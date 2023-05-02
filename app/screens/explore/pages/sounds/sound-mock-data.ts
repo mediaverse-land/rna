@@ -1,0 +1,53 @@
+export const soundMockData = [
+    {
+        id: 1,
+        title: 'Barcelona messi',
+        description: 'messi in barcelona',
+        userName: 'Julia Rabert',
+        userAvatarPath:
+            'https://s3-alpha-sig.figma.com/img/83d0/3fda/aeafecb9ecec22665790cbb050be9328?Expires=1683504000&Signature=Ty~1y8U-HW~cOGVcBTALhSYKsMkoRx01vTkEPWa-x9o-XsHKoUM4iDrTe3XigCyJtdskYU4d3tcmksMlHrnJ8emCl-OWByRqVUZpVYI8SKHeTIavWg3OGS2jGVVSGPrxo25QCUHTSTQzSLuUuCg3GDoJDZ-ZSpM~g1NJ9vkmUKIt6M76W5AXu3Sf-4adL6Xvefma3QHXFS7moxDBOEbY0PfafMqDBBD-efaz1qgLPk2azJTRSaGZHsJY4M6x8y~J5heFWumQQDP8RtqVqHpB~z2aBubm2u1oYC3ccYmZR4lgxMFa6BZy2YIt5XQOIHZp4C2lwmRvE7h5mofkd9q9Kg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
+    },
+    {
+        id: 2,
+        title: 'How to shoot like messi!',
+        description: 'messi in barcelona',
+        userName: 'Toni suprano',
+        userAvatarPath:
+            'https://s3-alpha-sig.figma.com/img/8e55/0669/918328bfce67b30fed2d5de70150c6da?Expires=1683504000&Signature=MlJtBSbiKPgBqeLb2f-kWAxc1ULl6XTpwyGWL6kC6dc8OW-L-kxMUDCd3wBuHnwH1kX7jTWoyC4J0BU6SrWmbnBb29JId41BU2qjXT4ErX9LTk9Pza3c1BLp~BRNV4h89KGIJNSCHCHw8sjo-3AY~mx0aD2YfC1oayZcI7uJp~jEpitBAn4VwTW8Vcl545lrQCJ2WxM4YMupGIRWwBtycU8DLvj0zG9M0vul934zKUXPtFF5FFePRZOCErnGVgMrJYy~E~C2hGIV0UVQ-g6D1wJ4KSofosttDrDUKN~J4kujfDz0fwrRWFY2cnBIk5nl-ThhmDxMW6WD7i9X3WQ7Mg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
+    }
+];
+
+export const soundsMostViewMockData = [
+    {
+        id: 1,
+        title: 'Iconic Messi!',
+        description: 'iconic moments from goat!',
+        userName: 'Putin',
+        userAvatarPath:
+            'https://s3-alpha-sig.figma.com/img/5094/0657/896c0c9e653386a34fbfb4f2570524a5?Expires=1683504000&Signature=FoyF6s4G6FQm2kVc0OGh0xxMT5T2p60slAY5f3dUQMLt6hh9-MX3fdiEqi6FhHdgquTmUfdQ8pAtV7iVjq~qptfgPQWzYW4e-TnBnZHZmsTqXx6Bx~mesCkAFxANS5ERHTaIQgM-dWQkki4Z4GD99bm5ASYTbv6jpe7EVmstqsOGOdhWMq3D36ROMn-t8LWIf5S6Yv4YTLKRwbD2Yrb~xAk9OuRN6i64yYyHVxkOenlexmUgL1pPIY68hn-vMl9XqxT8k1ZRPDGM6QALUAWl67Q9ADV7m-cw1TMBYEsp5RxPDEPpR4Fqv8QdvWOCPEqZaL2O8PZGf1X7pSiq2GGdZw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
+    },
+    {
+        id: 2,
+        title: 'Best worlld cup messi mo...',
+        description: 'this is a clip from best momen...',
+        userName: 'Lucy mario',
+        userAvatarPath:
+            'https://s3-alpha-sig.figma.com/img/5094/0657/896c0c9e653386a34fbfb4f2570524a5?Expires=1683504000&Signature=FoyF6s4G6FQm2kVc0OGh0xxMT5T2p60slAY5f3dUQMLt6hh9-MX3fdiEqi6FhHdgquTmUfdQ8pAtV7iVjq~qptfgPQWzYW4e-TnBnZHZmsTqXx6Bx~mesCkAFxANS5ERHTaIQgM-dWQkki4Z4GD99bm5ASYTbv6jpe7EVmstqsOGOdhWMq3D36ROMn-t8LWIf5S6Yv4YTLKRwbD2Yrb~xAk9OuRN6i64yYyHVxkOenlexmUgL1pPIY68hn-vMl9XqxT8k1ZRPDGM6QALUAWl67Q9ADV7m-cw1TMBYEsp5RxPDEPpR4Fqv8QdvWOCPEqZaL2O8PZGf1X7pSiq2GGdZw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
+    },
+    {
+        id: 3,
+        title: 'Barcelona messi',
+        description: 'messi in barcelona',
+        userName: 'Julia Rabert',
+        userAvatarPath:
+            'https://s3-alpha-sig.figma.com/img/83d0/3fda/aeafecb9ecec22665790cbb050be9328?Expires=1683504000&Signature=Ty~1y8U-HW~cOGVcBTALhSYKsMkoRx01vTkEPWa-x9o-XsHKoUM4iDrTe3XigCyJtdskYU4d3tcmksMlHrnJ8emCl-OWByRqVUZpVYI8SKHeTIavWg3OGS2jGVVSGPrxo25QCUHTSTQzSLuUuCg3GDoJDZ-ZSpM~g1NJ9vkmUKIt6M76W5AXu3Sf-4adL6Xvefma3QHXFS7moxDBOEbY0PfafMqDBBD-efaz1qgLPk2azJTRSaGZHsJY4M6x8y~J5heFWumQQDP8RtqVqHpB~z2aBubm2u1oYC3ccYmZR4lgxMFa6BZy2YIt5XQOIHZp4C2lwmRvE7h5mofkd9q9Kg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
+    },
+    {
+        id: 5,
+        title: 'How to shoot like messi!',
+        description: 'your shoots not gone be the...',
+        userName: 'Toni suprano',
+        userAvatarPath:
+            'https://s3-alpha-sig.figma.com/img/8e55/0669/918328bfce67b30fed2d5de70150c6da?Expires=1683504000&Signature=MlJtBSbiKPgBqeLb2f-kWAxc1ULl6XTpwyGWL6kC6dc8OW-L-kxMUDCd3wBuHnwH1kX7jTWoyC4J0BU6SrWmbnBb29JId41BU2qjXT4ErX9LTk9Pza3c1BLp~BRNV4h89KGIJNSCHCHw8sjo-3AY~mx0aD2YfC1oayZcI7uJp~jEpitBAn4VwTW8Vcl545lrQCJ2WxM4YMupGIRWwBtycU8DLvj0zG9M0vul934zKUXPtFF5FFePRZOCErnGVgMrJYy~E~C2hGIV0UVQ-g6D1wJ4KSofosttDrDUKN~J4kujfDz0fwrRWFY2cnBIk5nl-ThhmDxMW6WD7i9X3WQ7Mg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
+    }
+];

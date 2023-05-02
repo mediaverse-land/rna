@@ -1,1 +1,3 @@
-### Mediavers Native App
+### Mediaverse Project
+
+# This project is in development by React Native
