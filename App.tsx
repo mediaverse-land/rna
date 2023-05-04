@@ -1,10 +1,10 @@
 import 'react-native-gesture-handler';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppStack } from './app/screens/stack';
-import { SingleVideoPage } from './app/screens/single-video';
 import { SingleImagePage } from './app/screens/single-image';
+import { SingleTextPage } from './app/screens/single-text';
+import { SingleSoundPage } from './app/screens/single-sound';
 
 const Stack = createStackNavigator();
 
@@ -18,12 +18,16 @@ export default function App() {
             >
                 <Stack.Screen name="AppStack" component={AppStack} />
                 <Stack.Screen
-                    name="SingleVideoStack"
-                    component={SingleVideoPage}
-                />
-                <Stack.Screen
                     name="SingleImageStack"
                     component={SingleImagePage}
+                />
+                <Stack.Screen
+                    name="SingleTextStack"
+                    component={SingleTextPage}
+                />
+                <Stack.Screen
+                    name="SingleSoundStack"
+                    component={SingleSoundPage}
                 />
             </Stack.Navigator>
         </NavigationContainer>

@@ -1,4 +1,4 @@
-import { ScrollView } from 'react-native'
+import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Header } from '../../layout/header';
 import { SingleImageComponents } from './style';

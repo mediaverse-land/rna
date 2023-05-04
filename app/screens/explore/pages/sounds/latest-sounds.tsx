@@ -1,17 +1,31 @@
-import { FlatList } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 import { Title } from '../../../../shared/components/title';
 import { soundMockData } from './sound-mock-data';
 import { SoundItemCard } from '../../../../shared/components/sound-item-card';
+import { useNavigation } from '@react-navigation/native';
+
 
 export function LatestSounds() {
+    const navigation = useNavigation<any>();
+
+    function itemPressRedirectHandler(itemId: number) {
+        navigation.navigate('SingleSoundStack', {
+            itemId
+        });
+    }
+
     const renderItem = ({ item }: any) => {
         return (
-            <SoundItemCard
-                title={item.title}
-                description={item.description}
-                userAvatarPath={item.userAvatarPath}
-                userName={item.userName}
-            />
+            <TouchableOpacity
+                onPress={() => itemPressRedirectHandler(item.id)}
+            >
+                <SoundItemCard
+                    title={item.title}
+                    description={item.description}
+                    userAvatarPath={item.userAvatarPath}
+                    userName={item.userName}
+                />
+            </TouchableOpacity>
         );
     };
 
