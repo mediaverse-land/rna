@@ -1,14 +1,19 @@
-import { Image, View } from "react-native";
-import { SoundCardItemComponents } from "./style";
+import { Image, View } from 'react-native';
+import { SoundCardItemComponents } from './style';
 
 type Props = {
-    title: string
-    description: string
-    userAvatarPath: string
-    userName: string
-}
+    title: string;
+    description: string;
+    userAvatarPath: string;
+    userName: string;
+};
 
-export function SoundItemCard({ title, description, userAvatarPath, userName }: Props) {
+export function SoundItemCard({
+    title,
+    description,
+    userAvatarPath,
+    userName
+}: Props) {
     return (
         <SoundCardItemComponents.Container>
             <SoundCardItemComponents.CoverBox>
@@ -21,8 +26,12 @@ export function SoundItemCard({ title, description, userAvatarPath, userName }: 
                 />
             </SoundCardItemComponents.CoverBox>
             <View style={{ justifyContent: 'center', paddingLeft: 8 }}>
-                <SoundCardItemComponents.Title>{title}</SoundCardItemComponents.Title>
-                <SoundCardItemComponents.Description>{description}</SoundCardItemComponents.Description>
+                <SoundCardItemComponents.Title>
+                    {title}
+                </SoundCardItemComponents.Title>
+                <SoundCardItemComponents.Description>
+                    {description}
+                </SoundCardItemComponents.Description>
                 <SoundCardItemComponents.UserInfoBox>
                     <Image
                         source={{ uri: userAvatarPath }}
@@ -32,9 +41,11 @@ export function SoundItemCard({ title, description, userAvatarPath, userName }: 
                             borderRadius: 50
                         }}
                     />
-                    <SoundCardItemComponents.UserName>{userName}</SoundCardItemComponents.UserName>
+                    <SoundCardItemComponents.UserName>
+                        {userName}
+                    </SoundCardItemComponents.UserName>
                 </SoundCardItemComponents.UserInfoBox>
             </View>
         </SoundCardItemComponents.Container>
-    )
+    );
 }

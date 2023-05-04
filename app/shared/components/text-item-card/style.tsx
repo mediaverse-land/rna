@@ -29,7 +29,7 @@ export const TextCardItemComponents = {
         height: 17px;
         color: ${theme.color.light.GRAY};
         font-size: ${theme.fontSize.sm};
-        line-height: ${theme.lineHeight};
+        line-height: ${theme.lineHeight.itemCard};
         margin-bottom: 13px;
     `,
     UserInfoBox: styled.View`
@@ -38,7 +38,7 @@ export const TextCardItemComponents = {
     UserName: styled.Text`
         color: ${theme.color.light.GRAY};
         font-size: ${theme.fontSize.sm};
-        line-height: ${theme.lineHeight};
+        line-height: ${theme.lineHeight.itemCard};
         margin-left: 8px;
     `
 };

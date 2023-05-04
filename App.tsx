@@ -17,8 +17,14 @@ export default function App() {
                 }}
             >
                 <Stack.Screen name="AppStack" component={AppStack} />
-                <Stack.Screen name="SingleVideoStack" component={SingleVideoPage} />
-                <Stack.Screen name="SingleImageStack" component={SingleImagePage} />
+                <Stack.Screen
+                    name="SingleVideoStack"
+                    component={SingleVideoPage}
+                />
+                <Stack.Screen
+                    name="SingleImageStack"
+                    component={SingleImagePage}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

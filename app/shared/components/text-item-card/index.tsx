@@ -1,14 +1,19 @@
-import { Image, View } from "react-native";
-import { TextCardItemComponents } from "./style";
+import { Image, View } from 'react-native';
+import { TextCardItemComponents } from './style';
 
 type Props = {
-    title: string
-    description: string
-    userAvatarPath: string
-    userName: string
-}
+    title: string;
+    description: string;
+    userAvatarPath: string;
+    userName: string;
+};
 
-export function TextItemCard({ title, description, userAvatarPath, userName }: Props) {
+export function TextItemCard({
+    title,
+    description,
+    userAvatarPath,
+    userName
+}: Props) {
     return (
         <TextCardItemComponents.Container>
             <TextCardItemComponents.CoverBox>
@@ -21,8 +26,12 @@ export function TextItemCard({ title, description, userAvatarPath, userName }: P
                 />
             </TextCardItemComponents.CoverBox>
             <View style={{ justifyContent: 'center', paddingLeft: 8 }}>
-                <TextCardItemComponents.Title>{title}</TextCardItemComponents.Title>
-                <TextCardItemComponents.Description>{description}</TextCardItemComponents.Description>
+                <TextCardItemComponents.Title>
+                    {title}
+                </TextCardItemComponents.Title>
+                <TextCardItemComponents.Description>
+                    {description}
+                </TextCardItemComponents.Description>
                 <TextCardItemComponents.UserInfoBox>
                     <Image
                         source={{ uri: userAvatarPath }}
@@ -32,9 +41,11 @@ export function TextItemCard({ title, description, userAvatarPath, userName }: P
                             borderRadius: 50
                         }}
                     />
-                    <TextCardItemComponents.UserName>{userName}</TextCardItemComponents.UserName>
+                    <TextCardItemComponents.UserName>
+                        {userName}
+                    </TextCardItemComponents.UserName>
                 </TextCardItemComponents.UserInfoBox>
             </View>
         </TextCardItemComponents.Container>
-    )
+    );
 }

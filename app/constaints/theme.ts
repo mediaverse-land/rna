@@ -8,7 +8,10 @@ export const theme = {
             HEADING: 'rgba(0, 0, 51, 1)',
             LIGHT_GRAY_BG: '#F5F7F9',
             GRAY_BORDER: 'rgba(0, 0, 51, 0.2)',
-            GRAY: 'rgba(0, 0, 51, 0.2)'
+            GRAY: 'rgba(0, 0, 51, 0.2)',
+            CONTENT_TEXT: '#00003380',
+            COMMENT_BOX_BG: 'rgba(0, 0, 51, 0.05)',
+            COMMENT_BOX_TITLE_COLOR: 'rgba(0, 0, 51, 0.5)'
         },
         dark: {}
     },
@@ -18,5 +21,8 @@ export const theme = {
         md: '16px',
         sm: '14px'
     },
-    lineHeight: '17.3px'
+    lineHeight: {
+        conten: '25.69px',
+        itemCard: '17.3px'
+    }
 };

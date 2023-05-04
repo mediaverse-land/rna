@@ -1,7 +1,7 @@
-import { FlatList } from "react-native";
-import { Title } from "../../../../shared/components/title";
-import { soundMockData } from "./sound-mock-data";
-import { SoundItemCard } from "../../../../shared/components/sound-item-card";
+import { FlatList } from 'react-native';
+import { Title } from '../../../../shared/components/title';
+import { soundMockData } from './sound-mock-data';
+import { SoundItemCard } from '../../../../shared/components/sound-item-card';
 
 export function LatestSounds() {
     const renderItem = ({ item }: any) => {

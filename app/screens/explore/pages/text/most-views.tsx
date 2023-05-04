@@ -1,7 +1,7 @@
-import { FlatList } from "react-native";
-import { Title } from "../../../../shared/components/title";
-import { textMostViewMockData } from "./text-mock-data";
-import { TextItemCard } from "../../../../shared/components/text-item-card";
+import { FlatList } from 'react-native';
+import { Title } from '../../../../shared/components/title';
+import { textMostViewMockData } from './text-mock-data';
+import { TextItemCard } from '../../../../shared/components/text-item-card';
 
 export function MostViewsText() {
     const renderItem = ({ item }: any) => {

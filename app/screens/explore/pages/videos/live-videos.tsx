@@ -1,7 +1,5 @@
 import { FlatList, Image, View, ScrollView } from 'react-native';
-import {
-    LeftPaddingContainer,
-} from '../../../../styles/grid';
+import { LeftPaddingContainer } from '../../../../styles/grid';
 import { Title } from '../../../../shared/components/title';
 import { LiveVideosComponents } from './style';
 import { liveVideosMockData } from './video-mock-data';

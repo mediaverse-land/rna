@@ -1,7 +1,7 @@
-import { FlatList } from "react-native";
-import { TextItemCard } from "../../../../shared/components/text-item-card";
-import { Title } from "../../../../shared/components/title";
-import { textMockData } from "./text-mock-data";
+import { FlatList } from 'react-native';
+import { TextItemCard } from '../../../../shared/components/text-item-card';
+import { Title } from '../../../../shared/components/title';
+import { textMockData } from './text-mock-data';
 
 export function LatestTexts() {
     const renderItem = ({ item }: any) => (
@@ -9,7 +9,8 @@ export function LatestTexts() {
             title={item.title}
             description={item.description}
             userAvatarPath={item.userAvatarPath}
-            userName={item.userName} />
+            userName={item.userName}
+        />
     );
 
     return (
