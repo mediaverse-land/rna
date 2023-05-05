@@ -4,7 +4,7 @@ import { theme } from '../../constaints/theme';
 export const SearchBoxComponents = {
     Container: styled.View`
         width: 100%;
-        height: ${(props: { height: string }) => props.height}px;
+        height: ${(props: { height: string }) => props.height};
         background-color: ${theme.color.light.WHITE_BG};
     `,
     Wrapper: styled.View`

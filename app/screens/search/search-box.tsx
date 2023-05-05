@@ -38,7 +38,7 @@ export function SearchBox() {
     }
 
     return (
-        <Container height={!isSearchBarOpen ? '148' : '310'}>
+        <Container height={!isSearchBarOpen ? '148px' : '310px'}>
             <PaddingContainer>
                 <Wrapper>
                     <MainSearchInputWrapper
@@ -109,8 +109,8 @@ export function SearchBox() {
                                         <View
                                             style={{
                                                 width:
-                                                    (Math.floor(windowWidth) -
-                                                        111)
+                                                    Math.floor(windowWidth) -
+                                                    111
                                             }}
                                         >
                                             <SearchInput
