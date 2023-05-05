@@ -1,6 +1,6 @@
-import { View } from 'react-native'
-import { Title } from "../../shared/components/title";
-import { PaddingContainer } from "../../styles/grid";
+import { View } from 'react-native';
+import { Title } from '../../shared/components/title';
+import { PaddingContainer } from '../../styles/grid';
 import { UserNameCard } from '../../shared/components/username-card';
 import { ReportButton } from '../../shared/components/report-button';
 import { singleTextPageConstaints } from './constaints';
@@ -21,5 +21,5 @@ export function SingleTextPageHead() {
                 </SingleTextComponents.UserDataWrapper>
             </View>
         </PaddingContainer>
-    )
+    );
 }

@@ -4,9 +4,7 @@ import { Title } from '../../../../shared/components/title';
 import { textMockData } from './text-mock-data';
 import { useNavigation } from '@react-navigation/native';
 
-
 export function LatestTexts() {
-
     const navigation = useNavigation<any>();
 
     function itemPressRedirectHandler(itemId: number) {
@@ -15,11 +13,8 @@ export function LatestTexts() {
         });
     }
 
-
     const renderItem = ({ item }: any) => (
-        <TouchableOpacity
-            onPress={() => itemPressRedirectHandler(item.id)}
-        >
+        <TouchableOpacity onPress={() => itemPressRedirectHandler(item.id)}>
             <TextItemCard
                 title={item.title}
                 description={item.description}

@@ -1,7 +1,7 @@
-import { Tags } from "../../shared/components/tags";
-import { PaddingContainer } from "../../styles/grid";
-import { singleSoundPageConstaints } from "./constints";
-import { SingleSoundComponents } from "./style";
+import { Tags } from '../../shared/components/tags';
+import { PaddingContainer } from '../../styles/grid';
+import { singleSoundPageConstaints } from './constints';
+import { SingleSoundComponents } from './style';
 
 export function SingleSoundPageContent() {
     return (
@@ -11,5 +11,5 @@ export function SingleSoundPageContent() {
             </SingleSoundComponents.ContentText>
             <Tags />
         </PaddingContainer>
-    )
+    );
 }

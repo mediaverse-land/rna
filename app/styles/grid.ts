@@ -33,6 +33,7 @@ interface FlexStyleProps {
 
 export const Flex = styled.View<FlexStyleProps>`
     width: 100%;
+    flex-wrap: nowrap;
     ${(props) => (props.height ? `height: ${props.height}` : null)}};
     ${(props) =>
         props.justify ? `justify-content: ${props.justify}` : null}};   

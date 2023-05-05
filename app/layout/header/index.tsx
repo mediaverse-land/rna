@@ -1,7 +1,14 @@
-import { Image } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import { HeaderStyles } from './style';
+import { useNavigation } from '@react-navigation/native';
 
 export function Header() {
+    const navigation = useNavigation<any>();
+
+    function navigateToSearchPage() {
+        navigation.navigate('Search')
+    }
+
     return (
         <>
             <HeaderStyles.HeaderWrapper>
@@ -18,10 +25,12 @@ export function Header() {
                     <HeaderStyles.UserName>User.Name</HeaderStyles.UserName>
                 </HeaderStyles.Profile>
                 <HeaderStyles.SearchIconWrapper>
-                    <Image
-                        source={require('./../../../assets/icons/icon__search.png')}
-                        style={{ width: 18, height: 18 }}
-                    />
+                    <TouchableOpacity onPress={navigateToSearchPage}>
+                        <Image
+                            source={require('./../../../assets/icons/icon__search.png')}
+                            style={{ width: 18, height: 18 }}
+                        />
+                    </TouchableOpacity>
                 </HeaderStyles.SearchIconWrapper>
             </HeaderStyles.HeaderWrapper>
             <HeaderStyles.BorderIndicator />

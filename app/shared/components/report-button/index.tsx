@@ -1,5 +1,5 @@
-import { RowAlignCenter } from "../../../styles/grid";
-import { ReportBtnComponent, ReportBtnComponentText } from "./style";
+import { RowAlignCenter } from '../../../styles/grid';
+import { ReportBtnComponent, ReportBtnComponentText } from './style';
 
 export function ReportButton() {
     return (
@@ -8,5 +8,5 @@ export function ReportButton() {
                 <ReportBtnComponentText>Report...</ReportBtnComponentText>
             </ReportBtnComponent>
         </RowAlignCenter>
-    )
+    );
 }

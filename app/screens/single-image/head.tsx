@@ -26,8 +26,10 @@ export function SingleImagePageHead() {
                 <View>
                     <SingleImageComponents.UserDataWrapper>
                         <UserNameCard
-                            profileUri={singleImagePageConstaints.profileImageUri}
-                            username='Julia Rabert'
+                            profileUri={
+                                singleImagePageConstaints.profileImageUri
+                            }
+                            username="Julia Rabert"
                             profileImageStyles={{ marginRight: 8 }}
                         />
                         <ReportButton />

@@ -28,7 +28,7 @@ const HeaderWrapper = styled.View`
     `,
     BorderIndicator = styled.View`
         width: 100%;
-        border: 0.5px solid rgba(0, 0, 51, 0.2);
+        border: 0.5px solid ${theme.color.light.GRAY};
         border-bottom-color: #fff;
     `;
 

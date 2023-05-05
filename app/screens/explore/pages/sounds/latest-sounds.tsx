@@ -4,7 +4,6 @@ import { soundMockData } from './sound-mock-data';
 import { SoundItemCard } from '../../../../shared/components/sound-item-card';
 import { useNavigation } from '@react-navigation/native';
 
-
 export function LatestSounds() {
     const navigation = useNavigation<any>();
 
@@ -16,9 +15,7 @@ export function LatestSounds() {
 
     const renderItem = ({ item }: any) => {
         return (
-            <TouchableOpacity
-                onPress={() => itemPressRedirectHandler(item.id)}
-            >
+            <TouchableOpacity onPress={() => itemPressRedirectHandler(item.id)}>
                 <SoundItemCard
                     title={item.title}
                     description={item.description}
