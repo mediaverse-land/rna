@@ -1,13 +1,13 @@
-import { Image, View, Dimensions, Text } from 'react-native'
-import { Flex, PaddingContainer } from '../../styles/grid'
-import { SearchBoxComponents } from './style'
+import { useState } from 'react';
+import { Image, View, Dimensions } from 'react-native';
+import { Flex, PaddingContainer } from '../../styles/grid';
+import { SearchBoxComponents } from './style';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { imageUriResolver } from '../../utils/image-uri-resolver';
-import ICON_SEARCH_PNG from './../../../assets/icons/icon__search.png'
-import ICON_SEARCH_X_PNG from './../../../assets/icons/icon__x.png'
-import ICON_ARROW_DOWN_PNG from './../../../assets/icons/icon__arrow-down.png'
+import ICON_SEARCH_PNG from './../../../assets/icons/icon__search.png';
+import ICON_SEARCH_X_PNG from './../../../assets/icons/icon__x.png';
+import ICON_ARROW_DOWN_PNG from './../../../assets/icons/icon__arrow-down.png';
 import { searchPageConstaints } from './constaints';
-import { useState } from 'react';
 
 const ICON_SEARCH = imageUriResolver(ICON_SEARCH_PNG);
 const ICON_SEARCH_X = imageUriResolver(ICON_SEARCH_X_PNG);
@@ -28,17 +28,17 @@ const {
     DetailSearchBox,
     SearchInput,
     Label
-} = SearchBoxComponents
+} = SearchBoxComponents;
 
 export function SearchBox() {
     const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
 
     function toggleSearchBarHandler() {
-        setIsSearchBarOpen(!isSearchBarOpen)
+        setIsSearchBarOpen(!isSearchBarOpen);
     }
 
     return (
-        <Container height={!isSearchBarOpen ? '148' : '300'} >
+        <Container height={!isSearchBarOpen ? '148' : '310'}>
             <PaddingContainer>
                 <Wrapper>
                     <MainSearchInputWrapper
@@ -46,11 +46,19 @@ export function SearchBox() {
                     >
                         <View style={{ height: 56 }}>
                             <SearchInput
-                                placeholder={searchPageConstaints.mainInputPlaceholder}
+                                placeholder={
+                                    searchPageConstaints.mainInputPlaceholder
+                                }
                             />
                             <Image
                                 source={{ uri: ICON_SEARCH }}
-                                style={{ width: 18, height: 18, position: 'absolute', right: 19, top: 19 }}
+                                style={{
+                                    width: 18,
+                                    height: 18,
+                                    position: 'absolute',
+                                    right: 19,
+                                    top: 19
+                                }}
                             />
                         </View>
                     </MainSearchInputWrapper>
@@ -68,10 +76,10 @@ export function SearchBox() {
                 <AdvancedSearchWrapper style={{ height: 48 }}>
                     <AdvancedSearchHeader>
                         <Flex
-                            direction='row'
-                            align='center'
-                            justify='space-between'
-                            height='48'
+                            direction="row"
+                            align="center"
+                            justify="space-between"
+                            height="48"
                         >
                             <AdvancedSearchHeaderText>
                                 Advance search
@@ -84,56 +92,66 @@ export function SearchBox() {
                             </TouchableOpacity>
                         </Flex>
                     </AdvancedSearchHeader>
-                    {
-                        isSearchBarOpen ?
-                            <>
-                                <DetailSearchBox>
-                                    {/* SearchGroupItem start */}
-                                    <SearchGroupItem>
-                                        <Flex
-                                            direction='row'
-                                            align='center'
-                                            justify='space-between'
-                                            height='56'
+                    {isSearchBarOpen ? (
+                        <>
+                            <DetailSearchBox>
+                                {/* SearchGroupItem start */}
+                                <SearchGroupItem>
+                                    <Flex
+                                        direction="row"
+                                        align="center"
+                                        justify="space-between"
+                                        height="56"
+                                    >
+                                        <View style={{ width: 56 }}>
+                                            <Label>Tag:</Label>
+                                        </View>
+                                        <View
+                                            style={{
+                                                width:
+                                                    (Math.floor(windowWidth) -
+                                                        111)
+                                            }}
                                         >
-                                            <View style={{ width: 56 }}>
-                                                <Label>
-                                                    Tag:
-                                                </Label>
-                                            </View>
-                                            <View style={{ width: Math.floor(windowWidth) - 111 }}>
-                                                <SearchInput
-                                                    placeholder={searchPageConstaints.tagInputPlaceholder}
-                                                />
-                                            </View>
-                                        </Flex>
-                                    </SearchGroupItem>
-                                    <SearchGroupItem style={{ marginTop: 16 }}>
-                                        <Flex
-                                            direction='row'
-                                            align='center'
-                                            justify='space-between'
-                                            height='56'
+                                            <SearchInput
+                                                placeholder={
+                                                    searchPageConstaints.tagInputPlaceholder
+                                                }
+                                            />
+                                        </View>
+                                    </Flex>
+                                </SearchGroupItem>
+                                <SearchGroupItem style={{ marginTop: 16 }}>
+                                    <Flex
+                                        direction="row"
+                                        align="center"
+                                        justify="space-between"
+                                        height="56"
+                                    >
+                                        <View style={{ width: 56 }}>
+                                            <Label>Plan:</Label>
+                                        </View>
+                                        <View
+                                            style={{
+                                                width:
+                                                    Math.floor(windowWidth) -
+                                                    111
+                                            }}
                                         >
-                                            <View style={{ width: 56 }}>
-                                                <Label>
-                                                    Plan:
-                                                </Label>
-                                            </View>
-                                            <View style={{ width: Math.floor(windowWidth) - 111 }}>
-                                                <SearchInput
-                                                    placeholder={searchPageConstaints.planInputPlaceholder}
-                                                />
-                                            </View>
-                                        </Flex>
-                                    </SearchGroupItem>
-                                    {/* SearchGroupItem end */}
-                                </DetailSearchBox>
-                            </>
-                            : null
-                    }
+                                            <SearchInput
+                                                placeholder={
+                                                    searchPageConstaints.planInputPlaceholder
+                                                }
+                                            />
+                                        </View>
+                                    </Flex>
+                                </SearchGroupItem>
+                                {/* SearchGroupItem end */}
+                            </DetailSearchBox>
+                        </>
+                    ) : null}
                 </AdvancedSearchWrapper>
             </PaddingContainer>
         </Container>
-    )
+    );
 }

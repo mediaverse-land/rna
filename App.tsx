@@ -30,9 +30,7 @@ export default function App() {
                     name="SingleSoundStack"
                     component={SingleSoundPage}
                 />
-                <Stack.Screen
-                    name="Search" component={SearchPage}
-                />
+                <Stack.Screen name="Search" component={SearchPage} />
             </Stack.Navigator>
         </NavigationContainer>
     );

@@ -6,7 +6,7 @@ export function Header() {
     const navigation = useNavigation<any>();
 
     function navigateToSearchPage() {
-        navigation.navigate('Search')
+        navigation.navigate('Search');
     }
 
     return (

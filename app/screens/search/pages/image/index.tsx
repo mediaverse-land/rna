@@ -1,7 +1,13 @@
-import { View, Text } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler';
+import { PaddingContainer } from '../../../../styles/grid';
+import { SearchPagePlaceholder } from '../../../../shared/components/sesrch-page-placeholder';
 
 export function ImagesPage() {
-    return <View>
-        <Text>ImagesPage</Text>
-    </View>
+    return (
+        <ScrollView>
+            <PaddingContainer>
+                <SearchPagePlaceholder />
+            </PaddingContainer>
+        </ScrollView>
+    );
 }
