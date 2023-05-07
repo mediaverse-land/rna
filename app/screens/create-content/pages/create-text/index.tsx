@@ -1,10 +1,21 @@
 import { useState } from 'react';
-import { Text, View } from 'react-native';
+import { CreateTextContent } from './content';
+import { CreateContentAssets } from './assets';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export function CreateTextPage() {
+    const [isContentDataSaved, setIsContentDataSaved] = useState(false);
+
+    function activeIsContentDataSaved() {
+        setIsContentDataSaved(true)
+    }
+
     return (
-        <View>
-            <Text>CreateSoundPage</Text>
-        </View>
+        <ScrollView>
+            {!isContentDataSaved ?
+                <CreateTextContent /> :
+                <CreateContentAssets />
+            }
+        </ScrollView>
     );
 }

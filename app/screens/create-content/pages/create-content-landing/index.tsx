@@ -1,34 +1,36 @@
-import { Image } from "react-native";
-import { Flex, PaddingContainer } from "../../../../styles/grid";
-import { CreateContentLandingPageComponents } from "./style";
-import { imageUriResolver } from "../../../../utils/image-uri-resolver";
-import ICON_VIDEO_PNG from './../../../../../assets/icons/icon__video.png'
-import ICON_IMAGE_PNG from './../../../../../assets/icons/icon__img.png'
-import ICON_SOUND_PNG from './../../../../../assets/icons/icon__sound.png'
-import ICON_TEXT_PNG from './../../../../../assets/icons/icon__text.png'
+import { Image } from 'react-native';
+import { Flex, PaddingContainer } from '../../../../styles/grid';
+import { CreateContentLandingPageComponents } from './style';
+import { imageUriResolver } from '../../../../utils/image-uri-resolver';
+import ICON_VIDEO_PNG from './../../../../../assets/icons/icon__video.png';
+import ICON_IMAGE_PNG from './../../../../../assets/icons/icon__img.png';
+import ICON_SOUND_PNG from './../../../../../assets/icons/icon__sound.png';
+import ICON_TEXT_PNG from './../../../../../assets/icons/icon__text.png';
+import { useNavigation } from '@react-navigation/native';
 
-const ICON_VIDEO = imageUriResolver(ICON_VIDEO_PNG)
-const ICON_IMAGE = imageUriResolver(ICON_IMAGE_PNG)
-const ICON_SOUND = imageUriResolver(ICON_SOUND_PNG)
-const ICON_TEXT = imageUriResolver(ICON_TEXT_PNG)
+const ICON_VIDEO = imageUriResolver(ICON_VIDEO_PNG);
+const ICON_IMAGE = imageUriResolver(ICON_IMAGE_PNG);
+const ICON_SOUND = imageUriResolver(ICON_SOUND_PNG);
+const ICON_TEXT = imageUriResolver(ICON_TEXT_PNG);
 
-const {
-    Container,
-    CreateContentItem,
-    ItemText,
-    TitleText
-} = CreateContentLandingPageComponents
-
+const { Container, CreateContentItem, ItemText, TitleText } =
+    CreateContentLandingPageComponents;
 
 export function CreateContentLandingPage() {
+
+    const navigation = useNavigation<any>();
+
+    function navigateToCreateText() {
+        navigation.navigate('CreateTextPage')
+    }
+    function navigateToCreateSound() {
+        navigation.navigate('CreateSoundPage')
+    }
+
     return (
         <PaddingContainer style={{ flex: 1 }}>
             <Container>
-                <Flex
-                    direction="row"
-                    align="center"
-                    justify="center"
-                >
+                <Flex direction="row" align="center" justify="center">
                     <TitleText>What is your contant?</TitleText>
                 </Flex>
                 <Flex
@@ -49,9 +51,7 @@ export function CreateContentLandingPage() {
                         />
                         <ItemText>VIDEO</ItemText>
                     </CreateContentItem>
-                    <CreateContentItem
-                        style={{ marginLeft: 16 }}
-                    >
+                    <CreateContentItem style={{ marginLeft: 16 }}>
                         <Image
                             source={{ uri: ICON_IMAGE }}
                             style={{
@@ -71,7 +71,9 @@ export function CreateContentLandingPage() {
                     height="127px"
                     style={{ marginTop: 16 }}
                 >
-                    <CreateContentItem>
+                    <CreateContentItem
+                        onPress={navigateToCreateText}
+                    >
                         <Image
                             source={{ uri: ICON_TEXT }}
                             style={{
@@ -83,8 +85,8 @@ export function CreateContentLandingPage() {
                         <ItemText>TEXT</ItemText>
                     </CreateContentItem>
                     <CreateContentItem
-                        style={{ marginLeft: 16 }}
-                    >
+                        onPress={navigateToCreateSound}
+                        style={{ marginLeft: 16 }}>
                         <Image
                             source={{ uri: ICON_SOUND }}
                             style={{
@@ -98,5 +100,5 @@ export function CreateContentLandingPage() {
                 </Flex>
             </Container>
         </PaddingContainer>
-    )
+    );
 }

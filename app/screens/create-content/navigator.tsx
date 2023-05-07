@@ -24,13 +24,19 @@ export function Navigator() {
                     }}
                 />
                 <Stack.Screen
+                    name="CreateTextPage"
+                    component={CreateTextPage}
+                    options={{
+                        title: 'text'
+                    }}
+                />
+                <Stack.Screen
                     name="CreateVideoPage"
                     component={CreateVideoPage}
                     options={{
                         title: 'vidoe'
                     }}
                 />
-
                 <Stack.Screen
                     name="CreateImagePage"
                     component={CreateImagePage}
@@ -45,13 +51,7 @@ export function Navigator() {
                         title: 'sound'
                     }}
                 />
-                <Stack.Screen
-                    name="CreateTextPage"
-                    component={CreateTextPage}
-                    options={{
-                        title: 'text'
-                    }}
-                />
+
             </Stack.Navigator>
         </View>
     );
