@@ -1,6 +1,6 @@
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Header } from "../../layout/header";
-import { Navigator } from "./navigator";
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Header } from '../../layout/header';
+import { Navigator } from './navigator';
 
 export function CreateContentStack() {
     return (
@@ -8,5 +8,5 @@ export function CreateContentStack() {
             <Header />
             <Navigator />
         </SafeAreaView>
-    )
+    );
 }

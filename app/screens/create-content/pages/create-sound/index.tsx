@@ -1,7 +1,9 @@
-import { Text, View } from "react-native";
+import { Text, View } from 'react-native';
 
 export function CreateSoundPage() {
-    return <View>
-        <Text>CreateSoundPage</Text>
-    </View>
+    return (
+        <View>
+            <Text>CreateSoundPage</Text>
+        </View>
+    );
 }

@@ -1,22 +1,22 @@
-import { Image } from "react-native";
-import { BottomTabBarComponents } from "./style";
+import { Image } from 'react-native';
+import { BottomTabBarComponents } from './style';
 
-import ICON_EXPLORE_PNG from './../../../../assets/icons/icon__explore.png'
-import ICON_EXPLORE_ACTIVE_PNG from './../../../../assets/icons/icon__explore-active.png'
-import ICON_ADD_PNG from './../../../../assets/icons/icon__add.png'
-import ICON_ADD_ACTIVE_PNG from './../../../../assets/icons/icon__add-active.png'
-import ICON_MATCH_APPS_PNG from './../../../../assets/icons/icon__match-apps.png'
-import ICON_PROFILE_PNG from './../../../../assets/icons/icon__profile.png'
-import ICON_PROFILE_ACTIVE_PNG from './../../../../assets/icons/icon__profile-active.png'
-import { imageUriResolver } from "../../../utils/image-uri-resolver";
+import ICON_EXPLORE_PNG from './../../../../assets/icons/icon__explore.png';
+import ICON_EXPLORE_ACTIVE_PNG from './../../../../assets/icons/icon__explore-active.png';
+import ICON_ADD_PNG from './../../../../assets/icons/icon__add.png';
+import ICON_ADD_ACTIVE_PNG from './../../../../assets/icons/icon__add-active.png';
+import ICON_MATCH_APPS_PNG from './../../../../assets/icons/icon__match-apps.png';
+import ICON_PROFILE_PNG from './../../../../assets/icons/icon__profile.png';
+import ICON_PROFILE_ACTIVE_PNG from './../../../../assets/icons/icon__profile-active.png';
+import { imageUriResolver } from '../../../utils/image-uri-resolver';
 
-const ICON_EXPLORE = imageUriResolver(ICON_EXPLORE_PNG)
-const ICON_EXPLORE_ACTIVE = imageUriResolver(ICON_EXPLORE_ACTIVE_PNG)
-const ICON_ADD = imageUriResolver(ICON_ADD_PNG)
-const ICON_ADD_ACTIVE = imageUriResolver(ICON_ADD_ACTIVE_PNG)
-const ICON_MATCH_APPS = imageUriResolver(ICON_MATCH_APPS_PNG)
-const ICON_PROFILE = imageUriResolver(ICON_PROFILE_PNG)
-const ICON_PROFILE_ACTIVE = imageUriResolver(ICON_PROFILE_ACTIVE_PNG)
+const ICON_EXPLORE = imageUriResolver(ICON_EXPLORE_PNG);
+const ICON_EXPLORE_ACTIVE = imageUriResolver(ICON_EXPLORE_ACTIVE_PNG);
+const ICON_ADD = imageUriResolver(ICON_ADD_PNG);
+const ICON_ADD_ACTIVE = imageUriResolver(ICON_ADD_ACTIVE_PNG);
+const ICON_MATCH_APPS = imageUriResolver(ICON_MATCH_APPS_PNG);
+const ICON_PROFILE = imageUriResolver(ICON_PROFILE_PNG);
+const ICON_PROFILE_ACTIVE = imageUriResolver(ICON_PROFILE_ACTIVE_PNG);
 
 const { Container, TabItem } = BottomTabBarComponents;
 
@@ -108,11 +108,7 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
                         );
                         break;
                     default:
-                        icon =
-                            < Image
-                                source={{ uri: ICON_MATCH_APPS }
-
-                                } />
+                        icon = <Image source={{ uri: ICON_MATCH_APPS }} />;
 
                         break;
                 }
@@ -121,7 +117,7 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
                     const event = navigation.emit({
                         type: 'tabPress',
                         target: route.key,
-                        canPreventDefault: true,
+                        canPreventDefault: true
                     });
 
                     if (!isFocused && !event.defaultPrevented) {
@@ -133,7 +129,7 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
                 const onLongPress = () => {
                     navigation.emit({
                         type: 'tabLongPress',
-                        target: route.key,
+                        target: route.key
                     });
                 };
 

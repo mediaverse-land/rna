@@ -1,7 +1,9 @@
-import { Text, View } from "react-native";
+import { Text, View } from 'react-native';
 
 export function CreateVideoPage() {
-    return <View>
-        <Text>CreateVideoPage</Text>
-    </View>
+    return (
+        <View>
+            <Text>CreateVideoPage</Text>
+        </View>
+    );
 }
