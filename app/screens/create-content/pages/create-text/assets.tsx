@@ -1,5 +1,6 @@
 import { View } from 'react-native';
+import { CreateContentAssets } from '../../components/content-assets';
 
-export function CreateContentAssets() {
-    return <View></View>;
+export function CreateTextContentAssets() {
+    return <CreateContentAssets />;
 }

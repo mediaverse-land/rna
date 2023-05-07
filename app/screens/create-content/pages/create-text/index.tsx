@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { CreateTextContent } from './content';
-import { CreateContentAssets } from './assets';
+import { CreateTextContentAssets } from './assets';
 import { ScrollView } from 'react-native-gesture-handler';
 
 export function CreateTextPage() {
-    const [isContentDataSaved, setIsContentDataSaved] = useState(false);
+    const [isContentDataSaved, setIsContentDataSaved] = useState(true);
 
     function activeIsContentDataSaved() {
         setIsContentDataSaved(true);
@@ -15,7 +15,7 @@ export function CreateTextPage() {
             {!isContentDataSaved ? (
                 <CreateTextContent />
             ) : (
-                <CreateContentAssets />
+                <CreateTextContentAssets />
             )}
         </ScrollView>
     );

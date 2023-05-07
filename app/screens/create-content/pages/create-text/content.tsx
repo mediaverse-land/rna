@@ -4,10 +4,10 @@ import {
     NativeSyntheticEvent,
     View
 } from 'react-native';
+import { CreateContentNavigationBar } from '../../components/navigation-bar';
 import { PaddingContainer } from '../../../../styles/grid';
 import { CreateTextComponents } from './style';
 import { theme } from '../../../../constaints/theme';
-import { CreateTextContentNavigationBar } from './components/navigation-bar';
 
 const { Input, BorderSpacer, TagListItemStyles } = CreateTextComponents;
 const { color } = theme;
@@ -29,7 +29,7 @@ export function CreateTextContent() {
     }
 
     function createTagHandler(
-        event: NativeSyntheticEvent<TextInputKeyPressEventData>
+        event: any
     ) {
         const key = event.nativeEvent.key;
 
@@ -81,11 +81,11 @@ export function CreateTextContent() {
         ) : null
     ) : null;
 
-    const hasError = hashTags.length === 0 ? true : false
+    const hasError = hashTags.length === 0 ? true : false;
 
     return (
         <PaddingContainer>
-            <CreateTextContentNavigationBar hasError={hasError} />
+            <CreateContentNavigationBar hasError={hasError} />
             <View style={{ marginTop: 31.91 }}>
                 <View>
                     <Input

@@ -1,4 +1,52 @@
 1 => masonry grid for Videos/movie
 2 => video player
 3 => sound player
-4 => hashtags
+4 => hashtags (Done)
+
+
+
+
+
+
+
+ {/* <View>
+                <Text style={styleSheet.text}>Date = {date.toDateString()}</Text>
+
+                <Text style={styleSheet.text}>Time = {time.toLocaleTimeString('en-US')}</Text>
+
+                {datePicker && (
+                    <DateTimePicker
+                        value={date}
+                        mode={'date'}
+                        display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                        is24Hour={true}
+                        onChange={onDateSelected}
+                        style={styleSheet.datePicker}
+                    />
+                )}
+
+                {timePicker && (
+                    <DateTimePicker
+                        value={time}
+                        mode={'time'}
+                        display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                        is24Hour={false}
+                        onChange={onTimeSelected}
+                        style={styleSheet.datePicker}
+                    />
+                )}
+
+                {!datePicker && (
+                    <View style={{ margin: 10 }}>
+                        <Button title="Show Date Picker" color="green" onPress={showDatePicker} />
+                    </View>
+                )}
+
+                {!timePicker && (
+                    <View style={{ margin: 10 }}>
+                        <Button title="Show Time Picker" color="green" onPress={showTimePicker} />
+                    </View>
+                )} */}
+
+            {/* </View> */}
+            {/* <DatePicker date={date} onDateChange={setDate} /> */}
