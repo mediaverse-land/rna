@@ -1,11 +1,10 @@
-import { useState } from 'react'
-import { View, Platform, TouchableOpacity, Image } from 'react-native'
+import { useState } from 'react';
+import { View, Platform, TouchableOpacity, Image } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { InputComponent } from './style';
 import { theme } from '../../../constaints/theme';
 
-
-const { InputBox, FormGroup, PickerPlaceholder } = InputComponent
+const { InputBox, FormGroup, PickerPlaceholder } = InputComponent;
 
 export function TimePicker() {
     const [timePicker, setTimePicker] = useState(false);
@@ -22,13 +21,11 @@ export function TimePicker() {
 
     return (
         <FormGroup>
-            <TouchableOpacity
-                onPress={showTimePicker}
-            >
+            <TouchableOpacity onPress={showTimePicker}>
                 <InputBox
                     editable={false}
                     selectTextOnFocus={false}
-                    placeholder='insert time...'
+                    placeholder="insert time..."
                     placeholderTextColor={theme.color.light.GRAY}
                     style={{
                         paddingLeft: 89
@@ -37,9 +34,11 @@ export function TimePicker() {
                 <PickerPlaceholder
                     style={{
                         borderRightColor: theme.color.light.GRAY,
-                        borderRightWidth: 1,
+                        borderRightWidth: 1
                     }}
-                >Time</PickerPlaceholder>
+                >
+                    Time
+                </PickerPlaceholder>
             </TouchableOpacity>
             {timePicker && (
                 <DateTimePicker
@@ -51,5 +50,5 @@ export function TimePicker() {
                 />
             )}
         </FormGroup>
-    )
+    );
 }

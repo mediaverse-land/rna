@@ -28,9 +28,7 @@ export function CreateTextContent() {
         setTextInputHeight(height);
     }
 
-    function createTagHandler(
-        event: any
-    ) {
+    function createTagHandler(event: any) {
         const key = event.nativeEvent.key;
 
         // Space button triggerd
