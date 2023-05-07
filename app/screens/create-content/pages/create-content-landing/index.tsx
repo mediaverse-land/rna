@@ -17,14 +17,13 @@ const { Container, CreateContentItem, ItemText, TitleText } =
     CreateContentLandingPageComponents;
 
 export function CreateContentLandingPage() {
-
     const navigation = useNavigation<any>();
 
     function navigateToCreateText() {
-        navigation.navigate('CreateTextPage')
+        navigation.navigate('CreateTextPage');
     }
     function navigateToCreateSound() {
-        navigation.navigate('CreateSoundPage')
+        navigation.navigate('CreateSoundPage');
     }
 
     return (
@@ -71,9 +70,7 @@ export function CreateContentLandingPage() {
                     height="127px"
                     style={{ marginTop: 16 }}
                 >
-                    <CreateContentItem
-                        onPress={navigateToCreateText}
-                    >
+                    <CreateContentItem onPress={navigateToCreateText}>
                         <Image
                             source={{ uri: ICON_TEXT }}
                             style={{
@@ -86,7 +83,8 @@ export function CreateContentLandingPage() {
                     </CreateContentItem>
                     <CreateContentItem
                         onPress={navigateToCreateSound}
-                        style={{ marginLeft: 16 }}>
+                        style={{ marginLeft: 16 }}
+                    >
                         <Image
                             source={{ uri: ICON_SOUND }}
                             style={{

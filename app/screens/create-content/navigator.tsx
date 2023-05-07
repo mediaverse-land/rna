@@ -51,7 +51,6 @@ export function Navigator() {
                         title: 'sound'
                     }}
                 />
-
             </Stack.Navigator>
         </View>
     );

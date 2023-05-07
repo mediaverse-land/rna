@@ -7,15 +7,16 @@ export function CreateTextPage() {
     const [isContentDataSaved, setIsContentDataSaved] = useState(false);
 
     function activeIsContentDataSaved() {
-        setIsContentDataSaved(true)
+        setIsContentDataSaved(true);
     }
 
     return (
         <ScrollView>
-            {!isContentDataSaved ?
-                <CreateTextContent /> :
+            {!isContentDataSaved ? (
+                <CreateTextContent />
+            ) : (
                 <CreateContentAssets />
-            }
+            )}
         </ScrollView>
     );
 }
