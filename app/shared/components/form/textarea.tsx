@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { Dimensions } from 'react-native';
 import { InputComponent } from './style';
 import { theme } from '../../../constaints/theme';
 
@@ -9,14 +7,11 @@ type Props = {
     labelText: string;
 };
 
-export function TextArea({ labelText, }: Props) {
-
-    // 63 = (24 +24 => padding of <PaddingContainer></PaddingContainer> + 15 =>(marginRight of label))
-
+export function TextArea({ labelText }: Props) {
     return (
         <FormGroup
             style={{
-                flexDirection: 'column',
+                flexDirection: 'column'
             }}
         >
             <Label

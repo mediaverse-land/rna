@@ -1,4 +1,4 @@
-import { Image } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import { BottomTabBarComponents } from './style';
 
 import ICON_EXPLORE_PNG from './../../../../assets/icons/icon__explore.png';
@@ -133,20 +133,57 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
                     });
                 };
 
-                return (
-                    <TabItem
-                        accessibilityRole="button"
-                        accessibilityState={isFocused ? { selected: true } : {}}
-                        accessibilityLabel={options.tabBarAccessibilityLabel}
-                        testID={options.tabBarTestID}
-                        onPress={onPress}
-                        onLongPress={onLongPress}
-                        style={{ flex: 1 }}
-                        isActive={isFocused ? true : false}
-                    >
-                        {icon}
-                    </TabItem>
-                );
+                if (options.title === 'plus') {
+                    return (
+                        <View
+                            style={{
+                                flex: 1,
+                                width: 77,
+                                height: 77,
+                                padding: 10,
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}
+                        >
+                            <TouchableOpacity
+                                accessibilityRole="button"
+                                accessibilityState={isFocused ? { selected: true } : {}}
+                                accessibilityLabel={options.tabBarAccessibilityLabel}
+                                testID={options.tabBarTestID}
+                                onPress={onPress}
+                                onLongPress={onLongPress}
+                                style={{
+                                    flex: 1,
+                                    width: 67,
+                                    height: 67,
+                                    backgroundColor: 'rgba(89, 122, 255, 1)'
+                                }}
+                            // isActive={isFocused ? true : false}
+                            >
+                                {icon}
+                            </TouchableOpacity>
+                        </View>
+
+                    );
+                }
+                else {
+                    return (
+                        <TabItem
+                            accessibilityRole="button"
+                            accessibilityState={isFocused ? { selected: true } : {}}
+                            accessibilityLabel={options.tabBarAccessibilityLabel}
+                            testID={options.tabBarTestID}
+                            onPress={onPress}
+                            onLongPress={onLongPress}
+                            style={{ flex: 1 }}
+                            isActive={isFocused ? true : false}
+                        >
+                            {icon}
+                        </TabItem>
+                    );
+                }
+
+
             })}
         </Container>
     );

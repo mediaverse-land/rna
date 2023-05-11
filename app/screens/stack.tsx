@@ -9,7 +9,7 @@ export function AppStack() {
     return (
         <Tab.Navigator
             screenOptions={{
-                headerShown: false
+                headerShown: false,
             }}
             tabBar={(props) => <BottomTabBar {...props} />}
         >
@@ -28,14 +28,21 @@ export function AppStack() {
                 }}
             />
             <Tab.Screen
-                name="MatchOtherDevices"
+                name="Plus"
                 component={CreateContentStack}
                 options={{
-                    title: 'matchOtherDevices'
+                    title: 'plus'
                 }}
             />
             <Tab.Screen
                 name="Profile"
+                component={CreateContentStack}
+                options={{
+                    title: 'profile'
+                }}
+            />
+            <Tab.Screen
+                name="Profiles"
                 component={CreateContentStack}
                 options={{
                     title: 'profile'

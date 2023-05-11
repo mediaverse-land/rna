@@ -11,7 +11,9 @@ export const theme = {
             GRAY: 'rgba(0, 0, 51, 0.2)',
             CONTENT_TEXT: '#00003380',
             COMMENT_BOX_BG: 'rgba(0, 0, 51, 0.05)',
-            COMMENT_BOX_TITLE_COLOR: 'rgba(0, 0, 51, 0.5)'
+            COMMENT_BOX_TITLE_COLOR: 'rgba(0, 0, 51, 0.5)',
+            TRANSPARENT: 'rgba(255, 255, 255, 0)',
+            FLAT_INPUT_BORDER: 'rgba(245, 247, 249, 1)'
         },
         dark: {}
     },
