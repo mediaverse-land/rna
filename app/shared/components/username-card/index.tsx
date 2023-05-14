@@ -5,7 +5,7 @@ type Props = {
     profileUri: string;
     username: string;
     width?: number;
-    height?: string;
+    height?: number;
     borderRadius?: number;
     profileImageStyles?: StyleProp<ImageStyle>;
     usernameStyles?: StyleProp<any>;
@@ -35,7 +35,7 @@ export function UserNameCard({
                     profileImageStyles
                 ]}
             />
-            <Text style={[usernameStyles, { color: 'rgba(0, 0, 51, 0.2)' }]}>
+            <Text style={[{ color: 'rgba(0, 0, 51, 0.2)' }, usernameStyles]}>
                 {username}
             </Text>
         </RowAlignCenter>

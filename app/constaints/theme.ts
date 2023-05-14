@@ -25,6 +25,7 @@ export const theme = {
     },
     lineHeight: {
         conten: '25.69px',
-        itemCard: '17.3px'
+        itemCard: '17.3px',
+        md: '16px'
     }
 };

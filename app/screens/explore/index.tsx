@@ -2,14 +2,13 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Header } from '../../layout/header';
 import { Navigator } from './navigator';
+import { SearchBar } from '../../layout/search-bar';
 
 export function ExploreStack() {
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <Header />
+            {/* <Header /> */}
             <Navigator />
         </SafeAreaView>
     );
 }
-
-// exp://192.168.37.238:19000

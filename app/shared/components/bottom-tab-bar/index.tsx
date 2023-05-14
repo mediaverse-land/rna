@@ -156,9 +156,9 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
                                     flex: 1,
                                     width: 67,
                                     height: 67,
-                                    backgroundColor: 'rgba(89, 122, 255, 1)'
+                                    backgroundColor: 'rgba(89, 122, 255, 1)',
+                                    borderRadius: 200
                                 }}
-                            // isActive={isFocused ? true : false}
                             >
                                 {icon}
                             </TouchableOpacity>

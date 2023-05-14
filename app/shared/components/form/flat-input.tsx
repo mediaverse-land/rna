@@ -36,11 +36,12 @@ export function FlatInput({
                 alignItems: 'center'
             }}
         >
-            <FlatLabel style={{
-                marginRight: 15,
-                borderRightColor: theme.color.light.GRAY,
-                borderRightWidth: 0.5
-            }}
+            <FlatLabel
+                style={{
+                    marginRight: 15,
+                    borderRightColor: theme.color.light.GRAY,
+                    borderRightWidth: 0.5
+                }}
                 onLayout={(event: any) => {
                     const { width } = event.nativeEvent.layout;
                     ditectLabelWidthHandler(width);

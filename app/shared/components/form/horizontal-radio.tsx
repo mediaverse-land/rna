@@ -1,9 +1,5 @@
 import { useState } from 'react';
-import {
-    Dimensions,
-    TouchableOpacity,
-    LayoutChangeEvent
-} from 'react-native';
+import { Dimensions, TouchableOpacity, LayoutChangeEvent } from 'react-native';
 import { InputComponent } from './style';
 
 const {
@@ -11,19 +7,19 @@ const {
     Label,
     HorizontalRadioWrapper,
     HorizontalRadioItem,
-    HorizontalRadioItemText,
+    HorizontalRadioItemText
 } = InputComponent;
 
 type Props = {
     labelText: string;
-    dataList: string[]
+    dataList: string[];
 };
 
 const windowWidth = Dimensions.get('window').width;
 
 export function HorizontalRadio({ labelText, dataList }: Props) {
     const [labelWidth, setLabelWidth] = useState<number>(0);
-    const [selectedItem, setSelectedItem] = useState('')
+    const [selectedItem, setSelectedItem] = useState('');
 
     // 63 = (24 +24 => padding of <PaddingContainer></PaddingContainer> + 15 =>(marginRight of label))
     const inputWidth = Math.floor(windowWidth) - (63 + labelWidth);
@@ -33,23 +29,23 @@ export function HorizontalRadio({ labelText, dataList }: Props) {
     }
 
     function selectItemHandler(item: string) {
-        setSelectedItem(item)
+        setSelectedItem(item);
     }
 
-    const renderDataList = dataList ?
-        Array.isArray(dataList) ?
-            dataList.length ?
-                dataList.map((f: string, index: number) => (
-                    <HorizontalRadioItem
-                        key={index}
-                        onPress={() => selectItemHandler(f)}
-                    >
-                        <HorizontalRadioItemText>{f}</HorizontalRadioItemText>
-                    </HorizontalRadioItem>
-                ))
+    const renderDataList = dataList
+        ? Array.isArray(dataList)
+            ? dataList.length
+                ? dataList.map((f: string, index: number) => (
+                      <HorizontalRadioItem
+                          key={index}
+                          onPress={() => selectItemHandler(f)}
+                      >
+                          <HorizontalRadioItemText>{f}</HorizontalRadioItemText>
+                      </HorizontalRadioItem>
+                  ))
                 : null
             : null
-        : null
+        : null;
 
     return (
         <FormGroup
