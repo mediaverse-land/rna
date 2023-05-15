@@ -6,7 +6,7 @@ import { View } from 'react-native';
 
 const { DailyRecomended } = ImagesPageComponents;
 
-export function AllPageDailyRecomended() {
+export function AllPageChillSongs() {
     return (
         <DailyRecomended>
             <Title str="Daily recommended" />

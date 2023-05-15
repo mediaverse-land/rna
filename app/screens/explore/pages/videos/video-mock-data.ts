@@ -1,31 +1,42 @@
-export const liveVideosMockData = [
+import {
+    PROFILE_ONE,
+    PROFILE_THREE,
+    PROFILE_TWO
+} from '../../../../constaints/images';
+
+export const videosMockData = [
     {
         id: 1,
+        duration: '50:41',
+        username: 'Cameron Williamson',
+        userProfileUri: PROFILE_ONE,
         imagePath:
-            'https://s3-alpha-sig.figma.com/img/12c2/6abe/25c0b072ab655dac14fd2ed22d3ff03b?Expires=1683504000&Signature=BsDj6DDT6HvLC8CNjJweq7TMJjxZrMpe0XFw4POzYMr0dhPmM-jY8bvOamnCx6UBzYIPC2wTVOJb6M5MV5qS0ffQO8Ic5UFk4sV9LXn~Vnal8KA4nfqPTKxeX6rvE-8ZQXJoquy~2nYuUgygtHpEwlhILxdUll4alexzVGhHMuntpo1zIx5HnUWEbki737TlAu2YJqE5rCUZMT~iVq10tjDqQYMxBSEhRyp6muaFyOsC-2G-N-29pu5gXCEWCt8w03rwr8LrDkuHE1FtDqll3F91jYGFyXYCSTQamJuzo5OErCVVNZHGSI8n3LUWMmw5bGzbAv2eyz-~nkjuV8TUug__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+            'https://s3-alpha-sig.figma.com/img/58e2/e23b/563b5f02c41d19d955aeb3f9981806f7?Expires=1685318400&Signature=OAjKbNX4~dyJmN6xogOBGTvPnj2GYE5XC9W37FwG9jickypNGSKzHqXgPaX9SYvc0sqOUhnOSMj6RPOHT-opca8qZQCLFEwvgIWYp2bkor58-KPBX9OgrDDLJ1mKNSfE-HDIBZAHAVJuiKUey1GoKN~0vcsGyQYBq2-sX~P64we5vKMVYZmmcVmLdl9fecrMN5-oSUHtpuGQCKg2eZ8v6O5gkImeDOxVu~K4yBgcGoxgaBwkREfPBOZMWaxEVLw24aeY0vKWzMsQglzzyCCH~NJA4ndyWyrLYTUW7RQ5c0KqTHsCllXCn~8vk4UjJ8K5YMoPnXAFfCjDVhfl7zWmcw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
         title: 'euro news',
-        category: 'news'
+        description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
     },
     {
         id: 2,
+        duration: '42:28',
+        username: 'Marvin McKinney',
+        userProfileUri: PROFILE_TWO,
         imagePath:
-            'https://s3-alpha-sig.figma.com/img/3340/f18c/589d5ab2ff4fff36558a0f94cd115e8e?Expires=1683504000&Signature=HlDotuWSzuS5pMbRUFQaZE9NGRdLk7lZlUdrDAAHoo-uQeFTwA~yJioxIViNJ-ZZmrs9fhuqbtRLg53rY80HB-0v3gXNLfEMfZRk7jXhqdsWHPngljzaiK24IcsekiVj8PmHrOF76ZoKEoaslfwej26YbXfZkeW51DLzKVzBlkkP04hUvfw8fJ2vNJfCdEIa8RfUDl8b0cWPcwk~fSuHLe2FUZBld0FOYBQ09oeIAPsyqI0PDUcKSjZZGDByUmsKVzJKW0hGQkrMfWAohG0UKt3ZIwSGubUNMYHQ3YebMYuUaeZPZWQqmh5izwhJVvTipASEjXU7f9oBhjDuQrU32Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+            'https://s3-alpha-sig.figma.com/img/2909/7f28/684c3eb2ac3f5c67e9fd57fe1517a2b5?Expires=1685318400&Signature=JmxJlC~90hfWI3U3ojKuK5U5zsd0w2aoMKqBWtHiUheblIUWYvlhOEgcjA1~gGwvoxDoOJ47RrszGHmwVFthDxOiiGLj9jvra~5mh78fmkCj0K7CZFpnzz7Yp~EFox4miGHMZE8kZC41nzwWMsiXn7gkacpVu9zxhD6HIjPMq5S2OlrT5C08ToVyBJfq4oRLPvzoFFA01meBOEq2I89e4w0YhAf94kkaXHBMVokNeSn1kOYaa-p4uEvagvPk2jo-2aMedynJgps9es9KWv37V1cmXTfWqlYpHrHqARmPtKvbQgSiumycK9kdystQYZpDv4KSg8y1MURFHLT9eDxt5g__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
         title: 'SNL chan...',
-        category: 'fun'
+        description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
     },
     {
         id: 3,
+        duration: '10:24',
+        username: 'Jacob Jones',
+        userProfileUri: PROFILE_THREE,
         imagePath:
-            'https://s3-alpha-sig.figma.com/img/6640/b5eb/61e71bddb8a5da5969838d68675cdd4b?Expires=1683504000&Signature=lyr4bQ-2aSOwdpJCrmMon-9V8-uD2b8zJa4neO-W9UqOfWSIHC61dnltsHgpfdn7BfCDYDPniHyn2-1683bQdgcitZ1QCLUtIWnH~2COwpLJMA0XDa~ntLXBNSNrbXW~LSw7MN-wkKBIgjZl7QUJgewVzsGf2d0ZYaoAdv6YDIRmcSo4lkg2wSrkgfIQFQre~8zKy75jPSXgC3bWs~5hFxAkU9k9sfkXsWSeIUPUaFpaqxjE3Whnw1H53wuBw58-rfVF4xvRGkILIyWOmm-I-KT28MkiX~NPOP8OD3kqY8xu3heZxqpiOkK14oSgYbJ3k0IKZw6M6~mz2eJAyPlSMw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+            'https://s3-alpha-sig.figma.com/img/c3a8/72f5/32cb59e6021e3f8836ef6d7ace7ffb31?Expires=1685318400&Signature=AH3PTsOkwuaUSvFpyjDjhRZ5Y0LViVXvwkFIA6YuOLZuxl9FUatKZ7KSQ3wIcSnqzPmBxe1MTYN2d~ZXlui~2l04CqxcxSzqVloliOf4~vj9elKlpvEjizXFe2itTaHEJsTQZoTsq5Rz4TiSxQ1bdvWSYtMctDvLI6OBikUKrxtPEHfcRUH-jScDvt3hVjjeciuCKN3o0a4COZZuu6acfYOQlxA5EtC1Jw-nMZYB-TiqcUSzDltVyaAirT9BguBkVr8y17zL9SpEMcmrzDMONESMj-Z9TQBc7RmAliD8b~DoMIiH5tW~ZwZhoLEZuLGjhPnxmDZ-tjTgDo8qyJx1Qg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
         title: '24 France',
-        category: 'news'
-    },
-    {
-        id: 4,
-        imagePath:
-            'https://s3-alpha-sig.figma.com/img/8412/9e02/1fcd22c5eb055212bb12457fd07734bb?Expires=1683504000&Signature=hp381WBA3F5cPPrasPdVf19DZwoMnSdZsnH9ptbe8UQuSUitfbA1nHDtUrrhA4MwO5gWNnrpZ7CXRyO5PYIU0eCuGphAv1D0reoAiBBHtuFT4nLYQzCc1HUOp7Z35I4zmXNWN~lPXGbAKkDNT0k8G7Bw3EYt6kSh8iIfkdnUWTLkcm06mXp~evxAK4LBOn7LU6HIj2gKLku14AHR69sUqlhco8yMdOHpH0M0Bo8gbm4oxBNwFygyG9uZ0GVVr7l7OT7Q~FwziNTfpNVtVcKZZmZUxT7GcdJUPky5cw-MMryFYDQK~fFL3g5JVgamDBC-Ju26cJfxeNc07hNmsBhG5Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
-        title: 'B Plus',
-        category: 'podcast'
+        description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
     }
 ];
 

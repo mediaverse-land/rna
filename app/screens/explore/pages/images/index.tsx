@@ -1,25 +1,14 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { LatestImages } from './latest-images';
-import { MostViewImages } from './most-view';
-import { SearchBar } from '../../../../layout/search-bar';
-import { NavigationHeader } from '../../components/navigation-header';
-import { LinearGradient } from 'expo-linear-gradient';
 
+// import { LiveVideos } from '../videos/live-videos';
+// import { AnimationVideos } from '../videos/animations';
 
-export function ImagesPages() {
+export function ImagesPages({ route, navigation }: any) {
     return (
-        <LinearGradient
-            style={[styles.container]}
-            colors={['#030340', '#030340']}
-            start={{ x: 0.7, y: 0 }}
-        >
-            <SearchBar style={styles.fixed} />
-            <NavigationHeader style={styles.fixed} />
-            <ScrollView style={[styles.fixed, { backgroundColor: 'transparent', paddingTop: 100 }]}>
-                <LatestImages />
-                <MostViewImages />
-            </ScrollView>
-        </LinearGradient>
+        <View>
+            {/* <LiveVideos />
+            <AnimationVideos /> */}
+        </View>
     );
 }
 
@@ -35,7 +24,6 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         right: 0,
-        bottom: 0,
+        bottom: 0
     }
-})
-
+});

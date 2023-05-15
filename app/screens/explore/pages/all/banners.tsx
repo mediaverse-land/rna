@@ -1,12 +1,12 @@
-import { Dimensions, Image } from "react-native";
-import { ImagesPageComponents } from "./style";
-import { Flex } from "../../../../styles/grid";
+import { Dimensions, Image } from 'react-native';
+import { ImagesPageComponents } from './style';
+import { Flex } from '../../../../styles/grid';
 import {
     BANNER_ITEM_GRADIENT_IMAGE,
     BANNER_PODCAST_IMAGE,
     BANNER_STREAMS_IMAGE,
     BANNER_VLOG_IMAGE
-} from "../../../../constaints/images";
+} from '../../../../constaints/images';
 
 const { BannerItem } = ImagesPageComponents;
 
@@ -36,7 +36,7 @@ export function AllPageBanners() {
                         width: '100%',
                         height: '100%',
                         borderRadius: 16,
-                        position: 'absolute',
+                        position: 'absolute'
                     }}
                 />
             </BannerItem>
@@ -55,7 +55,7 @@ export function AllPageBanners() {
                         width: '100%',
                         height: '100%',
                         borderRadius: 16,
-                        position: 'absolute',
+                        position: 'absolute'
                     }}
                 />
             </BannerItem>
@@ -74,10 +74,10 @@ export function AllPageBanners() {
                         width: '100%',
                         height: '100%',
                         borderRadius: 16,
-                        position: 'absolute',
+                        position: 'absolute'
                     }}
                 />
             </BannerItem>
         </Flex>
-    )
+    );
 }

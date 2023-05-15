@@ -1,42 +1,32 @@
-import { View } from "react-native";
-import { HorizontalSliderComponents } from "./style";
-import { UserNameCard } from "../username-card";
-import { HORIZONTAL_SLIDER_GRADIENT } from "../../../constaints/images";
+import { View } from 'react-native';
+import { HorizontalSliderComponents } from './style';
+import { UserNameCard } from '../username-card';
+import { HORIZONTAL_SLIDER_GRADIENT } from '../../../constaints/images';
 
 type Props = {
-    slidePressRedirectHandler: (id: number) => void,
+    slidePressRedirectHandler: (id: number) => void;
     title: string;
     thumbnailPath: string;
     username: string;
     profileUri: string;
-    id: number
-}
+    id: number;
+};
 
-const {
-    Slide,
-    SliderThumbnailGradient,
-    SlideThumbnail,
-    SlideTitle,
-} = HorizontalSliderComponents;
+const { Slide, SliderThumbnailGradient, SlideThumbnail, SlideTitle } =
+    HorizontalSliderComponents;
 
-export function HorizontalSlide(
-    {
-        slidePressRedirectHandler,
-        title,
-        thumbnailPath,
-        profileUri,
-        username,
-        id
-    }: Props
-) {
+export function HorizontalSlide({
+    slidePressRedirectHandler,
+    title,
+    thumbnailPath,
+    profileUri,
+    username,
+    id
+}: Props) {
     return (
-        <Slide
-            onPress={() => slidePressRedirectHandler(id)}
-        >
+        <Slide onPress={() => slidePressRedirectHandler(id)}>
             <View>
-                <SlideThumbnail
-                    source={{ uri: thumbnailPath }}
-                />
+                <SlideThumbnail source={{ uri: thumbnailPath }} />
                 <SliderThumbnailGradient
                     source={{ uri: HORIZONTAL_SLIDER_GRADIENT }}
                 />
@@ -55,5 +45,5 @@ export function HorizontalSlide(
                 />
             </View>
         </Slide>
-    )
+    );
 }

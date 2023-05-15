@@ -1,8 +1,8 @@
+import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
 
 export const PaddingContainer = styled.View`
     width: 100%;
-    margin-top: 30px;
     padding: 0 24px;
 `;
 
@@ -21,7 +21,7 @@ export const Center = styled.View`
     width: 100%;
     justify-content: center;
     align-items: center;
-    ${(props: any) => (props.height ? props.height : null)};
+    ${(props: { height?: string }) => (props.height ? props.height : null)};
 `;
 
 interface FlexStyleProps {
@@ -41,3 +41,20 @@ export const Flex = styled.View<FlexStyleProps>`
         props.direction ? `flex-direction: ${props.direction}` : null}};
     ${(props) => (props.align ? `align-items: ${props.align}` : null)}};   
 `;
+
+export const styles = StyleSheet.create({
+    container: {
+        position: 'relative',
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: '#030340',
+        paddingBottom: 100
+    },
+    fixed: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+    }
+});

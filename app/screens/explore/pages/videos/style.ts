@@ -1,41 +1,60 @@
 import styled from 'styled-components/native';
 import { theme } from '../../../../constaints/theme';
+import { StyleSheet } from 'react-native';
 
-const Container = styled.ScrollView`
-    width: 100%;
-`;
+const styles = StyleSheet.create({
+    container: {
+        position: 'relative',
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: '#030340',
+        paddingBottom: 100
+    },
+    fixed: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+    }
+});
 
-export const LiveVideosComponents = {
-    Container: styled.View`
+export const VideoPageComponents = {
+    ContainerStyles: styles.container,
+    FixedStyles: styles.fixed,
+    ListWrapper: styled.View`
         width: 100%;
+        margin-top: 56px;
+        flex: 1;
     `,
-    Item: styled.View`
-        width: 157px;
-        height: 65px;
+    VideoListItem: styled.View`
+        width: 100%;
+        margin-top: 42px;
         border-radius: 8px;
-        border: 1px solid ${theme.color.light.GRAY_BORDER};
-        background-color: ${theme.color.light.WHITE_BG};
-        padding: 8px;
-        flex-direction: row;
-        align-items: center;
-        margin-right: 16px;
     `,
-    Body: styled.View`
+    VideoListItemThumbnail: styled.Image`
         width: 100%;
-        padding-left: 8px;
+        height: 226px;
+        border-radius: 8px;
     `,
-    Title: styled.Text`
-        color: ${theme.color.light.HEADING};
-        height: 20px;
+    VideoListItemGradietImage: styled.Image`
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 226px;
+        border-radius: 8px;
+    `,
+    VideoListItemDescription: styled.Text`
+        margin-top: 16px;
+        padding: 0 8px;
+        color: #666680;
         font-size: ${theme.fontSize.md};
+        line-height: ${theme.lineHeight.md};
     `,
-    Categoty: styled.Text`
-        color: ${theme.color.light.GRAY_BORDER};
-        height: 17px;
-        font-size: ${theme.fontSize.sm};
+    VideoListItemDuration: styled.Text`
+        color: #666680;
+        font-size: 12px;
+        line-height: 12px;
+        margin-top: 5px;
     `
-};
-
-export const VideosPageComponents = {
-    Container
 };

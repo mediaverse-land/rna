@@ -147,8 +147,12 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
                         >
                             <TouchableOpacity
                                 accessibilityRole="button"
-                                accessibilityState={isFocused ? { selected: true } : {}}
-                                accessibilityLabel={options.tabBarAccessibilityLabel}
+                                accessibilityState={
+                                    isFocused ? { selected: true } : {}
+                                }
+                                accessibilityLabel={
+                                    options.tabBarAccessibilityLabel
+                                }
                                 testID={options.tabBarTestID}
                                 onPress={onPress}
                                 onLongPress={onLongPress}
@@ -163,15 +167,17 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
                                 {icon}
                             </TouchableOpacity>
                         </View>
-
                     );
-                }
-                else {
+                } else {
                     return (
                         <TabItem
                             accessibilityRole="button"
-                            accessibilityState={isFocused ? { selected: true } : {}}
-                            accessibilityLabel={options.tabBarAccessibilityLabel}
+                            accessibilityState={
+                                isFocused ? { selected: true } : {}
+                            }
+                            accessibilityLabel={
+                                options.tabBarAccessibilityLabel
+                            }
                             testID={options.tabBarTestID}
                             onPress={onPress}
                             onLongPress={onLongPress}
@@ -182,8 +188,6 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
                         </TabItem>
                     );
                 }
-
-
             })}
         </Container>
     );

@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler';
+import { FC } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppStack } from './app/screens/stack';
@@ -9,6 +10,34 @@ import { SearchPage } from './app/screens/search';
 
 const Stack = createStackNavigator();
 
+const routes: { id: number, name: string, component: FC }[] = [
+    {
+        id: 1,
+        name: 'AppStack',
+        component: AppStack
+    },
+    {
+        id: 2,
+        name: 'SingleImageStack',
+        component: SingleImagePage
+    },
+    {
+        id: 3,
+        name: 'SingleTextStack',
+        component: SingleTextPage
+    },
+    {
+        id: 4,
+        name: 'SingleSoundStack',
+        component: SingleSoundPage
+    },
+    {
+        id: 5,
+        name: 'Search',
+        component: SearchPage
+    },
+]
+
 export default function App() {
     return (
         <NavigationContainer>
@@ -17,20 +46,13 @@ export default function App() {
                     headerShown: false
                 }}
             >
-                <Stack.Screen name="AppStack" component={AppStack} />
-                <Stack.Screen
-                    name="SingleImageStack"
-                    component={SingleImagePage}
-                />
-                <Stack.Screen
-                    name="SingleTextStack"
-                    component={SingleTextPage}
-                />
-                <Stack.Screen
-                    name="SingleSoundStack"
-                    component={SingleSoundPage}
-                />
-                <Stack.Screen name="Search" component={SearchPage} />
+                {routes.map((route) => (
+                    <Stack.Screen
+                        key={route.id}
+                        name={route.name}
+                        component={route.component}
+                    />
+                ))}
             </Stack.Navigator>
         </NavigationContainer>
     );

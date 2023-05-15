@@ -1,16 +1,16 @@
-import { FlatList } from "react-native";
-import { HorizontalSliderComponents } from "./style";
-import { HorizontalSlide } from "./slide";
+import { FlatList } from 'react-native';
+import { HorizontalSliderComponents } from './style';
+import { HorizontalSlide } from './slide';
 
 type Props = {
-    data: any
-}
+    data: any;
+};
 
-const { Wrapper } = HorizontalSliderComponents
+const { Wrapper } = HorizontalSliderComponents;
 
 export function HorizontalSlider({ data }: Props) {
     function slidePressRedirectHandler(id: number) {
-        console.log(id)
+        console.log(id);
     }
 
     const renderItem = ({ item }: any) => {
@@ -35,5 +35,5 @@ export function HorizontalSlider({ data }: Props) {
                 renderItem={renderItem}
             />
         </Wrapper>
-    )
+    );
 }
