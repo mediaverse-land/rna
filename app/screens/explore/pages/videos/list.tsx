@@ -1,9 +1,9 @@
-import { FlatList, View } from "react-native";
-import { VideoPageComponents } from "./style";
-import { VIDEO_LIST_ITEM_GRADIENT } from "../../../../constaints/images";
-import { videosMockData } from "./video-mock-data";
-import { Flex } from "../../../../styles/grid";
-import { UserNameCard } from "../../../../shared/components/username-card";
+import { FlatList, View } from 'react-native';
+import { VideoPageComponents } from './style';
+import { VIDEO_LIST_ITEM_GRADIENT } from '../../../../constaints/images';
+import { videosMockData } from './video-mock-data';
+import { Flex } from '../../../../styles/grid';
+import { UserNameCard } from '../../../../shared/components/username-card';
 
 const {
     ListWrapper,
@@ -12,16 +12,14 @@ const {
     VideoListItemGradietImage,
     VideoListItemDescription,
     VideoListItemDuration
-} = VideoPageComponents
+} = VideoPageComponents;
 
 export function VideoPageList() {
     const renderVidoeListItem = ({ item }: { item: any }) => {
         return (
             <VideoListItem>
                 <View>
-                    <VideoListItemThumbnail
-                        source={{ uri: item.imagePath }}
-                    />
+                    <VideoListItemThumbnail source={{ uri: item.imagePath }} />
                     <VideoListItemGradietImage
                         source={{ uri: VIDEO_LIST_ITEM_GRADIENT }}
                     />
@@ -34,7 +32,11 @@ export function VideoPageList() {
                         direction="row"
                         align="center"
                         justify="space-between"
-                        style={{ marginTop: 16, paddingLeft: 8, paddingRight: 8 }}
+                        style={{
+                            marginTop: 16,
+                            paddingLeft: 8,
+                            paddingRight: 8
+                        }}
                     >
                         <UserNameCard
                             username={item.username}
@@ -45,14 +47,16 @@ export function VideoPageList() {
                                 fontSize: 12
                             }}
                         />
-                        <VideoListItemDuration>{item.duration}</VideoListItemDuration>
+                        <VideoListItemDuration>
+                            {item.duration}
+                        </VideoListItemDuration>
                     </Flex>
                 </View>
             </VideoListItem>
-        )
-    }
+        );
+    };
 
-    const keyExtractor = (item: any) => item.id
+    const keyExtractor = (item: any) => item.id;
 
     return (
         <ListWrapper>
@@ -62,5 +66,5 @@ export function VideoPageList() {
                 keyExtractor={keyExtractor}
             />
         </ListWrapper>
-    )
+    );
 }

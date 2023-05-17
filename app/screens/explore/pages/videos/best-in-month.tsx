@@ -1,7 +1,7 @@
-import { View } from "react-native";
-import { Title } from "../../../../shared/components/title";
-import { HorizontalSlider } from "../../../../shared/components/horizontal-slider";
-import { dailyRecommendedMockData } from "../all/mock-data/daily-recommended";
+import { View } from 'react-native';
+import { Title } from '../../../../shared/components/title';
+import { HorizontalSlider } from '../../../../shared/components/horizontal-slider';
+import { dailyRecommendedMockData } from '../all/mock-data/daily-recommended';
 
 export function VideoPageBestInMonth() {
     return (
@@ -11,5 +11,5 @@ export function VideoPageBestInMonth() {
                 <HorizontalSlider data={dailyRecommendedMockData} />
             </View>
         </View>
-    )
+    );
 }

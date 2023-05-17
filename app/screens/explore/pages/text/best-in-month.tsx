@@ -1,10 +1,10 @@
 import { FlatList, Text, View } from 'react-native';
 import { ICON_TEXT_WHITE } from '../../../../constaints/icons';
 import { Title } from '../../../../shared/components/title';
-import { ImagesPageComponents } from './style';
 import { TEXT_SLIDER_ITEM_GRADIENT } from '../../../../constaints/images';
-import { topTenTextsMockData } from './mock-data/top-ten-texts';
 import { UserNameCard } from '../../../../shared/components/username-card';
+import { ImagesPageComponents } from '../all/style';
+import { topTenTextsMockData } from '../all/mock-data/top-ten-texts';
 
 const {
     TextSliderWrapper,
@@ -15,7 +15,7 @@ const {
     TextSlideContentText
 } = ImagesPageComponents;
 
-export function AllPageTopTenText() {
+export function ImagePageBestInMonth() {
     const renderItem = ({ item }: { item: any }) => {
         return (
             <TextSlide>
@@ -41,8 +41,8 @@ export function AllPageTopTenText() {
     };
 
     return (
-        <View style={{ flex: 1, marginTop: 40, paddingLeft: 24 }}>
-            <Title str="Top 10 texts" iconPath={ICON_TEXT_WHITE} />
+        <View style={{ flex: 1, paddingLeft: 24 }}>
+            <Title str="Best in month" />
             <TextSliderWrapper>
                 <FlatList
                     horizontal

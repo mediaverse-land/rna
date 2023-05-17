@@ -16,10 +16,7 @@ export function Navigator() {
                     headerShown: false
                 }}
             >
-                <Stack.Screen
-                    name="AllPage"
-                    component={AllPage}
-                />
+                <Stack.Screen name="AllPage" component={AllPage} />
                 <Stack.Screen
                     name="ImagesPages"
                     component={ImagesPages}

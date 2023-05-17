@@ -10,7 +10,7 @@ import { SearchPage } from './app/screens/search';
 
 const Stack = createStackNavigator();
 
-const routes: { id: number, name: string, component: FC }[] = [
+const routes: { id: number; name: string; component: FC }[] = [
     {
         id: 1,
         name: 'AppStack',
@@ -35,8 +35,8 @@ const routes: { id: number, name: string, component: FC }[] = [
         id: 5,
         name: 'Search',
         component: SearchPage
-    },
-]
+    }
+];
 
 export default function App() {
     return (
@@ -46,13 +46,15 @@ export default function App() {
                     headerShown: false
                 }}
             >
-                {routes.map((route) => (
-                    <Stack.Screen
-                        key={route.id}
-                        name={route.name}
-                        component={route.component}
-                    />
-                ))}
+                {
+                    routes.map((route) => (
+                        <Stack.Screen
+                            key={route.id}
+                            name={route.name}
+                            component={route.component}
+                        />
+                    ))
+                }
             </Stack.Navigator>
         </NavigationContainer>
     );

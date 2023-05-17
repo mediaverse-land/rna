@@ -9,6 +9,8 @@ import HORIZONTAL_SLIDER_GRADIENT_PNG from './../../assets/img/horizontal-slider
 
 import VIDEO_LIST_ITEM_GRADIENT_PNG from './../../assets/img/video-list/video-list-item-gradient.png';
 
+import TEXT_SWIPER_GRADIENT_PNG from './../../assets/img/text-swiper/gradient.png';
+
 import DAILY_RECOMMENDED_IMG_ONE_PNG from './../../assets/img/daily-recommended/img-3.png';
 import DAILY_RECOMMENDED_IMG_TWO_PNG from './../../assets/img/daily-recommended/img-2.png';
 import DAILY_RECOMMENDED_IMG_THREE_PNG from './../../assets/img/daily-recommended/img-1.png';
@@ -49,3 +51,5 @@ export const TEXT_SLIDER_ITEM_GRADIENT = imageUriResolver(
 export const VIDEO_LIST_ITEM_GRADIENT = imageUriResolver(
     VIDEO_LIST_ITEM_GRADIENT_PNG
 );
+
+export const TEXT_SWIPER_GRADIENT = imageUriResolver(TEXT_SWIPER_GRADIENT_PNG);

@@ -1,3 +1,25 @@
+export const bestWritersMockData = [
+    {
+        id: 1,
+        image: 'https://s3-alpha-sig.figma.com/img/98b4/e91a/7b4d60b90289785ed80e557c081dcf6a?Expires=1685318400&Signature=mG1ow56wrugCAfI2RCwT7TFBjgd9cZCY5RR3xS9TMulG-OZTQ6RkMQCBOF30dDj8Yg7uIJJMMcGx2LHctSAVhbW~tNtHfLVS8MvDC57FCzw5Uc7DfV~q~O2eWRs2xrQHEnRjkR5ZJD-xUVvRxQypL3dsTpVEp6yir8kq7dT1BT4f7MVVNXhH7bTQ0SqHKy8NHq-FJH435Z~ltNR-PeBzF6jxRXHcuL0xI8aIiBlUqLUNsBQGtkvXAvIcfRBKFFI7d-yMIk268Nzfp-Dxv-PRZqwZMxXJ6UqDAucBncz06sk2c0CznGY3gWuKXBiGVkN1qPzZakA6DAlabGUV-slkzA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+        title: 'Kathryn Murphy',
+        description: 'Amateur internet advocate. Introvert. Creator. Freelance'
+    },
+    {
+        id: 2,
+        image: 'https://s3-alpha-sig.figma.com/img/f127/01bd/073e2bc1cd36ec23f693b57248587006?Expires=1685318400&Signature=JAnb-4NL0fbFmCEY~ihRyWHcM4Nvd8Nv~G2VaVpM8sTNbkaChPC0h7tO0KWqjXGx~bcqhA~tr0H989XrU81jRRuMIyqkihXmkEym3LfABZgTuiitOBKBCc5eHN0yEWas5-JONM76JtUotojt-Wfi1Rc3cHJ26tJ0hkeuKp2BSUDxZHleRk4frvjAd56aDSFppxPfl6rsQsNDGSkrW1cFY8kpIjxDK-pYqLLI5YHufAhXjrUZmJArsSqAGjQEcQOGpW5fJcn-Tu1YE4qDopBb678kuGH9IXYkgbFLzVSrAGvbjFbQjL2DzWxjvVQ-F6XwtLHguoVEWsNG02~Fkh6jDQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+        title: 'Robert Fox',
+        description:
+            'Evil tv enthusiast. Thinker. Internet buff. Zombie guru. Music'
+    },
+    {
+        id: 3,
+        image: 'https://s3-alpha-sig.figma.com/img/98b4/e91a/7b4d60b90289785ed80e557c081dcf6a?Expires=1685318400&Signature=mG1ow56wrugCAfI2RCwT7TFBjgd9cZCY5RR3xS9TMulG-OZTQ6RkMQCBOF30dDj8Yg7uIJJMMcGx2LHctSAVhbW~tNtHfLVS8MvDC57FCzw5Uc7DfV~q~O2eWRs2xrQHEnRjkR5ZJD-xUVvRxQypL3dsTpVEp6yir8kq7dT1BT4f7MVVNXhH7bTQ0SqHKy8NHq-FJH435Z~ltNR-PeBzF6jxRXHcuL0xI8aIiBlUqLUNsBQGtkvXAvIcfRBKFFI7d-yMIk268Nzfp-Dxv-PRZqwZMxXJ6UqDAucBncz06sk2c0CznGY3gWuKXBiGVkN1qPzZakA6DAlabGUV-slkzA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
+        title: 'Kathryn Murphy',
+        description: 'Amateur internet advocate. Introvert. Creator. Freelance'
+    }
+];
+
 export const textMockData = [
     {
         id: 1,

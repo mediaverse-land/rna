@@ -1,7 +1,7 @@
-import { View } from "react-native";
-import { Title } from "../../../../shared/components/title";
-import { ICON_IMAGE } from "../../../../constaints/icons";
-import { MasonryView } from "../../../../shared/components/masonry";
+import { View } from 'react-native';
+import { Title } from '../../../../shared/components/title';
+import { ICON_IMAGE } from '../../../../constaints/icons';
+import { MasonryView } from '../../../../shared/components/masonry';
 
 export function AllPageMostViewed() {
     return (
@@ -9,5 +9,5 @@ export function AllPageMostViewed() {
             <Title str="Most viewed" iconPath={ICON_IMAGE} />
             {/* <MasonryView /> */}
         </View>
-    )
+    );
 }

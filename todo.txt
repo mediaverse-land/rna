@@ -1,8 +1,5 @@
 1 => masonry grid for Videos/movie
-2 => video player
-3 => sound player
-4 => hashtags (Done)
-
+2 => text page slider
 
 
 

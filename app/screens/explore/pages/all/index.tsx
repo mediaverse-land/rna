@@ -9,14 +9,9 @@ import { AllPageMostViewed } from './most-viewed';
 import { AllPageTopTenText } from './top-ten-texts';
 import { AllPageChillSongs } from './chill-songs';
 
-const {
-    Container,
-    FixedStyles,
-    ContainerStyles
-} = ImagesPageComponents;
+const { Container, FixedStyles, ContainerStyles } = ImagesPageComponents;
 
 export function AllPage({ route, navigation }: any) {
-
     return (
         <LinearGradient
             style={[ContainerStyles]}
@@ -35,7 +30,7 @@ export function AllPage({ route, navigation }: any) {
                     <AllPageBanners />
                 </Container>
                 <AllPageDailyRecomended />
-                <Container >
+                <Container>
                     <AllPageMostViewed />
                 </Container>
                 <AllPageTopTenText />
