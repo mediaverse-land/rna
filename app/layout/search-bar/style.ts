@@ -1,18 +1,6 @@
 import styled from 'styled-components/native';
 
 export const SearchBarComponents: any = {
-    Container: {
-        width: '100%',
-        height: 96,
-        backgroundColor: '#4e4e61',
-        zIndex: 3,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-        paddingLeft: 24,
-        paddingRight: 24,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
     SearchInput: styled.TextInput`
         width: 100%;
         height: 48;
@@ -20,8 +8,19 @@ export const SearchBarComponents: any = {
         border: 1px solid #353542;
         padding-left: 17px;
         line-height: 16.94px;
+        margin-top: 24px;
         color: #83839c;
-        background-color: #0e0e12;
+        background-color: #0e0e12a0;
         filter: blur(10px);
+    `,
+    SearchIcon: styled.Image`
+        width: 16px;
+        height: 16px;
+        position: absolute;
+        top: 70px;
+        right: 43px;
+        z-index: 12;
     `
 };
+
+// #0e0e12a0

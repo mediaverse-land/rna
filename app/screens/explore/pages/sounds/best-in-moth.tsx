@@ -1,14 +1,14 @@
-import { StyleSheet, View } from "react-native";
-import { HorizontalSlider } from "../../../../shared/components/horizontal-slider";
-import { Title } from "../../../../shared/components/title";
-import { PaddingContainer } from "../../../../styles/grid";
-import { soundsMockData } from "./sound-mock-data";
+import { StyleSheet, View } from 'react-native';
+import { HorizontalSlider } from '../../../../shared/components/horizontal-slider';
+import { Title } from '../../../../shared/components/title';
+import { PaddingContainer } from '../../../../styles/grid';
+import { soundsMockData } from './sound-mock-data';
 
 const styles = StyleSheet.create({
     sliderWrapper: {
         marginTop: 40
     }
-})
+});
 
 export function SoundsPageBestInMonth() {
     return (
@@ -18,5 +18,5 @@ export function SoundsPageBestInMonth() {
                 <HorizontalSlider data={soundsMockData} />
             </View>
         </PaddingContainer>
-    )
+    );
 }

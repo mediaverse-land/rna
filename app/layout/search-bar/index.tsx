@@ -1,23 +1,43 @@
-import { View, ViewStyle } from 'react-native';
+import { Image, StyleSheet, View, ViewStyle } from 'react-native';
 import { SearchBarComponents } from './style';
-// import { BlurView } from '@react-native-community/blur';
-// import styled from 'styled-components/native';
+import { ICON_SEARCH } from '../../constaints/icons';
 
 type Props = {
     style: ViewStyle;
 };
 
-const { Container, SearchInput } = SearchBarComponents;
+const { SearchInput, SearchIcon } = SearchBarComponents;
 
-// const BlurBox = styled(BlurView)`
-//     width: 100%;
-//     height: 50px;
-// `
-
-export function SearchBar({ style }: Props) {
+export function SearchBar() {
     return (
-        <View style={[Container, style]}>
-            <SearchInput placeholder="Search" placeholderTextColor="#83839C" />
+        <View style={styles.wrapper}>
+            <SearchIcon
+                source={{ uri: ICON_SEARCH }}
+            />
+            <SearchInput
+                placeholder="Search"
+                placeholderTextColor="#83839C"
+            />
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    wrapper: {
+        width: '100%',
+        height: 132,
+        zIndex: 10,
+        backgroundColor: '#0e0e12a0',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        borderBottomLeftRadius: 32,
+        borderBottomRightRadius: 32,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingLeft: 24,
+        paddingRight: 24
+    }
+})
+
+

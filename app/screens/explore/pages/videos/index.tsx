@@ -20,7 +20,7 @@ export function VideosPage({ route, navigation }: any) {
         >
             {/* <Blur /> */}
 
-            <SearchBar style={FixedStyles} />
+            {/* <SearchBar style={FixedStyles} /> */}
             <NavigationHeader navigation={navigation} route={route} />
             <ScrollView
                 style={[

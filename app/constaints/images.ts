@@ -19,6 +19,8 @@ import DAILY_RECOMMENDED_IMG_ONE_PNG from './../../assets/img/daily-recommended/
 import DAILY_RECOMMENDED_IMG_TWO_PNG from './../../assets/img/daily-recommended/img-2.png';
 import DAILY_RECOMMENDED_IMG_THREE_PNG from './../../assets/img/daily-recommended/img-1.png';
 
+import TOPBAR_BACKGROUND_PNG from './../../assets/img/topbar/topbar-bg.png';
+
 import PROFILE_ONE_PNG from './../../assets/img/profiles/img-1.png';
 import PROFILE_TWO_PNG from './../../assets/img/profiles/img-2.png';
 import PROFILE_THREE_PNG from './../../assets/img/profiles/img-3.png';
@@ -65,3 +67,5 @@ export const MUSIC_PLAYER_GRADIENT = imageUriResolver(
 export const MUSIC_PLAYER_STOP_BUTTON_GRADIENT = imageUriResolver(
     MUSIC_PLAYER_STOP_BUTTON_GRADIENT_PNG
 );
+
+export const TOPBAR_BACKGROUND = imageUriResolver(TOPBAR_BACKGROUND_PNG);

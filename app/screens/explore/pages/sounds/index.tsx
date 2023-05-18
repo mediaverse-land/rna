@@ -17,14 +17,9 @@ export function SoundsPage({ route, navigation }: any) {
             colors={['#030340', '#030340']}
             start={linearGradient}
         >
-            <SearchBar style={FixedStyles} />
+            {/* <SearchBar style={FixedStyles} /> */}
             <NavigationHeader navigation={navigation} route={route} />
-            <ScrollView
-                style={[
-                    FixedStyles,
-                    styles.scrollView
-                ]}
-            >
+            <ScrollView style={[FixedStyles, styles.scrollView]}>
                 <SoundsPageBestInMonth />
                 <SoundsPageMusicPlayer />
                 <SoundsPageChillSongs />
@@ -37,15 +32,16 @@ export function SoundsPage({ route, navigation }: any) {
 
 const styles = StyleSheet.create({
     seperator: {
-        width: '100%', height: 350
+        width: '100%',
+        height: 350
     },
     scrollView: {
         backgroundColor: 'transparent',
         paddingTop: 196
-    },
-})
+    }
+});
 
 const linearGradient = {
     x: 0.7,
     y: 0
-}
+};

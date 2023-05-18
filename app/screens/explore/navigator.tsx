@@ -1,51 +1,56 @@
 import { View } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { ImagesPages } from './pages/images';
 import { VideosPage } from './pages/videos';
 import { SoundsPage } from './pages/sounds';
 import { TextsPage } from './pages/text';
 import { AllPage } from './pages/all';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import TopTabBar from '../../shared/components/top-tab-bar';
 
-const Stack = createStackNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 export function Navigator() {
     return (
         <View style={{ width: '100%', flex: 1 }}>
-            <Stack.Navigator
-                screenOptions={{
-                    headerShown: false
-                }}
+            <Tab.Navigator
+                tabBar={(props) => <TopTabBar {...props} />}
             >
-                <Stack.Screen name="AllPage" component={AllPage} />
-                <Stack.Screen
+                <Tab.Screen
+                    name="AllPage"
+                    component={AllPage}
+                    options={{
+                        title: 'All'
+                    }}
+                />
+                <Tab.Screen
                     name="ImagesPages"
                     component={ImagesPages}
                     options={{
                         title: 'image'
                     }}
                 />
-                <Stack.Screen
+                <Tab.Screen
                     name="VideosPage"
                     component={VideosPage}
                     options={{
                         title: 'video'
                     }}
                 />
-                <Stack.Screen
+                <Tab.Screen
                     name="SoundsPage"
                     component={SoundsPage}
                     options={{
                         title: 'sound'
                     }}
                 />
-                <Stack.Screen
+                <Tab.Screen
                     name="TextsPage"
                     component={TextsPage}
                     options={{
                         title: 'text'
                     }}
                 />
-            </Stack.Navigator>
+            </Tab.Navigator>
         </View>
     );
 }

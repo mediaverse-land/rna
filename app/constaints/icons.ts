@@ -10,10 +10,44 @@ import ICON_VIDEO_GRAY_PNG from './../../assets/icons/icon__video-gray.png';
 import ICON_NEXT_GRAY_PNG from './../../assets/icons/icon__next-gray.png';
 import ICON_PREV_GRAY_PNG from './../../assets/icons/icon__prev-gray.png';
 
+import ICON_SEARCH_PNG from './../../assets/icons/icon__search.png';
+
 import ICON_MUSIC_NEXT_PNG from './../../assets/icons/icon__next-music.png';
 import ICON_MUSIC_PREV_PNG from './../../assets/icons/icon__prev-music.png';
 import ICON_MUSIC_STOP_PNG from './../../assets/icons/icon__stop-music.png';
 import ICON_MUSIC_PLAY_PNG from './../../assets/icons/icon__play-music.png';
+
+import ICON_TOP_TABBAR_IMAGE_PNG from './../../assets/icons/icon__top-bar-navigator-image.png';
+import ICON_TOP_TABBAR_IMAGE_ACTIVE_PNG from './../../assets/icons/icon__top-bar-navigator-image-active.png';
+import ICON_TOP_TABBAR_VIDEO_PNG from './../../assets/icons/icon__top-bar-navigator-vidoe.png';
+import ICON_TOP_TABBAR_VIDEO_ACTIVE_PNG from './../../assets/icons/icon__top-bar-navigator-video-active.png';
+import ICON_TOP_TABBAR_SOUND_PNG from './../../assets/icons/icon__top-bar-navigator-sound.png';
+import ICON_TOP_TABBAR_SOUND_ACTIVE_PNG from './../../assets/icons/icon__top-bar-navigator-sound-active.png';
+import ICON_TOP_TABBAR_TEXT_PNG from './../../assets/icons/icon__top-bar-navigator-text.png';
+import ICON_TOP_TABBAR_TEXT_ACTIVE_PNG from './../../assets/icons/icon__top-bar-navigator-text-active.png';
+
+export const ICON_TOP_TABBAR_IMAGE = imageUriResolver(
+    ICON_TOP_TABBAR_IMAGE_PNG
+);
+export const ICON_TOP_TABBAR_IMAGE_ACTIVE = imageUriResolver(
+    ICON_TOP_TABBAR_IMAGE_ACTIVE_PNG
+);
+export const ICON_TOP_TABBAR_VIDEO = imageUriResolver(
+    ICON_TOP_TABBAR_VIDEO_PNG
+);
+export const ICON_TOP_TABBAR_VIDEO_ACTIVE = imageUriResolver(
+    ICON_TOP_TABBAR_VIDEO_ACTIVE_PNG
+);
+export const ICON_TOP_TABBAR_SOUND = imageUriResolver(
+    ICON_TOP_TABBAR_SOUND_PNG
+);
+export const ICON_TOP_TABBAR_SOUND_ACTIVE = imageUriResolver(
+    ICON_TOP_TABBAR_SOUND_ACTIVE_PNG
+);
+export const ICON_TOP_TABBAR_TEXT = imageUriResolver(ICON_TOP_TABBAR_TEXT_PNG);
+export const ICON_TOP_TABBAR_TEXT_ACTIVE = imageUriResolver(
+    ICON_TOP_TABBAR_TEXT_ACTIVE_PNG
+);
 
 export const ICON_MUSIC_NEXT = imageUriResolver(ICON_MUSIC_NEXT_PNG);
 export const ICON_MUSIC_PREV = imageUriResolver(ICON_MUSIC_PREV_PNG);
@@ -30,3 +64,5 @@ export const ICON_VIDEO_GRAY = imageUriResolver(ICON_VIDEO_GRAY_PNG);
 
 export const ICON_NEXT_GRAY = imageUriResolver(ICON_NEXT_GRAY_PNG);
 export const ICON_PREV_GRAY = imageUriResolver(ICON_PREV_GRAY_PNG);
+
+export const ICON_SEARCH = imageUriResolver(ICON_SEARCH_PNG);

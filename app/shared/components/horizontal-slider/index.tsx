@@ -3,13 +3,13 @@ import { HorizontalSliderComponents } from './style';
 import { HorizontalSlide } from './slide';
 
 export type HorizontailSlideType = {
-    id: number,
-    title: string,
+    id: number;
+    title: string;
     thumbnailPath: string;
     username: string;
     profileUri: string;
-    slidePressRedirectHandler?: () => void
-}
+    slidePressRedirectHandler?: () => void;
+};
 
 type Props = {
     data: HorizontailSlideType[];
@@ -42,6 +42,7 @@ export function HorizontalSlider({ data }: Props) {
                 horizontal
                 keyExtractor={(item: HorizontailSlideType | any) => item.id}
                 renderItem={renderItem}
+                showsHorizontalScrollIndicator={false}
             />
         </Wrapper>
     );

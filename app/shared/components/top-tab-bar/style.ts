@@ -4,36 +4,53 @@ import { theme } from '../../../constaints/theme';
 const TabBar = styled.View`
         padding: 0 20px;
         flex-direction: row;
-        background-color: ${theme.color.light.WHITE_BG};
+        justify-content: center;
+        align-items: center;
+        border-radius: 16px;
+        background-color: #0e0e12a0;
+    `,
+    TopBarBackground = styled.Image`
+        position: absolute;
+        z-index: 99;
+        top: 0;
+        left: 24px;
+        width: 100%;
+        height: 40px;
     `,
     Container = styled.TouchableOpacity`
         width: 100%;
         justify-content: space-between;
         border-bottom: 1px solid ${theme.color.light.PRIMARY};
+        height: 48px;
     `,
     Wrapper = styled.View`
         width: 100%;
-        height: 56px;
+        height: 48px;
         flex-direction: row;
         align-items: center;
         justify-content: center;
         justidy-content: center;
     `,
     Label = styled.Text`
-        color: ${theme.color.light.PRIMARY};
-        font-size: ${theme.fontSize.md};
+        color: #fff;
+        font-size: ${theme.fontSize.sm};
         margin-left: 7.76px;
-        border: 1px solid #fff;
+        width: 100%;
+        text-align: center;
+        padding-right: 10px;
     `,
     SpacerBorder = styled.View`
         width: 100%;
         height: 2px;
-        background-color: ${theme.color.light.PRIMARY};
+        position: absolute;
+        top: 45px;
+        background-color: #597aff;
     `;
 
 export const TabBarComponents = {
     TabBar,
     Container,
+    TopBarBackground,
     Wrapper,
     Label,
     SpacerBorder

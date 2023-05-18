@@ -63,7 +63,6 @@ const width = Dimensions.get('window').width;
 
 export function NavigationHeader({ navigation, route }: Props) {
     const navigateToRouteHandler = (routeName: string) => {
-        console.log(routeName);
 
         if (navigation) {
             navigation.push(routeName);
@@ -74,7 +73,6 @@ export function NavigationHeader({ navigation, route }: Props) {
         const routeName = item.name;
         const textColor = route.name === routeName ? '#fff' : '#666680';
 
-        console.log(routeName);
 
         return (
             <Tab
@@ -100,7 +98,7 @@ export function NavigationHeader({ navigation, route }: Props) {
 
     return (
         <Container>
-            <Wrapper
+            {/* <Wrapper
                 style={[
                     {
                         width: Math.floor(width) - 48
@@ -108,7 +106,7 @@ export function NavigationHeader({ navigation, route }: Props) {
                 ]}
             >
                 {renderRoutes}
-            </Wrapper>
+            </Wrapper> */}
         </Container>
     );
 }

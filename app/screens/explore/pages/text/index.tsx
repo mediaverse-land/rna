@@ -17,7 +17,7 @@ export function TextsPage({ route, navigation }: any) {
             colors={['#030340', '#030340']}
             start={{ x: 0.7, y: 0 }}
         >
-            <SearchBar style={FixedStyles} />
+            {/* <SearchBar style={FixedStyles} /> */}
             <NavigationHeader navigation={navigation} route={route} />
             <ScrollView
                 style={[
