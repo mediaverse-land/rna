@@ -39,4 +39,3 @@ const linearGradient = {
     x: 0.7,
     y: 0
 };
-
