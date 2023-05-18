@@ -7,6 +7,7 @@ const Tab = createBottomTabNavigator();
 
 export function AppStack() {
     return (
+        // <BottomTabBar />
         <Tab.Navigator
             screenOptions={{
                 headerShown: false
@@ -21,6 +22,13 @@ export function AppStack() {
                 }}
             />
             <Tab.Screen
+                name="Apps"
+                component={CreateContentStack}
+                options={{
+                    title: 'apps'
+                }}
+            />
+            <Tab.Screen
                 name="CreateContent"
                 component={CreateContentStack}
                 options={{
@@ -28,10 +36,10 @@ export function AppStack() {
                 }}
             />
             <Tab.Screen
-                name="MatchOtherDevices"
+                name="Wallet"
                 component={CreateContentStack}
                 options={{
-                    title: 'matchOtherDevices'
+                    title: 'wallet'
                 }}
             />
             <Tab.Screen

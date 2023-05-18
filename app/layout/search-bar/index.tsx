@@ -11,13 +11,8 @@ const { SearchInput, SearchIcon } = SearchBarComponents;
 export function SearchBar() {
     return (
         <View style={styles.wrapper}>
-            <SearchIcon
-                source={{ uri: ICON_SEARCH }}
-            />
-            <SearchInput
-                placeholder="Search"
-                placeholderTextColor="#83839C"
-            />
+            <SearchIcon source={{ uri: ICON_SEARCH }} />
+            <SearchInput placeholder="Search" placeholderTextColor="#83839C" />
         </View>
     );
 }
@@ -38,6 +33,4 @@ const styles = StyleSheet.create({
         paddingLeft: 24,
         paddingRight: 24
     }
-})
-
-
+});

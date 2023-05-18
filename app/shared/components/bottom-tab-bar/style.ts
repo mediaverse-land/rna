@@ -8,19 +8,17 @@ export const BottomTabBarComponents = {
         right: 20;
         height: 64px;
         bottom: 20px;
-        background-color: ${theme.color.light.WHITE_BG};
-        border-radius: 20px;
     `,
     TabItem: styled.TouchableOpacity`
-        width: 25%;
+        width: 20%;
         height: 64px;
         justify-content: center;
         align-items: center;
-        border-radius: 20px;
-
-        ${(props: { isActive: boolean }) =>
-            props.isActive
-                ? `background-color: ${theme.color.light.HEADING}`
-                : null}
+        border: 1px solid black;
+        background-color: #fff;
     `
 };
+// ${(props: { isActive: boolean }) =>
+//     props.isActive
+//         ? `background-color: ${theme.color.light.HEADING}`
+//         : null}

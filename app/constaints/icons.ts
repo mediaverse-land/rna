@@ -26,6 +26,19 @@ import ICON_TOP_TABBAR_SOUND_ACTIVE_PNG from './../../assets/icons/icon__top-bar
 import ICON_TOP_TABBAR_TEXT_PNG from './../../assets/icons/icon__top-bar-navigator-text.png';
 import ICON_TOP_TABBAR_TEXT_ACTIVE_PNG from './../../assets/icons/icon__top-bar-navigator-text-active.png';
 
+import ICON_BOTTOM_TABBAR_EXPLORE_PNG from './../../assets/icons/icon__bottom-tabbar-explore-active.png';
+import ICON_BOTTOM_TABBAR_ACTIVE_EXPLORE_PNG from './../../assets/icons/icon__bottom-tabbar-explore-active.png';
+
+import ICON_BOTTOM_TABBAR_WALLET_PNG from './../../assets/icons/icon__bottom-tabbar-wallet.png';
+import ICON_BOTTOM_TABBAR_ACTIVE_WALLET_PNG from './../../assets/icons/icon__bottom-tabbar-wallet-active.png';
+
+import ICON_BOTTOM_TABBAR_APPS_PNG from './../../assets/icons/icon__bottom-tabbar-apps.png';
+import ICON_BOTTOM_TABBAR_ACTIVE_APPS_PNG from './../../assets/icons/icon__bottom-tabbar-apps-active.png';
+
+import ICON_BOTTOM_TABBAR_PROFILE_PNG from './../../assets/icons/icon__bottom-tabbar-profile.png';
+import ICON_BOTTOM_TABBAR_ACTIVE_PROFILE_PNG from './../../assets/icons/icon__bottom-tabbar-profile-active.png';
+import ICON_BOTTOM_TABBAR_PLUS_PNG from './../../assets/icons/icon__bottom-tabbar-plus.png';
+
 export const ICON_TOP_TABBAR_IMAGE = imageUriResolver(
     ICON_TOP_TABBAR_IMAGE_PNG
 );
@@ -66,3 +79,32 @@ export const ICON_NEXT_GRAY = imageUriResolver(ICON_NEXT_GRAY_PNG);
 export const ICON_PREV_GRAY = imageUriResolver(ICON_PREV_GRAY_PNG);
 
 export const ICON_SEARCH = imageUriResolver(ICON_SEARCH_PNG);
+
+//
+export const ICON_BOTTOM_TABBAR_EXPLORE = imageUriResolver(
+    ICON_BOTTOM_TABBAR_EXPLORE_PNG
+);
+export const ICON_BOTTOM_TABBAR_ACTIVE_EXPLORE = imageUriResolver(
+    ICON_BOTTOM_TABBAR_ACTIVE_EXPLORE_PNG
+);
+export const ICON_BOTTOM_TABBAR_WALLET = imageUriResolver(
+    ICON_BOTTOM_TABBAR_WALLET_PNG
+);
+export const ICON_BOTTOM_TABBAR_ACTIVE_WALLET = imageUriResolver(
+    ICON_BOTTOM_TABBAR_ACTIVE_WALLET_PNG
+);
+export const ICON_BOTTOM_TABBAR_APPS = imageUriResolver(
+    ICON_BOTTOM_TABBAR_APPS_PNG
+);
+export const ICON_BOTTOM_TABBAR_ACTIVE_APPS = imageUriResolver(
+    ICON_BOTTOM_TABBAR_ACTIVE_APPS_PNG
+);
+export const ICON_BOTTOM_TABBAR_PROFILE = imageUriResolver(
+    ICON_BOTTOM_TABBAR_PROFILE_PNG
+);
+export const ICON_BOTTOM_TABBAR_ACTIVE_PROFILE = imageUriResolver(
+    ICON_BOTTOM_TABBAR_ACTIVE_PROFILE_PNG
+);
+export const ICON_BOTTOM_TABBAR_PLUS = imageUriResolver(
+    ICON_BOTTOM_TABBAR_PLUS_PNG
+);

@@ -63,7 +63,6 @@ const width = Dimensions.get('window').width;
 
 export function NavigationHeader({ navigation, route }: Props) {
     const navigateToRouteHandler = (routeName: string) => {
-
         if (navigation) {
             navigation.push(routeName);
         }
@@ -72,7 +71,6 @@ export function NavigationHeader({ navigation, route }: Props) {
     const renderRoutes = routes.map((item) => {
         const routeName = item.name;
         const textColor = route.name === routeName ? '#fff' : '#666680';
-
 
         return (
             <Tab

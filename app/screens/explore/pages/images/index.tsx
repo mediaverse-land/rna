@@ -6,24 +6,26 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 export function ImagesPages({ route, navigation }: any) {
     return (
         <View>
-            {/* <LiveVideos />
-            <AnimationVideos /> */}
+            {/* <View style={{
+                marginTop: 200,
+                marginLeft: 40,
+                width: 200,
+                height: 100,
+                backgroundColor: 'blue',
+                borderTopEndRadius: 30,
+                borderStartWidth: 20,
+                borderTopStartRadius: 100
+            }}>
+                <View
+                    style={{
+                        width: 50,
+                        height: 50,
+                        backgroundColor: 'transparent',
+                    }}
+                ></View>
+            </View> */}
+
         </View>
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        position: 'relative',
-        flex: 1,
-        alignItems: 'center',
-        backgroundColor: '#030340'
-    },
-    fixed: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0
-    }
-});

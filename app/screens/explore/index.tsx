@@ -10,4 +10,3 @@ export function ExploreStack() {
         </SafeAreaView>
     );
 }
-
