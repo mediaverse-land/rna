@@ -5,13 +5,21 @@ import { ImagesPage } from './pages/image';
 import { VideosPage } from './pages/video';
 import { SoundsPage } from './pages/sound';
 import { TextsPage } from './pages/text';
+import { AllPage } from './pages/all';
 
 const Tab = createMaterialTopTabNavigator();
 
 export function Navigator() {
     return (
         <View style={{ width: '100%', flex: 1 }}>
-            <Tab.Navigator tabBar={(props) => <TopTabBar {...props} />}>
+            <Tab.Navigator tabBar={(props) => <TopTabBar hasFullWidth {...props} />}>
+                <Tab.Screen
+                    name="AllPage"
+                    component={AllPage}
+                    options={{
+                        title: 'All'
+                    }}
+                />
                 <Tab.Screen
                     name="SearchImage"
                     component={ImagesPage}

@@ -1,19 +1,29 @@
-import { Image, StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { SearchBarComponents } from './style';
 import { ICON_SEARCH } from '../../constaints/icons';
-
-type Props = {
-    style: ViewStyle;
-};
+import { useNavigation } from '@react-navigation/native';
 
 const { SearchInput, SearchIcon } = SearchBarComponents;
 
 export function SearchBar() {
+    const navigation = useNavigation<any>();
+
+    const navigateToSearchPageHandler = () => {
+        navigation.navigate('Search')
+    }
+
     return (
-        <View style={styles.wrapper}>
+        <TouchableOpacity
+            style={styles.wrapper}
+            onPress={navigateToSearchPageHandler}
+        >
             <SearchIcon source={{ uri: ICON_SEARCH }} />
-            <SearchInput placeholder="Search" placeholderTextColor="#83839C" />
-        </View>
+            <SearchInput
+                placeholder="Search"
+                placeholderTextColor="#83839C"
+                onFocus={navigateToSearchPageHandler}
+            />
+        </TouchableOpacity>
     );
 }
 

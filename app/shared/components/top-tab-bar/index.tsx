@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { Image, ImageStyle, View } from 'react-native';
 import { TabBarComponents } from './style';
 import {
@@ -60,23 +60,20 @@ function getTobBarItemsIcon(tobBarItemName: string, isFocused: boolean) {
     return { iconPath, iconStyle };
 }
 
-function TopTabBar({ state, descriptors, navigation }: any) {
+function TopTabBar({ state, descriptors, navigation, hasFullWidth = false }: any) {
+
     return (
         <View
             style={{
-                paddingLeft: 24,
-                paddingRight: 24,
+                paddingLeft: hasFullWidth ? 0 : 24,
+                paddingRight: hasFullWidth ? 0 : 24,
                 position: 'absolute',
-                top: 104,
+                top: hasFullWidth ? 120 : 104,
                 zIndex: 100,
-                width: '100%'
+                width: '100%',
             }}
         >
-            {/* <TabBarComponents.TopBarBackground
-                source={{ uri: BANNER_VLOG_IMAGE }}
-                blurRadius={70}
-            /> */}
-            <TabBarComponents.TabBar style={{ flexDirection: 'row' }}>
+            <TabBarComponents.TabBar style={{ flexDirection: 'row', borderRadius: hasFullWidth ? 0 : 16 }}>
                 {state.routes.map((route: any, index: number) => {
                     const { options } = descriptors[route.key];
 
@@ -84,8 +81,8 @@ function TopTabBar({ state, descriptors, navigation }: any) {
                         options.tabBarLabel !== undefined
                             ? options.tabBarLabel
                             : options.title !== undefined
-                            ? options.title
-                            : route.name;
+                                ? options.title
+                                : route.name;
 
                     const isFocused = state.index === index;
 

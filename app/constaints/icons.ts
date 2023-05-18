@@ -1,4 +1,5 @@
 import { imageUriResolver } from '../utils/image-uri-resolver';
+
 import ICON_IMAGE_PNG from './../../assets/icons/icon__image-white.png';
 import ICON_TEXT_WHITE_PNG from './../../assets/icons/icon__text-white.png';
 
@@ -16,6 +17,8 @@ import ICON_MUSIC_NEXT_PNG from './../../assets/icons/icon__next-music.png';
 import ICON_MUSIC_PREV_PNG from './../../assets/icons/icon__prev-music.png';
 import ICON_MUSIC_STOP_PNG from './../../assets/icons/icon__stop-music.png';
 import ICON_MUSIC_PLAY_PNG from './../../assets/icons/icon__play-music.png';
+
+import ICON_SETTINGS_PNG from './../../assets/icons/icon__settings.png';
 
 import ICON_TOP_TABBAR_IMAGE_PNG from './../../assets/icons/icon__top-bar-navigator-image.png';
 import ICON_TOP_TABBAR_IMAGE_ACTIVE_PNG from './../../assets/icons/icon__top-bar-navigator-image-active.png';
@@ -38,6 +41,9 @@ import ICON_BOTTOM_TABBAR_ACTIVE_APPS_PNG from './../../assets/icons/icon__botto
 import ICON_BOTTOM_TABBAR_PROFILE_PNG from './../../assets/icons/icon__bottom-tabbar-profile.png';
 import ICON_BOTTOM_TABBAR_ACTIVE_PROFILE_PNG from './../../assets/icons/icon__bottom-tabbar-profile-active.png';
 import ICON_BOTTOM_TABBAR_PLUS_PNG from './../../assets/icons/icon__bottom-tabbar-plus.png';
+
+import ICON_ARROW_BACK_PNG from './../../assets/icons/icon__arrow-back.png';
+import ICON_ARROW_DOWN_PNG from './../../assets/icons/icon__arrow-down.png';
 
 export const ICON_TOP_TABBAR_IMAGE = imageUriResolver(
     ICON_TOP_TABBAR_IMAGE_PNG
@@ -62,6 +68,10 @@ export const ICON_TOP_TABBAR_TEXT_ACTIVE = imageUriResolver(
     ICON_TOP_TABBAR_TEXT_ACTIVE_PNG
 );
 
+export const ICON_ARROW_BACK = imageUriResolver(ICON_ARROW_BACK_PNG);
+
+export const ICON_SETTINGS = imageUriResolver(ICON_SETTINGS_PNG);
+
 export const ICON_MUSIC_NEXT = imageUriResolver(ICON_MUSIC_NEXT_PNG);
 export const ICON_MUSIC_PREV = imageUriResolver(ICON_MUSIC_PREV_PNG);
 export const ICON_MUSIC_STOP = imageUriResolver(ICON_MUSIC_STOP_PNG);
@@ -79,6 +89,7 @@ export const ICON_NEXT_GRAY = imageUriResolver(ICON_NEXT_GRAY_PNG);
 export const ICON_PREV_GRAY = imageUriResolver(ICON_PREV_GRAY_PNG);
 
 export const ICON_SEARCH = imageUriResolver(ICON_SEARCH_PNG);
+export const ICON_ARROW_DOWN = imageUriResolver(ICON_ARROW_DOWN_PNG);
 
 //
 export const ICON_BOTTOM_TABBAR_EXPLORE = imageUriResolver(

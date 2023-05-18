@@ -5,7 +5,7 @@ import { PaddingContainer } from '../../../../styles/grid';
 
 const { FixedStyles, ContainerStyles } = ImagesPageComponents;
 
-export function VideosPage() {
+export function AllPage() {
     return (
         <LinearGradient
             style={[ContainerStyles]}

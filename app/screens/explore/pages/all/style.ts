@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
         position: 'relative',
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#030340',
-        paddingBottom: 100
+        backgroundColor: '#030340'
+        // paddingBottom: 100
     },
     fixed: {
         position: 'absolute',
