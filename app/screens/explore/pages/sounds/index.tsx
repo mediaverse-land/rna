@@ -1,15 +1,51 @@
-import { ScrollView } from 'react-native';
-import { PaddingContainer } from '../../../../styles/grid';
-import { LatestSounds } from './latest-sounds';
-import { MostViewsSounds } from './most-views';
+import { ScrollView, StyleSheet, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { ImagesPageComponents } from '../all/style';
+import { SearchBar } from '../../../../layout/search-bar';
+import { NavigationHeader } from '../../components/navigation-header';
+import { SoundsPageBestInMonth } from './best-in-moth';
+import { SoundsPageChillSongs } from './chil-songs';
+import { SoundsPageBestProducts } from './best-products';
+import { SoundsPageMusicPlayer } from './music-player';
 
-export function SoundsPage() {
+const { FixedStyles, ContainerStyles } = ImagesPageComponents;
+
+export function SoundsPage({ route, navigation }: any) {
     return (
-        <ScrollView>
-            <PaddingContainer>
-                <LatestSounds />
-                <MostViewsSounds />
-            </PaddingContainer>
-        </ScrollView>
+        <LinearGradient
+            style={[ContainerStyles]}
+            colors={['#030340', '#030340']}
+            start={linearGradient}
+        >
+            <SearchBar style={FixedStyles} />
+            <NavigationHeader navigation={navigation} route={route} />
+            <ScrollView
+                style={[
+                    FixedStyles,
+                    styles.scrollView
+                ]}
+            >
+                <SoundsPageBestInMonth />
+                <SoundsPageMusicPlayer />
+                <SoundsPageChillSongs />
+                <SoundsPageBestProducts />
+                <View style={styles.seperator}></View>
+            </ScrollView>
+        </LinearGradient>
     );
+}
+
+const styles = StyleSheet.create({
+    seperator: {
+        width: '100%', height: 350
+    },
+    scrollView: {
+        backgroundColor: 'transparent',
+        paddingTop: 196
+    },
+})
+
+const linearGradient = {
+    x: 0.7,
+    y: 0
 }

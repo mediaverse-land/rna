@@ -46,15 +46,13 @@ export default function App() {
                     headerShown: false
                 }}
             >
-                {
-                    routes.map((route) => (
-                        <Stack.Screen
-                            key={route.id}
-                            name={route.name}
-                            component={route.component}
-                        />
-                    ))
-                }
+                {routes.map((route) => (
+                    <Stack.Screen
+                        key={route.id}
+                        name={route.name}
+                        component={route.component}
+                    />
+                ))}
             </Stack.Navigator>
         </NavigationContainer>
     );

@@ -10,6 +10,16 @@ import ICON_VIDEO_GRAY_PNG from './../../assets/icons/icon__video-gray.png';
 import ICON_NEXT_GRAY_PNG from './../../assets/icons/icon__next-gray.png';
 import ICON_PREV_GRAY_PNG from './../../assets/icons/icon__prev-gray.png';
 
+import ICON_MUSIC_NEXT_PNG from './../../assets/icons/icon__next-music.png';
+import ICON_MUSIC_PREV_PNG from './../../assets/icons/icon__prev-music.png';
+import ICON_MUSIC_STOP_PNG from './../../assets/icons/icon__stop-music.png';
+import ICON_MUSIC_PLAY_PNG from './../../assets/icons/icon__play-music.png';
+
+export const ICON_MUSIC_NEXT = imageUriResolver(ICON_MUSIC_NEXT_PNG);
+export const ICON_MUSIC_PREV = imageUriResolver(ICON_MUSIC_PREV_PNG);
+export const ICON_MUSIC_STOP = imageUriResolver(ICON_MUSIC_STOP_PNG);
+export const ICON_MUSIC_PLAY = imageUriResolver(ICON_MUSIC_PLAY_PNG);
+
 export const ICON_IMAGE = imageUriResolver(ICON_IMAGE_PNG);
 export const ICON_TEXT_WHITE = imageUriResolver(ICON_TEXT_WHITE_PNG);
 

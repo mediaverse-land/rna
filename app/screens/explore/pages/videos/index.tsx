@@ -7,8 +7,6 @@ import { VideoPageBestInMonth } from './best-in-month';
 import { VideoPageList } from './list';
 import { VideoPageComponents } from './style';
 
-
-
 const { ContainerStyles, FixedStyles } = VideoPageComponents;
 
 export function VideosPage({ route, navigation }: any) {
@@ -22,7 +20,6 @@ export function VideosPage({ route, navigation }: any) {
         >
             {/* <Blur /> */}
 
-
             <SearchBar style={FixedStyles} />
             <NavigationHeader navigation={navigation} route={route} />
             <ScrollView
@@ -32,8 +29,6 @@ export function VideosPage({ route, navigation }: any) {
                 ]}
             >
                 <PaddingContainer>
-
-
                     <VideoPageBestInMonth />
                     <VideoPageList />
                 </PaddingContainer>
@@ -43,7 +38,6 @@ export function VideosPage({ route, navigation }: any) {
     );
 }
 
-
 //           <WebView
 // style={[s.absolute, s.transparent]}
 // originWhitelist={['*']}
@@ -52,7 +46,7 @@ export function VideosPage({ route, navigation }: any) {
 //     'position: absolute; top: 0; right:0; bottom: 0; left: 0;' +
 //     'background: rgba(255,255,255,0.2); backdrop-filter: blur(48px);' +
 //     '/*width:100%; height:100%; margin:0; padding:-10px;*/' +
-//     '/*background: #ff000033;*/ /*transparent*/ /*background: #4fc3f733;*/  
+//     '/*background: #ff000033;*/ /*transparent*/ /*background: #4fc3f733;*/
 //     /*border: none*/" ' +
 //     '></div>'
 // }}

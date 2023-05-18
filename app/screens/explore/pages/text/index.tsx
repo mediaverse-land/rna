@@ -8,8 +8,6 @@ import { ImagePageBestInMonth } from './best-in-month';
 import { TextPageSwiper } from './swiper';
 import { TextPageBestWriters } from './best-writers';
 
-// TextItemCard
-
 const { FixedStyles, ContainerStyles } = ImagesPageComponents;
 
 export function TextsPage({ route, navigation }: any) {

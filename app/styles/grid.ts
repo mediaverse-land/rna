@@ -25,14 +25,24 @@ export const Center = styled.View`
 `;
 
 interface FlexStyleProps {
-    justify?: string;
-    direction?: string;
-    align?: string;
+    justify?:
+        | 'center'
+        | 'space-between'
+        | 'space-around'
+        | 'flex-start'
+        | 'flex-end';
+    direction?: 'row' | 'column';
+    align?: 'center' | 'flex-start' | 'flex-end';
     height?: string;
+    width?: string;
+    marginTop?: string;
+    marginLeft?: string;
+    marginRight?: string;
+    marginBottom?: string;
 }
 
 export const Flex = styled.View<FlexStyleProps>`
-    width: 100%;
+    width: ${(props) => (props.width ? props.width : '100%')}};
     flex-wrap: nowrap;
     ${(props) => (props.height ? `height: ${props.height}` : null)}};
     ${(props) =>
@@ -40,6 +50,14 @@ export const Flex = styled.View<FlexStyleProps>`
     ${(props) =>
         props.direction ? `flex-direction: ${props.direction}` : null}};
     ${(props) => (props.align ? `align-items: ${props.align}` : null)}};   
+    ${(props) => (props.marginTop ? `margin-top: ${props.marginTop}` : null)}};
+    ${(props) =>
+        props.marginLeft ? `margin-top: ${props.marginLeft}` : null}};
+    ${(props) =>
+        props.marginRight ? `margin-top: ${props.marginRight}` : null}};
+    ${(props) =>
+        props.marginBottom ? `margin-top: ${props.marginBottom}` : null}};
+
 `;
 
 export const styles = StyleSheet.create({

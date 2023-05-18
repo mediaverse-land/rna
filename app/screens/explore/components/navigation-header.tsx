@@ -54,7 +54,7 @@ const routes: Routes[] = [
         title: 'TextPage',
         iconPath: ICON_TEXT_GRAY,
         iconStyles: { width: 16, height: 16 }
-    },
+    }
 ];
 
 const { Container, Wrapper, Tab } = NavigationHeaderComponents;
@@ -62,7 +62,6 @@ const { Container, Wrapper, Tab } = NavigationHeaderComponents;
 const width = Dimensions.get('window').width;
 
 export function NavigationHeader({ navigation, route }: Props) {
-
     const navigateToRouteHandler = (routeName: string) => {
         console.log(routeName);
 

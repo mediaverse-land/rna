@@ -11,6 +11,10 @@ import VIDEO_LIST_ITEM_GRADIENT_PNG from './../../assets/img/video-list/video-li
 
 import TEXT_SWIPER_GRADIENT_PNG from './../../assets/img/text-swiper/gradient.png';
 
+import MUSIC_PLAYER_GRADIENT_PNG from './../../assets/img/music-player/music-player-gradient.png';
+
+import MUSIC_PLAYER_STOP_BUTTON_GRADIENT_PNG from './../../assets/img/music-player/music-player-stop-button-gradient.png';
+
 import DAILY_RECOMMENDED_IMG_ONE_PNG from './../../assets/img/daily-recommended/img-3.png';
 import DAILY_RECOMMENDED_IMG_TWO_PNG from './../../assets/img/daily-recommended/img-2.png';
 import DAILY_RECOMMENDED_IMG_THREE_PNG from './../../assets/img/daily-recommended/img-1.png';
@@ -53,3 +57,11 @@ export const VIDEO_LIST_ITEM_GRADIENT = imageUriResolver(
 );
 
 export const TEXT_SWIPER_GRADIENT = imageUriResolver(TEXT_SWIPER_GRADIENT_PNG);
+
+export const MUSIC_PLAYER_GRADIENT = imageUriResolver(
+    MUSIC_PLAYER_GRADIENT_PNG
+);
+
+export const MUSIC_PLAYER_STOP_BUTTON_GRADIENT = imageUriResolver(
+    MUSIC_PLAYER_STOP_BUTTON_GRADIENT_PNG
+);

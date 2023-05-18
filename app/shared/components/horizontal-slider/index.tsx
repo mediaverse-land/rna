@@ -2,8 +2,17 @@ import { FlatList } from 'react-native';
 import { HorizontalSliderComponents } from './style';
 import { HorizontalSlide } from './slide';
 
+export type HorizontailSlideType = {
+    id: number,
+    title: string,
+    thumbnailPath: string;
+    username: string;
+    profileUri: string;
+    slidePressRedirectHandler?: () => void
+}
+
 type Props = {
-    data: any;
+    data: HorizontailSlideType[];
 };
 
 const { Wrapper } = HorizontalSliderComponents;
@@ -13,7 +22,7 @@ export function HorizontalSlider({ data }: Props) {
         console.log(id);
     }
 
-    const renderItem = ({ item }: any) => {
+    const renderItem = ({ item }: { item: HorizontailSlideType }) => {
         return (
             <HorizontalSlide
                 id={item.id}
@@ -31,7 +40,7 @@ export function HorizontalSlider({ data }: Props) {
             <FlatList
                 data={data}
                 horizontal
-                keyExtractor={(item: any) => item.id}
+                keyExtractor={(item: HorizontailSlideType | any) => item.id}
                 renderItem={renderItem}
             />
         </Wrapper>
