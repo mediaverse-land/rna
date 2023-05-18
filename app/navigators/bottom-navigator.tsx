@@ -93,7 +93,7 @@ export default class BottomNavigator extends Component {
                                 source={{
                                     uri: 'http://pluspng.com/img-png/home-icon-png-home-house-icon-image-202-512.png'
                                 }}
-                            // onPress={() => { Alert.alert("") }}
+                                // onPress={() => { Alert.alert("") }}
                             />
                         </TouchableOpacity>
                     </View>
@@ -116,7 +116,7 @@ export default class BottomNavigator extends Component {
                                 source={{
                                     uri: 'http://simpleicon.com/wp-content/uploads/active-search.png'
                                 }}
-                            // onPress={() => { Alert.alert("click") }}
+                                // onPress={() => { Alert.alert("click") }}
                             />
                         </TouchableOpacity>
                     </View>
@@ -144,7 +144,7 @@ export default class BottomNavigator extends Component {
                                     width: 30,
                                     height: 30
                                 }}
-                            // containerStyle={{ marginHorizontal: 16 }}
+                                // containerStyle={{ marginHorizontal: 16 }}
                             />
                         </TouchableOpacity>
                     </View>

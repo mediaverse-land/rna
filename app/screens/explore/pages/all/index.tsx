@@ -19,7 +19,7 @@ export function AllPage() {
             <ScrollView
                 style={[
                     FixedStyles,
-                    { backgroundColor: 'transparent', paddingTop: 96 }
+                    { backgroundColor: 'transparent', paddingTop: 196 }
                 ]}
             >
                 <Container>
@@ -31,7 +31,7 @@ export function AllPage() {
                 </Container>
                 <AllPageTopTenText />
                 <AllPageChillSongs />
-                <View style={{ width: '100%', height: 250 }}></View>
+                <View style={{ width: '100%', height: 350 }}></View>
             </ScrollView>
         </LinearGradient>
     );

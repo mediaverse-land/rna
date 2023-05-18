@@ -1,31 +1,42 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView, StyleSheet, View } from 'react-native';
+import { NavigationHeader } from '../../components/navigation-header';
+import { ImagesPageComponents } from '../all/style';
+import { ImagePageBestInMonth } from './bes-in-month';
+import { ImagePageMasonryList } from './masonry-list';
 
-// import { LiveVideos } from '../videos/live-videos';
-// import { AnimationVideos } from '../videos/animations';
+const { FixedStyles, ContainerStyles } = ImagesPageComponents;
 
 export function ImagesPages({ route, navigation }: any) {
     return (
-        <View>
-            {/* <View style={{
-                marginTop: 200,
-                marginLeft: 40,
-                width: 200,
-                height: 100,
-                backgroundColor: 'blue',
-                borderTopEndRadius: 30,
-                borderStartWidth: 20,
-                borderTopStartRadius: 100
-            }}>
-                <View
-                    style={{
-                        width: 50,
-                        height: 50,
-                        backgroundColor: 'transparent',
-                    }}
-                ></View>
-            </View> */}
-
-        </View>
+        <LinearGradient
+            style={[ContainerStyles]}
+            colors={['#030340', '#030340']}
+            start={linearGradient}
+        >
+            <NavigationHeader navigation={navigation} route={route} />
+            <ScrollView style={[FixedStyles, styles.scrollView]}>
+                <ImagePageBestInMonth />
+                <ImagePageMasonryList />
+                <View style={styles.seperator} />
+            </ScrollView>
+        </LinearGradient>
     );
 }
+
+const styles = StyleSheet.create({
+    seperator: {
+        width: '100%',
+        height: 350
+    },
+    scrollView: {
+        backgroundColor: 'transparent',
+        paddingTop: 196
+    }
+});
+
+const linearGradient = {
+    x: 0.7,
+    y: 0
+};
 

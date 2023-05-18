@@ -1,9 +1,13 @@
 import styled from 'styled-components/native';
 
-const Container = styled.ScrollView`
-    width: 100%;
-`;
-
-export const ImagesPage = {
-    Container
+export const ImagesPageComponents = {
+    MasonryWrapper: styled.View`
+        flex: 1;
+        width: 100%;
+        margin-top: 40px;
+    `,
+    MasonryRow: styled.View`
+        flex-direction: row;
+        min-height: 100px;
+    `
 };
