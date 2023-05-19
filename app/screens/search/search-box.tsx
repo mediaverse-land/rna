@@ -1,4 +1,4 @@
-import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import { SearchBoxComponents } from './style';
 import { Flex } from '../../styles/grid';
 import {
@@ -6,9 +6,16 @@ import {
     ICON_SEARCH,
     ICON_SETTINGS
 } from '../../constaints/icons';
+import { windowSize } from '../../utils/window-size';
 
-const { SearchBoxWrapper, SearchInput, SearchIcon, AdvancedSearchIconButton } =
-    SearchBoxComponents;
+const { width } = windowSize();
+
+const {
+    SearchBoxWrapper,
+    SearchInput,
+    SearchIcon,
+    AdvancedSearchIconButton
+} = SearchBoxComponents;
 
 export function SearchBox() {
     return (
@@ -27,7 +34,7 @@ export function SearchBox() {
                     style={{ width: 22, height: 16.88 }}
                 />
             </TouchableOpacity>
-            <View style={{ width: Dimensions.get('window').width - 150 }}>
+            <View style={{ width: width - 150 }}>
                 <SearchIcon source={{ uri: ICON_SEARCH }} />
                 <SearchInput
                     placeholder="Search"

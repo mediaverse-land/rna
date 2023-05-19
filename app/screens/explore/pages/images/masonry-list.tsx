@@ -7,5 +7,5 @@ export function ImagePageMasonryList() {
         <PaddingContainer>
             <Masonry data={masonryListImagesMockData} />
         </PaddingContainer>
-    )
+    );
 }

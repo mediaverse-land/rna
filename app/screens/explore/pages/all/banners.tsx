@@ -8,7 +8,8 @@ import {
     BANNER_VLOG_IMAGE
 } from '../../../../constaints/images';
 
-const { BannerItem, BannerItemTitel, BannerItemDescription } = ImagesPageComponents;
+const { BannerItem, BannerItemTitel, BannerItemDescription } =
+    ImagesPageComponents;
 
 const windowWidth = Math.floor(Dimensions.get('window').width);
 const width = (windowWidth - 80) / 3;
@@ -31,8 +32,8 @@ const bannerData = [
         coverPath: BANNER_VLOG_IMAGE,
         title: 'Vlog',
         description: 'weekly hot'
-    },
-]
+    }
+];
 
 export function AllPageBanners() {
     const renderBannerList = bannerData.map((banner) => (
@@ -57,7 +58,7 @@ export function AllPageBanners() {
             <BannerItemTitel>{banner.title}</BannerItemTitel>
             <BannerItemDescription>{banner.description}</BannerItemDescription>
         </BannerItem>
-    ))
+    ));
 
     return (
         <Flex

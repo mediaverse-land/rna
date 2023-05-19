@@ -1,19 +1,35 @@
 import React from 'react';
-import {
-    StyleSheet,
-    View,
-    Dimensions,
-    TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
 
-import { ICON_APPS_ACTIVE_SVG, ICON_APPS_SVG, ICON_EXPLORE_ACTIVE_SVG, ICON_EXPLORE_SVG, ICON_PLUS_SVG, ICON_PROFILE_ACTIVE_SVG, ICON_PROFILE_SVG, ICON_WALLET_ACTIVE_SVG, ICON_WALLET_SVG } from './../../../constaints/icons'
-
+import {
+    ICON_APPS_ACTIVE_SVG,
+    ICON_APPS_SVG,
+    ICON_EXPLORE_ACTIVE_SVG,
+    ICON_EXPLORE_SVG,
+    ICON_PLUS_SVG,
+    ICON_PROFILE_ACTIVE_SVG,
+    ICON_PROFILE_SVG,
+    ICON_WALLET_ACTIVE_SVG,
+    ICON_WALLET_SVG
+} from './../../../constaints/icons';
 
 const icons: any = {
     explore: {
-        path: <ICON_EXPLORE_SVG width={20} height={20} style={{ marginTop: 10 }} />,
-        activePath: <ICON_EXPLORE_ACTIVE_SVG width={20} height={20} style={{ marginTop: 10 }} />,
+        path: (
+            <ICON_EXPLORE_SVG
+                width={20}
+                height={20}
+                style={{ marginTop: 10 }}
+            />
+        ),
+        activePath: (
+            <ICON_EXPLORE_ACTIVE_SVG
+                width={20}
+                height={20}
+                style={{ marginTop: 10 }}
+            />
+        ),
         styles: {
             width: 20,
             height: 20,
@@ -21,8 +37,16 @@ const icons: any = {
         }
     },
     apps: {
-        path: <ICON_APPS_SVG width={20} height={20} style={{ marginTop: 10 }} />,
-        activePath: <ICON_APPS_ACTIVE_SVG width={20} height={20} style={{ marginTop: 10 }} />,
+        path: (
+            <ICON_APPS_SVG width={20} height={20} style={{ marginTop: 10 }} />
+        ),
+        activePath: (
+            <ICON_APPS_ACTIVE_SVG
+                width={20}
+                height={20}
+                style={{ marginTop: 10 }}
+            />
+        ),
         styles: {
             width: 20,
             height: 20,
@@ -30,8 +54,16 @@ const icons: any = {
         }
     },
     wallet: {
-        path: <ICON_WALLET_SVG width={20} height={16} style={{ marginTop: 10 }} />,
-        activePath: <ICON_WALLET_ACTIVE_SVG width={20} height={16} style={{ marginTop: 10 }} />,
+        path: (
+            <ICON_WALLET_SVG width={20} height={16} style={{ marginTop: 10 }} />
+        ),
+        activePath: (
+            <ICON_WALLET_ACTIVE_SVG
+                width={20}
+                height={16}
+                style={{ marginTop: 10 }}
+            />
+        ),
         styles: {
             width: 20,
             height: 16,
@@ -39,8 +71,20 @@ const icons: any = {
         }
     },
     profile: {
-        path: <ICON_PROFILE_SVG width={16} height={20} style={{ marginTop: 10 }} />,
-        activePath: <ICON_PROFILE_ACTIVE_SVG width={16} height={20} style={{ marginTop: 10 }} />,
+        path: (
+            <ICON_PROFILE_SVG
+                width={16}
+                height={20}
+                style={{ marginTop: 10 }}
+            />
+        ),
+        activePath: (
+            <ICON_PROFILE_ACTIVE_SVG
+                width={16}
+                height={20}
+                style={{ marginTop: 10 }}
+            />
+        ),
         styles: {
             width: 16,
             height: 20,
@@ -65,10 +109,7 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
         <View style={[styles.container]}>
             <View style={[styles.content]}>
                 <TouchableOpacity style={styles.plusButton}>
-                    <ICON_PLUS_SVG
-                        width={20}
-                        height={20}
-                    />
+                    <ICON_PLUS_SVG width={20} height={20} />
                 </TouchableOpacity>
                 <View style={styles.subContent}>
                     {state.routes.map((route: any, i: number) => {
@@ -78,7 +119,6 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
                         const currentIcon: any = isFocused
                             ? icon?.activePath
                             : icon?.path;
-
 
                         return (
                             <TouchableOpacity
@@ -111,9 +151,7 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
                                     }
                                 ]}
                             >
-                                {currentIcon ?
-                                    currentIcon
-                                    : null}
+                                {currentIcon ? currentIcon : null}
                             </TouchableOpacity>
                         );
                     })}

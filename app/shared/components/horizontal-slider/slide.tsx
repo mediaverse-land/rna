@@ -2,7 +2,12 @@ import { View, StyleSheet } from 'react-native';
 import { HorizontalSliderComponents } from './style';
 import { UserNameCard } from '../username-card';
 import { HORIZONTAL_SLIDER_GRADIENT } from '../../../constaints/images';
-import { ICON_TOP_TABBAR_IMAGE_SVG, ICON_TOP_TABBAR_SOUND_SVG, ICON_TOP_TABBAR_TEXT_SVG, ICON_TOP_TABBAR_VIDEO_SVG } from '../../../constaints/icons';
+import {
+    ICON_TOP_TABBAR_IMAGE_SVG,
+    ICON_TOP_TABBAR_SOUND_SVG,
+    ICON_TOP_TABBAR_TEXT_SVG,
+    ICON_TOP_TABBAR_VIDEO_SVG
+} from '../../../constaints/icons';
 
 type Props = {
     slidePressRedirectHandler: (id: number) => void;
@@ -11,7 +16,7 @@ type Props = {
     username: string;
     profileUri: string;
     id: number;
-    type?: 'image' | 'sound' | 'video' | 'text'
+    type?: 'image' | 'sound' | 'video' | 'text';
 };
 
 const { Slide, SliderThumbnailGradient, SlideThumbnail, SlideTitle } =
@@ -26,7 +31,7 @@ export function HorizontalSlide({
     id,
     type
 }: Props) {
-    const icon = detectTypeIcon(type)
+    const icon = detectTypeIcon(type);
 
     return (
         <Slide onPress={() => slidePressRedirectHandler(id)} activeOpacity={1}>
@@ -54,18 +59,40 @@ export function HorizontalSlide({
     );
 }
 
-
 function detectTypeIcon(type: 'image' | 'sound' | 'video' | 'text') {
     const types = {
-        image: <ICON_TOP_TABBAR_IMAGE_SVG width={16} height={16} style={styles.typeIconStyles} />,
-        video: <ICON_TOP_TABBAR_VIDEO_SVG width={20.57} height={16} style={styles.typeIconStyles} />,
-        sound: <ICON_TOP_TABBAR_SOUND_SVG width={16} height={14.39} style={styles.typeIconStyles} />,
-        text: <ICON_TOP_TABBAR_TEXT_SVG width={16} height={16} style={styles.typeIconStyles} />,
-    }
+        image: (
+            <ICON_TOP_TABBAR_IMAGE_SVG
+                width={16}
+                height={16}
+                style={styles.typeIconStyles}
+            />
+        ),
+        video: (
+            <ICON_TOP_TABBAR_VIDEO_SVG
+                width={20.57}
+                height={16}
+                style={styles.typeIconStyles}
+            />
+        ),
+        sound: (
+            <ICON_TOP_TABBAR_SOUND_SVG
+                width={16}
+                height={14.39}
+                style={styles.typeIconStyles}
+            />
+        ),
+        text: (
+            <ICON_TOP_TABBAR_TEXT_SVG
+                width={16}
+                height={16}
+                style={styles.typeIconStyles}
+            />
+        )
+    };
 
-    return types[type] || null
+    return types[type] || null;
 }
-
 
 const styles = StyleSheet.create({
     typeIconStyles: {
@@ -74,4 +101,4 @@ const styles = StyleSheet.create({
         bottom: 72,
         right: 16
     }
-})
+});

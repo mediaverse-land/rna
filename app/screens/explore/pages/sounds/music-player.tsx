@@ -6,7 +6,11 @@ import {
     TEXT_SWIPER_GRADIENT
 } from '../../../../constaints/images';
 import Slider from '@react-native-community/slider';
-import { ICON_PLAY_SVG, ICON_NEXT_SVG, ICON_PREV_SVG } from '../../../../constaints/icons';
+import {
+    ICON_PLAY_SVG,
+    ICON_NEXT_SVG,
+    ICON_PREV_SVG
+} from '../../../../constaints/icons';
 
 const {
     MusicPlayerContainer,
@@ -21,7 +25,7 @@ const {
     CurrentTrackSinger,
     CurrentSliderTime,
     StartStopButton,
-    StartStopButtonGradient,
+    StartStopButtonGradient
 } = SoundsPageComponents;
 
 export function SoundsPageMusicPlayer() {
@@ -91,10 +95,7 @@ export function SoundsPageMusicPlayer() {
                                 source={{ uri: ICON_MUSIC_PREV }}
                                 style={styles.musicTrackNextPrevButton}
                             /> */}
-                            <ICON_PREV_SVG
-                                width={18}
-                                height={18}
-                            />
+                            <ICON_PREV_SVG width={18} height={18} />
                         </TouchableOpacity>
                         <StartStopButton>
                             <StartStopButtonGradient
@@ -112,18 +113,13 @@ export function SoundsPageMusicPlayer() {
                                     top: 14
                                 }}
                             />
-
                         </StartStopButton>
                         <TouchableOpacity>
                             {/* <Image
                                 source={{ uri: ICON_MUSIC_NEXT }}
                                 style={styles.musicTrackNextPrevButton}
                             /> */}
-                            <ICON_NEXT_SVG
-                                width={18}
-                                height={18}
-                            />
-
+                            <ICON_NEXT_SVG width={18} height={18} />
                         </TouchableOpacity>
                     </Flex>
                 </MusicPlayerBox>

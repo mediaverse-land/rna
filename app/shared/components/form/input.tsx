@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Dimensions } from 'react-native';
+import { LayoutChangeEvent } from "react-native";
 import { InputComponent } from './style';
 import { theme } from '../../../constaints/theme';
+import { windowSize } from '../../../utils/window-size';
 
 const { FormGroup, Label, InputBox } = InputComponent;
 
@@ -11,7 +12,7 @@ type Props = {
     labelInSeperateLine: boolean;
 };
 
-const windowWidth = Dimensions.get('window').width;
+const windowWidth = windowSize().width;
 
 export function Input({
     labelText,
@@ -40,7 +41,7 @@ export function Input({
                 style={{
                     marginRight: 15
                 }}
-                onLayout={(event: any) => {
+                onLayout={(event: LayoutChangeEvent) => {
                     const { width } = event.nativeEvent.layout;
                     ditectLabelWidthHandler(width);
                 }}

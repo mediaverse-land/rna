@@ -57,9 +57,7 @@ const routes: Routes[] = [
     }
 ];
 
-const { Container, Wrapper, Tab } = NavigationHeaderComponents;
-
-const width = Dimensions.get('window').width;
+const { Container, Tab } = NavigationHeaderComponents;
 
 export function NavigationHeader({ navigation, route }: Props) {
     const navigateToRouteHandler = (routeName: string) => {

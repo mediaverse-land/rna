@@ -9,7 +9,7 @@ export type HorizontailSlideType = {
     username: string;
     profileUri: string;
     slidePressRedirectHandler?: () => void;
-    type?: 'sound' | 'video' | 'image' | 'text'
+    type?: 'sound' | 'video' | 'image' | 'text';
 };
 
 type Props = {

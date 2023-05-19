@@ -1,7 +1,16 @@
 import { memo, useEffect, useState } from 'react';
 import { ImageStyle, View } from 'react-native';
 import { TabBarComponents } from './style';
-import { ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG, ICON_TOP_TABBAR_IMAGE_SVG, ICON_TOP_TABBAR_SOUND_ACTIVE_SVG, ICON_TOP_TABBAR_SOUND_SVG, ICON_TOP_TABBAR_TEXT_ACTIVE_SVG, ICON_TOP_TABBAR_TEXT_SVG, ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG, ICON_TOP_TABBAR_VIDEO_SVG } from '../../../constaints/icons';
+import {
+    ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG,
+    ICON_TOP_TABBAR_IMAGE_SVG,
+    ICON_TOP_TABBAR_SOUND_ACTIVE_SVG,
+    ICON_TOP_TABBAR_SOUND_SVG,
+    ICON_TOP_TABBAR_TEXT_ACTIVE_SVG,
+    ICON_TOP_TABBAR_TEXT_SVG,
+    ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG,
+    ICON_TOP_TABBAR_VIDEO_SVG
+} from '../../../constaints/icons';
 
 function getTobBarItemsIcon(tobBarItemName: string, isFocused: boolean) {
     let iconPath: any;
@@ -9,24 +18,32 @@ function getTobBarItemsIcon(tobBarItemName: string, isFocused: boolean) {
 
     switch (tobBarItemName) {
         case 'video':
-            iconPath = isFocused
-                ? <ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG width={19.76} height={16} />
-                : <ICON_TOP_TABBAR_VIDEO_SVG width={19.76} height={16} />
+            iconPath = isFocused ? (
+                <ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG width={19.76} height={16} />
+            ) : (
+                <ICON_TOP_TABBAR_VIDEO_SVG width={19.76} height={16} />
+            );
             break;
         case 'image':
-            iconPath = isFocused
-                ? <ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG width={19.76} height={16} />
-                : <ICON_TOP_TABBAR_IMAGE_SVG width={19.76} height={16} />
+            iconPath = isFocused ? (
+                <ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG width={19.76} height={16} />
+            ) : (
+                <ICON_TOP_TABBAR_IMAGE_SVG width={19.76} height={16} />
+            );
             break;
         case 'sound':
-            iconPath = isFocused
-                ? <ICON_TOP_TABBAR_SOUND_ACTIVE_SVG width={19.76} height={16} />
-                : <ICON_TOP_TABBAR_SOUND_SVG width={19.76} height={16} />
+            iconPath = isFocused ? (
+                <ICON_TOP_TABBAR_SOUND_ACTIVE_SVG width={19.76} height={16} />
+            ) : (
+                <ICON_TOP_TABBAR_SOUND_SVG width={19.76} height={16} />
+            );
             break;
         case 'text':
-            iconPath = isFocused
-                ? <ICON_TOP_TABBAR_TEXT_ACTIVE_SVG width={19.76} height={16} />
-                : <ICON_TOP_TABBAR_TEXT_SVG width={19.76} height={16} />
+            iconPath = isFocused ? (
+                <ICON_TOP_TABBAR_TEXT_ACTIVE_SVG width={19.76} height={16} />
+            ) : (
+                <ICON_TOP_TABBAR_TEXT_SVG width={19.76} height={16} />
+            );
             break;
         default:
             break;
@@ -44,12 +61,12 @@ function TopTabBar({
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        setIsLoaded(true)
-    }, [])
+        setIsLoaded(true);
+    }, []);
 
     return (
         <>
-            {isLoaded ?
+            {isLoaded ? (
                 <View
                     style={{
                         paddingLeft: hasFullWidth ? 0 : 24,
@@ -73,13 +90,13 @@ function TopTabBar({
                                 options.tabBarLabel !== undefined
                                     ? options.tabBarLabel
                                     : options.title !== undefined
-                                        ? options.title
-                                        : route.name;
+                                    ? options.title
+                                    : route.name;
 
                             const isFocused = state.index === index;
 
                             const {
-                                iconPath,
+                                iconPath
                             }: { iconPath: string; iconStyle: ImageStyle } =
                                 getTobBarItemsIcon(options.title, isFocused);
 
@@ -121,9 +138,7 @@ function TopTabBar({
                                     style={{ flex: 1 }}
                                 >
                                     <TabBarComponents.Wrapper>
-                                        {iconPath ?
-                                            iconPath
-                                            : null}
+                                        {iconPath ? iconPath : null}
                                         {label === 'All' ? (
                                             <TabBarComponents.Label
                                                 style={{
@@ -144,9 +159,9 @@ function TopTabBar({
                         })}
                     </TabBarComponents.TabBar>
                 </View>
-                : null}
+            ) : null}
         </>
     );
 }
 
-export default TopTabBar
+export default TopTabBar;

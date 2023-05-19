@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Dimensions } from 'react-native';
+import { LayoutChangeEvent } from 'react-native'
 import { InputComponent } from './style';
 import { theme } from '../../../constaints/theme';
+import { windowSize } from '../../../utils/window-size';
 
 const { FlatFormGroup, InputBox, FlatLabel } = InputComponent;
 
@@ -11,7 +12,7 @@ type Props = {
     labelInSeperateLine: boolean;
 };
 
-const windowWidth = Dimensions.get('window').width;
+const windowWidth = windowSize().width;
 
 export function FlatInput({
     labelText,
@@ -42,7 +43,7 @@ export function FlatInput({
                     borderRightColor: theme.color.light.GRAY,
                     borderRightWidth: 0.5
                 }}
-                onLayout={(event: any) => {
+                onLayout={(event: LayoutChangeEvent) => {
                     const { width } = event.nativeEvent.layout;
                     ditectLabelWidthHandler(width);
                 }}

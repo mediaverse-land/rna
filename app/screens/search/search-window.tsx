@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { LinearGradient } from 'expo-linear-gradient';
 import {
-    Dimensions,
     ScrollView,
     TouchableOpacity,
     TouchableWithoutFeedback,
     View
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { ImagesPageComponents } from '../explore/pages/all/style';
 import { Flex } from '../../styles/grid';
 import { SearchBoxComponents } from './style';
@@ -16,8 +15,9 @@ import {
     ICON_SEARCH_SVG_PATH
 } from '../../constaints/icons';
 import { useNavigation } from '@react-navigation/native';
+import { windowSize } from '../../utils/window-size';
 
-const { width, height } = Dimensions.get('screen');
+const { width, height } = windowSize();
 
 const { FixedStyles, ContainerStyles } = ImagesPageComponents;
 const {
@@ -84,14 +84,11 @@ export function SearchWindow() {
                             }}
                             onPress={goBackHandler}
                         >
-                            <ICON_ARROW_LEFT_SVG
-                                width={22}
-                                height={16.88}
-                            />
+                            <ICON_ARROW_LEFT_SVG width={22} height={16.88} />
                         </TouchableOpacity>
                         <View
                             style={{
-                                width: Dimensions.get('window').width - 96
+                                width: width - 96
                             }}
                         >
                             <ICON_SEARCH_SVG_PATH
@@ -101,10 +98,9 @@ export function SearchWindow() {
                                     position: 'absolute',
                                     right: 16,
                                     top: 40,
-                                    zIndex: 10,
+                                    zIndex: 10
                                 }}
                             />
-                            {/* <SearchIcon source={{ uri: ICON_SEARCH }} /> */}
                             <SearchInput
                                 placeholder="Search"
                                 placeholderTextColor="#353542"
@@ -134,7 +130,7 @@ export function SearchWindow() {
                                     </SearchTagDropDownTitle>
                                 </TouchableOpacity>
                                 {showTagDropDown === true ? (
-                                    <DropDown >
+                                    <DropDown>
                                         <TouchableOpacity
                                             activeOpacity={1}
                                             style={{ marginBottom: 16 }}
@@ -157,7 +153,7 @@ export function SearchWindow() {
                             </SearchTagDropDown>
                             <View
                                 style={{
-                                    width: Dimensions.get('window').width - 141
+                                    width: width - 141
                                 }}
                             >
                                 <SearchInput

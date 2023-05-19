@@ -6,9 +6,9 @@ type ImageType = { id: number; width: number; height: number; path: string };
 
 type Props = {
     data: {
-        row: ImageType[]
-    }[]
-}
+        row: ImageType[];
+    }[];
+};
 
 const { MasonryWrapper, MasonryRow } = MasonryComponents;
 
@@ -103,9 +103,7 @@ export function Masonry({ data }: Props) {
         }
     );
 
-    return (
-        <MasonryWrapper>{renderMasonryList}</MasonryWrapper>
-    );
+    return <MasonryWrapper>{renderMasonryList}</MasonryWrapper>;
 }
 
 const styles = StyleSheet.create({

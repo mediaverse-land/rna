@@ -8,7 +8,9 @@ export function AllPageMostViewed() {
     return (
         <View style={{ flex: 1, marginTop: 40 }}>
             <View style={{ flexDirection: 'row' }}>
-                <ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG width={16} height={16}
+                <ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG
+                    width={16}
+                    height={16}
                     style={{ marginRight: 8, marginTop: 3 }}
                 />
                 <Title str="Most viewed" />
