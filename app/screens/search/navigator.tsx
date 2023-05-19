@@ -12,7 +12,9 @@ const Tab = createMaterialTopTabNavigator();
 export function Navigator() {
     return (
         <View style={{ width: '100%', flex: 1 }}>
-            <Tab.Navigator tabBar={(props) => <TopTabBar hasFullWidth {...props} />}>
+            <Tab.Navigator
+                tabBar={(props) => <TopTabBar hasFullWidth {...props} />}
+            >
                 <Tab.Screen
                     name="AllPage"
                     component={AllPage}

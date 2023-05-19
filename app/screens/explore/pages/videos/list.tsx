@@ -1,7 +1,7 @@
 import { FlatList, View } from 'react-native';
 import { VideoPageComponents } from './style';
 import { VIDEO_LIST_ITEM_GRADIENT } from '../../../../constaints/images';
-import { videosMockData } from './video-mock-data';
+import { videosMockData } from './mock-data/video-mock-data';
 import { Flex } from '../../../../styles/grid';
 import { UserNameCard } from '../../../../shared/components/username-card';
 

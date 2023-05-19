@@ -15,13 +15,16 @@ export function AllPage() {
                 y: 0
             }}
         >
-            <ScrollView style={[FixedStyles, {
-                backgroundColor: 'transparent',
-                paddingTop: 196
-            }]}>
-                <PaddingContainer>
-
-                </PaddingContainer>
+            <ScrollView
+                style={[
+                    FixedStyles,
+                    {
+                        backgroundColor: 'transparent',
+                        paddingTop: 196
+                    }
+                ]}
+            >
+                <PaddingContainer></PaddingContainer>
             </ScrollView>
         </LinearGradient>
     );

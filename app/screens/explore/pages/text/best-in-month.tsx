@@ -22,7 +22,7 @@ export function ImagePageBestInMonth() {
                 <TextSlideBackgroundGradient
                     source={{ uri: TEXT_SLIDER_ITEM_GRADIENT }}
                 />
-                <TextSlideBody>
+                <TextSlideBody activeOpacity={1}>
                     <TextSlideTitle>{item.title}</TextSlideTitle>
                     <TextSlideContentText>{item.content}</TextSlideContentText>
                     <View style={{ marginTop: 16 }}>

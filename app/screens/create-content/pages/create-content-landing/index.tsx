@@ -50,7 +50,7 @@ export function CreateContentLandingPage() {
                         />
                         <ItemText>VIDEO</ItemText>
                     </CreateContentItem>
-                    <CreateContentItem style={{ marginLeft: 16 }}>
+                    <CreateContentItem style={{ marginLeft: 16 }} activeOpacity={1}>
                         <Image
                             source={{ uri: ICON_IMAGE }}
                             style={{

@@ -35,6 +35,24 @@ export const ImagesPageComponents = {
         height: 170px;
         border-radius: 16px;
     `,
+    BannerItemTitel: styled.Text`
+        color: #d9d9ff;
+        font-size: ${theme.fontSize.md};
+        line-height: ${theme.lineHeight.md};
+        position: absolute;
+        bottom: 32px;
+        width: 100%;
+        text-align: center;
+    `,
+    BannerItemDescription: styled.Text`
+        color: #83839c;
+        font-size: 12px;
+        line-height: 12px;
+        position: absolute;
+        bottom: 16px;
+        width: 100%;
+        text-align: center;
+    `,
     DailyRecomended: styled.View`
         width: 100%;
         margin-top: 40px;

@@ -13,12 +13,12 @@ export function SearchPage() {
     const [showSearchWindow, setShowSearchWindow] = useState(true);
 
     const showSearchWindowHandler = () => {
-        setShowSearchWindow(true)
-    }
+        setShowSearchWindow(true);
+    };
 
     const hideSearchWindowHandler = () => {
-        setShowSearchWindow(false)
-    }
+        setShowSearchWindow(false);
+    };
     return (
         <>
             <SafeAreaView style={{ flex: 1 }}>
@@ -27,15 +27,10 @@ export function SearchPage() {
                     colors={['#030340', '#030340']}
                     start={{ x: 0.7, y: 0 }}
                 >
-                    {showSearchWindow ?
-                        <SearchWindow />
-                        :
-                        <SearchBox />
-                    }
+                    {showSearchWindow ? <SearchWindow /> : <SearchBox />}
                     <Navigator />
                 </LinearGradient>
             </SafeAreaView>
         </>
     );
 }
-

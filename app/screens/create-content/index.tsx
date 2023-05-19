@@ -5,8 +5,8 @@ import { Navigator } from './navigator';
 export function CreateContentStack() {
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <Header />
-            <Navigator />
+            {/* <Header /> */}
+            {/* <Navigator /> */}
         </SafeAreaView>
     );
 }

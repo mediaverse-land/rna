@@ -4,25 +4,16 @@ import {
     View,
     Dimensions,
     TouchableOpacity,
-    Image
 } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
-import {
-    ICON_BOTTOM_TABBAR_ACTIVE_APPS,
-    ICON_BOTTOM_TABBAR_ACTIVE_EXPLORE,
-    ICON_BOTTOM_TABBAR_ACTIVE_PROFILE,
-    ICON_BOTTOM_TABBAR_ACTIVE_WALLET,
-    ICON_BOTTOM_TABBAR_APPS,
-    ICON_BOTTOM_TABBAR_EXPLORE,
-    ICON_BOTTOM_TABBAR_PLUS,
-    ICON_BOTTOM_TABBAR_PROFILE,
-    ICON_BOTTOM_TABBAR_WALLET
-} from '../../../constaints/icons';
+
+import { ICON_APPS_ACTIVE_SVG, ICON_APPS_SVG, ICON_EXPLORE_ACTIVE_SVG, ICON_EXPLORE_SVG, ICON_PLUS_SVG, ICON_PROFILE_ACTIVE_SVG, ICON_PROFILE_SVG, ICON_WALLET_ACTIVE_SVG, ICON_WALLET_SVG } from './../../../constaints/icons'
+
 
 const icons: any = {
     explore: {
-        path: ICON_BOTTOM_TABBAR_EXPLORE,
-        activePath: ICON_BOTTOM_TABBAR_ACTIVE_EXPLORE,
+        path: <ICON_EXPLORE_SVG width={20} height={20} style={{ marginTop: 10 }} />,
+        activePath: <ICON_EXPLORE_ACTIVE_SVG width={20} height={20} style={{ marginTop: 10 }} />,
         styles: {
             width: 20,
             height: 20,
@@ -30,8 +21,8 @@ const icons: any = {
         }
     },
     apps: {
-        path: ICON_BOTTOM_TABBAR_APPS,
-        activePath: ICON_BOTTOM_TABBAR_ACTIVE_APPS,
+        path: <ICON_APPS_SVG width={20} height={20} style={{ marginTop: 10 }} />,
+        activePath: <ICON_APPS_ACTIVE_SVG width={20} height={20} style={{ marginTop: 10 }} />,
         styles: {
             width: 20,
             height: 20,
@@ -39,8 +30,8 @@ const icons: any = {
         }
     },
     wallet: {
-        path: ICON_BOTTOM_TABBAR_WALLET,
-        activePath: ICON_BOTTOM_TABBAR_ACTIVE_WALLET,
+        path: <ICON_WALLET_SVG width={20} height={16} style={{ marginTop: 10 }} />,
+        activePath: <ICON_WALLET_ACTIVE_SVG width={20} height={16} style={{ marginTop: 10 }} />,
         styles: {
             width: 20,
             height: 16,
@@ -48,8 +39,8 @@ const icons: any = {
         }
     },
     profile: {
-        path: ICON_BOTTOM_TABBAR_PROFILE,
-        activePath: ICON_BOTTOM_TABBAR_ACTIVE_PROFILE,
+        path: <ICON_PROFILE_SVG width={16} height={20} style={{ marginTop: 10 }} />,
+        activePath: <ICON_PROFILE_ACTIVE_SVG width={16} height={20} style={{ marginTop: 10 }} />,
         styles: {
             width: 16,
             height: 20,
@@ -74,12 +65,9 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
         <View style={[styles.container]}>
             <View style={[styles.content]}>
                 <TouchableOpacity style={styles.plusButton}>
-                    <Image
-                        source={{ uri: ICON_BOTTOM_TABBAR_PLUS }}
-                        style={{
-                            width: 20,
-                            height: 20
-                        }}
+                    <ICON_PLUS_SVG
+                        width={20}
+                        height={20}
                     />
                 </TouchableOpacity>
                 <View style={styles.subContent}>
@@ -87,10 +75,10 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
                         const isFocused = state.index === i;
                         const icon = icons[route.name.toLowerCase()];
 
-                        const currentIcon = isFocused
+                        const currentIcon: any = isFocused
                             ? icon?.activePath
                             : icon?.path;
-                        const currentIconStyles = icon?.styles;
+
 
                         return (
                             <TouchableOpacity
@@ -123,12 +111,9 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
                                     }
                                 ]}
                             >
-                                {currentIcon ? (
-                                    <Image
-                                        source={{ uri: currentIcon }}
-                                        style={currentIconStyles}
-                                    />
-                                ) : null}
+                                {currentIcon ?
+                                    currentIcon
+                                    : null}
                             </TouchableOpacity>
                         );
                     })}

@@ -1,15 +1,13 @@
 import styled from 'styled-components/native';
 
-export const MasonryGridComponents = {
-    Container: styled.View`
+export const MasonryComponents = {
+    MasonryWrapper: styled.View`
         flex: 1;
         width: 100%;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: flex-start;
+        margin-top: 40px;
     `,
-    MasonryItem: styled.View`
-        border: 1px solid #fff;
+    MasonryRow: styled.View`
+        flex-direction: row;
+        min-height: 100px;
     `
 };

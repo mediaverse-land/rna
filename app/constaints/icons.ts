@@ -20,14 +20,31 @@ import ICON_MUSIC_PLAY_PNG from './../../assets/icons/icon__play-music.png';
 
 import ICON_SETTINGS_PNG from './../../assets/icons/icon__settings.png';
 
-import ICON_TOP_TABBAR_IMAGE_PNG from './../../assets/icons/icon__top-bar-navigator-image.png';
-import ICON_TOP_TABBAR_IMAGE_ACTIVE_PNG from './../../assets/icons/icon__top-bar-navigator-image-active.png';
-import ICON_TOP_TABBAR_VIDEO_PNG from './../../assets/icons/icon__top-bar-navigator-vidoe.png';
-import ICON_TOP_TABBAR_VIDEO_ACTIVE_PNG from './../../assets/icons/icon__top-bar-navigator-video-active.png';
-import ICON_TOP_TABBAR_SOUND_PNG from './../../assets/icons/icon__top-bar-navigator-sound.png';
-import ICON_TOP_TABBAR_SOUND_ACTIVE_PNG from './../../assets/icons/icon__top-bar-navigator-sound-active.png';
-import ICON_TOP_TABBAR_TEXT_PNG from './../../assets/icons/icon__top-bar-navigator-text.png';
-import ICON_TOP_TABBAR_TEXT_ACTIVE_PNG from './../../assets/icons/icon__top-bar-navigator-text-active.png';
+import ICON_TOP_TABBAR_IMAGE_SVG_PATH from './../../assets/icons/icon__image-svg.svg';
+import ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG_PATH from './../../assets/icons/icon__image-active-svg.svg';
+import ICON_TOP_TABBAR_VIDEO_SVG_PATH from './../../assets/icons/icon__vidoe-svg.svg';
+import ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG_PATH from './../../assets/icons/icon__video-active-svg.svg';
+import ICON_TOP_TABBAR_SOUND_SVG_PATH from './../../assets/icons/icon__sound-svg.svg';
+import ICON_TOP_TABBAR_SOUND_ACTIVE_SVG_PATH from './../../assets/icons/icon__sound-active-svg.svg';
+import ICON_TOP_TABBAR_TEXT_SVG_PATH from './../../assets/icons/icon__text-svg.svg';
+import ICON_TOP_TABBAR_TEXT_ACTIVE_SVG_PATH from './../../assets/icons/icon__text-active-svg.svg';
+
+export const ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG =
+    ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG_PATH;
+
+export const ICON_TOP_TABBAR_VIDEO_SVG = ICON_TOP_TABBAR_VIDEO_SVG_PATH;
+export const ICON_TOP_TABBAR_IMAGE_SVG = ICON_TOP_TABBAR_IMAGE_SVG_PATH;
+export const ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG =
+    ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG_PATH;
+
+export const ICON_TOP_TABBAR_SOUND_SVG = ICON_TOP_TABBAR_SOUND_SVG_PATH;
+export const ICON_TOP_TABBAR_SOUND_ACTIVE_SVG =
+    ICON_TOP_TABBAR_SOUND_ACTIVE_SVG_PATH;
+
+export const SVG_ICON = ICON_TOP_TABBAR_TEXT_ACTIVE_SVG_PATH;
+export const ICON_TOP_TABBAR_TEXT_ACTIVE_SVG =
+    ICON_TOP_TABBAR_TEXT_ACTIVE_SVG_PATH;
+export const ICON_TOP_TABBAR_TEXT_SVG = ICON_TOP_TABBAR_TEXT_SVG_PATH;
 
 import ICON_BOTTOM_TABBAR_EXPLORE_PNG from './../../assets/icons/icon__bottom-tabbar-explore-active.png';
 import ICON_BOTTOM_TABBAR_ACTIVE_EXPLORE_PNG from './../../assets/icons/icon__bottom-tabbar-explore-active.png';
@@ -44,29 +61,6 @@ import ICON_BOTTOM_TABBAR_PLUS_PNG from './../../assets/icons/icon__bottom-tabba
 
 import ICON_ARROW_BACK_PNG from './../../assets/icons/icon__arrow-back.png';
 import ICON_ARROW_DOWN_PNG from './../../assets/icons/icon__arrow-down.png';
-
-export const ICON_TOP_TABBAR_IMAGE = imageUriResolver(
-    ICON_TOP_TABBAR_IMAGE_PNG
-);
-export const ICON_TOP_TABBAR_IMAGE_ACTIVE = imageUriResolver(
-    ICON_TOP_TABBAR_IMAGE_ACTIVE_PNG
-);
-export const ICON_TOP_TABBAR_VIDEO = imageUriResolver(
-    ICON_TOP_TABBAR_VIDEO_PNG
-);
-export const ICON_TOP_TABBAR_VIDEO_ACTIVE = imageUriResolver(
-    ICON_TOP_TABBAR_VIDEO_ACTIVE_PNG
-);
-export const ICON_TOP_TABBAR_SOUND = imageUriResolver(
-    ICON_TOP_TABBAR_SOUND_PNG
-);
-export const ICON_TOP_TABBAR_SOUND_ACTIVE = imageUriResolver(
-    ICON_TOP_TABBAR_SOUND_ACTIVE_PNG
-);
-export const ICON_TOP_TABBAR_TEXT = imageUriResolver(ICON_TOP_TABBAR_TEXT_PNG);
-export const ICON_TOP_TABBAR_TEXT_ACTIVE = imageUriResolver(
-    ICON_TOP_TABBAR_TEXT_ACTIVE_PNG
-);
 
 export const ICON_ARROW_BACK = imageUriResolver(ICON_ARROW_BACK_PNG);
 
@@ -119,3 +113,51 @@ export const ICON_BOTTOM_TABBAR_ACTIVE_PROFILE = imageUriResolver(
 export const ICON_BOTTOM_TABBAR_PLUS = imageUriResolver(
     ICON_BOTTOM_TABBAR_PLUS_PNG
 );
+
+import ICON_SEARCH_SVG from './../../assets/icons/icon__search-svg.svg';
+
+export const ICON_SEARCH_SVG_PATH = ICON_SEARCH_SVG;
+
+// //
+import ICON_EXPLORE_ACTIVE_SVG_PATH from './../../assets/icons/icon__explore-active-svg.svg';
+export const ICON_EXPLORE_ACTIVE_SVG = ICON_EXPLORE_ACTIVE_SVG_PATH;
+
+import ICON_EXPLORE_SVG_PATH from './../../assets/icons/icon__explore-svg.svg';
+export const ICON_EXPLORE_SVG = ICON_EXPLORE_SVG_PATH;
+
+import ICON_APPS_SVG_PATH from './../../assets/icons/icon__apps-svg.svg';
+export const ICON_APPS_SVG = ICON_APPS_SVG_PATH;
+
+import ICON_APPS_ACTIVE_SVG_PATH from './../../assets/icons/icon__apps-active-svg.svg';
+export const ICON_APPS_ACTIVE_SVG = ICON_APPS_ACTIVE_SVG_PATH;
+
+import ICON_WALLET_ACTIVE_SVG_PATH from './../../assets/icons/icon__wallet-active-svg.svg';
+export const ICON_WALLET_ACTIVE_SVG = ICON_WALLET_ACTIVE_SVG_PATH;
+
+import ICON_WALLET_SVG_PATH from './../../assets/icons/icon__wallet.svg.svg';
+export const ICON_WALLET_SVG = ICON_WALLET_SVG_PATH;
+
+import ICON_PROFILE_SVG_PATH from './../../assets/icons/icon__profile-sg.svg';
+export const ICON_PROFILE_SVG = ICON_PROFILE_SVG_PATH;
+
+import ICON_PROFILE_ACTIVE_SVG_PATH from './../../assets/icons/icon__profile-active-svg.svg';
+export const ICON_PROFILE_ACTIVE_SVG = ICON_PROFILE_ACTIVE_SVG_PATH;
+
+import ICON_PLUS_SVG_PATH from './../../assets/icons/icon__plus-svg.svg';
+export const ICON_PLUS_SVG = ICON_PLUS_SVG_PATH;
+
+import ICON_PLAY_SVG_PATH from './../../assets/icons/icon__play-svg.svg';
+export const ICON_PLAY_SVG = ICON_PLAY_SVG_PATH;
+
+import ICON_NEXT_SVG_PATH from './../../assets/icons/icon__next-svg.svg';
+export const ICON_NEXT_SVG = ICON_NEXT_SVG_PATH;
+
+import ICON_PREV_SVG_PATH from './../../assets/icons/icon__prev-svg.svg';
+export const ICON_PREV_SVG = ICON_PREV_SVG_PATH;
+
+// //
+import ICON_ARROW_DOWN_SVG_PATH from './../../assets/icons/icon__arrow-down-svg.svg';
+export const ICON_ARROW_DOWN_SVG = ICON_ARROW_DOWN_SVG_PATH;
+
+import ICON_ARROW_LEFT_SVG_PATH from './../../assets/icons/icon__arrow-left-svg.svg';
+export const ICON_ARROW_LEFT_SVG = ICON_ARROW_LEFT_SVG_PATH;

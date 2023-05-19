@@ -1,28 +1,33 @@
-import { useState } from "react";
-import { LinearGradient } from "expo-linear-gradient";
-import { Dimensions, Image, ScrollView, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
-import { ImagesPageComponents } from "../explore/pages/all/style";
-import { Flex } from "../../styles/grid";
-import { SearchBoxComponents } from "./style";
+import { useState } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
 import {
-    ICON_ARROW_BACK,
-    ICON_ARROW_DOWN,
-    ICON_SEARCH
-} from "../../constaints/icons";
-import { useNavigation } from "@react-navigation/native";
+    Dimensions,
+    ScrollView,
+    TouchableOpacity,
+    TouchableWithoutFeedback,
+    View
+} from 'react-native';
+import { ImagesPageComponents } from '../explore/pages/all/style';
+import { Flex } from '../../styles/grid';
+import { SearchBoxComponents } from './style';
+import {
+    ICON_ARROW_DOWN_SVG,
+    ICON_ARROW_LEFT_SVG,
+    ICON_SEARCH_SVG_PATH
+} from '../../constaints/icons';
+import { useNavigation } from '@react-navigation/native';
 
-const { width, height } = Dimensions.get('screen')
+const { width, height } = Dimensions.get('screen');
 
 const { FixedStyles, ContainerStyles } = ImagesPageComponents;
 const {
     SearchBoxWrapper,
     SearchInput,
-    SearchIcon,
     TagSearchWrapper,
     SearchTagDropDown,
     SearchTagDropDownTitle,
     DropDown
-} = SearchBoxComponents
+} = SearchBoxComponents;
 
 export function SearchWindow() {
     const [showTagDropDown, setShowTagDropDown] = useState(false);
@@ -30,28 +35,28 @@ export function SearchWindow() {
     const navigation = useNavigation();
 
     const showTagDropDownHandler = () => {
-        setShowTagDropDown(true)
-    }
+        setShowTagDropDown(true);
+    };
 
     const hideTagDropDownHandler = () => {
-        setShowTagDropDown(false)
-    }
+        setShowTagDropDown(false);
+    };
 
     const goBackHandler = () => {
-        navigation.goBack()
-    }
+        navigation.goBack();
+    };
 
     return (
-        <TouchableWithoutFeedback
-            onPress={hideTagDropDownHandler}>
-            <View style={{
-                position: 'absolute',
-                width,
-                height,
-                top: 0,
-                zIndex: 100,
-                left: 0,
-            }}
+        <TouchableWithoutFeedback onPress={hideTagDropDownHandler}>
+            <View
+                style={{
+                    position: 'absolute',
+                    width,
+                    height,
+                    top: 0,
+                    zIndex: 100,
+                    left: 0
+                }}
             >
                 <LinearGradient
                     style={[ContainerStyles]}
@@ -64,22 +69,42 @@ export function SearchWindow() {
                     <Flex
                         width="100%"
                         direction="row"
-                        style={[SearchBoxWrapper, { backgroundColor: 'transparent' }]}
+                        style={[
+                            SearchBoxWrapper,
+                            { backgroundColor: 'transparent' }
+                        ]}
                         align="center"
                     >
                         <TouchableOpacity
-                            style={{ width: 22, marginRight: 24, marginTop: 25 }}
+                            activeOpacity={1}
+                            style={{
+                                width: 22,
+                                marginRight: 24,
+                                marginTop: 25
+                            }}
                             onPress={goBackHandler}
                         >
-                            <Image
-                                source={{ uri: ICON_ARROW_BACK }}
-                                style={{ width: 22, height: 16.88 }}
+                            <ICON_ARROW_LEFT_SVG
+                                width={22}
+                                height={16.88}
                             />
                         </TouchableOpacity>
                         <View
-                            style={{ width: Dimensions.get('window').width - 96 }}
+                            style={{
+                                width: Dimensions.get('window').width - 96
+                            }}
                         >
-                            <SearchIcon source={{ uri: ICON_SEARCH }} />
+                            <ICON_SEARCH_SVG_PATH
+                                width={16}
+                                height={16}
+                                style={{
+                                    position: 'absolute',
+                                    right: 16,
+                                    top: 40,
+                                    zIndex: 10,
+                                }}
+                            />
+                            {/* <SearchIcon source={{ uri: ICON_SEARCH }} /> */}
                             <SearchInput
                                 placeholder="Search"
                                 placeholderTextColor="#353542"
@@ -87,33 +112,53 @@ export function SearchWindow() {
                         </View>
                     </Flex>
                     <TagSearchWrapper>
-                        <Flex direction="row" align="center" justify="space-between">
-                            <SearchTagDropDown >
-                                <Image
-                                    source={{ uri: ICON_ARROW_DOWN }}
-                                    style={{ width: 12, height: 14, marginBottom: 2 }}
+                        <Flex
+                            direction="row"
+                            align="center"
+                            justify="space-between"
+                        >
+                            <SearchTagDropDown activeOpacity={1}>
+                                <ICON_ARROW_DOWN_SVG
+                                    width={10}
+                                    height={14}
+                                    style={{
+                                        marginTop: 2
+                                    }}
                                 />
-                                <TouchableOpacity onPress={showTagDropDownHandler}>
-                                    <SearchTagDropDownTitle >Tag:</SearchTagDropDownTitle>
+                                <TouchableOpacity
+                                    activeOpacity={1}
+                                    onPress={showTagDropDownHandler}
+                                >
+                                    <SearchTagDropDownTitle>
+                                        Tag:
+                                    </SearchTagDropDownTitle>
                                 </TouchableOpacity>
-                                {showTagDropDown === true ?
+                                {showTagDropDown === true ? (
                                     <DropDown >
                                         <TouchableOpacity
+                                            activeOpacity={1}
                                             style={{ marginBottom: 16 }}
                                             onPress={hideTagDropDownHandler}
                                         >
-                                            <SearchTagDropDownTitle
-                                            >Tag</SearchTagDropDownTitle>
+                                            <SearchTagDropDownTitle>
+                                                Tag
+                                            </SearchTagDropDownTitle>
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={hideTagDropDownHandler}>
-                                            <SearchTagDropDownTitle>Plan</SearchTagDropDownTitle>
+                                        <TouchableOpacity
+                                            activeOpacity={1}
+                                            onPress={hideTagDropDownHandler}
+                                        >
+                                            <SearchTagDropDownTitle>
+                                                Plan
+                                            </SearchTagDropDownTitle>
                                         </TouchableOpacity>
-                                    </DropDown> :
-                                    null
-                                }
+                                    </DropDown>
+                                ) : null}
                             </SearchTagDropDown>
                             <View
-                                style={{ width: Dimensions.get('window').width - 141 }}
+                                style={{
+                                    width: Dimensions.get('window').width - 141
+                                }}
                             >
                                 <SearchInput
                                     placeholder="Search in tags"
@@ -123,13 +168,17 @@ export function SearchWindow() {
                             </View>
                         </Flex>
                     </TagSearchWrapper>
-                    <ScrollView style={[FixedStyles, {
-                        backgroundColor: 'transparent',
-                        paddingTop: 196
-                    }]}>
-                    </ScrollView>
+                    <ScrollView
+                        style={[
+                            FixedStyles,
+                            {
+                                backgroundColor: 'transparent',
+                                paddingTop: 196
+                            }
+                        ]}
+                    ></ScrollView>
                 </LinearGradient>
             </View>
         </TouchableWithoutFeedback>
-    )
+    );
 }

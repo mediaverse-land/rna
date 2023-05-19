@@ -1,5 +1,5 @@
-import { FlatList, Text, View } from 'react-native';
-import { ICON_TEXT_WHITE } from '../../../../constaints/icons';
+import { FlatList, View } from 'react-native';
+import { SVG_ICON } from '../../../../constaints/icons';
 import { Title } from '../../../../shared/components/title';
 import { ImagesPageComponents } from './style';
 import { TEXT_SLIDER_ITEM_GRADIENT } from '../../../../constaints/images';
@@ -22,7 +22,7 @@ export function AllPageTopTenText() {
                 <TextSlideBackgroundGradient
                     source={{ uri: TEXT_SLIDER_ITEM_GRADIENT }}
                 />
-                <TextSlideBody>
+                <TextSlideBody activeOpacity={1}>
                     <TextSlideTitle>{item.title}</TextSlideTitle>
                     <TextSlideContentText>{item.content}</TextSlideContentText>
                     <View style={{ marginTop: 16 }}>
@@ -42,7 +42,14 @@ export function AllPageTopTenText() {
 
     return (
         <View style={{ flex: 1, marginTop: 40, paddingLeft: 24 }}>
-            <Title str="Top 10 texts" iconPath={ICON_TEXT_WHITE} />
+            <View style={{ flexDirection: 'row' }}>
+                <SVG_ICON
+                    width={16}
+                    height={16}
+                    style={{ marginRight: 8, marginTop: 3 }}
+                />
+                <Title str="Top 10 texts" />
+            </View>
             <TextSliderWrapper>
                 <FlatList
                     horizontal
