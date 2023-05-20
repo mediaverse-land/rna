@@ -1,7 +1,5 @@
 import { ScrollView, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { SearchBar } from '../../../../layout/search-bar';
-import { NavigationHeader } from '../../components/navigation-header';
 import { PaddingContainer } from '../../../../styles/grid';
 import { VideoPageBestInMonth } from './best-in-month';
 import { VideoPageList } from './list';
@@ -18,10 +16,6 @@ export function VideosPage({ route, navigation }: any) {
             colors={['#030340', '#030340']}
             start={{ x: 0.7, y: 0 }}
         >
-            {/* <Blur /> */}
-
-            {/* <SearchBar style={FixedStyles} /> */}
-            <NavigationHeader navigation={navigation} route={route} />
             <ScrollView
                 style={[
                     FixedStyles,

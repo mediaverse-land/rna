@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import {
-    TextInputKeyPressEventData,
-    NativeSyntheticEvent,
     View
 } from 'react-native';
 import { CreateContentNavigationBar } from '../../components/navigation-bar';

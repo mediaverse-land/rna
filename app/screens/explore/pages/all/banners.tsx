@@ -1,4 +1,4 @@
-import { Dimensions, Image } from 'react-native';
+import { Image } from 'react-native';
 import { ImagesPageComponents } from './style';
 import { Flex } from '../../../../styles/grid';
 import {
@@ -7,11 +7,13 @@ import {
     BANNER_STREAMS_IMAGE,
     BANNER_VLOG_IMAGE
 } from '../../../../constaints/images';
+import { windowSize } from '../../../../utils/window-size';
+import { Box } from '../../../../shared/components/box';
 
 const { BannerItem, BannerItemTitel, BannerItemDescription } =
     ImagesPageComponents;
 
-const windowWidth = Math.floor(Dimensions.get('window').width);
+const windowWidth = Math.floor(windowSize().width);
 const width = (windowWidth - 80) / 3;
 
 const bannerData = [

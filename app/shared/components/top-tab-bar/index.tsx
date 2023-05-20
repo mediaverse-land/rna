@@ -1,5 +1,5 @@
-import { memo, useEffect, useState } from 'react';
-import { ImageStyle, View } from 'react-native';
+import { useEffect, useState, ReactElement } from 'react';
+import { ImageStyle } from 'react-native';
 import { TabBarComponents } from './style';
 import {
     ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG,
@@ -11,9 +11,10 @@ import {
     ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG,
     ICON_TOP_TABBAR_VIDEO_SVG
 } from '../../../constaints/icons';
+import { Box } from '../box';
 
 function getTobBarItemsIcon(tobBarItemName: string, isFocused: boolean) {
-    let iconPath: any;
+    let iconPath: ReactElement<SVGElement>;
     let iconStyle: ImageStyle;
 
     switch (tobBarItemName) {
@@ -67,15 +68,13 @@ function TopTabBar({
     return (
         <>
             {isLoaded ? (
-                <View
-                    style={{
-                        paddingLeft: hasFullWidth ? 0 : 24,
-                        paddingRight: hasFullWidth ? 0 : 24,
-                        position: 'absolute',
-                        top: hasFullWidth ? 120 : 104,
-                        zIndex: 100,
-                        width: '100%'
-                    }}
+                <Box
+                    paddingLeft={hasFullWidth ? 0 : 24}
+                    paddingRight={hasFullWidth ? 0 : 24}
+                    position='absolute'
+                    top={hasFullWidth ? 120 : 104}
+                    zIndex={100}
+                    width='100%'
                 >
                     <TabBarComponents.TabBar
                         style={{
@@ -90,15 +89,12 @@ function TopTabBar({
                                 options.tabBarLabel !== undefined
                                     ? options.tabBarLabel
                                     : options.title !== undefined
-                                    ? options.title
-                                    : route.name;
+                                        ? options.title
+                                        : route.name;
 
                             const isFocused = state.index === index;
 
-                            const {
-                                iconPath
-                            }: { iconPath: string; iconStyle: ImageStyle } =
-                                getTobBarItemsIcon(options.title, isFocused);
+                            const { iconPath } = getTobBarItemsIcon(options.title, isFocused);
 
                             const onPress = () => {
                                 const event = navigation.emit({
@@ -158,7 +154,7 @@ function TopTabBar({
                             );
                         })}
                     </TabBarComponents.TabBar>
-                </View>
+                </Box>
             ) : null}
         </>
     );

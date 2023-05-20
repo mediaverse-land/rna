@@ -1,20 +1,20 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { NavigationHeader } from '../../components/navigation-header';
+// import { NavigationHeader } from '../../components/navigation-header';
 import { ImagesPageComponents } from '../all/style';
 import { ImagePageBestInMonth } from './bes-in-month';
 import { ImagePageMasonryList } from './masonry-list';
 
 const { FixedStyles, ContainerStyles } = ImagesPageComponents;
 
-export function ImagesPages({ route, navigation }: any) {
+export function ImagesPage({ route, navigation }: any) {
     return (
         <LinearGradient
             style={[ContainerStyles]}
             colors={['#030340', '#030340']}
             start={linearGradient}
         >
-            <NavigationHeader navigation={navigation} route={route} />
+            {/* <NavigationHeader navigation={navigation} route={route} /> */}
             <ScrollView style={[FixedStyles, styles.scrollView]}>
                 <ImagePageBestInMonth />
                 <ImagePageMasonryList />

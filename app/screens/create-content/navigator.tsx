@@ -1,16 +1,16 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { View } from 'react-native';
 import { CreateVideoPage } from './pages/create-video';
 import { CreateImagePage } from './pages/create-image';
 import { CreateSoundPage } from './pages/create-sound';
 import { CreateTextPage } from './pages/create-text';
 import { CreateContentLandingPage } from './pages/create-content-landing';
+import { Box } from '../../shared/components/box';
 
 const Stack = createStackNavigator();
 
 export function Navigator() {
     return (
-        <View style={{ width: '100%', flex: 1 }}>
+        <Box width={'100%'} flex={1}>
             <Stack.Navigator
                 screenOptions={{
                     headerShown: false
@@ -52,6 +52,6 @@ export function Navigator() {
                     }}
                 />
             </Stack.Navigator>
-        </View>
+        </Box>
     );
 }

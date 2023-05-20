@@ -10,12 +10,8 @@ import { windowSize } from '../../utils/window-size';
 
 const { width } = windowSize();
 
-const {
-    SearchBoxWrapper,
-    SearchInput,
-    SearchIcon,
-    AdvancedSearchIconButton
-} = SearchBoxComponents;
+const { SearchBoxWrapper, SearchInput, SearchIcon, AdvancedSearchIconButton } =
+    SearchBoxComponents;
 
 export function SearchBox() {
     return (

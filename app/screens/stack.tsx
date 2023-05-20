@@ -1,54 +1,71 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ExploreStack } from './explore';
-import { CreateContentStack } from './create-content';
 import { BottomTabBar } from '../shared/components/bottom-tab-bar';
+import { AppsStack } from './apps';
 
-const Tab = createBottomTabNavigator();
+type RoutesType = {
+    Explore: undefined,
+    Apps: undefined,
+    CreateContent: undefined,
+    Wallet: undefined,
+    Profile: undefined
+}
+
+const Tab = createBottomTabNavigator<RoutesType>();
+
+const routes = [
+    {
+        id: 1,
+        name: 'Explore',
+        component: ExploreStack,
+        title: 'explore'
+    },
+    {
+        id: 2,
+        name: 'Apps',
+        component: AppsStack,
+        title: 'apps'
+    },
+    {
+        id: 3,
+        name: 'CreateContent',
+        component: ExploreStack,
+        title: 'createContent'
+    },
+    {
+        id: 4,
+        name: 'Wallet',
+        component: ExploreStack,
+        title: 'wallet'
+    },
+    {
+        id: 5,
+        name: 'Profile',
+        component: ExploreStack,
+        title: 'profile'
+    },
+]
 
 export function AppStack() {
     return (
-        // <BottomTabBar />
         <Tab.Navigator
+            tabBar={(props) => <BottomTabBar {...props} />}
             screenOptions={{
                 headerShown: false
             }}
-            tabBar={(props) => <BottomTabBar {...props} />}
         >
-            <Tab.Screen
-                name="Explore"
-                component={ExploreStack}
-                options={{
-                    title: 'explore'
-                }}
-            />
-            <Tab.Screen
-                name="Apps"
-                component={CreateContentStack}
-                options={{
-                    title: 'apps'
-                }}
-            />
-            <Tab.Screen
-                name="CreateContent"
-                component={CreateContentStack}
-                options={{
-                    title: 'createContent'
-                }}
-            />
-            <Tab.Screen
-                name="Wallet"
-                component={CreateContentStack}
-                options={{
-                    title: 'wallet'
-                }}
-            />
-            <Tab.Screen
-                name="Profile"
-                component={CreateContentStack}
-                options={{
-                    title: 'profile'
-                }}
-            />
+            {
+                routes.map((route: any) => (
+                    <Tab.Screen
+                        key={route.id}
+                        name={route.name}
+                        component={route.component}
+                        options={{
+                            title: route.title
+                        }}
+                    />
+                ))
+            }
         </Tab.Navigator>
     );
 }

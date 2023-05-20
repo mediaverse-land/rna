@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LayoutChangeEvent } from "react-native";
+import { LayoutChangeEvent } from 'react-native';
 import { InputComponent } from './style';
 import { theme } from '../../../constaints/theme';
 import { windowSize } from '../../../utils/window-size';

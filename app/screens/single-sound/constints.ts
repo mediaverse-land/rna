@@ -1,7 +1,0 @@
-export const singleSoundPageConstaints = {
-    profileImageUri:
-        'https://s3-alpha-sig.figma.com/img/83d0/3fda/aeafecb9ecec22665790cbb050be9328?Expires=1684108800&Signature=AGJCpfMXnRfkhYw0qX-hP7NyFwmFhfLByi9jPzi0~koadvM~lzSmeLA2QASUHcY~jHYd5-wIUkh-QJ9CRV7NizbVErAXuN2O49Y2Odk0bycIRTLSZywue19oEEw3nK906u7EsTx-iq~l0d8hlFjePFM86Zcf791ZQi7hfC-WPa-lZ5q5bDvziGBRTFGXmcAaSYk2e-PJwFrwIYBh8BID72fnabCCf8b5JDq5Dp4Xn7aY2j6Pe8K2zjYicExiwBoTYxJ0JVOg0yrBmFV4w~xf813wj6CfKIgTEj0zv2fQOk7IeEP6rlAPbMVvF7XF29xMGfHDjXk6HAw0~EoSQj81Kg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',
-    username: 'Julia Rabert',
-    title: 'Barcelona messi',
-    contentText: `this is a clip from best moments of messi playing football in 2022 worldcup!!!Following the vibrant trends may be fun, but sometimes all you want is some simplicity and calmness. Let the classics make your design shine with this Photoshop actioFollowing the vibrant trends may be fun, but sometimes all you want is some simplicity and calmness. Let the classics make your design shine with this Photoshop actioFollowing the vibrant trends may be fun, but sometimes all you want is some simplicity and calmness. Let the classics make your design shine with this Photoshop actioFollowing the vibrant trends may be fun, but sometimes all you want is some simplicity and calmness. Let the classics make your design shine with this Photoshop actio #action #crime #thriller`
-};

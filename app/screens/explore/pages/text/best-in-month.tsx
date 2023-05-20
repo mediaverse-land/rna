@@ -1,10 +1,10 @@
-import { FlatList, Text, View } from 'react-native';
-import { ICON_TEXT_WHITE } from '../../../../constaints/icons';
+import { FlatList } from 'react-native';
 import { Title } from '../../../../shared/components/title';
 import { TEXT_SLIDER_ITEM_GRADIENT } from '../../../../constaints/images';
 import { UserNameCard } from '../../../../shared/components/username-card';
 import { ImagesPageComponents } from '../all/style';
 import { topTenTextsMockData } from '../all/mock-data/top-ten-texts';
+import { Box } from '../../../../shared/components/box';
 
 const {
     TextSliderWrapper,
@@ -25,7 +25,7 @@ export function ImagePageBestInMonth() {
                 <TextSlideBody activeOpacity={1}>
                     <TextSlideTitle>{item.title}</TextSlideTitle>
                     <TextSlideContentText>{item.content}</TextSlideContentText>
-                    <View style={{ marginTop: 16 }}>
+                    <Box marginTop={16}>
                         <UserNameCard
                             username={item.username}
                             profileUri={item.profileUri}
@@ -34,14 +34,14 @@ export function ImagePageBestInMonth() {
                                 marginLeft: 8
                             }}
                         />
-                    </View>
+                    </Box>
                 </TextSlideBody>
             </TextSlide>
         );
     };
 
     return (
-        <View style={{ flex: 1, paddingLeft: 24 }}>
+        <Box flex={1} paddingLeft={24}>
             <Title str="Best in month" />
             <TextSliderWrapper>
                 <FlatList
@@ -50,6 +50,6 @@ export function ImagePageBestInMonth() {
                     renderItem={renderItem}
                 />
             </TextSliderWrapper>
-        </View>
+        </Box>
     );
 }

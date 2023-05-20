@@ -1,8 +1,7 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ImagesPageComponents } from '../all/style';
-import { SearchBar } from '../../../../layout/search-bar';
-import { NavigationHeader } from '../../components/navigation-header';
+// import { NavigationHeader } from '../../components/navigation-header';
 import { SoundsPageBestInMonth } from './best-in-moth';
 import { SoundsPageChillSongs } from './chil-songs';
 import { SoundsPageBestProducts } from './best-products';
@@ -18,7 +17,7 @@ export function SoundsPage({ route, navigation }: any) {
             start={linearGradient}
         >
             {/* <SearchBar style={FixedStyles} /> */}
-            <NavigationHeader navigation={navigation} route={route} />
+            {/* <NavigationHeader navigation={navigation} route={route} /> */}
             <ScrollView style={[FixedStyles, styles.scrollView]}>
                 <SoundsPageBestInMonth />
                 <SoundsPageMusicPlayer />

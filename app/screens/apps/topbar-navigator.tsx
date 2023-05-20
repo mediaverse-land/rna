@@ -1,60 +1,48 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { ImagesPage } from './pages/images';
-import { VideosPage } from './pages/videos';
-import { SoundsPage } from './pages/sounds';
-import { TextsPage } from './pages/text';
-import { AllPage } from './pages/all';
 import TopTabBar from '../../shared/components/top-tab-bar';
+import { AppsPageAllScreen } from './all';
 import { Box } from '../../shared/components/box';
 
-type RoutesType = {
-    AllPage: undefined,
-    ImagesPage: undefined,
-    VideosPage: undefined,
-    SoundsPage: undefined,
-    TextsPage: undefined
-}
+const Tab = createMaterialTopTabNavigator();
 
 const routes = [
     {
         id: 1,
-        name: 'AllPage',
         title: 'All',
-        component: AllPage
-    },
-    {
-        id: 2,
-        name: 'ImagesPage',
-        title: 'image',
-        component: ImagesPage
+        component: AppsPageAllScreen,
+        name: 'all'
     },
     {
         id: 3,
-        name: 'VideosPage',
-        title: 'video',
-        component: VideosPage
+        title: 'image',
+        component: AppsPageAllScreen,
+        name: 'image'
     },
     {
         id: 4,
-        name: 'SoundsPage',
-        title: 'sound',
-        component: SoundsPage
+        title: 'video',
+        component: AppsPageAllScreen,
+        name: 'video'
     },
     {
         id: 5,
-        name: 'TextsPage',
+        title: 'sound',
+        component: AppsPageAllScreen,
+        name: 'sound'
+    },
+    {
+        id: 6,
         title: 'text',
-        component: TextsPage
+        component: AppsPageAllScreen,
+        name: 'text'
     },
 ]
-
-const Tab = createMaterialTopTabNavigator<RoutesType>();
 
 export function Navigator() {
     return (
         <Box width={'100%'} flex={1}>
             <Tab.Navigator tabBar={(props) => <TopTabBar {...props} />}>
-                {routes.map((route: any) => (
+                {routes.map((route) => (
                     <Tab.Screen
                         key={route.id}
                         name={route.name}
@@ -66,6 +54,5 @@ export function Navigator() {
                 ))
                 }
             </Tab.Navigator>
-        </Box>
-    );
+        </Box>);
 }

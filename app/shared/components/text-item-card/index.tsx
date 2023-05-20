@@ -1,5 +1,7 @@
 import { Image, View } from 'react-native';
 import { TextCardItemComponents } from './style';
+import { Box } from '../box';
+import { Flex } from '../../../styles/grid';
 
 type Props = {
     title: string;
@@ -25,27 +27,31 @@ export function TextItemCard({
                     }}
                 />
             </TextCardItemComponents.CoverBox>
-            <View style={{ justifyContent: 'center', paddingLeft: 8 }}>
-                <TextCardItemComponents.Title>
-                    {title}
-                </TextCardItemComponents.Title>
-                <TextCardItemComponents.Description>
-                    {description}
-                </TextCardItemComponents.Description>
-                <TextCardItemComponents.UserInfoBox>
-                    <Image
-                        source={{ uri: userAvatarPath }}
-                        style={{
-                            width: 20,
-                            height: 20,
-                            borderRadius: 50
-                        }}
-                    />
-                    <TextCardItemComponents.UserName>
-                        {userName}
-                    </TextCardItemComponents.UserName>
-                </TextCardItemComponents.UserInfoBox>
-            </View>
+            <Box paddingLeft={8}>
+                <Flex justify='center'>
+
+                    <TextCardItemComponents.Title>
+                        {title}
+                    </TextCardItemComponents.Title>
+                    <TextCardItemComponents.Description>
+                        {description}
+                    </TextCardItemComponents.Description>
+                    <TextCardItemComponents.UserInfoBox>
+                        <Image
+                            source={{ uri: userAvatarPath }}
+                            style={{
+                                width: 20,
+                                height: 20,
+                                borderRadius: 50
+                            }}
+                        />
+                        <TextCardItemComponents.UserName>
+                            {userName}
+                        </TextCardItemComponents.UserName>
+                    </TextCardItemComponents.UserInfoBox>
+                </Flex>
+
+            </Box>
         </TextCardItemComponents.Container>
     );
 }

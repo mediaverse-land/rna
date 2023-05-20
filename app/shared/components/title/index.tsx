@@ -9,10 +9,6 @@ type Props = {
 };
 
 export function Title({ str, iconPath }: Props) {
-    const iconStyle = {
-        width: 16,
-        height: 16
-    };
 
     return (
         <TitleComponent>

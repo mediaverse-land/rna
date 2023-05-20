@@ -31,7 +31,7 @@ interface FlexStyleProps {
         | 'space-around'
         | 'flex-start'
         | 'flex-end';
-    direction?: 'row' | 'column';
+    direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
     align?: 'center' | 'flex-start' | 'flex-end';
     height?: string;
     width?: string;

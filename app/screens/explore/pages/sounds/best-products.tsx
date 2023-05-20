@@ -1,25 +1,19 @@
-import { StyleSheet, View } from 'react-native';
 import { HorizontalSlider } from '../../../../shared/components/horizontal-slider';
 import { Title } from '../../../../shared/components/title';
 import { PaddingContainer } from '../../../../styles/grid';
 import { soundsMockData } from './sound-mock-data';
+import { Box } from '../../../../shared/components/box';
 
-const styles = StyleSheet.create({
-    container: {
-        marginTop: 49
-    },
-    sliderWrapper: {
-        marginTop: 40
-    }
-});
 
 export function SoundsPageBestProducts() {
     return (
-        <PaddingContainer style={styles.container}>
-            <Title str="Best Podcasts" />
-            <View style={styles.sliderWrapper}>
-                <HorizontalSlider data={soundsMockData} />
-            </View>
-        </PaddingContainer>
+        <Box marginTop={49} >
+            <PaddingContainer>
+                <Title str="Best Podcasts" />
+                <Box marginTop={40}>
+                    <HorizontalSlider data={soundsMockData} />
+                </Box>
+            </PaddingContainer>
+        </Box>
     );
 }

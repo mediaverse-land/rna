@@ -1,6 +1,7 @@
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { MasonryComponents } from './style';
-import { Flex, PaddingContainer } from '../../../styles/grid';
+import { Flex } from '../../../styles/grid';
+import { Box } from '../box';
 
 type ImageType = { id: number; width: number; height: number; path: string };
 
@@ -35,13 +36,11 @@ export function Masonry({ data }: Props) {
                 );
 
                 return (
-                    <View
-                        style={{
-                            flexDirection: direction,
-                            justifyContent: 'space-between'
-                        }}
+                    <Flex
+                        justify='space-between'
+                        direction={direction}
                     >
-                        <View style={styles.oneInOneSingleImageWrapper}>
+                        <Box marginBottom={8} width='32%'>
                             {oneInOneImages.map(
                                 (
                                     _oneInOneItem: ImageType,
@@ -59,8 +58,8 @@ export function Masonry({ data }: Props) {
                                     />
                                 )
                             )}
-                        </View>
-                        <View style={{ width: '66%' }}>
+                        </Box>
+                        <Box width='66%'>
                             <Image
                                 source={{ uri: twoInTwoImage.path }}
                                 style={{
@@ -69,35 +68,36 @@ export function Masonry({ data }: Props) {
                                     borderRadius: 8
                                 }}
                             />
-                        </View>
-                    </View>
+                        </Box>
+                    </Flex>
                 );
             }
 
             // If all images sizes are 1*1
             return (
                 <MasonryRow key={index}>
-                    <Flex
-                        direction="row"
-                        height="109px"
-                        justify="space-between"
-                        align="center"
-                        style={{ marginBottom: 8 }}
-                    >
-                        {list.row.map((r: ImageType) => {
-                            return (
-                                <Image
-                                    key={r.id}
-                                    style={{
-                                        width: '32%',
-                                        height: 109,
-                                        borderRadius: 8
-                                    }}
-                                    source={{ uri: r.path }}
-                                />
-                            );
-                        })}
-                    </Flex>
+                    <Box marginBottom={8} paddingRight={8}>
+                        <Flex
+                            direction="row"
+                            height="109px"
+                            justify="space-between"
+                            align="center"
+                        >
+                            {list.row.map((r: ImageType) => {
+                                return (
+                                    <Image
+                                        key={r.id}
+                                        style={{
+                                            width: '32%',
+                                            height: 109,
+                                            borderRadius: 8
+                                        }}
+                                        source={{ uri: r.path }}
+                                    />
+                                );
+                            })}
+                        </Flex>
+                    </Box>
                 </MasonryRow>
             );
         }
@@ -112,8 +112,4 @@ const styles = StyleSheet.create({
         height: 109,
         borderRadius: 8
     },
-    oneInOneSingleImageWrapper: {
-        width: '32%',
-        marginBottom: 8
-    }
 });

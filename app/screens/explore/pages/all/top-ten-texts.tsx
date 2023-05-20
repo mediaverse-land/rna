@@ -1,10 +1,12 @@
 import { FlatList, View } from 'react-native';
-import { SVG_ICON } from '../../../../constaints/icons';
 import { Title } from '../../../../shared/components/title';
 import { ImagesPageComponents } from './style';
 import { TEXT_SLIDER_ITEM_GRADIENT } from '../../../../constaints/images';
 import { topTenTextsMockData } from './mock-data/top-ten-texts';
 import { UserNameCard } from '../../../../shared/components/username-card';
+import { Box } from '../../../../shared/components/box';
+import { Flex } from '../../../../styles/grid';
+import { SVG_ICON } from '../../../../constaints/icons';
 
 const {
     TextSliderWrapper,
@@ -25,7 +27,7 @@ export function AllPageTopTenText() {
                 <TextSlideBody activeOpacity={1}>
                     <TextSlideTitle>{item.title}</TextSlideTitle>
                     <TextSlideContentText>{item.content}</TextSlideContentText>
-                    <View style={{ marginTop: 16 }}>
+                    <Box marginTop={16}>
                         <UserNameCard
                             username={item.username}
                             profileUri={item.profileUri}
@@ -34,22 +36,22 @@ export function AllPageTopTenText() {
                                 marginLeft: 8
                             }}
                         />
-                    </View>
+                    </Box>
                 </TextSlideBody>
             </TextSlide>
         );
     };
 
     return (
-        <View style={{ flex: 1, marginTop: 40, paddingLeft: 24 }}>
-            <View style={{ flexDirection: 'row' }}>
+        <Box marginTop={40} paddingLeft={24} flex={1}>
+            <Flex direction='row'>
                 <SVG_ICON
                     width={16}
                     height={16}
                     style={{ marginRight: 8, marginTop: 3 }}
                 />
                 <Title str="Top 10 texts" />
-            </View>
+            </Flex>
             <TextSliderWrapper>
                 <FlatList
                     horizontal
@@ -57,6 +59,6 @@ export function AllPageTopTenText() {
                     renderItem={renderItem}
                 />
             </TextSliderWrapper>
-        </View>
+        </Box>
     );
 }

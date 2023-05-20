@@ -19,6 +19,7 @@ import ICON_SOUND_PNG from './../../../../assets/icons/icon__sound.png';
 import ICON_SOUND_ACTIVE_PNG from './../../../../assets/icons/icon__sound-option-active.png';
 import ICON_IMAGE_PNG from './../../../../assets/icons/icon__img.png';
 import ICON_IMAGE_ACTIVE_PNG from './../../../../assets/icons/icon__image-option-active.png';
+import { Box } from '../../../shared/components/box';
 
 const ICON_TEXT = imageUriResolver(ICON_TEXT_PNG);
 const ICON_TEXT_ACTIVE = imageUriResolver(ICON_TEXT_ACTIVE_PNG);
@@ -83,17 +84,17 @@ export function CreateContentAssets() {
                 <TitleText>Insert your asset submit.</TitleText>
             </Flex>
 
-            <View style={{ marginTop: 32 }}>
+            <Box marginTop={32}>
                 <Input
                     labelInSeperateLine={false}
                     labelText="Asset name:"
                     placeholder="asset name..."
                 />
-            </View>
+            </Box>
 
-            <View style={{ marginTop: 16 }}>
+            <Box marginTop={16} >
                 <DatePicker />
-            </View>
+            </Box>
 
             <View style={{ marginTop: 16 }}>
                 <TimePicker />

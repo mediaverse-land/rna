@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { HorizontalSliderComponents } from './style';
 import { UserNameCard } from '../username-card';
 import { HORIZONTAL_SLIDER_GRADIENT } from '../../../constaints/images';
@@ -8,6 +8,7 @@ import {
     ICON_TOP_TABBAR_TEXT_SVG,
     ICON_TOP_TABBAR_VIDEO_SVG
 } from '../../../constaints/icons';
+import { Box } from '../box';
 
 type Props = {
     slidePressRedirectHandler: (id: number) => void;
@@ -35,16 +36,18 @@ export function HorizontalSlide({
 
     return (
         <Slide onPress={() => slidePressRedirectHandler(id)} activeOpacity={1}>
-            <View>
+            <Box>
                 <SlideThumbnail source={{ uri: thumbnailPath }} />
                 <SliderThumbnailGradient
                     source={{ uri: HORIZONTAL_SLIDER_GRADIENT }}
                 />
-            </View>
-            <View>
+            </Box>
+            <Box>
                 <SlideTitle>{title}</SlideTitle>
-            </View>
-            <View style={{ marginTop: 8 }}>
+            </Box>
+            <Box
+                marginTop={8}
+            >
                 <UserNameCard
                     username={username}
                     profileUri={profileUri}
@@ -53,7 +56,7 @@ export function HorizontalSlide({
                     profileImageStyles={{ marginRight: 8 }}
                     usernameStyles={{ color: '#666680', fontSize: 12 }}
                 />
-            </View>
+            </Box>
             {icon ? icon : null}
         </Slide>
     );
