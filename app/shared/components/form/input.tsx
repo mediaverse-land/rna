@@ -1,58 +1,54 @@
-import { useState } from 'react';
-import { LayoutChangeEvent } from 'react-native';
+import { Box } from '../box';
 import { InputComponent } from './style';
+import { Text } from '../text';
 import { theme } from '../../../constaints/theme';
-import { windowSize } from '../../../utils/window-size';
+import { LayoutChangeEvent } from 'react-native';
+import { useState } from 'react';
 
-const { FormGroup, Label, InputBox } = InputComponent;
+const { InputBox, Label } = InputComponent
 
 type Props = {
     labelText: string;
     placeholder?: string;
-    labelInSeperateLine: boolean;
 };
-
-const windowWidth = windowSize().width;
 
 export function Input({
     labelText,
-    labelInSeperateLine = false,
     placeholder
 }: Props) {
     const [labelWidth, setLabelWidth] = useState<number>(0);
 
-    // 63 = (24 +24 => padding of <PaddingContainer></PaddingContainer> + 15 =>(marginRight of label))
-    const inputWidth = labelInSeperateLine
-        ? '100%'
-        : Math.floor(windowWidth) - (63 + labelWidth);
-
-    function ditectLabelWidthHandler(width: number) {
-        setLabelWidth(width);
-    }
-
     return (
-        <FormGroup
-            style={{
-                flexDirection: labelInSeperateLine ? 'column' : 'row',
-                alignItems: 'center'
-            }}
+        <Box
+            width='100%'
         >
-            <Label
-                style={{
-                    marginRight: 15
-                }}
-                onLayout={(event: LayoutChangeEvent) => {
-                    const { width } = event.nativeEvent.layout;
-                    ditectLabelWidthHandler(width);
-                }}
-            >
-                {labelText}
+            <Label onLayout={(e: LayoutChangeEvent) => {
+                const { width } = e.nativeEvent.layout
+                setLabelWidth(Math.floor(width))
+            }}>
+                <Box
+                    height='100%'
+                    additionalStyles={{
+                        borderRightWidth: 1,
+                        borderRightColor: '#fff'
+                    }}
+                >
+                    <Text
+                        fontSize={14}
+                        lineHeight={theme.numericLineHeight.md}
+                        color='#666680'
+                        paddingRight={16}
+                    >{labelText}</Text>
+                </Box>
             </Label>
             <InputBox
                 placeholder={placeholder}
-                placeholderTextColor={theme.color.light.GRAY}
-                style={{ width: inputWidth }}
+                placeholderTextColor="#353542"
+                style={{
+                    paddingLeft: labelWidth
+                }}
             />
-        </FormGroup>
-    );
+        </Box>
+    )
 }
+

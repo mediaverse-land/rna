@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { ViewComponent } from './style';
+import { LayoutChangeEvent, ViewStyle } from 'react-native';
 
 type Props = {
     children: ReactNode;
@@ -24,20 +25,27 @@ type Props = {
     zIndex?: number;
     backgroundColor?: string;
     borderRadius?: number;
-    borderTopEndRadius?: number,
-    borderTopStartRadius?: number,
-    borderTopRightRadius?: number,
-    borderTopLeftRadius?: number,
+    borderTopEndRadius?: number;
+    borderTopStartRadius?: number;
+    borderTopRightRadius?: number;
+    borderTopLeftRadius?: number;
 
-    borderBottomEndRadius?: number,
-    borderBottomStartRadius?: number,
-    borderBottomRightRadius?: number,
-    borderBottomLeftRadius?: number,
+    borderBottomEndRadius?: number;
+    borderBottomStartRadius?: number;
+    borderBottomRightRadius?: number;
+    borderBottomLeftRadius?: number;
 
     borderColor?: string;
 
     alignItems?: 'center' | 'flex-start' | 'flex-end';
-    justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
+    justifyContent?:
+    | 'center'
+    | 'flex-start'
+    | 'flex-end'
+    | 'space-between'
+    | 'space-around';
+    additionalStyles?: ViewStyle,
+    onlayout?: LayoutChangeEvent
 };
 
 export function Box({
@@ -75,7 +83,9 @@ export function Box({
     borderBottomLeftRadius,
     borderColor,
     alignItems,
-    justifyContent
+    justifyContent,
+    additionalStyles,
+    onlayout
 }: Props) {
     const styles = [
         width && { width },
@@ -109,14 +119,15 @@ export function Box({
         borderBottomLeftRadius && { borderBottomLeftRadius },
         backgroundColor && { backgroundColor },
         alignItems && { alignItems },
-        justifyContent && { justifyContent },
+        justifyContent && { justifyContent }
     ];
 
     return (
         <ViewComponent
-            style={styles}
+            style={[...styles, additionalStyles]}
             hasBlackBorder={hasBlackBorder}
             borderColor={borderColor}
+            onLayout={onlayout}
         >
             {children}
         </ViewComponent>

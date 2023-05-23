@@ -1,5 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { IndexMenu } from './pages/index-menu';
+import { AccountPage } from './pages/account';
+import { GeneralInformationPage } from './pages/account/general-information';
+import { SignInsPage } from './pages/account/singins';
+import { SessionsPage } from './pages/account/seassions';
 
 const Stack = createStackNavigator();
 
@@ -13,7 +17,7 @@ const routes = [
     {
         id: 9,
         title: 'Account',
-        component: IndexMenu,
+        component: AccountPage,
         name: 'account'
     },
     {
@@ -43,23 +47,22 @@ const routes = [
     {
         id: 6,
         title: 'General information',
-        component: IndexMenu,
-        name: 'general information'
+        component: GeneralInformationPage,
+        name: 'general_information'
     },
     {
         id: 7,
-        title: 'Signins',
-        component: IndexMenu,
-        name: 'signins'
+        title: 'Sign ins',
+        component: SignInsPage,
+        name: 'sign_ins'
     },
     {
         id: 8,
         title: 'Seassions',
-        component: IndexMenu,
+        component: SessionsPage,
         name: 'seassions'
     }
 ];
-
 
 export function SettingsStack() {
     return (
@@ -76,5 +79,5 @@ export function SettingsStack() {
                 />
             ))}
         </Stack.Navigator>
-    )
+    );
 }

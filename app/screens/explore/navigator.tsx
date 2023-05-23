@@ -53,8 +53,7 @@ const Tab = createMaterialTopTabNavigator<RoutesType>();
 export function Navigator() {
     return (
         <Box width={'100%'} flex={1}>
-            <Tab.Navigator
-                tabBar={(props) => <TopTabBar {...props} />}>
+            <Tab.Navigator tabBar={(props) => <TopTabBar {...props} />}>
                 {routes.map((route: any) => (
                     <Tab.Screen
                         key={route.id}

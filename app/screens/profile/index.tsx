@@ -1,7 +1,7 @@
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ProfileScreenHead } from "./components/head";
-import { Navigator } from "./topbar-navigator";
-import { ScreenGradient } from "../../shared/components/screen-gradient";
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ProfileScreenHead } from './components/head';
+import { Navigator } from './topbar-navigator';
+import { ScreenGradient } from '../../shared/components/screen-gradient';
 
 export function ProfileScreen() {
     return (
@@ -11,5 +11,5 @@ export function ProfileScreen() {
                 <Navigator />
             </ScreenGradient>
         </SafeAreaView>
-    )
+    );
 }

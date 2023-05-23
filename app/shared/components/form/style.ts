@@ -12,9 +12,10 @@ export const InputComponent: any = {
         border-radius: 8px;
     `,
     Label: styled.Text`
-        color: ${theme.color.light.GRAY};
-        font-size: ${theme.fontSize.md};
-        line-height: 19.77px;
+        height: 48px;
+        padding: 16px;
+        position: absolute;
+        left: 0;
     `,
     FlatLabel: styled.Text`
         width: 52px;
@@ -30,15 +31,14 @@ export const InputComponent: any = {
         color: ${theme.color.light.GRAY};
     `,
     InputBox: styled.TextInput`
-        height: 56px;
-        background-color: ${(props: { flat: boolean }) =>
-            props.flat
-                ? theme.color.light.TRANSPARENT
-                : theme.color.light.WHITE_BG};
-        padding: 0 18px;
+        width: 100%;
+        height: 48px;
         border-radius: 8px;
-        color: ${theme.color.light.HEADING};
+        border: 1px solid #666680;
+        background-color: rgba(14, 14, 18, 0.5);
+        color: #fff;
         font-size: ${theme.fontSize.md};
+        line-height: ${theme.lineHeight.md};
     `,
     datePiclerIconStyles: {
         width: 22,

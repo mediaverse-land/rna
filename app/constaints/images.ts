@@ -75,3 +75,8 @@ export const MUSIC_PLAYER_STOP_BUTTON_GRADIENT = imageUriResolver(
 );
 
 export const TOPBAR_BACKGROUND = imageUriResolver(TOPBAR_BACKGROUND_PNG);
+
+import SIGNINS_LIST_ITEM_GRADIET_PATH from './../../assets/img/signin-list/signins-list-gradient.png';
+export const SIGNINS_LIST_ITEM_GRADIET = imageUriResolver(
+    SIGNINS_LIST_ITEM_GRADIET_PATH
+);

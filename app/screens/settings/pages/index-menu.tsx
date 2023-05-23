@@ -3,10 +3,7 @@ import { Box } from '../../../shared/components/box';
 import { SettingsScreenHeader } from '../components/header';
 import { ScreenGradient } from '../../../shared/components/screen-gradient';
 import { PaddingContainer } from '../../../styles/grid';
-import {
-    ListColumn,
-    ListItem
-} from '../components/list';
+import { ListColumn, ListColumnItem } from '../components/list';
 import {
     ICON_ANALYTICS,
     ICON_MAIL,
@@ -14,14 +11,18 @@ import {
     ICON_USER
 } from '../../../constaints/icons';
 
-const listOneRows: ListItem[] = [
+const listOneRows: ListColumnItem[] = [
     {
         id: 1,
         title: 'Account',
         value: 'Ma.nakhli',
         bage: null,
         icon: ICON_USER,
-        routePath: 'account'
+        routePath: 'account',
+        iconStyle: {
+            width: 14.4,
+            height: 18
+        }
     },
     {
         id: 2,
@@ -29,7 +30,11 @@ const listOneRows: ListItem[] = [
         value: null,
         bage: 2,
         icon: ICON_MAIL,
-        routePath: 'massage'
+        routePath: 'massage',
+        iconStyle: {
+            width: 18,
+            height: 14.4
+        }
     },
     {
         id: 3,
@@ -37,25 +42,36 @@ const listOneRows: ListItem[] = [
         value: '200 $',
         bage: null,
         icon: ICON_MAIL,
-        routePath: 'wallet'
-    },
-]
+        routePath: 'wallet',
+        iconStyle: {
+            width: 18,
+            height: 14.4
+        }
+    }
+];
 
-const listTwoRows: ListItem[] = [
+const listTwoRows: ListColumnItem[] = [
     {
         id: 1,
         title: 'Analytics',
         icon: ICON_ANALYTICS,
-        routePath: 'analytics'
+        routePath: 'analytics',
+        iconStyle: {
+            width: 17.1,
+            height: 18
+        }
     },
     {
         id: 2,
         title: 'Share account',
         icon: ICON_SHARE,
-        routePath: 'share account'
-    },
-]
-
+        routePath: 'share account',
+        iconStyle: {
+            width: 18,
+            height: 18
+        }
+    }
+];
 
 export function IndexMenu() {
     return (
@@ -72,6 +88,5 @@ export function IndexMenu() {
                 </PaddingContainer>
             </ScreenGradient>
         </SafeAreaView>
-    )
+    );
 }
-

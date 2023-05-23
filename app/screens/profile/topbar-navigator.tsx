@@ -44,7 +44,7 @@ export function Navigator() {
             <Tab.Navigator
                 tabBar={(props) => <TopTabBar isProfilePage {...props} />}
                 style={{
-                    top: 4,
+                    top: 4
                 }}
             >
                 {routes.map((route) => (

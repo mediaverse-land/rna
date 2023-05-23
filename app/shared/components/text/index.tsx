@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Text as ReactNativeText } from 'react-native';
+import { Text as ReactNativeText, RegisteredStyle, TextStyle } from 'react-native';
 
 type Props = {
     children: ReactNode;
@@ -15,6 +15,7 @@ type Props = {
     paddingLeft?: number;
     paddingRight?: number;
     fontWeight?: any;
+    textStyles?: TextStyle
 };
 
 export function Text({
@@ -30,21 +31,39 @@ export function Text({
     paddingBottom,
     paddingLeft,
     paddingRight,
-    fontWeight
+    fontWeight,
+    textStyles
 }: Props) {
-    const styles = [
-        fontSize && { fontSize },
-        lineHeight && { lineHeight },
-        color && { color },
-        marginTop && { marginTop },
-        marginBottom && { marginBottom },
-        marginLeft && { marginLeft },
-        marginRight && { marginRight },
-        paddingTop && { paddingTop },
-        paddingBottom && { paddingBottom },
-        paddingLeft && { paddingLeft },
-        paddingRight && { paddingRight },
-        fontWeight && { fontWeight }
-    ];
-    return <ReactNativeText style={[...styles]}>{children}</ReactNativeText>;
+    let defaultStyles = [];
+
+    function addDefinedStyles() {
+        const styles = [
+            { fontSize },
+            { lineHeight },
+            { color },
+            { marginTop },
+            { marginBottom },
+            { marginLeft },
+            { marginRight },
+            { paddingTop },
+            { paddingBottom },
+            { paddingLeft },
+            { paddingRight },
+            { fontWeight }
+        ];
+
+        let newStyles: Record<string, string | number>[] = []
+
+        for (const item of styles) {
+            if (typeof Object.values(item)[0] !== 'undefined') {
+                newStyles = [...newStyles, item]
+            }
+        }
+
+        return newStyles;
+    }
+
+    defaultStyles = addDefinedStyles();
+
+    return <ReactNativeText style={[...defaultStyles, textStyles]}>{children}</ReactNativeText>;
 }

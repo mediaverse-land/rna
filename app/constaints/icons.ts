@@ -170,8 +170,10 @@ import ICON_SHARE_PATH from './../../assets/icons/icon__share.svg';
 import ICON_ANALYTICS_PATH from './../../assets/icons/icon__analyzis.svg';
 import ICON_MAIL_PATH from './../../assets/icons/icon__email.svg';
 import ICON_USER_PATH from './../../assets/icons/icon__user-svg.svg';
+import ICON_ARROW_RIGHT_PATH from './../../assets/icons/icon__arrow-right.svg';
 
 export const ICON_SHARE = ICON_SHARE_PATH;
 export const ICON_ANALYTICS = ICON_ANALYTICS_PATH;
 export const ICON_MAIL = ICON_MAIL_PATH;
 export const ICON_USER = ICON_USER_PATH;
+export const ICON_ARROW_RIGHT = ICON_ARROW_RIGHT_PATH;
