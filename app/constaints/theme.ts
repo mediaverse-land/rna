@@ -23,9 +23,16 @@ export const theme = {
         md: '16px',
         sm: '14px'
     },
+    numericFontSize: {
+        md: 16,
+        sm: 12
+    },
     lineHeight: {
         conten: '25.69px',
         itemCard: '17.3px',
         md: '16px'
+    },
+    numericLineHeight: {
+        md: 16
     }
 };

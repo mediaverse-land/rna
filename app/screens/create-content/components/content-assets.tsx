@@ -92,7 +92,7 @@ export function CreateContentAssets() {
                 />
             </Box>
 
-            <Box marginTop={16} >
+            <Box marginTop={16}>
                 <DatePicker />
             </Box>
 

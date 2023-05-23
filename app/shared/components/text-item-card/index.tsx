@@ -28,8 +28,7 @@ export function TextItemCard({
                 />
             </TextCardItemComponents.CoverBox>
             <Box paddingLeft={8}>
-                <Flex justify='center'>
-
+                <Flex justify="center">
                     <TextCardItemComponents.Title>
                         {title}
                     </TextCardItemComponents.Title>
@@ -50,7 +49,6 @@ export function TextItemCard({
                         </TextCardItemComponents.UserName>
                     </TextCardItemComponents.UserInfoBox>
                 </Flex>
-
             </Box>
         </TextCardItemComponents.Container>
     );

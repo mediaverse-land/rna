@@ -45,9 +45,7 @@ export function HorizontalSlide({
             <Box>
                 <SlideTitle>{title}</SlideTitle>
             </Box>
-            <Box
-                marginTop={8}
-            >
+            <Box marginTop={8}>
                 <UserNameCard
                     username={username}
                     profileUri={profileUri}

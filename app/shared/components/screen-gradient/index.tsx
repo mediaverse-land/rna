@@ -1,6 +1,6 @@
-import { LinearGradient } from "expo-linear-gradient";
-import { ReactNode } from "react";
-import { stickyStyles } from "../../../styles/sticky";
+import { LinearGradient } from 'expo-linear-gradient';
+import { ReactNode } from 'react';
+import { stickyStyles } from '../../../styles/sticky';
 
 export function ScreenGradient({ children }: { children: ReactNode }) {
     return (
@@ -11,5 +11,5 @@ export function ScreenGradient({ children }: { children: ReactNode }) {
         >
             {children}
         </LinearGradient>
-    )
+    );
 }

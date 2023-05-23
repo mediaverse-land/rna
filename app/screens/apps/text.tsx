@@ -1,6 +1,6 @@
-import { ScrollView } from "react-native";
-import { stickyStyles } from "../../styles/sticky";
-import { ScreenGradient } from "../../shared/components/screen-gradient";
+import { ScrollView } from 'react-native';
+import { stickyStyles } from '../../styles/sticky';
+import { ScreenGradient } from '../../shared/components/screen-gradient';
 
 export function AppsPageTextScreen() {
     return (
@@ -10,8 +10,7 @@ export function AppsPageTextScreen() {
                     stickyStyles.fixed,
                     { backgroundColor: 'transparent', paddingTop: 196 }
                 ]}
-            >
-            </ScrollView>
+            ></ScrollView>
         </ScreenGradient>
-    )
+    );
 }

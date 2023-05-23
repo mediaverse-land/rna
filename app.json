@@ -1,7 +1,7 @@
 {
     "expo": {
-        "name": "mediavers",
-        "slug": "mediavers",
+        "name": "mediaverse",
+        "slug": "mediaverse",
         "version": "0.0.1",
         "orientation": "portrait",
         "icon": "./assets/icon.png",
@@ -16,7 +16,7 @@
             "supportsTablet": true
         },
         "android": {
-            "package": "com.smartcity.mediavers",
+            "package": "com.smartcity.mediaverse",
             "adaptiveIcon": {
                 "foregroundImage": "./assets/adaptive-icon.png",
                 "backgroundColor": "#ffffff"

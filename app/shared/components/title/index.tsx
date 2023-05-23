@@ -9,7 +9,6 @@ type Props = {
 };
 
 export function Title({ str, iconPath }: Props) {
-
     return (
         <TitleComponent>
             {iconPath ? (

@@ -52,11 +52,11 @@ export const Flex = styled.View<FlexStyleProps>`
     ${(props) => (props.align ? `align-items: ${props.align}` : null)}};   
     ${(props) => (props.marginTop ? `margin-top: ${props.marginTop}` : null)}};
     ${(props) =>
-        props.marginLeft ? `margin-top: ${props.marginLeft}` : null}};
+        props.marginLeft ? `margin-left: ${props.marginLeft}` : null}};
     ${(props) =>
-        props.marginRight ? `margin-top: ${props.marginRight}` : null}};
+        props.marginRight ? `margin-right: ${props.marginRight}` : null}};
     ${(props) =>
-        props.marginBottom ? `margin-top: ${props.marginBottom}` : null}};
+        props.marginBottom ? `margin-bottom: ${props.marginBottom}` : null}};
 
 `;
 

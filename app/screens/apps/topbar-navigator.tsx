@@ -35,8 +35,8 @@ const routes = [
         title: 'text',
         component: AppsPageAllScreen,
         name: 'text'
-    },
-]
+    }
+];
 
 export function Navigator() {
     return (
@@ -51,8 +51,8 @@ export function Navigator() {
                             title: route.title
                         }}
                     />
-                ))
-                }
+                ))}
             </Tab.Navigator>
-        </Box>);
+        </Box>
+    );
 }

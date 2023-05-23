@@ -44,7 +44,7 @@ export function AllPageTopTenText() {
 
     return (
         <Box marginTop={40} paddingLeft={24} flex={1}>
-            <Flex direction='row'>
+            <Flex direction="row">
                 <SVG_ICON
                     width={16}
                     height={16}

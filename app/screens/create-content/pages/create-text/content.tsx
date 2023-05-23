@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-    View
-} from 'react-native';
+import { View } from 'react-native';
 import { CreateContentNavigationBar } from '../../components/navigation-bar';
 import { PaddingContainer } from '../../../../styles/grid';
 import { CreateTextComponents } from './style';

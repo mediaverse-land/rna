@@ -1,6 +1,6 @@
-import { SafeAreaView } from "react-native-safe-area-context";
-import { SearchBar } from "../../layout/search-bar";
-import { Navigator } from "./topbar-navigator";
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { SearchBar } from '../../layout/search-bar';
+import { Navigator } from './topbar-navigator';
 
 export function AppsStack() {
     return (
@@ -8,5 +8,5 @@ export function AppsStack() {
             <SearchBar />
             <Navigator />
         </SafeAreaView>
-    )
+    );
 }

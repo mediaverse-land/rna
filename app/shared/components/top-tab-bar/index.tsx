@@ -1,5 +1,6 @@
-import { useEffect, useState, ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { ImageStyle } from 'react-native';
+import { Box } from '../box';
 import { TabBarComponents } from './style';
 import {
     ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG,
@@ -11,7 +12,6 @@ import {
     ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG,
     ICON_TOP_TABBAR_VIDEO_SVG
 } from '../../../constaints/icons';
-import { Box } from '../box';
 
 function getTobBarItemsIcon(tobBarItemName: string, isFocused: boolean) {
     let iconPath: ReactElement<SVGElement>;
@@ -57,106 +57,104 @@ function TopTabBar({
     state,
     descriptors,
     navigation,
-    hasFullWidth = false
+    hasFullWidth = false,
+    isProfilePage = false
 }: any) {
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    useEffect(() => {
-        setIsLoaded(true);
-    }, []);
+    const topStyle =
+        isProfilePage ? 8 : (hasFullWidth ? 120 : 104)
 
     return (
-        <>
-            {isLoaded ? (
-                <Box
-                    paddingLeft={hasFullWidth ? 0 : 24}
-                    paddingRight={hasFullWidth ? 0 : 24}
-                    position='absolute'
-                    top={hasFullWidth ? 120 : 104}
-                    zIndex={100}
-                    width='100%'
-                >
-                    <TabBarComponents.TabBar
-                        style={{
-                            flexDirection: 'row',
-                            borderRadius: hasFullWidth ? 0 : 16
-                        }}
-                    >
-                        {state.routes.map((route: any, index: number) => {
-                            const { options } = descriptors[route.key];
+        <Box
+            paddingLeft={hasFullWidth ? 0 : 24}
+            paddingRight={hasFullWidth ? 0 : 24}
+            position="absolute"
+            top={topStyle}
+            zIndex={100}
+            width="100%"
+            backgroundColor='transparent'
+        >
+            <TabBarComponents.TabBar
+                style={{
+                    flexDirection: 'row',
+                    borderRadius: hasFullWidth ? 0 : 16
+                }}
+            >
+                {state.routes.map((route: ReturnType<typeof state.routes[0]>, index: number) => {
+                    const { options } = descriptors[route.key];
 
-                            const label =
-                                options.tabBarLabel !== undefined
-                                    ? options.tabBarLabel
-                                    : options.title !== undefined
-                                        ? options.title
-                                        : route.name;
+                    const label =
+                        options.tabBarLabel !== undefined
+                            ? options.tabBarLabel
+                            : options.title !== undefined
+                                ? options.title
+                                : route.name;
 
-                            const isFocused = state.index === index;
+                    const isFocused = state.index === index;
 
-                            const { iconPath } = getTobBarItemsIcon(options.title, isFocused);
+                    const { iconPath } = getTobBarItemsIcon(
+                        options.title,
+                        isFocused
+                    );
 
-                            const onPress = () => {
-                                const event = navigation.emit({
-                                    type: 'tabPress',
-                                    target: route.key,
-                                    canPreventDefault: true
-                                });
+                    const onPress = () => {
+                        const event = navigation.emit({
+                            type: 'tabPress',
+                            target: route.key,
+                            canPreventDefault: true
+                        });
 
-                                if (!isFocused && !event.defaultPrevented) {
-                                    navigation.navigate({
-                                        name: route.name,
-                                        merge: true
-                                    });
-                                }
-                            };
+                        if (!isFocused && !event.defaultPrevented) {
+                            navigation.navigate({
+                                name: route.name,
+                                merge: true
+                            });
+                        }
+                    };
 
-                            const onLongPress = () => {
-                                navigation.emit({
-                                    type: 'tabLongPress',
-                                    target: route.key
-                                });
-                            };
+                    const onLongPress = () => {
+                        navigation.emit({
+                            type: 'tabLongPress',
+                            target: route.key
+                        });
+                    };
 
-                            return (
-                                <TabBarComponents.Container
-                                    accessibilityRole="button"
-                                    accessibilityState={
-                                        isFocused ? { selected: true } : {}
-                                    }
-                                    accessibilityLabel={
-                                        options.tabBarAccessibilityLabel
-                                    }
-                                    testID={options.tabBarTestID}
-                                    onPress={onPress}
-                                    onLongPress={onLongPress}
-                                    key={index}
-                                    style={{ flex: 1 }}
-                                >
-                                    <TabBarComponents.Wrapper>
-                                        {iconPath ? iconPath : null}
-                                        {label === 'All' ? (
-                                            <TabBarComponents.Label
-                                                style={{
-                                                    color: isFocused
-                                                        ? '#fff'
-                                                        : '#666680'
-                                                }}
-                                            >
-                                                {label}
-                                            </TabBarComponents.Label>
-                                        ) : null}
-                                    </TabBarComponents.Wrapper>
-                                    {isFocused ? (
-                                        <TabBarComponents.SpacerBorder />
-                                    ) : null}
-                                </TabBarComponents.Container>
-                            );
-                        })}
-                    </TabBarComponents.TabBar>
-                </Box>
-            ) : null}
-        </>
+                    return (
+                        <TabBarComponents.Container
+                            accessibilityRole="button"
+                            accessibilityState={
+                                isFocused ? { selected: true } : {}
+                            }
+                            accessibilityLabel={
+                                options.tabBarAccessibilityLabel
+                            }
+                            testID={options.tabBarTestID}
+                            onPress={onPress}
+                            onLongPress={onLongPress}
+                            key={index}
+                            style={{ flex: 1 }}
+                        >
+                            <TabBarComponents.Wrapper>
+                                {iconPath ? iconPath : null}
+                                {label === 'All' ? (
+                                    <TabBarComponents.Label
+                                        style={{
+                                            color: isFocused
+                                                ? '#fff'
+                                                : '#666680'
+                                        }}
+                                    >
+                                        {label}
+                                    </TabBarComponents.Label>
+                                ) : null}
+                            </TabBarComponents.Wrapper>
+                            {isFocused ? (
+                                <TabBarComponents.SpacerBorder />
+                            ) : null}
+                        </TabBarComponents.Container>
+                    );
+                })}
+            </TabBarComponents.TabBar>
+        </Box>
     );
 }
 

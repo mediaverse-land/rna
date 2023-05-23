@@ -8,7 +8,7 @@ import { Flex } from '../../../../styles/grid';
 export function AllPageMostViewed() {
     return (
         <Box marginTop={40} flex={1}>
-            <Flex direction='row' >
+            <Flex direction="row">
                 <ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG
                     width={16}
                     height={16}

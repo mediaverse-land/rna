@@ -36,11 +36,8 @@ export function Masonry({ data }: Props) {
                 );
 
                 return (
-                    <Flex
-                        justify='space-between'
-                        direction={direction}
-                    >
-                        <Box marginBottom={8} width='32%'>
+                    <Flex justify="space-between" direction={direction}>
+                        <Box marginBottom={8} width="32%">
                             {oneInOneImages.map(
                                 (
                                     _oneInOneItem: ImageType,
@@ -59,7 +56,7 @@ export function Masonry({ data }: Props) {
                                 )
                             )}
                         </Box>
-                        <Box width='66%'>
+                        <Box width="66%">
                             <Image
                                 source={{ uri: twoInTwoImage.path }}
                                 style={{
@@ -111,5 +108,5 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 109,
         borderRadius: 8
-    },
+    }
 });

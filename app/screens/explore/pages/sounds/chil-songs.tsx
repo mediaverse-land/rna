@@ -6,7 +6,7 @@ import { Box } from '../../../../shared/components/box';
 
 export function SoundsPageChillSongs() {
     return (
-        <Box marginTop={49} >
+        <Box marginTop={49}>
             <PaddingContainer>
                 <Title str="Chill songs" />
                 <Box marginTop={40}>

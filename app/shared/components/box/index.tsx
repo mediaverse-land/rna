@@ -1,59 +1,82 @@
-import { ReactNode } from 'react'
-import { ViewComponent } from './style'
+import { ReactNode } from 'react';
+import { ViewComponent } from './style';
 
 type Props = {
-    children: ReactNode,
-    marginTop?: number
-    marginBottom?: number
-    marginLeft?: number
-    marginRight?: number
-    paddingTop?: number
-    paddingBottom?: number
-    paddingLeft?: number
-    paddingRight?: number,
-    direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse',
-    flex?: number,
-    width?: number | string
-    height?: number | string,
-    hasBlackBorder?: boolean,
-    position?: 'absolute' | 'relative',
-    top?: number | string,
-    bottom?: number | string,
-    right?: number | string,
-    left?: number | string,
-    zIndex?: number,
-    backgroundColor?: string,
-    borderRadius?: number
-}
+    children: ReactNode;
+    marginTop?: number;
+    marginBottom?: number;
+    marginLeft?: number;
+    marginRight?: number;
+    paddingTop?: number;
+    paddingBottom?: number;
+    paddingLeft?: number;
+    paddingRight?: number;
+    direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
+    flex?: number;
+    width?: number | string;
+    height?: number | string;
+    hasBlackBorder?: boolean;
+    position?: 'absolute' | 'relative';
+    top?: number | string;
+    bottom?: number | string;
+    right?: number | string;
+    left?: number | string;
+    zIndex?: number;
+    backgroundColor?: string;
+    borderRadius?: number;
+    borderTopEndRadius?: number,
+    borderTopStartRadius?: number,
+    borderTopRightRadius?: number,
+    borderTopLeftRadius?: number,
 
-export function Box(
-    {
-        children,
-        marginTop,
-        marginBottom,
-        marginLeft,
-        marginRight,
-        paddingTop,
-        paddingBottom,
-        paddingLeft,
-        paddingRight,
-        direction,
-        flex,
-        width,
-        height,
-        hasBlackBorder = false,
-        position,
-        top,
-        bottom,
-        right,
-        left,
-        zIndex,
-        borderRadius,
-        backgroundColor
-    }
-        : Props
-) {
+    borderBottomEndRadius?: number,
+    borderBottomStartRadius?: number,
+    borderBottomRightRadius?: number,
+    borderBottomLeftRadius?: number,
 
+    borderColor?: string;
+
+    alignItems?: 'center' | 'flex-start' | 'flex-end';
+    justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
+};
+
+export function Box({
+    children,
+    marginTop,
+    marginBottom,
+    marginLeft,
+    marginRight,
+    paddingTop,
+    paddingBottom,
+    paddingLeft,
+    paddingRight,
+    direction,
+    flex,
+    width,
+    height,
+    hasBlackBorder = false,
+    position,
+    top,
+    bottom,
+    right,
+    left,
+    zIndex,
+    borderRadius,
+    backgroundColor,
+
+    borderTopEndRadius,
+    borderTopStartRadius,
+    borderTopRightRadius,
+    borderTopLeftRadius,
+
+    borderBottomEndRadius,
+    borderBottomStartRadius,
+    borderBottomRightRadius,
+    borderBottomLeftRadius,
+    borderColor,
+    alignItems,
+    justifyContent
+}: Props) {
     const styles = [
         width && { width },
         height && { height },
@@ -74,15 +97,28 @@ export function Box(
         left && { left },
         zIndex && { zIndex },
         borderRadius && { borderRadius },
+
+        borderTopEndRadius && { borderTopEndRadius },
+        borderTopStartRadius && { borderTopStartRadius },
+        borderTopRightRadius && borderTopRightRadius,
+        borderTopLeftRadius && borderTopLeftRadius,
+
+        borderBottomEndRadius && { borderBottomEndRadius },
+        borderBottomStartRadius && { borderBottomStartRadius },
+        borderBottomRightRadius && { borderBottomRightRadius },
+        borderBottomLeftRadius && { borderBottomLeftRadius },
         backgroundColor && { backgroundColor },
-    ]
+        alignItems && { alignItems },
+        justifyContent && { justifyContent },
+    ];
 
     return (
         <ViewComponent
             style={styles}
             hasBlackBorder={hasBlackBorder}
+            borderColor={borderColor}
         >
             {children}
         </ViewComponent>
-    )
+    );
 }

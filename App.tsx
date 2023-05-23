@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AppStack } from './app/screens/stack';
 import { SearchPage } from './app/screens/search';
+import { SettingsStack } from './app/screens/settings/stack-navigator';
 
 const Stack = createStackNavigator();
 
@@ -14,9 +15,14 @@ const routes: { id: number; name: string; component: FC }[] = [
         component: AppStack
     },
     {
-        id: 5,
+        id: 2,
         name: 'Search',
         component: SearchPage
+    },
+    {
+        id: 3,
+        name: 'Settings',
+        component: SettingsStack
     }
 ];
 

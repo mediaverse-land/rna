@@ -25,6 +25,12 @@ import PROFILE_ONE_PNG from './../../assets/img/profiles/img-1.png';
 import PROFILE_TWO_PNG from './../../assets/img/profiles/img-2.png';
 import PROFILE_THREE_PNG from './../../assets/img/profiles/img-3.png';
 
+import PROFILE_HEAD_ITEM_GRADIENT_PNG from './../../assets/img/profile/profile-head-item-gradient.png';
+
+export const PROFILE_HEAD_ITEM_GRADIENT = imageUriResolver(
+    PROFILE_HEAD_ITEM_GRADIENT_PNG
+);
+
 export const BANNER_STREAMS_IMAGE = imageUriResolver(BANNER_STREAMS_PNG);
 export const BANNER_PODCAST_IMAGE = imageUriResolver(BANNER_PODCAST_PNG);
 export const BANNER_VLOG_IMAGE = imageUriResolver(BANNER_VLOG_PNG);

@@ -20,6 +20,10 @@ import ICON_MUSIC_PLAY_PNG from './../../assets/icons/icon__play-music.png';
 
 import ICON_SETTINGS_PNG from './../../assets/icons/icon__settings.png';
 
+import ICON_PROFILE_SETTINGS_SVG_PATH from './../../assets/icons/icon__profile-settings.svg';
+
+export const ICON_PROFILE_SETTINGS_SVG = ICON_PROFILE_SETTINGS_SVG_PATH;
+
 import ICON_TOP_TABBAR_IMAGE_SVG_PATH from './../../assets/icons/icon__image-svg.svg';
 import ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG_PATH from './../../assets/icons/icon__image-active-svg.svg';
 import ICON_TOP_TABBAR_VIDEO_SVG_PATH from './../../assets/icons/icon__vidoe-svg.svg';
@@ -161,3 +165,13 @@ export const ICON_ARROW_DOWN_SVG = ICON_ARROW_DOWN_SVG_PATH;
 
 import ICON_ARROW_LEFT_SVG_PATH from './../../assets/icons/icon__arrow-left-svg.svg';
 export const ICON_ARROW_LEFT_SVG = ICON_ARROW_LEFT_SVG_PATH;
+
+import ICON_SHARE_PATH from './../../assets/icons/icon__share.svg';
+import ICON_ANALYTICS_PATH from './../../assets/icons/icon__analyzis.svg';
+import ICON_MAIL_PATH from './../../assets/icons/icon__email.svg';
+import ICON_USER_PATH from './../../assets/icons/icon__user-svg.svg';
+
+export const ICON_SHARE = ICON_SHARE_PATH;
+export const ICON_ANALYTICS = ICON_ANALYTICS_PATH;
+export const ICON_MAIL = ICON_MAIL_PATH;
+export const ICON_USER = ICON_USER_PATH;
