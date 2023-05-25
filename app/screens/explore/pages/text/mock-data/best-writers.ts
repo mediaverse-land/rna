@@ -1,4 +1,11 @@
-export const bestWritersMockData = [
+export type WriterType = {
+    id: number;
+    image: string;
+    title: string;
+    description: string;
+};
+
+export const bestWritersMockData: WriterType[] = [
     {
         id: 1,
         image: 'https://s3-alpha-sig.figma.com/img/98b4/e91a/7b4d60b90289785ed80e557c081dcf6a?Expires=1685318400&Signature=mG1ow56wrugCAfI2RCwT7TFBjgd9cZCY5RR3xS9TMulG-OZTQ6RkMQCBOF30dDj8Yg7uIJJMMcGx2LHctSAVhbW~tNtHfLVS8MvDC57FCzw5Uc7DfV~q~O2eWRs2xrQHEnRjkR5ZJD-xUVvRxQypL3dsTpVEp6yir8kq7dT1BT4f7MVVNXhH7bTQ0SqHKy8NHq-FJH435Z~ltNR-PeBzF6jxRXHcuL0xI8aIiBlUqLUNsBQGtkvXAvIcfRBKFFI7d-yMIk268Nzfp-Dxv-PRZqwZMxXJ6UqDAucBncz06sk2c0CznGY3gWuKXBiGVkN1qPzZakA6DAlabGUV-slkzA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4',

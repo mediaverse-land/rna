@@ -1,8 +1,8 @@
-import { FlatList, View } from 'react-native';
+import { FlatList } from 'react-native';
 import { Title } from '../../../../shared/components/title';
 import { ImagesPageComponents } from './style';
 import { TEXT_SLIDER_ITEM_GRADIENT } from '../../../../constaints/images';
-import { topTenTextsMockData } from './mock-data/top-ten-texts';
+import { TextItem, topTenTextsMockData } from './mock-data/top-ten-texts';
 import { UserNameCard } from '../../../../shared/components/username-card';
 import { Box } from '../../../../shared/components/box';
 import { Flex } from '../../../../styles/grid';
@@ -18,7 +18,7 @@ const {
 } = ImagesPageComponents;
 
 export function AllPageTopTenText() {
-    const renderItem = ({ item }: { item: any }) => {
+    const renderItem = ({ item }: { item: TextItem }) => {
         return (
             <TextSlide>
                 <TextSlideBackgroundGradient

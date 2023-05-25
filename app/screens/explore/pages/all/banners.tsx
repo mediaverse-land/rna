@@ -8,7 +8,6 @@ import {
     BANNER_VLOG_IMAGE
 } from '../../../../constaints/images';
 import { windowSize } from '../../../../utils/window-size';
-import { Box } from '../../../../shared/components/box';
 
 const { BannerItem, BannerItemTitel, BannerItemDescription } =
     ImagesPageComponents;

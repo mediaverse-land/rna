@@ -31,6 +31,8 @@ export function ProfileScreenAllPage() {
         );
     };
 
+    const keyExtractor = (item: ListItemType) => item.id.toString();
+
     return (
         <LinearGradient
             style={[stickyStyles.container]}
@@ -44,7 +46,7 @@ export function ProfileScreenAllPage() {
                         numColumns={2}
                         data={mockDataListItem}
                         renderItem={renderListItem}
-                        keyExtractor={(item: any) => item.id}
+                        keyExtractor={keyExtractor}
                         style={{
                             paddingTop: 95
                         }}

@@ -1,5 +1,5 @@
-import { PaddingContainer } from '../../../../styles/grid';
 import { ScrollView, View } from 'react-native';
+import { PaddingContainer } from '../../../../styles/grid';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ImagesPageComponents } from '../all/style';
 import { ImagePageBestInMonth } from './best-in-month';
@@ -8,7 +8,7 @@ import { TextPageBestWriters } from './best-writers';
 
 const { FixedStyles, ContainerStyles } = ImagesPageComponents;
 
-export function TextsPage({ route, navigation }: any) {
+export function TextsPage() {
     return (
         <LinearGradient
             style={[ContainerStyles]}

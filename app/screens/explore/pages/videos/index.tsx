@@ -7,8 +7,7 @@ import { VideoPageComponents } from './style';
 
 const { ContainerStyles, FixedStyles } = VideoPageComponents;
 
-export function VideosPage({ route, navigation }: any) {
-    // const image = useImage(require("./../../../../../assets/img/10-profile-picture.png"));
+export function VideosPage() {
 
     return (
         <LinearGradient

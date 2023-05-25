@@ -1,7 +1,7 @@
 import { TextPageComponents } from './style';
 import { Title } from '../../../../shared/components/title';
 import { FlatList } from 'react-native';
-import { bestWritersMockData } from './mock-data/best-writers';
+import { WriterType, bestWritersMockData } from './mock-data/best-writers';
 
 const {
     BestWritersContainer,
@@ -13,7 +13,7 @@ const {
 } = TextPageComponents;
 
 export function TextPageBestWriters() {
-    const renderSliderItem = ({ item }: { item: any }) => {
+    const renderSliderItem = ({ item }: { item: WriterType }) => {
         return (
             <BestWritersSlide>
                 <BestWritersSlideUserImage source={{ uri: item.image }} />
@@ -25,6 +25,8 @@ export function TextPageBestWriters() {
         );
     };
 
+    const keyExtractor = (item: WriterType): string => item.id.toString();
+
     return (
         <BestWritersContainer>
             <Title str="Best writers" />
@@ -33,7 +35,7 @@ export function TextPageBestWriters() {
                     horizontal
                     data={bestWritersMockData}
                     renderItem={renderSliderItem}
-                    keyExtractor={(item: any) => item.id}
+                    keyExtractor={keyExtractor}
                 />
             </BestWritersSlider>
         </BestWritersContainer>

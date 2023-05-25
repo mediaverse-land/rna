@@ -4,7 +4,15 @@ import {
     PROFILE_TWO
 } from '../../../../../constaints/images';
 
-export const topTenTextsMockData = [
+export type TextItem = {
+    id: number;
+    title: string;
+    content: string;
+    username: string;
+    profileUri: string;
+};
+
+export const topTenTextsMockData: TextItem[] = [
     {
         id: 1,
         title: 'My thoughts',

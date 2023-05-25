@@ -7,7 +7,8 @@ import { ImagePageMasonryList } from './masonry-list';
 
 const { FixedStyles, ContainerStyles } = ImagesPageComponents;
 
-export function ImagesPage({ route, navigation }: any) {
+// export function ImagesPage({ route, navigation }: any) {
+export function ImagesPage() {
     return (
         <LinearGradient
             style={[ContainerStyles]}

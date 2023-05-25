@@ -3,7 +3,7 @@ import { Title } from '../../../../shared/components/title';
 import { TEXT_SLIDER_ITEM_GRADIENT } from '../../../../constaints/images';
 import { UserNameCard } from '../../../../shared/components/username-card';
 import { ImagesPageComponents } from '../all/style';
-import { topTenTextsMockData } from '../all/mock-data/top-ten-texts';
+import { TextItem, topTenTextsMockData } from '../all/mock-data/top-ten-texts';
 import { Box } from '../../../../shared/components/box';
 
 const {
@@ -16,7 +16,7 @@ const {
 } = ImagesPageComponents;
 
 export function ImagePageBestInMonth() {
-    const renderItem = ({ item }: { item: any }) => {
+    const renderItem = ({ item }: { item: TextItem }) => {
         return (
             <TextSlide>
                 <TextSlideBackgroundGradient

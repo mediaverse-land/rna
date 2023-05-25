@@ -7,7 +7,7 @@ import { Navigator } from './navigator';
 import { useState } from 'react';
 import { SearchWindow } from './search-window';
 
-const { FixedStyles, ContainerStyles } = ImagesPageComponents;
+const { ContainerStyles } = ImagesPageComponents;
 
 export function SearchPage() {
     const [showSearchWindow, setShowSearchWindow] = useState(true);

@@ -1,7 +1,6 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ImagesPageComponents } from '../all/style';
-// import { NavigationHeader } from '../../components/navigation-header';
 import { SoundsPageBestInMonth } from './best-in-moth';
 import { SoundsPageChillSongs } from './chil-songs';
 import { SoundsPageBestProducts } from './best-products';
@@ -9,7 +8,7 @@ import { SoundsPageMusicPlayer } from './music-player';
 
 const { FixedStyles, ContainerStyles } = ImagesPageComponents;
 
-export function SoundsPage({ route, navigation }: any) {
+export function SoundsPage() {
     return (
         <LinearGradient
             style={[ContainerStyles]}

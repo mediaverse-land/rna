@@ -35,7 +35,17 @@ export const bestIMonthVideosMockData: HorizontailSlideType[] = [
     }
 ];
 
-export const videosMockData = [
+export type VideoItem = {
+    id: number;
+    duration: string;
+    username: string;
+    userProfileUri: string;
+    imagePath: string;
+    title: string;
+    description: string;
+};
+
+export const videosMockData: VideoItem[] = [
     {
         id: 1,
         duration: '50:41',
