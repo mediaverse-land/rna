@@ -4,6 +4,7 @@ import { LayoutChangeEvent, ViewStyle } from 'react-native';
 
 type Props = {
     id?: string;
+    flexWrap?: 'wrap' | 'nowrap',
     children: ReactNode;
     marginTop?: number;
     marginBottom?: number;
@@ -41,17 +42,18 @@ type Props = {
 
     alignItems?: 'center' | 'flex-start' | 'flex-end';
     justifyContent?:
-        | 'center'
-        | 'flex-start'
-        | 'flex-end'
-        | 'space-between'
-        | 'space-around';
+    | 'center'
+    | 'flex-start'
+    | 'flex-end'
+    | 'space-between'
+    | 'space-around';
     additionalStyles?: ViewStyle;
-    onlayout?: LayoutChangeEvent;
+    onlayout?: LayoutChangeEvent | any;
 };
 
 export function Box({
     id,
+    flexWrap,
     children,
     marginTop,
     marginBottom,
@@ -93,6 +95,7 @@ export function Box({
 }: Props) {
     const styles = [
         width && { width },
+        flexWrap && { flexWrap },
         height && { height },
         marginTop && { marginTop },
         marginBottom && { marginBottom },

@@ -10,7 +10,7 @@ import { theme } from '../../../../constaints/theme';
 import { ScrollView } from 'react-native';
 import { SettingsScreenTitle } from '../../components/title';
 
-const { EditButton, SaveButton } = SettingsScreenComponents;
+const { SaveButton } = SettingsScreenComponents;
 const { width } = windowSize();
 
 const formStructure = [

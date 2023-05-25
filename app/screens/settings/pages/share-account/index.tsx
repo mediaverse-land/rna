@@ -58,7 +58,7 @@ export function ShareEccountPage() {
     const [isOpen, setIsOpen] = useState(false);
 
     const sheetRef = useRef<BottomSheet>(null);
-    const confirmAlertRef = useRef<any>(null);
+    const confirmAlertRef = useRef(null);
 
     const snapPoints = ['42'];
 

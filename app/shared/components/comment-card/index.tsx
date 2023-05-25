@@ -1,47 +1,87 @@
-import { Image, View } from 'react-native';
+import { Image } from 'react-native'
+import { PaddingContainer } from '../../../styles/grid';
+import { Box } from '../box';
+import { Text } from '../text';
 import { CommentCardComponents } from './style';
-import { PaddingContainer, RowAlignCenter } from '../../../styles/grid';
+import { COMMENT_BOX_GRADIENT } from '../../../constaints/images';
+
+const profile = 'https://s3-alpha-sig.figma.com/img/8b38/0123/1b3bc56d8d3d28d35c9776e478125bae?Expires=1685923200&Signature=gWMAZUvjlSCOfKP4e6hFLjFgOSd-IECkM40ZQ4~YTNr~WUr6gqDibYMhqOmNiwcMBzE2uFfLq7NcF8WJTxrQi9M6WJmXFTvwxWtxRPtDA~pPSx48PXwbibPvThmZVX3O5SAv9szQetIMBGF9VgyQNJMT~wuxVRNDPSkQGTUn~DdeZwbVELADu~Sgz5LTC-IPr~5St8CpDpQvDxCYDOKjFw091uL~PJiFUIJ1smHYXIczAAAOcWEtgHi187J0mufQL5CW2kymK7~RrFarFPZbUtSToEX44Um3JqXE2mtFxhyToGki4DTo6hmgntK0ZaWVhuxGhlZvGd2YUpS0ld92Dw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
+
+const { CommentInput } = CommentCardComponents
 
 export function CommentCard() {
     return (
         <PaddingContainer>
-            <CommentCardComponents.Wrapper>
-                <RowAlignCenter>
-                    <CommentCardComponents.Title>
-                        Comments
-                    </CommentCardComponents.Title>
-                    <CommentCardComponents.CommentsCound>
-                        56
-                    </CommentCardComponents.CommentsCound>
-                </RowAlignCenter>
-                <CommentCardComponents.TextBoxWrapper>
-                    <RowAlignCenter>
-                        <View style={{ paddingTop: 18 }}>
+            <Box
+                width='100%'
+                height={102}
+                borderRadius={8}
+            >
+                <Image
+                    source={{
+                        uri: COMMENT_BOX_GRADIENT
+                    }}
+                    style={{
+                        width: '100%',
+                        height: 102,
+                        position: 'absolute',
+                        top: 0
+                    }}
+                />
+                <Box padding={16}>
+                    {/* title */}
+                    <Box
+                        width='100%'
+                        direction='row'
+                        alignItems='center'
+                        justifyContent='space-between'
+                    >
+                        <Text
+                            color="#fff"
+                            fontSize={14}
+                            lineHeight={14}
+                        >
+                            Comments
+                        </Text>
+                        <Text
+                            color='#666680'
+                            fontSize={14}
+                            lineHeight={14}
+                        >
+                            56
+                        </Text>
+                    </Box>
+                    {/* body */}
+                    <Box
+                        marginTop={16}
+                        width='100%'
+                        direction='row'
+                        alignItems='center'
+                        justifyContent='space-between'
+                    >
+                        <Box>
                             <Image
+                                source={{
+                                    uri: profile,
+                                }}
                                 style={{
                                     width: 32,
                                     height: 32,
-                                    borderRadius: 100,
-                                    marginRight: 16
-                                }}
-                                source={{
-                                    uri: 'https://www.figma.com/file/PjruT7z5jL7KsoUn0tQadE/image/8b3801231b3bc56d8d3d28d35c9776e478125bae?fuid=843972259226061773'
+                                    marginRight: 16,
+                                    borderRadius: 100
                                 }}
                             />
-                        </View>
-                        <CommentCardComponents.TextBoxWrapper
-                            style={{ flex: 1, width: '100%' }}
-                        >
-                            <CommentCardComponents.TextBox
-                                placeholder="Add a comment"
-                                keyboardType="default"
-                                style={{ flex: 1, width: '100%' }}
+                        </Box>
+                        <Box flex={1}  >
+                            <CommentInput
+                                placeholder='Add a comment...'
+                                placeholderTextColor='#666680'
                             />
-                        </CommentCardComponents.TextBoxWrapper>
-                    </RowAlignCenter>
-                </CommentCardComponents.TextBoxWrapper>
-                <View style={{ height: 16, width: '100%' }}></View>
-            </CommentCardComponents.Wrapper>
+                        </Box>
+                    </Box>
+                </Box>
+
+            </Box>
         </PaddingContainer>
     );
 }

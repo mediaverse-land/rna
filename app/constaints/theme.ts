@@ -33,6 +33,7 @@ export const theme = {
         md: '16px'
     },
     numericLineHeight: {
+        sm: 12,
         md: 16
     }
 };

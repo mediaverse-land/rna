@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { Box } from '../../../../shared/components/box';
@@ -9,7 +8,7 @@ import { Input } from '../../../../shared/components/form';
 type Props = {
     windowHeight: number;
     isOpen: boolean;
-    setIsOpen: (open: boolean) => any;
+    setIsOpen: (open: boolean) => void;
     snapPoints: string[];
     sheetRef: BottomSheet | any;
     closeModalHandler: () => void;

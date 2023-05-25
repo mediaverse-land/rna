@@ -94,3 +94,25 @@ import CONFIRM_MODAL_BACKGROUND_PATH from './../../assets/img/confirm-modal-back
 export const CONFIRM_MODAL_BACKGROUND = imageUriResolver(
     CONFIRM_MODAL_BACKGROUND_PATH
 );
+
+import SINGLE_VIDEO_COVER_IMAGE_GRADIENT_PATH from './../../assets/img/gradients/signle-video-cover-image-gradient.png';
+export const SINGLE_VIDEO_COVER_IMAGE_GRADIENT = imageUriResolver(
+    SINGLE_VIDEO_COVER_IMAGE_GRADIENT_PATH
+);
+
+import VIDEO_FILES_ITEM_GRADEINT_PATH from './../../assets/img/gradients/video-files-item-gradient.png';
+import VIDEO_FILES_WRAPPER_GRADEINT_PATH from './../../assets/img/gradients/video-files-wrapper-gradiet.png';
+export const VIDEO_FILES_ITEM_GRADEINT = imageUriResolver(
+    VIDEO_FILES_ITEM_GRADEINT_PATH
+);
+export const VIDEO_FILES_WRAPPER_GRADEINT = imageUriResolver(
+    VIDEO_FILES_WRAPPER_GRADEINT_PATH
+);
+
+import COMMENT_BOX_GRADIENT_PATH from './../../assets/img/gradients/comment-box-gradient.png';
+export const COMMENT_BOX_GRADIENT = imageUriResolver(COMMENT_BOX_GRADIENT_PATH);
+
+import SINGLE_VIDEO_FOOTER_GRAIDENT_PATH from './../../assets/img/gradients/single-video-footer-gradient.png';
+export const SINGLE_VIDEO_FOOTER_GRAIDENT = imageUriResolver(
+    SINGLE_VIDEO_FOOTER_GRAIDENT_PATH
+);

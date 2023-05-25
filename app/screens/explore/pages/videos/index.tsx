@@ -8,7 +8,6 @@ import { VideoPageComponents } from './style';
 const { ContainerStyles, FixedStyles } = VideoPageComponents;
 
 export function VideosPage() {
-
     return (
         <LinearGradient
             style={[ContainerStyles]}

@@ -6,7 +6,7 @@ import {
 import { Flex } from '../../../../styles/grid';
 import { TextPageComponents } from './style';
 import { UserNameCard } from '../../../../shared/components/username-card';
-import { ICON_NEXT_GRAY, ICON_PREV_GRAY } from '../../../../constaints/icons';
+import { ICON_NEXT_SVG, ICON_PREV_SVG } from '../../../../constaints/icons';
 
 const {
     SwiperContainer,
@@ -19,7 +19,6 @@ const {
     SwiperItemCreationDate,
     NextButton,
     PrevButton,
-    NavButtonIcon
 } = TextPageComponents;
 
 export function TextPageSwiper() {
@@ -80,10 +79,19 @@ export function TextPageSwiper() {
                         }}
                     >
                         <NextButton>
-                            <NavButtonIcon source={{ uri: ICON_PREV_GRAY }} />
+                            <ICON_NEXT_SVG
+                                style={{
+                                    width: 7.8,
+                                    height: 14
+                                }}
+                            />
                         </NextButton>
                         <PrevButton>
-                            <NavButtonIcon source={{ uri: ICON_NEXT_GRAY }} />
+                            <ICON_PREV_SVG
+                                style={{
+                                    width: 7.8,
+                                    height: 14
+                                }} />
                         </PrevButton>
                     </Flex>
                 </SwiperItemInner>

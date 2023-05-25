@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { AppStack } from './app/screens/stack';
 import { SearchPage } from './app/screens/search';
 import { SettingsStack } from './app/screens/settings/stack-navigator';
+import { SingleVideoScreen } from './app/screens/single/video';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,11 @@ const routes: { id: number; name: string; component: FC }[] = [
         id: 3,
         name: 'Settings',
         component: SettingsStack
+    },
+    {
+        id: 4,
+        name: 'SingleVideoHeader',
+        component: SingleVideoScreen
     }
 ];
 

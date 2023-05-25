@@ -3,10 +3,10 @@ import { Platform, TouchableOpacity, Image } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { InputComponent } from './style';
 import { theme } from '../../../constaints/theme';
-import ICON_CALENDAR_PNG from './../../../../assets/icons/icon__calendar.png';
-import { imageUriResolver } from '../../../utils/image-uri-resolver';
+// import ICON_CALENDAR_PNG from './../../../../assets/icons/icon__calendar.png';
+// import { imageUriResolver } from '../../../utils/image-uri-resolver';
 
-const ICON_CALENDAR = imageUriResolver(ICON_CALENDAR_PNG);
+// const ICON_CALENDAR = imageUriResolver(ICON_CALENDAR_PNG);
 
 const { InputBox, FormGroup, datePiclerIconStyles, PickerPlaceholder } =
     InputComponent;
@@ -27,10 +27,10 @@ export function DatePicker() {
     return (
         <FormGroup>
             <TouchableOpacity onPress={showDatePicker}>
-                <Image
+                {/* <Image
                     source={{ uri: ICON_CALENDAR }}
                     style={datePiclerIconStyles}
-                />
+                /> */}
                 <InputBox
                     editable={false}
                     selectTextOnFocus={false}

@@ -1,16 +1,11 @@
-import { TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
 import { ScreenGradient } from '../../../../shared/components/screen-gradient';
 import { Box } from '../../../../shared/components/box';
 import { ListColumn, ListColumnItem } from '../../components/list';
-import { Text } from '../../../../shared/components/text';
 import { PaddingContainer } from '../../../../styles/grid';
 import {
-    ICON_ARROW_LEFT_SVG,
     ICON_ARROW_RIGHT
 } from '../../../../constaints/icons';
-import { theme } from '../../../../constaints/theme';
 import { SettingsScreenTitle } from '../../components/title';
 
 const data: ListColumnItem[] = [
@@ -67,12 +62,6 @@ const signOutData: ListColumnItem[] = [
 ];
 
 export function AccountPage() {
-    const navigation = useNavigation();
-
-    const goBackHandler = () => {
-        navigation.goBack();
-    };
-
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScreenGradient>
