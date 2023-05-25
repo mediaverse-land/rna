@@ -13,7 +13,7 @@ type Props = {
     paddingBottom?: number;
     paddingLeft?: number;
     paddingRight?: number;
-    padding?: number,
+    padding?: number;
     direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
     flex?: number;
     width?: number | string;
@@ -41,11 +41,11 @@ type Props = {
 
     alignItems?: 'center' | 'flex-start' | 'flex-end';
     justifyContent?:
-    | 'center'
-    | 'flex-start'
-    | 'flex-end'
-    | 'space-between'
-    | 'space-around';
+        | 'center'
+        | 'flex-start'
+        | 'flex-end'
+        | 'space-between'
+        | 'space-around';
     additionalStyles?: ViewStyle;
     onlayout?: LayoutChangeEvent;
 };

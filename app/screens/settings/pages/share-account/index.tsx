@@ -52,7 +52,6 @@ const pageHeaderComponent = (
     </Box>
 );
 
-
 const keyExtractor = (item: AccountType): string => item.id.toString();
 
 export function ShareEccountPage() {
@@ -120,7 +119,9 @@ export function ShareEccountPage() {
                             </Text>
                         </Box>
                         <Box>
-                            <TouchableOpacity onPress={() => confirmAlertRef.current?.open()}>
+                            <TouchableOpacity
+                                onPress={() => confirmAlertRef.current?.open()}
+                            >
                                 <ICON_TRASHBEEN
                                     style={{
                                         width: 16.22,

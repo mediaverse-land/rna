@@ -1,4 +1,4 @@
-import { useState, forwardRef, useImperativeHandle, useRef } from 'react'
+import { useState, forwardRef, useImperativeHandle, useRef } from 'react';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { Image } from 'react-native';
 import { Box } from '../box';
@@ -7,19 +7,19 @@ import { Text } from '../text';
 import { ConfirmModalComponents } from './style';
 import { theme } from '../../../constaints/theme';
 
-const { Button } = ConfirmModalComponents
+const { Button } = ConfirmModalComponents;
 
 export const ConfirmAlert = forwardRef((props, ref) => {
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const confirmAlertSheetRef = useRef<BottomSheet>(null);
 
-    const snapPoints = ['26']
+    const snapPoints = ['26'];
 
     const closeModalHandler = () => {
         confirmAlertSheetRef.current?.close();
-        setIsModalOpen(false)
-    }
+        setIsModalOpen(false);
+    };
 
     useImperativeHandle(ref, () => ({
         open() {
@@ -35,14 +35,13 @@ export const ConfirmAlert = forwardRef((props, ref) => {
         <>
             {isModalOpen ? (
                 <>
-
                     <BottomSheet
                         snapPoints={snapPoints}
                         ref={confirmAlertSheetRef}
                         onClose={() => setIsModalOpen(false)}
                         handleComponent={null}
                         backgroundStyle={{
-                            backgroundColor: 'transparent',
+                            backgroundColor: 'transparent'
                         }}
                     >
                         <BottomSheetView
@@ -52,8 +51,7 @@ export const ConfirmAlert = forwardRef((props, ref) => {
                                 top: 0,
                                 left: 0,
                                 width: '100%',
-                                height: 260,
-
+                                height: 260
                             }}
                         >
                             <Image
@@ -66,12 +64,12 @@ export const ConfirmAlert = forwardRef((props, ref) => {
                                     position: 'absolute',
                                     borderTopLeftRadius: 16,
                                     borderTopRightRadius: 16,
-                                    top: 0,
+                                    top: 0
                                 }}
                             />
                             <Box
                                 id="body"
-                                width='100%'
+                                width="100%"
                                 height={260}
                                 borderTopLeftRadius={16}
                                 borderTopRightRadius={16}
@@ -84,16 +82,30 @@ export const ConfirmAlert = forwardRef((props, ref) => {
                                     fontSize={theme.numericFontSize.md}
                                     lineHeight={theme.numericLineHeight.md}
                                     fontWeight={400}
-                                >Are you sure?</Text>
+                                >
+                                    Are you sure?
+                                </Text>
                                 <Box>
                                     <Box marginTop={24}>
                                         <Button>
-                                            <Text fontSize={14} lineHeight={20} color="#fff">Yes</Text>
+                                            <Text
+                                                fontSize={14}
+                                                lineHeight={20}
+                                                color="#fff"
+                                            >
+                                                Yes
+                                            </Text>
                                         </Button>
                                     </Box>
                                     <Box marginTop={16}>
                                         <Button onPress={closeModalHandler}>
-                                            <Text fontSize={14} lineHeight={20} color="#fff">No</Text>
+                                            <Text
+                                                fontSize={14}
+                                                lineHeight={20}
+                                                color="#fff"
+                                            >
+                                                No
+                                            </Text>
                                         </Button>
                                     </Box>
                                 </Box>
@@ -103,9 +115,8 @@ export const ConfirmAlert = forwardRef((props, ref) => {
                 </>
             ) : null}
         </>
-    )
+    );
 });
-
 
 // export const ConfirmAlert = forwardRef({
 //     openModal

@@ -1,6 +1,7 @@
 1 => masonry grid for Videos/movie
 2 => text page slider
-
+3 => confirm modal cover View
+4 => settings pages linear gradient color
 
 
 
