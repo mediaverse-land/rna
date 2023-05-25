@@ -3,6 +3,7 @@ import { ViewComponent } from './style';
 import { LayoutChangeEvent, ViewStyle } from 'react-native';
 
 type Props = {
+    id?: string;
     children: ReactNode;
     marginTop?: number;
     marginBottom?: number;
@@ -12,6 +13,7 @@ type Props = {
     paddingBottom?: number;
     paddingLeft?: number;
     paddingRight?: number;
+    padding?: number,
     direction?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
     flex?: number;
     width?: number | string;
@@ -39,21 +41,23 @@ type Props = {
 
     alignItems?: 'center' | 'flex-start' | 'flex-end';
     justifyContent?:
-        | 'center'
-        | 'flex-start'
-        | 'flex-end'
-        | 'space-between'
-        | 'space-around';
+    | 'center'
+    | 'flex-start'
+    | 'flex-end'
+    | 'space-between'
+    | 'space-around';
     additionalStyles?: ViewStyle;
     onlayout?: LayoutChangeEvent;
 };
 
 export function Box({
+    id,
     children,
     marginTop,
     marginBottom,
     marginLeft,
     marginRight,
+    padding,
     paddingTop,
     paddingBottom,
     paddingLeft,
@@ -95,6 +99,7 @@ export function Box({
         marginRight && { marginRight },
         marginLeft && { marginLeft },
         paddingTop && { paddingTop },
+        padding && { padding },
         paddingBottom && { paddingBottom },
         paddingRight && { paddingRight },
         paddingLeft && { paddingLeft },

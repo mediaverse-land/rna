@@ -1,70 +1,81 @@
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Box } from "../../../shared/components/box";
-import { ScreenGradient } from "../../../shared/components/screen-gradient";
-import { PaddingContainer } from "../../../styles/grid";
-import { SettingsScreenTitle } from "../components/title";
-import { FlatList, Image } from "react-native";
-import { SIGNINS_LIST_ITEM_GRADIET, SIGNINS_LIST_ITEM_LIGHT_GRADIET } from "../../../constaints/images";
-import { Text } from "../../../shared/components/text";
-import { theme } from "../../../constaints/theme";
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Box } from '../../../shared/components/box';
+import { ScreenGradient } from '../../../shared/components/screen-gradient';
+import { PaddingContainer } from '../../../styles/grid';
+import { SettingsScreenTitle } from '../components/title';
+import { FlatList, Image } from 'react-native';
+import {
+    SIGNINS_LIST_ITEM_GRADIET,
+    SIGNINS_LIST_ITEM_LIGHT_GRADIET
+} from '../../../constaints/images';
+import { Text } from '../../../shared/components/text';
+import { theme } from '../../../constaints/theme';
 
 type MessageType = {
     id: number;
     date: string;
     description: string;
-    isRead: boolean
-}
+    isRead: boolean;
+};
 
 const messages: MessageType[] = [
     {
         id: 1,
         date: 'April 26  13:23',
         isRead: false,
-        description: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
+        description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
     },
     {
         id: 2,
         date: 'April 26  13:23',
         isRead: false,
-        description: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
+        description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
     },
     {
         id: 3,
         date: 'April 26  13:23',
         isRead: true,
-        description: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
+        description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
     },
     {
         id: 4,
         date: 'April 26  13:23',
         isRead: true,
-        description: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
+        description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
     },
     {
         id: 5,
         date: 'April 26  13:23',
         isRead: true,
-        description: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
+        description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
     },
     {
         id: 6,
         date: 'April 26  13:23',
         isRead: true,
-        description: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
+        description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
     },
     {
         id: 7,
         date: 'April 26  13:23',
         isRead: true,
-        description: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
+        description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
     },
     {
         id: 8,
         date: 'April 26  13:23',
         isRead: true,
-        description: 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
-    },
-]
+        description:
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia...'
+    }
+];
 
 const pageHeaderComponent = (
     <Box marginBottom={48}>
@@ -72,7 +83,7 @@ const pageHeaderComponent = (
             <SettingsScreenTitle title="Messages" />
         </PaddingContainer>
     </Box>
-)
+);
 
 export function MessagesPage() {
     const renderMessageItem = ({ item }: { item: MessageType }) => {
@@ -89,9 +100,9 @@ export function MessagesPage() {
                 >
                     <Image
                         source={{
-                            uri: item.isRead ?
-                                SIGNINS_LIST_ITEM_GRADIET :
-                                SIGNINS_LIST_ITEM_LIGHT_GRADIET
+                            uri: item.isRead
+                                ? SIGNINS_LIST_ITEM_GRADIET
+                                : SIGNINS_LIST_ITEM_LIGHT_GRADIET
                         }}
                         style={{
                             width: '100%',
@@ -103,7 +114,7 @@ export function MessagesPage() {
                         }}
                     />
                     <Box
-                        width='100%'
+                        width="100%"
                         direction="row"
                         justifyContent="space-between"
                         alignItems="center"
@@ -127,11 +138,10 @@ export function MessagesPage() {
                     </Text>
                 </Box>
             </PaddingContainer>
-        )
-    }
+        );
+    };
 
     const keyExtractor = (item: MessageType): string => item.id.toString();
-
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -146,5 +156,5 @@ export function MessagesPage() {
                 </Box>
             </ScreenGradient>
         </SafeAreaView>
-    )
+    );
 }

@@ -157,7 +157,7 @@ const pageHeaderComponent = (
             <SettingsScreenTitle title="Sessions" />
         </Box>
     </PaddingContainer>
-)
+);
 
 const keyExtractor = (item: SessionItem): string => item.id.toString();
 

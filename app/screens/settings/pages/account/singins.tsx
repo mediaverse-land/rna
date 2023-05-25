@@ -76,7 +76,7 @@ export function SignInsPage() {
                 <SettingsScreenTitle title="Sign ins" />
             </Box>
         </PaddingContainer>
-    )
+    );
 
     return (
         <SafeAreaView style={{ flex: 1, width: '100%' }}>

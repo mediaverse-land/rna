@@ -183,9 +183,7 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-
-    },
+    container: {},
     content: {
         flexDirection: 'column',
         zIndex: 0,

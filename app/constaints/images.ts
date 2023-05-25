@@ -89,3 +89,8 @@ import ADD_ACCOUNT_BUTTON_GRADIENT_PATH from './../../assets/img/add-account-btn
 export const ADD_ACCOUNT_BUTTON_GRADIENT = imageUriResolver(
     ADD_ACCOUNT_BUTTON_GRADIENT_PATH
 );
+
+import CONFIRM_MODAL_BACKGROUND_PATH from './../../assets/img/confirm-modal-background.png';
+export const CONFIRM_MODAL_BACKGROUND = imageUriResolver(
+    CONFIRM_MODAL_BACKGROUND_PATH
+);
