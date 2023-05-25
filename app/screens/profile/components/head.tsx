@@ -189,7 +189,7 @@ export function ProfileScreenHead() {
                                         backgroundColor="#597AFF"
                                         left="29%"
                                     >
-
+                                        <></>
                                     </Box>
                                     <Flex
                                         width="100%"

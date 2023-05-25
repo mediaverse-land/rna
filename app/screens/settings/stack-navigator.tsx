@@ -4,6 +4,8 @@ import { AccountPage } from './pages/account';
 import { GeneralInformationPage } from './pages/account/general-information';
 import { SignInsPage } from './pages/account/singins';
 import { SessionsPage } from './pages/account/seassions';
+import { MessagesPage } from './pages/messages';
+import { ShareEccountPage } from './pages/share-account';
 
 const Stack = createStackNavigator();
 
@@ -23,7 +25,7 @@ const routes = [
     {
         id: 2,
         title: 'Massage',
-        component: IndexMenu,
+        component: MessagesPage,
         name: 'massage'
     },
     {
@@ -41,7 +43,7 @@ const routes = [
     {
         id: 5,
         title: 'Share account',
-        component: IndexMenu,
+        component: ShareEccountPage,
         name: 'share account'
     },
     {

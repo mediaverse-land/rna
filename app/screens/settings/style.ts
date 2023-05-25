@@ -20,5 +20,22 @@ export const SettingsScreenComponents = {
         border-radius: 32px;
         align-items: center;
         justify-content: center;
+    `,
+    AddAccountButton: styled.TouchableOpacity`
+        width: 100%;
+        height: 48px;
+        border: 1px dashed #83839c;
+        border-radius: 16px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    `,
+    AddAccountSubmitButton: styled.TouchableOpacity`
+        width: 100%:
+        height: 48px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px; 
     `
 };

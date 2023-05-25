@@ -80,3 +80,12 @@ import SIGNINS_LIST_ITEM_GRADIET_PATH from './../../assets/img/signin-list/signi
 export const SIGNINS_LIST_ITEM_GRADIET = imageUriResolver(
     SIGNINS_LIST_ITEM_GRADIET_PATH
 );
+import SIGNINS_LIST_ITEM_LIGHT_GRADIET_PATH from './../../assets/img/signin-list/signins-list-light-gradient.png';
+export const SIGNINS_LIST_ITEM_LIGHT_GRADIET = imageUriResolver(
+    SIGNINS_LIST_ITEM_LIGHT_GRADIET_PATH
+);
+
+import ADD_ACCOUNT_BUTTON_GRADIENT_PATH from './../../assets/img/add-account-btn-background.png';
+export const ADD_ACCOUNT_BUTTON_GRADIENT = imageUriResolver(
+    ADD_ACCOUNT_BUTTON_GRADIENT_PATH
+);

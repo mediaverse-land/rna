@@ -39,13 +39,13 @@ type Props = {
 
     alignItems?: 'center' | 'flex-start' | 'flex-end';
     justifyContent?:
-    | 'center'
-    | 'flex-start'
-    | 'flex-end'
-    | 'space-between'
-    | 'space-around';
-    additionalStyles?: ViewStyle,
-    onlayout?: LayoutChangeEvent
+        | 'center'
+        | 'flex-start'
+        | 'flex-end'
+        | 'space-between'
+        | 'space-around';
+    additionalStyles?: ViewStyle;
+    onlayout?: LayoutChangeEvent;
 };
 
 export function Box({

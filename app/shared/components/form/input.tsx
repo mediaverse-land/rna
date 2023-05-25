@@ -5,29 +5,26 @@ import { theme } from '../../../constaints/theme';
 import { LayoutChangeEvent } from 'react-native';
 import { useState } from 'react';
 
-const { InputBox, Label } = InputComponent
+const { InputBox, Label } = InputComponent;
 
 type Props = {
     labelText: string;
     placeholder?: string;
 };
 
-export function Input({
-    labelText,
-    placeholder
-}: Props) {
+export function Input({ labelText, placeholder }: Props) {
     const [labelWidth, setLabelWidth] = useState<number>(0);
 
     return (
-        <Box
-            width='100%'
-        >
-            <Label onLayout={(e: LayoutChangeEvent) => {
-                const { width } = e.nativeEvent.layout
-                setLabelWidth(Math.floor(width))
-            }}>
+        <Box width="100%">
+            <Label
+                onLayout={(e: LayoutChangeEvent) => {
+                    const { width } = e.nativeEvent.layout;
+                    setLabelWidth(Math.floor(width));
+                }}
+            >
                 <Box
-                    height='100%'
+                    height="100%"
                     additionalStyles={{
                         borderRightWidth: 1,
                         borderRightColor: '#fff'
@@ -36,9 +33,11 @@ export function Input({
                     <Text
                         fontSize={14}
                         lineHeight={theme.numericLineHeight.md}
-                        color='#666680'
+                        color="#666680"
                         paddingRight={16}
-                    >{labelText}</Text>
+                    >
+                        {labelText}
+                    </Text>
                 </Box>
             </Label>
             <InputBox
@@ -49,6 +48,5 @@ export function Input({
                 }}
             />
         </Box>
-    )
+    );
 }
-

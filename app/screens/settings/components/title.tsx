@@ -1,7 +1,7 @@
-import { TouchableOpacity } from 'react-native'
-import { theme } from "../../../constaints/theme";
-import { Box } from "../../../shared/components/box";
-import { Text } from "../../../shared/components/text";
+import { TouchableOpacity } from 'react-native';
+import { theme } from '../../../constaints/theme';
+import { Box } from '../../../shared/components/box';
+import { Text } from '../../../shared/components/text';
 import { ICON_ARROW_LEFT_SVG } from '../../../constaints/icons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -10,13 +10,9 @@ export function SettingsScreenTitle({ title }: { title: string }) {
 
     const goBackHandler = () => {
         navigation.goBack();
-    }
+    };
     return (
-        <Box
-            marginTop={32}
-            width='100%'
-            alignItems="center"
-        >
+        <Box marginTop={32} width="100%" alignItems="center">
             <Text
                 color="#fff"
                 fontWeight={600}
@@ -36,10 +32,10 @@ export function SettingsScreenTitle({ title }: { title: string }) {
                 <ICON_ARROW_LEFT_SVG
                     style={{
                         width: 22,
-                        height: 16.88,
+                        height: 16.88
                     }}
                 />
             </TouchableOpacity>
         </Box>
-    )
+    );
 }

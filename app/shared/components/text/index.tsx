@@ -1,5 +1,9 @@
 import { ReactNode } from 'react';
-import { Text as ReactNativeText, RegisteredStyle, TextStyle } from 'react-native';
+import {
+    Text as ReactNativeText,
+    RegisteredStyle,
+    TextStyle
+} from 'react-native';
 
 type Props = {
     children: ReactNode;
@@ -15,7 +19,7 @@ type Props = {
     paddingLeft?: number;
     paddingRight?: number;
     fontWeight?: any;
-    textStyles?: TextStyle
+    textStyles?: TextStyle;
 };
 
 export function Text({
@@ -52,11 +56,11 @@ export function Text({
             { fontWeight }
         ];
 
-        let newStyles: Record<string, string | number>[] = []
+        let newStyles: Record<string, string | number>[] = [];
 
         for (const item of styles) {
             if (typeof Object.values(item)[0] !== 'undefined') {
-                newStyles = [...newStyles, item]
+                newStyles = [...newStyles, item];
             }
         }
 
@@ -65,5 +69,9 @@ export function Text({
 
     defaultStyles = addDefinedStyles();
 
-    return <ReactNativeText style={[...defaultStyles, textStyles]}>{children}</ReactNativeText>;
+    return (
+        <ReactNativeText style={[...defaultStyles, textStyles]}>
+            {children}
+        </ReactNativeText>
+    );
 }

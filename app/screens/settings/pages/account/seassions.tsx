@@ -1,18 +1,18 @@
-import { FlatList, Image, SafeAreaView, ScrollView } from "react-native";
-import { Box } from "../../../../shared/components/box";
-import { ScreenGradient } from "../../../../shared/components/screen-gradient";
-import { PaddingContainer } from "../../../../styles/grid";
-import { SettingsScreenTitle } from "../../components/title";
-import { SIGNINS_LIST_ITEM_GRADIET } from "../../../../constaints/images";
-import { Text } from "../../../../shared/components/text";
-import { theme } from "../../../../constaints/theme";
+import { FlatList, Image, SafeAreaView, ScrollView } from 'react-native';
+import { Box } from '../../../../shared/components/box';
+import { ScreenGradient } from '../../../../shared/components/screen-gradient';
+import { PaddingContainer } from '../../../../styles/grid';
+import { SettingsScreenTitle } from '../../components/title';
+import { SIGNINS_LIST_ITEM_GRADIET } from '../../../../constaints/images';
+import { Text } from '../../../../shared/components/text';
+import { theme } from '../../../../constaints/theme';
 
 type SessionItem = {
     id: number;
     uri: string;
     date: string;
     device_id: number;
-}
+};
 
 const sessionList: SessionItem[] = [
     {
@@ -86,15 +86,14 @@ const sessionList: SessionItem[] = [
         uri: 'Mozilla/almas.nakhli.man@gmail.com/sdf...',
         date: '2020/03/26  13:23',
         device_id: 84568305
-    },
-]
+    }
+];
 
-export function SessionsPage() {
-
-    const renderSigninItems = ({ item }: { item: SessionItem }) => {
-        return (
+const renderSigninItems = ({ item }: { item: SessionItem }) => {
+    return (
+        <PaddingContainer>
             <Box
-                width='100%'
+                width="100%"
                 height={77}
                 paddingTop={16}
                 paddingBottom={16}
@@ -107,23 +106,26 @@ export function SessionsPage() {
                         width: '100%',
                         height: 77,
                         position: 'absolute',
-                        left: 0, top: 0,
+                        left: 0,
+                        top: 0,
                         borderRadius: 16
                     }}
                 />
-                <Box width='100%' paddingLeft={16}>
+                <Box width="100%" paddingLeft={16}>
                     <Text
                         color="#fff"
                         fontSize={14}
                         fontWeight={400}
                         lineHeight={17}
-                    >{item.uri}</Text>
+                    >
+                        {item.uri}
+                    </Text>
                 </Box>
                 <Box
                     direction="row"
                     alignItems="center"
                     justifyContent="space-between"
-                    width='100%'
+                    width="100%"
                     height={16}
                     marginTop={8}
                 >
@@ -132,39 +134,48 @@ export function SessionsPage() {
                         color="#666680"
                         fontSize={theme.numericFontSize.sm}
                         lineHeight={theme.numericLineHeight.md}
-                    >{item.date}</Text>
+                    >
+                        {item.date}
+                    </Text>
                     <Text
                         color="#666680"
                         marginRight={16}
                         fontSize={theme.numericFontSize.sm}
                         lineHeight={theme.numericLineHeight.md}
-                    >{item.device_id}</Text>
+                    >
+                        {item.device_id}
+                    </Text>
                 </Box>
-
             </Box>
-        )
-    }
+        </PaddingContainer>
+    );
+};
 
-    const keyExtractor = (item: SessionItem): string => item.id.toString()
+const pageHeaderComponent = (
+    <PaddingContainer>
+        <Box marginBottom={32}>
+            <SettingsScreenTitle title="Sessions" />
+        </Box>
+    </PaddingContainer>
+)
 
+const keyExtractor = (item: SessionItem): string => item.id.toString();
+
+export function SessionsPage() {
     return (
         <SafeAreaView style={{ flex: 1, width: '100%' }}>
-            <ScreenGradient >
+            <ScreenGradient>
                 <ScrollView style={{ flex: 1, width: '100%' }}>
-                    <PaddingContainer>
-                        <Box marginTop={32}>
-                            <SettingsScreenTitle title="Sessions" />
-                        </Box>
-                        <Box marginTop={48}>
-                            <FlatList
-                                data={sessionList}
-                                renderItem={renderSigninItems}
-                                keyExtractor={keyExtractor}
-                            />
-                        </Box>
-                    </PaddingContainer>
+                    <Box marginTop={48}>
+                        <FlatList
+                            ListHeaderComponent={pageHeaderComponent}
+                            data={sessionList}
+                            renderItem={renderSigninItems}
+                            keyExtractor={keyExtractor}
+                        />
+                    </Box>
                 </ScrollView>
             </ScreenGradient>
         </SafeAreaView>
-    )
+    );
 }

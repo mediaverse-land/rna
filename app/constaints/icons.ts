@@ -177,3 +177,12 @@ export const ICON_ANALYTICS = ICON_ANALYTICS_PATH;
 export const ICON_MAIL = ICON_MAIL_PATH;
 export const ICON_USER = ICON_USER_PATH;
 export const ICON_ARROW_RIGHT = ICON_ARROW_RIGHT_PATH;
+
+import ICON_INSTAGRAM_PRIMARY_SVG from './../../assets/icons/icon__instagram-primary.svg';
+export const ICON_INSTAGRAM_PRIMARY = ICON_INSTAGRAM_PRIMARY_SVG;
+
+import ICON_TRASHBEEN_SVG from './../../assets/icons/icon__trash.svg';
+export const ICON_TRASHBEEN = ICON_TRASHBEEN_SVG;
+
+import ICON_ADD_SVG from './../../assets/icons/icon__add.svg';
+export const ICON_ADD = ICON_ADD_SVG;

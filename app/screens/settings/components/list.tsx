@@ -12,8 +12,8 @@ export type ListColumnItem = {
     bage?: number | string | null;
     icon: any;
     routePath?: string;
-    direction?: 'row-reverse',
-    iconStyle?: any
+    direction?: 'row-reverse';
+    iconStyle?: any;
 };
 
 type Props = {
@@ -44,7 +44,9 @@ export function ListColumn({ data }: Props) {
                     marginBottom={list.id !== data.at(-1).id ? 32 : 0}
                 >
                     <TouchableOpacity
-                        onPress={() => list.routePath && navigationHandler(list.routePath)}
+                        onPress={() =>
+                            list.routePath && navigationHandler(list.routePath)
+                        }
                     >
                         <Flex
                             width="100%"
@@ -53,14 +55,17 @@ export function ListColumn({ data }: Props) {
                             justify="space-between"
                         >
                             <Flex width="60%" direction="row" align="center">
-                                {
-                                    !list.direction || list.direction !== 'row-reverse' ?
-                                        <list.icon
-                                            style={[list.iconStyle, {
+                                {!list.direction ||
+                                list.direction !== 'row-reverse' ? (
+                                    <list.icon
+                                        style={[
+                                            list.iconStyle,
+                                            {
                                                 marginRight: 21.6
-                                            }]}
-                                        /> : null
-                                }
+                                            }
+                                        ]}
+                                    />
+                                ) : null}
                                 <Text
                                     color="#fff"
                                     fontSize={14}
@@ -70,18 +75,19 @@ export function ListColumn({ data }: Props) {
                                 </Text>
                             </Flex>
 
-                            {list?.direction === 'row-reverse' ?
+                            {list?.direction === 'row-reverse' ? (
                                 <>
-                                    <list.icon
-                                        style={[list.iconStyle]}
-                                    />
-                                </> :
+                                    <list.icon style={[list.iconStyle]} />
+                                </>
+                            ) : (
                                 <>
                                     {list.value ? (
                                         <Text
                                             color="#A2A2B5"
                                             fontSize={theme.numericFontSize.sm}
-                                            lineHeight={theme.numericLineHeight.md}
+                                            lineHeight={
+                                                theme.numericLineHeight.md
+                                            }
                                         >
                                             {list.value}
                                         </Text>
@@ -97,8 +103,12 @@ export function ListColumn({ data }: Props) {
                                         >
                                             <Text
                                                 color="#353542"
-                                                fontSize={theme.numericFontSize.sm}
-                                                lineHeight={theme.numericLineHeight.md}
+                                                fontSize={
+                                                    theme.numericFontSize.sm
+                                                }
+                                                lineHeight={
+                                                    theme.numericLineHeight.md
+                                                }
                                                 fontWeight={400}
                                             >
                                                 {list.bage}
@@ -106,7 +116,7 @@ export function ListColumn({ data }: Props) {
                                         </Box>
                                     ) : null}
                                 </>
-                            }
+                            )}
                         </Flex>
                     </TouchableOpacity>
                 </Box>

@@ -1,12 +1,13 @@
 import 'react-native-gesture-handler';
 import { FC } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+// import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AppStack } from './app/screens/stack';
 import { SearchPage } from './app/screens/search';
 import { SettingsStack } from './app/screens/settings/stack-navigator';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const routes: { id: number; name: string; component: FC }[] = [
     {
@@ -31,7 +32,8 @@ export default function App() {
         <NavigationContainer>
             <Stack.Navigator
                 screenOptions={{
-                    headerShown: false
+                    headerShown: false,
+                    animation: "fade_from_bottom",
                 }}
             >
                 {routes.map((route) => (
