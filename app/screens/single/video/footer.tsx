@@ -1,10 +1,10 @@
-import { Image } from 'react-native'
-import { Box } from "../../../shared/components/box";
+import { Image } from 'react-native';
+import { Box } from '../../../shared/components/box';
 import { SINGLE_VIDEO_FOOTER_GRAIDENT } from '../../../constaints/images';
 
 export function Footer() {
     return (
-        <Box width='100%' height={240} >
+        <Box width="100%" height={240}>
             <Image
                 source={{
                     uri: SINGLE_VIDEO_FOOTER_GRAIDENT
@@ -19,5 +19,5 @@ export function Footer() {
                 }}
             />
         </Box>
-    )
+    );
 }

@@ -103,8 +103,55 @@ export const ICON_ARROW_LEFT_WHITE = ICON_ARROW_LEFT_WHITE_SVG;
 import ICON_VIDEO_WHITE_SVG from './../../assets/icons/icon__video-white.svg';
 export const ICON_VIDEO_WHITE = ICON_VIDEO_WHITE_SVG;
 
+import ICON_IMAGE_WHITE_SVG from './../../assets/icons/icon__image-white.svg';
+export const ICON_IMAGE_WHITE = ICON_IMAGE_WHITE_SVG;
+
 import ICON_VIDEO_PLAY_SVG from './../../assets/icons/icon__video-play.svg';
 export const ICON_VIDEO_PLAY = ICON_VIDEO_PLAY_SVG;
 
 import ICON_ARROW_UP_PATH from './../../assets/icons/icon__arrow-up.svg';
 export const ICON_ARROW_UP = ICON_ARROW_UP_PATH;
+
+import ICON_SOUND_WHITE_PATH from './../../assets/icons/icon__sound-white.svg';
+export const ICON_SOUND_WHITE = ICON_SOUND_WHITE_PATH;
+
+import ICON_TEXT_WHITE_PATH from './../../assets/icons/icon__text-white.svg';
+export const ICON_TEXT_WHITE = ICON_TEXT_WHITE_PATH;
+
+import ICON_EYE_GRAY_PATH from './../../assets/icons/icon__eye-gray.svg';
+export const ICON_EYE_GRAY = ICON_EYE_GRAY_PATH;
+
+import ICON_SHRE_GRAY_PATH from './../../assets/icons/icon__share-gray.svg';
+export const ICON_SHRE_GRAY = ICON_SHRE_GRAY_PATH;
+
+import ICON_PLAY_GRAY_PATH from './../../assets/icons/icon__play-gray.svg';
+export const ICON_PLAY_GRAY = ICON_PLAY_GRAY_PATH;
+
+import ICON_WALLET_BLUE_PATH from './../../assets/icons/icon__wallet-blue.svg';
+export const ICON_WALLET_BLUE = ICON_WALLET_BLUE_PATH;
+
+import ICON_PAYPAL_PATH from './../../assets/icons/icon__paypal.svg';
+export const ICON_PAYPAL = ICON_PAYPAL_PATH;
+
+import ICON_MASTER_CARD_PATH from './../../assets/icons/icon__mastercard.svg';
+export const ICON_MASTER_CARD = ICON_MASTER_CARD_PATH;
+
+import ICON_LIKE_BLUE_PATH from './../../assets/icons/icon__like-blue-button.svg';
+export const ICON_LIKE_BLUE = ICON_LIKE_BLUE_PATH;
+
+import ICON_LOGO_TOP_SECTION_PATH from './../../assets/icons/icon__logo-top-section.svg';
+import ICON_LOGO_MIDD_SECTION_PATH from './../../assets/icons/icon__logo-mid-section.svg';
+import ICON_LOGO_BOTTOM_SECTION_PATH from './../../assets/icons/icon__logo-bottom-section.svg';
+export const ICON_LOGO_TOP_SECTION = ICON_LOGO_TOP_SECTION_PATH;
+export const ICON_LOGO_MIDD_SECTION = ICON_LOGO_MIDD_SECTION_PATH;
+export const ICON_LOGO_BOTTOM_SECTION = ICON_LOGO_BOTTOM_SECTION_PATH;
+
+import ICON_APPLE_PATH from './../../assets/icons/icon__apple.svg';
+import ICON_GOOGLE_PATH from './../../assets/icons/icon__google.svg';
+import ICON_FACEBOOK_PATH from './../../assets/icons/icon__facebook.svg';
+export const ICON_APPLE = ICON_APPLE_PATH;
+export const ICON_GOOGLE = ICON_GOOGLE_PATH;
+export const ICON_FACEBOOK = ICON_FACEBOOK_PATH;
+
+import ICON_FRANCE_FLAG_PATH from './../../assets/icons/icon__france-flag.svg';
+export const ICON_FRANCE_FLAG = ICON_FRANCE_FLAG_PATH;

@@ -1,44 +1,37 @@
-import { useState } from 'react'
-import {
-    TouchableOpacity,
-    LayoutChangeEvent,
-    Image
-} from 'react-native'
-import { Box } from "../../../../shared/components/box";
-import { Text } from '../../../../shared/components/text';
-import { theme } from '../../../../constaints/theme';
-import { ICON_ARROW_UP } from '../../../../constaints/icons';
-import {
-    VIDEO_FILES_ITEM_GRADEINT,
-    VIDEO_FILES_WRAPPER_GRADEINT
-} from '../../../../constaints/images';
+import { FC, useState } from 'react';
+import { TouchableOpacity, LayoutChangeEvent, Image } from 'react-native';
+import { Box } from '../../../shared/components/box';
+import { VIDEO_FILES_ITEM_GRADEINT, VIDEO_FILES_WRAPPER_GRADEINT } from '../../../constaints/images';
+import { Text } from '../../../shared/components/text';
+import { theme } from '../../../constaints/theme';
+import { ICON_ARROW_UP } from '../../../constaints/icons';
 
-export type VideoFileType = {
-    id: number,
-    chapterName: string,
-    duration: string
-}
+export type FileType = {
+    id: number;
+    chapterName: string;
+    duration: string;
+};
 
 type Props = {
-    data: VideoFileType[]
-}
+    data: FileType[];
+};
 
-export function VideoFiles({ data }: Props) {
-    const [layoutHeight, setLayoutHeight] = useState<number>(20)
+export const SingleItemFiles: FC<Props> = ({ data }) => {
+    const [layoutHeight, setLayoutHeight] = useState<number>(20);
     const [isAccordianOpen, setIsAccordianOpen] = useState(true);
 
     const setLayoutHeightHandler = (event: LayoutChangeEvent) => {
         const { height } = event.nativeEvent.layout;
-        setLayoutHeight(Math.floor(height))
-    }
+        setLayoutHeight(Math.floor(height));
+    };
 
     const toggleAccordianHandler = () => {
-        setIsAccordianOpen(!isAccordianOpen)
-    }
+        setIsAccordianOpen(!isAccordianOpen);
+    };
 
     return (
         <Box
-            width='100%'
+            width="100%"
             marginTop={24}
             paddingBottom={16}
             onlayout={setLayoutHeightHandler}
@@ -51,25 +44,23 @@ export function VideoFiles({ data }: Props) {
                     position: 'absolute',
                     top: 0,
                     left: 0,
-                    borderRadius: 16,
+                    borderRadius: 16
                 }}
-                resizeMode='cover'
+                resizeMode="cover"
             />
             {/* title */}
-            <TouchableOpacity
-                onPress={toggleAccordianHandler}
-            >
+            <TouchableOpacity onPress={toggleAccordianHandler}>
                 <Box
-                    width='100%'
-                    direction='row'
-                    alignItems='center'
-                    justifyContent='space-between'
+                    width="100%"
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
                     marginTop={20}
                     paddingLeft={24}
                     paddingRight={24}
                 >
                     <Text
-                        color='#fff'
+                        color="#fff"
                         fontSize={theme.numericFontSize.md}
                         lineHeight={theme.numericLineHeight.md}
                     >
@@ -81,14 +72,18 @@ export function VideoFiles({ data }: Props) {
                                 width: 7.78,
                                 height: 14,
                                 transform: [
-                                    { rotateX: isAccordianOpen ? '180deg' : '0deg' }
+                                    {
+                                        rotateX: isAccordianOpen
+                                            ? '180deg'
+                                            : '0deg'
+                                    }
                                 ]
                             }}
                         />
                     </Box>
                 </Box>
             </TouchableOpacity>
-            {isAccordianOpen ?
+            {isAccordianOpen ? (
                 <Box
                     paddingTop={28}
                     paddingBottom={20}
@@ -96,11 +91,7 @@ export function VideoFiles({ data }: Props) {
                     paddingRight={16}
                 >
                     {data.map((file) => (
-                        <Box
-                            key={file.id}
-                            marginBottom={8}
-                            borderRadius={8}
-                        >
+                        <Box key={file.id} marginBottom={8} borderRadius={8}>
                             <Image
                                 source={{
                                     uri: VIDEO_FILES_ITEM_GRADEINT
@@ -114,9 +105,9 @@ export function VideoFiles({ data }: Props) {
                             />
                             <Box
                                 height={48}
-                                direction='row'
-                                alignItems='center'
-                                justifyContent='space-between'
+                                direction="row"
+                                alignItems="center"
+                                justifyContent="space-between"
                                 paddingLeft={16}
                                 paddingRight={16}
                             >
@@ -140,8 +131,7 @@ export function VideoFiles({ data }: Props) {
                         </Box>
                     ))}
                 </Box>
-                : null}
-
+            ) : null}
         </Box>
-    )
+    );
 }

@@ -1,12 +1,16 @@
-import { Image, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { SearchBoxComponents } from './style';
 import { Flex } from '../../styles/grid';
-import { ICON_ARROW_LEFT_SVG, ICON_PROFILE_SETTINGS_SVG, ICON_SEARCH_SVG_PATH } from '../../constaints/icons';
+import {
+    ICON_ARROW_LEFT_SVG,
+    ICON_PROFILE_SETTINGS_SVG,
+    ICON_SEARCH_SVG_PATH
+} from '../../constaints/icons';
 import { windowSize } from '../../utils/window-size';
 
 const { width } = windowSize();
 
-const { SearchBoxWrapper, SearchInput, SearchIcon, AdvancedSearchIconButton } =
+const { SearchBoxWrapper, SearchInput, AdvancedSearchIconButton } =
     SearchBoxComponents;
 
 export function SearchBox() {
@@ -21,9 +25,7 @@ export function SearchBox() {
                 activeOpacity={1}
                 style={{ width: 22, marginRight: 24, marginTop: 25 }}
             >
-                <ICON_ARROW_LEFT_SVG
-                    style={{ width: 22, height: 16.88 }}
-                />
+                <ICON_ARROW_LEFT_SVG style={{ width: 22, height: 16.88 }} />
 
                 {/* <Image
                     source={{ uri: ICON_ARROW_BACK }}
@@ -38,7 +40,7 @@ export function SearchBox() {
                         position: 'absolute',
                         top: 40,
                         right: 24,
-                        zIndex: 12,
+                        zIndex: 12
                     }}
                 />
                 {/* <SearchIcon source={{ uri: ICON_SEARCH }} /> */}
@@ -52,7 +54,9 @@ export function SearchBox() {
                     marginTop: 25
                 }}
             >
-                <ICON_PROFILE_SETTINGS_SVG style={{ width: 19.62, height: 20 }} />
+                <ICON_PROFILE_SETTINGS_SVG
+                    style={{ width: 19.62, height: 20 }}
+                />
                 {/* <Image
                     source={{ uri: ICON_SETTINGS }}
                     

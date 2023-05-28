@@ -65,7 +65,7 @@ export const ImagesPageComponents = {
         height: 154px;
         margin-top: 24px;
     `,
-    TextSlide: styled.View`
+    TextSlide: styled.TouchableOpacity`
         width: 190px;
         height: 154px;
         margin-right: 16px;

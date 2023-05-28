@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const SearchBarComponents: any = {
+export const SearchBarComponents = {
     SearchInput: styled.TextInput`
         width: 100%;
         height: 48;
@@ -8,7 +8,7 @@ export const SearchBarComponents: any = {
         border: 1px solid #353542;
         padding-left: 17px;
         line-height: 16.94px;
-        margin-top: 48px;
+        margin-top: 24px;
         color: #83839c;
         background-color: #0e0e12a0;
         filter: blur(10px);

@@ -1,6 +1,9 @@
 import { FlatList } from 'react-native';
 import { HorizontalSliderComponents } from './style';
 import { HorizontalSlide } from './slide';
+import { useNavigation } from '@react-navigation/native';
+
+type ContentType = 'sound' | 'video' | 'image' | 'text';
 
 export type HorizontailSlideType = {
     id: number;
@@ -9,18 +12,42 @@ export type HorizontailSlideType = {
     username: string;
     profileUri: string;
     slidePressRedirectHandler?: () => void;
-    type?: 'sound' | 'video' | 'image' | 'text';
+    type?: ContentType
 };
 
 type Props = {
     data: HorizontailSlideType[];
+    navigationScreenName?: string
 };
 
 const { Wrapper } = HorizontalSliderComponents;
 
+const contentTypeMapperToScreenMapper = (type: ContentType) => {
+    const screens = {
+        sound: 'SingleSoundScreen',
+        image: 'SingleImageScreen',
+        video: 'SingleVideoScreen',
+        text: 'SingleTextScreen'
+    }
+
+    return screens[type] || null;
+}
+
+type UseNavigationProps = {
+    navigate: (title: string, options: Record<string, string>) => void;
+}
+
 export function HorizontalSlider({ data }: Props) {
-    function slidePressRedirectHandler(id: number) {
-        console.log(id);
+    const navigation = useNavigation<UseNavigationProps>();
+
+    function slidePressRedirectHandler(title: string, contentType: ContentType) {
+        const screen = contentTypeMapperToScreenMapper(contentType);
+
+        if (screen) {
+            navigation.navigate(screen, {
+                title
+            })
+        }
     }
 
     const renderItem = ({ item }: { item: HorizontailSlideType }) => {
@@ -31,18 +58,20 @@ export function HorizontalSlider({ data }: Props) {
                 thumbnailPath={item.thumbnailPath}
                 username={item.username}
                 profileUri={item.profileUri}
-                slidePressRedirectHandler={slidePressRedirectHandler}
+                slidePressRedirectHandler={() => slidePressRedirectHandler(item.title, item.type)}
                 type={item.type ? item.type : 'image'}
             />
         );
     };
+
+    const keyExtractor = (item: HorizontailSlideType) => item.id.toString();
 
     return (
         <Wrapper>
             <FlatList
                 data={data}
                 horizontal
-                keyExtractor={(item: HorizontailSlideType | any) => item.id}
+                keyExtractor={keyExtractor}
                 renderItem={renderItem}
                 showsHorizontalScrollIndicator={false}
             />

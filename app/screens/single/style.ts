@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { theme } from '../../../constaints/theme';
+import { theme } from '../../constaints/theme';
 
 export const SingleVideoPageComponents = {
     BackButton: styled.TouchableOpacity`

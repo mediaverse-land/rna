@@ -10,9 +10,10 @@ const { InputBox, Label } = InputComponent;
 type Props = {
     labelText: string;
     placeholder?: string;
+    labelIcon?: any
 };
 
-export function Input({ labelText, placeholder }: Props) {
+export function Input({ labelText, placeholder, labelIcon }: Props) {
     const [labelWidth, setLabelWidth] = useState<number>(0);
 
     return (
@@ -29,6 +30,7 @@ export function Input({ labelText, placeholder }: Props) {
                         borderRightWidth: 1,
                         borderRightColor: '#fff'
                     }}
+
                 >
                     <Text
                         fontSize={14}
@@ -36,7 +38,14 @@ export function Input({ labelText, placeholder }: Props) {
                         color="#666680"
                         paddingRight={16}
                     >
-                        {labelText}
+                        {
+                            labelIcon ?
+                                <Box marginTop={10} paddingTop={20}>
+                                    {labelIcon}
+                                </Box>
+                                : null
+                        }
+                        <Text>{labelIcon ? '   ' : null}{labelText}</Text>
                     </Text>
                 </Box>
             </Label>

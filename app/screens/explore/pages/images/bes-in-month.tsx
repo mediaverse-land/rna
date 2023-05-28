@@ -15,7 +15,10 @@ export function ImagePageBestInMonth() {
         <PaddingContainer>
             <Title str="Best in month" />
             <View style={styles.sliderWrapper}>
-                <HorizontalSlider data={bestInMonthImagesMockData} />
+                <HorizontalSlider
+                    data={bestInMonthImagesMockData}
+                    navigationScreenName='SingleImageScreen'
+                />
             </View>
         </PaddingContainer>
     );

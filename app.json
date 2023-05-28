@@ -1,7 +1,7 @@
 {
     "expo": {
-        "name": "mediaverse",
-        "slug": "mediaverse",
+        "name": "mediavers",
+        "slug": "mediavers",
         "version": "0.0.1",
         "orientation": "portrait",
         "icon": "./assets/icon.png",

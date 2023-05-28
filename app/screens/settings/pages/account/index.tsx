@@ -3,9 +3,7 @@ import { ScreenGradient } from '../../../../shared/components/screen-gradient';
 import { Box } from '../../../../shared/components/box';
 import { ListColumn, ListColumnItem } from '../../components/list';
 import { PaddingContainer } from '../../../../styles/grid';
-import {
-    ICON_ARROW_RIGHT
-} from '../../../../constaints/icons';
+import { ICON_ARROW_RIGHT } from '../../../../constaints/icons';
 import { SettingsScreenTitle } from '../../components/title';
 
 const data: ListColumnItem[] = [

@@ -19,17 +19,19 @@ export function VideoPageList() {
     const navigation = useNavigation<any>();
 
     const navigateToSinglVide = (title: string) => {
-        navigation.navigate('SingleVideoHeader', {
+        navigation.navigate('SingleVideoScreen', {
             videoTitle: title
-        })
-    }
+        });
+    };
 
     const renderVidoeListItem = ({ item }: { item: VideoItem }) => {
         return (
             <TouchableOpacity onPress={() => navigateToSinglVide(item.title)}>
                 <VideoListItem>
                     <View>
-                        <VideoListItemThumbnail source={{ uri: item.imagePath }} />
+                        <VideoListItemThumbnail
+                            source={{ uri: item.imagePath }}
+                        />
                         <VideoListItemGradietImage
                             source={{ uri: VIDEO_LIST_ITEM_GRADIENT }}
                         />

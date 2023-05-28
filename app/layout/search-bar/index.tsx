@@ -39,7 +39,7 @@ export function SearchBar() {
 const styles = StyleSheet.create({
     wrapper: {
         width: '100%',
-        height: 132,
+        height: 96,
         zIndex: 10,
         backgroundColor: '#0e0e12a0',
         position: 'absolute',

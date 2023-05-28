@@ -18,7 +18,7 @@ const {
     SwiperItemContent,
     SwiperItemCreationDate,
     NextButton,
-    PrevButton,
+    PrevButton
 } = TextPageComponents;
 
 export function TextPageSwiper() {
@@ -91,7 +91,8 @@ export function TextPageSwiper() {
                                 style={{
                                     width: 7.8,
                                     height: 14
-                                }} />
+                                }}
+                            />
                         </PrevButton>
                     </Flex>
                 </SwiperItemInner>

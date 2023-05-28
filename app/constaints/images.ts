@@ -100,6 +100,11 @@ export const SINGLE_VIDEO_COVER_IMAGE_GRADIENT = imageUriResolver(
     SINGLE_VIDEO_COVER_IMAGE_GRADIENT_PATH
 );
 
+import SINGLE_SOUND_COVER_IMAGE_GRADIENT_PATH from './../../assets/img/gradients/single-sound-screen-header-gradient.png';
+export const SINGLE_SOUND_COVER_IMAGE_GRADIENT = imageUriResolver(
+    SINGLE_SOUND_COVER_IMAGE_GRADIENT_PATH
+);
+
 import VIDEO_FILES_ITEM_GRADEINT_PATH from './../../assets/img/gradients/video-files-item-gradient.png';
 import VIDEO_FILES_WRAPPER_GRADEINT_PATH from './../../assets/img/gradients/video-files-wrapper-gradiet.png';
 export const VIDEO_FILES_ITEM_GRADEINT = imageUriResolver(
@@ -116,3 +121,33 @@ import SINGLE_VIDEO_FOOTER_GRAIDENT_PATH from './../../assets/img/gradients/sing
 export const SINGLE_VIDEO_FOOTER_GRAIDENT = imageUriResolver(
     SINGLE_VIDEO_FOOTER_GRAIDENT_PATH
 );
+
+import SINGLE_TEXT_COVER_GRAIDENT_PATH from './../../assets/img/gradients/single-text-cover-gradient.png';
+export const SINGLE_TEXT_COVER_GRAIDENT = imageUriResolver(
+    SINGLE_TEXT_COVER_GRAIDENT_PATH
+);
+
+import SINGLE_TEXT_THUMBNAIL_GRAIDENT_PATH from './../../assets/img/gradients/single-text-thumbnail-gradient.png';
+export const SINGLE_TEXT_THUMBNAIL_GRAIDENT = imageUriResolver(
+    SINGLE_TEXT_THUMBNAIL_GRAIDENT_PATH
+);
+
+import PAYMENT_CARD_ITEM_GRAIDENT_PATH from './../../assets/img/gradients/payment-card-item-gradient.png';
+export const PAYMENT_CARD_ITEM_GRAIDENT = imageUriResolver(
+    PAYMENT_CARD_ITEM_GRAIDENT_PATH
+);
+
+import PAYMENT_CARD_BUTTON_GRAIDENT_PATH from './../../assets/img/gradients/payment-card-button-gradient.png';
+export const PAYMENT_CARD_BUTTON_GRAIDENT = imageUriResolver(
+    PAYMENT_CARD_BUTTON_GRAIDENT_PATH
+);
+
+import TACKING_BOX_GRADEINT_PATH from './../../assets/img/gradients/tracking-box-gradeint.png';
+export const TACKING_BOX_GRADEINT = imageUriResolver(TACKING_BOX_GRADEINT_PATH);
+
+import AUTH_SHAPE_LEFT_PATH from './../../assets/img/auth/shape__left.svg';
+import AUTH_SHAPE_RIGHT_PATH from './../../assets/img/auth/shape__right.svg';
+import AUTH_EMOJY_PATH from './../../assets/img/auth/emojy.svg';
+export const AUTH_SHAPE_LEFT = AUTH_SHAPE_LEFT_PATH;
+export const AUTH_SHAPE_RIGHT = AUTH_SHAPE_RIGHT_PATH;
+export const AUTH_EMOJY = AUTH_EMOJY_PATH;
