@@ -1,7 +1,7 @@
-import { FC } from "react";
-import { Box } from "../../../shared/components/box";
-import { UserNameCard } from "../../../shared/components/username-card";
-import { Text } from "../../../shared/components/text";
+import { FC } from 'react';
+import { Box } from '../../../shared/components/box';
+import { UserNameCard } from '../../../shared/components/username-card';
+import { Text } from '../../../shared/components/text';
 
 type Props = {
     username: string;
@@ -20,7 +20,7 @@ export const SingleItemUsernameAndDuration: FC<Props> = ({
             direction="row"
             alignItems="center"
             justifyContent="space-between"
-        // marginTop={16}
+            // marginTop={16}
         >
             <UserNameCard
                 username={username}
@@ -39,4 +39,4 @@ export const SingleItemUsernameAndDuration: FC<Props> = ({
             </Text>
         </Box>
     );
-}
+};

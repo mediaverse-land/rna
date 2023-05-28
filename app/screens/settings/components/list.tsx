@@ -4,6 +4,7 @@ import { Box } from '../../../shared/components/box';
 import { Text } from '../../../shared/components/text';
 import { Flex } from '../../../styles/grid';
 import { TouchableOpacity } from 'react-native';
+import { useRtl } from '../../../hooks/use-rtl';
 
 export type ListColumnItem = {
     id: number;
@@ -21,6 +22,7 @@ type Props = {
 };
 
 export function ListColumn({ data }: Props) {
+    const { isRtl } = useRtl();
     const navigation = useNavigation<any>();
 
     const navigationHandler = (routePath: string) => {
@@ -56,12 +58,12 @@ export function ListColumn({ data }: Props) {
                         >
                             <Flex width="60%" direction="row" align="center">
                                 {!list.direction ||
-                                list.direction !== 'row-reverse' ? (
+                                    list.direction !== 'row-reverse' ? (
                                     <list.icon
                                         style={[
                                             list.iconStyle,
                                             {
-                                                marginRight: 21.6
+                                                marginRight: 21.6,
                                             }
                                         ]}
                                     />
@@ -77,7 +79,11 @@ export function ListColumn({ data }: Props) {
 
                             {list?.direction === 'row-reverse' ? (
                                 <>
-                                    <list.icon style={[list.iconStyle]} />
+                                    <list.icon style={[list.iconStyle, {
+                                        transform: [
+                                            { rotate: isRtl ? '180deg' : '0deg' }
+                                        ]
+                                    }]} />
                                 </>
                             ) : (
                                 <>

@@ -2,10 +2,12 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { SearchBarComponents } from './style';
 import { ICON_SEARCH_SVG_PATH } from '../../constaints/icons';
 import { useNavigation } from '@react-navigation/native';
+import { useRtl } from '../../hooks/use-rtl';
 
 const { SearchInput } = SearchBarComponents;
 
 export function SearchBar() {
+    const { isRtl } = useRtl();
     const navigation = useNavigation<any>();
 
     const navigateToSearchPageHandler = () => {
@@ -22,6 +24,7 @@ export function SearchBar() {
                 placeholder="Search"
                 placeholderTextColor="#83839C"
                 onFocus={navigateToSearchPageHandler}
+                textAlign={!isRtl ? 'left' : 'right'}
             />
             <ICON_SEARCH_SVG_PATH
                 width={16}

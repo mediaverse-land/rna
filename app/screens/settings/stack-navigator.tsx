@@ -66,11 +66,18 @@ const routes = [
     }
 ];
 
+const fadeTransition = ({ current }: any) => ({
+    cardStyle: {
+        opacity: current.progress,
+    },
+});
+
 export function SettingsStack() {
     return (
         <Stack.Navigator
             screenOptions={{
-                headerShown: false
+                headerShown: false,
+                cardStyleInterpolator: fadeTransition,
             }}
         >
             {routes.map((route) => (

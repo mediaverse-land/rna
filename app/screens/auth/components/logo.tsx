@@ -1,19 +1,23 @@
-import { ICON_LOGO_BOTTOM_SECTION, ICON_LOGO_MIDD_SECTION, ICON_LOGO_TOP_SECTION } from "../../../constaints/icons";
-import { theme } from "../../../constaints/theme";
-import { Box } from "../../../shared/components/box";
-import { Text } from "../../../shared/components/text";
+import {
+    ICON_LOGO_BOTTOM_SECTION,
+    ICON_LOGO_MIDD_SECTION,
+    ICON_LOGO_TOP_SECTION
+} from '../../../constaints/icons';
+import { theme } from '../../../constaints/theme';
+import { Box } from '../../../shared/components/box';
+import { Text } from '../../../shared/components/text';
 
 export function AuthLogo() {
     return (
         <Box
-            width='100%'
+            width="100%"
             justifyContent="center"
             alignItems="center"
             paddingTop={56}
         >
             <ICON_LOGO_TOP_SECTION
                 style={{
-                    width: 14.20,
+                    width: 14.2,
                     height: 8
                 }}
             />
@@ -50,7 +54,6 @@ export function AuthLogo() {
             >
                 Content is wealth
             </Text>
-
         </Box>
-    )
+    );
 }

@@ -1,24 +1,23 @@
-import { Image, TouchableOpacity } from "react-native";
-import { Box } from "../../../shared/components/box";
-import { ADD_ACCOUNT_BUTTON_GRADIENT, SINGLE_VIDEO_FOOTER_GRAIDENT } from "../../../constaints/images";
-import { Text } from "../../../shared/components/text";
-import { theme } from "../../../constaints/theme";
-import { ICON_EYE_GRAY, ICON_SHRE_GRAY } from "../../../constaints/icons";
-import { useNavigation } from "@react-navigation/native";
+import { Image, TouchableOpacity } from 'react-native';
+import { Box } from '../../../shared/components/box';
+import {
+    ADD_ACCOUNT_BUTTON_GRADIENT,
+    SINGLE_VIDEO_FOOTER_GRAIDENT
+} from '../../../constaints/images';
+import { Text } from '../../../shared/components/text';
+import { theme } from '../../../constaints/theme';
+import { ICON_EYE_GRAY, ICON_SHRE_GRAY } from '../../../constaints/icons';
+import { useNavigation } from '@react-navigation/native';
 
 export function BuyBottom() {
-
     const navigation = useNavigation<any>();
 
     const paymentScreenNavigationHandler = () => {
-        navigation.navigate('PaymentScreen')
-    }
+        navigation.navigate('PaymentScreen');
+    };
 
     return (
-        <Box
-            width='100%'
-            height={176}
-        >
+        <Box width="100%" height={176}>
             <Image
                 source={{ uri: SINGLE_VIDEO_FOOTER_GRAIDENT }}
                 style={{
@@ -28,21 +27,16 @@ export function BuyBottom() {
                     top: 0,
                     left: 0,
                     borderTopLeftRadius: 16,
-                    borderTopRightRadius: 16,
+                    borderTopRightRadius: 16
                 }}
             />
 
-            <Box
-                width='100%'
-                height={176}
-                padding={24}
-            >
+            <Box width="100%" height={176} padding={24}>
                 <Box
-                    width='100%'
+                    width="100%"
                     height={56}
                     borderRadius={16}
                     backgroundColor="rgba(78, 78, 97, 0.5)"
-
                 >
                     <Image
                         source={{
@@ -61,7 +55,7 @@ export function BuyBottom() {
                     <Box
                         position="relative"
                         zIndex={11}
-                        height='100%'
+                        height="100%"
                         direction="row"
                         alignItems="center"
                         paddingLeft={17}
@@ -109,11 +103,9 @@ export function BuyBottom() {
                 </Box>
                 {/* buy-buton */}
                 <Box marginTop={16}>
-                    <TouchableOpacity
-                        onPress={paymentScreenNavigationHandler}
-                    >
+                    <TouchableOpacity onPress={paymentScreenNavigationHandler}>
                         <Box
-                            width='100%'
+                            width="100%"
                             height={48}
                             backgroundColor="#597AFF"
                             borderRadius={16}
@@ -133,5 +125,5 @@ export function BuyBottom() {
                 </Box>
             </Box>
         </Box>
-    )
+    );
 }

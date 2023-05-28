@@ -4,10 +4,7 @@ import { Text } from '../../../shared/components/text';
 import { SINGLE_VIDEO_COVER_IMAGE_GRADIENT } from '../../../constaints/images';
 import { PaddingContainer } from '../../../styles/grid';
 import { GoBackButton } from '../components/goback-button';
-import {
-    ICON_VIDEO_PLAY,
-    ICON_VIDEO_WHITE
-} from '../../../constaints/icons';
+import { ICON_VIDEO_PLAY, ICON_VIDEO_WHITE } from '../../../constaints/icons';
 
 type Props = {
     goBackHandler: () => void;
@@ -39,7 +36,10 @@ export function SingleVideoHeader({ goBackHandler }: Props) {
     return (
         <Box>
             <Box>
-                <GoBackButton goBackHandler={goBackHandler} hasBackground={true} />
+                <GoBackButton
+                    goBackHandler={goBackHandler}
+                    hasBackground={true}
+                />
                 <Box width="100%" height={thumbnailHeight}>
                     {thumbnailCoverGradient}
                     <Image

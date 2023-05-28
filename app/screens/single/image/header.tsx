@@ -2,9 +2,7 @@ import { Image } from 'react-native';
 import { Box } from '../../../shared/components/box';
 import { Text } from '../../../shared/components/text';
 import { SINGLE_VIDEO_COVER_IMAGE_GRADIENT } from '../../../constaints/images';
-import {
-    ICON_IMAGE_WHITE
-} from '../../../constaints/icons';
+import { ICON_IMAGE_WHITE } from '../../../constaints/icons';
 import { PaddingContainer } from '../../../styles/grid';
 import { GoBackButton } from '../components/goback-button';
 
@@ -14,7 +12,7 @@ type Props = {
 
 const thumbnailHeight = 218;
 const imageThumbnailCoverPath =
-    'https://s3-alpha-sig.figma.com/img/0098/539b/5cf8c5cdb0ce5e6ed284538a3bea6eec?Expires=1685923200&Signature=GqtbLIw7ALgmf2KhQkAtCNuhjdPVSdw5Y7joPDkebLkCiTKGmLlE-OdS-ka3Qs6p1ssYvaKf-qq2d0fXCO9mT4mcFDI8-te5dopLqaLTZ2RBG~7kC932Jnu5VZjJNpku7a8CnMHYRp38FFncTpXvwGnS62jQt95PhK6SJfwvZykXerzso0rPUEAdKrfxNehiWTV-lCTr3coy2c36qtVb7JtkfkdXr55YdwHUh0GTdjIia2UDz5dGEF1HSScRWK1xSNYOQSgVHRtXZiKkB7Z1UgkKZIM~Or253T4G-bTRpjThjS9J5QiTHOCBGkeptOQrWa~7liQCQEAhVqYqUjp4Vg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
+    'https://s3-alpha-sig.figma.com/img/0098/539b/5cf8c5cdb0ce5e6ed284538a3bea6eec?Expires=1685923200&Signature=GqtbLIw7ALgmf2KhQkAtCNuhjdPVSdw5Y7joPDkebLkCiTKGmLlE-OdS-ka3Qs6p1ssYvaKf-qq2d0fXCO9mT4mcFDI8-te5dopLqaLTZ2RBG~7kC932Jnu5VZjJNpku7a8CnMHYRp38FFncTpXvwGnS62jQt95PhK6SJfwvZykXerzso0rPUEAdKrfxNehiWTV-lCTr3coy2c36qtVb7JtkfkdXr55YdwHUh0GTdjIia2UDz5dGEF1HSScRWK1xSNYOQSgVHRtXZiKkB7Z1UgkKZIM~Or253T4G-bTRpjThjS9J5QiTHOCBGkeptOQrWa~7liQCQEAhVqYqUjp4Vg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4';
 
 export function SingleImageHeader({ goBackHandler }: Props) {
     const thumbnailCoverGradient = (
@@ -38,7 +36,10 @@ export function SingleImageHeader({ goBackHandler }: Props) {
     return (
         <Box>
             <Box>
-                <GoBackButton goBackHandler={goBackHandler} hasBackground={true} />
+                <GoBackButton
+                    goBackHandler={goBackHandler}
+                    hasBackground={true}
+                />
                 {/* GoBack button place */}
                 <Box width="100%" height={thumbnailHeight}>
                     {thumbnailCoverGradient}
@@ -61,7 +62,6 @@ export function SingleImageHeader({ goBackHandler }: Props) {
                         }}
                     />
                 </Box>
-
             </Box>
             {/* Title */}
             <PaddingContainer>

@@ -25,7 +25,7 @@ export const SearchBoxComponents = {
         background-color: ${theme.color.light.WHITE_BG};
     `,
     SearchBoxWrapper: styles.wrapper,
-    SearchInput: styled.TextInput`
+    SearchInput: styled.TextInput<{ textAlign: string }>`
         width: 100%;
         height: 48;
         border-radius: 16px;
@@ -36,6 +36,7 @@ export const SearchBoxComponents = {
         color: #83839c;
         background-color: #0e0e12a0;
         filter: blur(10px);
+        text-align: ${(props) => props.textAlign || 'left'};
     `,
     SearchIcon: styled.Image`
         width: 16px;

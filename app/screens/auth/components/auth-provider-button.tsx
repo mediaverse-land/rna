@@ -1,16 +1,20 @@
-import { TouchableOpacity } from "react-native";
-import { Box } from "../../../shared/components/box";
-import { Text } from "../../../shared/components/text";
-
+import { TouchableOpacity } from 'react-native';
+import { Box } from '../../../shared/components/box';
+import { Text } from '../../../shared/components/text';
 
 type Props = {
-    backgroundColor: string,
-    textColor: string,
-    icon: any,
-    text: string
-}
+    backgroundColor: string;
+    textColor: string;
+    icon: any;
+    text: string;
+};
 
-export function AuthProviderButton({ backgroundColor, textColor, icon, text }: Props) {
+export function AuthProviderButton({
+    backgroundColor,
+    textColor,
+    icon,
+    text
+}: Props) {
     return (
         <TouchableOpacity>
             <Box
@@ -36,5 +40,5 @@ export function AuthProviderButton({ backgroundColor, textColor, icon, text }: P
                 </Text>
             </Box>
         </TouchableOpacity>
-    )
+    );
 }

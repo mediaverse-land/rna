@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const SearchBarComponents = {
-    SearchInput: styled.TextInput`
+    SearchInput: styled.TextInput<{ textAlign: string }>`
         width: 100%;
         height: 48;
         border-radius: 16px;
@@ -12,6 +12,7 @@ export const SearchBarComponents = {
         color: #83839c;
         background-color: #0e0e12a0;
         filter: blur(10px);
+        text-align: ${(props) => props.textAlign};
     `,
     SearchIcon: styled.Image`
         width: 16px;

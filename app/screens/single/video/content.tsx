@@ -61,9 +61,7 @@ export function SingleVideoContent() {
     return (
         <PaddingContainer>
             <Box width="100%" marginTop={16}>
-                <SingleItemDescription
-                    description={description}
-                />
+                <SingleItemDescription description={description} />
                 <Box marginTop={16}>
                     <SingleItemUsernameAndDuration
                         username={username}
@@ -71,12 +69,8 @@ export function SingleVideoContent() {
                         duration={duration}
                     />
                 </Box>
-                <SingleItemMetaData
-                    data={videoData}
-                />
-                <SingleItemFiles
-                    data={videoFiles}
-                />
+                <SingleItemMetaData data={videoData} />
+                <SingleItemFiles data={videoFiles} />
             </Box>
         </PaddingContainer>
     );

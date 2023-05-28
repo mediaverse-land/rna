@@ -1,44 +1,46 @@
-import { TouchableOpacity } from "react-native";
-import { Box } from "../../../shared/components/box";
-import { HeroShapes } from "../components/hero-shapes";
-import { Text } from "../../../shared/components/text";
-import { windowSize } from "../../../utils/window-size";
+import { TouchableOpacity } from 'react-native';
+import { Box } from '../../../shared/components/box';
+import { HeroShapes } from '../components/hero-shapes';
+import { Text } from '../../../shared/components/text';
+import { windowSize } from '../../../utils/window-size';
 
 type Props = {
-    setWindowHandler: (window: 'login' | 'singin') => void
-}
-
+    setWindowHandler: (window: 'login' | 'singin') => void;
+};
 
 export function AuthRoot({ setWindowHandler }: Props) {
     return (
-        <Box flex={1}>
+        <Box flex={1} paddingBottom={50}>
             <HeroShapes />
             <Box
-                width='100%'
+                width="100%"
                 flex={1}
                 paddingLeft={24}
                 paddingRight={24}
                 marginTop={30}
             >
-                <TouchableOpacity
-                    onPress={() => setWindowHandler('singin')}
-                >
+                <TouchableOpacity onPress={() => setWindowHandler('singin')}>
                     <Box
-                        width='100%'
+                        width="100%"
                         height={48}
                         backgroundColor="#597AFF"
                         borderRadius={32}
                         alignItems="center"
                         justifyContent="center"
                     >
-                        <Text color="#fff" fontWeight={600} lineHeight={16} fontSize={14}>Lets start</Text>
+                        <Text
+                            color="#fff"
+                            fontWeight={600}
+                            lineHeight={16}
+                            fontSize={14}
+                        >
+                            Lets start
+                        </Text>
                     </Box>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => setWindowHandler('login')}
-                >
+                <TouchableOpacity onPress={() => setWindowHandler('login')}>
                     <Box
-                        width='100%'
+                        width="100%"
                         height={48}
                         backgroundColor="rgba(78, 78, 97, 0.5)"
                         borderRadius={32}
@@ -46,7 +48,14 @@ export function AuthRoot({ setWindowHandler }: Props) {
                         justifyContent="center"
                         marginTop={16}
                     >
-                        <Text color="#fff" fontWeight={600} lineHeight={16} fontSize={14}>I have an account</Text>
+                        <Text
+                            color="#fff"
+                            fontWeight={600}
+                            lineHeight={16}
+                            fontSize={14}
+                        >
+                            I have an account
+                        </Text>
                     </Box>
                 </TouchableOpacity>
                 <Text
@@ -57,9 +66,10 @@ export function AuthRoot({ setWindowHandler }: Props) {
                     fontWeight={500}
                     lineHeight={16}
                 >
-                    By registering, you agree to our <Text color="#597AFF">Terms of Use</Text>.
+                    By registering, you agree to our{' '}
+                    <Text color="#597AFF">Terms of Use</Text>.
                 </Text>
             </Box>
         </Box>
-    )
+    );
 }

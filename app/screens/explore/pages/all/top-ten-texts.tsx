@@ -19,27 +19,27 @@ const {
 } = ImagesPageComponents;
 
 export function AllPageTopTenText() {
-
-    const navigation = useNavigation<{ navigate: (screenName: string, option: Record<string, string>) => void }>();
+    const navigation = useNavigation<{
+        navigate: (screenName: string, option: Record<string, string>) => void;
+    }>();
 
     const textScreenNavigationHandler = (title: string) => {
-        console.log('title')
+        console.log('title');
         navigation.navigate('SingleTextScreen', {
             title
-        })
-    }
+        });
+    };
 
     const renderItem = ({ item }: { item: TextItem }) => {
         return (
-            <TextSlide
-
-            >
+            <TextSlide>
                 <TextSlideBackgroundGradient
                     source={{ uri: TEXT_SLIDER_ITEM_GRADIENT }}
                 />
                 <TextSlideBody
                     onPress={() => textScreenNavigationHandler(item.title)}
-                    activeOpacity={1}>
+                    activeOpacity={1}
+                >
                     <TextSlideTitle>{item.title}</TextSlideTitle>
                     <TextSlideContentText>{item.content}</TextSlideContentText>
                     <Box marginTop={16}>

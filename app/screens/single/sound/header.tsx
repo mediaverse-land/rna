@@ -15,10 +15,10 @@ type Props = {
 };
 
 const thumbnailHeight = 332;
-const username = 'Ralph Edwards'
-const duration = '8:15'
+const username = 'Ralph Edwards';
+const duration = '8:15';
 const soundThumbnailCoverPath =
-    'https://s3-alpha-sig.figma.com/img/10e1/c4cf/e9985984e59b0b6150ea62faf736493a?Expires=1685923200&Signature=WHRaNiS~OHdfQMza1lg941xYbM9rsnAn5kqV9CaFzdqNQ9d~DpWQza2gIQO-ank3oNoULIEI5Gr8FjBu7X2Pq~vF~4NcC44MF2ESnlXgsBtCwCFeKTkYmfyEHUWdZ5u98-D7qtUPTdSZCZqXJbLFSrIunJkCNbp9km7l7sDRiIlZL02YdXz5MIl59RDcvxENXqy-1mPI7y9QcZg9AmgWeeGLMiNZlRaDIT-yoFSnkHDrNcTkxbXUy2RDajvxrcLoJ~G-CLaXXvfX3Uyc22gUFT-T773wJsaL70N3Ug~rwkB1THK0YNQu5F1cCX~7ykaVU98d2RPJxrqW66r-1GlxaA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
+    'https://s3-alpha-sig.figma.com/img/10e1/c4cf/e9985984e59b0b6150ea62faf736493a?Expires=1685923200&Signature=WHRaNiS~OHdfQMza1lg941xYbM9rsnAn5kqV9CaFzdqNQ9d~DpWQza2gIQO-ank3oNoULIEI5Gr8FjBu7X2Pq~vF~4NcC44MF2ESnlXgsBtCwCFeKTkYmfyEHUWdZ5u98-D7qtUPTdSZCZqXJbLFSrIunJkCNbp9km7l7sDRiIlZL02YdXz5MIl59RDcvxENXqy-1mPI7y9QcZg9AmgWeeGLMiNZlRaDIT-yoFSnkHDrNcTkxbXUy2RDajvxrcLoJ~G-CLaXXvfX3Uyc22gUFT-T773wJsaL70N3Ug~rwkB1THK0YNQu5F1cCX~7ykaVU98d2RPJxrqW66r-1GlxaA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4';
 
 export function SingleSoundHeader({ goBackHandler }: Props) {
     const thumbnailHeaderGradient = (
@@ -57,22 +57,21 @@ export function SingleSoundHeader({ goBackHandler }: Props) {
         />
     );
 
-
     return (
         <Box>
             <GoBackButton goBackHandler={goBackHandler} />
-            <Box
-                width="100%"
-                height={thumbnailHeight}
-            >
-                <GoBackButton goBackHandler={goBackHandler} hasBackground={false} />
+            <Box width="100%" height={thumbnailHeight}>
+                <GoBackButton
+                    goBackHandler={goBackHandler}
+                    hasBackground={false}
+                />
                 <Box
                     width={'100%'}
                     height={'100%'}
-                    position='relative'
+                    position="relative"
                     zIndex={11}
-                    alignItems='center'
-                    justifyContent='center'
+                    alignItems="center"
+                    justifyContent="center"
                 >
                     <Box>
                         <Image
@@ -116,6 +115,5 @@ export function SingleSoundHeader({ goBackHandler }: Props) {
                 {thumbnailHeaderGradient}
             </Box>
         </Box>
-
     );
 }

@@ -12,12 +12,13 @@ export type HorizontailSlideType = {
     username: string;
     profileUri: string;
     slidePressRedirectHandler?: () => void;
-    type?: ContentType
+    type?: ContentType;
 };
 
 type Props = {
     data: HorizontailSlideType[];
-    navigationScreenName?: string
+    navigationScreenName?: string;
+    isRtl?: boolean
 };
 
 const { Wrapper } = HorizontalSliderComponents;
@@ -28,25 +29,29 @@ const contentTypeMapperToScreenMapper = (type: ContentType) => {
         image: 'SingleImageScreen',
         video: 'SingleVideoScreen',
         text: 'SingleTextScreen'
-    }
+    };
 
     return screens[type] || null;
-}
+};
 
 type UseNavigationProps = {
     navigate: (title: string, options: Record<string, string>) => void;
-}
 
-export function HorizontalSlider({ data }: Props) {
+};
+
+export function HorizontalSlider({ data, isRtl }: Props) {
     const navigation = useNavigation<UseNavigationProps>();
 
-    function slidePressRedirectHandler(title: string, contentType: ContentType) {
+    function slidePressRedirectHandler(
+        title: string,
+        contentType: ContentType
+    ) {
         const screen = contentTypeMapperToScreenMapper(contentType);
 
         if (screen) {
             navigation.navigate(screen, {
                 title
-            })
+            });
         }
     }
 
@@ -58,8 +63,11 @@ export function HorizontalSlider({ data }: Props) {
                 thumbnailPath={item.thumbnailPath}
                 username={item.username}
                 profileUri={item.profileUri}
-                slidePressRedirectHandler={() => slidePressRedirectHandler(item.title, item.type)}
+                slidePressRedirectHandler={() =>
+                    slidePressRedirectHandler(item.title, item.type)
+                }
                 type={item.type ? item.type : 'image'}
+                isRtl={isRtl}
             />
         );
     };

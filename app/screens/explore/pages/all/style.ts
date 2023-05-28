@@ -58,6 +58,7 @@ export const ImagesPageComponents = {
         margin-top: 40px;
         padding-left: 24px;
     `,
+    // ${(props) => (props.isRtl ? `padding-right: 24px` : `padding-left: 24`)}
     ContainerStyles: styles.container,
     FixedStyles: styles.fixed,
     TextSliderWrapper: styled.View`

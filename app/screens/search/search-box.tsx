@@ -7,6 +7,7 @@ import {
     ICON_SEARCH_SVG_PATH
 } from '../../constaints/icons';
 import { windowSize } from '../../utils/window-size';
+import { useRtl } from '../../hooks/use-rtl';
 
 const { width } = windowSize();
 
@@ -14,6 +15,7 @@ const { SearchBoxWrapper, SearchInput, AdvancedSearchIconButton } =
     SearchBoxComponents;
 
 export function SearchBox() {
+    const { isRtl } = useRtl();
     return (
         <Flex
             width="100%"
@@ -47,6 +49,7 @@ export function SearchBox() {
                 <SearchInput
                     placeholder="Search"
                     placeholderTextColor="#353542"
+                    textAlign={isRtl ? 'right' : 'left'}
                 />
             </View>
             <AdvancedSearchIconButton

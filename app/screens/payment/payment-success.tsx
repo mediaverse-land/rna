@@ -1,9 +1,9 @@
-import { Image } from "react-native";
-import { ICON_LIKE_BLUE } from "../../constaints/icons";
-import { Box } from "../../shared/components/box";
-import { Text } from "../../shared/components/text";
-import { windowSize } from "../../utils/window-size";
-import { TACKING_BOX_GRADEINT } from "../../constaints/images";
+import { Image } from 'react-native';
+import { ICON_LIKE_BLUE } from '../../constaints/icons';
+import { Box } from '../../shared/components/box';
+import { Text } from '../../shared/components/text';
+import { windowSize } from '../../utils/window-size';
+import { TACKING_BOX_GRADEINT } from '../../constaints/images';
 
 const { height: windowHeight } = windowSize();
 
@@ -11,7 +11,7 @@ export function PaymentSuccess() {
     return (
         <Box
             flex={1}
-            width='100%'
+            width="100%"
             height={Math.floor(windowHeight)}
             alignItems="center"
             justifyContent="center"
@@ -46,21 +46,16 @@ export function PaymentSuccess() {
                     </Text>
                 </Box>
             </Box>
-            <Box
-                width='100%'
-                marginTop={40}
-                paddingLeft={48}
-                paddingRight={48}
-            >
+            <Box width="100%" marginTop={40} paddingLeft={48} paddingRight={48}>
                 <Box
-                    width='100%'
+                    width="100%"
                     height={60}
                     backgroundColor="rgba(78, 78, 97, 0.2)"
                     borderRadius={16}
                 >
                     <Image
                         source={{
-                            uri: TACKING_BOX_GRADEINT,
+                            uri: TACKING_BOX_GRADEINT
                         }}
                         style={{
                             width: '100%',
@@ -72,7 +67,7 @@ export function PaymentSuccess() {
                         }}
                     />
                     <Box
-                        width='100%'
+                        width="100%"
                         height={60}
                         padding={16}
                         direction="row"
@@ -85,7 +80,7 @@ export function PaymentSuccess() {
                             alignItems="center"
                             additionalStyles={{
                                 borderRightWidth: 1,
-                                borderRightColor: "#666680"
+                                borderRightColor: '#666680'
                             }}
                         >
                             <Text
@@ -126,5 +121,5 @@ export function PaymentSuccess() {
                 </Box>
             </Box>
         </Box>
-    )
+    );
 }

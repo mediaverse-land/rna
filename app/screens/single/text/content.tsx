@@ -17,7 +17,7 @@ const textMetaData: MetaDataType[] = [
         id: 2,
         key: 'Type',
         value: 'text'
-    },
+    }
 ];
 
 const textFiles: FileType[] = [
@@ -52,17 +52,11 @@ export function SingleTextContent() {
     return (
         <PaddingContainer>
             <Box width="100%" marginTop={32}>
-                <SingleItemDescription
-                    description={description}
-                />
+                <SingleItemDescription description={description} />
                 <Box marginTop={8}>
-                    <SingleItemMetaData
-                        data={textMetaData}
-                    />
+                    <SingleItemMetaData data={textMetaData} />
                 </Box>
-                <SingleItemFiles
-                    data={textFiles}
-                />
+                <SingleItemFiles data={textFiles} />
             </Box>
         </PaddingContainer>
     );

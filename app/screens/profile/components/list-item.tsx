@@ -47,15 +47,17 @@ export function ListItem({
                 />
             </Box>
             <Box paddingLeft={8} paddingRight={8}>
-                <Text
-                    marginTop={16}
-                    color="#666680"
-                    fontWeight={400}
-                    fontSize={theme.numericFontSize.md}
-                    lineHeight={16}
-                >
-                    {title}
-                </Text>
+                <Box direction='row'>
+                    <Text
+                        marginTop={16}
+                        color="#666680"
+                        fontWeight={400}
+                        fontSize={theme.numericFontSize.md}
+                        lineHeight={16}
+                    >
+                        {title}
+                    </Text>
+                </Box>
                 <Box width="100%" marginTop={8}>
                     <UserNameCard
                         username={username}

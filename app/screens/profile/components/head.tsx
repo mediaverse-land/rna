@@ -106,21 +106,25 @@ export function ProfileScreenHead() {
                                 />
                             </Box>
                             <Box width={usernameBoxWidth}>
-                                <Text
-                                    color="#fff"
-                                    fontWeight={600}
-                                    fontSize={theme.numericFontSize.md}
-                                >
-                                    Ma.nakhli
-                                </Text>
-                                <Text
-                                    color="#83839C"
-                                    fontSize={theme.numericFontSize.sm}
-                                    fontWeight={400}
-                                    marginTop={4}
-                                >
-                                    Manakhli@gmail.com
-                                </Text>
+                                <Box direction='row'>
+                                    <Text
+                                        color="#fff"
+                                        fontWeight={600}
+                                        fontSize={theme.numericFontSize.md}
+                                    >
+                                        Ma.nakhli
+                                    </Text>
+                                </Box>
+                                <Box direction='row'>
+                                    <Text
+                                        color="#83839C"
+                                        fontSize={theme.numericFontSize.sm}
+                                        fontWeight={400}
+                                        marginTop={4}
+                                    >
+                                        Manakhli@gmail.com
+                                    </Text>
+                                </Box>
                             </Box>
                             <Box
                                 width={48}

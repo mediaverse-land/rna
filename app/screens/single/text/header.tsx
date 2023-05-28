@@ -7,7 +7,7 @@ import {
     PROFILE_ONE,
     SINGLE_SOUND_COVER_IMAGE_GRADIENT,
     SINGLE_TEXT_COVER_GRAIDENT,
-    SINGLE_TEXT_THUMBNAIL_GRAIDENT,
+    SINGLE_TEXT_THUMBNAIL_GRAIDENT
 } from '../../../constaints/images';
 import { SingleItemUsernameAndDuration } from '../components/username-and-duration';
 
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const thumbnailHeight = 232;
-const username = 'Ralph Edwards'
+const username = 'Ralph Edwards';
 
 export function SingleTextHeader({ goBackHandler }: Props) {
     const thumbnailHeaderGradient = (
@@ -40,32 +40,28 @@ export function SingleTextHeader({ goBackHandler }: Props) {
     return (
         <Box>
             <GoBackButton goBackHandler={goBackHandler} />
-            <Box
-                width="100%"
-                height={thumbnailHeight}
-            >
-                <GoBackButton goBackHandler={goBackHandler} hasBackground={false} />
+            <Box width="100%" height={thumbnailHeight}>
+                <GoBackButton
+                    goBackHandler={goBackHandler}
+                    hasBackground={false}
+                />
                 <Box
                     width={'100%'}
                     height={'100%'}
-                    position='relative'
+                    position="relative"
                     zIndex={11}
                     padding={24}
                 >
-
                     <Box
-                        id='inner'
-                        width='100%'
+                        id="inner"
+                        width="100%"
                         height={127}
                         flex={1}
                         marginTop={81 - 24}
-                        direction='row'
-                        justifyContent='space-between'
+                        direction="row"
+                        justifyContent="space-between"
                     >
-                        <Box
-                            width={127}
-                            height={127}
-                        >
+                        <Box width={127} height={127}>
                             <Image
                                 source={{ uri: SINGLE_TEXT_THUMBNAIL_GRAIDENT }}
                                 style={{
@@ -83,7 +79,6 @@ export function SingleTextHeader({ goBackHandler }: Props) {
                                     position: 'absolute',
                                     top: 0,
                                     left: 0
-
                                 }}
                             />
                             <ICON_TEXT_WHITE
@@ -99,7 +94,7 @@ export function SingleTextHeader({ goBackHandler }: Props) {
                         <Box
                             flex={1}
                             height={127}
-                            justifyContent='space-between'
+                            justifyContent="space-between"
                         >
                             <Text
                                 color="#fff"
@@ -113,10 +108,7 @@ export function SingleTextHeader({ goBackHandler }: Props) {
                             >
                                 My thoughts
                             </Text>
-                            <Box
-                                paddingLeft={16}
-                                paddingBottom={16}
-                            >
+                            <Box paddingLeft={16} paddingBottom={16}>
                                 <SingleItemUsernameAndDuration
                                     username={username}
                                     profileUri={PROFILE_ONE}
@@ -131,4 +123,3 @@ export function SingleTextHeader({ goBackHandler }: Props) {
         </Box>
     );
 }
-

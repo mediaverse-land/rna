@@ -1,7 +1,10 @@
 import { FC, useState } from 'react';
 import { TouchableOpacity, LayoutChangeEvent, Image } from 'react-native';
 import { Box } from '../../../shared/components/box';
-import { VIDEO_FILES_ITEM_GRADEINT, VIDEO_FILES_WRAPPER_GRADEINT } from '../../../constaints/images';
+import {
+    VIDEO_FILES_ITEM_GRADEINT,
+    VIDEO_FILES_WRAPPER_GRADEINT
+} from '../../../constaints/images';
 import { Text } from '../../../shared/components/text';
 import { theme } from '../../../constaints/theme';
 import { ICON_ARROW_UP } from '../../../constaints/icons';
@@ -134,4 +137,4 @@ export const SingleItemFiles: FC<Props> = ({ data }) => {
             ) : null}
         </Box>
     );
-}
+};

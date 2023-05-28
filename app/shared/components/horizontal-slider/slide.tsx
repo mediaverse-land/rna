@@ -18,6 +18,7 @@ type Props = {
     profileUri: string;
     id: number;
     type?: 'image' | 'sound' | 'video' | 'text';
+    isRtl?: boolean
 };
 
 const { Slide, SliderThumbnailGradient, SlideThumbnail, SlideTitle } =
@@ -30,7 +31,8 @@ export function HorizontalSlide({
     profileUri,
     username,
     id,
-    type
+    type,
+    isRtl
 }: Props) {
     const icon = detectTypeIcon(type);
 
@@ -42,7 +44,7 @@ export function HorizontalSlide({
                     source={{ uri: HORIZONTAL_SLIDER_GRADIENT }}
                 />
             </Box>
-            <Box>
+            <Box direction='row'>
                 <SlideTitle>{title}</SlideTitle>
             </Box>
             <Box marginTop={8}>

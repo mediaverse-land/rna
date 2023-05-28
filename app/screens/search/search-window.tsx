@@ -16,6 +16,7 @@ import {
 } from '../../constaints/icons';
 import { useNavigation } from '@react-navigation/native';
 import { windowSize } from '../../utils/window-size';
+import { useRtl } from '../../hooks/use-rtl';
 
 const { width, height } = windowSize();
 
@@ -30,6 +31,8 @@ const {
 } = SearchBoxComponents;
 
 export function SearchWindow() {
+    const { isRtl } = useRtl();
+
     const [showTagDropDown, setShowTagDropDown] = useState(false);
 
     const navigation = useNavigation();
@@ -84,7 +87,15 @@ export function SearchWindow() {
                             }}
                             onPress={goBackHandler}
                         >
-                            <ICON_ARROW_LEFT_SVG width={22} height={16.88} />
+                            <ICON_ARROW_LEFT_SVG
+                                width={22}
+                                height={16.88}
+                                style={{
+                                    transform: [
+                                        { rotate: isRtl ? '180deg' : '0deg' }
+                                    ]
+                                }}
+                            />
                         </TouchableOpacity>
                         <View
                             style={{
@@ -104,6 +115,7 @@ export function SearchWindow() {
                             <SearchInput
                                 placeholder="Search"
                                 placeholderTextColor="#353542"
+                                textAlign={isRtl ? 'right' : 'left'}
                             />
                         </View>
                     </Flex>
@@ -160,6 +172,7 @@ export function SearchWindow() {
                                     placeholder="Search in tags"
                                     placeholderTextColor="#353542"
                                     style={{ marginTop: 0 }}
+                                    textAlign={isRtl ? 'right' : 'left'}
                                 />
                             </View>
                         </Flex>

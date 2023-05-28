@@ -1,6 +1,6 @@
-import { Box } from "../../../shared/components/box";
-import { Text } from "../../../shared/components/text";
-import { SingleVideoPageComponents } from "../style";
+import { Box } from '../../../shared/components/box';
+import { Text } from '../../../shared/components/text';
+import { SingleVideoPageComponents } from '../style';
 
 export type MetaDataType = {
     id: number;

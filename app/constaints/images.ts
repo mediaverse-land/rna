@@ -151,3 +151,6 @@ import AUTH_EMOJY_PATH from './../../assets/img/auth/emojy.svg';
 export const AUTH_SHAPE_LEFT = AUTH_SHAPE_LEFT_PATH;
 export const AUTH_SHAPE_RIGHT = AUTH_SHAPE_RIGHT_PATH;
 export const AUTH_EMOJY = AUTH_EMOJY_PATH;
+
+import INVENTORY_BOX_GRADIENT_PATH from './../../assets/img/gradients/inventory-box-gradient.svg'
+export const INVENTORY_BOX_GRADIENT = INVENTORY_BOX_GRADIENT_PATH

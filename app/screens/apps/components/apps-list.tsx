@@ -34,23 +34,27 @@ export function AppItem({ title, category, imagePath }: Props) {
                     />
                 </Box>
                 <Box marginLeft={16}>
-                    <Text
-                        color="#fff"
-                        fontSize={16}
-                        lineHeight={16}
-                        fontWeight={600}
-                    >
-                        {title}
-                    </Text>
-                    <Text
-                        color="#666680"
-                        fontSize={12}
-                        lineHeight={16}
-                        marginTop={8}
-                        fontWeight={400}
-                    >
-                        {category}
-                    </Text>
+                    <Box direction='row'>
+                        <Text
+                            color="#fff"
+                            fontSize={16}
+                            lineHeight={16}
+                            fontWeight={600}
+                        >
+                            {title}
+                        </Text>
+                    </Box>
+                    <Box direction='row'>
+                        <Text
+                            color="#666680"
+                            fontSize={12}
+                            lineHeight={16}
+                            marginTop={8}
+                            fontWeight={400}
+                        >
+                            {category}
+                        </Text>
+                    </Box>
                 </Box>
             </Flex>
         </Box>

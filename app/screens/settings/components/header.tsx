@@ -6,11 +6,13 @@ import { Text } from '../../../shared/components/text';
 import { theme } from '../../../constaints/theme';
 import { ICON_ARROW_LEFT_SVG } from '../../../constaints/icons';
 import { useNavigation } from '@react-navigation/native';
+import { useRtl } from '../../../hooks/use-rtl';
 
 const URI =
     'https://s3-alpha-sig.figma.com/img/8b38/0123/1b3bc56d8d3d28d35c9776e478125bae?Expires=1685923200&Signature=gWMAZUvjlSCOfKP4e6hFLjFgOSd-IECkM40ZQ4~YTNr~WUr6gqDibYMhqOmNiwcMBzE2uFfLq7NcF8WJTxrQi9M6WJmXFTvwxWtxRPtDA~pPSx48PXwbibPvThmZVX3O5SAv9szQetIMBGF9VgyQNJMT~wuxVRNDPSkQGTUn~DdeZwbVELADu~Sgz5LTC-IPr~5St8CpDpQvDxCYDOKjFw091uL~PJiFUIJ1smHYXIczAAAOcWEtgHi187J0mufQL5CW2kymK7~RrFarFPZbUtSToEX44Um3JqXE2mtFxhyToGki4DTo6hmgntK0ZaWVhuxGhlZvGd2YUpS0ld92Dw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4';
 
 export function SettingsScreenHeader() {
+    const { isRtl } = useRtl();
     const navigation = useNavigation();
 
     const goBackHandler = () => {
@@ -78,12 +80,19 @@ export function SettingsScreenHeader() {
                     </Flex>
                 </Box>
             </Flex>
-            <Box position="absolute" top={76} left={24}>
+            <Box
+                position="absolute"
+                top={76}
+                left={24}
+            >
                 <TouchableOpacity onPress={goBackHandler}>
                     <ICON_ARROW_LEFT_SVG
                         style={{
                             width: 122,
-                            height: 16.88
+                            height: 16.88,
+                            transform: [
+                                { rotate: isRtl ? '180deg' : '0deg' }
+                            ]
                         }}
                     />
                 </TouchableOpacity>

@@ -1,11 +1,11 @@
-import { FC } from 'react'
-import { theme } from "../../../constaints/theme";
-import { Box } from "../../../shared/components/box";
-import { Text } from "../../../shared/components/text";
+import { FC } from 'react';
+import { theme } from '../../../constaints/theme';
+import { Box } from '../../../shared/components/box';
+import { Text } from '../../../shared/components/text';
 
 type Props = {
-    description: string
-}
+    description: string;
+};
 
 export const SingleItemDescription: FC<Props> = ({ description }) => {
     return (
@@ -20,5 +20,5 @@ export const SingleItemDescription: FC<Props> = ({ description }) => {
                 <Text color="#A2A2B5">more...</Text>
             </Text>
         </Box>
-    )
-}
+    );
+};

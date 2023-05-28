@@ -1,9 +1,8 @@
-import { TouchableOpacity } from "react-native";
-import { Box } from "../../../shared/components/box";
-import { Input } from "../../../shared/components/form";
-import { Text } from "../../../shared/components/text";
-import { useNavigation } from "@react-navigation/native";
-
+import { TouchableOpacity } from 'react-native';
+import { Box } from '../../../shared/components/box';
+import { Input } from '../../../shared/components/form';
+import { Text } from '../../../shared/components/text';
+import { useNavigation } from '@react-navigation/native';
 
 const fillDataForm = [
     {
@@ -40,65 +39,68 @@ const fillDataForm = [
         id: 7,
         placeholder: 'Insert adress...',
         labelText: 'Adress'
-    },
-
-]
+    }
+];
 
 export function FillData() {
     const navigation = useNavigation<any>();
 
     const navigateToExploreHandler = () => {
-        navigation.navigate('AppStack')
-    }
+        navigation.navigate('AppStack');
+    };
 
     return (
-        <Box width='100%' flex={1} alignItems="center" position="absolute" top={-200}>
-            <Text
-                color='#fff'
-                lineHeight={20}
-                fontSize={12}
-                fontWeight={600}
-                marginBottom={32}
-            >We send the code to +339012910407</Text>
-            {
-                fillDataForm.map((f) => (
-                    <Box width='100%' marginBottom={16} key={f.id}>
-                        <Input
-                            placeholder={f.placeholder}
-                            labelText={f.labelText}
-                        />
-                    </Box>
-                ))
-            }
-            {/* <Box>
-                <Text color='#83839C'
+        <Box flex={1} width='100%' alignItems="center" >
+            <Box
+                position="relative"
+                width='100%'
+                alignItems='center'
+            >
+                <Text
+                    color="#fff"
                     lineHeight={20}
                     fontSize={12}
                     fontWeight={600}
-                    marginBottom={24}
+                    marginBottom={32}
                 >
-                    Dont like this?
-                    <Text color='#597AFF'> {' '}skip</Text>
+                    We send the code to +339012910407
                 </Text>
-            </Box> */}
-            <TouchableOpacity
-                style={{
-                    width: '100%'
-                }}
-                onPress={navigateToExploreHandler}
-            >
-                <Box
-                    width='100%'
-                    height={48}
-                    backgroundColor="#597AFF"
-                    borderRadius={32}
-                    alignItems="center"
-                    justifyContent="center"
-                    marginTop={24}
-                >
-                    <Text color="#fff" fontWeight={600} lineHeight={16} fontSize={14}>Save</Text>
+                <Box>
+                    {fillDataForm.map((f) => (
+                        <Box width="100%" marginBottom={16} key={f.id}>
+                            <Input
+                                placeholder={f.placeholder}
+                                labelText={f.labelText}
+                            />
+                        </Box>
+                    ))}
                 </Box>
-            </TouchableOpacity>
-        </Box >
-    )
+                <TouchableOpacity
+                    style={{
+                        width: '100%'
+                    }}
+                    onPress={navigateToExploreHandler}
+                >
+                    <Box
+                        width="100%"
+                        height={48}
+                        backgroundColor="#597AFF"
+                        borderRadius={32}
+                        alignItems="center"
+                        justifyContent="center"
+                        marginTop={24}
+                    >
+                        <Text
+                            color="#fff"
+                            fontWeight={600}
+                            lineHeight={16}
+                            fontSize={14}
+                        >
+                            Save
+                        </Text>
+                    </Box>
+                </TouchableOpacity>
+            </Box>
+        </Box>
+    );
 }

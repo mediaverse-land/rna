@@ -11,11 +11,11 @@ export const InputComponent: any = {
         padding-left: 16px;
         border-radius: 8px;
     `,
-    Label: styled.Text`
-        height: 48px;
+    Label: styled.Text<{ isRtl: boolean }>`
+        height: 100%;
         padding: 16px;
         position: absolute;
-        left: 0;
+        ${(props) => (!props.isRtl ? `right: 0` : `left: 0`)};
     `,
     FlatLabel: styled.Text`
         width: 52px;
@@ -30,7 +30,7 @@ export const InputComponent: any = {
         padding-top: 3px;
         color: ${theme.color.light.GRAY};
     `,
-    InputBox: styled.TextInput`
+    InputBox: styled.TextInput<{ textAlign: string }>`
         width: 100%;
         height: 48px;
         border-radius: 8px;
@@ -39,6 +39,7 @@ export const InputComponent: any = {
         color: #fff;
         font-size: ${theme.fontSize.md};
         line-height: ${theme.lineHeight.md};
+        text-align: ${(props) => props.textAlign};
     `,
     datePiclerIconStyles: {
         width: 22,
