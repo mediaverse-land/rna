@@ -1,22 +1,20 @@
-import { FC } from "react";
-import { Box } from "../../../../shared/components/box";
-import { Text } from "../../../../shared/components/text";
-import { Input } from "../../../../shared/components/form";
-import { ICON_FRANCE_FLAG } from "../../../../constaints/icons";
-import { TouchableOpacity } from "react-native";
+import { FC } from 'react';
+import { Box } from '../../../../shared/components/box';
+import { Text } from '../../../../shared/components/text';
+import { Input } from '../../../../shared/components/form';
+import { ICON_FRANCE_FLAG } from '../../../../constaints/icons';
+import { TouchableOpacity } from 'react-native';
 
 type Props = {
-    setCurrentWindowHandler: (path: 'INSERT_PHONE' | 'SEND_CODE' | 'FILL_DATA') => void;
-}
+    setCurrentWindowHandler: (
+        path: 'INSERT_PHONE' | 'SEND_CODE' | 'FILL_DATA'
+    ) => void;
+};
 
 export const InsertPhone: FC<Props> = ({ setCurrentWindowHandler }) => {
     return (
         <Box flex={1} alignItems="center">
-            <Box
-                position="relative"
-                top={'27%'}
-                alignItems="center"
-            >
+            <Box position="relative" top={'27%'} alignItems="center">
                 <Text
                     color="#fff"
                     lineHeight={20}
@@ -90,4 +88,4 @@ export const InsertPhone: FC<Props> = ({ setCurrentWindowHandler }) => {
             </Box>
         </Box>
     );
-}
+};

@@ -1,4 +1,11 @@
-import { useState, forwardRef, useImperativeHandle, useRef, useContext, useEffect } from 'react';
+import {
+    useState,
+    forwardRef,
+    useImperativeHandle,
+    useRef,
+    useContext,
+    useEffect
+} from 'react';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { Image } from 'react-native';
 import { Box } from '../box';
@@ -16,10 +23,10 @@ export const ConfirmAlert = forwardRef((props, ref) => {
     useEffect(() => {
         return () => {
             closeModalHandler();
-        }
-    }, [])
+        };
+    }, []);
 
-    const alertCtx: any = useContext(alertContext)
+    const alertCtx: any = useContext(alertContext);
 
     const confirmAlertSheetRef = useRef<BottomSheet>(null);
 
@@ -50,12 +57,10 @@ export const ConfirmAlert = forwardRef((props, ref) => {
                         ref={confirmAlertSheetRef}
                         onClose={() => setIsModalOpen(false)}
                         handleComponent={null}
-
                         backgroundStyle={{
-                            backgroundColor: 'transparent',
+                            backgroundColor: 'transparent'
                         }}
-                        style={{
-                        }}
+                        style={{}}
                     >
                         <BottomSheetView
                             style={{
@@ -78,7 +83,7 @@ export const ConfirmAlert = forwardRef((props, ref) => {
                                     position: 'absolute',
                                     borderTopLeftRadius: 16,
                                     borderTopRightRadius: 16,
-                                    top: 0,
+                                    top: 0
                                 }}
                             />
                             <Box

@@ -29,9 +29,7 @@ export const GoBackButton: FC<Props> = ({ goBackHandler, hasBackground }) => {
                     style={{
                         width: 20,
                         height: 15.5,
-                        transform: [
-                            { rotate: isRtl ? '180deg' : '0deg' }
-                        ]
+                        transform: [{ rotate: isRtl ? '180deg' : '0deg' }]
                     }}
                 />
             </TouchableOpacity>
@@ -43,9 +41,7 @@ export const GoBackButton: FC<Props> = ({ goBackHandler, hasBackground }) => {
                     style={{
                         width: 20,
                         height: 15.5,
-                        transform: [
-                            { rotate: isRtl ? '180deg' : '0deg' }
-                        ]
+                        transform: [{ rotate: isRtl ? '180deg' : '0deg' }]
                     }}
                 />
             </BackButton>

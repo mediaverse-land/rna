@@ -68,7 +68,10 @@ export function AddAccountModal({
                         <Text color="#fff" fontSize={theme.numericFontSize.md}>
                             Add account
                         </Text>
-                        <TouchableOpacity onPress={closeModalHandler} activeOpacity={1}>
+                        <TouchableOpacity
+                            onPress={closeModalHandler}
+                            activeOpacity={1}
+                        >
                             <Text color="#A2A2B5" fontSize={14}>
                                 Cancel
                             </Text>

@@ -17,14 +17,14 @@ export function AppsPageAllScreen() {
                     />
                 </Box>
             </PaddingContainer>
-        )
-    }
+        );
+    };
 
-    const keyExtractor = (item: AppItemType) => item.id.toString()
+    const keyExtractor = (item: AppItemType) => item.id.toString();
 
     return (
         <ScreenGradient>
-            <Box width='100%'  >
+            <Box width="100%">
                 <FlatList
                     contentContainerStyle={{
                         paddingTop: 192,

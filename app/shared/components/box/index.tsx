@@ -42,11 +42,11 @@ type Props = {
 
     alignItems?: 'center' | 'flex-start' | 'flex-end';
     justifyContent?:
-    | 'center'
-    | 'flex-start'
-    | 'flex-end'
-    | 'space-between'
-    | 'space-around';
+        | 'center'
+        | 'flex-start'
+        | 'flex-end'
+        | 'space-between'
+        | 'space-around';
     additionalStyles?: ViewStyle | ViewStyle[];
     onlayout?: LayoutChangeEvent | any;
 };

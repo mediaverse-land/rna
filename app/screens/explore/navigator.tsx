@@ -8,7 +8,7 @@ import { TextsPage } from './pages/text';
 import { AllPage } from './pages/all';
 import TopTabBar from '../../shared/components/top-tab-bar';
 import { Box } from '../../shared/components/box';
-import { StatusBar } from 'react-native'
+import { StatusBar } from 'react-native';
 
 type RoutesType = {
     AllPage: undefined;
@@ -19,11 +19,11 @@ type RoutesType = {
 };
 
 type RouteObject = {
-    id: number,
-    name: keyof RoutesType,
-    title: string,
-    component: () => JSX.Element
-}
+    id: number;
+    name: keyof RoutesType;
+    title: string;
+    component: () => JSX.Element;
+};
 
 const routes: RouteObject[] = [
     {
@@ -65,25 +65,26 @@ export function Navigator() {
 
     useFocusEffect(
         useCallback(() => {
-            setShouldHide(false)
+            setShouldHide(false);
             return () => {
-                setShouldHide(true)
+                setShouldHide(true);
             };
         }, [])
     );
 
-
-
     return (
         <>
-            {shouldHide ? null :
-                <StatusBar backgroundColor={'#0c0c21'} barStyle='light-content' />
-            }
+            {shouldHide ? null : (
+                <StatusBar
+                    backgroundColor={'#0c0c21'}
+                    barStyle="light-content"
+                />
+            )}
 
             <Box width={'100%'} flex={1}>
                 <Tab.Navigator
                     screenOptions={{
-                        animationEnabled: false,
+                        animationEnabled: false
                     }}
                     tabBar={(props) => <TopTabBar {...props} />}
                 >
@@ -98,7 +99,7 @@ export function Navigator() {
                         />
                     ))}
                 </Tab.Navigator>
-            </Box >
+            </Box>
         </>
     );
 }

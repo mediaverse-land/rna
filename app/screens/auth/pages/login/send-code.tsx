@@ -1,10 +1,9 @@
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { UseNavigationType } from '../../../../shared/types/use-navigation';
 import { Box } from '../../../../shared/components/box';
 import { Text } from '../../../../shared/components/text';
 import { Input } from '../../../../shared/components/form';
-
 
 export const SendCode = () => {
     const navigation = useNavigation<UseNavigationType>();
@@ -75,4 +74,4 @@ export const SendCode = () => {
             </Box>
         </>
     );
-}
+};

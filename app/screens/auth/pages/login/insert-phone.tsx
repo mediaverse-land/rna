@@ -1,14 +1,14 @@
-import { FC } from 'react'
-import { TouchableOpacity } from 'react-native'
-import { ICON_FRANCE_FLAG } from "../../../../constaints/icons";
-import { Box } from "../../../../shared/components/box";
-import { Input } from "../../../../shared/components/form";
-import { Text } from "../../../../shared/components/text";
+import { FC } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { ICON_FRANCE_FLAG } from '../../../../constaints/icons';
+import { Box } from '../../../../shared/components/box';
+import { Input } from '../../../../shared/components/form';
+import { Text } from '../../../../shared/components/text';
 import { LoginWindows } from '../types';
 
 type Props = {
     setCurrentWindowHandler: (window: Partial<LoginWindows>) => void;
-}
+};
 
 export const InsertPhone: FC<Props> = ({ setCurrentWindowHandler }) => {
     return (
@@ -84,4 +84,4 @@ export const InsertPhone: FC<Props> = ({ setCurrentWindowHandler }) => {
             </Box>
         </>
     );
-}
+};

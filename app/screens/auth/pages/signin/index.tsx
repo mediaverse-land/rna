@@ -13,18 +13,14 @@ import {
 const { height } = windowSize();
 
 export function Signin() {
-    const [signUpCurrentWindow, setSigUpCurrentWindow] = useState<
-        SignupWindows
-    >(SINGUP_WITH_PROVIDER);
+    const [signUpCurrentWindow, setSigUpCurrentWindow] =
+        useState<SignupWindows>(SINGUP_WITH_PROVIDER);
 
     const setSIgnupWithUsernameHandler = () => {
         setSigUpCurrentWindow(SIGNUP_WITH_USERNAME);
     };
 
-    const currentWindow: Record<
-        SignupWindows,
-        ReactNode
-    > = {
+    const currentWindow: Record<SignupWindows, ReactNode> = {
         SINGUP_WITH_PROVIDER: (
             <SignUpWithProvider
                 height={height}

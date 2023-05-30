@@ -104,7 +104,10 @@ export function BuyBottom() {
                 </Box>
                 {/* buy-buton */}
                 <Box marginTop={16}>
-                    <TouchableOpacity onPress={paymentScreenNavigationHandler} activeOpacity={1}>
+                    <TouchableOpacity
+                        onPress={paymentScreenNavigationHandler}
+                        activeOpacity={1}
+                    >
                         <Box
                             width="100%"
                             height={48}

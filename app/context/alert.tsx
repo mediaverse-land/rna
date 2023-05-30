@@ -1,8 +1,8 @@
-import { createContext, useState } from "react";
+import { createContext, useState } from 'react';
 
 type Props = {
-    children: React.ReactNode
-}
+    children: React.ReactNode;
+};
 
 export const alertContext = createContext({
     open: function () {
@@ -14,37 +14,32 @@ export const alertContext = createContext({
     isOpen: function () {
         //
     }
-})
-
+});
 
 export const AlertContextProvider: React.FC<Props> = ({ children }) => {
-    const [isAlertOpen, setIsAlertOpen] = useState(false)
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
 
     const openAlert = () => {
-        setIsAlertOpen(true)
-    }
+        setIsAlertOpen(true);
+    };
 
     const closeAlert = () => {
-        setIsAlertOpen(false)
-    }
+        setIsAlertOpen(false);
+    };
 
-    const isAlertOpenHandler = () => isAlertOpen
+    const isAlertOpenHandler = () => isAlertOpen;
 
-    const store:
-        {
-            open: () => void,
-            close: () => void,
-            isOpen: () => boolean
-        }
-        = {
+    const store: {
+        open: () => void;
+        close: () => void;
+        isOpen: () => boolean;
+    } = {
         open: openAlert,
         close: closeAlert,
         isOpen: isAlertOpenHandler
     };
 
     return (
-        <alertContext.Provider value={store}>
-            {children}
-        </alertContext.Provider>
-    )
-}
+        <alertContext.Provider value={store}>{children}</alertContext.Provider>
+    );
+};

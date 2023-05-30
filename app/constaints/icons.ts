@@ -176,3 +176,18 @@ export const ICON_PREV_TEXT = ICON_PREV_TEXT_PATH;
 
 import ICON_NEXT_TEXT_PATH from './../../assets/icons/icon__next-text.svg';
 export const ICON_NEXT_TEXT = ICON_NEXT_TEXT_PATH;
+
+import ICON_CHECK_WHITE_PATH from './../../assets/icons/icon__check-white.svg';
+export const ICON_CHECK_WHITE = ICON_CHECK_WHITE_PATH;
+
+import ICON_MENU_WHITE_PATH from './../../assets/icons/icon__menu-white.svg';
+export const ICON_MENU_WHITE = ICON_MENU_WHITE_PATH;
+
+import ICON_CHECK_SQUARE_WHITE_PATH from './../../assets/icons/icon__check-square-white.svg';
+export const ICON_CHECK_SQUARE_WHITE = ICON_CHECK_SQUARE_WHITE_PATH;
+
+import ICON_DOWNLOAD_WHITE_PATH from './../../assets/icons/icon__download-white.svg';
+export const ICON_DOWNLOAD_WHITE = ICON_DOWNLOAD_WHITE_PATH;
+
+import ICON_X_WHITE_PATH from './../../assets/icons/icon__x-white.svg';
+export const ICON_X_WHITE = ICON_X_WHITE_PATH;

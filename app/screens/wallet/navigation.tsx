@@ -1,4 +1,4 @@
-import { StatusBar } from 'react-native'
+import { StatusBar } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { WalletSlider } from './slider';
 import { HistoryPage } from './history';
@@ -19,7 +19,7 @@ const routes = [
         title: 'HistoryPage',
         component: HistoryPage,
         name: 'HistoryPage'
-    },
+    }
 ];
 
 const fadeTransition = ({ current }: any) => ({
@@ -33,19 +33,22 @@ export function WalletStack() {
 
     useFocusEffect(
         useCallback(() => {
-            setShouldHide(false)
+            setShouldHide(false);
 
             return () => {
-                setShouldHide(true)
+                setShouldHide(true);
             };
         }, [])
     );
 
     return (
         <>
-            {shouldHide ? null :
-                <StatusBar backgroundColor={'#030340'} barStyle='light-content' />
-            }
+            {shouldHide ? null : (
+                <StatusBar
+                    backgroundColor={'#030340'}
+                    barStyle="light-content"
+                />
+            )}
             <Stack.Navigator
                 screenOptions={{
                     headerShown: false,

@@ -18,7 +18,10 @@ export function AuthRoot({ setWindowHandler }: Props) {
                 paddingRight={24}
                 marginTop={30}
             >
-                <TouchableOpacity activeOpacity={1} onPress={() => setWindowHandler('singin')}>
+                <TouchableOpacity
+                    activeOpacity={1}
+                    onPress={() => setWindowHandler('singin')}
+                >
                     <Box
                         width="100%"
                         height={48}
@@ -37,7 +40,10 @@ export function AuthRoot({ setWindowHandler }: Props) {
                         </Text>
                     </Box>
                 </TouchableOpacity>
-                <TouchableOpacity activeOpacity={1} onPress={() => setWindowHandler('login')}>
+                <TouchableOpacity
+                    activeOpacity={1}
+                    onPress={() => setWindowHandler('login')}
+                >
                     <Box
                         width="100%"
                         height={48}

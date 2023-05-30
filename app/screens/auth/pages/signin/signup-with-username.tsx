@@ -1,43 +1,31 @@
-import { FC, ReactNode, useState } from "react";
-import { SendCode } from "./send-code";
-import { InsertPhone } from "./insert-phone";
-import { FillData } from "./fill-data";
-import { Box } from "../../../../shared/components/box";
-import type { SignUpWithUsernameWindows } from "../types";
-import { INSERT_PHONE } from "../types";
+import { FC, ReactNode, useState } from 'react';
+import { SendCode } from './send-code';
+import { InsertPhone } from './insert-phone';
+import { FillData } from './fill-data';
+import { Box } from '../../../../shared/components/box';
+import type { SignUpWithUsernameWindows } from '../types';
+import { INSERT_PHONE } from '../types';
 
 type Props = {
-    height: number
-}
+    height: number;
+};
 
 export const SignUpWithUsername: FC<Props> = ({ height }) => {
-    const [currentWindow, setCurrentWindow] = useState<
-        SignUpWithUsernameWindows
-    >(INSERT_PHONE);
+    const [currentWindow, setCurrentWindow] =
+        useState<SignUpWithUsernameWindows>(INSERT_PHONE);
 
-    const setCurrentWindowHandler = (
-        window: SignUpWithUsernameWindows
-    ) => {
+    const setCurrentWindowHandler = (window: SignUpWithUsernameWindows) => {
         setCurrentWindow(window);
     };
 
-    const windows: Record<
-        SignUpWithUsernameWindows,
-        ReactNode
-    > = {
+    const windows: Record<SignUpWithUsernameWindows, ReactNode> = {
         INSERT_PHONE: (
-            <InsertPhone
-                setCurrentWindowHandler={setCurrentWindowHandler}
-            />
+            <InsertPhone setCurrentWindowHandler={setCurrentWindowHandler} />
         ),
         SEND_CODE: (
-            <SendCode
-                setCurrentWindowHandler={setCurrentWindowHandler}
-            />
+            <SendCode setCurrentWindowHandler={setCurrentWindowHandler} />
         ),
-        FILL_DATA: (
-            <FillData />
-        )
+        FILL_DATA: <FillData />
     };
     return (
         <Box
@@ -48,4 +36,4 @@ export const SignUpWithUsername: FC<Props> = ({ height }) => {
             {windows[currentWindow]}
         </Box>
     );
-}
+};

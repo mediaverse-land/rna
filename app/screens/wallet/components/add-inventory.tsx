@@ -1,19 +1,15 @@
-import { TouchableOpacity } from "react-native";
-import { Box } from "../../../shared/components/box";
-import { Input } from "../../../shared/components/form";
-import { Text } from "../../../shared/components/text";
-import { PaddingContainer } from "../../../styles/grid";
+import { TouchableOpacity } from 'react-native';
+import { Box } from '../../../shared/components/box';
+import { Input } from '../../../shared/components/form';
+import { Text } from '../../../shared/components/text';
+import { PaddingContainer } from '../../../styles/grid';
 
 export function AddInventory() {
     return (
         <PaddingContainer>
-
-            <Box
-                paddingTop={16}
-                height={400}
-            >
+            <Box paddingTop={16} height={400}>
                 <Box
-                    width='100%'
+                    width="100%"
                     direction="row"
                     alignItems="center"
                     justifyContent="space-between"
@@ -36,14 +32,9 @@ export function AddInventory() {
                     </Text>
                 </Box>
                 <Box marginTop={25}>
-                    <Input
-                        placeholder="Insert amount..."
-                        labelText="Amount"
-                    />
+                    <Input placeholder="Insert amount..." labelText="Amount" />
 
-                    <TouchableOpacity
-                        activeOpacity={1}
-                    >
+                    <TouchableOpacity activeOpacity={1}>
                         <Box
                             marginTop={24}
                             width="100%"
@@ -53,11 +44,7 @@ export function AddInventory() {
                             alignItems="center"
                             justifyContent="center"
                         >
-                            <Text
-                                color="#fff"
-                                fontSize={14}
-                                fontWeight={600}
-                            >
+                            <Text color="#fff" fontSize={14} fontWeight={600}>
                                 Pay
                             </Text>
                         </Box>
@@ -65,5 +52,5 @@ export function AddInventory() {
                 </Box>
             </Box>
         </PaddingContainer>
-    )
+    );
 }

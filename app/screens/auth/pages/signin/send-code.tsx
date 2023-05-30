@@ -1,12 +1,14 @@
-import { FC } from "react";
-import { Box } from "../../../../shared/components/box";
-import { Text } from "../../../../shared/components/text";
-import { Input } from "../../../../shared/components/form";
-import { TouchableOpacity } from "react-native";
+import { FC } from 'react';
+import { Box } from '../../../../shared/components/box';
+import { Text } from '../../../../shared/components/text';
+import { Input } from '../../../../shared/components/form';
+import { TouchableOpacity } from 'react-native';
 
 type Props = {
-    setCurrentWindowHandler: (path: 'INSERT_PHONE' | 'SEND_CODE' | 'FILL_DATA') => void
-}
+    setCurrentWindowHandler: (
+        path: 'INSERT_PHONE' | 'SEND_CODE' | 'FILL_DATA'
+    ) => void;
+};
 
 export const SendCode: FC<Props> = ({ setCurrentWindowHandler }) => {
     return (
@@ -71,4 +73,4 @@ export const SendCode: FC<Props> = ({ setCurrentWindowHandler }) => {
             </Box>
         </>
     );
-}
+};

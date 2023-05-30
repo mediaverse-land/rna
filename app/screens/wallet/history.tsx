@@ -3,7 +3,10 @@ import { FlatList, Image } from 'react-native';
 import { Box } from '../../shared/components/box';
 import { PaddingContainer } from '../../styles/grid';
 import { SettingsScreenTitle } from '../settings/components/title';
-import { SIGNINS_LIST_ITEM_GRADIET, SIGNINS_LIST_ITEM_LIGHT_GRADIET } from '../../constaints/images';
+import {
+    SIGNINS_LIST_ITEM_GRADIET,
+    SIGNINS_LIST_ITEM_LIGHT_GRADIET
+} from '../../constaints/images';
 import { Text } from '../../shared/components/text';
 import { theme } from '../../constaints/theme';
 import { ScreenGradient } from '../../shared/components/screen-gradient';
@@ -40,19 +43,22 @@ const messages: MessageType[] = [
         title: '20 $',
         date: '2020/03/26  13:23',
         description: 'Labeling'
-    },
+    }
 ];
 
 const pageHeaderComponent = (
     <Box marginBottom={48}>
         <PaddingContainer>
-            <Box direction='row' alignItems='center' justifyContent='space-between' >
-                <Box width={150} >
+            <Box
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+            >
+                <Box width={150}>
                     <SettingsScreenTitle title="History" />
                 </Box>
                 <Box paddingTop={38}>
-                    <ICON_DOWNLOAD
-                        width={20} height={20} />
+                    <ICON_DOWNLOAD width={20} height={20} />
                 </Box>
             </Box>
         </PaddingContainer>
@@ -105,8 +111,12 @@ export function HistoryPage() {
                             {item.date}
                         </Text>
                     </Box>
-                    <Box width='100%' direction='row'>
-                        <Text color="#666680" paddingLeft={16} paddingRight={16}>
+                    <Box width="100%" direction="row">
+                        <Text
+                            color="#666680"
+                            paddingLeft={16}
+                            paddingRight={16}
+                        >
                             {item.description}
                         </Text>
                     </Box>

@@ -13,16 +13,20 @@ export function InventoryBox() {
     const navigation = useNavigation<UseNavigationType>();
 
     const redirectToHistoryHandler = () => {
-        navigation.navigate('HistoryPage')
-    }
+        navigation.navigate('HistoryPage');
+    };
 
     return (
         <PaddingContainer>
-            <Box width={Math.floor(width) - 48}
+            <Box
+                width={Math.floor(width) - 48}
                 additionalStyles={{
                     overflow: 'hidden'
                 }}
-                marginTop={40} height={56} borderRadius={16}>
+                marginTop={40}
+                height={56}
+                borderRadius={16}
+            >
                 <INVENTORY_BOX_GRADIENT
                     style={{
                         width: Math.floor(width) - 48,
@@ -68,7 +72,10 @@ export function InventoryBox() {
                         <Text color="#fff" fontSize={16} fontWeight={600}>
                             200 $
                         </Text>
-                        <TouchableOpacity onPress={redirectToHistoryHandler} activeOpacity={1}>
+                        <TouchableOpacity
+                            onPress={redirectToHistoryHandler}
+                            activeOpacity={1}
+                        >
                             <Text
                                 color="#597AFF"
                                 fontSize={14}

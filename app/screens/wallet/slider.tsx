@@ -13,7 +13,7 @@ import { AddInventory } from './components/add-inventory';
 import { AddCard } from './components/add-card';
 import { windowSize } from '../../utils/window-size';
 
-const { width: windowWidth } = windowSize()
+const { width: windowWidth } = windowSize();
 
 export function WalletSlider() {
     const confirmAlertRef = useRef(null);
@@ -24,65 +24,70 @@ export function WalletSlider() {
     const isOpen: any = alertCtx.isOpen();
 
     const openConfirmAlertHandler = () => {
-        confirmAlertRef.current?.open()
+        confirmAlertRef.current?.open();
         alertCtx.open();
-    }
+    };
 
     const openAddCardAlertHandler = () => {
-        addCardAlertRef.current?.open()
+        addCardAlertRef.current?.open();
         alertCtx.open();
-    }
+    };
 
     const closeAddCardAlertHandler = () => {
-        addCardAlertRef.current?.close()
+        addCardAlertRef.current?.close();
         alertCtx.close();
-    }
+    };
 
     const closeConfirmAlertHandler = () => {
-        confirmAlertRef.current?.close()
+        confirmAlertRef.current?.close();
         alertCtx.close();
-    }
+    };
 
     const openAddInventoryAlertHandler = () => {
         addInventoryAlertRef.current?.expand();
         alertCtx.open();
-    }
+    };
 
     const closeAddInventoryAlertHandler = () => {
         addInventoryAlertRef.current?.close();
         alertCtx.close();
-    }
+    };
 
-    console.log(Math.floor(windowWidth))
+    console.log(Math.floor(windowWidth));
 
     return (
         <>
-
             <ScreenGradient>
                 <ScrollView style={{ flex: 1, width: '100%' }}>
                     <Box>
                         <InventoryBox />
                         <CardSlider />
                         <Box
-                            direction='row'
+                            direction="row"
                             width={'100%'}
                             marginTop={40}
-                            justifyContent='center'
+                            justifyContent="center"
                         >
                             <Box width={230}>
-                                <AddButton onpress={openAddCardAlertHandler} text='Add account' />
+                                <AddButton
+                                    onpress={openAddCardAlertHandler}
+                                    text="Add account"
+                                />
                             </Box>
                         </Box>
                         <PaddingContainer>
                             <Box
-                                direction='row'
+                                direction="row"
                                 width={'100%'}
                                 marginTop={40}
-                                justifyContent='center'
+                                justifyContent="center"
                                 paddingBottom={146}
                             >
                                 <Box width={'100%'}>
-                                    <AddButton onpress={openAddInventoryAlertHandler} text='Add inventory' />
+                                    <AddButton
+                                        onpress={openAddInventoryAlertHandler}
+                                        text="Add inventory"
+                                    />
                                 </Box>
                             </Box>
                         </PaddingContainer>
@@ -95,12 +100,7 @@ export function WalletSlider() {
                 height={windowWidth < 350 ? 400 : 300}
                 snapPoints={windowWidth < 350 ? ['40'] : ['30']}
             >
-                <Box
-                    width={'100%'}
-                    flex={1}
-                    position='absolute'
-                    zIndex={100}
-                >
+                <Box width={'100%'} flex={1} position="absolute" zIndex={100}>
                     <AddInventory />
                 </Box>
             </ModalBottomSheet>
@@ -109,38 +109,29 @@ export function WalletSlider() {
                 height={windowWidth < 350 ? 500 : 400}
                 snapPoints={windowWidth < 350 ? ['50'] : ['40']}
             >
-                <Box
-                    width={'100%'}
-                    flex={1}
-                    position='absolute'
-                    zIndex={100}
-                >
+                <Box width={'100%'} flex={1} position="absolute" zIndex={100}>
                     <AddCard />
                 </Box>
             </ModalBottomSheet>
             <ConfirmAlert ref={confirmAlertRef} />
-            {
-                isOpen ?
-                    <TouchableOpacity
-                        activeOpacity={1}
-                        onPress={() => {
-                            closeAddInventoryAlertHandler();
-                            closeConfirmAlertHandler();
-                            closeAddCardAlertHandler();
-                        }}
-                        style={{
-                            position: 'absolute',
-                            top: 0,
-                            width: '100%',
-                            height: '60%',
-                            flex: 1,
-                            backgroundColor: 'transparent',
-
-                        }}
-                    ></TouchableOpacity>
-                    : null
-            }
+            {isOpen ? (
+                <TouchableOpacity
+                    activeOpacity={1}
+                    onPress={() => {
+                        closeAddInventoryAlertHandler();
+                        closeConfirmAlertHandler();
+                        closeAddCardAlertHandler();
+                    }}
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        width: '100%',
+                        height: '60%',
+                        flex: 1,
+                        backgroundColor: 'transparent'
+                    }}
+                ></TouchableOpacity>
+            ) : null}
         </>
     );
 }
-

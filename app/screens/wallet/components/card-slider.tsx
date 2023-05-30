@@ -59,48 +59,38 @@ export function CardSlider() {
                         top: 0
                     }}
                 />
-                <Box
-                    width={'100%'}
-                    height={'100%'}
-                >
+                <Box width={'100%'} height={'100%'}>
                     <Box
-                        width='100%'
+                        width="100%"
                         paddingTop={34}
-                        justifyContent='center'
-                        alignItems='center'
+                        justifyContent="center"
+                        alignItems="center"
                     >
-                        <ICON_PAYPAL_LARGE
-                            width={35}
-                            height={42}
-                        />
+                        <ICON_PAYPAL_LARGE width={35} height={42} />
                         <Text
                             fontSize={14}
                             fontWeight={400}
                             lineHeight={24}
-                            color='#fff'
+                            color="#fff"
                         >
                             Paypal
                         </Text>
                     </Box>
-                    <Box
-                        width='100%'
-                        position='absolute'
-                        bottom={1}
-                    >
+                    <Box width="100%" position="absolute" bottom={1}>
                         <Box
-                            width='100%'
+                            width="100%"
                             paddingRight={28}
                             paddingLeft={28}
-                            direction='row'
-                            alignItems='center'
-                            justifyContent='space-between'
+                            direction="row"
+                            alignItems="center"
+                            justifyContent="space-between"
                             marginBottom={12}
                         >
                             <Text
                                 fontSize={16}
                                 fontWeight={600}
                                 lineHeight={24}
-                                color='#D9D9FF'
+                                color="#D9D9FF"
                             >
                                 Ar Hosseini
                             </Text>
@@ -108,27 +98,27 @@ export function CardSlider() {
                                 fontSize={16}
                                 fontWeight={600}
                                 lineHeight={24}
-                                color='#D9D9FF'
+                                color="#D9D9FF"
                             >
                                 01/15
                             </Text>
                         </Box>
-                        <Box
-                            alignItems='center'
-                            marginBottom={24}
-                        >
+                        <Box alignItems="center" marginBottom={24}>
                             <Text
                                 fontSize={16}
                                 fontWeight={600}
                                 lineHeight={24}
-                                color='#fff'
-                            >****{' '}****{' '}****{' '}3054</Text>
+                                color="#fff"
+                            >
+                                **** **** **** 3054
+                            </Text>
                         </Box>
-                        <Box width='100%' alignItems='center' paddingBottom={35}>
-                            <ICON_SIMCARD
-                                width={38}
-                                height={26}
-                            />
+                        <Box
+                            width="100%"
+                            alignItems="center"
+                            paddingBottom={35}
+                        >
+                            <ICON_SIMCARD width={38} height={26} />
                         </Box>
                     </Box>
                 </Box>
@@ -161,7 +151,15 @@ export function CardSlider() {
     );
 }
 
-function Card({ rotate, style, children }: { rotate: string; style: ViewStyle, children?: any }) {
+function Card({
+    rotate,
+    style,
+    children
+}: {
+    rotate: string;
+    style: ViewStyle;
+    children?: any;
+}) {
     return (
         <Box
             width={230}

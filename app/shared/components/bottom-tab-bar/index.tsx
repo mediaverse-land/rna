@@ -106,15 +106,18 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
         navigation?.navigate(screenName);
     };
 
-    const alertCtx: any = useContext(alertContext)
+    const alertCtx: any = useContext(alertContext);
 
-    const isAlertModalOpen = alertCtx.isOpen() || false
+    const isAlertModalOpen = alertCtx.isOpen() || false;
 
     return (
         <View style={[styles.container]}>
-            {!isAlertModalOpen ?
+            {!isAlertModalOpen ? (
                 <View style={[styles.content]}>
-                    <TouchableOpacity activeOpacity={1} style={styles.plusButton}>
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        style={styles.plusButton}
+                    >
                         <ICON_PLUS_SVG width={20} height={20} />
                     </TouchableOpacity>
                     <View style={styles.subContent}>
@@ -131,7 +134,9 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
                                     activeOpacity={1}
                                     key={i}
                                     onPress={() =>
-                                        tabBarItemClickNavigateHandler(route.name)
+                                        tabBarItemClickNavigateHandler(
+                                            route.name
+                                        )
                                     }
                                     style={[
                                         {
@@ -185,8 +190,7 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
                         />
                     </Svg>
                 </View>
-                : null
-            }
+            ) : null}
         </View>
     );
 }
@@ -201,7 +205,7 @@ const styles = StyleSheet.create({
         left: '4%',
         right: '4%',
         position: 'absolute',
-        bottom: '1%',
+        bottom: '1%'
     },
     subContent: {
         flexDirection: 'row',
@@ -209,7 +213,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 5,
         justifyContent: 'space-between',
-        zIndex: 2,
+        zIndex: 2
     },
     plusButton: {
         width: 56,

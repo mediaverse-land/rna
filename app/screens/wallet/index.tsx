@@ -1,10 +1,3 @@
-
 export function WalletScreen() {
-
-    return (
-        <>
-
-        </>
-    );
+    return <></>;
 }
-

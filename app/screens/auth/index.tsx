@@ -9,9 +9,7 @@ import { AuthWindows } from './pages/types';
 import { Login } from './pages/login';
 
 export function AuthScreen() {
-    const [currentWindow, setCurrentWindow] = useState<
-        AuthWindows
-    >('root');
+    const [currentWindow, setCurrentWindow] = useState<AuthWindows>('root');
 
     const setWindowHandler = (window: AuthWindows) => {
         setCurrentWindow(window);
@@ -25,7 +23,7 @@ export function AuthScreen() {
 
     return (
         <>
-            <StatusBar backgroundColor={'#030340'} barStyle='light-content' />
+            <StatusBar backgroundColor={'#030340'} barStyle="light-content" />
             <SafeAreaView style={{ flex: 1 }}>
                 <ScrollView
                     style={{

@@ -1,39 +1,35 @@
 {
-  "expo": {
-    "name": "mediaverse",
-    "slug": "mediaverse",
-    "version": "0.0.1",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#ffffff"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "package": "com.smartcity.mediaverse",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      "expo-localization"
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "a898fd87-c772-49c8-a07a-d509e5cd23ff"
-      }
+    "expo": {
+        "name": "mediaverse",
+        "slug": "mediaverse",
+        "version": "0.0.1",
+        "orientation": "portrait",
+        "icon": "./assets/icon.png",
+        "userInterfaceStyle": "light",
+        "splash": {
+            "image": "./assets/splash.png",
+            "resizeMode": "cover",
+            "backgroundColor": "#ffffff"
+        },
+        "assetBundlePatterns": ["**/*"],
+        "ios": {
+            "supportsTablet": true
+        },
+        "android": {
+            "package": "com.smartcity.mediaverse",
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/adaptive-icon.png",
+                "backgroundColor": "#ffffff"
+            }
+        },
+        "web": {
+            "favicon": "./assets/favicon.png"
+        },
+        "plugins": ["expo-localization"],
+        "extra": {
+            "eas": {
+                "projectId": "a898fd87-c772-49c8-a07a-d509e5cd23ff"
+            }
+        }
     }
-  }
 }

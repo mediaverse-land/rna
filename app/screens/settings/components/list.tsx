@@ -60,7 +60,7 @@ export function ListColumn({ data }: Props) {
                         >
                             <Flex width="60%" direction="row" align="center">
                                 {!list.direction ||
-                                    list.direction !== 'row-reverse' ? (
+                                list.direction !== 'row-reverse' ? (
                                     <list.icon
                                         style={[
                                             list.iconStyle,

@@ -27,7 +27,10 @@ export function VideoPageList() {
 
     const renderVidoeListItem = ({ item }: { item: VideoItem }) => {
         return (
-            <TouchableOpacity activeOpacity={1} onPress={() => navigateToSinglVide(item.title)}>
+            <TouchableOpacity
+                activeOpacity={1}
+                onPress={() => navigateToSinglVide(item.title)}
+            >
                 <VideoListItem>
                     <View>
                         <VideoListItemThumbnail

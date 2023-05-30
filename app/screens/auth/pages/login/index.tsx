@@ -10,16 +10,17 @@ import { UserPass } from './user-pass';
 const { height } = windowSize();
 
 export function Login() {
-    const [currentWindow, setCurrentWindow] = useState<LoginWindows>(INSERT_PHONE);
+    const [currentWindow, setCurrentWindow] =
+        useState<LoginWindows>(INSERT_PHONE);
 
-    const setCurrentWindowHandler = (
-        window: Partial<LoginWindows>
-    ) => {
+    const setCurrentWindowHandler = (window: Partial<LoginWindows>) => {
         setCurrentWindow(window);
     };
 
     const windows: Record<LoginWindows, ReactNode> = {
-        INSERT_PHONE: <InsertPhone setCurrentWindowHandler={setCurrentWindowHandler} />,
+        INSERT_PHONE: (
+            <InsertPhone setCurrentWindowHandler={setCurrentWindowHandler} />
+        ),
         SEND_CODE: <SendCode />,
         USER_PASS: <UserPass />
     };
@@ -35,5 +36,3 @@ export function Login() {
         </PaddingContainer>
     );
 }
-
-

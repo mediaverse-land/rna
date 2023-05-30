@@ -4,8 +4,6 @@ import { Box } from '../../../shared/components/box';
 import { useEffect } from 'react';
 
 export function HeroShapes() {
-
-
     return (
         <>
             <Box width="100%" height={400} alignItems="center">

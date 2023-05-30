@@ -1,20 +1,20 @@
-import { TouchableOpacity } from "react-native";
-import { Box } from "../../../shared/components/box";
-import { Input } from "../../../shared/components/form";
-import { Text } from "../../../shared/components/text";
-import { PaddingContainer } from "../../../styles/grid";
-import { ICON_MASTER_CARD_BLUE, ICON_PAYPAL_GRAY } from "../../../constaints/icons";
-import { FontWeight } from "@shopify/react-native-skia";
+import { TouchableOpacity } from 'react-native';
+import { Box } from '../../../shared/components/box';
+import { Input } from '../../../shared/components/form';
+import { Text } from '../../../shared/components/text';
+import { PaddingContainer } from '../../../styles/grid';
+import {
+    ICON_MASTER_CARD_BLUE,
+    ICON_PAYPAL_GRAY
+} from '../../../constaints/icons';
+import { FontWeight } from '@shopify/react-native-skia';
 
 export function AddCard() {
     return (
         <PaddingContainer>
-            <Box
-                paddingTop={16}
-                height={400}
-            >
+            <Box paddingTop={16} height={400}>
                 <Box
-                    width='100%'
+                    width="100%"
                     direction="row"
                     alignItems="center"
                     justifyContent="space-between"
@@ -44,7 +44,7 @@ export function AddCard() {
                 >
                     <Box
                         height={43}
-                        width='48%'
+                        width="48%"
                         additionalStyles={{
                             borderWidth: 1,
                             borderColor: '#A2A2B5',
@@ -54,10 +54,7 @@ export function AddCard() {
                         alignItems="center"
                         justifyContent="center"
                     >
-                        <ICON_PAYPAL_GRAY
-                            width={15.9}
-                            height={16}
-                        />
+                        <ICON_PAYPAL_GRAY width={15.9} height={16} />
                         <Text
                             color="#A2A2B5"
                             fontSize={14}
@@ -70,7 +67,7 @@ export function AddCard() {
                     </Box>
                     <Box
                         height={43}
-                        width='48%'
+                        width="48%"
                         additionalStyles={{
                             borderWidth: 1,
                             borderColor: '#597AFF',
@@ -81,11 +78,7 @@ export function AddCard() {
                         alignItems="center"
                         justifyContent="center"
                     >
-
-                        <ICON_MASTER_CARD_BLUE
-                            width={22}
-                            height={13.87}
-                        />
+                        <ICON_MASTER_CARD_BLUE width={22} height={13.87} />
                         <Text
                             color="#fff"
                             fontSize={14}
@@ -98,14 +91,9 @@ export function AddCard() {
                     </Box>
                 </Box>
                 <Box marginTop={25}>
-                    <Input
-                        placeholder="Insert amount..."
-                        labelText="Wallet"
-                    />
+                    <Input placeholder="Insert amount..." labelText="Wallet" />
 
-                    <TouchableOpacity
-                        activeOpacity={1}
-                    >
+                    <TouchableOpacity activeOpacity={1}>
                         <Box
                             marginTop={24}
                             width="100%"
@@ -115,11 +103,7 @@ export function AddCard() {
                             alignItems="center"
                             justifyContent="center"
                         >
-                            <Text
-                                color="#fff"
-                                fontSize={14}
-                                fontWeight={600}
-                            >
+                            <Text color="#fff" fontSize={14} fontWeight={600}>
                                 Pay
                             </Text>
                         </Box>
@@ -127,5 +111,5 @@ export function AddCard() {
                 </Box>
             </Box>
         </PaddingContainer>
-    )
+    );
 }

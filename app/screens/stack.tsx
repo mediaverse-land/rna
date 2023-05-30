@@ -46,7 +46,7 @@ const routes = [
         name: 'Profile',
         component: ProfileScreen,
         title: 'profile'
-    },
+    }
 ];
 
 export function AppStack() {
