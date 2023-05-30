@@ -21,13 +21,13 @@ export function ListItem({
     profileUri
 }: Props) {
     return (
-        <Box width={width} height={221} marginBottom={30}>
-            <Box width={163} height={163}>
+        <Box width={'48%'} marginBottom={30}>
+            <Box width={'100%'} height={163}>
                 <Image
                     source={{ uri: imagePath }}
                     style={{
                         borderRadius: 16,
-                        width: 163,
+                        width: '100%',
                         height: 163
                     }}
                 />
@@ -47,7 +47,7 @@ export function ListItem({
                 />
             </Box>
             <Box paddingLeft={8} paddingRight={8}>
-                <Box direction='row'>
+                <Box direction="row">
                     <Text
                         marginTop={16}
                         color="#666680"

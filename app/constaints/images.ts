@@ -152,5 +152,10 @@ export const AUTH_SHAPE_LEFT = AUTH_SHAPE_LEFT_PATH;
 export const AUTH_SHAPE_RIGHT = AUTH_SHAPE_RIGHT_PATH;
 export const AUTH_EMOJY = AUTH_EMOJY_PATH;
 
-import INVENTORY_BOX_GRADIENT_PATH from './../../assets/img/gradients/inventory-box-gradient.svg'
-export const INVENTORY_BOX_GRADIENT = INVENTORY_BOX_GRADIENT_PATH
+import INVENTORY_BOX_GRADIENT_PATH from './../../assets/img/gradients/inventory-box-gradient.svg';
+export const INVENTORY_BOX_GRADIENT = INVENTORY_BOX_GRADIENT_PATH;
+
+import WALLET_SLIDER_BACKGROUND_PATH from './../../assets/img/wallet/slider-background.png';
+export const WALLET_SLIDER_BACKGROUND = imageUriResolver(
+    WALLET_SLIDER_BACKGROUND_PATH
+);

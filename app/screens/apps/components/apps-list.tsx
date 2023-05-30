@@ -34,7 +34,7 @@ export function AppItem({ title, category, imagePath }: Props) {
                     />
                 </Box>
                 <Box marginLeft={16}>
-                    <Box direction='row'>
+                    <Box direction="row">
                         <Text
                             color="#fff"
                             fontSize={16}
@@ -44,7 +44,7 @@ export function AppItem({ title, category, imagePath }: Props) {
                             {title}
                         </Text>
                     </Box>
-                    <Box direction='row'>
+                    <Box direction="row">
                         <Text
                             color="#666680"
                             fontSize={12}

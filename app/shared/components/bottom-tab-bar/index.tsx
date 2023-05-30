@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
 
@@ -13,6 +13,7 @@ import {
     ICON_WALLET_ACTIVE_SVG,
     ICON_WALLET_SVG
 } from './../../../constaints/icons';
+import { alertContext } from '../../../context/alert';
 
 const icons: any = {
     explore: {
@@ -105,79 +106,87 @@ export function BottomTabBar({ state, descriptors, navigation }: any) {
         navigation?.navigate(screenName);
     };
 
+    const alertCtx: any = useContext(alertContext)
+
+    const isAlertModalOpen = alertCtx.isOpen() || false
+
     return (
         <View style={[styles.container]}>
-            <View style={[styles.content]}>
-                <TouchableOpacity style={styles.plusButton}>
-                    <ICON_PLUS_SVG width={20} height={20} />
-                </TouchableOpacity>
-                <View style={styles.subContent}>
-                    {state.routes.map((route: any, i: number) => {
-                        const isFocused = state.index === i;
-                        const icon = icons[route.name.toLowerCase()];
+            {!isAlertModalOpen ?
+                <View style={[styles.content]}>
+                    <TouchableOpacity activeOpacity={1} style={styles.plusButton}>
+                        <ICON_PLUS_SVG width={20} height={20} />
+                    </TouchableOpacity>
+                    <View style={styles.subContent}>
+                        {state.routes.map((route: any, i: number) => {
+                            const isFocused = state.index === i;
+                            const icon = icons[route.name.toLowerCase()];
 
-                        const currentIcon: any = isFocused
-                            ? icon?.activePath
-                            : icon?.path;
+                            const currentIcon: any = isFocused
+                                ? icon?.activePath
+                                : icon?.path;
 
-                        return (
-                            <TouchableOpacity
-                                key={i}
-                                onPress={() =>
-                                    tabBarItemClickNavigateHandler(route.name)
-                                }
-                                style={[
-                                    {
-                                        height: 64,
-                                        borderWidth: 1,
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        borderColor: 'transparent'
-                                    },
-                                    i === 0 && {
-                                        width: '17.5%'
-                                    },
-                                    i === 1 && {
-                                        width: '17.5%'
-                                    },
-                                    i === 2 && {
-                                        width: '30%'
-                                    },
-                                    i === 3 && {
-                                        width: '17.5%'
-                                    },
-                                    i === 4 && {
-                                        width: '17.5%'
+                            return (
+                                <TouchableOpacity
+                                    activeOpacity={1}
+                                    key={i}
+                                    onPress={() =>
+                                        tabBarItemClickNavigateHandler(route.name)
                                     }
-                                ]}
-                            >
-                                {currentIcon ? currentIcon : null}
-                            </TouchableOpacity>
-                        );
-                    })}
+                                    style={[
+                                        {
+                                            height: 64,
+                                            borderWidth: 1,
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            borderColor: 'transparent'
+                                        },
+                                        i === 0 && {
+                                            width: '17.5%'
+                                        },
+                                        i === 1 && {
+                                            width: '17.5%'
+                                        },
+                                        i === 2 && {
+                                            width: '30%'
+                                        },
+                                        i === 3 && {
+                                            width: '17.5%'
+                                        },
+                                        i === 4 && {
+                                            width: '17.5%'
+                                        }
+                                    ]}
+                                >
+                                    {currentIcon ? currentIcon : null}
+                                </TouchableOpacity>
+                            );
+                        })}
+                    </View>
+                    <Svg
+                        id="bottom-bar"
+                        x="0px"
+                        y="0px"
+                        width="100%"
+                        height="100"
+                        viewBox="0 0 1092 260"
+                    >
+                        <Path
+                            fill={'#4e4e61d8'}
+                            stroke={'#4e4e61d8'}
+                            d={`M30,60h${states.pathX}.3c17.2,0,31,14.4,30,31.6c-0.2,2.7-0.3,5.5-0.3,8.2c0,71.2,58.1,129.6,129.4,130c72.1,0.3,130.6-58,130.6-130c0-2.7-0.1-5.4-0.2-8.1C${states.pathY}.7,74.5,${states.pathA}.5,60,${states.pathB}.7,60H1062c16.6,0,30,13.4,30,30v94c0,42-34,76-76,76H76c-42,0-76-34-76-76V90C0,73.4,13.4,60,30,60z`}
+                        />
+                        <Circle
+                            fill={'#597AFF'}
+                            stroke={'#597AFF'}
+                            cx="546"
+                            cy="100"
+                            r="100"
+                        />
+                    </Svg>
                 </View>
-                <Svg
-                    id="bottom-bar"
-                    x="0px"
-                    y="0px"
-                    width="100%"
-                    height="100"
-                    viewBox="0 0 1092 260"
-                >
-                    <Path
-                        fill={'#4e4e61d8'}
-                        stroke={'#4e4e61d8'}
-                        d={`M30,60h${states.pathX}.3c17.2,0,31,14.4,30,31.6c-0.2,2.7-0.3,5.5-0.3,8.2c0,71.2,58.1,129.6,129.4,130c72.1,0.3,130.6-58,130.6-130c0-2.7-0.1-5.4-0.2-8.1C${states.pathY}.7,74.5,${states.pathA}.5,60,${states.pathB}.7,60H1062c16.6,0,30,13.4,30,30v94c0,42-34,76-76,76H76c-42,0-76-34-76-76V90C0,73.4,13.4,60,30,60z`}
-                    />
-                    <Circle
-                        fill={'#597AFF'}
-                        stroke={'#597AFF'}
-                        cx="546"
-                        cy="100"
-                        r="100"
-                    />
-                </Svg>
-            </View>
+                : null
+            }
         </View>
     );
 }
@@ -186,21 +195,21 @@ const styles = StyleSheet.create({
     container: {},
     content: {
         flexDirection: 'column',
-        zIndex: 0,
+        zIndex: 1,
         width: Dimensions.get('window').width - 30,
         marginBottom: '4%',
         left: '4%',
         right: '4%',
         position: 'absolute',
-        bottom: '1%'
+        bottom: '1%',
     },
     subContent: {
         flexDirection: 'row',
         marginBottom: 10,
-        zIndex: 1,
         position: 'absolute',
         bottom: 5,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        zIndex: 2,
     },
     plusButton: {
         width: 56,

@@ -5,6 +5,7 @@ import { Text } from '../../../shared/components/text';
 import { Flex } from '../../../styles/grid';
 import { TouchableOpacity } from 'react-native';
 import { useRtl } from '../../../hooks/use-rtl';
+import { UseNavigationType } from '../../../shared/types/use-navigation';
 
 export type ListColumnItem = {
     id: number;
@@ -23,7 +24,7 @@ type Props = {
 
 export function ListColumn({ data }: Props) {
     const { isRtl } = useRtl();
-    const navigation = useNavigation<any>();
+    const navigation = useNavigation<UseNavigationType>();
 
     const navigationHandler = (routePath: string) => {
         navigation.navigate(routePath);
@@ -46,6 +47,7 @@ export function ListColumn({ data }: Props) {
                     marginBottom={list.id !== data.at(-1).id ? 32 : 0}
                 >
                     <TouchableOpacity
+                        activeOpacity={1}
                         onPress={() =>
                             list.routePath && navigationHandler(list.routePath)
                         }
@@ -63,7 +65,7 @@ export function ListColumn({ data }: Props) {
                                         style={[
                                             list.iconStyle,
                                             {
-                                                marginRight: 21.6,
+                                                marginRight: 21.6
                                             }
                                         ]}
                                     />
@@ -79,11 +81,20 @@ export function ListColumn({ data }: Props) {
 
                             {list?.direction === 'row-reverse' ? (
                                 <>
-                                    <list.icon style={[list.iconStyle, {
-                                        transform: [
-                                            { rotate: isRtl ? '180deg' : '0deg' }
-                                        ]
-                                    }]} />
+                                    <list.icon
+                                        style={[
+                                            list.iconStyle,
+                                            {
+                                                transform: [
+                                                    {
+                                                        rotate: isRtl
+                                                            ? '180deg'
+                                                            : '0deg'
+                                                    }
+                                                ]
+                                            }
+                                        ]}
+                                    />
                                 </>
                             ) : (
                                 <>

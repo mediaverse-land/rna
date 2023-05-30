@@ -14,7 +14,10 @@ export function AllPageDailyRecomended() {
         <DailyRecomended>
             <Title str="Daily recommended" />
             <Box marginTop={24}>
-                <HorizontalSlider data={dailyRecommendedMockData} isRtl={isRtl} />
+                <HorizontalSlider
+                    data={dailyRecommendedMockData}
+                    isRtl={isRtl}
+                />
             </Box>
         </DailyRecomended>
     );

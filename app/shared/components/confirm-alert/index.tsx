@@ -1,4 +1,4 @@
-import { useState, forwardRef, useImperativeHandle, useRef } from 'react';
+import { useState, forwardRef, useImperativeHandle, useRef, useContext, useEffect } from 'react';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { Image } from 'react-native';
 import { Box } from '../box';
@@ -6,11 +6,20 @@ import { CONFIRM_MODAL_BACKGROUND } from '../../../constaints/images';
 import { Text } from '../text';
 import { ConfirmModalComponents } from './style';
 import { theme } from '../../../constaints/theme';
+import { alertContext } from '../../../context/alert';
 
 const { Button } = ConfirmModalComponents;
 
 export const ConfirmAlert = forwardRef((props, ref) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    useEffect(() => {
+        return () => {
+            closeModalHandler();
+        }
+    }, [])
+
+    const alertCtx: any = useContext(alertContext)
 
     const confirmAlertSheetRef = useRef<BottomSheet>(null);
 
@@ -19,6 +28,7 @@ export const ConfirmAlert = forwardRef((props, ref) => {
     const closeModalHandler = () => {
         confirmAlertSheetRef.current?.close();
         setIsModalOpen(false);
+        alertCtx.close();
     };
 
     useImperativeHandle(ref, () => ({
@@ -40,8 +50,11 @@ export const ConfirmAlert = forwardRef((props, ref) => {
                         ref={confirmAlertSheetRef}
                         onClose={() => setIsModalOpen(false)}
                         handleComponent={null}
+
                         backgroundStyle={{
-                            backgroundColor: 'transparent'
+                            backgroundColor: 'transparent',
+                        }}
+                        style={{
                         }}
                     >
                         <BottomSheetView
@@ -51,7 +64,8 @@ export const ConfirmAlert = forwardRef((props, ref) => {
                                 top: 0,
                                 left: 0,
                                 width: '100%',
-                                height: 260
+                                height: 260,
+                                zIndex: 100000000000
                             }}
                         >
                             <Image
@@ -64,7 +78,7 @@ export const ConfirmAlert = forwardRef((props, ref) => {
                                     position: 'absolute',
                                     borderTopLeftRadius: 16,
                                     borderTopRightRadius: 16,
-                                    top: 0
+                                    top: 0,
                                 }}
                             />
                             <Box
@@ -117,66 +131,3 @@ export const ConfirmAlert = forwardRef((props, ref) => {
         </>
     );
 });
-
-// export const ConfirmAlert = forwardRef({
-//     openModal
-// }: Props)  =>{
-//     const [isModalOpen, setIsModalOpen] = useState(false)
-
-//     const confirmAlertSheetRef = useRef<BottomSheet>(null)
-
-//     const closeModalHandler = () => {
-//         confirmAlertSheetRef.current?.close();
-//         setIsModalOpen(false)
-//     }
-
-//     useEffect(() => {
-//         console.log('openModal')
-//     }, [openModal])
-//     // const openModalHandler = () => {
-
-//     // }
-
-//     return (
-//         <>
-//             {/* {isModalOpen ? (
-//                 <TouchableOpacity
-//                     style={{
-//                         width: '100%',
-//                         height: windowHeight,
-//                         position: 'absolute',
-//                         top: 0,
-//                         left: 0
-//                     }}
-//                     onPress={closeModalHandler}
-//                 ></TouchableOpacity>
-//             ) : null}
-//             <BottomSheet
-//                 snapPoints={snapPoints}
-//                 ref={sheetRef}
-//                 onClose={() => setIsModalOpen(false)}
-//                 handleComponent={null}
-//                 backgroundStyle={{
-//                     backgroundColor: 'transparent'
-//                 }}
-//             >
-//                 <BottomSheetView
-//                     style={{
-//                         position: 'absolute',
-//                         backgroundColor: 'rgba(78, 78, 97, 0.75)',
-//                         top: 0,
-//                         left: 0,
-//                         width: '100%',
-//                         height: 420,
-//                         borderTopLeftRadius: 16,
-//                         borderTopRightRadius: 16,
-//                         padding: 24
-//                     }}
-//                 >
-//                     <Box marginTop={24}>
-//                     </Box>
-//                 </BottomSheetView>
-//             </BottomSheet> */}
-//         </>
-//     );
-// }

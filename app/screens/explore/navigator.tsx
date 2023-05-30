@@ -1,3 +1,5 @@
+import React, { useCallback, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { ImagesPage } from './pages/images';
 import { VideosPage } from './pages/videos';
@@ -6,6 +8,7 @@ import { TextsPage } from './pages/text';
 import { AllPage } from './pages/all';
 import TopTabBar from '../../shared/components/top-tab-bar';
 import { Box } from '../../shared/components/box';
+import { StatusBar } from 'react-native'
 
 type RoutesType = {
     AllPage: undefined;
@@ -15,7 +18,14 @@ type RoutesType = {
     TextsPage: undefined;
 };
 
-const routes = [
+type RouteObject = {
+    id: number,
+    name: keyof RoutesType,
+    title: string,
+    component: () => JSX.Element
+}
+
+const routes: RouteObject[] = [
     {
         id: 1,
         name: 'AllPage',
@@ -51,20 +61,44 @@ const routes = [
 const Tab = createMaterialTopTabNavigator<RoutesType>();
 
 export function Navigator() {
+    const [shouldHide, setShouldHide] = useState(false);
+
+    useFocusEffect(
+        useCallback(() => {
+            setShouldHide(false)
+            return () => {
+                setShouldHide(true)
+            };
+        }, [])
+    );
+
+
+
     return (
-        <Box width={'100%'} flex={1}>
-            <Tab.Navigator tabBar={(props) => <TopTabBar {...props} />}>
-                {routes.map((route: any) => (
-                    <Tab.Screen
-                        key={route.id}
-                        name={route.name}
-                        component={route.component}
-                        options={{
-                            title: route.title
-                        }}
-                    />
-                ))}
-            </Tab.Navigator>
-        </Box>
+        <>
+            {shouldHide ? null :
+                <StatusBar backgroundColor={'#0c0c21'} barStyle='light-content' />
+            }
+
+            <Box width={'100%'} flex={1}>
+                <Tab.Navigator
+                    screenOptions={{
+                        animationEnabled: false,
+                    }}
+                    tabBar={(props) => <TopTabBar {...props} />}
+                >
+                    {routes.map((route) => (
+                        <Tab.Screen
+                            key={route.id}
+                            name={route.name}
+                            component={route.component}
+                            options={{
+                                title: route.title
+                            }}
+                        />
+                    ))}
+                </Tab.Navigator>
+            </Box >
+        </>
     );
 }

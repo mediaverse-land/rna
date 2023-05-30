@@ -155,3 +155,24 @@ export const ICON_FACEBOOK = ICON_FACEBOOK_PATH;
 
 import ICON_FRANCE_FLAG_PATH from './../../assets/icons/icon__france-flag.svg';
 export const ICON_FRANCE_FLAG = ICON_FRANCE_FLAG_PATH;
+
+import ICON_PAYPAL_GRAY_PATH from './../../assets/icons/icon__paypal-gray.svg';
+export const ICON_PAYPAL_GRAY = ICON_PAYPAL_GRAY_PATH;
+
+import ICON_MASTER_CARD_BLUE_PATH from './../../assets/icons/icon__mastercard-blue.svg';
+export const ICON_MASTER_CARD_BLUE = ICON_MASTER_CARD_BLUE_PATH;
+
+import ICON_PAYPAL_LARGE_PATH from './../../assets/icons/icon__paypal-large.svg';
+export const ICON_PAYPAL_LARGE = ICON_PAYPAL_LARGE_PATH;
+
+import ICON_SIMCARD_PATH from './../../assets/icons/icon__simcard.svg';
+export const ICON_SIMCARD = ICON_SIMCARD_PATH;
+
+import ICON_DOWNLOAD_PATH from './../../assets/icons/icon__download-blue.svg';
+export const ICON_DOWNLOAD = ICON_DOWNLOAD_PATH;
+
+import ICON_PREV_TEXT_PATH from './../../assets/icons/icon__prev-text.svg';
+export const ICON_PREV_TEXT = ICON_PREV_TEXT_PATH;
+
+import ICON_NEXT_TEXT_PATH from './../../assets/icons/icon__next-text.svg';
+export const ICON_NEXT_TEXT = ICON_NEXT_TEXT_PATH;

@@ -26,6 +26,7 @@ export function AddAccountModal({
         <>
             {isOpen ? (
                 <TouchableOpacity
+                    activeOpacity={1}
                     style={{
                         width: '100%',
                         height: windowHeight,
@@ -67,7 +68,7 @@ export function AddAccountModal({
                         <Text color="#fff" fontSize={theme.numericFontSize.md}>
                             Add account
                         </Text>
-                        <TouchableOpacity onPress={closeModalHandler}>
+                        <TouchableOpacity onPress={closeModalHandler} activeOpacity={1}>
                             <Text color="#A2A2B5" fontSize={14}>
                                 Cancel
                             </Text>
@@ -94,6 +95,7 @@ export function AddAccountModal({
                         </Box>
                         <Box marginTop={24}>
                             <TouchableOpacity
+                                activeOpacity={1}
                                 style={{
                                     width: '100%',
                                     height: 48,

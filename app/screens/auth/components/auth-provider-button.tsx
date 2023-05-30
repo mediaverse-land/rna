@@ -16,7 +16,7 @@ export function AuthProviderButton({
     text
 }: Props) {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity activeOpacity={1}>
             <Box
                 width="100%"
                 borderRadius={32}

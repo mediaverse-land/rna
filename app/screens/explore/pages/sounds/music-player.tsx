@@ -90,7 +90,7 @@ export function SoundsPageMusicPlayer() {
                         height="48px"
                         marginTop="28px"
                     >
-                        <TouchableOpacity>
+                        <TouchableOpacity activeOpacity={1}>
                             {/* <Image
                                 source={{ uri: ICON_MUSIC_PREV }}
                                 style={styles.musicTrackNextPrevButton}
@@ -114,7 +114,7 @@ export function SoundsPageMusicPlayer() {
                                 }}
                             />
                         </StartStopButton>
-                        <TouchableOpacity>
+                        <TouchableOpacity activeOpacity={1}>
                             {/* <Image
                                 source={{ uri: ICON_MUSIC_NEXT }}
                                 style={styles.musicTrackNextPrevButton}

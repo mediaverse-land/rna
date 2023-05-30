@@ -1,3 +1,4 @@
+import { FlatList } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { stickyStyles } from '../../styles/sticky';
 import { Box } from '../../shared/components/box';
@@ -6,7 +7,6 @@ import {
     mockDataListItem
 } from './mock-data/list-item-mock-data';
 import { ListItem } from './components/list-item';
-import { FlatList } from 'react-native';
 import { PaddingContainer } from '../../styles/grid';
 import { windowSize } from '../../utils/window-size';
 
@@ -48,7 +48,8 @@ export function ProfileScreenAllPage() {
                         renderItem={renderListItem}
                         keyExtractor={keyExtractor}
                         style={{
-                            paddingTop: 95
+                            paddingTop: 95,
+                            paddingBottom: 150
                         }}
                     />
                 </PaddingContainer>

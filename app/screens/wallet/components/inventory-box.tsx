@@ -1,27 +1,38 @@
-import { TouchableOpacity } from "react-native";
-import { INVENTORY_BOX_GRADIENT } from "../../../constaints/images";
-import { Box } from "../../../shared/components/box";
-import { Text } from "../../../shared/components/text";
-import { PaddingContainer } from "../../../styles/grid";
+import { TouchableOpacity } from 'react-native';
+import { INVENTORY_BOX_GRADIENT } from '../../../constaints/images';
+import { Box } from '../../../shared/components/box';
+import { Text } from '../../../shared/components/text';
+import { PaddingContainer } from '../../../styles/grid';
+import { windowSize } from '../../../utils/window-size';
+import { useNavigation } from '@react-navigation/native';
+import { UseNavigationType } from '../../../shared/types/use-navigation';
+
+const { width } = windowSize();
 
 export function InventoryBox() {
+    const navigation = useNavigation<UseNavigationType>();
+
+    const redirectToHistoryHandler = () => {
+        navigation.navigate('HistoryPage')
+    }
+
     return (
         <PaddingContainer>
-            <Box
-                marginTop={40}
-                height={56}
-                borderRadius={16}
-            >
+            <Box width={Math.floor(width) - 48}
+                additionalStyles={{
+                    overflow: 'hidden'
+                }}
+                marginTop={40} height={56} borderRadius={16}>
                 <INVENTORY_BOX_GRADIENT
                     style={{
-                        width: '100%',
+                        width: Math.floor(width) - 48,
                         height: 56,
                         position: 'absolute',
                         top: 0
                     }}
                 />
                 <Box
-                    width='100%'
+                    width="100%"
                     height={56}
                     paddingLeft={16}
                     paddingRight={16}
@@ -54,27 +65,21 @@ export function InventoryBox() {
                         alignItems="center"
                         justifyContent="space-between"
                     >
-                        <Text
-                            color="#fff"
-                            fontSize={16}
-                            fontWeight={600}
-                        >
+                        <Text color="#fff" fontSize={16} fontWeight={600}>
                             200 $
                         </Text>
-                        <TouchableOpacity
-                            activeOpacity={1}
-                        >
+                        <TouchableOpacity onPress={redirectToHistoryHandler} activeOpacity={1}>
                             <Text
                                 color="#597AFF"
                                 fontSize={14}
                                 fontWeight={400}
                             >
-                                Inventory
+                                History
                             </Text>
                         </TouchableOpacity>
                     </Box>
                 </Box>
             </Box>
         </PaddingContainer>
-    )
+    );
 }

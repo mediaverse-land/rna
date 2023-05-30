@@ -7,6 +7,7 @@ import { theme } from '../../../constaints/theme';
 import { windowSize } from './../../../utils/window-size';
 import { ICON_PROFILE_SETTINGS_SVG } from '../../../constaints/icons';
 import { useNavigation } from '@react-navigation/native';
+import { UseNavigationType } from '../../../shared/types/use-navigation';
 
 const { width: windowWidth } = windowSize();
 
@@ -31,7 +32,7 @@ const userProfileData = [
 ];
 
 export function ProfileScreenHead() {
-    const navigation = useNavigation<any>();
+    const navigation = useNavigation<UseNavigationType>();
 
     const settingsScreenRedirect = () => {
         navigation.navigate('Settings');
@@ -106,7 +107,7 @@ export function ProfileScreenHead() {
                                 />
                             </Box>
                             <Box width={usernameBoxWidth}>
-                                <Box direction='row'>
+                                <Box direction="row">
                                     <Text
                                         color="#fff"
                                         fontWeight={600}
@@ -115,7 +116,7 @@ export function ProfileScreenHead() {
                                         Ma.nakhli
                                     </Text>
                                 </Box>
-                                <Box direction='row'>
+                                <Box direction="row">
                                     <Text
                                         color="#83839C"
                                         fontSize={theme.numericFontSize.sm}
@@ -140,6 +141,7 @@ export function ProfileScreenHead() {
                                     height="48px"
                                 >
                                     <TouchableOpacity
+                                        activeOpacity={1}
                                         onPress={settingsScreenRedirect}
                                     >
                                         <ICON_PROFILE_SETTINGS_SVG

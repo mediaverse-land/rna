@@ -80,19 +80,13 @@ export function SettingsScreenHeader() {
                     </Flex>
                 </Box>
             </Flex>
-            <Box
-                position="absolute"
-                top={76}
-                left={24}
-            >
-                <TouchableOpacity onPress={goBackHandler}>
+            <Box position="absolute" top={76} left={24}>
+                <TouchableOpacity activeOpacity={1} onPress={goBackHandler}>
                     <ICON_ARROW_LEFT_SVG
                         style={{
                             width: 122,
                             height: 16.88,
-                            transform: [
-                                { rotate: isRtl ? '180deg' : '0deg' }
-                            ]
+                            transform: [{ rotate: isRtl ? '180deg' : '0deg' }]
                         }}
                     />
                 </TouchableOpacity>

@@ -11,7 +11,7 @@ type Props = {
 
 export function Title({ str, iconPath }: Props) {
     return (
-        <Box direction='row'>
+        <Box direction="row">
             <TitleComponent>
                 {iconPath ? (
                     <>

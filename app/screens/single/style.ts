@@ -23,6 +23,7 @@ export const SingleVideoPageComponents = {
         align-items: center;
         margin-bottom: 8px;
         padding: 0 16px;
+        flex-direction: row;
     `,
     VideoDataBoxLabel: styled.Text`
         color: #666680;

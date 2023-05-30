@@ -1,6 +1,5 @@
 import 'react-native-gesture-handler';
 import { FC } from 'react';
-import { StatusBar } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { AppStack } from './app/screens/stack';
@@ -13,6 +12,7 @@ import { SingleTextScreen } from './app/screens/single/text';
 import { PaymentScreen } from './app/screens/payment';
 import { AuthScreen } from './app/screens/auth';
 import { WalletScreen } from './app/screens/wallet';
+import { AlertContextProvider } from './app/context/alert';
 
 const Stack = createStackNavigator();
 
@@ -66,35 +66,36 @@ const routes: { id: number; name: string; component: FC }[] = [
         id: 10,
         name: 'WalletScreen',
         component: WalletScreen
-    },
+    }
 ];
 
 const fadeTransition = ({ current }: any) => ({
     cardStyle: {
-        opacity: current.progress,
-    },
+        opacity: current.progress
+    }
 });
 
 export default function App() {
     return (
         <>
-            <StatusBar />
-            <NavigationContainer>
-                <Stack.Navigator
-                    screenOptions={{
-                        headerShown: false,
-                        cardStyleInterpolator: fadeTransition,
-                    }}
-                >
-                    {routes.map((route) => (
-                        <Stack.Screen
-                            key={route.id}
-                            name={route.name}
-                            component={route.component}
-                        />
-                    ))}
-                </Stack.Navigator>
-            </NavigationContainer>
+            <AlertContextProvider>
+                <NavigationContainer>
+                    <Stack.Navigator
+                        screenOptions={{
+                            headerShown: false,
+                            cardStyleInterpolator: fadeTransition
+                        }}
+                    >
+                        {routes.map((route) => (
+                            <Stack.Screen
+                                key={route.id}
+                                name={route.name}
+                                component={route.component}
+                            />
+                        ))}
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </AlertContextProvider>
         </>
     );
 }

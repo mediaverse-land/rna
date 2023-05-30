@@ -3,12 +3,13 @@ import { SearchBarComponents } from './style';
 import { ICON_SEARCH_SVG_PATH } from '../../constaints/icons';
 import { useNavigation } from '@react-navigation/native';
 import { useRtl } from '../../hooks/use-rtl';
+import { UseNavigationType } from '../../shared/types/use-navigation';
 
 const { SearchInput } = SearchBarComponents;
 
 export function SearchBar() {
     const { isRtl } = useRtl();
-    const navigation = useNavigation<any>();
+    const navigation = useNavigation<UseNavigationType>();
 
     const navigateToSearchPageHandler = () => {
         navigation.navigate('Search');

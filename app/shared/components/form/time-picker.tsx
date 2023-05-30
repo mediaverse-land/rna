@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Platform, TouchableOpacity, Image } from 'react-native';
+import { Platform, TouchableOpacity } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { InputComponent } from './style';
 import { theme } from '../../../constaints/theme';
@@ -21,7 +21,7 @@ export function TimePicker() {
 
     return (
         <FormGroup>
-            <TouchableOpacity onPress={showTimePicker}>
+            <TouchableOpacity activeOpacity={1} onPress={showTimePicker}>
                 <InputBox
                     editable={false}
                     selectTextOnFocus={false}

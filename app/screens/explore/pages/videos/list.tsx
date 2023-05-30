@@ -5,6 +5,7 @@ import { VideoItem, videosMockData } from './mock-data/video-mock-data';
 import { Flex } from '../../../../styles/grid';
 import { UserNameCard } from '../../../../shared/components/username-card';
 import { useNavigation } from '@react-navigation/native';
+import { UseNavigationType } from '../../../../shared/types/use-navigation';
 
 const {
     ListWrapper,
@@ -16,7 +17,7 @@ const {
 } = VideoPageComponents;
 
 export function VideoPageList() {
-    const navigation = useNavigation<any>();
+    const navigation = useNavigation<UseNavigationType>();
 
     const navigateToSinglVide = (title: string) => {
         navigation.navigate('SingleVideoScreen', {
@@ -26,7 +27,7 @@ export function VideoPageList() {
 
     const renderVidoeListItem = ({ item }: { item: VideoItem }) => {
         return (
-            <TouchableOpacity onPress={() => navigateToSinglVide(item.title)}>
+            <TouchableOpacity activeOpacity={1} onPress={() => navigateToSinglVide(item.title)}>
                 <VideoListItem>
                     <View>
                         <VideoListItemThumbnail

@@ -8,6 +8,7 @@ import { Box } from '../../../../shared/components/box';
 import { Flex } from '../../../../styles/grid';
 import { SVG_ICON } from '../../../../constaints/icons';
 import { useNavigation } from '@react-navigation/native';
+import { UseNavigationType } from '../../../../shared/types/use-navigation';
 
 const {
     TextSliderWrapper,
@@ -19,9 +20,7 @@ const {
 } = ImagesPageComponents;
 
 export function AllPageTopTenText() {
-    const navigation = useNavigation<{
-        navigate: (screenName: string, option: Record<string, string>) => void;
-    }>();
+    const navigation = useNavigation<UseNavigationType>();
 
     const textScreenNavigationHandler = (title: string) => {
         console.log('title');

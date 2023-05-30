@@ -18,7 +18,7 @@ export type HorizontailSlideType = {
 type Props = {
     data: HorizontailSlideType[];
     navigationScreenName?: string;
-    isRtl?: boolean
+    isRtl?: boolean;
 };
 
 const { Wrapper } = HorizontalSliderComponents;
@@ -36,7 +36,6 @@ const contentTypeMapperToScreenMapper = (type: ContentType) => {
 
 type UseNavigationProps = {
     navigate: (title: string, options: Record<string, string>) => void;
-
 };
 
 export function HorizontalSlider({ data, isRtl }: Props) {

@@ -20,7 +20,7 @@ export function Input({ labelText, placeholder, labelIcon }: Props) {
     const { isRtl } = useRtl();
 
     return (
-        <Box width="100%" direction='row-reverse'>
+        <Box width="100%" direction="row-reverse">
             <Label
                 onLayout={(e: LayoutChangeEvent) => {
                     const { width } = e.nativeEvent.layout;
@@ -31,7 +31,7 @@ export function Input({ labelText, placeholder, labelIcon }: Props) {
                     height="100%"
                     additionalStyles={{
                         borderRightWidth: 1,
-                        borderRightColor: '#fff',
+                        borderRightColor: '#fff'
                     }}
                 >
                     <Text

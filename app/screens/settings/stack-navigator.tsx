@@ -68,8 +68,8 @@ const routes = [
 
 const fadeTransition = ({ current }: any) => ({
     cardStyle: {
-        opacity: current.progress,
-    },
+        opacity: current.progress
+    }
 });
 
 export function SettingsStack() {
@@ -77,7 +77,7 @@ export function SettingsStack() {
         <Stack.Navigator
             screenOptions={{
                 headerShown: false,
-                cardStyleInterpolator: fadeTransition,
+                cardStyleInterpolator: fadeTransition
             }}
         >
             {routes.map((route) => (

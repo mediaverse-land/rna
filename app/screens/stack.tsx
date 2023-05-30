@@ -4,6 +4,7 @@ import { BottomTabBar } from '../shared/components/bottom-tab-bar';
 import { AppsStack } from './apps';
 import { ProfileScreen } from './profile';
 import { WalletScreen } from './wallet';
+import { WalletStack } from './wallet/navigation';
 
 type RoutesType = {
     Explore: undefined;
@@ -37,7 +38,7 @@ const routes = [
     {
         id: 4,
         name: 'Wallet',
-        component: WalletScreen,
+        component: WalletStack,
         title: 'wallet'
     },
     {
@@ -53,7 +54,7 @@ export function AppStack() {
         <Tab.Navigator
             tabBar={(props) => <BottomTabBar {...props} />}
             screenOptions={{
-                headerShown: false,
+                headerShown: false
             }}
         >
             {routes.map((route: any) => (

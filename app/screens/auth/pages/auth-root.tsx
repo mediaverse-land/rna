@@ -2,7 +2,6 @@ import { TouchableOpacity } from 'react-native';
 import { Box } from '../../../shared/components/box';
 import { HeroShapes } from '../components/hero-shapes';
 import { Text } from '../../../shared/components/text';
-import { windowSize } from '../../../utils/window-size';
 
 type Props = {
     setWindowHandler: (window: 'login' | 'singin') => void;
@@ -19,7 +18,7 @@ export function AuthRoot({ setWindowHandler }: Props) {
                 paddingRight={24}
                 marginTop={30}
             >
-                <TouchableOpacity onPress={() => setWindowHandler('singin')}>
+                <TouchableOpacity activeOpacity={1} onPress={() => setWindowHandler('singin')}>
                     <Box
                         width="100%"
                         height={48}
@@ -38,7 +37,7 @@ export function AuthRoot({ setWindowHandler }: Props) {
                         </Text>
                     </Box>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => setWindowHandler('login')}>
+                <TouchableOpacity activeOpacity={1} onPress={() => setWindowHandler('login')}>
                     <Box
                         width="100%"
                         height={48}

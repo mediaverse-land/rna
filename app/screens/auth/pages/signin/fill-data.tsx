@@ -1,8 +1,9 @@
 import { TouchableOpacity } from 'react-native';
-import { Box } from '../../../shared/components/box';
-import { Input } from '../../../shared/components/form';
-import { Text } from '../../../shared/components/text';
+import { Box } from '../../../../shared/components/box';
+import { Input } from '../../../../shared/components/form';
+import { Text } from '../../../../shared/components/text';
 import { useNavigation } from '@react-navigation/native';
+import { UseNavigationType } from '../../../../shared/types/use-navigation';
 
 const fillDataForm = [
     {
@@ -43,19 +44,15 @@ const fillDataForm = [
 ];
 
 export function FillData() {
-    const navigation = useNavigation<any>();
+    const navigation = useNavigation<UseNavigationType>();
 
     const navigateToExploreHandler = () => {
         navigation.navigate('AppStack');
     };
 
     return (
-        <Box flex={1} width='100%' alignItems="center" >
-            <Box
-                position="relative"
-                width='100%'
-                alignItems='center'
-            >
+        <Box flex={1} width="100%" alignItems="center">
+            <Box position="relative" width="100%" alignItems="center">
                 <Text
                     color="#fff"
                     lineHeight={20}
@@ -76,6 +73,7 @@ export function FillData() {
                     ))}
                 </Box>
                 <TouchableOpacity
+                    activeOpacity={1}
                     style={{
                         width: '100%'
                     }}

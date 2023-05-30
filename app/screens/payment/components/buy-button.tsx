@@ -19,7 +19,7 @@ export function BuyButton({ setPayHandler }: Props) {
             paddingLeft={24}
             paddingRight={24}
         >
-            <TouchableOpacity onPress={buyButtonPressHandler}>
+            <TouchableOpacity activeOpacity={1} onPress={buyButtonPressHandler}>
                 <Box
                     width="100%"
                     height={48}

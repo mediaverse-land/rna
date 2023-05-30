@@ -5,6 +5,9 @@
 
 
 
+            "eas": {
+                "projectId": "d68159ed-2151-40be-bf45-b40a72819dc6"
+            }
 
 
  {/* <View>

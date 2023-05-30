@@ -24,6 +24,7 @@ export function SettingsScreenTitle({ title }: { title: string }) {
                 {title}
             </Text>
             <TouchableOpacity
+                activeOpacity={1}
                 onPress={goBackHandler}
                 style={{
                     position: 'absolute',
@@ -35,9 +36,7 @@ export function SettingsScreenTitle({ title }: { title: string }) {
                     style={{
                         width: 22,
                         height: 16.88,
-                        transform: [
-                            { rotate: isRtl ? '180deg' : '0deg' }
-                        ]
+                        transform: [{ rotate: isRtl ? '180deg' : '0deg' }]
                     }}
                 />
             </TouchableOpacity>

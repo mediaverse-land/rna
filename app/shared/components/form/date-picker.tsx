@@ -26,7 +26,7 @@ export function DatePicker() {
 
     return (
         <FormGroup>
-            <TouchableOpacity onPress={showDatePicker}>
+            <TouchableOpacity activeOpacity={1} onPress={showDatePicker}>
                 {/* <Image
                     source={{ uri: ICON_CALENDAR }}
                     style={datePiclerIconStyles}

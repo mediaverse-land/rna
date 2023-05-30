@@ -52,7 +52,7 @@ export const SingleItemFiles: FC<Props> = ({ data }) => {
                 resizeMode="cover"
             />
             {/* title */}
-            <TouchableOpacity onPress={toggleAccordianHandler}>
+            <TouchableOpacity onPress={toggleAccordianHandler} activeOpacity={1}>
                 <Box
                     width="100%"
                     direction="row"

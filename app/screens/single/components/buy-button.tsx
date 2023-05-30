@@ -8,9 +8,10 @@ import { Text } from '../../../shared/components/text';
 import { theme } from '../../../constaints/theme';
 import { ICON_EYE_GRAY, ICON_SHRE_GRAY } from '../../../constaints/icons';
 import { useNavigation } from '@react-navigation/native';
+import { UseNavigationType } from '../../../shared/types/use-navigation';
 
 export function BuyBottom() {
-    const navigation = useNavigation<any>();
+    const navigation = useNavigation<UseNavigationType>();
 
     const paymentScreenNavigationHandler = () => {
         navigation.navigate('PaymentScreen');
@@ -103,7 +104,7 @@ export function BuyBottom() {
                 </Box>
                 {/* buy-buton */}
                 <Box marginTop={16}>
-                    <TouchableOpacity onPress={paymentScreenNavigationHandler}>
+                    <TouchableOpacity onPress={paymentScreenNavigationHandler} activeOpacity={1}>
                         <Box
                             width="100%"
                             height={48}

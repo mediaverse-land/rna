@@ -1,9 +1,10 @@
 import { Image, TouchableOpacity } from 'react-native';
 import { HeaderStyles } from './style';
 import { useNavigation } from '@react-navigation/native';
+import { UseNavigationType } from '../../shared/types/use-navigation';
 
 export function Header() {
-    const navigation = useNavigation<any>();
+    const navigation = useNavigation<UseNavigationType>();
 
     function navigateToSearchPage() {
         navigation.navigate('Search');
@@ -25,7 +26,10 @@ export function Header() {
                     <HeaderStyles.UserName>User.Name</HeaderStyles.UserName>
                 </HeaderStyles.Profile>
                 <HeaderStyles.SearchIconWrapper>
-                    <TouchableOpacity onPress={navigateToSearchPage}>
+                    <TouchableOpacity
+                        onPress={navigateToSearchPage}
+                        activeOpacity={1}
+                    >
                         <Image
                             source={require('./../../../assets/icons/icon__search.png')}
                             style={{ width: 18, height: 18 }}

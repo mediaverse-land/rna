@@ -120,6 +120,7 @@ export function ShareEccountPage() {
                         </Box>
                         <Box>
                             <TouchableOpacity
+                                activeOpacity={1}
                                 onPress={() => confirmAlertRef.current?.open()}
                             >
                                 <ICON_TRASHBEEN
