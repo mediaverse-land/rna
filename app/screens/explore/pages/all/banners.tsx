@@ -1,4 +1,4 @@
-import { Image } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { ImagesPageComponents } from './style';
 import { Flex } from '../../../../styles/grid';
 import {
@@ -41,20 +41,11 @@ export function AllPageBanners() {
         <BannerItem key={banner.id} style={{ width }}>
             <Image
                 source={{ uri: banner.coverPath }}
-                style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: 16
-                }}
+                style={styles.bannerImage}
             />
             <Image
                 source={{ uri: BANNER_ITEM_GRADIENT_IMAGE }}
-                style={{
-                    width: '100%',
-                    height: '100%',
-                    borderRadius: 16,
-                    position: 'absolute'
-                }}
+                style={styles.bannerImagePlaceholder}
             />
             <BannerItemTitel>{banner.title}</BannerItemTitel>
             <BannerItemDescription>{banner.description}</BannerItemDescription>
@@ -72,3 +63,17 @@ export function AllPageBanners() {
         </Flex>
     );
 }
+
+const styles = StyleSheet.create({
+    bannerImage: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 16
+    },
+    bannerImagePlaceholder: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 16,
+        position: 'absolute'
+    },
+})

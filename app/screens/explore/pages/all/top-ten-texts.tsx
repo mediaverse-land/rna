@@ -1,4 +1,5 @@
 import { FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Title } from '../../../../shared/components/title';
 import { ImagesPageComponents } from './style';
 import { TEXT_SLIDER_ITEM_GRADIENT } from '../../../../constaints/images';
@@ -6,8 +7,7 @@ import { TextItem, topTenTextsMockData } from './mock-data/top-ten-texts';
 import { UserNameCard } from '../../../../shared/components/username-card';
 import { Box } from '../../../../shared/components/box';
 import { Flex } from '../../../../styles/grid';
-import { SVG_ICON } from '../../../../constaints/icons';
-import { useNavigation } from '@react-navigation/native';
+import { ICON_TOP_TABBAR_TEXT_ACTIVE_SVG } from '../../../../constaints/icons';
 import { UseNavigationType } from '../../../../shared/types/use-navigation';
 
 const {
@@ -59,7 +59,7 @@ export function AllPageTopTenText() {
     return (
         <Box marginTop={40} paddingLeft={24} flex={1}>
             <Flex direction="row">
-                <SVG_ICON
+                <ICON_TOP_TABBAR_TEXT_ACTIVE_SVG
                     width={16}
                     height={16}
                     style={{ marginRight: 8, marginTop: 3 }}

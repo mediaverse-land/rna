@@ -16,7 +16,11 @@ export function SingleSoundScreen({ navigation }: any) {
         <SafeAreaView style={{ flex: 1 }}>
             <ScreenGradient>
                 <ScrollView style={{ width: '100%' }}>
-                    <Box width="100%">
+                    <Box
+                        width="100%"
+                        position='relative'
+                        zIndex={20}
+                    >
                         <SingleSoundHeader goBackHandler={goBackHandler} />
                         <SingleSoundContent />
                         <Box marginTop={24} marginBottom={50}>

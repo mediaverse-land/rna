@@ -20,6 +20,8 @@ export function SingleItemMetaData({ data }: { data: MetaDataType[] }) {
             direction="row"
             justifyContent="space-between"
             flexWrap="wrap"
+            position='relative'
+            zIndex={20}
         >
             {data.map((video: MetaDataType) => (
                 <VideoDataBox key={video.id}>
@@ -27,14 +29,14 @@ export function SingleItemMetaData({ data }: { data: MetaDataType[] }) {
                         style={[
                             !isRtl
                                 ? {
-                                      borderRightWidth: 1,
-                                      borderRightColor: '#666680'
-                                  }
+                                    borderRightWidth: 1,
+                                    borderRightColor: '#666680'
+                                }
                                 : {
-                                      borderLeftWidth: 1,
-                                      borderLeftColor: '#666680',
-                                      paddingLeft: 16
-                                  }
+                                    borderLeftWidth: 1,
+                                    borderLeftColor: '#666680',
+                                    paddingLeft: 16
+                                }
                         ]}
                     >
                         {video.key}

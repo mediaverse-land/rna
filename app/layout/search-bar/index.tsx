@@ -30,11 +30,7 @@ export function SearchBar() {
             <ICON_SEARCH_SVG_PATH
                 width={16}
                 height={16}
-                style={{
-                    position: 'relative',
-                    left: '40%',
-                    top: -30
-                }}
+                style={styles.iconSearch}
             />
         </TouchableOpacity>
     );
@@ -55,5 +51,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 24,
         paddingRight: 24
+    },
+    iconSearch: {
+        position: 'relative',
+        left: '40%',
+        top: -30
     }
 });

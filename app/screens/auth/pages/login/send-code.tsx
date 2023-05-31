@@ -1,4 +1,4 @@
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { UseNavigationType } from '../../../../shared/types/use-navigation';
 import { Box } from '../../../../shared/components/box';
@@ -47,9 +47,7 @@ export const SendCode = () => {
                     </Text>
                     <TouchableOpacity
                         activeOpacity={1}
-                        style={{
-                            width: '100%'
-                        }}
+                        style={styles.fullWidth}
                         onPress={navigateToExploreHandler}
                     >
                         <Box
@@ -75,3 +73,9 @@ export const SendCode = () => {
         </>
     );
 };
+
+const styles = StyleSheet.create({
+    fullWidth: {
+        width: '100%'
+    }
+})

@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthLogo } from './components/logo';
 import { AuthRoot } from './pages/auth-root';
@@ -24,13 +24,9 @@ export function AuthScreen() {
     return (
         <>
             <StatusBar backgroundColor={'#030340'} barStyle="light-content" />
-            <SafeAreaView style={{ flex: 1 }}>
+            <SafeAreaView style={styles.safeAreaView}>
                 <ScrollView
-                    style={{
-                        flex: 1,
-                        backgroundColor: '#030340',
-                        paddingBottom: 50
-                    }}
+                    style={styles.scrollView}
                 >
                     <AuthLogo />
                     {authWindows[currentWindow]}
@@ -39,3 +35,14 @@ export function AuthScreen() {
         </>
     );
 }
+
+const styles = StyleSheet.create({
+    safeAreaView: {
+        flex: 1
+    },
+    scrollView: {
+        flex: 1,
+        backgroundColor: '#030340',
+        paddingBottom: 50
+    }
+})

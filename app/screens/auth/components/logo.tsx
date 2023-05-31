@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native'
 import {
     ICON_LOGO_BOTTOM_SECTION,
     ICON_LOGO_MIDD_SECTION,
@@ -6,6 +7,7 @@ import {
 import { theme } from '../../../constaints/theme';
 import { Box } from '../../../shared/components/box';
 import { Text } from '../../../shared/components/text';
+
 
 export function AuthLogo() {
     return (
@@ -16,26 +18,13 @@ export function AuthLogo() {
             paddingTop={56}
         >
             <ICON_LOGO_TOP_SECTION
-                style={{
-                    width: 14.2,
-                    height: 8
-                }}
+                style={styles.logoIconTopSection}
             />
             <ICON_LOGO_MIDD_SECTION
-                style={{
-                    width: 25,
-                    height: 19.89,
-                    position: 'relative',
-                    top: -4
-                }}
+                style={styles.logoIconMidSection}
             />
             <ICON_LOGO_BOTTOM_SECTION
-                style={{
-                    width: 14.16,
-                    height: 8.19,
-                    position: 'relative',
-                    top: -6
-                }}
+                style={styles.logoIconBottomSection}
             />
             <Text
                 color="#fff"
@@ -57,3 +46,23 @@ export function AuthLogo() {
         </Box>
     );
 }
+
+
+const styles = StyleSheet.create({
+    logoIconTopSection: {
+        width: 14.2,
+        height: 8
+    },
+    logoIconMidSection: {
+        width: 25,
+        height: 19.89,
+        position: 'relative',
+        top: -4
+    },
+    logoIconBottomSection: {
+        width: 14.16,
+        height: 8.19,
+        position: 'relative',
+        top: -6
+    }
+})

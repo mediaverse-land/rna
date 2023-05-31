@@ -1,4 +1,4 @@
-import { Image, TouchableOpacity } from 'react-native';
+import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { HeaderStyles } from './style';
 import { useNavigation } from '@react-navigation/native';
 import { UseNavigationType } from '../../shared/types/use-navigation';
@@ -16,12 +16,7 @@ export function Header() {
                 <HeaderStyles.Profile>
                     <Image
                         source={require('./../../../assets/img/10-profile-picture.png')}
-                        style={{
-                            width: 40,
-                            height: 40,
-                            marginRight: 10,
-                            borderRadius: 100
-                        }}
+                        style={styles.headerProfileImage}
                     />
                     <HeaderStyles.UserName>User.Name</HeaderStyles.UserName>
                 </HeaderStyles.Profile>
@@ -32,7 +27,7 @@ export function Header() {
                     >
                         <Image
                             source={require('./../../../assets/icons/icon__search.png')}
-                            style={{ width: 18, height: 18 }}
+                            style={styles.searchIcon}
                         />
                     </TouchableOpacity>
                 </HeaderStyles.SearchIconWrapper>
@@ -41,3 +36,17 @@ export function Header() {
         </>
     );
 }
+
+
+const styles = StyleSheet.create({
+    headerProfileImage: {
+        width: 40,
+        height: 40,
+        marginRight: 10,
+        borderRadius: 100
+    },
+    searchIcon: {
+        width: 18,
+        height: 18
+    }
+})

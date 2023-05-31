@@ -200,19 +200,17 @@ export function HowToPayList() {
                                                 borderWidth: 1,
                                                 borderColor:
                                                     selectedPaymentMethod !==
-                                                        m.title
+                                                    m.title
                                                         ? '#CCCCFF'
                                                         : 'transparent'
                                             }}
                                             backgroundColor={
                                                 selectedPaymentMethod ===
-                                                    m.title
+                                                m.title
                                                     ? '#597AFF'
                                                     : 'transparent'
                                             }
-                                        >
-
-                                        </Box>
+                                        ></Box>
                                     </Box>
                                 </Box>
                             </Box>

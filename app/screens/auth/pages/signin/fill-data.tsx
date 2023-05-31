@@ -1,4 +1,4 @@
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 import { Box } from '../../../../shared/components/box';
 import { Input } from '../../../../shared/components/form';
 import { Text } from '../../../../shared/components/text';
@@ -74,9 +74,7 @@ export function FillData() {
                 </Box>
                 <TouchableOpacity
                     activeOpacity={1}
-                    style={{
-                        width: '100%'
-                    }}
+                    style={styles.fullWidth}
                     onPress={navigateToExploreHandler}
                 >
                     <Box
@@ -102,3 +100,9 @@ export function FillData() {
         </Box>
     );
 }
+
+const styles = StyleSheet.create({
+    fullWidth: {
+        width: '100%'
+    }
+})

@@ -1,55 +1,54 @@
-import { FC } from 'react'
-import { Box } from '../../../shared/components/box'
+import { FC } from 'react';
+import { Box } from '../../../shared/components/box';
 import {
     ICON_CHECK_SQUARE_WHITE,
     ICON_DOWNLOAD_WHITE,
     ICON_MENU_WHITE,
     ICON_X_WHITE
-} from '../../../constaints/icons'
+} from '../../../constaints/icons';
 import { TouchableOpacity } from 'react-native';
 
 type Props = {
-    isVisible: boolean,
+    isVisible: boolean;
     closerHandler: () => void;
-}
+};
 
 export const SelectBar: FC<Props> = ({ isVisible, closerHandler }) => {
     const selectBarCloserHandler = () => {
         closerHandler();
-    }
+    };
 
     return (
         <>
-            {isVisible ?
+            {isVisible ? (
                 <Box
-                    width='100%'
+                    width="100%"
                     height={48}
-                    position='absolute'
+                    position="absolute"
                     bottom={139}
-                    justifyContent='center'
+                    justifyContent="center"
                     paddingLeft={24}
                     paddingRight={24}
                     zIndex={1000000}
                 >
                     <Box
-                        width='100%'
-                        height='100%'
+                        width="100%"
+                        height="100%"
                         borderRadius={16}
-                        backgroundColor='#0e0e12a0'
-                        direction='row'
-                        alignItems='center'
-                        justifyContent='space-between'
+                        backgroundColor="#0e0e12a0"
+                        direction="row"
+                        alignItems="center"
+                        justifyContent="space-between"
                         paddingRight={24}
                         paddingLeft={24}
                     >
                         <TouchableOpacity onPress={selectBarCloserHandler}>
-                            <Box direction='row' alignItems='center' >
+                            <Box direction="row" alignItems="center">
                                 <ICON_X_WHITE />
                             </Box>
                         </TouchableOpacity>
-                        <Box direction='row' alignItems='center' >
-                            <ICON_DOWNLOAD_WHITE
-                            />
+                        <Box direction="row" alignItems="center">
+                            <ICON_DOWNLOAD_WHITE />
                             <ICON_CHECK_SQUARE_WHITE
                                 style={{
                                     marginLeft: 24
@@ -63,7 +62,7 @@ export const SelectBar: FC<Props> = ({ isVisible, closerHandler }) => {
                         </Box>
                     </Box>
                 </Box>
-                : null}
+            ) : null}
         </>
-    )
-}
+    );
+};

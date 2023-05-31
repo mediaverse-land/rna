@@ -9,10 +9,6 @@ export const SingleVideoPageComponents = {
         background-color: rgba(14, 14, 18, 0.5);
         align-items: center;
         justify-content: center;
-        position: absolute;
-        top: 16px;
-        z-index: 11;
-        left: 24px;
     `,
     VideoDataBox: styled.View`
         width: 49%;

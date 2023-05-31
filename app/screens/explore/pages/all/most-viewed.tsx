@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native'
 import { Title } from '../../../../shared/components/title';
 import { ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG } from '../../../../constaints/icons';
 import { Masonry } from '../../../../shared/components/masonry';
@@ -12,7 +13,7 @@ export function AllPageMostViewed() {
                 <ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG
                     width={16}
                     height={16}
-                    style={{ marginRight: 8, marginTop: 3 }}
+                    style={styles.icon}
                 />
                 <Title str="Most viewed" />
             </Flex>
@@ -22,3 +23,10 @@ export function AllPageMostViewed() {
         </Box>
     );
 }
+
+
+const styles = StyleSheet.create({
+    icon: {
+        marginRight: 8, marginTop: 3
+    },
+})

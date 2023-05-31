@@ -1,4 +1,4 @@
-import { FlatList } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { ScreenGradient } from '../../shared/components/screen-gradient';
 import { AppItemType, appItemListMockData } from './mock-data/apps-mock-data';
 import { AppItem } from './components/apps-list';
@@ -26,10 +26,7 @@ export function AppsPageAllScreen() {
         <ScreenGradient>
             <Box width="100%">
                 <FlatList
-                    contentContainerStyle={{
-                        paddingTop: 192,
-                        paddingBottom: 100
-                    }}
+                    contentContainerStyle={styles.list}
                     data={appItemListMockData}
                     renderItem={renderItem}
                     keyExtractor={keyExtractor}
@@ -58,3 +55,10 @@ export function AppsPageAllScreen() {
         </ScreenGradient>
     );
 }
+
+const styles = StyleSheet.create({
+    list: {
+        paddingTop: 192,
+        paddingBottom: 100
+    }
+})

@@ -40,32 +40,33 @@ export function ProfileScreenAllPage() {
         else {
             removeContentFromSelectedList(itemId);
         }
-    }
+    };
 
     const removeContentFromSelectedList = (itemId: number) => {
         const filteredContent = selectedContents.filter((f) => f !== itemId);
         const newArray = [...filteredContent];
-        setSelectedContents(newArray)
-    }
+        setSelectedContents(newArray);
+    };
 
     const isSelectedContent = (itemId: number) => {
         const findContent = findSelectedContent(itemId);
-        return findContent ? true : false
-    }
+        return findContent ? true : false;
+    };
 
     const selectOwnedItemPressHandler = (itemId: number) => {
         if (selectedContents.length === 0) {
             return;
         }
 
-        selectOwnedItemLognPressHandler(itemId)
-    }
+        selectOwnedItemLognPressHandler(itemId);
+    };
 
     const selectBarCloserHandler = () => {
-        setSelectedContents([])
-    }
+        setSelectedContents([]);
+    };
 
-    const findSelectedContent = (itemId: number) => selectedContents.find((f) => f === itemId);
+    const findSelectedContent = (itemId: number) =>
+        selectedContents.find((f) => f === itemId);
 
     const renderListItem = ({ item }: { item: ListItemType }) => {
         const { imagePath, title, username, profileUri } = item;
@@ -102,19 +103,20 @@ export function ProfileScreenAllPage() {
                 <Box flex={1} width="100%" backgroundColor="transparent">
                     <PaddingContainer>
                         <FlatList
-                            columnWrapperStyle={{ justifyContent: 'space-between' }}
+                            columnWrapperStyle={{
+                                justifyContent: 'space-between'
+                            }}
                             numColumns={2}
                             data={mockDataListItem}
                             renderItem={renderListItem}
                             keyExtractor={keyExtractor}
                             style={{
-                                paddingTop: 95,
+                                paddingTop: 95
                             }}
                         />
                     </PaddingContainer>
                 </Box>
-                <Box width='100%' height={100}>
-                </Box>
+                <Box width="100%" height={100}></Box>
             </ScrollView>
         </LinearGradient>
     );

@@ -1,14 +1,20 @@
 import { FC } from 'react';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 import { Box } from '../../../../shared/components/box';
 import { Text } from '../../../../shared/components/text';
 import { Input } from '../../../../shared/components/form';
-import { TouchableOpacity } from 'react-native';
 
 type Props = {
     setCurrentWindowHandler: (
         path: 'INSERT_PHONE' | 'SEND_CODE' | 'FILL_DATA'
     ) => void;
 };
+
+const styles = StyleSheet.create({
+    fullWidth: {
+        width: '100%'
+    }
+})
 
 export const SendCode: FC<Props> = ({ setCurrentWindowHandler }) => {
     return (
@@ -46,9 +52,7 @@ export const SendCode: FC<Props> = ({ setCurrentWindowHandler }) => {
                     </Text>
                     <TouchableOpacity
                         activeOpacity={1}
-                        style={{
-                            width: '100%'
-                        }}
+                        style={styles.fullWidth}
                         onPress={() => setCurrentWindowHandler('FILL_DATA')}
                     >
                         <Box

@@ -23,7 +23,7 @@ export const ICON_TOP_TABBAR_SOUND_SVG = ICON_TOP_TABBAR_SOUND_SVG_PATH;
 export const ICON_TOP_TABBAR_SOUND_ACTIVE_SVG =
     ICON_TOP_TABBAR_SOUND_ACTIVE_SVG_PATH;
 
-export const SVG_ICON = ICON_TOP_TABBAR_TEXT_ACTIVE_SVG_PATH;
+// export const SVG_ICON = ICON_TOP_TABBAR_TEXT_ACTIVE_SVG_PATH;
 export const ICON_TOP_TABBAR_TEXT_ACTIVE_SVG =
     ICON_TOP_TABBAR_TEXT_ACTIVE_SVG_PATH;
 export const ICON_TOP_TABBAR_TEXT_SVG = ICON_TOP_TABBAR_TEXT_SVG_PATH;
@@ -81,12 +81,13 @@ import ICON_ANALYTICS_PATH from './../../assets/icons/icon__analyzis.svg';
 import ICON_MAIL_PATH from './../../assets/icons/icon__email.svg';
 import ICON_USER_PATH from './../../assets/icons/icon__user-svg.svg';
 import ICON_ARROW_RIGHT_PATH from './../../assets/icons/icon__arrow-right.svg';
+export const ICON_ARROW_RIGHT = ICON_ARROW_RIGHT_PATH;
 
 export const ICON_SHARE = ICON_SHARE_PATH;
 export const ICON_ANALYTICS = ICON_ANALYTICS_PATH;
 export const ICON_MAIL = ICON_MAIL_PATH;
 export const ICON_USER = ICON_USER_PATH;
-export const ICON_ARROW_RIGHT = ICON_ARROW_RIGHT_PATH;
+// export const ICON_ARROW_RIGHT = ICON_ARROW_RIGHT_PATH;
 
 import ICON_INSTAGRAM_PRIMARY_SVG from './../../assets/icons/icon__instagram-primary.svg';
 export const ICON_INSTAGRAM_PRIMARY = ICON_INSTAGRAM_PRIMARY_SVG;
@@ -182,6 +183,9 @@ export const ICON_CHECK_WHITE = ICON_CHECK_WHITE_PATH;
 
 import ICON_MENU_WHITE_PATH from './../../assets/icons/icon__menu-white.svg';
 export const ICON_MENU_WHITE = ICON_MENU_WHITE_PATH;
+
+import ICON_MENU_ACTIVE_PATH from './../../assets/icons/icon__menu-active.svg';
+export const ICON_MENU_ACTIVE = ICON_MENU_ACTIVE_PATH;
 
 import ICON_CHECK_SQUARE_WHITE_PATH from './../../assets/icons/icon__check-square-white.svg';
 export const ICON_CHECK_SQUARE_WHITE = ICON_CHECK_SQUARE_WHITE_PATH;

@@ -1,15 +1,29 @@
 import { FC } from 'react';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 import { Box } from '../../../../shared/components/box';
 import { Text } from '../../../../shared/components/text';
 import { Input } from '../../../../shared/components/form';
 import { ICON_FRANCE_FLAG } from '../../../../constaints/icons';
-import { TouchableOpacity } from 'react-native';
 
 type Props = {
     setCurrentWindowHandler: (
         path: 'INSERT_PHONE' | 'SEND_CODE' | 'FILL_DATA'
     ) => void;
 };
+
+const styles = StyleSheet.create({
+    flagIcon: {
+        width: 25,
+        height: 18,
+        marginTop: 10,
+        paddingTop: 10,
+        position: 'relative',
+        top: 5
+    },
+    fullWidth: {
+        width: '100%'
+    }
+})
 
 export const InsertPhone: FC<Props> = ({ setCurrentWindowHandler }) => {
     return (
@@ -31,14 +45,7 @@ export const InsertPhone: FC<Props> = ({ setCurrentWindowHandler }) => {
                         labelText="+33"
                         labelIcon={
                             <ICON_FRANCE_FLAG
-                                style={{
-                                    width: 25,
-                                    height: 18,
-                                    marginTop: 10,
-                                    paddingTop: 10,
-                                    position: 'relative',
-                                    top: 5
-                                }}
+                                style={styles.flagIcon}
                             />
                         }
                     />
@@ -62,9 +69,7 @@ export const InsertPhone: FC<Props> = ({ setCurrentWindowHandler }) => {
                 </Text>
                 <TouchableOpacity
                     activeOpacity={1}
-                    style={{
-                        width: '100%'
-                    }}
+                    style={styles.fullWidth}
                     onPress={() => setCurrentWindowHandler('SEND_CODE')}
                 >
                     <Box

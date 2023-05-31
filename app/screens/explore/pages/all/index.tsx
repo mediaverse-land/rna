@@ -1,4 +1,4 @@
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ImagesPageComponents } from './style';
 import { AllPageBanners } from './banners';
@@ -6,8 +6,9 @@ import { AllPageDailyRecomended } from './daily-recomended';
 import { AllPageMostViewed } from './most-viewed';
 import { AllPageTopTenText } from './top-ten-texts';
 import { AllPageChillSongs } from './chill-songs';
+import { PaddingContainer } from '../../../../styles/grid';
 
-const { Container, FixedStyles, ContainerStyles } = ImagesPageComponents;
+const { FixedStyles, ContainerStyles } = ImagesPageComponents;
 
 export function AllPage() {
     return (
@@ -19,20 +20,31 @@ export function AllPage() {
             <ScrollView
                 style={[
                     FixedStyles,
-                    { backgroundColor: 'transparent', paddingTop: 196 }
+                    styles.scrollView
                 ]}
             >
-                <Container>
+                <PaddingContainer>
                     <AllPageBanners />
-                </Container>
+                </PaddingContainer>
                 <AllPageDailyRecomended />
-                <Container>
+                <PaddingContainer>
                     <AllPageMostViewed />
-                </Container>
+                </PaddingContainer>
                 <AllPageTopTenText />
                 <AllPageChillSongs />
-                <View style={{ width: '100%', height: 350 }}></View>
+                <View style={styles.space}></View>
             </ScrollView>
         </LinearGradient>
     );
 }
+
+
+const styles = StyleSheet.create({
+    scrollView: {
+        paddingTop: 196,
+        backgroundColor: 'transparent'
+    },
+    space: {
+        width: '100%', height: 350
+    }
+})

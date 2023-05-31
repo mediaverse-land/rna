@@ -1,4 +1,4 @@
-import { Image } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { Box } from '../../../shared/components/box';
 import { Flex } from '../../../styles/grid';
 import { Text } from '../../../shared/components/text';
@@ -26,11 +26,7 @@ export function AppItem({ title, category, imagePath }: Props) {
                 <Box>
                     <Image
                         source={{ uri: imagePath }}
-                        style={{
-                            width: 40,
-                            height: 40,
-                            borderRadius: 8
-                        }}
+                        style={styles.itemIcon}
                     />
                 </Box>
                 <Box marginLeft={16}>
@@ -60,3 +56,11 @@ export function AppItem({ title, category, imagePath }: Props) {
         </Box>
     );
 }
+
+const styles = StyleSheet.create({
+    itemIcon: {
+        width: 40,
+        height: 40,
+        borderRadius: 8
+    }
+})

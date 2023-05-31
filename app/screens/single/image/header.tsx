@@ -34,7 +34,9 @@ export function SingleImageHeader({ goBackHandler }: Props) {
     );
 
     return (
-        <Box>
+        <Box position='relative'
+            zIndex={20}
+        >
             <Box>
                 <GoBackButton
                     goBackHandler={goBackHandler}

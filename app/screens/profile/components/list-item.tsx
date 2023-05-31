@@ -14,7 +14,7 @@ type Props = {
     profileUri: string;
     onlongpress?: () => void;
     onpress?: () => void;
-    isSelected: boolean
+    isSelected: boolean;
 };
 
 export function ListItem({
@@ -27,10 +27,7 @@ export function ListItem({
     isSelected
 }: Props) {
     return (
-        <Box
-            width={'48%'}
-            marginBottom={30}
-        >
+        <Box width={'48%'} marginBottom={30}>
             <TouchableOpacity
                 onLongPress={onlongpress}
                 onPress={onpress}
@@ -48,7 +45,7 @@ export function ListItem({
                             borderRadius: 16,
                             width: '100%',
                             height: 163,
-                            borderWidth: 1,
+                            borderWidth: 1
                         }}
                     />
                     <Image
@@ -65,47 +62,41 @@ export function ListItem({
                             zIndex: 10
                         }}
                     />
-                    {
-                        isSelected ?
-                            <>
-                                <Box
-                                    width='100%'
-                                    height={163}
-                                    backgroundColor={'#597AFF'}
-                                    additionalStyles={{
-                                        opacity: 0.1,
-                                    }}
-                                    position='absolute'
-                                    top={0}
-                                    borderRadius={16}
-                                    zIndex={11}
-                                    alignItems='center'
-                                    justifyContent='center'
-                                >
-                                </Box>
-                                <Box
-                                    width={32}
-                                    height={32}
-                                    backgroundColor={'#597AFF'}
-                                    position='absolute'
-                                    top={0}
-                                    borderRadius={8}
-                                    zIndex={12}
-                                    additionalStyles={{
-                                        left: '40%',
-                                        top: '40%'
-                                    }}
-                                    alignItems='center'
-                                    justifyContent='center'
-                                >
-                                    <ICON_CHECK_WHITE
-                                        width={18}
-                                        height={14}
-                                    />
-                                </Box>
-                            </>
-                            : null
-                    }
+                    {isSelected ? (
+                        <>
+                            <Box
+                                width="100%"
+                                height={163}
+                                backgroundColor={'#597AFF'}
+                                additionalStyles={{
+                                    opacity: 0.1
+                                }}
+                                position="absolute"
+                                top={0}
+                                borderRadius={16}
+                                zIndex={11}
+                                alignItems="center"
+                                justifyContent="center"
+                            ></Box>
+                            <Box
+                                width={32}
+                                height={32}
+                                backgroundColor={'#597AFF'}
+                                position="absolute"
+                                top={0}
+                                borderRadius={8}
+                                zIndex={12}
+                                additionalStyles={{
+                                    left: '40%',
+                                    top: '40%'
+                                }}
+                                alignItems="center"
+                                justifyContent="center"
+                            >
+                                <ICON_CHECK_WHITE width={18} height={14} />
+                            </Box>
+                        </>
+                    ) : null}
                 </Box>
                 <Box paddingLeft={8} paddingRight={8}>
                     <Box direction="row">
