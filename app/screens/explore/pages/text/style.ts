@@ -30,18 +30,18 @@ export const TextPageComponents = {
     `,
     SwiperItemTitle: styled.Text`
         margin-top: 24px;
-        color: #d9d9ff;
+        color: ${theme.color.light.CARD_TITLE_TEXT};
         font-size: ${theme.fontSize.md};
         line-height: ${theme.fontSize.md};
     `,
     SwiperItemContent: styled.Text`
-        color: #666680;
+        color: ${theme.color.light.TEXT};
         font-size: ${theme.fontSize.md};
         line-height: ${theme.fontSize.md};
         margin-top: 16px;
     `,
     SwiperItemCreationDate: styled.Text`
-        color: #666680;
+        color: ${theme.color.light.TEXT};
         font-size: 12px;
         line-height: 12px;
         padding-top: 4px;
@@ -49,7 +49,7 @@ export const TextPageComponents = {
     NextButton: styled.TouchableOpacity`
         width: 40px;
         height: 40px;
-        border: 1px solid #353542;
+        border: 1px solid ${theme.color.light.INPUT_PLACEHOLDER};
         border-radius: 8px;
         align-items: center;
         justify-content: center;
@@ -57,7 +57,7 @@ export const TextPageComponents = {
     PrevButton: styled.TouchableOpacity`
         width: 40px;
         height: 40px;
-        border: 1px solid #353542;
+        border: 1px solid ${theme.color.light.INPUT_PLACEHOLDER};
         border-radius: 8px;
         align-items: center;
         justify-content: center;
@@ -86,13 +86,13 @@ export const TextPageComponents = {
     `,
     BestWritersSlideTitle: styled.Text`
         margin-top: 8px;
-        color: #d9d9ff;
+        color: ${theme.color.light.CARD_TITLE_TEXT};
         font-size: ${theme.fontSize.md};
         line-height: ${theme.fontSize.md};
     `,
     BestWritersSlideDescription: styled.Text`
         margin-top: 16px;
-        color: #666680;
+        color: ${theme.color.light.TEXT};
         font-size: ${theme.fontSize.md};
         line-height: ${theme.fontSize.md};
     `

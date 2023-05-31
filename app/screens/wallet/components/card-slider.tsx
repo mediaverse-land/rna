@@ -2,8 +2,8 @@ import { ViewStyle, Image } from 'react-native';
 import { Box } from '../../../shared/components/box';
 import { WALLET_SLIDER_BACKGROUND } from '../../../constaints/images';
 import { Text } from '../../../shared/components/text';
-import { AddButton } from './add-button';
 import { ICON_PAYPAL_LARGE, ICON_SIMCARD } from '../../../constaints/icons';
+import { theme } from '../../../constaints/theme';
 
 export function CardSlider() {
     const rotates = ['-15deg', '-7.5deg', '0deg', '7.5deg', '15deg'];
@@ -71,7 +71,7 @@ export function CardSlider() {
                             fontSize={14}
                             fontWeight={400}
                             lineHeight={24}
-                            color="#fff"
+                            color={theme.color.light.WHITE}
                         >
                             Paypal
                         </Text>
@@ -90,7 +90,7 @@ export function CardSlider() {
                                 fontSize={16}
                                 fontWeight={600}
                                 lineHeight={24}
-                                color="#D9D9FF"
+                                color={theme.color.light.CARD_TITLE_TEXT}
                             >
                                 Ar Hosseini
                             </Text>
@@ -98,7 +98,7 @@ export function CardSlider() {
                                 fontSize={16}
                                 fontWeight={600}
                                 lineHeight={24}
-                                color="#D9D9FF"
+                                color={theme.color.light.CARD_TITLE_TEXT}
                             >
                                 01/15
                             </Text>
@@ -108,7 +108,7 @@ export function CardSlider() {
                                 fontSize={16}
                                 fontWeight={600}
                                 lineHeight={24}
-                                color="#fff"
+                                color={theme.color.light.WHITE}
                             >
                                 **** **** **** 3054
                             </Text>

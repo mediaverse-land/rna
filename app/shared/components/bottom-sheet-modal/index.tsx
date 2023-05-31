@@ -12,6 +12,7 @@ import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { alertContext } from '../../../context/alert';
 import { Box } from '../../../shared/components/box';
 import { CONFIRM_MODAL_BACKGROUND } from '../../../constaints/images';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
     children: ReactNode;
@@ -66,13 +67,13 @@ export const ModalBottomSheet = forwardRef(
                             onClose={() => setIsModalOpen(false)}
                             handleComponent={null}
                             backgroundStyle={{
-                                backgroundColor: 'rgba(78, 78, 97, 0.75)'
+                                backgroundColor: theme.color.light.ADD_ACCOUNT_MODAL_BAKGROUND
                             }}
                         >
                             <BottomSheetView
                                 style={{
                                     position: 'absolute',
-                                    backgroundColor: 'rgba(78, 78, 97, 0.75)',
+                                    backgroundColor: theme.color.light.ADD_ACCOUNT_MODAL_BAKGROUND,
                                     top: 0,
                                     left: 0,
                                     width: '100%',

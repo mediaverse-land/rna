@@ -6,6 +6,7 @@ import { PaddingContainer } from '../../../styles/grid';
 import { windowSize } from '../../../utils/window-size';
 import { useNavigation } from '@react-navigation/native';
 import { UseNavigationType } from '../../../shared/types/use-navigation';
+import { theme } from '../../../constaints/theme';
 
 const { width } = windowSize();
 
@@ -50,11 +51,11 @@ export function InventoryBox() {
                         alignItems="center"
                         additionalStyles={{
                             borderRightWidth: 1,
-                            borderRightColor: '#666680'
+                            borderRightColor: theme.color.light.TEXT
                         }}
                     >
                         <Text
-                            color="#666680"
+                            color={theme.color.light.TEXT}
                             lineHeight={16}
                             fontSize={14}
                             fontWeight={400}
@@ -69,7 +70,7 @@ export function InventoryBox() {
                         alignItems="center"
                         justifyContent="space-between"
                     >
-                        <Text color="#fff" fontSize={16} fontWeight={600}>
+                        <Text color={theme.color.light.WHITE} fontSize={16} fontWeight={600}>
                             200 $
                         </Text>
                         <TouchableOpacity
@@ -77,7 +78,7 @@ export function InventoryBox() {
                             activeOpacity={1}
                         >
                             <Text
-                                color="#597AFF"
+                                color={theme.color.light.PRIMARY}
                                 fontSize={14}
                                 fontWeight={400}
                             >

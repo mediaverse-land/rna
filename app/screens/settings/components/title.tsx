@@ -16,7 +16,7 @@ export function SettingsScreenTitle({ title }: { title: string }) {
     return (
         <Box marginTop={32} width="100%" alignItems="center">
             <Text
-                color="#fff"
+                color={theme.color.light.WHITE}
                 fontWeight={600}
                 fontSize={theme.numericFontSize.md}
                 lineHeight={32}

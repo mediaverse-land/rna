@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 import {
     ICON_LOGO_BOTTOM_SECTION,
     ICON_LOGO_MIDD_SECTION,
@@ -8,7 +8,6 @@ import { theme } from '../../../constaints/theme';
 import { Box } from '../../../shared/components/box';
 import { Text } from '../../../shared/components/text';
 
-
 export function AuthLogo() {
     return (
         <Box
@@ -17,17 +16,11 @@ export function AuthLogo() {
             alignItems="center"
             paddingTop={56}
         >
-            <ICON_LOGO_TOP_SECTION
-                style={styles.logoIconTopSection}
-            />
-            <ICON_LOGO_MIDD_SECTION
-                style={styles.logoIconMidSection}
-            />
-            <ICON_LOGO_BOTTOM_SECTION
-                style={styles.logoIconBottomSection}
-            />
+            <ICON_LOGO_TOP_SECTION style={styles.logoIconTopSection} />
+            <ICON_LOGO_MIDD_SECTION style={styles.logoIconMidSection} />
+            <ICON_LOGO_BOTTOM_SECTION style={styles.logoIconBottomSection} />
             <Text
-                color="#fff"
+                color={theme.color.light.WHITE}
                 lineHeight={19}
                 fontSize={theme.numericFontSize.md}
                 fontWeight={600}
@@ -36,7 +29,7 @@ export function AuthLogo() {
                 Mediaverse
             </Text>
             <Text
-                color="#83839C"
+                color={theme.color.light.LIGHT_DESCRIPTION}
                 lineHeight={14.5}
                 fontSize={theme.numericFontSize.sm}
                 fontWeight={400}
@@ -46,7 +39,6 @@ export function AuthLogo() {
         </Box>
     );
 }
-
 
 const styles = StyleSheet.create({
     logoIconTopSection: {
@@ -65,4 +57,4 @@ const styles = StyleSheet.create({
         position: 'relative',
         top: -6
     }
-})
+});

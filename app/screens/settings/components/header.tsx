@@ -62,7 +62,7 @@ export function SettingsScreenHeader() {
                         <Text
                             fontWeight={600}
                             marginTop={68}
-                            color="#FFFFFF"
+                            color={theme.color.light.WHITE}
                             fontSize={theme.numericFontSize.md}
                             lineHeight={theme.numericFontSize.md}
                         >
@@ -71,7 +71,7 @@ export function SettingsScreenHeader() {
                         <Text
                             fontWeight={400}
                             marginTop={8}
-                            color="#83839C"
+                            color={theme.color.light.LIGHT_DESCRIPTION}
                             fontSize={theme.numericFontSize.sm}
                             lineHeight={theme.numericFontSize.sm}
                         >

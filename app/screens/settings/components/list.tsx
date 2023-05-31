@@ -60,7 +60,7 @@ export function ListColumn({ data }: Props) {
                         >
                             <Flex width="60%" direction="row" align="center">
                                 {!list.direction ||
-                                list.direction !== 'row-reverse' ? (
+                                    list.direction !== 'row-reverse' ? (
                                     <list.icon
                                         style={[
                                             list.iconStyle,
@@ -71,7 +71,7 @@ export function ListColumn({ data }: Props) {
                                     />
                                 ) : null}
                                 <Text
-                                    color="#fff"
+                                    color={theme.color.light.WHITE}
                                     fontSize={14}
                                     lineHeight={20}
                                 >
@@ -100,7 +100,7 @@ export function ListColumn({ data }: Props) {
                                 <>
                                     {list.value ? (
                                         <Text
-                                            color="#A2A2B5"
+                                            color={theme.color.light.LIGHT_TEXT}
                                             fontSize={theme.numericFontSize.sm}
                                             lineHeight={
                                                 theme.numericLineHeight.md
@@ -113,13 +113,13 @@ export function ListColumn({ data }: Props) {
                                         <Box
                                             width={18}
                                             height={18}
-                                            backgroundColor="#fff"
+                                            backgroundColor={theme.color.light.WHITE}
                                             borderRadius={100}
                                             alignItems="center"
                                             justifyContent="center"
                                         >
                                             <Text
-                                                color="#353542"
+                                                color={theme.color.light.INPUT_PLACEHOLDER}
                                                 fontSize={
                                                     theme.numericFontSize.sm
                                                 }

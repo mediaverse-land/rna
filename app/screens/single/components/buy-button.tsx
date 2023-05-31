@@ -63,7 +63,7 @@ export function BuyBottom() {
                         paddingRight={17}
                     >
                         <Text
-                            color="#CCCCFF"
+                            color={theme.color.light.SONG_CARD_TITLE_TEXT}
                             fontSize={theme.numericFontSize.md}
                             lineHeight={theme.numericLineHeight.md}
                             fontWeight={400}
@@ -71,7 +71,7 @@ export function BuyBottom() {
                             Ownership
                         </Text>
                         <Text
-                            color="#fff"
+                            color={theme.color.light.WHITE}
                             fontSize={theme.numericFontSize.md}
                             lineHeight={theme.numericLineHeight.md}
                             marginLeft={16}
@@ -111,13 +111,13 @@ export function BuyBottom() {
                         <Box
                             width="100%"
                             height={48}
-                            backgroundColor="#597AFF"
+                            backgroundColor={theme.color.light.PRIMARY}
                             borderRadius={16}
                             alignItems="center"
                             justifyContent="center"
                         >
                             <Text
-                                color="#fff"
+                                color={theme.color.light.WHITE}
                                 fontSize={14}
                                 lineHeight={20}
                                 fontWeight={600}

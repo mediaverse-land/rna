@@ -6,6 +6,7 @@ import { SettingsScreenTitle } from '../../components/title';
 import { Box } from '../../../../shared/components/box';
 import { Text } from '../../../../shared/components/text';
 import { SIGNINS_LIST_ITEM_GRADIET } from '../../../../constaints/images';
+import { theme } from '../../../../constaints/theme';
 
 type SignInsData = {
     id: number;
@@ -57,10 +58,10 @@ export function SignInsPage() {
                             borderRadius: 16
                         }}
                     />
-                    <Text color="#fff" marginLeft={16}>
+                    <Text color={theme.color.light.WHITE} marginLeft={16}>
                         {item.date}
                     </Text>
-                    <Text color="#fff" marginRight={16}>
+                    <Text color={theme.color.light.WHITE} marginRight={16}>
                         {item.device_id}
                     </Text>
                 </Box>

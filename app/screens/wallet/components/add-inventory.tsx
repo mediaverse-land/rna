@@ -3,6 +3,7 @@ import { Box } from '../../../shared/components/box';
 import { Input } from '../../../shared/components/form';
 import { Text } from '../../../shared/components/text';
 import { PaddingContainer } from '../../../styles/grid';
+import { theme } from '../../../constaints/theme';
 
 export function AddInventory() {
     return (
@@ -15,7 +16,7 @@ export function AddInventory() {
                     justifyContent="space-between"
                 >
                     <Text
-                        color="#fff"
+                        color={theme.color.light.WHITE}
                         fontWeight={600}
                         fontSize={16}
                         lineHeight={16}
@@ -23,7 +24,7 @@ export function AddInventory() {
                         Add inventory
                     </Text>
                     <Text
-                        color="#A2A2B5"
+                        color={theme.color.light.LIGHT_TEXT}
                         fontWeight={400}
                         fontSize={14}
                         lineHeight={16}
@@ -40,11 +41,11 @@ export function AddInventory() {
                             width="100%"
                             height={48}
                             borderRadius={16}
-                            backgroundColor="rgba(28, 28, 35, 0.75)"
+                            backgroundColor={theme.color.light.DARK_GRAY}
                             alignItems="center"
                             justifyContent="center"
                         >
-                            <Text color="#fff" fontSize={14} fontWeight={600}>
+                            <Text color={theme.color.light.WHITE} fontSize={14} fontWeight={600}>
                                 Pay
                             </Text>
                         </Box>

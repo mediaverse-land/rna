@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 import { Title } from '../../../../shared/components/title';
 import { ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG } from '../../../../constaints/icons';
 import { Masonry } from '../../../../shared/components/masonry';
@@ -24,9 +24,9 @@ export function AllPageMostViewed() {
     );
 }
 
-
 const styles = StyleSheet.create({
     icon: {
-        marginRight: 8, marginTop: 3
-    },
-})
+        marginRight: 8,
+        marginTop: 3
+    }
+});

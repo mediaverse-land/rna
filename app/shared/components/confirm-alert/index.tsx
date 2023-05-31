@@ -97,7 +97,7 @@ export const ConfirmAlert = forwardRef((props, ref) => {
                                 paddingRight={24}
                             >
                                 <Text
-                                    color="#D9D9FF"
+                                    color={theme.color.light.CARD_TITLE_TEXT}
                                     fontSize={theme.numericFontSize.md}
                                     lineHeight={theme.numericLineHeight.md}
                                     fontWeight={400}
@@ -110,7 +110,7 @@ export const ConfirmAlert = forwardRef((props, ref) => {
                                             <Text
                                                 fontSize={14}
                                                 lineHeight={20}
-                                                color="#fff"
+                                                color={theme.color.light.WHITE}
                                             >
                                                 Yes
                                             </Text>
@@ -121,7 +121,7 @@ export const ConfirmAlert = forwardRef((props, ref) => {
                                             <Text
                                                 fontSize={14}
                                                 lineHeight={20}
-                                                color="#fff"
+                                                color={theme.color.light.WHITE}
                                             >
                                                 No
                                             </Text>

@@ -4,6 +4,7 @@ import { UseNavigationType } from '../../../../shared/types/use-navigation';
 import { Box } from '../../../../shared/components/box';
 import { Text } from '../../../../shared/components/text';
 import { Input } from '../../../../shared/components/form';
+import { theme } from '../../../../constaints/theme';
 
 export const UserPass = () => {
     const navigation = useNavigation<UseNavigationType>();
@@ -16,7 +17,7 @@ export const UserPass = () => {
         <>
             <Box height="60%" marginTop={150} alignItems="center">
                 <Text
-                    color="#fff"
+                    color={theme.color.light.WHITE}
                     lineHeight={20}
                     fontSize={12}
                     fontWeight={600}
@@ -43,14 +44,14 @@ export const UserPass = () => {
                     bottom={2}
                 >
                     <Text
-                        color="#83839C"
+                        color={theme.color.light.LIGHT_DESCRIPTION}
                         lineHeight={20}
                         fontSize={12}
                         fontWeight={600}
                         marginBottom={24}
                     >
                         DOnt have an account?
-                        <Text color="#597AFF"> Signup</Text>
+                        <Text color={theme.color.light.PRIMARY}> Signup</Text>
                     </Text>
                     <TouchableOpacity
                         activeOpacity={1}
@@ -66,7 +67,7 @@ export const UserPass = () => {
                             backgroundColor="rgba(78, 78, 97, 0.5)"
                         >
                             <Text
-                                color="#fff"
+                                color={theme.color.light.WHITE}
                                 lineHeight={20}
                                 fontSize={12}
                                 fontWeight={600}
@@ -81,9 +82,8 @@ export const UserPass = () => {
     );
 };
 
-
 const styles = StyleSheet.create({
     fullWidth: {
         width: '100%'
     }
-})
+});

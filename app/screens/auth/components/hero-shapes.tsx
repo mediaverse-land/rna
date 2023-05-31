@@ -21,17 +21,12 @@ export function HeroShapes() {
                     />
                 </Box>
                 <Box paddingLeft={30}>
-                    <AUTH_EMOJY
-                        width={230}
-                        height={183}
-                        style={styles.icon}
-                    />
+                    <AUTH_EMOJY width={230} height={183} style={styles.icon} />
                 </Box>
             </Box>
         </>
     );
 }
-
 
 const styles = StyleSheet.create({
     shapeOne: {
@@ -53,4 +48,4 @@ const styles = StyleSheet.create({
     icon: {
         marginTop: 112
     }
-})
+});

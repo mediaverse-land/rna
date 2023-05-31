@@ -15,7 +15,7 @@ export const BottomTabBarComponents = {
         justify-content: center;
         align-items: center;
         border: 1px solid black;
-        background-color: #fff;
+        background-color: ${theme.color.light.WHITE};
     `
 };
 // ${(props: { isActive: boolean }) =>

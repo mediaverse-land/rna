@@ -5,6 +5,7 @@ import { SINGLE_VIDEO_COVER_IMAGE_GRADIENT } from '../../../constaints/images';
 import { ICON_IMAGE_WHITE } from '../../../constaints/icons';
 import { PaddingContainer } from '../../../styles/grid';
 import { GoBackButton } from '../components/goback-button';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
     goBackHandler: () => void;
@@ -34,9 +35,7 @@ export function SingleImageHeader({ goBackHandler }: Props) {
     );
 
     return (
-        <Box position='relative'
-            zIndex={20}
-        >
+        <Box position="relative" zIndex={20}>
             <Box>
                 <GoBackButton
                     goBackHandler={goBackHandler}
@@ -69,7 +68,7 @@ export function SingleImageHeader({ goBackHandler }: Props) {
             <PaddingContainer>
                 <Box marginTop={32}>
                     <Text
-                        color="#fff"
+                        color={theme.color.light.WHITE}
                         fontSize={20}
                         lineHeight={20}
                         fontWeight={600}

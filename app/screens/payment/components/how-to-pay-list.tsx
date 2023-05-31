@@ -53,7 +53,7 @@ export function HowToPayList() {
         <PaddingContainer>
             <Box marginTop={32}>
                 <Text
-                    color="#fff"
+                    color={theme.color.light.WHITE}
                     fontWeight={600}
                     fontSize={theme.numericFontSize.md}
                     lineHeight={theme.numericLineHeight.md}
@@ -96,7 +96,7 @@ export function HowToPayList() {
                         >
                             <Box>
                                 <Text
-                                    color="#fff"
+                                    color={theme.color.light.WHITE}
                                     fontWeight={600}
                                     fontSize={theme.numericFontSize.md}
                                     lineHeight={theme.numericLineHeight.md}
@@ -104,7 +104,7 @@ export function HowToPayList() {
                                     Wallet
                                 </Text>
                                 <Text
-                                    color="#666680"
+                                    color={theme.color.light.TEXT}
                                     fontWeight={400}
                                     fontSize={theme.numericFontSize.sm}
                                     lineHeight={theme.numericLineHeight.md}
@@ -119,7 +119,7 @@ export function HowToPayList() {
                                 justifyContent="flex-end"
                             >
                                 <Text
-                                    color="#666680"
+                                    color={theme.color.light.TEXT}
                                     fontWeight={400}
                                     fontSize={theme.numericFontSize.sm}
                                     lineHeight={theme.numericLineHeight.md}
@@ -151,7 +151,7 @@ export function HowToPayList() {
                                     borderWidth: 1,
                                     borderColor:
                                         selectedPaymentMethod === m.title
-                                            ? '#597AFF'
+                                            ? theme.color.light.PRIMARY
                                             : 'transparent'
                                 }}
                             >
@@ -166,7 +166,7 @@ export function HowToPayList() {
                                 >
                                     <Box>
                                         <Text
-                                            color="#fff"
+                                            color={theme.color.light.WHITE}
                                             fontWeight={600}
                                             fontSize={theme.numericFontSize.md}
                                             lineHeight={
@@ -176,7 +176,7 @@ export function HowToPayList() {
                                             {m.title}
                                         </Text>
                                         <Text
-                                            color="#666680"
+                                            color={theme.color.light.TEXT}
                                             fontWeight={400}
                                             fontSize={theme.numericFontSize.sm}
                                             lineHeight={
@@ -200,14 +200,14 @@ export function HowToPayList() {
                                                 borderWidth: 1,
                                                 borderColor:
                                                     selectedPaymentMethod !==
-                                                    m.title
-                                                        ? '#CCCCFF'
+                                                        m.title
+                                                        ? theme.color.light.SONG_CARD_TITLE_TEXT
                                                         : 'transparent'
                                             }}
                                             backgroundColor={
                                                 selectedPaymentMethod ===
-                                                m.title
-                                                    ? '#597AFF'
+                                                    m.title
+                                                    ? theme.color.light.PRIMARY
                                                     : 'transparent'
                                             }
                                         ></Box>

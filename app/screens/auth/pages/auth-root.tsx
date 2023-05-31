@@ -2,6 +2,7 @@ import { TouchableOpacity } from 'react-native';
 import { Box } from '../../../shared/components/box';
 import { HeroShapes } from '../components/hero-shapes';
 import { Text } from '../../../shared/components/text';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
     setWindowHandler: (window: 'login' | 'singin') => void;
@@ -25,13 +26,13 @@ export function AuthRoot({ setWindowHandler }: Props) {
                     <Box
                         width="100%"
                         height={48}
-                        backgroundColor="#597AFF"
+                        backgroundColor={theme.color.light.PRIMARY}
                         borderRadius={32}
                         alignItems="center"
                         justifyContent="center"
                     >
                         <Text
-                            color="#fff"
+                            color={theme.color.light.WHITE}
                             fontWeight={600}
                             lineHeight={16}
                             fontSize={14}
@@ -54,7 +55,7 @@ export function AuthRoot({ setWindowHandler }: Props) {
                         marginTop={16}
                     >
                         <Text
-                            color="#fff"
+                            color={theme.color.light.WHITE}
                             fontWeight={600}
                             lineHeight={16}
                             fontSize={14}
@@ -66,13 +67,13 @@ export function AuthRoot({ setWindowHandler }: Props) {
                 <Text
                     textStyles={{ textAlign: 'center' }}
                     marginTop={24}
-                    color="#83839C"
+                    color={theme.color.light.LIGHT_DESCRIPTION}
                     fontSize={12}
                     fontWeight={500}
                     lineHeight={16}
                 >
                     By registering, you agree to our{' '}
-                    <Text color="#597AFF">Terms of Use</Text>.
+                    <Text color={theme.color.light.PRIMARY}>Terms of Use</Text>.
                 </Text>
             </Box>
         </Box>

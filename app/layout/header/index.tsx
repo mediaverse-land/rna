@@ -37,7 +37,6 @@ export function Header() {
     );
 }
 
-
 const styles = StyleSheet.create({
     headerProfileImage: {
         width: 40,
@@ -49,4 +48,4 @@ const styles = StyleSheet.create({
         width: 18,
         height: 18
     }
-})
+});

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/ban-types */
-import { useState, useEffect } from 'react'
-import { Alert } from 'react-native'
+import { useState, useEffect } from 'react';
+import { Alert } from 'react-native';
 
 export function useApi<DATA_TYPE>(getterFunction: Function) {
     const [data, setData] = useState<DATA_TYPE>();
@@ -15,14 +15,14 @@ export function useApi<DATA_TYPE>(getterFunction: Function) {
                 setData(result);
                 setIsPending(false);
             }
-        }
+        };
 
         getData();
-    }, [])
+    }, []);
 
     const alertIfHasError = () => {
-        Alert.alert('sdmflksdf')
-    }
+        Alert.alert('sdmflksdf');
+    };
 
-    return { isPending, data, error, alertIfHasError }
+    return { isPending, data, error, alertIfHasError };
 }

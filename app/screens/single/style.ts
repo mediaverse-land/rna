@@ -14,7 +14,7 @@ export const SingleVideoPageComponents = {
         width: 49%;
         height: 32px;
         border-radius: 8px;
-        border: 1px solid #666680;
+        border: 1px solid ${theme.color.light.TEXT};
         flex-direction: row;
         align-items: center;
         margin-bottom: 8px;
@@ -22,7 +22,7 @@ export const SingleVideoPageComponents = {
         flex-direction: row;
     `,
     VideoDataBoxLabel: styled.Text`
-        color: #666680;
+        color: ${theme.color.light.TEXT};
         font-size: ${theme.numericFontSize.sm};
         line-height: ${theme.numericLineHeight.sm};
         padding-right: 16px;

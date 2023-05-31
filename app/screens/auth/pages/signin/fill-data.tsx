@@ -4,6 +4,7 @@ import { Input } from '../../../../shared/components/form';
 import { Text } from '../../../../shared/components/text';
 import { useNavigation } from '@react-navigation/native';
 import { UseNavigationType } from '../../../../shared/types/use-navigation';
+import { theme } from '../../../../constaints/theme';
 
 const fillDataForm = [
     {
@@ -54,7 +55,7 @@ export function FillData() {
         <Box flex={1} width="100%" alignItems="center">
             <Box position="relative" width="100%" alignItems="center">
                 <Text
-                    color="#fff"
+                    color={theme.color.light.WHITE}
                     lineHeight={20}
                     fontSize={12}
                     fontWeight={600}
@@ -80,14 +81,14 @@ export function FillData() {
                     <Box
                         width="100%"
                         height={48}
-                        backgroundColor="#597AFF"
+                        backgroundColor={theme.color.light.PRIMARY}
                         borderRadius={32}
                         alignItems="center"
                         justifyContent="center"
                         marginTop={24}
                     >
                         <Text
-                            color="#fff"
+                            color={theme.color.light.WHITE}
                             fontWeight={600}
                             lineHeight={16}
                             fontSize={14}
@@ -105,4 +106,4 @@ const styles = StyleSheet.create({
     fullWidth: {
         width: '100%'
     }
-})
+});

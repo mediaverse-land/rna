@@ -113,7 +113,7 @@ const renderSigninItems = ({ item }: { item: SessionItem }) => {
                 />
                 <Box width="100%" paddingLeft={16}>
                     <Text
-                        color="#fff"
+                        color={theme.color.light.WHITE}
                         fontSize={14}
                         fontWeight={400}
                         lineHeight={17}
@@ -131,14 +131,14 @@ const renderSigninItems = ({ item }: { item: SessionItem }) => {
                 >
                     <Text
                         marginLeft={16}
-                        color="#666680"
+                        color={theme.color.light.TEXT}
                         fontSize={theme.numericFontSize.sm}
                         lineHeight={theme.numericLineHeight.md}
                     >
                         {item.date}
                     </Text>
                     <Text
-                        color="#666680"
+                        color={theme.color.light.TEXT}
                         marginRight={16}
                         fontSize={theme.numericFontSize.sm}
                         lineHeight={theme.numericLineHeight.md}

@@ -1,56 +1,68 @@
-import React, { useEffect, useRef } from 'react'
-import {
-    StyleSheet,
-    ColorValue,
-    Image,
-    Animated,
-    Easing
-} from 'react-native'
-import { Box } from '../box'
-import { LOADER, LOADER_SPINNER } from '../../../constaints/images'
+import React, { useEffect, useRef } from 'react';
+import { StyleSheet, ColorValue, Image, Animated, Easing } from 'react-native';
+import { Box } from '../box';
+import { LOADER, LOADER_SPINNER } from '../../../constaints/images';
 
 interface Props {
-    color: ColorValue
-    durationMs?: number
-    testID?: string
+    color: ColorValue;
+    durationMs?: number;
+    testID?: string;
 }
 
-const startRotationAnimation = (durationMs: number, rotationDegree: Animated.Value): void => {
-    Animated.loop(Animated.timing(
-        rotationDegree,
-        {
+const startRotationAnimation = (
+    durationMs: number,
+    rotationDegree: Animated.Value
+): void => {
+    Animated.loop(
+        Animated.timing(rotationDegree, {
             toValue: 360,
             duration: durationMs,
             easing: Easing.linear,
             useNativeDriver: true
-        }
-    )).start()
-}
+        })
+    ).start();
+};
 
 export const LoadingSpinner = ({
     durationMs = 1000,
     testID
 }: Props): JSX.Element => {
-    const rotationDegree = useRef(new Animated.Value(0)).current
+    const rotationDegree = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        startRotationAnimation(durationMs, rotationDegree)
-    }, [durationMs, rotationDegree])
+        startRotationAnimation(durationMs, rotationDegree);
+    }, [durationMs, rotationDegree]);
 
     return (
-        <Box width='100%' direction='row' alignItems='center' justifyContent='center'>
-            <Box width={38} height={38} alignItems='center' justifyContent='center'>
+        <Box
+            width="100%"
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+        >
+            <Box
+                width={38}
+                height={38}
+                alignItems="center"
+                justifyContent="center"
+            >
                 <Animated.View
                     testID={testID}
-                    style={[styles.container, {
-                        transform: [{
-                            rotateZ: rotationDegree.interpolate({
-                                inputRange: [0, 360],
-                                outputRange: ['0deg', '360deg']
-                            })
-                        }]
-                    }]}
-                    accessibilityRole='progressbar'>
+                    style={[
+                        styles.container,
+                        {
+                            transform: [
+                                {
+                                    rotateZ: rotationDegree.interpolate({
+                                        inputRange: [0, 360],
+                                        outputRange: ['0deg', '360deg']
+                                    })
+                                }
+                            ]
+                        }
+                    ]}
+                    accessibilityRole="progressbar"
+                >
                     <Image
                         source={{
                             uri: LOADER
@@ -75,12 +87,10 @@ export const LoadingSpinner = ({
                 </Animated.View>
             </Box>
         </Box>
-    )
-}
+    );
+};
 
-
-
-const height = 24
+const height = 24;
 
 const styles = StyleSheet.create({
     container: {
@@ -89,7 +99,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         paddingTop: 15,
-        left: 0,
+        left: 0
     },
     background: {
         width: '100%',
@@ -103,4 +113,4 @@ const styles = StyleSheet.create({
         height: 30,
         position: 'absolute'
     }
-})
+});

@@ -1,3 +1,4 @@
+import { theme } from '../../../constaints/theme';
 import { useRtl } from '../../../hooks/use-rtl';
 import { Box } from '../../../shared/components/box';
 import { Text } from '../../../shared/components/text';
@@ -20,7 +21,7 @@ export function SingleItemMetaData({ data }: { data: MetaDataType[] }) {
             direction="row"
             justifyContent="space-between"
             flexWrap="wrap"
-            position='relative'
+            position="relative"
             zIndex={20}
         >
             {data.map((video: MetaDataType) => (
@@ -30,11 +31,11 @@ export function SingleItemMetaData({ data }: { data: MetaDataType[] }) {
                             !isRtl
                                 ? {
                                     borderRightWidth: 1,
-                                    borderRightColor: '#666680'
+                                    borderRightColor: theme.color.light.TEXT
                                 }
                                 : {
                                     borderLeftWidth: 1,
-                                    borderLeftColor: '#666680',
+                                    borderLeftColor: theme.color.light.TEXT,
                                     paddingLeft: 16
                                 }
                         ]}
@@ -47,7 +48,7 @@ export function SingleItemMetaData({ data }: { data: MetaDataType[] }) {
                         alignItems="center"
                         justifyContent="center"
                     >
-                        <Text color="#fff" fontSize={14} lineHeight={14}>
+                        <Text color={theme.color.light.WHITE} fontSize={14} lineHeight={14}>
                             {video.value}
                         </Text>
                     </Box>

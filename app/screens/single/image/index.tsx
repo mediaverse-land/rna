@@ -16,9 +16,7 @@ export function SingleImageScreen({ navigation }: any) {
         <SafeAreaView style={{ flex: 1 }}>
             <ScreenGradient>
                 <ScrollView style={{ width: '100%' }}>
-                    <Box width="100%" position='relative'
-                        zIndex={20}
-                    >
+                    <Box width="100%" position="relative" zIndex={20}>
                         <SingleImageHeader goBackHandler={goBackHandler} />
                         <SingleImageContent />
                         <Box marginTop={24} marginBottom={50}>

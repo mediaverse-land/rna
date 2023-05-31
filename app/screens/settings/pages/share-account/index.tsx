@@ -110,7 +110,7 @@ export function ShareEccountPage() {
                                 }}
                             />
                             <Text
-                                color="#fff"
+                                color={theme.color.light.WHITE}
                                 marginLeft={16}
                                 fontSize={14}
                                 fontWeight={theme.numericLineHeight.md}
@@ -184,7 +184,7 @@ export function ShareEccountPage() {
                                     onPress={openModalHandler}
                                 >
                                     <Text
-                                        color="#83839C"
+                                        color={theme.color.light.LIGHT_DESCRIPTION}
                                         fontSize={14}
                                         fontWeight={600}
                                         marginRight={10}

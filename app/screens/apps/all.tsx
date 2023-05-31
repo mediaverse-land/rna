@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
         paddingTop: 192,
         paddingBottom: 100
     }
-})
+});

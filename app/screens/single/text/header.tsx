@@ -10,6 +10,7 @@ import {
     SINGLE_TEXT_THUMBNAIL_GRAIDENT
 } from '../../../constaints/images';
 import { SingleItemUsernameAndDuration } from '../components/username-and-duration';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
     goBackHandler: () => void;
@@ -97,7 +98,7 @@ export function SingleTextHeader({ goBackHandler }: Props) {
                             justifyContent="space-between"
                         >
                             <Text
-                                color="#fff"
+                                color={theme.color.light.WHITE}
                                 fontSize={20}
                                 lineHeight={20}
                                 fontWeight={600}

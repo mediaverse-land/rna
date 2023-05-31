@@ -34,9 +34,9 @@ export const InputComponent: any = {
         width: 100%;
         height: 48px;
         border-radius: 8px;
-        border: 1px solid #666680;
+        border: 1px solid ${theme.color.light.TEXT};
         background-color: rgba(14, 14, 18, 0.5);
-        color: #fff;
+        color: ${theme.color.light.WHITE};
         font-size: ${theme.fontSize.md};
         line-height: ${theme.lineHeight.md};
         text-align: ${(props) => props.textAlign};

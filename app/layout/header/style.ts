@@ -29,7 +29,7 @@ const HeaderWrapper = styled.View`
     BorderIndicator = styled.View`
         width: 100%;
         border: 0.5px solid ${theme.color.light.GRAY};
-        border-bottom-color: #fff;
+        border-bottom-color: ${theme.color.light.WHITE};
     `;
 
 export const HeaderStyles = {

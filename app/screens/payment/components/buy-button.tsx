@@ -1,6 +1,7 @@
 import { TouchableOpacity } from 'react-native';
 import { Box } from '../../../shared/components/box';
 import { Text } from '../../../shared/components/text';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
     setPayHandler: () => void;
@@ -23,14 +24,14 @@ export function BuyButton({ setPayHandler }: Props) {
                 <Box
                     width="100%"
                     height={48}
-                    backgroundColor="#597AFF"
+                    backgroundColor={theme.color.light.PRIMARY}
                     marginTop={10}
                     borderRadius={32}
                     alignItems="center"
                     justifyContent="center"
                 >
                     <Text
-                        color="#fff"
+                        color={theme.color.light.WHITE}
                         fontSize={14}
                         lineHeight={20}
                         fontWeight={600}

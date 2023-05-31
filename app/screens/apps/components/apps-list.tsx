@@ -2,6 +2,7 @@ import { Image, StyleSheet } from 'react-native';
 import { Box } from '../../../shared/components/box';
 import { Flex } from '../../../styles/grid';
 import { Text } from '../../../shared/components/text';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
     title: string;
@@ -32,7 +33,7 @@ export function AppItem({ title, category, imagePath }: Props) {
                 <Box marginLeft={16}>
                     <Box direction="row">
                         <Text
-                            color="#fff"
+                            color={theme.color.light.WHITE}
                             fontSize={16}
                             lineHeight={16}
                             fontWeight={600}
@@ -42,7 +43,7 @@ export function AppItem({ title, category, imagePath }: Props) {
                     </Box>
                     <Box direction="row">
                         <Text
-                            color="#666680"
+                            color={theme.color.light.TEXT}
                             fontSize={12}
                             lineHeight={16}
                             marginTop={8}
@@ -63,4 +64,4 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 8
     }
-})
+});

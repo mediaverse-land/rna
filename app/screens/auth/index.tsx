@@ -25,9 +25,7 @@ export function AuthScreen() {
         <>
             <StatusBar backgroundColor={'#030340'} barStyle="light-content" />
             <SafeAreaView style={styles.safeAreaView}>
-                <ScrollView
-                    style={styles.scrollView}
-                >
+                <ScrollView style={styles.scrollView}>
                     <AuthLogo />
                     {authWindows[currentWindow]}
                 </ScrollView>
@@ -45,4 +43,4 @@ const styles = StyleSheet.create({
         backgroundColor: '#030340',
         paddingBottom: 50
     }
-})
+});

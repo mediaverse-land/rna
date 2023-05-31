@@ -7,6 +7,7 @@ import { Flex } from '../../../../styles/grid';
 import { TextPageComponents } from './style';
 import { UserNameCard } from '../../../../shared/components/username-card';
 import { ICON_PREV_TEXT, ICON_NEXT_TEXT } from '../../../../constaints/icons';
+import { theme } from '../../../../constaints/theme';
 
 const {
     SwiperContainer,
@@ -58,7 +59,7 @@ export function TextPageSwiper() {
                                 username="Ralph Edwards"
                                 profileUri={PROFILE_ONE}
                                 usernameStyles={{
-                                    color: '#666680',
+                                    color: theme.color.light.TEXT,
                                     marginLeft: 8
                                 }}
                             />

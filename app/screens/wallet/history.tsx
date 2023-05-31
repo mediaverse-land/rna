@@ -100,11 +100,11 @@ export function HistoryPage() {
                         paddingRight={16}
                         marginBottom={8}
                     >
-                        <Text color="#fff" fontSize={14} lineHeight={17.3}>
+                        <Text color={theme.color.light.WHITE} fontSize={14} lineHeight={17.3}>
                             {item.title}
                         </Text>
                         <Text
-                            color="#666680"
+                            color={theme.color.light.TEXT}
                             fontSize={theme.numericFontSize.sm}
                             lineHeight={theme.numericLineHeight.md}
                         >
@@ -113,7 +113,7 @@ export function HistoryPage() {
                     </Box>
                     <Box width="100%" direction="row">
                         <Text
-                            color="#666680"
+                            color={theme.color.light.TEXT}
                             paddingLeft={16}
                             paddingRight={16}
                         >

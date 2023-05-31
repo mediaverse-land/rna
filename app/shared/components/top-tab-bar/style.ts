@@ -32,7 +32,7 @@ const TabBar = styled.View`
         justidy-content: center;
     `,
     Label = styled.Text`
-        color: #fff;
+        color: ${theme.color.light.WHITE};
         font-size: ${theme.fontSize.sm};
         margin-left: 7.76px;
         width: 100%;
@@ -44,7 +44,7 @@ const TabBar = styled.View`
         height: 2px;
         position: absolute;
         top: 45px;
-        background-color: #597aff;
+        background-color: ${theme.color.light.PRIMARY};
     `;
 
 export const TabBarComponents = {

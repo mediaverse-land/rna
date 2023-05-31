@@ -66,7 +66,7 @@ export const SingleItemFiles: FC<Props> = ({ data }) => {
                     paddingRight={24}
                 >
                     <Text
-                        color="#fff"
+                        color={theme.color.light.WHITE}
                         fontSize={theme.numericFontSize.md}
                         lineHeight={theme.numericLineHeight.md}
                     >
@@ -118,7 +118,7 @@ export const SingleItemFiles: FC<Props> = ({ data }) => {
                                 paddingRight={16}
                             >
                                 <Text
-                                    color="#fff"
+                                    color={theme.color.light.WHITE}
                                     fontSize={14}
                                     lineHeight={14}
                                     fontWeight={400}
@@ -126,7 +126,7 @@ export const SingleItemFiles: FC<Props> = ({ data }) => {
                                     {file.chapterName}
                                 </Text>
                                 <Text
-                                    color="#666680"
+                                    color={theme.color.light.TEXT}
                                     fontSize={14}
                                     lineHeight={14}
                                     fontWeight={400}

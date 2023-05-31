@@ -9,15 +9,15 @@ type Props = {
 
 export const SingleItemDescription: FC<Props> = ({ description }) => {
     return (
-        <Box position='relative' zIndex={13}>
+        <Box position="relative" zIndex={13}>
             <Text
-                color="#666680"
+                color={theme.color.light.TEXT}
                 fontSize={theme.numericFontSize.md}
                 lineHeight={theme.numericLineHeight.md}
                 fontWeight={400}
             >
                 {description}
-                <Text color="#A2A2B5">more...</Text>
+                <Text color={theme.color.light.LIGHT_TEXT}>more...</Text>
             </Text>
         </Box>
     );

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Navigator } from './navigator';
 import { SearchBar } from '../../layout/search-bar';
@@ -16,4 +16,4 @@ const styles = StyleSheet.create({
     flex: {
         flex: 1
     }
-})
+});

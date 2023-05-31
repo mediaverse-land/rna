@@ -109,7 +109,7 @@ export function ProfileScreenHead() {
                             <Box width={usernameBoxWidth}>
                                 <Box direction="row">
                                     <Text
-                                        color="#fff"
+                                        color={theme.color.light.WHITE}
                                         fontWeight={600}
                                         fontSize={theme.numericFontSize.md}
                                     >
@@ -118,7 +118,7 @@ export function ProfileScreenHead() {
                                 </Box>
                                 <Box direction="row">
                                     <Text
-                                        color="#83839C"
+                                        color={theme.color.light.LIGHT_DESCRIPTION}
                                         fontSize={theme.numericFontSize.sm}
                                         fontWeight={400}
                                         marginTop={4}
@@ -131,7 +131,7 @@ export function ProfileScreenHead() {
                                 width={48}
                                 height={48}
                                 borderRadius={16}
-                                borderColor="#353542"
+                                borderColor={theme.color.light.INPUT_PLACEHOLDER}
                                 backgroundColor="rgba(14, 14, 18, 0.5)"
                             >
                                 <Flex
@@ -192,7 +192,7 @@ export function ProfileScreenHead() {
                                         position="absolute"
                                         height={1}
                                         width={46}
-                                        backgroundColor="#597AFF"
+                                        backgroundColor={theme.color.light.PRIMARY}
                                         left="29%"
                                     >
                                         <></>
@@ -204,14 +204,14 @@ export function ProfileScreenHead() {
                                         justify="center"
                                     >
                                         <Text
-                                            color="#D9D9FF"
+                                            color={theme.color.light.CARD_TITLE_TEXT}
                                             fontSize={theme.numericFontSize.md}
                                             lineHeight={20}
                                         >
                                             {data.value}
                                         </Text>
                                         <Text
-                                            color="#83839C"
+                                            color={theme.color.light.LIGHT_DESCRIPTION}
                                             fontSize={theme.numericFontSize.sm}
                                             lineHeight={12}
                                             marginTop={4}

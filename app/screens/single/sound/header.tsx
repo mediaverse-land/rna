@@ -9,6 +9,7 @@ import {
     SINGLE_SOUND_COVER_IMAGE_GRADIENT,
     SINGLE_VIDEO_COVER_IMAGE_GRADIENT
 } from '../../../constaints/images';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
     goBackHandler: () => void;
@@ -58,9 +59,7 @@ export function SingleSoundHeader({ goBackHandler }: Props) {
     );
 
     return (
-        <Box position='relative'
-            zIndex={20}
-        >
+        <Box position="relative" zIndex={20}>
             <GoBackButton goBackHandler={goBackHandler} />
             <Box width="100%" height={thumbnailHeight}>
                 <GoBackButton
@@ -98,7 +97,7 @@ export function SingleSoundHeader({ goBackHandler }: Props) {
                     </Box>
                     {/* title */}
                     <Text
-                        color="#fff"
+                        color={theme.color.light.WHITE}
                         fontSize={20}
                         lineHeight={20}
                         fontWeight={600}

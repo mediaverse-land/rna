@@ -31,13 +31,13 @@ export function Input({ labelText, placeholder, labelIcon }: Props) {
                     height="100%"
                     additionalStyles={{
                         borderRightWidth: 1,
-                        borderRightColor: '#fff'
+                        borderRightColor: theme.color.light.WHITE
                     }}
                 >
                     <Text
                         fontSize={14}
                         lineHeight={theme.numericLineHeight.md}
-                        color="#666680"
+                        color={theme.color.light.TEXT}
                         paddingRight={!isRtl ? 16 : 0}
                         paddingLeft={isRtl ? 16 : 0}
                     >
@@ -55,7 +55,7 @@ export function Input({ labelText, placeholder, labelIcon }: Props) {
             </Label>
             <InputBox
                 placeholder={placeholder}
-                placeholderTextColor="#353542"
+                placeholderTextColor={theme.color.light.INPUT_PLACEHOLDER}
                 style={{
                     paddingLeft: labelWidth
                 }}

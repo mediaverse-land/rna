@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Box } from '../../../shared/components/box';
 import { UserNameCard } from '../../../shared/components/username-card';
 import { Text } from '../../../shared/components/text';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
     username: string;
@@ -20,13 +21,13 @@ export const SingleItemUsernameAndDuration: FC<Props> = ({
             direction="row"
             alignItems="center"
             justifyContent="space-between"
-            // marginTop={16}
+        // marginTop={16}
         >
             <UserNameCard
                 username={username}
                 profileUri={profileUri}
                 usernameStyles={{
-                    color: '#666680',
+                    color: theme.color.light.TEXT,
                     marginLeft: 8
                 }}
                 profileImageStyles={{
@@ -34,7 +35,7 @@ export const SingleItemUsernameAndDuration: FC<Props> = ({
                     height: 18
                 }}
             />
-            <Text color="#666680" fontSize={14} lineHeight={14} paddingTop={5}>
+            <Text color={theme.color.light.TEXT} fontSize={14} lineHeight={14} paddingTop={5}>
                 {duration}
             </Text>
         </Box>

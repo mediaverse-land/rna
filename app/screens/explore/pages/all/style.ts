@@ -36,7 +36,7 @@ export const ImagesPageComponents = {
         border-radius: 16px;
     `,
     BannerItemTitel: styled.Text`
-        color: #d9d9ff;
+        color: ${theme.color.light.CARD_TITLE_TEXT};
         font-size: ${theme.fontSize.md};
         line-height: ${theme.lineHeight.md};
         position: absolute;
@@ -45,7 +45,7 @@ export const ImagesPageComponents = {
         text-align: center;
     `,
     BannerItemDescription: styled.Text`
-        color: #83839c;
+        color: ${theme.color.light.LIGHT_DESCRIPTION};
         font-size: 12px;
         line-height: 12px;
         position: absolute;
@@ -85,12 +85,12 @@ export const ImagesPageComponents = {
         padding: 24px 16px;
     `,
     TextSlideTitle: styled.Text`
-        color: #ccccff;
+        color: ${theme.color.light.SONG_CARD_TITLE_TEXT};
         font-size: ${theme.fontSize.md};
         line-height: ${theme.lineHeight.md};
     `,
     TextSlideContentText: styled.Text`
-        color: #666680;
+        color: ${theme.color.light.TEXT};
         font-size: ${theme.fontSize.md};
         line-height: ${theme.lineHeight.md};
         margin-top: 8px;

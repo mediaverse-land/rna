@@ -12,6 +12,7 @@ import {
     ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG,
     ICON_TOP_TABBAR_VIDEO_SVG
 } from '../../../constaints/icons';
+import { theme } from '../../../constaints/theme';
 
 function getTobBarItemsIcon(tobBarItemName: string, isFocused: boolean) {
     let iconPath: ReactElement<SVGElement>;
@@ -89,8 +90,8 @@ function TopTabBar({
                             options.tabBarLabel !== undefined
                                 ? options.tabBarLabel
                                 : options.title !== undefined
-                                ? options.title
-                                : route.name;
+                                    ? options.title
+                                    : route.name;
 
                         const isFocused = state.index === index;
 
@@ -142,8 +143,8 @@ function TopTabBar({
                                         <TabBarComponents.Label
                                             style={{
                                                 color: isFocused
-                                                    ? '#fff'
-                                                    : '#666680'
+                                                    ? theme.color.light.WHITE
+                                                    : theme.color.light.TEXT
                                             }}
                                         >
                                             {label}

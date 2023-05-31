@@ -59,20 +59,20 @@ export const SoundsPageComponents = {
         opacity: 0.8;
     `,
     CurrentTrackTitle: styled.Text`
-        color: #d9d9ff;
+        color: ${theme.color.light.CARD_TITLE_TEXT};
         font-size: ${theme.fontSize.md};
         line-height: ${theme.lineHeight.md};
         margin-top: 40px;
     `,
     CurrentTrackSinger: styled.Text`
-        color: #666680;
+        color: ${theme.color.light.TEXT};
         font-size: 12px;
         line-height: 12px;
         text-align: center;
         margin-top: 8px;
     `,
     CurrentSliderTime: styled.Text`
-        color: #666680;
+        color: ${theme.color.light.TEXT};
         width: 31px;
         height: 12px;
         font-size: 12px;

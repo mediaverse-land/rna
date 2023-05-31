@@ -1,4 +1,4 @@
-import { TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { Box } from '../../../../shared/components/box';
 import { Text } from '../../../../shared/components/text';
@@ -47,17 +47,7 @@ export function AddAccountModal({
                 }}
             >
                 <BottomSheetView
-                    style={{
-                        position: 'absolute',
-                        backgroundColor: 'rgba(78, 78, 97, 0.75)',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: 420,
-                        borderTopLeftRadius: 16,
-                        borderTopRightRadius: 16,
-                        padding: 24
-                    }}
+                    style={styles.bottomSheet}
                 >
                     <Box
                         direction="row"
@@ -65,14 +55,14 @@ export function AddAccountModal({
                         justifyContent="space-between"
                         alignItems="center"
                     >
-                        <Text color="#fff" fontSize={theme.numericFontSize.md}>
+                        <Text color={theme.color.light.WHITE} fontSize={theme.numericFontSize.md}>
                             Add account
                         </Text>
                         <TouchableOpacity
                             onPress={closeModalHandler}
                             activeOpacity={1}
                         >
-                            <Text color="#A2A2B5" fontSize={14}>
+                            <Text color={theme.color.light.LIGHT_TEXT} fontSize={14}>
                                 Cancel
                             </Text>
                         </TouchableOpacity>
@@ -99,16 +89,9 @@ export function AddAccountModal({
                         <Box marginTop={24}>
                             <TouchableOpacity
                                 activeOpacity={1}
-                                style={{
-                                    width: '100%',
-                                    height: 48,
-                                    backgroundColor: 'rgba(28, 28, 35, 0.75)',
-                                    borderRadius: 32,
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                }}
+                                style={styles.addButton}
                             >
-                                <Text color="#fff">Add</Text>
+                                <Text color={theme.color.light.WHITE}>Add</Text>
                             </TouchableOpacity>
                         </Box>
                     </Box>
@@ -117,3 +100,26 @@ export function AddAccountModal({
         </>
     );
 }
+
+
+const styles = StyleSheet.create({
+    bottomSheet: {
+        position: 'absolute',
+        backgroundColor: theme.color.light.ADD_ACCOUNT_MODAL_BAKGROUND,
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: 420,
+        borderTopLeftRadius: 16,
+        borderTopRightRadius: 16,
+        padding: 24
+    },
+    addButton: {
+        width: '100%',
+        height: 48,
+        backgroundColor: theme.color.light.DARK_GRAY,
+        borderRadius: 32,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+})

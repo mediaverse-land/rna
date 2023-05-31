@@ -4,6 +4,7 @@ import { Box } from '../../../../shared/components/box';
 import { Text } from '../../../../shared/components/text';
 import { AuthProviderButton } from '../../components/auth-provider-button';
 import { providerButtons } from '../../mock-data';
+import { theme } from '../../../../constaints/theme';
 
 type Props = {
     height: number;
@@ -37,7 +38,7 @@ export const SignUpWithProvider: FC<Props> = ({
                     justifyContent="center"
                 >
                     <Text
-                        color="#fff"
+                        color={theme.color.light.WHITE}
                         lineHeight={20}
                         fontSize={12}
                         fontWeight={600}
@@ -60,7 +61,7 @@ export const SignUpWithProvider: FC<Props> = ({
                         backgroundColor="rgba(78, 78, 97, 0.5)"
                     >
                         <Text
-                            color="#fff"
+                            color={theme.color.light.WHITE}
                             lineHeight={20}
                             fontSize={12}
                             fontWeight={600}

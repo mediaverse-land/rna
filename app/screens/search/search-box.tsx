@@ -8,6 +8,7 @@ import {
 } from '../../constaints/icons';
 import { windowSize } from '../../utils/window-size';
 import { useRtl } from '../../hooks/use-rtl';
+import { theme } from '../../constaints/theme';
 
 const { width } = windowSize();
 
@@ -48,7 +49,7 @@ export function SearchBox() {
                 {/* <SearchIcon source={{ uri: ICON_SEARCH }} /> */}
                 <SearchInput
                     placeholder="Search"
-                    placeholderTextColor="#353542"
+                    placeholderTextColor={theme.color.light.INPUT_PLACEHOLDER}
                     textAlign={isRtl ? 'right' : 'left'}
                 />
             </View>

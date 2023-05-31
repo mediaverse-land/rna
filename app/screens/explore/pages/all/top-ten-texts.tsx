@@ -9,6 +9,7 @@ import { Box } from '../../../../shared/components/box';
 import { Flex } from '../../../../styles/grid';
 import { ICON_TOP_TABBAR_TEXT_ACTIVE_SVG } from '../../../../constaints/icons';
 import { UseNavigationType } from '../../../../shared/types/use-navigation';
+import { theme } from '../../../../constaints/theme';
 
 const {
     TextSliderWrapper,
@@ -46,7 +47,7 @@ export function AllPageTopTenText() {
                             username={item.username}
                             profileUri={item.profileUri}
                             usernameStyles={{
-                                color: '#666680',
+                                color: theme.color.light.TEXT,
                                 marginLeft: 8
                             }}
                         />

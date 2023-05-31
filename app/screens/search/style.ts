@@ -29,11 +29,11 @@ export const SearchBoxComponents = {
         width: 100%;
         height: 48;
         border-radius: 16px;
-        border: 1px solid #353542;
+        border: 1px solid ${theme.color.light.INPUT_PLACEHOLDER};
         padding-left: 17px;
         line-height: 16.94px;
         margin-top: 24px;
-        color: #83839c;
+        color: ${theme.color.light.LIGHT_DESCRIPTION};
         background-color: #0e0e12a0;
         filter: blur(10px);
         text-align: ${(props) => props.textAlign || 'left'};
@@ -48,7 +48,7 @@ export const SearchBoxComponents = {
     `,
     AdvancedSearchIconButton: styled.TouchableOpacity`
         background-color: #0e0e12a0;
-        border: 1px solid #353542;
+        border: 1px solid ${theme.color.light.INPUT_PLACEHOLDER};
         width: 48px;
         height: 48px;
         border-radius: 16px;
@@ -70,7 +70,7 @@ export const SearchBoxComponents = {
         align-items: center;
     `,
     SearchTagDropDownTitle: styled.Text`
-        color: #83839c;
+        color: ${theme.color.light.LIGHT_DESCRIPTION};
         font-size: ${theme.fontSize.md};
         margin-left: 16px;
     `,

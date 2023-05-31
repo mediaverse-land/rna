@@ -8,6 +8,7 @@ import {
     ICON_PAYPAL_GRAY
 } from '../../../constaints/icons';
 import { FontWeight } from '@shopify/react-native-skia';
+import { theme } from '../../../constaints/theme';
 
 export function AddCard() {
     return (
@@ -20,7 +21,7 @@ export function AddCard() {
                     justifyContent="space-between"
                 >
                     <Text
-                        color="#fff"
+                        color={theme.color.light.WHITE}
                         fontWeight={600}
                         fontSize={16}
                         lineHeight={16}
@@ -28,7 +29,7 @@ export function AddCard() {
                         Add card
                     </Text>
                     <Text
-                        color="#A2A2B5"
+                        color={theme.color.light.LIGHT_TEXT}
                         fontWeight={400}
                         fontSize={14}
                         lineHeight={16}
@@ -47,7 +48,7 @@ export function AddCard() {
                         width="48%"
                         additionalStyles={{
                             borderWidth: 1,
-                            borderColor: '#A2A2B5',
+                            borderColor: theme.color.light.LIGHT_TEXT,
                             borderRadius: 8
                         }}
                         direction="row"
@@ -56,7 +57,7 @@ export function AddCard() {
                     >
                         <ICON_PAYPAL_GRAY width={15.9} height={16} />
                         <Text
-                            color="#A2A2B5"
+                            color={theme.color.light.LIGHT_TEXT}
                             fontSize={14}
                             lineHeight={16}
                             fontWeight={400}
@@ -70,8 +71,8 @@ export function AddCard() {
                         width="48%"
                         additionalStyles={{
                             borderWidth: 1,
-                            borderColor: '#597AFF',
-                            backgroundColor: '#597AFF',
+                            borderColor: theme.color.light.PRIMARY,
+                            backgroundColor: theme.color.light.PRIMARY,
                             borderRadius: 8
                         }}
                         direction="row"
@@ -80,7 +81,7 @@ export function AddCard() {
                     >
                         <ICON_MASTER_CARD_BLUE width={22} height={13.87} />
                         <Text
-                            color="#fff"
+                            color={theme.color.light.WHITE}
                             fontSize={14}
                             lineHeight={16}
                             fontWeight={400}
@@ -99,11 +100,11 @@ export function AddCard() {
                             width="100%"
                             height={48}
                             borderRadius={16}
-                            backgroundColor="rgba(28, 28, 35, 0.75)"
+                            backgroundColor={theme.color.light.DARK_GRAY}
                             alignItems="center"
                             justifyContent="center"
                         >
-                            <Text color="#fff" fontSize={14} fontWeight={600}>
+                            <Text color={theme.color.light.WHITE} fontSize={14} fontWeight={600}>
                                 Pay
                             </Text>
                         </Box>

@@ -70,7 +70,7 @@ export function PaymentContentHeader({ goBackHandler }: Props) {
                                     fontSize={theme.numericFontSize.md}
                                     lineHeight={theme.numericLineHeight.md}
                                     fontWeight={400}
-                                    color="#fff"
+                                    color={theme.color.light.WHITE}
                                     marginTop={12}
                                 >
                                     Model clothes are expensive.
@@ -119,14 +119,14 @@ export function PaymentContentHeader({ goBackHandler }: Props) {
                                         }}
                                     />
                                     <Text
-                                        color="#CCCCFF"
+                                        color={theme.color.light.SONG_CARD_TITLE_TEXT}
                                         fontSize={14}
                                         lineHeight={theme.numericLineHeight.md}
                                     >
                                         Monthly
                                     </Text>
                                     <Text
-                                        color="#fff"
+                                        color={theme.color.light.WHITE}
                                         fontSize={theme.numericFontSize.md}
                                         lineHeight={theme.numericLineHeight.md}
                                         marginLeft={8}

@@ -1,11 +1,15 @@
 import { FC, useState } from 'react';
 import { SingleVideoPageComponents } from '../style';
-import { ICON_ARROW_LEFT_WHITE, ICON_MENU_ACTIVE } from '../../../constaints/icons';
+import {
+    ICON_ARROW_LEFT_WHITE,
+    ICON_MENU_ACTIVE
+} from '../../../constaints/icons';
 import { TouchableOpacity } from 'react-native';
 import { useRtl } from '../../../hooks/use-rtl';
 import { Box } from '../../../shared/components/box';
 import { windowSize } from '../../../utils/window-size';
 import { Text } from '../../../shared/components/text';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
     goBackHandler: () => void;
@@ -15,7 +19,7 @@ const { BackButton } = SingleVideoPageComponents;
 
 const { height: windowHeight } = windowSize();
 
-const menuList: { id: number, title: string }[] = [
+const menuList: { id: number; title: string }[] = [
     {
         id: 1,
         title: 'Edit file'
@@ -36,7 +40,7 @@ const menuList: { id: number, title: string }[] = [
         id: 5,
         title: 'Share'
     }
-]
+];
 
 export const GoBackButton: FC<Props> = ({ goBackHandler, hasBackground }) => {
     const { isRtl } = useRtl();
@@ -44,14 +48,14 @@ export const GoBackButton: FC<Props> = ({ goBackHandler, hasBackground }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const closeMenuHandler = () => {
-        setIsMenuOpen(false)
-    }
+        setIsMenuOpen(false);
+    };
 
     const openMenuHandler = () => {
-        setIsMenuOpen(true)
-    }
+        setIsMenuOpen(true);
+    };
 
-    const renderGoBackButton = !hasBackground ?
+    const renderGoBackButton = !hasBackground ? (
         <TouchableOpacity
             activeOpacity={1}
             onPress={goBackHandler}
@@ -70,7 +74,7 @@ export const GoBackButton: FC<Props> = ({ goBackHandler, hasBackground }) => {
                 }}
             />
         </TouchableOpacity>
-        :
+    ) : (
         <BackButton onPress={goBackHandler}>
             <ICON_ARROW_LEFT_WHITE
                 style={{
@@ -80,18 +84,19 @@ export const GoBackButton: FC<Props> = ({ goBackHandler, hasBackground }) => {
                 }}
             />
         </BackButton>
+    );
 
     return (
         <>
             {/* menu */}
-            {isMenuOpen ?
+            {isMenuOpen ? (
                 <Box
-                    id='menu'
+                    id="menu"
                     width={120}
-                    position='absolute'
+                    position="absolute"
                     top={70}
                     right={24}
-                    backgroundColor='rgba(78, 78, 97, 0.2)'
+                    backgroundColor="rgba(78, 78, 97, 0.2)"
                     zIndex={100}
                     borderRadius={16}
                     paddingLeft={16}
@@ -101,17 +106,19 @@ export const GoBackButton: FC<Props> = ({ goBackHandler, hasBackground }) => {
                     {menuList.map((menu) => (
                         <Text
                             key={menu.id}
-                            color='#D9D9FF'
+                            color={theme.color.light.CARD_TITLE_TEXT}
                             fontWeight={600}
                             fontSize={14}
                             lineHeight={20}
                             marginTop={16}
-                        >{menu.title}</Text>
+                        >
+                            {menu.title}
+                        </Text>
                     ))}
                 </Box>
-                : null}
+            ) : null}
             {/* menu background */}
-            {isMenuOpen ?
+            {isMenuOpen ? (
                 <TouchableOpacity
                     style={{
                         width: '100%',
@@ -121,55 +128,48 @@ export const GoBackButton: FC<Props> = ({ goBackHandler, hasBackground }) => {
                         top: 0,
                         zIndex: 40
                     }}
-                    onPress={closeMenuHandler}>
+                    onPress={closeMenuHandler}
+                >
                     <Box
-                        width='100%'
+                        width="100%"
                         height={windowHeight}
-                        position='absolute'
+                        position="absolute"
                         left={0}
                         top={0}
                         zIndex={40}
-                    >
-                    </Box>
+                    ></Box>
                 </TouchableOpacity>
-                : null
-            }
+            ) : null}
             <Box
-                width='100%'
+                width="100%"
                 height={40}
-                direction='row'
-                alignItems='center'
-                justifyContent='space-between'
-                position='absolute'
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                position="absolute"
                 top={16}
                 zIndex={24}
                 paddingRight={24}
                 paddingLeft={24}
             >
                 {renderGoBackButton}
-                <TouchableOpacity
-                    activeOpacity={1}
-                    onPress={openMenuHandler}
-                >
+                <TouchableOpacity activeOpacity={1} onPress={openMenuHandler}>
                     <Box
                         width={40}
                         height={40}
                         borderRadius={100}
-                        backgroundColor={hasBackground ? 'rgba(14, 14, 18, 0.5)' : null}
-                        alignItems='center'
-                        justifyContent='center'
-                        position='relative'
+                        backgroundColor={
+                            hasBackground ? 'rgba(14, 14, 18, 0.5)' : null
+                        }
+                        alignItems="center"
+                        justifyContent="center"
+                        position="relative"
                         zIndex={100}
                     >
-                        <ICON_MENU_ACTIVE
-                            width={18}
-                            height={5.2}
-                        />
-
+                        <ICON_MENU_ACTIVE width={18} height={5.2} />
                     </Box>
                 </TouchableOpacity>
             </Box>
         </>
     );
-}
-
+};

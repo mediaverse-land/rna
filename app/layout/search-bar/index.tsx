@@ -4,6 +4,7 @@ import { ICON_SEARCH_SVG_PATH } from '../../constaints/icons';
 import { useNavigation } from '@react-navigation/native';
 import { useRtl } from '../../hooks/use-rtl';
 import { UseNavigationType } from '../../shared/types/use-navigation';
+import { theme } from '../../constaints/theme';
 
 const { SearchInput } = SearchBarComponents;
 
@@ -23,7 +24,7 @@ export function SearchBar() {
         >
             <SearchInput
                 placeholder="Search"
-                placeholderTextColor="#83839C"
+                placeholderTextColor={theme.color.light.LIGHT_DESCRIPTION}
                 onFocus={navigateToSearchPageHandler}
                 textAlign={!isRtl ? 'left' : 'right'}
             />

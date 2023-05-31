@@ -4,6 +4,7 @@ import { Box } from '../../shared/components/box';
 import { Text } from '../../shared/components/text';
 import { windowSize } from '../../utils/window-size';
 import { TACKING_BOX_GRADEINT } from '../../constaints/images';
+import { theme } from '../../constaints/theme';
 
 const { height: windowHeight } = windowSize();
 
@@ -26,7 +27,7 @@ export function PaymentSuccess() {
             </Box>
             <Box>
                 <Text
-                    color="#fff"
+                    color={theme.color.light.WHITE}
                     lineHeight={20}
                     fontSize={20}
                     fontWeight={600}
@@ -36,7 +37,7 @@ export function PaymentSuccess() {
                 </Text>
                 <Box alignItems="center">
                     <Text
-                        color="#666680"
+                        color={theme.color.light.TEXT}
                         lineHeight={16}
                         fontSize={16}
                         fontWeight={400}
@@ -80,11 +81,11 @@ export function PaymentSuccess() {
                             alignItems="center"
                             additionalStyles={{
                                 borderRightWidth: 1,
-                                borderRightColor: '#666680'
+                                borderRightColor: theme.color.light.TEXT
                             }}
                         >
                             <Text
-                                color="#666680"
+                                color={theme.color.light.TEXT}
                                 fontSize={14}
                                 lineHeight={16}
                                 fontWeight={400}
@@ -101,7 +102,7 @@ export function PaymentSuccess() {
                             paddingLeft={16}
                         >
                             <Text
-                                color="#fff"
+                                color={theme.color.light.WHITE}
                                 fontSize={14}
                                 lineHeight={16}
                                 fontWeight={400}
@@ -109,7 +110,7 @@ export function PaymentSuccess() {
                                 58741236954347
                             </Text>
                             <Text
-                                color="#597AFF"
+                                color={theme.color.light.PRIMARY}
                                 fontSize={14}
                                 lineHeight={16}
                                 fontWeight={400}

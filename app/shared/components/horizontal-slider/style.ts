@@ -24,7 +24,7 @@ export const HorizontalSliderComponents = {
     `,
     SlideTitle: styled.Text`
         margin-top: 16px;
-        color: #666680;
+        color: ${theme.color.light.TEXT};
         font-size: ${theme.fontSize.md};
         line-height: ${theme.lineHeight.md};
     `

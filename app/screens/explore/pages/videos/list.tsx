@@ -6,6 +6,7 @@ import { Flex } from '../../../../styles/grid';
 import { UserNameCard } from '../../../../shared/components/username-card';
 import { useNavigation } from '@react-navigation/native';
 import { UseNavigationType } from '../../../../shared/types/use-navigation';
+import { theme } from '../../../../constaints/theme';
 
 const {
     ListWrapper,
@@ -58,7 +59,7 @@ export function VideoPageList() {
                                 username={item.username}
                                 profileUri={item.userProfileUri}
                                 usernameStyles={{
-                                    color: '#666680',
+                                    color: theme.color.light.TEXT,
                                     marginLeft: 8,
                                     fontSize: 12
                                 }}

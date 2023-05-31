@@ -17,6 +17,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { windowSize } from '../../utils/window-size';
 import { useRtl } from '../../hooks/use-rtl';
+import { theme } from '../../constaints/theme';
 
 const { width, height } = windowSize();
 
@@ -114,7 +115,7 @@ export function SearchWindow() {
                             />
                             <SearchInput
                                 placeholder="Search"
-                                placeholderTextColor="#353542"
+                                placeholderTextColor={theme.color.light.INPUT_PLACEHOLDER}
                                 textAlign={isRtl ? 'right' : 'left'}
                             />
                         </View>
@@ -170,7 +171,7 @@ export function SearchWindow() {
                             >
                                 <SearchInput
                                     placeholder="Search in tags"
-                                    placeholderTextColor="#353542"
+                                    placeholderTextColor={theme.color.light.INPUT_PLACEHOLDER}
                                     style={{ marginTop: 0 }}
                                     textAlign={isRtl ? 'right' : 'left'}
                                 />

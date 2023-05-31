@@ -17,12 +17,7 @@ export function AllPage() {
             colors={['#030340', '#030340']}
             start={{ x: 0.7, y: 0 }}
         >
-            <ScrollView
-                style={[
-                    FixedStyles,
-                    styles.scrollView
-                ]}
-            >
+            <ScrollView style={[FixedStyles, styles.scrollView]}>
                 <PaddingContainer>
                     <AllPageBanners />
                 </PaddingContainer>
@@ -38,13 +33,13 @@ export function AllPage() {
     );
 }
 
-
 const styles = StyleSheet.create({
     scrollView: {
         paddingTop: 196,
         backgroundColor: 'transparent'
     },
     space: {
-        width: '100%', height: 350
+        width: '100%',
+        height: 350
     }
-})
+});

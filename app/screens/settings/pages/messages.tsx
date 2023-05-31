@@ -122,18 +122,18 @@ export function MessagesPage() {
                         paddingRight={16}
                         marginBottom={8}
                     >
-                        <Text color="#fff" fontSize={14} lineHeight={17.3}>
+                        <Text color={theme.color.light.WHITE} fontSize={14} lineHeight={17.3}>
                             New updates
                         </Text>
                         <Text
-                            color="#666680"
+                            color={theme.color.light.TEXT}
                             fontSize={theme.numericFontSize.sm}
                             lineHeight={theme.numericLineHeight.md}
                         >
                             {item.date}
                         </Text>
                     </Box>
-                    <Text color="#666680" paddingLeft={16} paddingRight={16}>
+                    <Text color={theme.color.light.TEXT} paddingLeft={16} paddingRight={16}>
                         {item.description}
                     </Text>
                 </Box>

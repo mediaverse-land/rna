@@ -90,7 +90,7 @@ export function GeneralInformationPage() {
                     }}
                 >
                     <Text
-                        color="#fff"
+                        color={theme.color.light.WHITE}
                         fontSize={14}
                         fontWeight={600}
                         lineHeight={theme.numericLineHeight.md}

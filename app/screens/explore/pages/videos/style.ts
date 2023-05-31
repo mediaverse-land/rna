@@ -47,12 +47,12 @@ export const VideoPageComponents = {
     VideoListItemDescription: styled.Text`
         margin-top: 16px;
         padding: 0 8px;
-        color: #666680;
+        color: ${theme.color.light.TEXT};
         font-size: ${theme.fontSize.md};
         line-height: ${theme.lineHeight.md};
     `,
     VideoListItemDuration: styled.Text`
-        color: #666680;
+        color: ${theme.color.light.TEXT};
         font-size: 12px;
         line-height: 12px;
         margin-top: 5px;

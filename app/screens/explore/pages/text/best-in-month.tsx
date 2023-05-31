@@ -5,6 +5,7 @@ import { UserNameCard } from '../../../../shared/components/username-card';
 import { ImagesPageComponents } from '../all/style';
 import { TextItem, topTenTextsMockData } from '../all/mock-data/top-ten-texts';
 import { Box } from '../../../../shared/components/box';
+import { theme } from '../../../../constaints/theme';
 
 const {
     TextSliderWrapper,
@@ -30,7 +31,7 @@ export function ImagePageBestInMonth() {
                             username={item.username}
                             profileUri={item.profileUri}
                             usernameStyles={{
-                                color: '#666680',
+                                color: theme.color.light.TEXT,
                                 marginLeft: 8
                             }}
                         />

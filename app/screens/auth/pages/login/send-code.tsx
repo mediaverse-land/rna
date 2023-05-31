@@ -4,6 +4,7 @@ import { UseNavigationType } from '../../../../shared/types/use-navigation';
 import { Box } from '../../../../shared/components/box';
 import { Text } from '../../../../shared/components/text';
 import { Input } from '../../../../shared/components/form';
+import { theme } from '../../../../constaints/theme';
 
 export const SendCode = () => {
     const navigation = useNavigation<UseNavigationType>();
@@ -17,7 +18,7 @@ export const SendCode = () => {
             <Box flex={1} alignItems="center">
                 <Box position="relative" top={'27%'} alignItems="center">
                     <Text
-                        color="#fff"
+                        color={theme.color.light.WHITE}
                         lineHeight={20}
                         fontSize={12}
                         fontWeight={600}
@@ -36,14 +37,14 @@ export const SendCode = () => {
                     bottom={10}
                 >
                     <Text
-                        color="#83839C"
+                        color={theme.color.light.LIGHT_DESCRIPTION}
                         lineHeight={20}
                         fontSize={12}
                         fontWeight={600}
                         marginBottom={24}
                     >
                         Have an account?
-                        <Text color="#597AFF"> Log in</Text>
+                        <Text color={theme.color.light.PRIMARY}> Log in</Text>
                     </Text>
                     <TouchableOpacity
                         activeOpacity={1}
@@ -59,7 +60,7 @@ export const SendCode = () => {
                             backgroundColor="rgba(78, 78, 97, 0.5)"
                         >
                             <Text
-                                color="#fff"
+                                color={theme.color.light.WHITE}
                                 lineHeight={20}
                                 fontSize={12}
                                 fontWeight={600}
@@ -78,4 +79,4 @@ const styles = StyleSheet.create({
     fullWidth: {
         width: '100%'
     }
-})
+});
