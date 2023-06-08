@@ -4,10 +4,10 @@
         "slug": "mediaverse",
         "version": "0.0.1",
         "orientation": "portrait",
-        "icon": "./assets/icon.png",
+        "icon": "./assets/mediaverse-icon.png",
         "userInterfaceStyle": "light",
         "splash": {
-            "image": "./assets/splash.png",
+            "image": "./assets/iphone-splash.png",
             "resizeMode": "cover",
             "backgroundColor": "#ffffff"
         },
@@ -18,12 +18,12 @@
         "android": {
             "package": "com.smartcity.mediaverse",
             "adaptiveIcon": {
-                "foregroundImage": "./assets/adaptive-icon.png",
+                "foregroundImage": "./assets/mediaverse-icon.png",
                 "backgroundColor": "#ffffff"
             }
         },
         "web": {
-            "favicon": "./assets/favicon.png"
+            "favicon": "./assets/mediaverse-icon.png"
         },
         "plugins": ["expo-localization"],
         "extra": {

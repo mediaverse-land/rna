@@ -5,28 +5,34 @@ import { Text } from '../../../../shared/components/text';
 import { Input } from '../../../../shared/components/form';
 import { ICON_FRANCE_FLAG } from '../../../../constaints/icons';
 import { theme } from '../../../../constaints/theme';
+import { LoadingSpinner } from '../../../../shared/components/loader-spinner';
 
 type Props = {
-    setCurrentWindowHandler: (
-        path: 'INSERT_PHONE' | 'SEND_CODE' | 'FILL_DATA'
-    ) => void;
+    submitHandler: () => void;
+    setPhoneNumberHandler: (phoneNumber: string) => void;
+    phoneNumber: string;
+    isLoading: boolean,
+    phoneError: boolean,
+    setPhoneError: (isError: boolean) => void;
 };
 
-const styles = StyleSheet.create({
-    flagIcon: {
-        width: 25,
-        height: 18,
-        marginTop: 10,
-        paddingTop: 10,
-        position: 'relative',
-        top: 5
-    },
-    fullWidth: {
-        width: '100%'
+export const InsertPhone: FC<Props> = ({
+    submitHandler,
+    setPhoneNumberHandler,
+    phoneNumber,
+    phoneError,
+    setPhoneError,
+    isLoading }) => {
+    const changeTextHandler = (text) => {
+        if (text.trim().length !== 10) {
+            setPhoneError(true)
+        }
+        else {
+            setPhoneError(false)
+            setPhoneNumberHandler(text);
+        }
     }
-});
 
-export const InsertPhone: FC<Props> = ({ setCurrentWindowHandler }) => {
     return (
         <Box flex={1} alignItems="center">
             <Box position="relative" top={'27%'} alignItems="center">
@@ -39,12 +45,17 @@ export const InsertPhone: FC<Props> = ({ setCurrentWindowHandler }) => {
                 >
                     Insert your number for loging in.
                 </Text>
-
                 <Box width="100%" position="relative">
                     <Input
                         placeholder="your number..."
                         labelText="+33"
                         labelIcon={<ICON_FRANCE_FLAG style={styles.flagIcon} />}
+                        hasError={phoneError}
+                        onChangeText={(text) => changeTextHandler(text)}
+                        additionalProps={{
+                            inputMode: 'numeric',
+                            defaultValue: phoneNumber,
+                        }}
                     />
                 </Box>
             </Box>
@@ -67,7 +78,7 @@ export const InsertPhone: FC<Props> = ({ setCurrentWindowHandler }) => {
                 <TouchableOpacity
                     activeOpacity={1}
                     style={styles.fullWidth}
-                    onPress={() => setCurrentWindowHandler('SEND_CODE')}
+                    onPress={submitHandler}
                 >
                     <Box
                         width="100%"
@@ -83,7 +94,7 @@ export const InsertPhone: FC<Props> = ({ setCurrentWindowHandler }) => {
                             fontSize={12}
                             fontWeight={600}
                         >
-                            Send code
+                            {isLoading ? <LoadingSpinner color='red' /> : 'Send code'}
                         </Text>
                     </Box>
                 </TouchableOpacity>
@@ -91,3 +102,17 @@ export const InsertPhone: FC<Props> = ({ setCurrentWindowHandler }) => {
         </Box>
     );
 };
+
+const styles = StyleSheet.create({
+    flagIcon: {
+        width: 25,
+        height: 18,
+        marginTop: 10,
+        paddingTop: 10,
+        position: 'relative',
+        top: 5
+    },
+    fullWidth: {
+        width: '100%'
+    }
+});

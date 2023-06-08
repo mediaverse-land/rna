@@ -3,6 +3,7 @@ import { SoundsPageComponents } from './style';
 import { Flex, PaddingContainer } from '../../../../styles/grid';
 import {
     MUSIC_PLAYER_STOP_BUTTON_GRADIENT,
+    SOUND_ITEM,
     TEXT_SWIPER_GRADIENT
 } from '../../../../constaints/images';
 import Slider from '@react-native-community/slider';
@@ -28,6 +29,8 @@ const {
     StartStopButtonGradient
 } = SoundsPageComponents;
 
+
+
 export function SoundsPageMusicPlayer() {
     return (
         <PaddingContainer>
@@ -41,14 +44,14 @@ export function SoundsPageMusicPlayer() {
                     </MusicPlayerBoxTitle>
                     <MusicCoverSliderWrapper>
                         <PrevMusicCoverSlide
-                            source={{ uri: prevTrack.cover }}
+                            source={{ uri: SOUND_ITEM }}
                             blurRadius={10}
                         />
                         <CurrentMusicCoverSlide
-                            source={{ uri: currentTrack.cover }}
+                            source={{ uri: SOUND_ITEM }}
                         />
                         <NextMusicCoverSlide
-                            source={{ uri: nextTrack.cover }}
+                            source={{ uri: SOUND_ITEM }}
                             blurRadius={10}
                         />
                     </MusicCoverSliderWrapper>
@@ -91,10 +94,6 @@ export function SoundsPageMusicPlayer() {
                         marginTop="28px"
                     >
                         <TouchableOpacity activeOpacity={1}>
-                            {/* <Image
-                                source={{ uri: ICON_MUSIC_PREV }}
-                                style={styles.musicTrackNextPrevButton}
-                            /> */}
                             <ICON_PREV_SVG width={18} height={18} />
                         </TouchableOpacity>
                         <StartStopButton>
@@ -115,10 +114,6 @@ export function SoundsPageMusicPlayer() {
                             />
                         </StartStopButton>
                         <TouchableOpacity activeOpacity={1}>
-                            {/* <Image
-                                source={{ uri: ICON_MUSIC_NEXT }}
-                                style={styles.musicTrackNextPrevButton}
-                            /> */}
                             <ICON_NEXT_SVG width={18} height={18} />
                         </TouchableOpacity>
                     </Flex>

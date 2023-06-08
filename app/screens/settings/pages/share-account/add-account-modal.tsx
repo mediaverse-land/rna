@@ -46,23 +46,27 @@ export function AddAccountModal({
                     backgroundColor: 'transparent'
                 }}
             >
-                <BottomSheetView
-                    style={styles.bottomSheet}
-                >
+                <BottomSheetView style={styles.bottomSheet}>
                     <Box
                         direction="row"
                         width="100%"
                         justifyContent="space-between"
                         alignItems="center"
                     >
-                        <Text color={theme.color.light.WHITE} fontSize={theme.numericFontSize.md}>
+                        <Text
+                            color={theme.color.light.WHITE}
+                            fontSize={theme.numericFontSize.md}
+                        >
                             Add account
                         </Text>
                         <TouchableOpacity
                             onPress={closeModalHandler}
                             activeOpacity={1}
                         >
-                            <Text color={theme.color.light.LIGHT_TEXT} fontSize={14}>
+                            <Text
+                                color={theme.color.light.LIGHT_TEXT}
+                                fontSize={14}
+                            >
                                 Cancel
                             </Text>
                         </TouchableOpacity>
@@ -101,7 +105,6 @@ export function AddAccountModal({
     );
 }
 
-
 const styles = StyleSheet.create({
     bottomSheet: {
         position: 'absolute',
@@ -122,4 +125,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     }
-})
+});

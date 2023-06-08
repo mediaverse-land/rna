@@ -51,7 +51,7 @@ const textFiles: FileType[] = [
 export function SingleTextContent() {
     return (
         <PaddingContainer>
-            <Box width="100%" marginTop={32}>
+            <Box position="relative" zIndex={20} width="100%" marginTop={32}>
                 <SingleItemDescription description={description} />
                 <Box marginTop={8}>
                     <SingleItemMetaData data={textMetaData} />

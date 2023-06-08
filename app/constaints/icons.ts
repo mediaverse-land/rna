@@ -195,3 +195,6 @@ export const ICON_DOWNLOAD_WHITE = ICON_DOWNLOAD_WHITE_PATH;
 
 import ICON_X_WHITE_PATH from './../../assets/icons/icon__x-white.svg';
 export const ICON_X_WHITE = ICON_X_WHITE_PATH;
+
+import ICON_FORM_ERROR_PATH from './../../assets/icons/icon__form-error.svg';
+export const ICON_FORM_ERROR = ICON_FORM_ERROR_PATH;

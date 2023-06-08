@@ -39,7 +39,7 @@ export function SingleTextHeader({ goBackHandler }: Props) {
     );
 
     return (
-        <Box>
+        <Box position="relative" zIndex={20}>
             <GoBackButton goBackHandler={goBackHandler} />
             <Box width="100%" height={thumbnailHeight}>
                 <GoBackButton

@@ -70,7 +70,11 @@ export function InventoryBox() {
                         alignItems="center"
                         justifyContent="space-between"
                     >
-                        <Text color={theme.color.light.WHITE} fontSize={16} fontWeight={600}>
+                        <Text
+                            color={theme.color.light.WHITE}
+                            fontSize={16}
+                            fontWeight={600}
+                        >
                             200 $
                         </Text>
                         <TouchableOpacity

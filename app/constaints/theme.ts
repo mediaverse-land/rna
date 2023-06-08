@@ -16,12 +16,13 @@ export const theme = {
             FLAT_INPUT_BORDER: 'rgba(245, 247, 249, 1)',
 
             // for comment card background
-            // BUTTON_LIGHT_GRAY_BG: 'rgba(78, 78, 97, 0.5)',
+            BUTTON_LIGHT_GRAY_BG: 'rgba(78, 78, 97, 0.5)',
             LIGHT_GRAY: 'rgba(78, 78, 97, 0.3)',
             DARK_GRAY: 'rgba(28, 28, 35, 0.75)',
             TEXT: '#666680',
             LIGHT_TEXT: '#A2A2B5',
             PRIMARY: '#597AFF',
+            DANGER: '#D90429',
             FACEBOOK: '#1771E6',
             APPLE: '#000000',
             INPUT_PLACEHOLDER: '#353542',

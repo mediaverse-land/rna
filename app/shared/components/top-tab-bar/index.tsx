@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactElement } from 'react';
 import { ImageStyle } from 'react-native';
 import { Box } from '../box';

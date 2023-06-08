@@ -30,14 +30,14 @@ export function SingleItemMetaData({ data }: { data: MetaDataType[] }) {
                         style={[
                             !isRtl
                                 ? {
-                                    borderRightWidth: 1,
-                                    borderRightColor: theme.color.light.TEXT
-                                }
+                                      borderRightWidth: 1,
+                                      borderRightColor: theme.color.light.TEXT
+                                  }
                                 : {
-                                    borderLeftWidth: 1,
-                                    borderLeftColor: theme.color.light.TEXT,
-                                    paddingLeft: 16
-                                }
+                                      borderLeftWidth: 1,
+                                      borderLeftColor: theme.color.light.TEXT,
+                                      paddingLeft: 16
+                                  }
                         ]}
                     >
                         {video.key}
@@ -48,7 +48,11 @@ export function SingleItemMetaData({ data }: { data: MetaDataType[] }) {
                         alignItems="center"
                         justifyContent="center"
                     >
-                        <Text color={theme.color.light.WHITE} fontSize={14} lineHeight={14}>
+                        <Text
+                            color={theme.color.light.WHITE}
+                            fontSize={14}
+                            lineHeight={14}
+                        >
                             {video.value}
                         </Text>
                     </Box>

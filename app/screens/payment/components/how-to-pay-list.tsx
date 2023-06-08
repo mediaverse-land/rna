@@ -201,7 +201,8 @@ export function HowToPayList() {
                                                 borderColor:
                                                     selectedPaymentMethod !==
                                                         m.title
-                                                        ? theme.color.light.SONG_CARD_TITLE_TEXT
+                                                        ? theme.color.light
+                                                            .SONG_CARD_TITLE_TEXT
                                                         : 'transparent'
                                             }}
                                             backgroundColor={

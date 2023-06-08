@@ -1,3 +1,4 @@
+declare module '@env';
 declare module '*.png';
 declare module '*.svg' {
     import React from 'react';

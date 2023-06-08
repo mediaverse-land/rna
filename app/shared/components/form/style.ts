@@ -30,13 +30,20 @@ export const InputComponent: any = {
         padding-top: 3px;
         color: ${theme.color.light.GRAY};
     `,
-    InputBox: styled.TextInput<{ textAlign: string }>`
+    InputBox: styled.TextInput<{ textAlign: string; hasError?: boolean }>`
         width: 100%;
         height: 48px;
         border-radius: 8px;
-        border: 1px solid ${theme.color.light.TEXT};
+        border: 1px solid
+            ${(props) =>
+                props.hasError
+                    ? theme.color.light.DANGER
+                    : theme.color.light.TEXT};
         background-color: rgba(14, 14, 18, 0.5);
-        color: ${theme.color.light.WHITE};
+        color: ${(props) =>
+            props.hasError
+                ? theme.color.light.DANGER
+                : theme.color.light.WHITE};
         font-size: ${theme.fontSize.md};
         line-height: ${theme.lineHeight.md};
         text-align: ${(props) => props.textAlign};

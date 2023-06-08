@@ -115,7 +115,9 @@ export function SearchWindow() {
                             />
                             <SearchInput
                                 placeholder="Search"
-                                placeholderTextColor={theme.color.light.INPUT_PLACEHOLDER}
+                                placeholderTextColor={
+                                    theme.color.light.INPUT_PLACEHOLDER
+                                }
                                 textAlign={isRtl ? 'right' : 'left'}
                             />
                         </View>
@@ -171,7 +173,9 @@ export function SearchWindow() {
                             >
                                 <SearchInput
                                     placeholder="Search in tags"
-                                    placeholderTextColor={theme.color.light.INPUT_PLACEHOLDER}
+                                    placeholderTextColor={
+                                        theme.color.light.INPUT_PLACEHOLDER
+                                    }
                                     style={{ marginTop: 0 }}
                                     textAlign={isRtl ? 'right' : 'left'}
                                 />

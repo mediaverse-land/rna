@@ -55,7 +55,10 @@ export function HorizontalSlide({
                     width={16}
                     height={16}
                     profileImageStyles={{ marginRight: 8 }}
-                    usernameStyles={{ color: theme.color.light.TEXT, fontSize: 12 }}
+                    usernameStyles={{
+                        color: theme.color.light.TEXT,
+                        fontSize: 12
+                    }}
                 />
             </Box>
             {icon ? icon : null}

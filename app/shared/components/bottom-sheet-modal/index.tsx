@@ -67,13 +67,17 @@ export const ModalBottomSheet = forwardRef(
                             onClose={() => setIsModalOpen(false)}
                             handleComponent={null}
                             backgroundStyle={{
-                                backgroundColor: theme.color.light.ADD_ACCOUNT_MODAL_BAKGROUND
+                                backgroundColor:
+                                    theme.color.light
+                                        .ADD_ACCOUNT_MODAL_BAKGROUND
                             }}
                         >
                             <BottomSheetView
                                 style={{
                                     position: 'absolute',
-                                    backgroundColor: theme.color.light.ADD_ACCOUNT_MODAL_BAKGROUND,
+                                    backgroundColor:
+                                        theme.color.light
+                                            .ADD_ACCOUNT_MODAL_BAKGROUND,
                                     top: 0,
                                     left: 0,
                                     width: '100%',

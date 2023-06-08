@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { StatusBar } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { ImagesPage } from './pages/images';
@@ -8,7 +9,6 @@ import { TextsPage } from './pages/text';
 import { AllPage } from './pages/all';
 import TopTabBar from '../../shared/components/top-tab-bar';
 import { Box } from '../../shared/components/box';
-import { StatusBar } from 'react-native';
 
 type RoutesType = {
     AllPage: undefined;
@@ -84,7 +84,8 @@ export function Navigator() {
             <Box width={'100%'} flex={1}>
                 <Tab.Navigator
                     screenOptions={{
-                        animationEnabled: false
+                        animationEnabled: false,
+                        swipeEnabled: false
                     }}
                     tabBar={(props) => <TopTabBar {...props} />}
                 >

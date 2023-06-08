@@ -1,4 +1,3 @@
-import { TouchableOpacity } from 'react-native';
 import { Box } from '../../../shared/components/box';
 import { Input } from '../../../shared/components/form';
 import { Text } from '../../../shared/components/text';
@@ -7,8 +6,8 @@ import {
     ICON_MASTER_CARD_BLUE,
     ICON_PAYPAL_GRAY
 } from '../../../constaints/icons';
-import { FontWeight } from '@shopify/react-native-skia';
 import { theme } from '../../../constaints/theme';
+import { Button } from '../../../shared/components/button';
 
 export function AddCard() {
     return (
@@ -93,22 +92,13 @@ export function AddCard() {
                 </Box>
                 <Box marginTop={25}>
                     <Input placeholder="Insert amount..." labelText="Wallet" />
-
-                    <TouchableOpacity activeOpacity={1}>
-                        <Box
-                            marginTop={24}
-                            width="100%"
-                            height={48}
-                            borderRadius={16}
-                            backgroundColor={theme.color.light.DARK_GRAY}
-                            alignItems="center"
-                            justifyContent="center"
-                        >
-                            <Text color={theme.color.light.WHITE} fontSize={14} fontWeight={600}>
-                                Pay
-                            </Text>
-                        </Box>
-                    </TouchableOpacity>
+                    <Button
+                        varient='dark'
+                        text='Pay'
+                        marginTop={24}
+                        borderRadius={16}
+                        size='lg'
+                    />
                 </Box>
             </Box>
         </PaddingContainer>

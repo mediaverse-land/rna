@@ -9,7 +9,7 @@ const { DailyRecomended } = ImagesPageComponents;
 export function AllPageChillSongs() {
     return (
         <DailyRecomended>
-            <Title str="Daily recommended" />
+            <Title str="Chill songs" />
             <Box marginTop={24}>
                 <HorizontalSlider data={dailyRecommendedMockData} />
             </Box>

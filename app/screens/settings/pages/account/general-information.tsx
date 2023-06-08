@@ -3,14 +3,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScreenGradient } from '../../../../shared/components/screen-gradient';
 import { PaddingContainer } from '../../../../styles/grid';
 import { Box } from '../../../../shared/components/box';
-import { SettingsScreenComponents } from '../../style';
 import { windowSize } from '../../../../utils/window-size';
-import { Text } from '../../../../shared/components/text';
-import { theme } from '../../../../constaints/theme';
 import { ScrollView } from 'react-native';
 import { SettingsScreenTitle } from '../../components/title';
+import { Button } from '../../../../shared/components/button';
 
-const { SaveButton } = SettingsScreenComponents;
 const { width } = windowSize();
 
 const formStructure = [
@@ -66,7 +63,6 @@ export function GeneralInformationPage() {
                     {/* header */}
                     <PaddingContainer>
                         <SettingsScreenTitle title="General Information" />
-
                         {/* form */}
                         <Box flex={1} width="100%" paddingTop={72}>
                             {formStructure.map((form) => (
@@ -78,26 +74,17 @@ export function GeneralInformationPage() {
                                 </Box>
                             ))}
                         </Box>
-                        <Box width={'100%'} height={100}>
-                            <></>
-                        </Box>
+                        <Box width={'100%'} height={100}></Box>
                     </PaddingContainer>
                 </ScrollView>
-                <SaveButton
-                    style={{
-                        // padding24 = 48
-                        width: Math.floor(width) - 48
-                    }}
-                >
-                    <Text
-                        color={theme.color.light.WHITE}
-                        fontSize={14}
-                        fontWeight={600}
-                        lineHeight={theme.numericLineHeight.md}
-                    >
-                        Save
-                    </Text>
-                </SaveButton>
+                <Box marginBottom={20}>
+                    <Button
+                        varient='primary'
+                        width={Math.floor(width) - 48}
+                        text='Save'
+                        size='sm'
+                    />
+                </Box>
             </ScreenGradient>
         </SafeAreaView>
     );

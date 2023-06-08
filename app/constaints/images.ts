@@ -128,3 +128,6 @@ export const WALLET_SLIDER_BACKGROUND = imageUriResolver(
 );
 export const LOADER_SPINNER = imageUriResolver(LOADER_SPINNER_PATH);
 export const LOADER = imageUriResolver(LOADER_PATH);
+
+import SOUND_ITEM_PNG from './../../assets/img/music-item.png';
+export const SOUND_ITEM = imageUriResolver(SOUND_ITEM_PNG);

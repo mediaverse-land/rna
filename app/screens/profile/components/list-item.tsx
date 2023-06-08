@@ -43,14 +43,14 @@ export function ListItem({
                         source={{ uri: imagePath }}
                         style={styles.thumbnail}
                     />
-                    {!isSelected ?
+                    {!isSelected ? (
                         <Image
                             source={{
                                 uri: HORIZONTAL_SLIDER_GRADIENT
                             }}
                             style={styles.nonSelectedItemPlaceholder}
                         />
-                        : null}
+                    ) : null}
                     {isSelected ? (
                         <>
                             <Box
@@ -73,7 +73,9 @@ export function ListItem({
                                 top={0}
                                 borderRadius={8}
                                 zIndex={12}
-                                additionalStyles={styles.selectedItemPlaceholder}
+                                additionalStyles={
+                                    styles.selectedItemPlaceholder
+                                }
                                 alignItems="center"
                                 justifyContent="center"
                             >
@@ -108,8 +110,6 @@ export function ListItem({
     );
 }
 
-
-
 const styles = StyleSheet.create({
     thumbnail: {
         borderRadius: 16,
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         zIndex: 10,
-        borderWidth: 2,
+        borderWidth: 2
     },
     selectedItem: {
         opacity: 0.1
@@ -144,4 +144,4 @@ const styles = StyleSheet.create({
         width: 16,
         height: 16
     }
-})
+});

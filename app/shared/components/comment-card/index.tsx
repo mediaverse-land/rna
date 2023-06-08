@@ -34,10 +34,18 @@ export function CommentCard() {
                         alignItems="center"
                         justifyContent="space-between"
                     >
-                        <Text color={theme.color.light.WHITE} fontSize={14} lineHeight={14}>
+                        <Text
+                            color={theme.color.light.WHITE}
+                            fontSize={14}
+                            lineHeight={14}
+                        >
                             Comments
                         </Text>
-                        <Text color={theme.color.light.TEXT} fontSize={14} lineHeight={14}>
+                        <Text
+                            color={theme.color.light.TEXT}
+                            fontSize={14}
+                            lineHeight={14}
+                        >
                             56
                         </Text>
                     </Box>

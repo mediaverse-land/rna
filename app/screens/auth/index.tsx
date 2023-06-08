@@ -15,10 +15,14 @@ export function AuthScreen() {
         setCurrentWindow(window);
     };
 
+    const goBackToSigninWindow = () => {
+        setCurrentWindow('singin');
+    }
+
     const authWindows: Record<AuthWindows, ReactNode> = {
         root: <AuthRoot setWindowHandler={setWindowHandler} />,
         login: <Login />,
-        singin: <Signin />
+        singin: <Signin goBackToSigninWindow={goBackToSigninWindow} />
     };
 
     return (

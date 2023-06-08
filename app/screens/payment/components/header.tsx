@@ -119,7 +119,10 @@ export function PaymentContentHeader({ goBackHandler }: Props) {
                                         }}
                                     />
                                     <Text
-                                        color={theme.color.light.SONG_CARD_TITLE_TEXT}
+                                        color={
+                                            theme.color.light
+                                                .SONG_CARD_TITLE_TEXT
+                                        }
                                         fontSize={14}
                                         lineHeight={theme.numericLineHeight.md}
                                     >

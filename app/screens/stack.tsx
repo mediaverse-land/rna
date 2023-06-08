@@ -3,7 +3,6 @@ import { ExploreStack } from './explore';
 import { BottomTabBar } from '../shared/components/bottom-tab-bar';
 import { AppsStack } from './apps';
 import { ProfileScreen } from './profile';
-import { WalletScreen } from './wallet';
 import { WalletStack } from './wallet/navigation';
 
 type RoutesType = {

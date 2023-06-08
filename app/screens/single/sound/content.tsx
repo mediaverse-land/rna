@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { PaddingContainer } from '../../../styles/grid';
 import { Box } from '../../../shared/components/box';
 import { SingleItemDescription } from '../components/description';
@@ -23,7 +22,7 @@ const soundData: MetaDataType[] = [
 export const SingleSoundContent = () => {
     return (
         <PaddingContainer>
-            <Box width="100%" marginTop={32}>
+            <Box position="relative" zIndex={20} width="100%" marginTop={32}>
                 <SingleItemDescription description={description} />
                 <SingleItemMetaData data={soundData} />
             </Box>

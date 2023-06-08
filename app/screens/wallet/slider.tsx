@@ -1,17 +1,18 @@
+import { useContext, useRef } from 'react';
 import { ScrollView, TouchableOpacity } from 'react-native';
 import { ScreenGradient } from '../../shared/components/screen-gradient';
 import { InventoryBox } from './components/inventory-box';
 import { CardSlider } from './components/card-slider';
 import { Box } from '../../shared/components/box';
-import { AddButton } from './components/add-button';
 import { PaddingContainer } from '../../styles/grid';
-import { useContext, useRef } from 'react';
 import { ConfirmAlert } from '../../shared/components/confirm-alert';
 import { alertContext } from '../../context/alert';
 import { ModalBottomSheet } from '../../shared/components/bottom-sheet-modal';
 import { AddInventory } from './components/add-inventory';
 import { AddCard } from './components/add-card';
 import { windowSize } from '../../utils/window-size';
+import { Button } from '../../shared/components/button';
+import { ICON_ADD } from '../../constaints/icons';
 
 const { width: windowWidth } = windowSize();
 
@@ -53,8 +54,6 @@ export function WalletSlider() {
         alertCtx.close();
     };
 
-    console.log(Math.floor(windowWidth));
-
     return (
         <>
             <ScreenGradient>
@@ -69,9 +68,12 @@ export function WalletSlider() {
                             justifyContent="center"
                         >
                             <Box width={230}>
-                                <AddButton
-                                    onpress={openAddCardAlertHandler}
-                                    text="Add account"
+                                <Button
+                                    varient='flat'
+                                    text='Add account'
+                                    onpressHandler={openAddCardAlertHandler}
+                                    icon={<ICON_ADD width={16} height={16} />}
+                                    size='sm'
                                 />
                             </Box>
                         </Box>
@@ -83,12 +85,13 @@ export function WalletSlider() {
                                 justifyContent="center"
                                 paddingBottom={146}
                             >
-                                <Box width={'100%'}>
-                                    <AddButton
-                                        onpress={openAddInventoryAlertHandler}
-                                        text="Add inventory"
-                                    />
-                                </Box>
+                                <Button
+                                    varient='flat'
+                                    text='Add inventory'
+                                    onpressHandler={openAddInventoryAlertHandler}
+                                    icon={<ICON_ADD width={16} height={16} />}
+                                    size='lg'
+                                />
                             </Box>
                         </PaddingContainer>
                     </Box>

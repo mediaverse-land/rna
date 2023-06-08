@@ -60,7 +60,7 @@ export function ListColumn({ data }: Props) {
                         >
                             <Flex width="60%" direction="row" align="center">
                                 {!list.direction ||
-                                    list.direction !== 'row-reverse' ? (
+                                list.direction !== 'row-reverse' ? (
                                     <list.icon
                                         style={[
                                             list.iconStyle,
@@ -113,13 +113,18 @@ export function ListColumn({ data }: Props) {
                                         <Box
                                             width={18}
                                             height={18}
-                                            backgroundColor={theme.color.light.WHITE}
+                                            backgroundColor={
+                                                theme.color.light.WHITE
+                                            }
                                             borderRadius={100}
                                             alignItems="center"
                                             justifyContent="center"
                                         >
                                             <Text
-                                                color={theme.color.light.INPUT_PLACEHOLDER}
+                                                color={
+                                                    theme.color.light
+                                                        .INPUT_PLACEHOLDER
+                                                }
                                                 fontSize={
                                                     theme.numericFontSize.sm
                                                 }

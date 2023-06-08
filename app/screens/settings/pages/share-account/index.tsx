@@ -184,7 +184,9 @@ export function ShareEccountPage() {
                                     onPress={openModalHandler}
                                 >
                                     <Text
-                                        color={theme.color.light.LIGHT_DESCRIPTION}
+                                        color={
+                                            theme.color.light.LIGHT_DESCRIPTION
+                                        }
                                         fontSize={14}
                                         fontWeight={600}
                                         marginRight={10}

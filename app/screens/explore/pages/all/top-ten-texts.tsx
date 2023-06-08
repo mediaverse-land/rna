@@ -24,7 +24,6 @@ export function AllPageTopTenText() {
     const navigation = useNavigation<UseNavigationType>();
 
     const textScreenNavigationHandler = (title: string) => {
-        console.log('title');
         navigation.navigate('SingleTextScreen', {
             title
         });

@@ -17,7 +17,7 @@ type Props = {
 };
 const { BackButton } = SingleVideoPageComponents;
 
-const { height: windowHeight } = windowSize();
+const { width: windowWidth, height: windowHeight } = windowSize();
 
 const menuList: { id: number; title: string }[] = [
     {
@@ -153,18 +153,22 @@ export const GoBackButton: FC<Props> = ({ goBackHandler, hasBackground }) => {
                 paddingLeft={24}
             >
                 {renderGoBackButton}
-                <TouchableOpacity activeOpacity={1} onPress={openMenuHandler}>
+                <TouchableOpacity
+                    activeOpacity={1}
+                    onPress={openMenuHandler}>
                     <Box
-                        width={40}
-                        height={40}
-                        borderRadius={100}
                         backgroundColor={
                             hasBackground ? 'rgba(14, 14, 18, 0.5)' : null
                         }
+                        width={40}
+                        height={40}
+                        borderRadius={100}
                         alignItems="center"
                         justifyContent="center"
-                        position="relative"
+                        position={hasBackground ? 'relative' : "absolute"}
+                        left={!hasBackground && Math.floor(windowWidth) - 48 - 40}
                         zIndex={100}
+                        top={!hasBackground ? 8 : 0}
                     >
                         <ICON_MENU_ACTIVE width={18} height={5.2} />
                     </Box>

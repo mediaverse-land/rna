@@ -1,9 +1,9 @@
-import { TouchableOpacity } from 'react-native';
 import { Box } from '../../../shared/components/box';
 import { Input } from '../../../shared/components/form';
 import { Text } from '../../../shared/components/text';
 import { PaddingContainer } from '../../../styles/grid';
 import { theme } from '../../../constaints/theme';
+import { Button } from '../../../shared/components/button';
 
 export function AddInventory() {
     return (
@@ -34,22 +34,13 @@ export function AddInventory() {
                 </Box>
                 <Box marginTop={25}>
                     <Input placeholder="Insert amount..." labelText="Amount" />
-
-                    <TouchableOpacity activeOpacity={1}>
-                        <Box
-                            marginTop={24}
-                            width="100%"
-                            height={48}
-                            borderRadius={16}
-                            backgroundColor={theme.color.light.DARK_GRAY}
-                            alignItems="center"
-                            justifyContent="center"
-                        >
-                            <Text color={theme.color.light.WHITE} fontSize={14} fontWeight={600}>
-                                Pay
-                            </Text>
-                        </Box>
-                    </TouchableOpacity>
+                    <Button
+                        varient='dark'
+                        text='Pay'
+                        marginTop={24}
+                        borderRadius={16}
+                        size='lg'
+                    />
                 </Box>
             </Box>
         </PaddingContainer>

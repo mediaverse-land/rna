@@ -5,7 +5,6 @@ import { SingleVideoHeader } from './header';
 import { Box } from '../../../shared/components/box';
 import { SingleVideoContent } from './content';
 import { CommentCard } from '../../../shared/components/comment-card';
-import { Footer } from './footer';
 import { BuyBottom } from '../components/buy-button';
 
 export function SingleVideoScreen({ navigation }: any) {
