@@ -25,7 +25,7 @@ export function Navigator({ searchParams }: Props) {
             >
                 <Tab.Screen
                     name="AllPage"
-                    component={(props) => (
+                    component={(props: any) => (
                         <AllPage searchParams={searchParams} {...props} />
                     )}
                     options={{
@@ -34,7 +34,7 @@ export function Navigator({ searchParams }: Props) {
                 />
                 <Tab.Screen
                     name="SearchImage"
-                    component={(props) => (
+                    component={(props: any) => (
                         <ImagePage searchParams={searchParams} {...props} />
                     )}
                     options={{
@@ -43,7 +43,7 @@ export function Navigator({ searchParams }: Props) {
                 />
                 <Tab.Screen
                     name="SearchVideo"
-                    component={(props) => (
+                    component={(props: any) => (
                         <VideosPage searchParams={searchParams} {...props} />
                     )}
                     options={{
@@ -52,7 +52,7 @@ export function Navigator({ searchParams }: Props) {
                 />
                 <Tab.Screen
                     name="SearchSound"
-                    component={(props) => (
+                    component={(props: any) => (
                         <SoundsPage searchParams={searchParams} {...props} />
                     )}
                     options={{
@@ -61,7 +61,7 @@ export function Navigator({ searchParams }: Props) {
                 />
                 <Tab.Screen
                     name="SearchText"
-                    component={(props) => (
+                    component={(props: any) => (
                         <TextsPage searchParams={searchParams} {...props} />
                     )}
                     options={{

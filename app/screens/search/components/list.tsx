@@ -16,7 +16,7 @@ type Props = {
 
 const keyExtractor = (item: Asset) => item.id.toString();
 
-const contentTypes = {
+const contentTypes: Record<number, Record<string, string>> = {
     1: {
         name: 'texts',
         screen: 'SingleTextScreen'
@@ -38,7 +38,7 @@ const contentTypes = {
 export const List: FC<Props> = ({ data, isLoading }) => {
     const navigation = useNavigation<UseNavigationType>();
 
-    const renderListItem = ({ item }: { item: Asset }) => {
+    const renderListItem = ({ item }: { item: Asset | any }) => {
         const itemContentType = contentTypes[item.type];
 
         if (!item.id) {

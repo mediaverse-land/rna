@@ -56,7 +56,7 @@ export function TextsPage({ searchParams }: Props) {
         setLoading(false);
     };
 
-    const formatInputData = (inputData) => {
+    const formatInputData = (inputData: any) => {
         const { texts} = inputData;
 
         const formattedTexts = addTypeToAsset(texts, 1)

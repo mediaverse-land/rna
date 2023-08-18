@@ -55,7 +55,7 @@ export function SoundsPage({ searchParams }: Props) {
         setLoading(false);
     };
 
-    const formatInputData = (inputData) => {
+    const formatInputData = (inputData: any) => {
         const { audios} = inputData;
 
         const formattedAudios = addTypeToAsset(audios, 3)

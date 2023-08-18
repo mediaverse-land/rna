@@ -1,5 +1,5 @@
-export  const addTypeToAsset = (assetList, typeId) => {
-    const formattedAsset = [];
+export  const addTypeToAsset = (assetList: any[], typeId: number) => {
+    const formattedAsset: any[] = [];
 
     assetList.forEach(element => {
         const newElement = {

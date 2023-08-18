@@ -174,8 +174,6 @@ export function SingleTextScreen({
 
   const thumnailImageUri =
     data?.asset?.thumbnails["852x480"] ||
-    data?.asset?.thumbnails["500"] ||
-    data?.asset?.thumbnails["400x200"] ||
     TEXT_THUMBNAIL_PLACEHOLDER;
 
   const price: number = data?.asset?.price || null;

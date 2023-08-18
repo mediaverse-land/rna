@@ -52,7 +52,7 @@ export function MessagesPage() {
         if (!data.length) {
             return;
         }
-        await _storageService.set('notifs_length', data.length)
+        await _storageService.set('notifs_length', data.length.toString())
     }
 
     const getSessions = async () => {

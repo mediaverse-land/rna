@@ -66,7 +66,7 @@ export function AllPage({ searchParams }: Props) {
         setLoading(false);
     };
 
-    const formatInputData = (inputData) => {
+    const formatInputData = (inputData: any) => {
         const {videos, texts, audios, images} = inputData;
 
         const formattedVideos = addTypeToAsset(videos, 4);

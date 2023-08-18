@@ -54,7 +54,7 @@ export function ImagePage({ searchParams }: Props) {
         setLoading(false);
     };
     
-    const formatInputData = (inputData) => {
+    const formatInputData = (inputData: any) => {
         const { images} = inputData;
 
         const formattedImages = addTypeToAsset(images, 2)

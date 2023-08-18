@@ -88,7 +88,7 @@ export function CommentCard({ assetId }: Props) {
 
         const formattedToken = tokenStringResolver(token);
 
-        const body = {
+        const body: any = {
             "parent_id": null,
             "asset_id": assetId,
             "body": inputValue
