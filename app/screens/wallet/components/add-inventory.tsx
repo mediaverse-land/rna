@@ -1,14 +1,19 @@
-import { Box } from '../../../shared/components/box';
-import { Input } from '../../../shared/components/form';
-import { Text } from '../../../shared/components/text';
+import { TouchableOpacity } from 'react-native';
+import { Box } from '../../../components/box';
+import { Input } from '../../../components/form';
+import { Text } from '../../../components/text';
 import { PaddingContainer } from '../../../styles/grid';
 import { theme } from '../../../constaints/theme';
-import { Button } from '../../../shared/components/button';
+import { Button } from '../../../components/button';
 
-export function AddInventory() {
+type Props = {
+    closeAddInventoryAlertHandler: () => void;
+};
+
+export function AddInventory({ closeAddInventoryAlertHandler }: Props) {
     return (
         <PaddingContainer>
-            <Box paddingTop={16} height={400}>
+            <Box paddingTop={16}>
                 <Box
                     width="100%"
                     direction="row"
@@ -23,23 +28,28 @@ export function AddInventory() {
                     >
                         Add inventory
                     </Text>
-                    <Text
-                        color={theme.color.light.LIGHT_TEXT}
-                        fontWeight={400}
-                        fontSize={14}
-                        lineHeight={16}
+                    <TouchableOpacity
+                        onPress={closeAddInventoryAlertHandler}
+                        activeOpacity={1}
                     >
-                        Cancel
-                    </Text>
+                        <Text
+                            color={theme.color.light.LIGHT_TEXT}
+                            fontWeight={400}
+                            fontSize={14}
+                            lineHeight={16}
+                        >
+                            Cancel
+                        </Text>
+                    </TouchableOpacity>
                 </Box>
                 <Box marginTop={25}>
                     <Input placeholder="Insert amount..." labelText="Amount" />
                     <Button
-                        varient='dark'
-                        text='Pay'
+                        varient="dark"
+                        text="Pay"
                         marginTop={24}
                         borderRadius={16}
-                        size='lg'
+                        size="lg"
                     />
                 </Box>
             </Box>

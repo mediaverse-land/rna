@@ -1,18 +1,34 @@
-import { HorizontalSlider } from '../../../../shared/components/horizontal-slider';
-import { Title } from '../../../../shared/components/title';
+import { Title } from '../../../../components/title';
 import { PaddingContainer } from '../../../../styles/grid';
-import { soundsMockData } from './sound-mock-data';
-import { Box } from '../../../../shared/components/box';
+import { Box } from '../../../../components/box';
+import { RenderIf } from '../../../../components/render-if';
+import { IfNoItem } from '../../../../components/if-no-item';
+import { HorizontalSlider } from '../../../../components/horizontal-slider';
+import { Sound } from '../../../../types/sound';
 
-export function SoundsPageBestProducts() {
+type Props = {
+    isLoading: boolean;
+    data: Sound[];
+};
+
+export function SoundsPageBestProducts({ isLoading, data }: Props) {
     return (
-        <Box marginTop={49}>
+        <>
             <PaddingContainer>
-                <Title str="Best Podcasts" />
-                <Box marginTop={40}>
-                    <HorizontalSlider data={soundsMockData} />
+                <Box marginBottom={24} marginTop={34}>
+                    <Title str="Best in products" />
                 </Box>
             </PaddingContainer>
-        </Box>
+            <Box paddingLeft={24}>
+                <RenderIf condition={isLoading}>
+                    <IfNoItem dataLength={data.length}>
+                        <HorizontalSlider
+                            data={data}
+                            navigationScreenName="SingleImageScreen"
+                        />
+                    </IfNoItem>
+                </RenderIf>
+            </Box>
+        </>
     );
 }

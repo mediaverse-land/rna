@@ -1,15 +1,17 @@
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { ProfileScreenHead } from './components/head';
-import { Navigator } from './topbar-navigator';
-import { ScreenGradient } from '../../shared/components/screen-gradient';
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Navigator } from "./topbar-navigator";
+import { FocusedStatusBar } from "../../components/focused-statusbar";
+import { ScreenGradient } from "../../components/screen-gradient";
+import { ProfileScreenHead } from "./components/head";
 
-export function ProfileScreen() {
-    return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <ScreenGradient>
-                <ProfileScreenHead />
-                <Navigator />
-            </ScreenGradient>
-        </SafeAreaView>
-    );
+export function ProfileScreen(props: any) {
+  return (
+    <SafeAreaView style={{ flex: 1, width: "100%", marginTop: -30 }}>
+      <FocusedStatusBar />
+      <ScreenGradient>
+        <ProfileScreenHead />
+        <Navigator />
+      </ScreenGradient>
+    </SafeAreaView>
+  );
 }

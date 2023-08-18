@@ -1,11 +1,17 @@
 import { ViewStyle, Image } from 'react-native';
-import { Box } from '../../../shared/components/box';
+import { Box } from '../../../components/box';
 import { WALLET_SLIDER_BACKGROUND } from '../../../constaints/images';
-import { Text } from '../../../shared/components/text';
+import { Text } from '../../../components/text';
 import { ICON_PAYPAL_LARGE, ICON_SIMCARD } from '../../../constaints/icons';
 import { theme } from '../../../constaints/theme';
+import { useContext } from 'react';
+import { userContext } from '../../../context/user';
 
 export function CardSlider() {
+    const _userCtx = useContext(userContext);
+
+    const userData = _userCtx.getUser();
+
     const rotates = ['-15deg', '-7.5deg', '0deg', '7.5deg', '15deg'];
 
     return (
@@ -92,7 +98,7 @@ export function CardSlider() {
                                 lineHeight={24}
                                 color={theme.color.light.CARD_TITLE_TEXT}
                             >
-                                Ar Hosseini
+                                {userData?.username}
                             </Text>
                             <Text
                                 fontSize={16}

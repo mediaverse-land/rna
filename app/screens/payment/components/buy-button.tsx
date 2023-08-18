@@ -1,6 +1,6 @@
 import { TouchableOpacity } from 'react-native';
-import { Box } from '../../../shared/components/box';
-import { Text } from '../../../shared/components/text';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
 import { theme } from '../../../constaints/theme';
 
 type Props = {

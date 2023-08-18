@@ -1,19 +1,40 @@
 import { Image, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Flex } from '../../../styles/grid';
-import { Box } from '../../../shared/components/box';
-import { Text } from '../../../shared/components/text';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
 import { theme } from '../../../constaints/theme';
 import { ICON_ARROW_LEFT_SVG } from '../../../constaints/icons';
 import { useNavigation } from '@react-navigation/native';
 import { useRtl } from '../../../hooks/use-rtl';
-
-const URI =
-    'https://s3-alpha-sig.figma.com/img/8b38/0123/1b3bc56d8d3d28d35c9776e478125bae?Expires=1685923200&Signature=gWMAZUvjlSCOfKP4e6hFLjFgOSd-IECkM40ZQ4~YTNr~WUr6gqDibYMhqOmNiwcMBzE2uFfLq7NcF8WJTxrQi9M6WJmXFTvwxWtxRPtDA~pPSx48PXwbibPvThmZVX3O5SAv9szQetIMBGF9VgyQNJMT~wuxVRNDPSkQGTUn~DdeZwbVELADu~Sgz5LTC-IPr~5St8CpDpQvDxCYDOKjFw091uL~PJiFUIJ1smHYXIczAAAOcWEtgHi187J0mufQL5CW2kymK7~RrFarFPZbUtSToEX44Um3JqXE2mtFxhyToGki4DTo6hmgntK0ZaWVhuxGhlZvGd2YUpS0ld92Dw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4';
+import { useContext } from 'react';
+import { userContext } from '../../../context/user';
+import { User } from '../../../types/user';
+import { LoadingSpinner } from '../../../components/loader-spinner';
+import { PROFILE_IMAGE } from '../../../constaints/images';
 
 export function SettingsScreenHeader() {
     const { isRtl } = useRtl();
     const navigation = useNavigation();
+
+    const userCtx = useContext(userContext);
+
+    const user: User = userCtx.getUser();
+
+    const { username, email } = user;
+
+    if (!username && !email) {
+        return (
+            <Box
+                width="100%"
+                height={52}
+                alignItems="center"
+                justifyContent="center"
+            >
+                <LoadingSpinner color="red" />
+            </Box>
+        );
+    }
 
     const goBackHandler = () => {
         navigation.goBack();
@@ -50,7 +71,7 @@ export function SettingsScreenHeader() {
                         >
                             <Image
                                 source={{
-                                    uri: URI
+                                    uri: PROFILE_IMAGE
                                 }}
                                 style={{
                                     width: 77,
@@ -66,7 +87,7 @@ export function SettingsScreenHeader() {
                             fontSize={theme.numericFontSize.md}
                             lineHeight={theme.numericFontSize.md}
                         >
-                            Ma.nakhli
+                            {username}
                         </Text>
                         <Text
                             fontWeight={400}
@@ -75,7 +96,7 @@ export function SettingsScreenHeader() {
                             fontSize={theme.numericFontSize.sm}
                             lineHeight={theme.numericFontSize.sm}
                         >
-                            Manakhli@gmail.com
+                            {email}
                         </Text>
                     </Flex>
                 </Box>

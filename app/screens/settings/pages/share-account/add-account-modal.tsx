@@ -1,9 +1,9 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
-import { Box } from '../../../../shared/components/box';
-import { Text } from '../../../../shared/components/text';
+import { Box } from '../../../../components/box';
+import { Text } from '../../../../components/text';
 import { theme } from '../../../../constaints/theme';
-import { Input } from '../../../../shared/components/form';
+import { Input } from '../../../../components/form';
 
 type Props = {
     windowHeight: number;

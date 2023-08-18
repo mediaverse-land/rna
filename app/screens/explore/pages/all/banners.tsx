@@ -1,6 +1,6 @@
 import { Image, StyleSheet } from 'react-native';
 import { ImagesPageComponents } from './style';
-import { Flex } from '../../../../styles/grid';
+import { Flex, PaddingContainer } from '../../../../styles/grid';
 import {
     BANNER_ITEM_GRADIENT_IMAGE,
     BANNER_PODCAST_IMAGE,
@@ -53,14 +53,16 @@ export function AllPageBanners() {
     ));
 
     return (
-        <Flex
-            direction="row"
-            justify="space-between"
-            align="center"
-            height="170"
-        >
-            {renderBannerList}
-        </Flex>
+        <PaddingContainer>
+            <Flex
+                direction="row"
+                justify="space-between"
+                align="center"
+                height="170"
+            >
+                {renderBannerList}
+            </Flex>
+        </PaddingContainer>
     );
 }
 

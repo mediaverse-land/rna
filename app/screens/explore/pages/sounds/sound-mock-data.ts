@@ -4,7 +4,7 @@ import {
     PROFILE_TWO,
     SOUND_ITEM
 } from '../../../../constaints/images';
-import { HorizontailSlideType } from '../../../../shared/components/horizontal-slider';
+import { HorizontailSlideType } from '../../../../components/horizontal-slider';
 
 export const soundMockData = [
     {
@@ -32,20 +32,20 @@ export const soundsMockData: HorizontailSlideType[] = [
         username: 'Devon Lane',
         thumbnailPath: SOUND_ITEM,
         profileUri: PROFILE_THREE,
-        type: 'sound'
+        type: 3
     },
     {
         id: 2,
         title: 'Colorfull lady...',
         username: 'Ralph Edwards',
-        type: 'sound',
+        type: 3,
         thumbnailPath: SOUND_ITEM,
         profileUri: PROFILE_ONE
     },
     {
         id: 3,
         title: 'Portrate with...',
-        type: 'sound',
+        type: 3,
         username: 'Julia Rabert',
         thumbnailPath: SOUND_ITEM,
         profileUri: PROFILE_TWO
@@ -53,7 +53,7 @@ export const soundsMockData: HorizontailSlideType[] = [
     {
         id: 5,
         title: 'How to shoot like messi!',
-        type: 'sound',
+        type: 3,
         username: 'Toni suprano',
         thumbnailPath: SOUND_ITEM,
         profileUri: PROFILE_THREE

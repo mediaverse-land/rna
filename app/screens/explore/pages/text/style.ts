@@ -35,6 +35,8 @@ export const TextPageComponents = {
         line-height: ${theme.fontSize.md};
     `,
     SwiperItemContent: styled.Text`
+        width: 100%;
+        height: 179px;
         color: ${theme.color.light.TEXT};
         font-size: ${theme.fontSize.md};
         line-height: ${theme.fontSize.md};

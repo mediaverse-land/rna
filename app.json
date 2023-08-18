@@ -1,35 +1,52 @@
 {
-    "expo": {
-        "name": "mediaverse",
-        "slug": "mediaverse",
-        "version": "0.0.1",
-        "orientation": "portrait",
-        "icon": "./assets/mediaverse-icon.png",
-        "userInterfaceStyle": "light",
-        "splash": {
-            "image": "./assets/iphone-splash.png",
-            "resizeMode": "cover",
-            "backgroundColor": "#ffffff"
-        },
-        "assetBundlePatterns": ["**/*"],
-        "ios": {
-            "supportsTablet": true
-        },
-        "android": {
-            "package": "com.smartcity.mediaverse",
-            "adaptiveIcon": {
-                "foregroundImage": "./assets/mediaverse-icon.png",
-                "backgroundColor": "#ffffff"
-            }
-        },
-        "web": {
-            "favicon": "./assets/mediaverse-icon.png"
-        },
-        "plugins": ["expo-localization"],
-        "extra": {
-            "eas": {
-                "projectId": "a898fd87-c772-49c8-a07a-d509e5cd23ff"
-            }
+  "expo": {
+    "name": "Mediaverse",
+    "slug": "mediaverse",
+    "version": "0.0.01",
+    "orientation": "portrait",
+    "icon": "./assets/flat_icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/iphone-splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#090951"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/flat_icon.png",
+        "backgroundColor": "#030340"
+      },
+      "package": "com.emahdi1297.mediaverse"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
         }
-    }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos.",
+          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "2ecc9ab0-6195-4d80-97b7-5e15f2a89bbe"
+      }
+    },
+    "owner": "emahdi1297"
+  }
 }

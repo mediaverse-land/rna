@@ -1,6 +1,6 @@
 import { ScrollView } from 'react-native';
 import { stickyStyles } from '../../styles/sticky';
-import { ScreenGradient } from '../../shared/components/screen-gradient';
+import { ScreenGradient } from '../../components/screen-gradient';
 
 export function AppsPageTextScreen() {
     return (

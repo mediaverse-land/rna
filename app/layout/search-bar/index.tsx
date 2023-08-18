@@ -3,7 +3,7 @@ import { SearchBarComponents } from './style';
 import { ICON_SEARCH_SVG_PATH } from '../../constaints/icons';
 import { useNavigation } from '@react-navigation/native';
 import { useRtl } from '../../hooks/use-rtl';
-import { UseNavigationType } from '../../shared/types/use-navigation';
+import { UseNavigationType } from '../../types/use-navigation';
 import { theme } from '../../constaints/theme';
 
 const { SearchInput } = SearchBarComponents;

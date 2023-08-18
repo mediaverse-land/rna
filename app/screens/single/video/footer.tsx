@@ -1,5 +1,5 @@
 import { Image } from 'react-native';
-import { Box } from '../../../shared/components/box';
+import { Box } from '../../../components/box';
 import { SINGLE_VIDEO_FOOTER_GRAIDENT } from '../../../constaints/images';
 
 export function Footer() {

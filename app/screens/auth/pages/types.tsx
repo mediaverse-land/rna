@@ -10,4 +10,4 @@ export const SINGUP_WITH_PROVIDER = 'SINGUP_WITH_PROVIDER';
 export const SIGNUP_WITH_USERNAME = 'SIGNUP_WITH_USERNAME';
 export const FILL_DATA = 'FILL_DATA';
 export const INSERT_PHONE = 'INSERT_PHONE';
-export const SIGNIN = 'singin'
+export const SIGNIN = 'singin';

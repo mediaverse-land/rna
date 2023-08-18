@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { theme } from '../../../constaints/theme';
-import { Box } from '../../../shared/components/box';
-import { Text } from '../../../shared/components/text';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
 
 type Props = {
     description: string;
@@ -16,8 +16,7 @@ export const SingleItemDescription: FC<Props> = ({ description }) => {
                 lineHeight={theme.numericLineHeight.md}
                 fontWeight={400}
             >
-                {description}
-                <Text color={theme.color.light.LIGHT_TEXT}>more...</Text>
+                {description}{' '}
             </Text>
         </Box>
     );

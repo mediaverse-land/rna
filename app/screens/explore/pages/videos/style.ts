@@ -26,6 +26,7 @@ export const VideoPageComponents = {
         width: 100%;
         margin-top: 56px;
         flex: 1;
+        padding-right: 24px;
     `,
     VideoListItem: styled.View`
         width: 100%;
@@ -47,6 +48,8 @@ export const VideoPageComponents = {
     VideoListItemDescription: styled.Text`
         margin-top: 16px;
         padding: 0 8px;
+        width: 100%;
+        max-height: 32px;
         color: ${theme.color.light.TEXT};
         font-size: ${theme.fontSize.md};
         line-height: ${theme.lineHeight.md};

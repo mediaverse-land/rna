@@ -6,7 +6,7 @@ import {
     PROFILE_THREE,
     PROFILE_TWO
 } from '../../../../../constaints/images';
-import { HorizontailSlideType } from '../../../../../shared/components/horizontal-slider';
+import { HorizontailSlideType } from '../../../../../components/horizontal-slider';
 
 export const dailyRecommendedMockData: HorizontailSlideType[] = [
     {
@@ -15,7 +15,7 @@ export const dailyRecommendedMockData: HorizontailSlideType[] = [
         username: 'Robert junior',
         thumbnailPath: DAILY_RECOMMENDED_IMG_ONE,
         profileUri: PROFILE_ONE,
-        type: 'image'
+        type: 3
     },
     {
         id: 2,
@@ -23,7 +23,7 @@ export const dailyRecommendedMockData: HorizontailSlideType[] = [
         username: 'Ross',
         thumbnailPath: DAILY_RECOMMENDED_IMG_TWO,
         profileUri: PROFILE_TWO,
-        type: 'video'
+        type: 3
     },
     {
         id: 3,
@@ -31,6 +31,6 @@ export const dailyRecommendedMockData: HorizontailSlideType[] = [
         username: 'Rayan jones',
         thumbnailPath: DAILY_RECOMMENDED_IMG_THREE,
         profileUri: PROFILE_THREE,
-        type: 'sound'
+        type: 3
     }
 ];

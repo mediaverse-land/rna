@@ -1,4 +1,4 @@
-import { Box } from '../../../shared/components/box';
+import { Box } from '../../../components/box';
 import { PaddingContainer } from '../../../styles/grid';
 import { PROFILE_ONE } from '../../../constaints/images';
 import { SingleItemDescription } from '../components/description';
@@ -6,8 +6,6 @@ import { SingleItemUsernameAndDuration } from '../components/username-and-durati
 import { MetaDataType, SingleItemMetaData } from '../components/item-metadata';
 import { FileType, SingleItemFiles } from '../components/files';
 
-const description =
-    'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat. ';
 const username = 'Ralph Edwards';
 const duration = '8:15';
 
@@ -57,7 +55,15 @@ const videoFiles: FileType[] = [
     }
 ];
 
-export function SingleVideoContent() {
+type Props = {
+    description: string;
+    metaDataList: MetaDataType[],
+    username: string,
+    userProfile: string,
+    duration: number
+};
+
+export function SingleVideoContent({ description, metaDataList, username, userProfile, duration }: Props) {
     return (
         <PaddingContainer>
             <Box width="100%" marginTop={16}>
@@ -65,12 +71,11 @@ export function SingleVideoContent() {
                 <Box marginTop={16}>
                     <SingleItemUsernameAndDuration
                         username={username}
-                        profileUri={PROFILE_ONE}
+                        profileUri={userProfile}
                         duration={duration}
                     />
                 </Box>
-                <SingleItemMetaData data={videoData} />
-                <SingleItemFiles data={videoFiles} />
+                <SingleItemMetaData data={metaDataList} />
             </Box>
         </PaddingContainer>
     );

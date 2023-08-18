@@ -1,13 +1,14 @@
 import { FC } from 'react';
-import { Box } from '../../../shared/components/box';
-import { UserNameCard } from '../../../shared/components/username-card';
-import { Text } from '../../../shared/components/text';
+import { Box } from '../../../components/box';
+import { UserNameCard } from '../../../components/username-card';
+import { Text } from '../../../components/text';
 import { theme } from '../../../constaints/theme';
+import { formatTime } from '../../../utils/format-time';
 
 type Props = {
     username: string;
     profileUri: string;
-    duration: string;
+    duration: number;
 };
 
 export const SingleItemUsernameAndDuration: FC<Props> = ({
@@ -15,13 +16,14 @@ export const SingleItemUsernameAndDuration: FC<Props> = ({
     profileUri,
     duration
 }) => {
+    const durationTime = formatTime(duration)
+
     return (
         <Box
             width="100%"
             direction="row"
             alignItems="center"
             justifyContent="space-between"
-            // marginTop={16}
         >
             <UserNameCard
                 username={username}
@@ -41,7 +43,12 @@ export const SingleItemUsernameAndDuration: FC<Props> = ({
                 lineHeight={14}
                 paddingTop={5}
             >
-                {duration}
+                {duration ?
+                    <>
+                        {durationTime.minute}:{durationTime.second}
+                    </>
+                    : null
+                }
             </Text>
         </Box>
     );

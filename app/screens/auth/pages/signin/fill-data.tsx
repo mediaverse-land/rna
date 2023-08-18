@@ -1,13 +1,18 @@
-import { FC, useContext, useState } from 'react'
-import { TouchableOpacity, StyleSheet } from 'react-native';
-import { Box } from '../../../../shared/components/box';
-import { Input } from '../../../../shared/components/form';
-import { Text } from '../../../../shared/components/text';
-import { theme } from '../../../../constaints/theme';
+import { FC, useContext, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { SignupCompleteionBody } from './service';
+import { Box } from '../../../../components/box';
+import { Input } from '../../../../components/form';
+import { Text } from '../../../../components/text';
+import { theme } from '../../../../constaints/theme';
 import { tokenContext } from '../../../../context/token';
-import { LoadingSpinner } from '../../../../shared/components/loader-spinner';
+import { StorageService } from '../../../../services/storage.service';
+import { userContext } from '../../../../context/user';
+import { signupContext } from './context';
+import { Button } from '../../../../components/button';
+import {
+    SignupCompleteionBody,
+    signupCompeletionApiHandler
+} from './service';
 
 const fillDataForm = [
     {
@@ -17,7 +22,7 @@ const fillDataForm = [
         required: true,
         name: 'username',
         validators: {
-            required: 'This field is required',
+            required: 'This field is required'
         }
     },
     {
@@ -55,21 +60,37 @@ const fillDataForm = [
         name: 'last_name'
     }
 ];
+
 type Props = {
-    token: string;
-}
+    initial__token: string;
+};
 
-export const FillData: FC<Props> = () => {
-    // const navigation = useNavigation<UseNavigationType>();
+const _storageService = new StorageService();
 
-    const tokenCtx = useContext(tokenContext)
+export const FillData: FC<Props> = ({ initial__token }: Props) => {
+    const { getToken, getPhoneNumber } = useContext(signupContext);
 
-    const [isLoading, setIsLoading] = useState(false)
+    const tk = getToken();
 
-    const { handleSubmit, control, formState: { errors } } = useForm();
+    const phoneNumber = getPhoneNumber();
+
+    const {
+        handleSubmit,
+        control,
+        setError,
+        clearErrors,
+        formState: { errors }
+    } = useForm();
+
+    const tokenCtx = useContext(tokenContext);
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const userCtx = useContext(userContext);
 
     const onSubmit = async (data) => {
         setIsLoading(true);
+        clearErrors();
 
         const formattedData: Partial<SignupCompleteionBody> = {};
 
@@ -79,11 +100,62 @@ export const FillData: FC<Props> = () => {
             }
         }
 
-        // const { res, isSuccess, isError } = await signupCompeletionApiHandler(formattedData, token);
+        const newFormattedData = {
+            ...formattedData,
+            username: data.username.toLowerCase()
+        }
+
+        const token = getToken();
+
+        if (!token && !initial__token) {
+            return;
+        }
+
+        if (initial__token) {
+            await _storageService.set('user_data', initial__token);
+        }
+        if (token) {
+            await _storageService.set('user_data', token);
+        }
+
+        const { isError, isSuccess, res, errorRes } =
+            await signupCompeletionApiHandler(newFormattedData, initial__token || token);
+
+        if (errorRes) {
+            showErrors(errorRes);
+            setIsLoading(false);
+            return;
+        }
+
+        if (isError || !isSuccess) {
+            setIsLoading(false);
+            return;
+        }
+
+        await userCtx.setUser(res.data);
         setIsLoading(false);
 
-        tokenCtx.setToken("b9cf4aa3755763531498babf1dd18b212d28373491e74b9b8dac0873bd08033978d3135c1225cb3db8bc210fef457afce496fb2eee7a99b4a46cd3fec500fc12");
+        if (initial__token) {
+            await tokenCtx.setToken(initial__token);
+        }
+        if (token) {
+            await tokenCtx.setToken(token);
+        }
+    };
 
+    const showErrors = (errors) => {
+        const errorMessage: string = errors?.error;
+        if (errorMessage) {
+            if (
+                errorMessage === 'The username format is invalid.' ||
+                errorMessage === 'The username has already been taken.'
+            ) {
+                setError('username', {});
+            }
+            if (errorMessage.includes('password')) {
+                setError('password', {});
+            }
+        }
     };
 
     const renderForm = fillDataForm.map((f) => {
@@ -96,23 +168,24 @@ export const FillData: FC<Props> = () => {
                             placeholder={f.placeholder}
                             labelText={f.labelText}
                             onBlur={onBlur}
-                            onChangeText={value => {
-                                onChange(value || "")
+                            onChangeText={(value) => {
+                                onChange(value || '');
                             }}
                             value={value}
                             hasError={errors?.[f.name] ? true : false}
+
                         />
                     )}
                     name={f.name}
                     rules={f.validators}
                 />
             </Box>
-        )
-    })
+        );
+    });
 
     return (
         <Box flex={1} width="100%" alignItems="center">
-            <Box position="relative" width="100%" alignItems="center">
+            <Box position="relative" flex={1} width="100%" alignItems="center">
                 <Text
                     color={theme.color.light.WHITE}
                     lineHeight={20}
@@ -120,42 +193,24 @@ export const FillData: FC<Props> = () => {
                     fontWeight={600}
                     marginBottom={32}
                 >
-                    We send the code to +339012910407
+                    We send the code to +98{phoneNumber}
                 </Text>
-                <Box width='100%'>
-                    {renderForm}
-                </Box>
-                <TouchableOpacity
-                    activeOpacity={1}
-                    style={styles.fullWidth}
-                    onPress={handleSubmit(onSubmit)}
+                <Box width="100%">{renderForm}</Box>
+                <Box
+                    position="absolute"
+                    bottom={10}
+                    width="100%"
+                    alignItems="center"
                 >
-                    <Box
-                        width="100%"
-                        height={48}
-                        backgroundColor={theme.color.light.PRIMARY}
-                        borderRadius={32}
-                        alignItems="center"
-                        justifyContent="center"
-                        marginTop={24}
-                    >
-                        <Text
-                            color={theme.color.light.WHITE}
-                            fontWeight={600}
-                            lineHeight={16}
-                            fontSize={14}
-                        >
-                            {isLoading ? <LoadingSpinner color='red' /> : 'Save'}
-                        </Text>
-                    </Box>
-                </TouchableOpacity>
+                    <Button
+                        text="Save"
+                        varient="primary"
+                        onpressHandler={handleSubmit(onSubmit)}
+                        size="lg"
+                        isLoading={isLoading}
+                    />
+                </Box>
             </Box>
         </Box>
     );
-}
-
-const styles = StyleSheet.create({
-    fullWidth: {
-        width: '100%'
-    }
-});
+};

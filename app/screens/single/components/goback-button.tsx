@@ -6,14 +6,15 @@ import {
 } from '../../../constaints/icons';
 import { TouchableOpacity } from 'react-native';
 import { useRtl } from '../../../hooks/use-rtl';
-import { Box } from '../../../shared/components/box';
+import { Box } from '../../../components/box';
 import { windowSize } from '../../../utils/window-size';
-import { Text } from '../../../shared/components/text';
+import { Text } from '../../../components/text';
 import { theme } from '../../../constaints/theme';
 
 type Props = {
     goBackHandler: () => void;
     hasBackground?: boolean;
+    isOwner?: boolean;
 };
 const { BackButton } = SingleVideoPageComponents;
 
@@ -42,7 +43,11 @@ const menuList: { id: number; title: string }[] = [
     }
 ];
 
-export const GoBackButton: FC<Props> = ({ goBackHandler, hasBackground }) => {
+export const GoBackButton: FC<Props> = ({
+    goBackHandler,
+    hasBackground,
+    isOwner
+}) => {
     const { isRtl } = useRtl();
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -61,7 +66,7 @@ export const GoBackButton: FC<Props> = ({ goBackHandler, hasBackground }) => {
             onPress={goBackHandler}
             style={{
                 position: 'absolute',
-                top: 40,
+                top: 30,
                 left: 24,
                 zIndex: 10
             }}
@@ -94,7 +99,7 @@ export const GoBackButton: FC<Props> = ({ goBackHandler, hasBackground }) => {
                     id="menu"
                     width={120}
                     position="absolute"
-                    top={70}
+                    top={75}
                     right={24}
                     backgroundColor="rgba(78, 78, 97, 0.2)"
                     zIndex={100}
@@ -147,32 +152,38 @@ export const GoBackButton: FC<Props> = ({ goBackHandler, hasBackground }) => {
                 alignItems="center"
                 justifyContent="space-between"
                 position="absolute"
-                top={16}
+                top={20}
                 zIndex={24}
                 paddingRight={24}
                 paddingLeft={24}
             >
                 {renderGoBackButton}
-                <TouchableOpacity
-                    activeOpacity={1}
-                    onPress={openMenuHandler}>
-                    <Box
-                        backgroundColor={
-                            hasBackground ? 'rgba(14, 14, 18, 0.5)' : null
-                        }
-                        width={40}
-                        height={40}
-                        borderRadius={100}
-                        alignItems="center"
-                        justifyContent="center"
-                        position={hasBackground ? 'relative' : "absolute"}
-                        left={!hasBackground && Math.floor(windowWidth) - 48 - 40}
-                        zIndex={100}
-                        top={!hasBackground ? 8 : 0}
+                {/* {isOwner ? (
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        onPress={openMenuHandler}
                     >
-                        <ICON_MENU_ACTIVE width={18} height={5.2} />
-                    </Box>
-                </TouchableOpacity>
+                        <Box
+                            backgroundColor={
+                                hasBackground ? 'rgba(14, 14, 18, 0.5)' : null
+                            }
+                            width={40}
+                            height={40}
+                            borderRadius={100}
+                            alignItems="center"
+                            justifyContent="center"
+                            position={hasBackground ? 'relative' : 'absolute'}
+                            left={
+                                !hasBackground &&
+                                Math.floor(windowWidth) - 48 - 40
+                            }
+                            zIndex={100}
+                            top={!hasBackground ? 8 : 0}
+                        >
+                            <ICON_MENU_ACTIVE width={18} height={5.2} />
+                        </Box>
+                    </TouchableOpacity>
+                ) : null} */}
             </Box>
         </>
     );

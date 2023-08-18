@@ -1,64 +1,132 @@
-import { FlatList, StyleSheet } from 'react-native';
-import { ScreenGradient } from '../../shared/components/screen-gradient';
-import { AppItemType, appItemListMockData } from './mock-data/apps-mock-data';
-import { AppItem } from './components/apps-list';
-import { Box } from '../../shared/components/box';
-import { PaddingContainer } from '../../styles/grid';
+import { useEffect, useRef } from "react";
+import { useIsFocused } from "@react-navigation/native";
+import { FlatList, StyleSheet } from "react-native";
+import { ScreenGradient } from "../../components/screen-gradient";
+import { AppItemType, appItemListMockData } from "./mock-data/apps-mock-data";
+import { AppItem } from "./components/apps-list";
+import { Box } from "../../components/box";
+import { PaddingContainer } from "../../styles/grid";
+import { StorageService } from "../../services/storage.service";
+import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
+import { HAS_USER_SEEN_APPS_TOUR } from "../../constaints/consts";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store";
+import {
+  activeDisableOnIntractions,
+  deActivrDisableOnIntractions,
+} from "../../slices/tour.slice";
+
+const TOUR_GUIDE =
+  "You are the manager of a social TV and this is your TV channel, you have your conductor, playout, control room, etc. and this section is right here";
+
+const _storageService = new StorageService();
 
 export function AppsPageAllScreen() {
-    const renderItem = ({ item }: { item: AppItemType }) => {
-        return (
-            <PaddingContainer>
-                <Box width={'100%'} key={item.id}>
-                    <AppItem
-                        title={item.title}
-                        category={item.category}
-                        imagePath={item.imagePath}
-                    />
-                </Box>
-            </PaddingContainer>
-        );
-    };
+  const { DISABLE_INTRACTION } = useSelector(
+    (state: RootState) => state.tourSlice
+  );
 
-    const keyExtractor = (item: AppItemType) => item.id.toString();
+  const dispatch = useDispatch<AppDispatch>();
+  // useEffect(() => {}, [])
+  const isFocused = useIsFocused();
+
+  const firstAppItemRef = useRef();
+
+  /**
+   * Checks if user has seen the tour before or not,
+   * if has seen, return true else false
+   * @returns {boolean}
+   */
+  const hasUserSeenTour = async () => {
+    const hasUserSeen = await _storageService.get(HAS_USER_SEEN_APPS_TOUR);
+    const res = hasUserSeen ? true : false;
+    if (res) {
+      dispatch(deActivrDisableOnIntractions());
+    }
+    return res;
+  };
+
+  const setUserSeenTour = async () => {
+    await _storageService.set(HAS_USER_SEEN_APPS_TOUR, HAS_USER_SEEN_APPS_TOUR);
+  };
+
+  const setupTour = async () => {
+    const hasSeen = await hasUserSeenTour();
+    if (hasSeen) {
+      return;
+    }
+
+    if (firstAppItemRef?.current) {
+      setTimeout(() => {
+        const composer = new CoachmarkComposer([firstAppItemRef]);
+        composer.show().then(async () => {
+          await setUserSeenTour();
+          dispatch(deActivrDisableOnIntractions());
+        });
+      }, 3000);
+    }
+  };
+
+  // useEffect(() => {
+  // }, []);
+
+  useEffect(() => {
+    if (isFocused) {
+      dispatch(activeDisableOnIntractions());
+      setupTour();
+    }
+  }, [firstAppItemRef, isFocused]);
+
+  const renderItem = ({
+    item,
+    index,
+  }: {
+    item: AppItemType;
+    index: number;
+  }) => {
+    const showTour = index === 0 ? true : false;
 
     return (
-        <ScreenGradient>
-            <Box width="100%">
-                <FlatList
-                    contentContainerStyle={styles.list}
-                    data={appItemListMockData}
-                    renderItem={renderItem}
-                    keyExtractor={keyExtractor}
-                />
-            </Box>
-            {/* <ScrollView
-                style={{
-                    flex: 1,
-                    paddingTop: 192,
-                    width: '100%',
-                }}
-
-            >
-                <PaddingContainer>
-                    {appItemListMockData.map((item: AppItemType) => (
-                        <Box width={'100%'} key={item.id}>
-                            <AppItem
-                                title={item.title}
-                                category={item.category}
-                                imagePath={item.imagePath}
-                            />
-                        </Box>
-                    ))}
-                </PaddingContainer>
-            </ScrollView> */}
-        </ScreenGradient>
+      <CoachmarkWrapper
+        allowBackgroundInteractions={false}
+        ref={showTour ? firstAppItemRef : null}
+        message={TOUR_GUIDE}
+      >
+        <AppItem
+          title={item.title}
+          category={item.category}
+          isDisable={item.isDisable}
+          imagePath={item.imagePath}
+        />
+      </CoachmarkWrapper>
     );
+  };
+
+  const keyExtractor = (item: AppItemType) => item.id.toString();
+
+  return (
+    <>
+      <ScreenGradient>
+        <PaddingContainer>
+          <Box width="100%">
+            <FlatList
+              contentContainerStyle={styles.list}
+              data={appItemListMockData}
+              renderItem={renderItem}
+              keyExtractor={keyExtractor}
+            />
+          </Box>
+        </PaddingContainer>
+      </ScreenGradient>
+    </>
+  );
 }
 
+const CoachmarkWrapper: any = Coachmark;
+
 const styles = StyleSheet.create({
-    list: {
-        paddingTop: 192,
-        paddingBottom: 100
-    }
+  list: {
+    paddingTop: 40,
+    paddingBottom: 100,
+  },
 });

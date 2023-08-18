@@ -1,10 +1,5 @@
 import { useState } from 'react';
-import {
-    ScrollView,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
-    View
-} from 'react-native';
+import { TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ImagesPageComponents } from '../explore/pages/all/style';
 import { Flex } from '../../styles/grid';
@@ -18,10 +13,15 @@ import { useNavigation } from '@react-navigation/native';
 import { windowSize } from '../../utils/window-size';
 import { useRtl } from '../../hooks/use-rtl';
 import { theme } from '../../constaints/theme';
+import { SearchParam } from '.';
+
+type Props = {
+    setSearch: (param: SearchParam) => void;
+};
 
 const { width, height } = windowSize();
 
-const { FixedStyles, ContainerStyles } = ImagesPageComponents;
+const { ContainerStyles } = ImagesPageComponents;
 const {
     SearchBoxWrapper,
     SearchInput,
@@ -31,10 +31,32 @@ const {
     DropDown
 } = SearchBoxComponents;
 
-export function SearchWindow() {
+const dropDownList: {
+    id: number;
+    title: 'Plan' | 'Tag';
+}[] = [
+    {
+        id: 1,
+        title: 'Plan'
+    },
+    {
+        id: 2,
+        title: 'Tag'
+    }
+];
+
+export function SearchWindow({ setSearch }: Props) {
     const { isRtl } = useRtl();
 
     const [showTagDropDown, setShowTagDropDown] = useState(false);
+    const [selectedItem, setSelectedItem] = useState<'Plan' | 'Tag'>('Plan');
+
+    const [searchParams, setSearchParams] = useState<SearchParam>({
+        type: null,
+        plan: null,
+        name: null,
+        tag: null
+    });
 
     const navigation = useNavigation();
 
@@ -42,7 +64,10 @@ export function SearchWindow() {
         setShowTagDropDown(true);
     };
 
-    const hideTagDropDownHandler = () => {
+    const hideTagDropDownHandler = (item?: 'Plan' | 'Tag') => {
+        if (item) {
+            setSelectedItem(item);
+        }
         setShowTagDropDown(false);
     };
 
@@ -50,8 +75,24 @@ export function SearchWindow() {
         navigation.goBack();
     };
 
+    const submitHandler = () => {
+        setSearch(searchParams);
+    };
+
+    const setNameToSearchHandler = (name: string) => {
+        setSearchParams({ ...searchParams, name: name });
+    };
+
+    const setPlanHandler = (plan: string) => {
+        setSearchParams({ ...searchParams, plan });
+    };
+
+    const setTagHandler = (tag: string) => {
+        setSearchParams({ ...searchParams, tag });
+    };
+
     return (
-        <TouchableWithoutFeedback onPress={hideTagDropDownHandler}>
+        <TouchableWithoutFeedback onPress={() => hideTagDropDownHandler(null)}>
             <View
                 style={{
                     position: 'absolute',
@@ -118,6 +159,8 @@ export function SearchWindow() {
                                 placeholderTextColor={
                                     theme.color.light.INPUT_PLACEHOLDER
                                 }
+                                onSubmitEditing={submitHandler}
+                                onChangeText={setNameToSearchHandler}
                                 textAlign={isRtl ? 'right' : 'left'}
                             />
                         </View>
@@ -141,28 +184,27 @@ export function SearchWindow() {
                                     onPress={showTagDropDownHandler}
                                 >
                                     <SearchTagDropDownTitle>
-                                        Tag:
+                                        {selectedItem}:
                                     </SearchTagDropDownTitle>
                                 </TouchableOpacity>
                                 {showTagDropDown === true ? (
                                     <DropDown>
-                                        <TouchableOpacity
-                                            activeOpacity={1}
-                                            style={{ marginBottom: 16 }}
-                                            onPress={hideTagDropDownHandler}
-                                        >
-                                            <SearchTagDropDownTitle>
-                                                Tag
-                                            </SearchTagDropDownTitle>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity
-                                            activeOpacity={1}
-                                            onPress={hideTagDropDownHandler}
-                                        >
-                                            <SearchTagDropDownTitle>
-                                                Plan
-                                            </SearchTagDropDownTitle>
-                                        </TouchableOpacity>
+                                        {dropDownList.map((l) => (
+                                            <TouchableOpacity
+                                                key={l.id}
+                                                activeOpacity={1}
+                                                style={{ marginBottom: 16 }}
+                                                onPress={() =>
+                                                    hideTagDropDownHandler(
+                                                        l.title
+                                                    )
+                                                }
+                                            >
+                                                <SearchTagDropDownTitle>
+                                                    {l.title}
+                                                </SearchTagDropDownTitle>
+                                            </TouchableOpacity>
+                                        ))}
                                     </DropDown>
                                 ) : null}
                             </SearchTagDropDown>
@@ -172,25 +214,27 @@ export function SearchWindow() {
                                 }}
                             >
                                 <SearchInput
-                                    placeholder="Search in tags"
+                                    placeholder={`Search in ${selectedItem.toLocaleLowerCase()}s`}
                                     placeholderTextColor={
                                         theme.color.light.INPUT_PLACEHOLDER
                                     }
                                     style={{ marginTop: 0 }}
                                     textAlign={isRtl ? 'right' : 'left'}
+                                    onChangeText={(text) => {
+                                        selectedItem === 'Plan'
+                                            ? setPlanHandler(text)
+                                            : setTagHandler(text);
+                                    }}
+                                    defaultValue={
+                                        selectedItem === 'Plan'
+                                            ? searchParams.plan
+                                            : searchParams.tag
+                                    }
+                                    onSubmitEditing={submitHandler}
                                 />
                             </View>
                         </Flex>
                     </TagSearchWrapper>
-                    <ScrollView
-                        style={[
-                            FixedStyles,
-                            {
-                                backgroundColor: 'transparent',
-                                paddingTop: 196
-                            }
-                        ]}
-                    ></ScrollView>
                 </LinearGradient>
             </View>
         </TouchableWithoutFeedback>

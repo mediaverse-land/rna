@@ -1,7 +1,7 @@
 import { theme } from '../../../constaints/theme';
 import { useRtl } from '../../../hooks/use-rtl';
-import { Box } from '../../../shared/components/box';
-import { Text } from '../../../shared/components/text';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
 import { SingleVideoPageComponents } from '../style';
 
 export type MetaDataType = {

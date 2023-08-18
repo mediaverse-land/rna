@@ -7,8 +7,8 @@ import { VideosPage } from './pages/videos';
 import { SoundsPage } from './pages/sounds';
 import { TextsPage } from './pages/text';
 import { AllPage } from './pages/all';
-import TopTabBar from '../../shared/components/top-tab-bar';
-import { Box } from '../../shared/components/box';
+import TopTabBar from '../../components/top-tab-bar';
+import { Box } from '../../components/box';
 
 type RoutesType = {
     AllPage: undefined;

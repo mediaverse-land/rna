@@ -1,7 +1,7 @@
 import { Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { HeaderStyles } from './style';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigationType } from '../../shared/types/use-navigation';
+import { UseNavigationType } from '../../types/use-navigation';
 
 export function Header() {
     const navigation = useNavigation<UseNavigationType>();

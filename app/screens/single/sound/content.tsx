@@ -1,10 +1,7 @@
 import { PaddingContainer } from '../../../styles/grid';
-import { Box } from '../../../shared/components/box';
+import { Box } from '../../../components/box';
 import { SingleItemDescription } from '../components/description';
 import { MetaDataType, SingleItemMetaData } from '../components/item-metadata';
-
-const description =
-    'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat';
 
 const soundData: MetaDataType[] = [
     {
@@ -19,12 +16,17 @@ const soundData: MetaDataType[] = [
     }
 ];
 
-export const SingleSoundContent = () => {
+type Props = {
+    description: string;
+    metaDataList: MetaDataType[]
+}
+
+export const SingleSoundContent = ({ description, metaDataList }: Props) => {
     return (
         <PaddingContainer>
             <Box position="relative" zIndex={20} width="100%" marginTop={32}>
                 <SingleItemDescription description={description} />
-                <SingleItemMetaData data={soundData} />
+                <SingleItemMetaData data={metaDataList} />
             </Box>
         </PaddingContainer>
     );

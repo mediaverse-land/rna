@@ -1,120 +1,172 @@
-import { Image } from 'react-native';
-import { Box } from '../../../shared/components/box';
-import { Text } from '../../../shared/components/text';
-import { GoBackButton } from '../components/goback-button';
-import { SingleItemUsernameAndDuration } from '../components/username-and-duration';
-import { ICON_SOUND_WHITE } from '../../../constaints/icons';
+import { Image, TouchableOpacity } from "react-native";
+import { Box } from "../../../components/box";
+import { Text } from "../../../components/text";
+import { GoBackButton } from "../components/goback-button";
+import { SingleItemUsernameAndDuration } from "../components/username-and-duration";
 import {
-    PROFILE_ONE,
-    SINGLE_SOUND_COVER_IMAGE_GRADIENT,
-    SINGLE_VIDEO_COVER_IMAGE_GRADIENT
-} from '../../../constaints/images';
-import { theme } from '../../../constaints/theme';
+  ICON_PLAY_SVG,
+  ICON_SOUND_WHITE,
+  ICON_VIDEO_PAUSE,
+  ICON_VIDEO_PLAY,
+} from "../../../constaints/icons";
+import {
+  AUDIO_THUMBNAIL_PLACEHOLDER,
+  PROFILE_ONE,
+  SINGLE_SOUND_COVER_IMAGE_GRADIENT,
+  SINGLE_VIDEO_COVER_IMAGE_GRADIENT,
+} from "../../../constaints/images";
+import { theme } from "../../../constaints/theme";
+import { useState } from "react";
 
 type Props = {
-    goBackHandler: () => void;
+  goBackHandler: () => void;
+  thumnailImageUri: string;
+  contentName: string;
+  isOwner: boolean;
+  isOwnerOrSubscriber: boolean;
+  playSoundHandler: () => void;
+  stopSoundHandler: () => void;
+  openReportModalHandler: () => void;
+  username: string;
+  userProfileUri: string;
 };
 
 const thumbnailHeight = 332;
-const username = 'Ralph Edwards';
-const duration = '8:15';
-const soundThumbnailCoverPath =
-    'https://s3-alpha-sig.figma.com/img/10e1/c4cf/e9985984e59b0b6150ea62faf736493a?Expires=1685923200&Signature=WHRaNiS~OHdfQMza1lg941xYbM9rsnAn5kqV9CaFzdqNQ9d~DpWQza2gIQO-ank3oNoULIEI5Gr8FjBu7X2Pq~vF~4NcC44MF2ESnlXgsBtCwCFeKTkYmfyEHUWdZ5u98-D7qtUPTdSZCZqXJbLFSrIunJkCNbp9km7l7sDRiIlZL02YdXz5MIl59RDcvxENXqy-1mPI7y9QcZg9AmgWeeGLMiNZlRaDIT-yoFSnkHDrNcTkxbXUy2RDajvxrcLoJ~G-CLaXXvfX3Uyc22gUFT-T773wJsaL70N3Ug~rwkB1THK0YNQu5F1cCX~7ykaVU98d2RPJxrqW66r-1GlxaA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4';
 
-export function SingleSoundHeader({ goBackHandler }: Props) {
-    const thumbnailHeaderGradient = (
-        <Image
-            source={{
-                uri: SINGLE_SOUND_COVER_IMAGE_GRADIENT
-            }}
-            style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                zIndex: 2,
-                height: thumbnailHeight,
-                borderBottomLeftRadius: 16,
-                borderBottomRightRadius: 16
-            }}
+export function SingleSoundHeader({
+  goBackHandler,
+  isOwnerOrSubscriber,
+  thumnailImageUri,
+  contentName,
+  isOwner = false,
+  playSoundHandler,
+  stopSoundHandler,
+  username = "",
+  userProfileUri = PROFILE_ONE,
+  openReportModalHandler,
+}: Props) {
+  // const [isPlaying, setIsPlaying] = useState(false);
+
+  // const _playSoundHandler = () => {
+  //     playSoundHandler()
+  //     setIsPlaying(true);
+  // }
+
+  // const _pauseSoundHandler = () => {
+  //     stopSoundHandler()
+  //     setIsPlaying(false);
+  // }
+
+  const thumbnailHeaderGradient = (
+    <Image
+      source={{
+        uri: SINGLE_SOUND_COVER_IMAGE_GRADIENT,
+      }}
+      style={{
+        position: "absolute",
+        top: -30,
+        left: 0,
+        width: "100%",
+        zIndex: 2,
+        height: thumbnailHeight+30,
+        borderBottomLeftRadius: 16,
+        borderBottomRightRadius: 16,
+      }}
+      resizeMode="stretch"
+    />
+  );
+
+  const thumbnailCoverGradient = (
+    <Image
+      source={{
+        uri: SINGLE_VIDEO_COVER_IMAGE_GRADIENT,
+      }}
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: 198,
+        height: 198,
+        zIndex: 2,
+        borderBottomLeftRadius: 16,
+        borderBottomRightRadius: 16,
+        borderRadius: 16,
+      }}
+    />
+  );
+
+  return (
+    <Box position="relative" zIndex={20}>
+      <GoBackButton goBackHandler={goBackHandler} />
+      <Box width="100%" height={thumbnailHeight}>
+        <GoBackButton
+          goBackHandler={goBackHandler}
+          hasBackground={false}
+          isOwner={isOwner}
         />
-    );
-
-    const thumbnailCoverGradient = (
-        <Image
-            source={{
-                uri: SINGLE_VIDEO_COVER_IMAGE_GRADIENT
-            }}
-            style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
+        <Box
+          width={"100%"}
+          height={"100%"}
+          position="relative"
+          zIndex={11}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box>
+            <Image
+              source={{ uri: thumnailImageUri || AUDIO_THUMBNAIL_PLACEHOLDER }}
+              style={{
                 width: 198,
                 height: 198,
-                zIndex: 2,
-                borderBottomLeftRadius: 16,
-                borderBottomRightRadius: 16
-            }}
-        />
-    );
-
-    return (
-        <Box position="relative" zIndex={20}>
-            <GoBackButton goBackHandler={goBackHandler} />
-            <Box width="100%" height={thumbnailHeight}>
-                <GoBackButton
-                    goBackHandler={goBackHandler}
-                    hasBackground={false}
-                />
-                <Box
-                    width={'100%'}
-                    height={'100%'}
-                    position="relative"
-                    zIndex={11}
-                    alignItems="center"
-                    justifyContent="center"
-                >
-                    <Box>
-                        <Image
-                            source={{ uri: soundThumbnailCoverPath }}
-                            style={{
-                                width: 198,
-                                height: 198,
-                                borderRadius: 16
-                            }}
-                        />
-                        <ICON_SOUND_WHITE
-                            style={{
-                                width: 20,
-                                height: 17.99,
-                                position: 'absolute',
-                                zIndex: 10,
-                                left: 24,
-                                bottom: 24
-                            }}
-                        />
-                        {thumbnailCoverGradient}
-                    </Box>
-                    {/* title */}
-                    <Text
-                        color={theme.color.light.WHITE}
-                        fontSize={20}
-                        lineHeight={20}
-                        fontWeight={600}
-                        marginTop={24}
-                    >
-                        Tiger love is beautiful
-                    </Text>
-                    <Box width={198} marginTop={16}>
-                        <SingleItemUsernameAndDuration
-                            username={username}
-                            duration={duration}
-                            profileUri={PROFILE_ONE}
-                        />
-                    </Box>
-                </Box>
-                {thumbnailHeaderGradient}
+                borderRadius: 16,
+              }}
+            />
+            <ICON_SOUND_WHITE
+              style={{
+                width: 20,
+                height: 17.99,
+                position: "absolute",
+                zIndex: 10,
+                left: 24,
+                bottom: 24,
+                borderRadius: 16,
+              }}
+            />
+            {thumbnailCoverGradient}
+          </Box>
+          {/* title */}
+          <Text
+            color={theme.color.light.WHITE}
+            fontSize={20}
+            lineHeight={20}
+            fontWeight={600}
+            marginTop={24}
+          >
+            {contentName}
+          </Text>
+          <Box
+            width={198}
+            marginTop={16}
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <SingleItemUsernameAndDuration
+              username={username}
+              duration={null}
+              profileUri={userProfileUri}
+            />
+            <Box width={50}>
+              <TouchableOpacity activeOpacity={1} onPress={openReportModalHandler}>
+                <Text color={"#666680"} fontSize={14} fontWeight={400}>
+                  Report
+                </Text>
+              </TouchableOpacity>
             </Box>
+          </Box>
         </Box>
-    );
+        {thumbnailHeaderGradient}
+      </Box>
+    </Box>
+  );
 }

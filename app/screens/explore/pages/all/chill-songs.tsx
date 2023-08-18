@@ -1,18 +1,31 @@
+import { FC } from 'react';
 import { ImagesPageComponents } from './style';
-import { Title } from '../../../../shared/components/title';
-import { HorizontalSlider } from '../../../../shared/components/horizontal-slider';
-import { dailyRecommendedMockData } from './mock-data/daily-recommended';
-import { Box } from '../../../../shared/components/box';
+import { Title } from '../../../../components/title';
+import { HorizontalSlider } from '../../../../components/horizontal-slider';
+import { Asset } from '../../../../types/asset';
+import { RenderIf } from '../../../../components/render-if';
+import { IfNoItem } from '../../../../components/if-no-item';
+import { CHILL_SONGS } from '../../../../constaints/consts';
+import { Box } from '../../../../components/box';
+
+type Props = {
+    isLoading: boolean;
+    data: Asset[];
+};
 
 const { DailyRecomended } = ImagesPageComponents;
 
-export function AllPageChillSongs() {
+export const AllPageChillSongs: FC<Props> = ({ isLoading, data }) => {
     return (
         <DailyRecomended>
-            <Title str="Chill songs" />
-            <Box marginTop={24}>
-                <HorizontalSlider data={dailyRecommendedMockData} />
+            <Box marginBottom={24}>
+                <Title str={CHILL_SONGS} />
             </Box>
+            <RenderIf condition={isLoading}>
+                <IfNoItem dataLength={data.length}>
+                    <HorizontalSlider data={data} />
+                </IfNoItem>
+            </RenderIf>
         </DailyRecomended>
     );
-}
+};

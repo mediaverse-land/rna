@@ -6,6 +6,7 @@ import { SignInsPage } from './pages/account/singins';
 import { SessionsPage } from './pages/account/seassions';
 import { MessagesPage } from './pages/messages';
 import { ShareEccountPage } from './pages/share-account';
+import { MessageDetail } from './pages/message-detail';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,12 @@ const routes = [
         title: 'Massage',
         component: MessagesPage,
         name: 'massage'
+    },
+    {
+        id: 12,
+        title: 'MassageDetail',
+        component: MessageDetail,
+        name: 'MassageDetail',
     },
     {
         id: 3,
@@ -74,19 +81,21 @@ const fadeTransition = ({ current }: any) => ({
 
 export function SettingsStack() {
     return (
-        <Stack.Navigator
-            screenOptions={{
-                headerShown: false,
-                cardStyleInterpolator: fadeTransition
-            }}
-        >
-            {routes.map((route) => (
-                <Stack.Screen
-                    key={route.id}
-                    name={route.name}
-                    component={route.component}
-                />
-            ))}
-        </Stack.Navigator>
+        <>
+            <Stack.Navigator
+                screenOptions={{
+                    headerShown: false,
+                    cardStyleInterpolator: fadeTransition
+                }}
+            >
+                {routes.map((route) => (
+                    <Stack.Screen
+                        key={route.id}
+                        name={route.name}
+                        component={route.component}
+                    />
+                ))}
+            </Stack.Navigator>
+        </>
     );
 }

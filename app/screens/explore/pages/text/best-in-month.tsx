@@ -1,56 +1,29 @@
-import { FlatList } from 'react-native';
-import { Title } from '../../../../shared/components/title';
-import { TEXT_SLIDER_ITEM_GRADIENT } from '../../../../constaints/images';
-import { UserNameCard } from '../../../../shared/components/username-card';
-import { ImagesPageComponents } from '../all/style';
-import { TextItem, topTenTextsMockData } from '../all/mock-data/top-ten-texts';
-import { Box } from '../../../../shared/components/box';
-import { theme } from '../../../../constaints/theme';
+import { useNavigation } from '@react-navigation/native'
+import { Title } from '../../../../components/title';
+import { PROFILE_TWO, TEXT_SLIDER_ITEM_GRADIENT } from '../../../../constaints/images';
+import { UserNameCard } from '../../../../components/username-card';
+import { Box } from '../../../../components/box';
+import { Text } from '../../../../types/text';
+import { TextSlider } from '../../../../components/text-slider';
+import { UseNavigationType } from '../../../../types/use-navigation';
 
-const {
-    TextSliderWrapper,
-    TextSlide,
-    TextSlideBackgroundGradient,
-    TextSlideBody,
-    TextSlideTitle,
-    TextSlideContentText
-} = ImagesPageComponents;
 
-export function ImagePageBestInMonth() {
-    const renderItem = ({ item }: { item: TextItem }) => {
-        return (
-            <TextSlide>
-                <TextSlideBackgroundGradient
-                    source={{ uri: TEXT_SLIDER_ITEM_GRADIENT }}
-                />
-                <TextSlideBody activeOpacity={1}>
-                    <TextSlideTitle>{item.title}</TextSlideTitle>
-                    <TextSlideContentText>{item.content}</TextSlideContentText>
-                    <Box marginTop={16}>
-                        <UserNameCard
-                            username={item.username}
-                            profileUri={item.profileUri}
-                            usernameStyles={{
-                                color: theme.color.light.TEXT,
-                                marginLeft: 8
-                            }}
-                        />
-                    </Box>
-                </TextSlideBody>
-            </TextSlide>
-        );
-    };
+type Props = {
+    data: Text[]
+}
+
+export function SoundsPageBestInMonth({ data }: Props) {
+
+    const navigation = useNavigation<UseNavigationType>()
 
     return (
         <Box flex={1} paddingLeft={24}>
             <Title str="Best in month" />
-            <TextSliderWrapper>
-                <FlatList
-                    horizontal
-                    data={topTenTextsMockData}
-                    renderItem={renderItem}
-                />
-            </TextSliderWrapper>
+            <TextSlider
+                data={data}
+                isLoading={false}
+                navigation={navigation}
+            />
         </Box>
     );
 }

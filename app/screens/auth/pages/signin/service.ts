@@ -32,8 +32,20 @@ export type SignupCompleteionBody = {
 
 export async function signupCompeletionApiHandler(body: object, token: string) {
     const config = {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}`,
+        "X-App": "_ReactNative",
+    }
     };
 
-    return await api.post('auth/sign-up-completion', body, config);
+    return await api.post('/auth/sign-up-completion', body, config);
+}
+
+export async function googleAuthApiHandler(token: string) {
+    const url = '/auth/google';
+
+    const body = {
+        id_token: token
+    };
+
+    return await api.post(url, body);
 }

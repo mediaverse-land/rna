@@ -1,15 +1,22 @@
 import { useRef, useState } from 'react';
-import { FlatList, Image, View, TouchableOpacity } from 'react-native';
+import {
+    FlatList,
+    StatusBar,
+    Image,
+    View,
+    TouchableOpacity
+} from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { SettingsScreenComponents } from '../../style';
 import { windowSize } from '../../../../utils/window-size';
-import { Box } from '../../../../shared/components/box';
+import { Box } from '../../../../components/box';
 import { PaddingContainer } from '../../../../styles/grid';
 import { SettingsScreenTitle } from '../../components/title';
-import { Text } from '../../../../shared/components/text';
+import { Text } from '../../../../components/text';
 import { theme } from '../../../../constaints/theme';
-import { ScreenGradient } from '../../../../shared/components/screen-gradient';
+import { ScreenGradient } from '../../../../components/screen-gradient';
 import { AddAccountModal } from './add-account-modal';
 import {
     ICON_ADD,
@@ -20,7 +27,7 @@ import {
     ADD_ACCOUNT_BUTTON_GRADIENT,
     SIGNINS_LIST_ITEM_GRADIET
 } from '../../../../constaints/images';
-import { ConfirmAlert } from '../../../../shared/components/confirm-alert';
+import { ConfirmAlert } from '../../../../components/confirm-alert';
 
 type AccountType = {
     id: number;
@@ -137,9 +144,17 @@ export function ShareEccountPage() {
         );
     };
 
+    const isFocused = useIsFocused();
+
     return (
         <>
             <SafeAreaView style={{ flex: 1 }}>
+                {isFocused ? (
+                    <StatusBar
+                        backgroundColor={'#030340'}
+                        barStyle="light-content"
+                    />
+                ) : null}
                 <ScreenGradient>
                     <Box width="100%">
                         <FlatList

@@ -1,9 +1,9 @@
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigationType } from '../../../../shared/types/use-navigation';
-import { Box } from '../../../../shared/components/box';
-import { Text } from '../../../../shared/components/text';
-import { Input } from '../../../../shared/components/form';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { Box } from '../../../../components/box';
+import { Text } from '../../../../components/text';
+import { Input } from '../../../../components/form';
 import { theme } from '../../../../constaints/theme';
 
 export const UserPass = () => {
@@ -50,8 +50,8 @@ export const UserPass = () => {
                         fontWeight={600}
                         marginBottom={24}
                     >
-                        DOnt have an account?
-                        <Text color={theme.color.light.PRIMARY}> Signup</Text>
+                        Dont have an account?
+                        <Text color={theme.color.light.PRIMARY}>Signup</Text>
                     </Text>
                     <TouchableOpacity
                         activeOpacity={1}

@@ -1,22 +1,24 @@
 import { TouchableOpacity } from 'react-native';
-import { Box } from '../../../shared/components/box';
-import { Text } from '../../../shared/components/text';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
 
 type Props = {
     backgroundColor: string;
     textColor: string;
     icon: any;
     text: string;
+    onpress: any
 };
 
 export function AuthProviderButton({
     backgroundColor,
     textColor,
     icon,
-    text
+    text,
+    onpress
 }: Props) {
     return (
-        <TouchableOpacity activeOpacity={1}>
+        <TouchableOpacity onPress={onpress} activeOpacity={1}>
             <Box
                 width="100%"
                 borderRadius={32}

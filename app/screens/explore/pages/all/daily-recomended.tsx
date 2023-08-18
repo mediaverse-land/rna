@@ -1,36 +1,31 @@
+import { FC } from 'react';
 import { ImagesPageComponents } from './style';
-import { Title } from '../../../../shared/components/title';
-import {
-    HorizontailSlideType,
-    HorizontalSlider
-} from '../../../../shared/components/horizontal-slider';
-import { Box } from '../../../../shared/components/box';
+import { Title } from '../../../../components/title';
+import { HorizontalSlider } from '../../../../components/horizontal-slider';
+import { Box } from '../../../../components/box';
 import { useRtl } from '../../../../hooks/use-rtl';
-import { ExploreService } from './service';
-import { useApi } from '../../../../hooks/use-api';
-import { LoadingSpinner } from '../../../../shared/components/loader-spinner';
+import { Asset } from '../../../../types/asset';
+import { RenderIf } from '../../../../components/render-if';
+import { DAILY_RECOMMENDED } from '../../../../constaints/consts';
 
 const { DailyRecomended } = ImagesPageComponents;
 
-const service = new ExploreService();
+type Props = {
+    data: Asset[];
+    isLoading: boolean;
+};
 
-export function AllPageDailyRecomended() {
+export const AllPageDailyRecomended: FC<Props> = ({ data, isLoading }) => {
     const { isRtl } = useRtl();
-
-    const { isPending, data } = useApi<HorizontailSlideType[]>(
-        service.getGetDailyRecommendedData
-    );
 
     return (
         <DailyRecomended>
-            <Title str="Daily recommended" />
+            <Title str={DAILY_RECOMMENDED} />
             <Box marginTop={24}>
-                {isPending ? (
-                    <LoadingSpinner color="red" />
-                ) : (
+                <RenderIf condition={isLoading}>
                     <HorizontalSlider data={data} isRtl={isRtl} />
-                )}
+                </RenderIf>
             </Box>
         </DailyRecomended>
     );
-}
+};

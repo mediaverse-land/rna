@@ -1,16 +1,25 @@
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { UseNavigationType } from '../../../../shared/types/use-navigation';
-import { Box } from '../../../../shared/components/box';
-import { Text } from '../../../../shared/components/text';
-import { Input } from '../../../../shared/components/form';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { Box } from '../../../../components/box';
+import { Text } from '../../../../components/text';
+import { Input } from '../../../../components/form';
 import { theme } from '../../../../constaints/theme';
+import { AuthWindows } from '../types';
 
-export const SendCode = () => {
+type Props = {
+    setWindowHandler: (window: AuthWindows) => void;
+};
+
+export const SendCode = ({ setWindowHandler }: Props) => {
     const navigation = useNavigation<UseNavigationType>();
 
     const navigateToExploreHandler = () => {
         navigation.navigate('AppStack');
+    };
+
+    const navigateToSignupPage = () => {
+        setWindowHandler('singin');
     };
 
     return (
@@ -36,16 +45,24 @@ export const SendCode = () => {
                     position="absolute"
                     bottom={10}
                 >
-                    <Text
-                        color={theme.color.light.LIGHT_DESCRIPTION}
-                        lineHeight={20}
-                        fontSize={12}
-                        fontWeight={600}
-                        marginBottom={24}
+                    <TouchableOpacity
+                        activeOpacity={1}
+                        onPress={navigateToSignupPage}
                     >
-                        Have an account?
-                        <Text color={theme.color.light.PRIMARY}> Log in</Text>
-                    </Text>
+                        <Text
+                            color={theme.color.light.LIGHT_DESCRIPTION}
+                            lineHeight={20}
+                            fontSize={12}
+                            fontWeight={600}
+                            marginBottom={24}
+                        >
+                            Dont have an account?
+                            <Text color={theme.color.light.PRIMARY}>
+                                {' '}
+                                Log in
+                            </Text>
+                        </Text>
+                    </TouchableOpacity>
                     <TouchableOpacity
                         activeOpacity={1}
                         style={styles.fullWidth}

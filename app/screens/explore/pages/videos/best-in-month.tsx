@@ -1,15 +1,45 @@
 import { View } from 'react-native';
-import { Title } from '../../../../shared/components/title';
-import { HorizontalSlider } from '../../../../shared/components/horizontal-slider';
-import { bestIMonthVideosMockData } from './mock-data/video-mock-data';
+import { Title } from '../../../../components/title';
+import { HorizontalSlider } from '../../../../components/horizontal-slider';
+import { Asset } from '../../../../types/asset';
+import { Box } from '../../../../components/box';
+import { LoadingSpinner } from '../../../../components/loader-spinner';
+import { Text } from '../../../../components/text';
 
-export function VideoPageBestInMonth() {
+type Props = {
+    isLoading: boolean;
+    data: Asset[];
+    disableOnIntractions?:boolean
+};
+
+export function VideoPageBestInMonth({ isLoading, data, disableOnIntractions= false }: Props) {
     return (
-        <View>
+        <Box paddingLeft={24}>
             <Title str="Best in month" />
             <View style={{ marginTop: 24 }}>
-                <HorizontalSlider data={bestIMonthVideosMockData} />
+                {isLoading ? (
+                    <Box
+                        width="100%"
+                        paddingRight={24}
+                        height={100}
+                        alignItems="center"
+                        justifyContent="center"
+                    >
+                        <LoadingSpinner color="red" />
+                    </Box>
+                ) : data.length === 0 ? (
+                    <Box
+                        width="100%"
+                        alignItems="flex-start"
+                        justifyContent="center"
+                        paddingLeft={24}
+                    >
+                        <Text color="#fff">No item to show</Text>
+                    </Box>
+                ) : (
+                    <HorizontalSlider disableOnIntractions={disableOnIntractions} data={data} />
+                )}
             </View>
-        </View>
+        </Box>
     );
 }

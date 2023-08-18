@@ -1,7 +1,7 @@
 import { TouchableOpacity } from 'react-native';
 import { theme } from '../../../constaints/theme';
-import { Box } from '../../../shared/components/box';
-import { Text } from '../../../shared/components/text';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
 import { ICON_ARROW_LEFT_SVG } from '../../../constaints/icons';
 import { useNavigation } from '@react-navigation/native';
 import { useRtl } from '../../../hooks/use-rtl';
