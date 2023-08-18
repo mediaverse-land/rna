@@ -455,12 +455,12 @@ export function ProfileScreenHead() {
                     <Box
                       paddingBottom={16}
                       additionalStyles={{
-                        borderWidth:
+                        borderBottomWidth:
                           activeSubscribeItem || activeOwnershipItem ? 2 : 0,
                         borderBottomColor:
                           activeSubscribeItem || activeOwnershipItem
                             ? theme.color.light.PRIMARY
-                            : null,
+                            : 'transparent',
                       }}
                     >
                       <Text
