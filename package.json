@@ -37,6 +37,7 @@
     "expo-auth-session": "~4.0.3",
     "expo-av": "~13.2.1",
     "expo-blob": "^0.0.0",
+    "expo-blur": "~12.2.2",
     "expo-camera": "~13.2.1",
     "expo-cli": "^6.3.9",
     "expo-crypto": "~12.2.1",
@@ -73,7 +74,8 @@
     "react-native-webview": "11.26.0",
     "react-redux": "^8.1.1",
     "rn-tourguide": "^3.3.0",
-    "styled-components": "^5.3.10"
+    "styled-components": "^5.3.10",
+    "@shopify/flash-list": "1.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

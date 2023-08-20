@@ -16,12 +16,16 @@ import { LoadingSpinner } from "../../../../components/loader-spinner";
 import { Text } from "../../../../components/text";
 import { windowSize } from "../../../../utils/window-size";
 import { formatTime } from "../../../../utils/format-time";
+import { Title } from "../../../../components/title";
+import { VIEW_ALL } from "../../../stack";
+import { ViewAllPageEnum } from "../../../view-all";
 
 type Props = {
   isLoading: boolean;
   data: Asset[];
   onEndReached?: () => void;
   disableOnIntractions?: boolean;
+  navigation: UseNavigationType;
 };
 
 const {
@@ -39,9 +43,8 @@ export function VideoPageList({
   data,
   onEndReached,
   disableOnIntractions = false,
+  navigation,
 }: Props) {
-  const navigation = useNavigation<UseNavigationType>();
-
   const navigateToSinglVide = (
     id: number,
     name: string,
@@ -88,13 +91,12 @@ export function VideoPageList({
           width: "100%",
         }}
       >
-        <Box width="100%" flex={1}>
+        <Box  width="100%" flex={1}>
           <VideoListItem>
             <View>
               <VideoListItemThumbnail
                 source={{
                   uri: thumbUri,
-                  // || defaultThumb
                 }}
               />
               <VideoListItemGradietImage
@@ -149,9 +151,22 @@ export function VideoPageList({
 
   const keyExtractor = (item: Asset) => item.id.toString();
 
+  const viewAllNavigationHandler = () => {
+    navigation.navigate(VIEW_ALL, {
+      pageDirection: ViewAllPageEnum.RECENTLY_VIDEOS,
+    });
+  };
+
   return (
     <PaddingContainer>
-      <Box width={Math.floor(width) - 48} flex={1} marginTop={56}>
+      <Box paddingRight={9} marginTop={40}>
+        <Title
+          showViewMoreButton={true}
+          navigateHandler={viewAllNavigationHandler}
+          str={"Recently"}
+        />
+      </Box>
+      <Box marginTop={24} width={Math.floor(width) - 48} flex={1}>
         {isLoading ? (
           <Box
             width="100%"

@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 import { theme } from "../../constaints/theme";
+// background-color: #0e0e12a0;
 
 const TabBar = styled.View`
     padding: 0 20px;
@@ -7,7 +8,6 @@ const TabBar = styled.View`
     justify-content: center;
     align-items: center;
     border-radius: 16px;
-    background-color: #0e0e12a0;
   `,
   TopBarBackground = styled.Image`
     position: absolute;
@@ -21,7 +21,6 @@ const TabBar = styled.View`
     width: 100%;
     justify-content: space-between;
     border-bottom: 1px solid ${theme.color.light.PRIMARY};
-    height: 48px;
   `,
   Wrapper = styled.View`
     width: 100%;

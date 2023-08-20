@@ -13,9 +13,10 @@ import { ImagePageMasonryList } from "./masonry-list";
 import { FocusedStatusBar } from "../../../../components/focused-statusbar";
 import { Box } from "../../../../components/box";
 import { LoadingSpinner } from "../../../../components/loader-spinner";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { tokenContext } from "../../../../context/token";
 import { tokenStringResolver } from "../../../../utils/token-string-resolver";
+import { UseNavigationType } from "../../../../types/use-navigation";
 
 const { ContainerStyles } = ImagesPageComponents;
 
@@ -23,6 +24,7 @@ export function ImagesPage() {
   const isFocused = useIsFocused();
 
   const tokenCtx = useContext(tokenContext);
+  const navigation = useNavigation<UseNavigationType>();
 
   const [isImagesLoading, setIsImagesLoading] = useState(true);
   const [imagesData, setImagesData] = useState<Asset[]>([]);
@@ -118,7 +120,7 @@ export function ImagesPage() {
   const _onRefreshHandler = async () => {
     setImagesData([]);
     _setNextPageUrl("/images");
-    await getData()
+    await getData();
   };
 
   return (
@@ -133,6 +135,7 @@ export function ImagesPage() {
           <ImagePageBestInMonth
             data={bestInMonthData}
             isLoading={bestInMonthLoading}
+            navigate={navigation.navigate}
           />
           <VirtualizedList
             onEndReached={() => {
@@ -142,6 +145,7 @@ export function ImagesPage() {
             <ImagePageMasonryList
               isLoading={isImagesLoading}
               data={imagesData}
+              navigate={navigation.navigate}
             />
             {isInfinitLoading ? (
               <Box width="100%" alignItems="center" justifyContent="center">

@@ -24,6 +24,8 @@ import {
   ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG,
   ICON_TOP_TABBAR_VIDEO_SVG,
 } from "../../constaints/icons";
+import { View, StyleSheet } from "react-native";
+import { BlurView } from "expo-blur";
 
 function getTobBarItemsIcon(tobBarItemName: string, isFocused: boolean) {
   let iconPath: ReactElement<SVGElement>;
@@ -204,98 +206,134 @@ function TopTabBar({
       width="100%"
       backgroundColor="transparent"
     >
-      <TabBarComponents.TabBar
-        style={{
-          flexDirection: "row",
-          borderRadius: hasFullWidth ? 0 : 16,
-        }}
-      >
-        {state.routes.map(
-          (route: ReturnType<(typeof state.routes)[0]>, index: number) => {
-            const { options } = descriptors[route.key];
+      <View style={styles.container}>
+      <View style={styles.background} />
 
-            const label =
-              options.tabBarLabel !== undefined
-                ? options.tabBarLabel
-                : options.title !== undefined
-                ? options.title
-                : route.name;
+        <BlurView
+          renderToHardwareTextureAndroid
+          style={styles.blurView}
+          intensity={90} // Adjust the intensity value to control the blur effect
+          tint="dark" // Set the tint color ('light' or 'dark')
+        >
+          <TabBarComponents.TabBar
+            style={{
+              flexDirection: "row",
+              borderRadius: hasFullWidth ? 0 : 16,
+            }}
+          >
+            {state.routes.map(
+              (route: ReturnType<(typeof state.routes)[0]>, index: number) => {
+                const { options } = descriptors[route.key];
 
-            const isFocused = state.index === index;
+                const label =
+                  options.tabBarLabel !== undefined
+                    ? options.tabBarLabel
+                    : options.title !== undefined
+                    ? options.title
+                    : route.name;
 
-            const { iconPath } = getTobBarItemsIcon(options.title, isFocused);
+                const isFocused = state.index === index;
 
-            const onPress = () => {
-              if (DISABLE_INTRACTION) {
-                return;
+                const { iconPath } = getTobBarItemsIcon(
+                  options.title,
+                  isFocused
+                );
+
+                const onPress = () => {
+                  if (DISABLE_INTRACTION) {
+                    return;
+                  }
+                  const event = navigation.emit({
+                    type: "tabPress",
+                    target: route.key,
+                    canPreventDefault: true,
+                  });
+
+                  if (!isFocused && !event.defaultPrevented) {
+                    if (DISABLE_INTRACTION) {
+                      return;
+                    }
+                    navigation.navigate({
+                      name: route.name,
+                      merge: true,
+                    });
+                  }
+                };
+
+                const onLongPress = () => {
+                  navigation.emit({
+                    type: "tabLongPress",
+                    target: route.key,
+                  });
+                };
+
+                const menuItemRef = returnRef(index);
+                const menuTourText = tourGuides[index];
+
+                return (
+                  <TabBarComponents.Container
+                    accessibilityRole="button"
+                    accessibilityState={isFocused ? { selected: true } : {}}
+                    accessibilityLabel={options.tabBarAccessibilityLabel}
+                    testID={options.tabBarTestID}
+                    onPress={onPress}
+                    onLongPress={onLongPress}
+                    key={index}
+                    style={{ flex: 1, top: 40 }}
+                  >
+                    <CoachmarkWrapper
+                      allowBackgroundInteractions={false}
+                      ref={menuItemRef}
+                      message={menuTourText}
+                    >
+                      <TabBarComponents.Wrapper>
+                        {iconPath ? iconPath : null}
+                        {label === "All" ? (
+                          <TabBarComponents.Label
+                            style={{
+                              color: isFocused
+                                ? theme.color.light.WHITE
+                                : theme.color.light.TEXT,
+                            }}
+                          >
+                            {label}
+                          </TabBarComponents.Label>
+                        ) : null}
+                      </TabBarComponents.Wrapper>
+                    </CoachmarkWrapper>
+                    {isFocused ? <TabBarComponents.SpacerBorder /> : null}
+                  </TabBarComponents.Container>
+                );
               }
-              const event = navigation.emit({
-                type: "tabPress",
-                target: route.key,
-                canPreventDefault: true,
-              });
-
-              if (!isFocused && !event.defaultPrevented) {
-                if (DISABLE_INTRACTION) {
-                  return;
-                }
-                navigation.navigate({
-                  name: route.name,
-                  merge: true,
-                });
-              }
-            };
-
-            const onLongPress = () => {
-              navigation.emit({
-                type: "tabLongPress",
-                target: route.key,
-              });
-            };
-
-            const menuItemRef = returnRef(index);
-            const menuTourText = tourGuides[index];
-
-            return (
-              <TabBarComponents.Container
-                accessibilityRole="button"
-                accessibilityState={isFocused ? { selected: true } : {}}
-                accessibilityLabel={options.tabBarAccessibilityLabel}
-                testID={options.tabBarTestID}
-                onPress={onPress}
-                onLongPress={onLongPress}
-                key={index}
-                style={{ flex: 1, top: 40 }}
-              >
-                <CoachmarkWrapper
-                  allowBackgroundInteractions={false}
-                  ref={menuItemRef}
-                  message={menuTourText}
-                >
-                  <TabBarComponents.Wrapper>
-                    {iconPath ? iconPath : null}
-                    {label === "All" ? (
-                      <TabBarComponents.Label
-                        style={{
-                          color: isFocused
-                            ? theme.color.light.WHITE
-                            : theme.color.light.TEXT,
-                        }}
-                      >
-                        {label}
-                      </TabBarComponents.Label>
-                    ) : null}
-                  </TabBarComponents.Wrapper>
-                </CoachmarkWrapper>
-                {/*  */}
-                {isFocused ? <TabBarComponents.SpacerBorder /> : null}
-              </TabBarComponents.Container>
-            );
-          }
-        )}
-      </TabBarComponents.TabBar>
+            )}
+          </TabBarComponents.TabBar>
+        </BlurView>
+      </View>
     </Box>
   );
 }
 
 export default TopTabBar;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  background: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)', // Adjust the opacity and color as needed
+  },
+  blurView: {
+    position: "absolute",
+    width: "100%",
+    height: 50,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 999999999999,
+    borderRadius: 10,
+  },
+});

@@ -5,7 +5,7 @@ import { LOADER, LOADER_SPINNER } from '../../constaints/images';
 import { windowSize } from '../../utils/window-size';
 
 interface Props {
-    color: ColorValue;
+    color?: ColorValue;
     durationMs?: number;
     testID?: string;
 }

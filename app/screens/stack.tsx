@@ -4,6 +4,7 @@ import { BottomTabBar } from "../components/bottom-tab-bar";
 import { AppsStack } from "./apps";
 import { WalletStack } from "./wallet/navigation";
 import { ProfileScreen } from "./profile";
+import ViewAllScreen  from "./view-all";
 
 type RoutesType = {
   Explore: undefined;
@@ -13,44 +14,55 @@ type RoutesType = {
   Profile: undefined;
 };
 
+export const EXPORE = "Explore",
+  APPS = "Apps",
+  WALLET = "Wallet",
+  PROFILE = "Profile",
+  CREATE_CONTENT = "CreateContent",
+  VIEW_ALL = "ViewAll";
+
 const Tab = createBottomTabNavigator<RoutesType>();
 
 const routes = [
   {
     id: 1,
-    name: "Explore",
+    name: EXPORE,
     component: ExploreStack,
     title: "explore",
   },
   {
     id: 2,
-    name: "Apps",
+    name: APPS,
     component: AppsStack,
     title: "apps",
   },
   {
     id: 3,
-    name: "CreateContent",
+    name: CREATE_CONTENT,
     component: ExploreStack,
     title: "createContent",
   },
   {
     id: 4,
-    name: "Wallet",
+    name: WALLET,
     component: WalletStack,
     title: "wallet",
   },
   {
     id: 5,
-    name: "Profile",
+    name: PROFILE,
     component: ProfileScreen,
     title: "profile",
+  },
+  {
+    id: 6,
+    name: VIEW_ALL,
+    component: ViewAllScreen,
+    title: "view all",
   },
 ];
 
 export function AppStack() {
- 
-
   return (
     <Tab.Navigator
       tabBar={(props) => <BottomTabBar {...props} />}

@@ -73,8 +73,8 @@ export function TextsPage() {
           <RenderIf condition={isLoading}>
             <IfNoItem dataLength={data.length}>
               <SoundsPageBestInMonth data={data} />
-              <TextPageSwiper data={data} />
-              <TextPageBestWriters />
+              {/* <TextPageSwiper data={data} />
+              <TextPageBestWriters /> */}
             </IfNoItem>
           </RenderIf>
           <Spacer />

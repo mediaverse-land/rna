@@ -11,7 +11,7 @@ import { FocusedStatusBar } from "../../../../components/focused-statusbar";
 import { Live } from "../../../../types/live";
 import { getLivesApiHandler } from "../all/service";
 import { VideosPageLives } from "./lives";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../store";
 import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
@@ -21,6 +21,7 @@ import {
   activeDisableOnIntractions,
   deActivrDisableOnIntractions,
 } from "../../../../slices/tour.slice";
+import { UseNavigationType } from "../../../../types/use-navigation";
 
 const { ContainerStyles } = VideoPageComponents;
 
@@ -33,6 +34,7 @@ const _storageService = new StorageService();
 
 export function VideosPage() {
   const isFocused = useIsFocused();
+  const navigation = useNavigation<UseNavigationType>();
 
   const [isLoading, setIsLoading] = useState(true);
   const [videoListData, setVideoListData] = useState<Asset[]>([]);
@@ -182,6 +184,7 @@ export function VideosPage() {
             isLoading={isLoading}
             data={videoListData}
             disableOnIntractions={isDisabledOnIntractions}
+            navigation={navigation}
             onEndReached={() => {
               // console.log('end')
             }}

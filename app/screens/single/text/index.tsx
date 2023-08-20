@@ -1,81 +1,75 @@
-import { useContext, useEffect, useState } from "react";
-import { TextInput, ToastAndroid, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { ToastAndroid, View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
-import { ScreenGradient } from "../../../components/screen-gradient";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useClickOutside } from "react-native-click-outside";
+import SelectLanguage from "../components/select-language";
 import { SingleTextHeader } from "./header";
-import { CommentCard } from "../../../components/comment-card";
 import { SingleTextContent } from "./content";
+import { AssetModal } from "./text-modal";
+import { ScreenGradient } from "../../../components/screen-gradient";
+import { CommentCard } from "../../../components/comment-card";
 import { BuyBottom } from "../components/buy-button";
+import { VirtualizedList } from "../../../components/virtualized-list";
+import { RenderIf } from "../../../components/render-if";
+import { MetaDataType } from "../components/item-metadata";
+import { SingleItemFiles } from "../components/files";
+import { FocusedStatusBar } from "../../../components/focused-statusbar";
+import { ModalBottomSheet } from "../../../components/bottom-sheet-modal";
+import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
+import { ReportModal } from "../components/report-modal";
 import { tokenContext } from "../../../context/token";
+import { userContext } from "../../../context/user";
 import { tokenStringResolver } from "../../../utils/token-string-resolver";
+import { ifUserIsOwner } from "../../../utils/if-user-is-owner";
+import { retriveToken } from "../../../utils/retrive-token";
 import {
   convertTextToAudioHandler,
   convertTextToImageHandler,
   getTextDetailApiHandler,
   translateTextApiHandler,
 } from "../service";
-import { VirtualizedList } from "../../../components/virtualized-list";
-import { RenderIf } from "../../../components/render-if";
-import { MetaDataType } from "../components/item-metadata";
-import { userContext } from "../../../context/user";
-import { ifUserIsOwner } from "../../../utils/if-user-is-owner";
-import {
-  AUDIO_THUMBNAIL_PLACEHOLDER,
-  PROFILE_ONE,
-  TEXT_THUMBNAIL_PLACEHOLDER,
-} from "../../../constaints/images";
-import { SingleItemFiles } from "../components/files";
-import type { Text as TextType } from "../../../types/text";
-import { FocusedStatusBar } from "../../../components/focused-statusbar";
-import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
 import { ComponentNavigationProps } from "../../../types/component-navigation-props";
-import { AssetModal } from "./text-modal";
-import { useClickOutside } from "react-native-click-outside";
-import { ReportModal } from "../components/report-modal";
-import { retriveToken } from "../../../utils/retrive-token";
+import type { Text as TextType } from "../../../types/text";
 import {
   ICON_EDIT_DARK,
   ICON_IMAGE_WHITE,
   ICON_SOUND_WHITE,
   ICON_TEXT_WHITE,
 } from "../../../constaints/icons";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { Input } from "../../../components/form";
-import { Button } from "../../../components/button";
-import { Controller, useForm } from "react-hook-form";
+import { TEXT_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
 import { EDIT_SCREEN } from "../../../constaints/consts";
 
 export function SingleTextScreen({
   navigation,
   route,
 }: ComponentNavigationProps) {
-  const { register, handleSubmit, control } = useForm();
-
   const { id } = route.params;
 
   const [data, setData] = useState<TextType>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isOwner, setIsOwner] = useState<boolean>(null);
   const [isSubscriber, setIsSubscriber] = useState<boolean>(null);
-  const [translateModalOpen, setTranslateModalOpen] = useState(false);
+  // const [translateModalOpen, setTranslateModalOpen] = useState(false);
   const [openReportModal, setOpenReportModal] = useState(false);
   const [showTextModal, setShowTextModal] = useState(false);
-  const [isTranslateLoading, setIsTranslateLoading] = useState(false);
-
+  // const [isTranslateLoading, setIsTranslateLoading] = useState(false);
   const [currentUserId, setCurrentUserId] = useState<number>(null);
 
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+
   const isFocused = useIsFocused();
+  const selectLanguageRef = useRef(null);
+
   // ReportModalRef
   // close while clicked outside
   const ref = useClickOutside<View>(() => {
     setOpenReportModal(false);
   });
 
-  // ReportModalRef, close while clicked outside
-  const translateModalRef = useClickOutside<View>(() => {
-    setTranslateModalOpen(false);
+  const innerSelectLanguageBottomSheet = useClickOutside<View>(() => {
+    // setOpenReportModal(false);
+    selectLanguageRef?.current.close();
   });
 
   const tokenCtx = useContext(tokenContext);
@@ -84,6 +78,10 @@ export function SingleTextScreen({
   useEffect(() => {
     getData();
   }, [isFocused]);
+
+  useEffect(() => {
+    _translateTextHandler();
+  }, [selectedLanguage]);
 
   const getData = async () => {
     startLoad();
@@ -144,6 +142,46 @@ export function SingleTextScreen({
     stopLoad();
   };
 
+  const _translateTextHandler = async () => {
+    // setIsTranslateLoading(true);
+    // const { language } = _formData;
+    if(!selectedLanguage){
+      return;
+    }
+    const token = await retriveToken(tokenCtx);
+    if (!token) {
+      return;
+    }
+
+    const itemId = await data?.id;
+
+    const body: any = {
+      text: itemId,
+      target_language: selectedLanguage,
+      language: selectedLanguage,
+    };
+
+    const { isError, isSuccess, errorRes, res } = await translateTextApiHandler(
+      token,
+      data?.id,
+      body
+    );
+
+    console.log({ isError, isSuccess, errorRes, res });
+
+    if (isSuccess) {
+      ToastAndroid.show(
+        "Translate text requested successfully",
+        ToastAndroid.LONG
+      );
+    }
+    if (isError) {
+      ToastAndroid.show("Translate text requested faliled", ToastAndroid.LONG);
+    }
+
+    selectLanguageRef?.current?.close();
+  };
+
   const _showTextModalHandler = () => {
     setShowTextModal(true);
   };
@@ -173,8 +211,7 @@ export function SingleTextScreen({
   };
 
   const thumnailImageUri =
-    data?.asset?.thumbnails["852x480"] ||
-    TEXT_THUMBNAIL_PLACEHOLDER;
+    data?.asset?.thumbnails["852x480"] || TEXT_THUMBNAIL_PLACEHOLDER;
 
   const price: number = data?.asset?.price || null;
   const assetUser = data?.asset?.user;
@@ -241,45 +278,8 @@ export function SingleTextScreen({
     }
   };
 
-  const _translateTextHandler = async (_formData: any) => {
-    setIsTranslateLoading(true);
-    const { language } = _formData;
-    const token = await retriveToken(tokenCtx);
-    if (!token) {
-      return;
-    }
-
-    const itemId = await data?.id;
-
-    const body: any = {
-      text: itemId,
-      target_language: language,
-    };
-
-    const { isError, isSuccess, errorRes, res } = await translateTextApiHandler(
-      token,
-      data?.id,
-      body
-    );
-
-    console.log({ isError, isSuccess, errorRes, res });
-
-    if (isSuccess) {
-      ToastAndroid.show(
-        "Translate text requested successfully",
-        ToastAndroid.LONG
-      );
-    }
-    if (isError) {
-      ToastAndroid.show("Translate text requested faliled", ToastAndroid.LONG);
-    }
-
-    setTranslateModalOpen(false);
-    setIsTranslateLoading(false);
-  };
-
-  const openTranslateModalHandler = () => {
-    setTranslateModalOpen(true);
+  const openAddCardAlertHandler = () => {
+    selectLanguageRef.current?.open();
   };
 
   const isLoadedAndDataExists = !isLoading && data?.id ? true : false;
@@ -333,7 +333,7 @@ export function SingleTextScreen({
     },
     {
       id: 2,
-      func: openTranslateModalHandler,
+      func: openAddCardAlertHandler,
       icon: <ICON_TEXT_WHITE />,
       isDisable: !hasEditPermission,
     },
@@ -362,116 +362,92 @@ export function SingleTextScreen({
       ]
     : null;
 
+  const snapPoints = useMemo(() => ["25%", "50%"], []);
+
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <FocusedStatusBar />
-      <ScreenGradient>
-        <VirtualizedList>
-          <RenderIf condition={isLoading}>
-            <RenderIfWithoutLoading condition={isLoadedAndDataExists}>
-              <SingleTextHeader
-                goBackHandler={goBackHandler}
-                thumnailImageUri={thumnailImageUri}
-                contentName={data?.name || ""}
-                isOwner={isOwner}
-                asset_username={assetUser?.username || ""}
-                user_image_url={assetUser?.image_url || ""}
-                openReportModalHandler={_openReportModalHandler}
-                toolbar_options={TOOLBAR_OPTIONS}
-                hasPermission={isOwner || isSubscriber}
-              />
-              <SingleTextContent
-                description={data?.description}
-                metaDataList={metaDataList}
-                showTextModalHandler={_showTextModalHandler}
-                isOwner={isOwner}
-                isSubscriber={isSubscriber}
-              />
-              <RenderIfWithoutLoading condition={hasAssetFile}>
-                <SingleItemFiles data={textFiles} />
+    <>
+      <SafeAreaView style={{ flex: 1 }}>
+        <FocusedStatusBar />
+        <ScreenGradient>
+          <VirtualizedList>
+            <RenderIf condition={isLoading}>
+              <RenderIfWithoutLoading condition={isLoadedAndDataExists}>
+                <SingleTextHeader
+                  goBackHandler={goBackHandler}
+                  thumnailImageUri={thumnailImageUri}
+                  contentName={data?.name || ""}
+                  isOwner={isOwner}
+                  asset_username={assetUser?.username || ""}
+                  user_image_url={assetUser?.image_url || ""}
+                  openReportModalHandler={_openReportModalHandler}
+                  toolbar_options={TOOLBAR_OPTIONS}
+                  hasPermission={isOwner || isSubscriber}
+                />
+                <SingleTextContent
+                  description={data?.description}
+                  metaDataList={metaDataList}
+                  showTextModalHandler={_showTextModalHandler}
+                  isOwner={isOwner}
+                  isSubscriber={isSubscriber}
+                />
+                <RenderIfWithoutLoading condition={hasAssetFile}>
+                  <SingleItemFiles data={textFiles} />
+                </RenderIfWithoutLoading>
+                <CommentCard assetId={data?.id} />
               </RenderIfWithoutLoading>
-              <CommentCard assetId={data?.id} />
-            </RenderIfWithoutLoading>
-          </RenderIf>
-        </VirtualizedList>
-        <RenderIfWithoutLoading condition={isLoadedAndDataExists}>
-          <BuyBottom
-            isLoading={isLoading}
-            price={price}
-            thumbnail={thumnailImageUri}
-            title={data?.name || ""}
-            assetId={data?.asset_id || data?.id}
-            isSubscriber={isSubscriber}
-            isOwner={isOwner}
-          />
-        </RenderIfWithoutLoading>
-        <RenderIfWithoutLoading condition={shouldShowTextModal}>
-          <AssetModal
-            hideTextModalHandler={_hideTextModalHandler}
-            fileUrl={fileUrl}
-            title={data?.name || ""}
-          />
-        </RenderIfWithoutLoading>
-        {translateModalOpen ? (
-          <View
-            ref={translateModalRef}
-            style={{
-              position: "absolute",
-              zIndex: 40000,
-              top: 200,
-              backgroundColor: "#0f172cab",
-              width: "70%",
-              borderRadius: 8,
-              padding: 16,
-            }}
-          >
-            <Text color="#fff">Add translate target</Text>
-            <Box marginTop={16} marginBottom={16}>
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => {
-                  return (
-                    <Input
-                      placeholder={"fr"}
-                      labelText={"language"}
-                      onBlur={onBlur}
-                      onChangeText={onChange}
-                      value={value}
-                    />
-                  );
-                }}
-                name={"language"}
+            </RenderIf>
+          </VirtualizedList>
+          <RenderIfWithoutLoading condition={isLoadedAndDataExists}>
+            <BuyBottom
+              isLoading={isLoading}
+              price={price}
+              thumbnail={thumnailImageUri}
+              title={data?.name || ""}
+              assetId={data?.asset_id || data?.id}
+              isSubscriber={isSubscriber}
+              isOwner={isOwner}
+            />
+          </RenderIfWithoutLoading>
+          <RenderIfWithoutLoading condition={shouldShowTextModal}>
+            <AssetModal
+              hideTextModalHandler={_hideTextModalHandler}
+              fileUrl={fileUrl}
+              title={data?.name || ""}
+            />
+          </RenderIfWithoutLoading>
+          {data?.asset_id && openReportModal ? (
+            <View
+              ref={ref}
+              style={{
+                position: "absolute",
+                zIndex: 40000,
+                top: 200,
+                right: 20,
+                backgroundColor: "#0f172cab",
+                width: 250,
+                height: 250,
+              }}
+            >
+              <ReportModal
+                assetId={data?.asset_id}
+                reportModalCloseHandler={_closeReportModalHandler}
               />
-            </Box>
-            <Button
-              onpressHandler={handleSubmit(_translateTextHandler)}
-              varient="primary"
-              borderRadius={8}
-              text="Submit"
-              isLoading={isTranslateLoading}
-            />
-          </View>
-        ) : null}
-        {data?.asset_id && openReportModal ? (
-          <View
-            ref={ref}
-            style={{
-              position: "absolute",
-              zIndex: 40000,
-              top: 200,
-              right: 20,
-              backgroundColor: "#0f172cab",
-              width: 250,
-              height: 250,
-            }}
-          >
-            <ReportModal
-              assetId={data?.asset_id}
-              reportModalCloseHandler={_closeReportModalHandler}
-            />
-          </View>
-        ) : null}
-      </ScreenGradient>
-    </SafeAreaView>
+            </View>
+          ) : null}
+        </ScreenGradient>
+      </SafeAreaView>
+      <ModalBottomSheet ref={selectLanguageRef} snapPoints={snapPoints}>
+        <View
+          ref={innerSelectLanguageBottomSheet}
+          style={{
+            marginBottom: 200,
+            flex: 1,
+            height: 1000,
+          }}
+        >
+          <SelectLanguage isFocused={isFocused} setSelectedLanguage={setSelectedLanguage} />
+        </View>
+      </ModalBottomSheet>
+    </>
   );
 }

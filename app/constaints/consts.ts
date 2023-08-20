@@ -1,7 +1,7 @@
 export const DAILY_RECOMMENDED = "Daily recommended";
-export const CHILL_SONGS = "Chill songs";
+export const CHILL_SONGS = "Best songs";
 export const MOST_VIEWED = "Most viewed";
-export const TOP_TEN_TEXTS = "Top 10 texts";
+export const TOP_TEN_TEXTS = "Top texts";
 export const AUTH_SCREEN = "AuthScreen";
 export const LIVES = "Lives";
 

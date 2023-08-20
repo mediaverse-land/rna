@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { ImagesPageComponents } from "../all/style";
 import { SoundsPageBestInMonth } from "./best-in-moth";
 import { SoundsPageChillSongs } from "./chil-songs";
-import { SoundsPageBestProducts } from "./best-products";
+import { SoundsPageRecently } from "./recently";
 import { SoundsPageMusicPlayer } from "./music-player";
 import { VirtualizedList } from "../../../../components/virtualized-list";
 import { RenderIf } from "../../../../components/render-if";
@@ -12,21 +12,23 @@ import { IfNoItem } from "../../../../components/if-no-item";
 import { getSoundPageDatApiHandler } from "./service";
 import { Sound } from "../../../../types/sound";
 import { FocusedStatusBar } from "../../../../components/focused-statusbar";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
+import { UseNavigationType } from "../../../../types/use-navigation";
 
 const { ContainerStyles } = ImagesPageComponents;
 
 export function SoundsPage() {
   const isFocused = useIsFocused();
+  const navigation = useNavigation<UseNavigationType>();
 
   const [isSoundsDataLoading, setIsSoundsDataLoading] = useState(true);
   const [soundsData, setSoundsData] = useState<Sound[]>([]);
 
   useEffect(() => {
-    if(isFocused){
-        getData();
+    if (isFocused) {
+      getData();
     }
-}, [isFocused]);
+  }, [isFocused]);
 
   const getData = async () => {
     await getSoundsData();
@@ -47,9 +49,9 @@ export function SoundsPage() {
   };
 
   const _onRefreshHandler = async () => {
-    setIsSoundsDataLoading(true)
+    setIsSoundsDataLoading(true);
     setSoundsData([]);
-    await getData()
+    await getData();
   };
 
   return (
@@ -67,14 +69,15 @@ export function SoundsPage() {
                 isLoading={isSoundsDataLoading}
                 data={soundsData}
               />
-              <SoundsPageMusicPlayer data={soundsData} />
-              <SoundsPageChillSongs
+              {/* <SoundsPageMusicPlayer data={soundsData} /> */}
+              {/* <SoundsPageChillSongs
                 isLoading={isSoundsDataLoading}
                 data={soundsData}
-              />
-              <SoundsPageBestProducts
+              /> */}
+              <SoundsPageRecently
                 isLoading={isSoundsDataLoading}
                 data={soundsData}
+                navigate={navigation.navigate}
               />
             </IfNoItem>
           </RenderIf>

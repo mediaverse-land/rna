@@ -7,6 +7,7 @@ import { TextSliderComponents } from "./style";
 import { UseNavigationType } from "../../types/use-navigation";
 import {
   PROFILE_ONE,
+  TEXT_SLIDER_COVER_BG,
   TEXT_SLIDER_ITEM_GRADIENT,
 } from "../../constaints/images";
 import { UserNameCard } from "../username-card";
@@ -64,10 +65,11 @@ export const TextSlider: FC<Props> = ({
 
     return (
       <TextSlide>
-        <TextSlideBackgroundGradient
+        <TEXT_SLIDER_COVER_BG />
+        {/* <TextSlideBackgroundGradient
           source={{ uri: TEXT_SLIDER_ITEM_GRADIENT }}
           resizeMode="stretch"
-        />
+        /> */}
         <TextSlideBody
           onPress={() =>
             textScreenNavigationHandler(

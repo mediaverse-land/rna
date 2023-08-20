@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import { Alert, ToastAndroid, View } from "react-native";
+import { useState, useEffect, useContext, useRef, useMemo } from "react";
+import { ToastAndroid, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ScreenGradient } from "../../../components/screen-gradient";
 import { SingleSoundHeader } from "./header";
@@ -28,25 +28,20 @@ import MusicPlayer from "./player";
 import { ReportModal } from "../components/report-modal";
 import { useClickOutside } from "react-native-click-outside";
 import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
-import { useGetSingleVideoDataQuery } from "../../../services/single-sound.service";
 import { retriveToken } from "../../../utils/retrive-token";
 import { Toolbar } from "../components/toolbar";
 import {
-  ICON_EDIT,
   ICON_EDIT_DARK,
   ICON_SOUND_WHITE,
   ICON_TEXT_WHITE,
 } from "../../../constaints/icons";
 import { PaddingContainer } from "../../../styles/grid";
-import { Text } from "../../../components/text";
-import { Controller, useForm } from "react-hook-form";
-import { Input } from "../../../components/form";
-import { Button } from "../../../components/button";
 import { AUDIO_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
 import { EDIT_SCREEN } from "../../../constaints/consts";
+import { ModalBottomSheet } from "../../../components/bottom-sheet-modal";
+import SelectLanguage from "../components/select-language";
 
 export function SingleSoundScreen({ navigation, route }: any) {
-  const { control, register, handleSubmit } = useForm();
   const { id } = route.params;
 
   const [openReportModal, setOpenReportModal] = useState(false);
@@ -59,21 +54,22 @@ export function SingleSoundScreen({ navigation, route }: any) {
   const [file, setFile] = useState<any>(null);
 
   const [currentUserId, setCurrentUserId] = useState<number>(null);
+  const [selectedLanguage, setSelectedLanguage] = useState("");
 
-  const [translateModalOpen, setTranslateModalOpen] = useState(false);
-  const [isTranslateLoading, setIsTranslateLoading] = useState(false);
+  const selectLanguageRef = useRef(null);
 
   const isFocused = useIsFocused();
+
   // ReportModalRef
   // close while clicked outside
   const ref = useClickOutside<View>(() => {
     setOpenReportModal(false);
   });
 
-  const translateModalRef = useClickOutside<View>(() => {
-    setTranslateModalOpen(false);
+  const innerSelectLanguageBottomSheet = useClickOutside<View>(() => {
+    // setOpenReportModal(false);
+    selectLanguageRef?.current.close();
   });
-
   // const {data, error, isLoading, isSuccess} = useGetSingleVideoDataQuery()
 
   const tokenCtx = useContext(tokenContext);
@@ -113,6 +109,10 @@ export function SingleSoundScreen({ navigation, route }: any) {
         }
       : undefined;
   }, [sound, soundUri]);
+
+  useEffect(() => {
+    _translateAudio();
+  }, [selectedLanguage]);
 
   const getData = async () => {
     setIsLoading(true);
@@ -208,9 +208,12 @@ export function SingleSoundScreen({ navigation, route }: any) {
     }
   };
 
-  const _translateAudio = async (_formData: any) => {
-    setIsTranslateLoading(true);
-    const { language } = _formData;
+  const _translateAudio = async () => {
+    // setIsTranslateLoading(true);
+    if (!selectedLanguage) {
+      return;
+    }
+
     const token = await retriveToken(tokenCtx);
     if (!token) {
       console.log(`no token, func: _convertAudioToText`);
@@ -221,7 +224,7 @@ export function SingleSoundScreen({ navigation, route }: any) {
 
     const body: any = {
       audio: itemId,
-      language,
+      language: selectLanguageRef,
     };
 
     const { isError, isSuccess, errorRes, res } = await translateAudioHandler(
@@ -239,8 +242,7 @@ export function SingleSoundScreen({ navigation, route }: any) {
     if (isError) {
       ToastAndroid.show("Translate asset requested faliled", ToastAndroid.LONG);
     }
-    setTranslateModalOpen(false);
-    setIsTranslateLoading(false);
+    selectLanguageRef?.current?.close();
   };
 
   const goBackHandler = () => {
@@ -248,14 +250,11 @@ export function SingleSoundScreen({ navigation, route }: any) {
   };
 
   const openTranslateModalHandler = () => {
-    setTranslateModalOpen(true);
+    selectLanguageRef?.current?.open();
   };
 
-  console.log(data?.asset)
-
   const thumnailImageUri =
-    data?.asset?.thumbnails["336x366"] ||
-    AUDIO_THUMBNAIL_PLACEHOLDER;
+    data?.asset?.thumbnails["336x366"] || AUDIO_THUMBNAIL_PLACEHOLDER;
   const price = data?.asset?.price || null;
 
   const metaDataList: MetaDataType[] =
@@ -296,7 +295,7 @@ export function SingleSoundScreen({ navigation, route }: any) {
 
   const navigateToEditScreen = () => {
     navigation.navigate(EDIT_SCREEN, {
-      id:data?.id,
+      id: data?.id,
       assetType: "sound",
     });
   };
@@ -304,10 +303,9 @@ export function SingleSoundScreen({ navigation, route }: any) {
   const isDisableEditIcon =
     data?.asset?.user?.id === currentUserId ? false : true;
 
-    
-    const hasEditPermission =
+  const hasEditPermission =
     data?.asset?.forkability_status === 2 ? true : false;
-    console.log({forkability_status: data?.asset?.forkability_status})
+  console.log({ forkability_status: data?.asset?.forkability_status });
 
   const toolbarOptions = [
     {
@@ -327,7 +325,7 @@ export function SingleSoundScreen({ navigation, route }: any) {
       id: 1,
       func: navigateToEditScreen,
       // icon: <ICON_TEXT_WHITE />,
-      icon:<ICON_EDIT_DARK width={20} height={20} />,
+      icon: <ICON_EDIT_DARK width={20} height={20} />,
       isDisable: isDisableEditIcon,
     },
   ];
@@ -344,118 +342,96 @@ export function SingleSoundScreen({ navigation, route }: any) {
   const isFileExists = data?.asset?.file?.url ? true : false;
 
   const hasPermission = isOwner || isSubscriber;
+  const snapPoints = useMemo(() => ["25%", "50%"], []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <FocusedStatusBar />
-      <ScreenGradient>
-        <VirtualizedList>
-          <RenderIf condition={isLoading}>
-            <Box width="100%" position="relative" zIndex={20}>
-              <RenderIfWithoutLoading condition={isDataExists}>
-                <SingleSoundHeader
-                  goBackHandler={goBackHandler}
-                  thumnailImageUri={thumnailImageUri}
-                  contentName={data?.name}
-                  isOwner={isOwner}
-                  isOwnerOrSubscriber={hasPermission}
-                  playSoundHandler={playSoundHandler}
-                  stopSoundHandler={stopSoundHandler}
-                  username={data?.asset?.user?.username || ""}
-                  userProfileUri={data?.asset?.user?.image_url || ""}
-                  openReportModalHandler={_openReportModalHandler}
-                />
-                <RenderIfWithoutLoading condition={hasPermission}>
-                  <PaddingContainer>
-                    <Toolbar toolbarList={toolbarOptions} />
-                  </PaddingContainer>
+    <>
+      <SafeAreaView style={{ flex: 1 }}>
+        <FocusedStatusBar />
+        <ScreenGradient>
+          <VirtualizedList>
+            <RenderIf condition={isLoading}>
+              <Box width="100%" position="relative" zIndex={20}>
+                <RenderIfWithoutLoading condition={isDataExists}>
+                  <SingleSoundHeader
+                    goBackHandler={goBackHandler}
+                    thumnailImageUri={thumnailImageUri}
+                    contentName={data?.name}
+                    isOwner={isOwner}
+                    isOwnerOrSubscriber={hasPermission}
+                    playSoundHandler={playSoundHandler}
+                    stopSoundHandler={stopSoundHandler}
+                    username={data?.asset?.user?.username || ""}
+                    userProfileUri={data?.asset?.user?.image_url || ""}
+                    openReportModalHandler={_openReportModalHandler}
+                  />
+                  <RenderIfWithoutLoading condition={hasPermission}>
+                    <PaddingContainer>
+                      <Toolbar toolbarList={toolbarOptions} />
+                    </PaddingContainer>
+                  </RenderIfWithoutLoading>
+                  <RenderIfWithoutLoading condition={isFileExists}>
+                    <MusicPlayer url={file?.url} />
+                  </RenderIfWithoutLoading>
+                  <SingleSoundContent
+                    description={data?.description}
+                    metaDataList={metaDataList}
+                  />
+                  <RenderIfWithoutLoading condition={isFileExists}>
+                    <SingleItemFiles data={textFiles} />
+                  </RenderIfWithoutLoading>
+                  <CommentCard assetId={data?.id} />
                 </RenderIfWithoutLoading>
-                <RenderIfWithoutLoading condition={isFileExists}>
-                  <MusicPlayer url={file?.url} />
-                </RenderIfWithoutLoading>
-                <SingleSoundContent
-                  description={data?.description}
-                  metaDataList={metaDataList}
-                />
-                <RenderIfWithoutLoading condition={isFileExists}>
-                  <SingleItemFiles data={textFiles} />
-                </RenderIfWithoutLoading>
-                <CommentCard assetId={data?.id} />
-              </RenderIfWithoutLoading>
-            </Box>
-          </RenderIf>
-        </VirtualizedList>
-        {data ? (
-          <BuyBottom
-            isLoading={isLoading}
-            price={price}
-            thumbnail={thumnailImageUri}
-            title={data.name}
-            assetId={data.asset_id || data.id}
-            isSubscriber={isSubscriber}
-            isOwner={isOwner}
-          />
-        ) : null}
-        {translateModalOpen ? (
-          <View
-            ref={translateModalRef}
-            style={{
-              position: "absolute",
-              zIndex: 40000,
-              top: 200,
-              backgroundColor: "#0f172cab",
-              width: "70%",
-              borderRadius: 8,
-              padding: 16,
-            }}
-          >
-            <Text color="#fff">Add translate target</Text>
-            <Box marginTop={16} marginBottom={16}>
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => {
-                  return (
-                    <Input
-                      placeholder={"fr"}
-                      labelText={"language"}
-                      onBlur={onBlur}
-                      onChangeText={onChange}
-                      value={value}
-                    />
-                  );
-                }}
-                name={"language"}
+              </Box>
+            </RenderIf>
+          </VirtualizedList>
+          {data ? (
+            <BuyBottom
+              isLoading={isLoading}
+              price={price}
+              thumbnail={thumnailImageUri}
+              title={data.name}
+              assetId={data.asset_id || data.id}
+              isSubscriber={isSubscriber}
+              isOwner={isOwner}
+            />
+          ) : null}
+          {data?.asset_id && openReportModal ? (
+            <View
+              ref={ref}
+              style={{
+                position: "absolute",
+                zIndex: 40000,
+                top: 300,
+                right: 20,
+                backgroundColor: "#0f172cab",
+                width: 250,
+                height: 250,
+              }}
+            >
+              <ReportModal
+                assetId={data?.asset_id}
+                reportModalCloseHandler={_closeReportModalHandler}
               />
-            </Box>
-            <Button
-              onpressHandler={handleSubmit(_translateAudio)}
-              varient="primary"
-              borderRadius={8}
-              text="Submit"
-              isLoading={isTranslateLoading}
-            />
-          </View>
-        ) : null}
-        {data?.asset_id && openReportModal ? (
-          <View
-            ref={ref}
-            style={{
-              position: "absolute",
-              zIndex: 40000,
-              top: 300,
-              right: 20,
-              backgroundColor: "#0f172cab",
-              width: 250,
-              height: 250,
-            }}
-          >
-            <ReportModal
-              assetId={data?.asset_id}
-              reportModalCloseHandler={_closeReportModalHandler}
-            />
-          </View>
-        ) : null}
-      </ScreenGradient>
-    </SafeAreaView>
+            </View>
+          ) : null}
+        </ScreenGradient>
+      </SafeAreaView>
+      <ModalBottomSheet ref={selectLanguageRef} snapPoints={snapPoints}>
+        <View
+          ref={innerSelectLanguageBottomSheet}
+          style={{
+            marginBottom: 200,
+            flex: 1,
+            height: 1000,
+          }}
+        >
+          <SelectLanguage
+            isFocused={isFocused}
+            setSelectedLanguage={setSelectedLanguage}
+          />
+        </View>
+      </ModalBottomSheet>
+    </>
   );
 }

@@ -45,16 +45,16 @@ import IMAGE_THUMBNAIL_PLACEHOLDER_PNG from "./../../assets/img/thumbnail-placeh
 import VIDEO_THUMBNAIL_PLACEHOLDER_PNG from "./../../assets/img/thumbnail-placeholder/Video143.png";
 import AUDIO_THUMBNAIL_PLACEHOLDER_PNG from "./../../assets/img/thumbnail-placeholder/Sound143.png";
 import TEXT_THUMBNAIL_PLACEHOLDER_PNG from "./../../assets/img/thumbnail-placeholder/Text143.png";
+import TEXT_SLIDER_COVER_BG_SVG from "./../../assets/img/text-slider/text_slider_cover_bg.svg";
 
 import TOP_BAR_BG_PNG from "./../../assets/img/gradients/Rectangle 212.png";
 
 import TOP_BAR_BACKGROUND_SVG from "./../../assets/img/gradients/Rectangle 212.svg";
 export const TOP_BAR_BACKGROUND = TOP_BAR_BACKGROUND_SVG;
 
-export const TOP_BAR_BG = imageUriResolver(
-  TOP_BAR_BG_PNG
-);
+export const TOP_BAR_BG = imageUriResolver(TOP_BAR_BG_PNG);
 
+export const TEXT_SLIDER_COVER_BG = TEXT_SLIDER_COVER_BG_SVG;
 
 export const GALLERY_MODAL_BG = GALLERY_MODAL_BG_PATH;
 

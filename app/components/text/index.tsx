@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useMemo } from "react";
 import { Text as ReactNativeText, TextInput, TextStyle } from "react-native";
 
 type Props = {
@@ -39,6 +39,7 @@ export function Text({
   let defaultStyles = [];
 
   function addDefinedStyles() {
+    
     const styles = [
       { fontSize },
       { lineHeight },
@@ -65,7 +66,7 @@ export function Text({
     return newStyles;
   }
 
-  defaultStyles = addDefinedStyles();
+  defaultStyles = useMemo(() => addDefinedStyles(),[])
 
   return (
     <>
