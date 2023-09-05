@@ -20,10 +20,23 @@ export const languageService: any = createApi({
         };
       },
     }),
+    getCountries: builder.query({
+      query: (args) => {
+        return {
+          url: "countries",
+          method: "GET",
+          headers: {
+            // Authorization: `Bearer ${args.token}`
+            "X-App": "_ReactNative",
+          },
+        };
+      },
+    }),
  
   }),
 });
 
 export const {
   useGetLanguagesQuery,
+  useGetCountriesQuery
 } = languageService;

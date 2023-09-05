@@ -12,7 +12,6 @@ import { UseNavigationType } from "../../types/use-navigation";
 import { Text } from "../../components/text";
 import { ViewAllTitle } from "./components/view-all-title";
 import { VirtualizedList } from "../../components/virtualized-list";
-import { useGetAssetListQuery } from "../../services/view-all.service";
 import { tokenContext } from "../../context/token";
 import { retriveToken } from "../../utils/retrive-token";
 import { Logger } from "../../utils/logger";
@@ -23,6 +22,7 @@ import {
   ICON_TOP_TABBAR_TEXT_ACTIVE_SVG,
   ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG,
 } from "../../constaints/icons";
+import { getViewAllDataApiHandler } from "./service";
 
 type Props = {
   navigation: UseNavigationType;
@@ -69,7 +69,7 @@ const viewAllPages: Record<
         style={viewAllStyles.icon}
       />
     ),
-    title: "",
+    title: "Best Videos",
     url: "videos/most-viewed",
     ListComponent: ViewAllVideoList,
   },
@@ -167,14 +167,14 @@ const viewAllPages: Record<
     ),
     title: "Recently texts",
     url: "texts",
-    ListComponent: ViewAllImageList,
+    ListComponent: ViewAllTextsList,
   },
 };
 
 const ViewAllScreen = ({ navigation, route }: Props) => {
   const { params } = route;
 
-  const current_page = viewAllPages[params?.pageDirection || ""];
+  const current_page = viewAllPages[params?.pageDirection || ""];       
 
   if (!current_page) {
     return (
@@ -187,78 +187,96 @@ const ViewAllScreen = ({ navigation, route }: Props) => {
   const tokenCtx = useContext(tokenContext);
   const isFocused = useIsFocused();
 
-  const [preventDataFetching, setPreventDataFetching] = useState(true);
-  const [token, setToken] = useState(null);
+  // const [preventDataFetching, setPreventDataFetching] = useState(true);
+  // const [token, setToken] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [assetList, setAssetList] = useState<any>([]);
-  const [randomNumber, setRandomNumber] = useState(Math.random());
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
+  // const [randomNumber, setRandomNumber] = useState(Math.random());
 
   const { icon, title, url, ListComponent } = current_page;
 
-  const { data, isError, isSuccess, error, isLoading, isFetching } =
-    useGetAssetListQuery(
-      {
-        url: `${url}?page=${currentPage}`,
-        token,
-        sessionId: randomNumber,
-      },
-      {
-        skip: preventDataFetching,
-      },
-      false
-    );
+  // const { data, isError, isSuccess, error, isLoading, isFetching } =
+  //   useGetAssetListQuery(
+  //     {
+  //       url: `${url}?page=${currentPage}`,
+  //       token,
+  //       sessionId: randomNumber,
+  //     },
+  //     {
+  //       skip: preventDataFetching,
+  //     },
+  //     // false
+  //   );
 
-  useEffect(() => {
-    getToken();
-  }, []);
+  // useEffect(() => {
+  //   getToken();
+  // }, []);
 
   useEffect(() => {
     if (isFocused) {
-      setRandomNumber(Math.random());
-      setPreventDataFetching(false);
+      setIsLoading(true);
+      getData();
+      // setRandomNumber(Math.`random());
+      // setPreventDataFetching(false);`
     }
     if (!isFocused) {
       setAssetList([]);
     }
   }, [isFocused]);
 
-  useEffect(() => {
-    copyDataToAssetList();
-  }, [data]);
+  // useEffect(() => {
+  //   copyDataToAssetList();
+  // }, [data]);
 
-  const copyDataToAssetList = () => {
-    if (isFetching) {
-      return;
-    }
-
-    if (!isError) {
-      if (data?.length === undefined && data?.data?.length) {
-        if (currentPage !== 1) {
-          setAssetList([...assetList, ...data?.data]);
-          return;
-        }
-        setAssetList(data?.data);
-        return;
-      }
-      if (data?.length !== undefined) {
-        if (currentPage !== 1) {
-          setAssetList([...assetList, ...data]);
-          return;
-        }
-        setAssetList(data);
-      }
-    }
-  };
-
-  const getToken = async () => {
+  const getData = async () => {
     const token = await retriveToken(tokenCtx);
     if (!token) {
       _logger.logErro("no token at view-all.tsx line 105");
     }
-    setToken(token);
+
+    const { res, isSuccess, isError, errorRes } =
+      await getViewAllDataApiHandler(`/${url}?page=${currentPage}`, token);
+
+    if (isError) {
+      setError(true);
+      setIsLoading(false);
+      return;
+    }
+
+    const { data } = res;
+
+    if (data?.length === undefined && data?.data?.length) {
+      if (currentPage !== 1) {
+        setAssetList([...assetList, ...data?.data]);
+        return;
+      }
+      setAssetList(data?.data);
+      setIsLoading(false);
+      return;
+    }
+    if (data?.length !== undefined) {
+      if (currentPage !== 1) {
+        setAssetList([...assetList, ...data]);
+        return;
+      }
+
+      setAssetList(data);
+    }
+    setIsLoading(false);
   };
 
-  if (isError) {
+  const getToken = async () => {
+    // const token = await retriveToken(tokenCtx);
+    // if (!token) {
+    //   _logger.logErro("no token at view-all.tsx line 105");
+    // }
+    // setToken(token);
+  };
+
+  if (error) {
     <Box>
       <Text color="red">Error while fetching list</Text>
     </Box>;
@@ -279,7 +297,7 @@ const ViewAllScreen = ({ navigation, route }: Props) => {
               <ListComponent data={assetList} navigate={navigation.navigate} />
             </Box>
           ) : null}
-          {isFetching ? (
+          {isLoading ? (
             <Box height={100}>
               <LoadingSpinner />
             </Box>

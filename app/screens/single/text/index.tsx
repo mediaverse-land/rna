@@ -3,7 +3,7 @@ import { ToastAndroid, View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useClickOutside } from "react-native-click-outside";
-import SelectLanguage from "../components/select-language";
+import SelectLanguageBottomSheet from './../../../components/select-language'
 import { SingleTextHeader } from "./header";
 import { SingleTextContent } from "./content";
 import { AssetModal } from "./text-modal";
@@ -37,8 +37,13 @@ import {
   ICON_SOUND_WHITE,
   ICON_TEXT_WHITE,
 } from "../../../constaints/icons";
-import { TEXT_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
+import {
+  TEXT_THUMBNAIL_PLACEHOLDER,
+  __TEXT_THUMBNAIL_PLACEHOLDER_PNG,
+} from "../../../constaints/images";
 import { EDIT_SCREEN } from "../../../constaints/consts";
+import { Share } from "react-native";
+import { Button } from "../../../components/button";
 
 export function SingleTextScreen({
   navigation,
@@ -145,7 +150,7 @@ export function SingleTextScreen({
   const _translateTextHandler = async () => {
     // setIsTranslateLoading(true);
     // const { language } = _formData;
-    if(!selectedLanguage){
+    if (!selectedLanguage) {
       return;
     }
     const token = await retriveToken(tokenCtx);
@@ -364,6 +369,37 @@ export function SingleTextScreen({
 
   const snapPoints = useMemo(() => ["25%", "50%"], []);
 
+  const shareApp = async () => {
+    const url =
+      "https://play.google.com/store/apps/details?id=com.instagram.android&hl=en_IN&gl=US";
+
+    try {
+      const result = await Share.share({
+        message: "Instagram | A time wasting application" + "\n" + url,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error: any) {
+      alert(error.message);
+    }
+
+    // try {
+    //   // sharing only works with `file://` urls on Android so we need to copy it out of assets
+    //   await Sharing.shareAsync({}, {
+    //     dialogTitle: "Is it a snake or a hat?",
+    //   });
+    // } catch (e) {
+    //   console.error(e);
+    // }
+  };
+
   return (
     <>
       <SafeAreaView style={{ flex: 1 }}>
@@ -383,6 +419,11 @@ export function SingleTextScreen({
                   toolbar_options={TOOLBAR_OPTIONS}
                   hasPermission={isOwner || isSubscriber}
                 />
+                {/* <Button
+                  varient="primary"
+                  text="Share"
+                  onpressHandler={shareApp}
+                /> */}
                 <SingleTextContent
                   description={data?.description}
                   metaDataList={metaDataList}
@@ -445,7 +486,10 @@ export function SingleTextScreen({
             height: 1000,
           }}
         >
-          <SelectLanguage isFocused={isFocused} setSelectedLanguage={setSelectedLanguage} />
+          <SelectLanguageBottomSheet
+            isFocused={isFocused}
+            setSelectedLanguage={setSelectedLanguage}
+          />
         </View>
       </ModalBottomSheet>
     </>

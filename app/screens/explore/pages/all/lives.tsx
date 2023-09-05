@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { ImagesPageComponents } from "./style";
 import { Title } from "../../../../components/title";
 import { Box } from "../../../../components/box";
@@ -7,8 +7,13 @@ import { RenderIf } from "../../../../components/render-if";
 import { FlatList } from "react-native";
 import { Live } from "../../../../types/live";
 import { HorizontalSlide } from "../../../../components/horizontal-slider/slide";
-import { LIVES, SINGLE_LIVE_SCREEN } from "../../../../constaints/consts";
+import {
+  ALL_LIVES_SCREEN,
+  LIVES,
+  SINGLE_LIVE_SCREEN,
+} from "../../../../constaints/consts";
 import { UseNavigationType } from "../../../../types/use-navigation";
+import { ICON_LIVE_CHANNELS } from "../../../../constaints/icons";
 
 const { DailyRecomended } = ImagesPageComponents;
 
@@ -53,8 +58,8 @@ export const AllPageLives: FC<Props> = ({
 
   const keyExtractor = (item: Live) => item.id.toString();
 
-  const viewMoreNavigationHandler = () => {
-    // navigation.navigate("livesView");
+  const viewAllNavigationHandler = () => {
+    navigation.navigate(ALL_LIVES_SCREEN);
   };
 
   return (
@@ -63,7 +68,18 @@ export const AllPageLives: FC<Props> = ({
         <Title
           str={LIVES}
           showViewMoreButton
-          navigateHandler={viewMoreNavigationHandler}
+          navigateHandler={viewAllNavigationHandler}
+          svgIcon={
+            <ICON_LIVE_CHANNELS
+              width={24}
+              height={24}
+              style={{
+                marginRight: 8,
+                position: "relative",
+                top: 1,
+              }}
+            />
+          }
         />
       </Box>
 

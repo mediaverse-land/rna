@@ -62,7 +62,7 @@
 //   useGetLivesQuery,
 //   useGetMostViewdImagesQuery,
 //   useGetTopTenTextsQuery,
-// } from "../../../../services/explore.service";
+// } from "../../../../ explore.service";
 
 // const { ContainerStyles } = ImagesPageComponents;
 

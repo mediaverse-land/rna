@@ -27,8 +27,7 @@ export const ImagePageBestInMonth: FC<Props> = ({
   };
 
   return (
-    <Box width="100%" flex={1}>
-      <PaddingContainer>
+    <Box paddingLeft={24} width="100%" flex={1}>
         <Box marginBottom={24}>
           <Title
             str="Best in month"
@@ -44,7 +43,6 @@ export const ImagePageBestInMonth: FC<Props> = ({
             />
           </IfNoItem>
         </RenderIf>
-      </PaddingContainer>
     </Box>
   );
 };

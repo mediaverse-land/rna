@@ -67,7 +67,7 @@ export const InsertPhone: FC<Props> = ({ setWindowHandler }) => {
         setWindowHandler('singin');
     };
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data: any) => {
         setIsLoading(true);
         clearErrors();
 
@@ -82,6 +82,7 @@ export const InsertPhone: FC<Props> = ({ setWindowHandler }) => {
         const { isError, isSuccess, res, errorRes } = await signinApiHandler(
             newData
         );
+
 
         if (errorRes) {
             showErrors(errorRes?.message);

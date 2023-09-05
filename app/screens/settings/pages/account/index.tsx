@@ -10,10 +10,6 @@ import { ICON_ARROW_RIGHT } from "../../../../constaints/icons";
 import { SettingsScreenTitle } from "../../components/title";
 import { tokenContext } from "../../../../context/token";
 import { StorageService } from "../../../../services/storage.service";
-import {
-  IS_FIRST_TIME_BOTTOM_BAR_ACTION,
-  IS_FIRST_TIME_EXPLORE_NAVIGATION_BAR_ACTION,
-} from "../../../../controllers/tour-controller";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
 // import { hideExploreNavigationTour } from "../../../../slices/tour.slice";
@@ -22,7 +18,6 @@ import {
   HAS_USER_SEEN_BUY_BUTTON_TOUR,
   HAS_USER_SEEN_EXPLORE_ALL_TOUR,
   HAS_USER_SEEN_OWNER_VIDEO_TOUR,
-  HAS_USER_SEEN_OWNER_VIDEO_TOUR_____,
   HAS_USER_SEEN_PAYMENT_TOUR,
   HAS_USER_SEEN_PLUS_CREATE_FORM_TOUR,
   HAS_USER_SEEN_PLUS_TOUR,
@@ -32,7 +27,6 @@ import {
   HAS_USER_SEEN_WALLET_TOUR,
   USER_HAS_SEEN_BOTTOM_TAB_GUIDE,
   USER_HAS_SEEN_EXPLORE_TOP_BAR_TOUR_GUIDE,
-  USER_HAS_SEEN_TOP_TAB_GUIDE,
 } from "../../../../constaints/consts";
 import {
   activeDisableOnIntractions,

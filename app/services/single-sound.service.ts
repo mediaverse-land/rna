@@ -17,7 +17,6 @@ export const singleSoundService: any = createApi({
     }),
     createSingleSound: builder.mutation({
       query: (args) => {
-        console.log({args})
         return {
           url: "/audios",
           method: "POST",

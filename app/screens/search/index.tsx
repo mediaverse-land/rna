@@ -37,7 +37,6 @@ export function SearchPage() {
     return (
         <>
             <SafeAreaView style={{ flex: 1 }}>
-
                 {isFocused ? (
                     <StatusBar
                         backgroundColor={'#0c0c21'}

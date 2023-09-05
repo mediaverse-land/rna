@@ -1,14 +1,31 @@
 export interface Live {
+  id: number;
+  title: string ;
+  type: number;
+  link: string;
+  thumbnail_id: number;
+  language: string;
+  country: string;
+  description: null;
+  recording_status: number;
+  availability_status: number;
+  details: {
+    record_length: string;
+  };
+  created_at: string;
+  updated_at: string;
+  thumbnail:
+  string,
+    file: {
     id: number;
-    title: string;
+    user_id: number;
     type: number;
-    link: string;
-    image: string;
-    language: 'en' | 'fr';
-    country: 'us' | 'fr' | 'ar' | 'far';
-    be_recorded: number;
-    details: null;
+    storage: string;
+    path: string;
+    extension: string;
+    description: string;
     created_at: string;
     updated_at: string;
-    thumbnail: string;
+    url: string;
+  };
 }

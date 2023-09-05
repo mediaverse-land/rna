@@ -1,6 +1,9 @@
 import { useEffect, useState, useRef, useContext } from "react";
 import { Image, TouchableOpacity, BackHandler, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import * as ScreenOrientation from "expo-screen-orientation";
+import ViewShot, { CaptureOptions } from "react-native-view-shot";
+import { useDispatch, useSelector } from "react-redux";
 import { Box } from "../../../components/box";
 import { Text } from "../../../components/text";
 import { SINGLE_VIDEO_COVER_IMAGE_GRADIENT } from "../../../constaints/images";
@@ -8,16 +11,12 @@ import { PaddingContainer } from "../../../styles/grid";
 import { GoBackButton } from "../components/goback-button";
 import { theme } from "../../../constaints/theme";
 import { AVPlaybackStatus, ResizeMode, Video } from "expo-av";
-import * as ScreenOrientation from "expo-screen-orientation";
-import ViewShot, { CaptureOptions } from "react-native-view-shot";
-import { useDispatch, useSelector } from "react-redux";
 import { addImage } from "../../../slices/single-image.slice";
 import { Toaster } from "../../../utils/toaster";
 import { AppDispatch, RootState } from "../../../store";
 import { UseNavigationType } from "../../../types/use-navigation";
 import { setParam } from "../../../slices/plus.slice";
 import { convertVideoToSoundHandler, recordVideoHandler } from "../service";
-import { tokenContext } from "../../../context/token";
 import { tokenStringResolver } from "../../../utils/token-string-resolver";
 import { Toolbar } from "../components/toolbar";
 import { StorageService } from "../../../services/storage.service";
@@ -34,7 +33,6 @@ import {
   EDIT_SCREEN,
   HAS_USER_SEEN_OWNER_VIDEO_TOUR,
 } from "../../../constaints/consts";
-import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
 
 type Props = {
   goBackHandler: () => void;
@@ -51,7 +49,7 @@ type Props = {
   userId: number;
   forkability_status: boolean;
   isDisableEditIcon: boolean;
-
+  tokenCtx: any
 };
 
 const thumbnailHeight = 264;
@@ -84,24 +82,25 @@ export function SingleVideoHeader({
   id,
   forkability_status,
   userId,
-  isDisableEditIcon
+  isDisableEditIcon,
+  tokenCtx
 }: Props) {
-  const [isStarted, setIsStarted] = useState(false);
-
-  // Start position of video
-  const [initSeek, setInitSeek] = useState(null);
-
-  const [isTourActive, setIsTourActive] = useState(false);
-
   // rotationStatus 1 = landscape and 3 = portrait
   const [rotationStatus, setRotationStatus] = useState<1 | 3>(3);
+  // Start position of video
+  const [initSeek, setInitSeek] = useState(null);
+  const [isStarted, setIsStarted] = useState(false);
+  const [isTourActive, setIsTourActive] = useState(false);
 
   const videoRef = useRef<Video>(null);
-  
-  const navigation = useNavigation<UseNavigationType>();
   const videoAreaRef = useRef<ViewShot>(null);
 
-  const tokenCtx = useContext(tokenContext);
+  // Tour refs
+  const videoTourRef = useRef();
+  const toolbarTourRef = useRef();
+  const reportTourRef = useRef();
+
+  const navigation = useNavigation<UseNavigationType>();
   const dispatch = useDispatch<AppDispatch>();
 
   const { params } = useSelector((state: RootState) => state.plusSlice);
@@ -317,9 +316,6 @@ export function SingleVideoHeader({
 
   const hasPermission = isOwner || isSubscriber;
 
-  const videoTourRef = useRef();
-  const toolbarTourRef = useRef();
-  const reportTourRef = useRef();
 
   /**
    * Checks if user has seen the tour before or not,
@@ -402,122 +398,6 @@ export function SingleVideoHeader({
       </>
     ) : null;
 
-  // const RENDER_VIDEO_SECTION = (
-  //   <RenderIfWithoutLoading
-  //     id="render video if user is owner or subscriber"
-  //     condition={isSubscriber || isOwner}
-  //   >
-  //     {!isStarted && thumnailImageUri ? (
-  //       <>
-  //         {thumbnailCoverGradient}
-  //         {thumbnailImageElement}
-  //       </>
-  //     ) : (
-  //       <ViewShot
-  //         style={styles.viewShotStyles}
-  //         ref={videoAreaRef}
-  //         options={VIDEO_OPTIONS}
-  //       >
-  //         <Box id="video-player" width={"100%"} height={thumbnailHeight}>
-  //           <RenderIfWithoutLoading condition={videoUri ? true : false}>
-  //             <Video
-  //               shouldPlay={true}
-  //               source={{
-  //                 uri: videoUri,
-  //               }}
-  //               posterSource={{
-  //                 uri: thumnailImageUri,
-  //               }}
-  //               onFullscreenUpdate={(e) => {
-  //                 const { fullscreenUpdate }: any = e;
-  //                 setRotationStatus(fullscreenUpdate);
-  //               }}
-  //               ref={videoRef}
-  //               style={styles.videoStyles}
-  //               positionMillis={video_position}
-  //               useNativeControls
-  //               resizeMode={ResizeMode.CONTAIN}
-  //               isLooping
-  //             />
-  //           </RenderIfWithoutLoading>
-  //         </Box>
-  //       </ViewShot>
-  //     )}
-  //   </RenderIfWithoutLoading>
-  // );
-
-  // const renderStartButtonIfVideoNotStarted = (
-  //   <RenderIfWithoutLoading condition={!isStarted}>
-  //     <Box position="absolute" zIndex={11} bottom={24} left={24}>
-  //       <ICON_VIDEO_WHITE style={styles.iconVideoWhiteStyles} />
-  //     </Box>
-  //     <Box position="absolute" zIndex={11} left="47%" top="46%">
-  //       {isOwner || isSubscriber ? (
-  //         <TouchableOpacity activeOpacity={1} onPress={startVideo}>
-  //           <ICON_VIDEO_PLAY style={styles.iconVideoPlayerStyles} />
-  //         </TouchableOpacity>
-  //       ) : null}
-  //     </Box>
-  //   </RenderIfWithoutLoading>
-  // );
-
-  // return (
-  //   <Box position="relative" zIndex={20}>
-  //     <Box>
-  //       {/* Go back button */}
-  //       <GoBackButton
-  //         goBackHandler={_goBackHandler}
-  //         hasBackground={true}
-  //         isOwner={isOwner}
-  //       />
-  //       {/* Video and thumbnail section */}
-  //       <CoachmarkWrapper
-  //         allowBackgroundInteractions={false}
-  //         ref={videoTourRef}
-  //         message={VIDEO_TOUR_GUIDE}
-  //       >
-  //         <Box width="100%" height={thumbnailHeight}>
-  //           {RENDER_VIDEO_SECTION}
-  //           {RENDER_THUMBNAIL_IF_USER_NOT_OWNER}
-  //         </Box>
-  //       </CoachmarkWrapper>
-
-  //       {renderStartButtonIfVideoNotStarted}
-  //     </Box>
-  //     {/* Title */}
-  //     <Box>
-  //       <PaddingContainer>
-  //         {/* Render toolbar if user is owner or subscriber */}
-  //         <RenderIfWithoutLoading condition={videoUri ? true : false}>
-  //           <CoachmarkWrapper
-  //             allowBackgroundInteractions={false}
-  //             ref={toolbarTourRef}
-  //             message={TOOLBAR_GUIDE}
-  //           >
-  //             <Toolbar toolbarList={TOOLABR_OPTIONS} />
-  //           </CoachmarkWrapper>
-  //         </RenderIfWithoutLoading>
-  //         <Box direction="row" alignItems="center">
-  //           {/* Content title */}
-  //           <Box flex={1} marginTop={!videoUri ? 24 : 0}>
-  //             <Text
-  //               color={theme.color.light.WHITE}
-  //               fontSize={20}
-  //               lineHeight={20}
-  //               fontWeight={600}
-  //             >
-  //               {contentName}
-  //             </Text>
-  //           </Box>
-  //           <ReportSection
-  //             openReportModalHandler={openReportModalHandler}
-  //             reportTourRef={reportTourRef}
-  //           />
-  //         </Box>
-  //       </PaddingContainer>
-  //     </Box>
-  //   </Box>
-  // );
   return (
     <Box position="relative" zIndex={20}>
       <Box>
@@ -531,7 +411,7 @@ export function SingleVideoHeader({
           ref={videoTourRef}
           message={VIDEO_TOUR_GUIDE}
         >
-          <Box  width="100%" height={thumbnailHeight}>
+          <Box width="100%" height={thumbnailHeight}>
             {isSubscriber || isOwner ? (
               <>
                 {!isStarted && thumnailImageUri ? (

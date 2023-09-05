@@ -44,6 +44,18 @@ export const exploreService: any = createApi({
         };
       },
     }),
+    getBestVideos: builder.query({
+      query: (args) => {
+        return {
+          url: "videos/most-viewed",
+          method: "GET",
+          headers: {
+            // Authorization: `Bearer ${args.token}`
+            "X-App": "_ReactNative",
+          },
+        };
+      },
+    }),
     getChillSongs: builder.query({
       query: (args) => {
         return {
@@ -61,6 +73,7 @@ export const exploreService: any = createApi({
 
 export const {
   useGetLivesQuery,
+  useGetBestVideosQuery,
   useGetMostViewdImagesQuery,
   useGetTopTenTextsQuery,
   useGetChillSongsQuery

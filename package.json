@@ -1,6 +1,6 @@
 {
   "name": "mediaverse",
-  "version": "0.0.01",
+  "version": "0.0.02",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -10,6 +10,9 @@
     "prepare": "husky install",
     "prettier:write": "npx prettier --write **/*.{js,jsx,ts,tsx,json} && npx prettier --write *.{js,jsx,ts,tsx,json}",
     "lint": "tsc --noEmit && eslint --ext .js,.jsx,.ts,.tsx ./"
+  },
+  "overrides": {
+    "react-devtools-core": "~4.25.0"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.4.6",
@@ -25,6 +28,7 @@
     "@react-navigation/native-stack": "^6.9.12",
     "@react-navigation/stack": "^6.3.16",
     "@reduxjs/toolkit": "^1.9.5",
+    "@shopify/flash-list": "1.4.0",
     "@types/react-native": "^0.69.21",
     "axios": "^1.4.0",
     "base64-arraybuffer": "^1.0.2",
@@ -50,6 +54,9 @@
     "expo-notifications": "~0.18.1",
     "expo-screen-capture": "~5.1.1",
     "expo-screen-orientation": "~5.1.1",
+    "expo-sharing": "~11.2.2",
+    "expo-sqlite": "~11.1.1",
+    "expo-sqlite-orm": "^1.6.0",
     "expo-status-bar": "~1.4.4",
     "expo-web-browser": "~12.1.1",
     "react": "18.2.0",
@@ -74,8 +81,7 @@
     "react-native-webview": "11.26.0",
     "react-redux": "^8.1.1",
     "rn-tourguide": "^3.3.0",
-    "styled-components": "^5.3.10",
-    "@shopify/flash-list": "1.4.0"
+    "styled-components": "^5.3.10"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

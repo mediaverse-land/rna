@@ -1,4 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { Image } from "../types/image";
+import { tokenStringResolver } from "../utils/token-string-resolver";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const _getToken = async () => {
+  const formattedToken = await tokenStringResolver(await AsyncStorage.getItem('user_data'));
+  return formattedToken
+};
 
 export const singleImageService: any = createApi({
   reducerPath: "singleImageService",
@@ -6,12 +14,12 @@ export const singleImageService: any = createApi({
     baseUrl: "https://api.mediaverse.land/v2",
   }),
   endpoints: (builder) => ({
-    getSingleImage: builder.query({
+    getSingleImage: builder.query<Image, {id: number}>({
       query: (args) => {
         return {
           url: `images/${args.id}`,
           method: "GET",
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: { Authorization: `Bearer ${_getToken}` },
         };
       },
     }),

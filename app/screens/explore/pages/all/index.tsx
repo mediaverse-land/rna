@@ -11,12 +11,14 @@ import { AllPageLives } from "./lives";
 import { RootState } from "../../../../store";
 import { ImagesPageComponents } from "./style";
 import {
+  useGetBestVideosQuery,
   useGetChillSongsQuery,
   useGetLivesQuery,
   useGetMostViewdImagesQuery,
   useGetTopTenTextsQuery,
 } from "../../../../services/explore.service";
 import { UseNavigationType } from "../../../../types/use-navigation";
+import { ExplorePageBestVideos } from "./best-videos";
 
 const { ContainerStyles } = ImagesPageComponents;
 
@@ -28,6 +30,14 @@ export function AllPage({ navigation }: { navigation: UseNavigationType }) {
     isLoading: _isLivesLoading,
     refetch: refreshLives,
   } = useGetLivesQuery();
+
+  const {
+    data: _bestVideosData,
+    isError: _isBestVideosError,
+    isSuccess: _isBestVideosSuccess,
+    isLoading: _isBestVideosLoading,
+    refetch: refreshBestVideos,
+  } = useGetBestVideosQuery();
 
   const {
     data: _imagesData,
@@ -65,6 +75,7 @@ export function AllPage({ navigation }: { navigation: UseNavigationType }) {
     refetchImages();
     refetchTopTenText();
     regreshChillSongs();
+    refreshBestVideos();
   };
 
   return (
@@ -80,6 +91,12 @@ export function AllPage({ navigation }: { navigation: UseNavigationType }) {
             navigation={navigation}
             isLoading={_isLivesLoading}
             data={_livesData || []}
+            disableOnIntractions={DISABLE_INTRACTION}
+          />
+          <ExplorePageBestVideos
+            navigation={navigation}
+            isLoading={_isBestVideosLoading}
+            data={_bestVideosData || []}
             disableOnIntractions={DISABLE_INTRACTION}
           />
           <AllPageMostViewed
@@ -113,6 +130,6 @@ const styles = StyleSheet.create({
   },
   space: {
     width: "100%",
-    height: 350,
+    height: 280,
   },
 });

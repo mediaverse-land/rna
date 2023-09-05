@@ -1,9 +1,7 @@
 import { useState, useContext, useEffect } from "react";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { SoundsPageBestInMonth } from "./best-in-month";
-import { TextPageSwiper } from "./swiper";
-import { TextPageBestWriters } from "./best-writers";
 import { VirtualizedList } from "../../../../components/virtualized-list";
 import { Spacer } from "../../../../components/spacer";
 import { tokenContext } from "../../../../context/token";
@@ -14,51 +12,81 @@ import { FocusedStatusBar } from "../../../../components/focused-statusbar";
 import { getTextDataApiHandler } from "./service";
 import { ImagesPageComponents } from "../all/style";
 import type { Text } from "../../../../types/text";
+import { UseNavigationType } from "../../../../types/use-navigation";
+import { SoundsPageRecently } from "./recently";
 
 const { ContainerStyles } = ImagesPageComponents;
 
 export function TextsPage() {
   const isFocused = useIsFocused();
   const tokenCtx = useContext(tokenContext);
+  const navigation = useNavigation<UseNavigationType>();
 
-  const [data, setData] = useState<Text[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [bestInMonthData, setBestInMothData] = useState<Text[]>([]);
+  const [isBestInMonthLoading, setIsBestInMonthLoading] = useState(true);
+
+  const [recentlyData, setRecentlyData] = useState<Text[]>([]);
+  const [isRecentlyLoading, setIsRecentlyLoading] = useState(true);
 
   useEffect(() => {
-    if(isFocused){
-        getData();
+    if (isFocused) {
+      getData();
     }
-}, [isFocused]);
 
-  async function getData(): Promise<void> {
+    if (!isFocused) {
+      setBestInMothData([]);
+      setRecentlyData([]);
+    }
+  }, [isFocused]);
+
+  const getData = async () => {
+    Promise.all([
+      await getApiDataData(
+        "/texts/newest",
+        setBestInMothData,
+        setIsBestInMonthLoading
+      ),
+      await getApiDataData("/texts", setRecentlyData, setIsRecentlyLoading),
+    ]);
+
+  };
+
+  async function getApiDataData(
+    url: string,
+    setter: (...args: any) => void,
+    loadSetter: (isLoading: boolean) => void
+  ): Promise<void> {
+    loadSetter(true);
     const token = await tokenCtx.getToken();
 
     if (token === null) {
-      setIsLoading(false);
+      loadSetter(false);
       return null;
     }
 
     const formattedToken = tokenStringResolver(token);
 
-    const { isError, res } = await getTextDataApiHandler(formattedToken);
+    const { isError, res } = await getTextDataApiHandler(url, formattedToken);
 
     if (isError) {
-      setIsLoading(false);
+      loadSetter(false);
       return;
     }
 
     if (res) {
       const { data } = res;
-      setData(data);
+      setter(data);
     }
 
-    setIsLoading(false);
+    loadSetter(false);
   }
 
   const _onRefreshHandler = async () => {
-    setIsLoading(true)
-    setData([]);
-    await getData()
+    // setIsLoading(true);
+    // setData([]);
+    setRecentlyData([]);
+    setBestInMothData([]);
+    await getData();
   };
 
   return (
@@ -70,9 +98,19 @@ export function TextsPage() {
         start={{ x: 0.7, y: 0 }}
       >
         <VirtualizedList paddingTop={197} onRefresh={_onRefreshHandler}>
-          <RenderIf condition={isLoading}>
-            <IfNoItem dataLength={data.length}>
-              <SoundsPageBestInMonth data={data} />
+          <RenderIf condition={isBestInMonthLoading}>
+            <IfNoItem dataLength={bestInMonthData.length}>
+              <SoundsPageBestInMonth data={bestInMonthData} />
+              {/* <TextPageSwiper data={data} />
+              <TextPageBestWriters /> */}
+            </IfNoItem>
+          </RenderIf>
+          <RenderIf condition={isRecentlyLoading}>
+            <IfNoItem dataLength={recentlyData?.data?.length}>
+              <SoundsPageRecently
+                data={recentlyData?.data}
+                navigation={navigation}
+              />
               {/* <TextPageSwiper data={data} />
               <TextPageBestWriters /> */}
             </IfNoItem>

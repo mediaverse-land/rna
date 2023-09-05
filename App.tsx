@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Alert, StatusBar } from "react-native";
 import { AlertContextProvider } from "./app/context/alert";
 import { TokenContextProvider } from "./app/context/token";
@@ -9,7 +8,9 @@ import { ClickOutsideProvider } from "react-native-click-outside";
 import { CopilotProvider } from "react-native-copilot";
 import store from "./app/store";
 import messaging from "@react-native-firebase/messaging";
-import {usePreventScreenCapture} from 'expo-screen-capture'
+import * as ScreenCapture from "expo-screen-capture";
+import { useEffect } from "react";
+import { ScreenController } from "./app/controllers/screen.controller";
 
 const firebaseConfig = {
   apiKey:
@@ -23,8 +24,15 @@ const firebaseConfig = {
   measurementId: "G-measurement-id",
 };
 
+
+const _screenController = new ScreenController();
+
+_screenController.preventScreenShot();
+
+
 export default function App() {
-  usePreventScreenCapture()
+  // usePreventScreenCapture();
+
   // const requestUserPermission = async () => {
   //   const authStatus = await messaging().requestPermission();
   //   const enabled =
@@ -77,7 +85,6 @@ export default function App() {
   //   messaging().setBackgroundMessageHandler(async (remoteMessage) => {
   //     console.log("Message handled in the background!", remoteMessage);
   //   });
-
 
   //   // Listening to messages
   //   const unsubscribe = messaging().onMessage(async remoteMessage => {

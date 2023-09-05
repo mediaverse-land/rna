@@ -4,7 +4,7 @@ export const MasonryComponents = {
     MasonryWrapper: styled.View`
         flex: 1;
         width: 100%;
-        margin-top: 40px;
+        margin-top: 24px;
     `,
     MasonryRow: styled.View`
         flex-direction: row;

@@ -68,8 +68,6 @@ export function PaymentScreen({ navigation, route }: any) {
     setIsLoading(() => false);
   };
 
-  console.log({ isLoading });
-
   const wallet = (userData && userData?.wallets && userData?.wallets[0]) || 0;
 
   return (

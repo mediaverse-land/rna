@@ -14,7 +14,7 @@ export function SoundsPageBestInMonth({ data }: Props) {
 
   return (
     <Box flex={1} paddingLeft={24}>
-      <Box marginRight={32}>
+      <Box marginRight={32} >
         <Title str="Best in month" />
       </Box>
       <TextSlider data={data} isLoading={false} navigation={navigation} />

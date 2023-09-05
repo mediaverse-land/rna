@@ -33,8 +33,7 @@ export function RadioButton({ labelText, dataList, defaultOption, getSelectedOpt
 
   useEffect(() => {
     getSelectedOption(selectedItem)
-  }, [selectedItem])
-
+  }, [selectedItem]);
 
   const renderDataList = dataList
     ? Array.isArray(dataList)

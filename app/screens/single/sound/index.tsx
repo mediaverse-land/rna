@@ -39,10 +39,13 @@ import { PaddingContainer } from "../../../styles/grid";
 import { AUDIO_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
 import { EDIT_SCREEN } from "../../../constaints/consts";
 import { ModalBottomSheet } from "../../../components/bottom-sheet-modal";
-import SelectLanguage from "../components/select-language";
+import SelectLanguageBottomSheet from './../../../components/select-language'
+
+let counter = 0;
 
 export function SingleSoundScreen({ navigation, route }: any) {
   const { id } = route.params;
+
 
   const [openReportModal, setOpenReportModal] = useState(false);
   const [data, setData] = useState<Sound>(null);
@@ -128,7 +131,6 @@ export function SingleSoundScreen({ navigation, route }: any) {
     await getSingleData(formattedToken);
     setIsLoading(false);
   };
-  console.log({ id: data?.id });
 
   const getSingleData = async (token: string) => {
     const shouldSearchByAssetId = route.params?.saech__asset_id ? true : false;
@@ -286,13 +288,6 @@ export function SingleSoundScreen({ navigation, route }: any) {
       ]
     : null;
 
-  // const eligible_for_audio_extraction =
-  //   data?.asset?.eligible_for_audio_extraction;
-  // const eligible_for_image_extraction =
-  //   data?.asset?.eligible_for_image_extraction;
-  // const eligible_for_video_extraction =
-  //   data?.asset?.eligible_for_video_extraction;
-
   const navigateToEditScreen = () => {
     navigation.navigate(EDIT_SCREEN, {
       id: data?.id,
@@ -305,7 +300,6 @@ export function SingleSoundScreen({ navigation, route }: any) {
 
   const hasEditPermission =
     data?.asset?.forkability_status === 2 ? true : false;
-  console.log({ forkability_status: data?.asset?.forkability_status });
 
   const toolbarOptions = [
     {
@@ -343,6 +337,8 @@ export function SingleSoundScreen({ navigation, route }: any) {
 
   const hasPermission = isOwner || isSubscriber;
   const snapPoints = useMemo(() => ["25%", "50%"], []);
+
+  console.log('counting re-renders', (counter += 1));
 
   return (
     <>
@@ -426,7 +422,7 @@ export function SingleSoundScreen({ navigation, route }: any) {
             height: 1000,
           }}
         >
-          <SelectLanguage
+          <SelectLanguageBottomSheet
             isFocused={isFocused}
             setSelectedLanguage={setSelectedLanguage}
           />

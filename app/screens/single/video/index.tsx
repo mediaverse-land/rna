@@ -1,4 +1,4 @@
-import { StatusBar } from "react-native";
+import { useContext, useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useIsFocused } from "@react-navigation/native";
@@ -7,9 +7,7 @@ import { Box } from "../../../components/box";
 import { SingleVideoContent } from "./content";
 import { CommentCard } from "../../../components/comment-card";
 import { BuyBottom } from "../components/buy-button";
-import { useContext, useEffect, useRef, useState } from "react";
 import { tokenContext } from "../../../context/token";
-import { tokenStringResolver } from "../../../utils/token-string-resolver";
 import { VirtualizedList } from "../../../components/virtualized-list";
 import { RenderIf } from "../../../components/render-if";
 import { MetaDataType } from "../components/item-metadata";
@@ -22,20 +20,13 @@ import { SingleItemFiles } from "../components/files";
 import { useClickOutside } from "react-native-click-outside";
 import { ReportModal } from "../components/report-modal";
 import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store";
-import { StorageService } from "../../../services/storage.service";
 import { retriveToken } from "../../../utils/retrive-token";
-import { useTourGuideController } from "rn-tourguide";
 import { FocusedStatusBar } from "../../../components/focused-statusbar";
 import { VIDEO_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
 
 export function SingleVideoScreen({ navigation, route }: any) {
   const { id } = route.params;
-
   const isFocused = useIsFocused();
-  // const dispatch = useDispatch<AppDispatch>();
-  // const state = useSelector((state: RootState) => state.tourSlice);
 
   const [data, setData] = useState<Video>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -52,9 +43,6 @@ export function SingleVideoScreen({ navigation, route }: any) {
 
   const tokenCtx = useContext(tokenContext);
   const userCtx = useContext(userContext);
-  const videoRef = useRef<any>(null);
-
-  // const hasPermission = isOwner || isSubscriber;
 
   useEffect(() => {
     getData();
@@ -146,9 +134,6 @@ export function SingleVideoScreen({ navigation, route }: any) {
 
   const price = data?.asset?.price || null;
 
-  const hasEditPermission =
-    data?.asset?.forkability_status === 2 ? true : false;
-
   const metaDataList: MetaDataType[] =
     [
       {
@@ -181,11 +166,6 @@ export function SingleVideoScreen({ navigation, route }: any) {
   const isDisableEditIcon =
     data?.asset?.user?.id === _currentUserId ? false : true;
 
-  // const eligible_for_audio_extraction =
-  //     data?.asset?.eligible_for_audio_extraction,
-  //   eligible_for_image_extraction = data?.asset?.eligible_for_image_extraction,
-  //   eligible_for_video_extraction = data?.asset?.eligible_for_video_extraction;
-
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <FocusedStatusBar />
@@ -195,10 +175,10 @@ export function SingleVideoScreen({ navigation, route }: any) {
             <Box width="100%">
               <RenderIfWithoutLoading condition={data ? true : false}>
                 <SingleVideoHeader
-                  videoRef={videoRef}
                   thumnailImageUri={thumnailImageUri}
                   goBackHandler={goBackHandler}
                   contentName={data?.name || ""}
+                  tokenCtx={tokenCtx}
                   isOwner={isOwner === true ? true : false}
                   isSubscriber={isSubscriber === true ? true : false}
                   videoUri={videoUri}

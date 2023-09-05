@@ -5,6 +5,7 @@ import { Asset } from "../../../../types/asset";
 import { Box } from "../../../../components/box";
 import { LoadingSpinner } from "../../../../components/loader-spinner";
 import { Text } from "../../../../components/text";
+import { UseNavigationType } from "../../../../types/use-navigation";
 
 type Props = {
   isLoading: boolean;

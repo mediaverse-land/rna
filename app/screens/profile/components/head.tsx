@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Image, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity, Text as NativeText } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
@@ -14,7 +14,6 @@ import { LoadingSpinner } from "../../../components/loader-spinner";
 import { User } from "../../../types/user";
 import { userContext } from "../../../context/user";
 import { PROFILE_IMAGE } from "../../../constaints/images";
-import { getProfileStaticsApiHandler } from "../service";
 import { tokenContext } from "../../../context/token";
 import { tokenStringResolver } from "../../../utils/token-string-resolver";
 import { ProfileStatic } from "../../../types/profile-static";
@@ -81,7 +80,7 @@ export function ProfileScreenHead() {
   const dispatch = useDispatch<AppDispatch>();
 
   const [allowIntraction, setAllowIntraction] = useState(false);
-  const [token,setToken] = useState('')
+  const [token, setToken] = useState("");
 
   const [profileStaticsData, setProfileStaticsData] =
     useState<ProfileStatic>(initialState);
@@ -113,19 +112,16 @@ export function ProfileScreenHead() {
     );
   }
 
-  const {data, isLoading, isError, isFetching, error} = useGetUserProfileQuery({token},
-    // pollingInterval: 3000,
-    // refetchOnMountOrArgChange: true,
-    // skip: false,
-
+  const { data, isLoading, isError, isFetching, error } =
+    useGetUserProfileQuery(
+      { token }
     );
 
-  console.log({data, isLoading, isError, isFetching, error})
+  console.log({ data, isLoading, isError, isFetching, error });
 
   useEffect(() => {
     getData();
   }, []);
-
 
   const getData = async () => {
     const token = await tokenCtx.getToken();
@@ -135,7 +131,7 @@ export function ProfileScreenHead() {
     }
 
     const formattedToken = tokenStringResolver(token);
-    setToken(formattedToken)
+    setToken(formattedToken);
 
     // await getProfileStaticsData(formattedToken);
   };
@@ -440,45 +436,80 @@ export function ProfileScreenHead() {
               justifyContent="space-evenly"
               marginTop={20}
             >
-              {subscriptionOwnerTabItems.map((item) => {
+              {/* {subscriptionOwnerTabItems.map((item) => {
                 const activeSubscribeItem =
-                  (item.id === 1 && ACTIVE_PAGE === "subscribe") || false;
+                  item.id === 1 && ACTIVE_PAGE === "subscribe";
                 const activeOwnershipItem =
-                  (item.id === 2 && ACTIVE_PAGE === "ownership") || false;
+                  item.id === 2 && ACTIVE_PAGE !== "subscribe";
 
-                return (
-                  <TouchableOpacity
-                    key={item.id}
-                    activeOpacity={1}
-                    onPress={() => handleProfilePage(item.id)}
+                // const activeSubscribeItem =
+                //   (item.id === 1 && ACTIVE_PAGE === "subscribe") || false;
+                // const activeOwnershipItem =
+                //   (item.id === 2 && ACTIVE_PAGE === "ownership") || false;
+
+                return ( */}
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={() => handleProfilePage(1)}
+              >
+                <Box
+                  paddingBottom={16}
+                  additionalStyles={{
+                    borderBottomWidth: ACTIVE_PAGE === "subscribe" ? 2 : 0,
+                    borderBottomColor:
+                      ACTIVE_PAGE === "subscribe"
+                        ? theme.color.light.PRIMARY
+                        : "transparet",
+                  }}
+                >
+                  <NativeText
+                    style={[
+                      ACTIVE_PAGE === "subscribe"
+                        ? { color: "#D9D9FF" }
+                        : { color: "#666680" },
+                      {
+                        fontSize: 14,
+                        lineHeight: 16,
+                        fontWeight: "400",
+                      },
+                    ]}
                   >
-                    <Box
-                      paddingBottom={16}
-                      additionalStyles={{
-                        borderBottomWidth:
-                          activeSubscribeItem || activeOwnershipItem ? 2 : 0,
-                        borderBottomColor:
-                          activeSubscribeItem || activeOwnershipItem
-                            ? theme.color.light.PRIMARY
-                            : 'transparent',
-                      }}
-                    >
-                      <Text
-                        color={
-                          activeSubscribeItem || activeOwnershipItem
-                            ? SUBSCRIPTION_OWNER_TAB_STYLES.activeColor
-                            : SUBSCRIPTION_OWNER_TAB_STYLES.deActiveColor
-                        }
-                        fontSize={SUBSCRIPTION_OWNER_TAB_STYLES.fontSize}
-                        lineHeight={SUBSCRIPTION_OWNER_TAB_STYLES.lineHeight}
-                        fontWeight={SUBSCRIPTION_OWNER_TAB_STYLES.fontWeight}
-                      >
-                        {item.title}
-                      </Text>
-                    </Box>
-                  </TouchableOpacity>
-                );
-              })}
+                    {"Subscribe"}
+                  </NativeText>
+                </Box>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={() => handleProfilePage(2)}
+              >
+                <Box
+                  paddingBottom={16}
+                  additionalStyles={{
+                    borderBottomWidth: ACTIVE_PAGE === "ownership" ? 2 : 0,
+                    borderBottomColor:
+                      ACTIVE_PAGE === "ownership"
+                        ? theme.color.light.PRIMARY
+                        : "transparet",
+                  }}
+                >
+                  <NativeText
+                    style={[
+                      ACTIVE_PAGE === "ownership"
+                        ? { color: "#D9D9FF" }
+                        : { color: "#666680" },
+                      {
+                        fontSize: 14,
+                        lineHeight: 16,
+                        fontWeight: "400",
+                      },
+                    ]}
+                  >
+                    {"Ownership"}
+                  </NativeText>
+                </Box>
+              </TouchableOpacity>
+              {/* );
+              })} */}
             </Box>
           </PaddingContainer>
         </LinearGradient>

@@ -222,10 +222,17 @@ export const ICON_FORM_ERROR = ICON_FORM_ERROR_PATH;
 import ICON_SEARCH_WHITE_PATH from "./../../assets/icons/icon__search-white.svg";
 export const ICON_SEARCH_WHITE = ICON_SEARCH_WHITE_PATH;
 
+
 import ICON_FOLDER_WHITE_PATH from "./../../assets/icons/icon__folder-white.svg";
 export const ICON_FOLDER_WHITE = ICON_FOLDER_WHITE_PATH;
 
 //
+import ICON_LIVE_CHANNELS_PATH from "./../../assets/icons/icon_live-channels-svg.svg";
+export const ICON_LIVE_CHANNELS = ICON_LIVE_CHANNELS_PATH;
+
+import ICON_FILTER_PATH from "./../../assets/icons/icon_filter-svg.svg";
+export const ICON_FILTER = ICON_FILTER_PATH;
+
 import ICON_CREATE_IMAGE_RESULT_BG_PATH from "./../../assets/icons/create_image_result_bg.svg";
 export const ICON_CREATE_IMAGE_RESULT_BG = ICON_CREATE_IMAGE_RESULT_BG_PATH;
 
@@ -246,6 +253,10 @@ export const ICON_TAKE_PHOTO_LIGHT = ICON_TAKE_PHOTO_LIGHT_PATH;
 
 import ICON_RECORD_VOIC_ACTIVE_PATH from "./../../assets/icons/icon__record-voice-light.svg";
 export const ICON_RECORD_VOIC_ACTIVE = ICON_RECORD_VOIC_ACTIVE_PATH;
+
+import ICON_RECORD_VOIC_IS_RECORDING_PATH from "./../../assets/icons/icon__record-voice-is-recording.svg";
+export const ICON_RECORD_VOIC_IS_RECORDING = ICON_RECORD_VOIC_IS_RECORDING_PATH;
+
 
 import ICON_RECORD_VOICE_LIGHT_PATH from "./../../assets/icons/icon__record-voice-light.svg";
 export const ICON_RECORD_VOICE_LIGHT = ICON_RECORD_VOICE_LIGHT_PATH;

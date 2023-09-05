@@ -5,30 +5,31 @@ import { Box } from "../../../components/box";
 import type { Image as ImageType } from "../../../types/image";
 import { PaddingContainer } from "../../../styles/grid";
 import { windowSize } from "../../../utils/window-size";
-import { FlatList, Image, TouchableOpacity } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 import { UserNameCard } from "../../../components/username-card";
-import { SINGLE_IMAGE_SCREEN, SINGLE_TEXT_SCREEN } from "../../../constaints/consts";
 import { PROFILE_ONE, TEXT_SLIDER_COVER_BG } from "../../../constaints/images";
 import { navigateTo } from "../utils/navigate-to-single-screen";
+import { Text as TextType } from "../../../types/text";
 
 type Props = {
-  data: ImageType[];
+  data: TextType[];
   navigate: (...args: any) => void;
+  marginTop?: number;
 };
 
 const { width: WINDOW_WIDTH } = windowSize();
 
-const itemWidth = Math.floor(WINDOW_WIDTH) / 2 - 40;
+const itemWidth = Math.floor(WINDOW_WIDTH) / 2 - 32;
 
 const theme_text_color = "#CCCCFF";
 const title_text_size = 16;
 const username_text_size = 12;
 
-const ViewAllTextsList = ({ data, navigate }: Props) => {
-  const renderItem = ({ item }: { item: ImageType }) => {
+const ViewAllTextsList = ({ data, navigate, marginTop }: Props) => {
+  const renderItem = ({ item }: { item: TextType }) => {
     return (
       <TouchableOpacity
-        onPress={() => navigateTo.singleText({navigate, id: item.id})}
+        onPress={() => navigateTo.singleText({ navigate, id: item.id })}
         activeOpacity={1}
       >
         <Box
@@ -49,7 +50,7 @@ const ViewAllTextsList = ({ data, navigate }: Props) => {
               {item.name}
             </Text>
           </Box>
-          <Box id="description" marginTop={8} height={48}>
+          <Box id="description" marginTop={8} height={42}>
             <Text
               color="#666680"
               lineHeight={title_text_size}
@@ -75,9 +76,9 @@ const ViewAllTextsList = ({ data, navigate }: Props) => {
             />
           </Box>
           <TEXT_SLIDER_COVER_BG
+            width="130%"
+            height="130%"
             style={{
-              width: "101%",
-              height: 163,
               position: "absolute",
               top: 0,
               left: 0,
@@ -88,18 +89,20 @@ const ViewAllTextsList = ({ data, navigate }: Props) => {
     );
   };
 
-  const keyExtractor = (item: ImageType) => item.id.toString();
+  const keyExtractor = (item: TextType) => item.id.toString();
 
   return (
-    <Box marginTop={56}>
+    <Box marginTop={marginTop ? marginTop : 56}>
       <PaddingContainer>
-        <FlashList
+        <FlatList
           style={{ justifyContent: "space-between" }}
+          contentContainerStyle={{ justifyContent: "space-between" }}
+          columnWrapperStyle={{ justifyContent: "space-between" }}
           data={data}
           numColumns={2}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
-          estimatedItemSize={20}
+          // estimatedItemSize={20}
           onEndReached={() => console.log("onEndReached")}
         />
       </PaddingContainer>

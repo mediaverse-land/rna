@@ -9,8 +9,8 @@ import { PaddingContainer } from "../../styles/grid";
 import { StorageService } from "../../services/storage.service";
 import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
 import { HAS_USER_SEEN_APPS_TOUR } from "../../constaints/consts";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
 import {
   activeDisableOnIntractions,
   deActivrDisableOnIntractions,
@@ -22,12 +22,12 @@ const TOUR_GUIDE =
 const _storageService = new StorageService();
 
 export function AppsPageAllScreen() {
-  const { DISABLE_INTRACTION } = useSelector(
-    (state: RootState) => state.tourSlice
-  );
+  // const { DISABLE_INTRACTION } = useSelector(
+  //   (state: RootState) => state.tourSlice
+  // );
 
   const dispatch = useDispatch<AppDispatch>();
-  // useEffect(() => {}, [])
+
   const isFocused = useIsFocused();
 
   const firstAppItemRef = useRef();

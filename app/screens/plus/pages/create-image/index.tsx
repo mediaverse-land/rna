@@ -18,7 +18,7 @@ import { Toaster } from "../../../../utils/toaster";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../store";
 import { removeImage } from "../../../../slices/single-image.slice";
-import { FileSystemController } from "../../../../controllers/file-system-controller";
+import { FileSystemController } from "../../../../controllers/file-system.controller";
 import { uploadHandler } from "../../service";
 import { useCreateSingleVideoMutation } from "../../../../services/single.video.service";
 import {

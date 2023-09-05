@@ -1,9 +1,11 @@
 export const DAILY_RECOMMENDED = "Daily recommended";
 export const CHILL_SONGS = "Best songs";
 export const MOST_VIEWED = "Most viewed";
+export const BEST_VIDEOS = "Best videos";
 export const TOP_TEN_TEXTS = "Top texts";
 export const AUTH_SCREEN = "AuthScreen";
-export const LIVES = "Lives";
+export const LIVES = "Live channels";
+export const OTHER_CAHNNELS = "Other channel";
 
 export const APP_STACK = "AppStack";
 export const SEARCH_STACK = "Search";
@@ -19,10 +21,11 @@ export const WALLET_STACK = "WalletScreen";
 export const SINGLE_LIVE_SCREEN = "SingleLiveScreen";
 
 export const EDIT_SCREEN = "EditScreen";
-export const EDIT_TEXT_SCREEN =  "EditTextScreen";
+export const EDIT_TEXT_SCREEN = "EditTextScreen";
 export const EDIT_SOUND_SCREEN = "EditSoundScreen";
 export const EDIT_VIDEO_SCREEN = "EditVideoScreen";
 
+export const ALL_LIVES_SCREEN = "AllLivesScreen";
 
 export const USER_HAS_SEEN_BOTTOM_TAB_GUIDE = "USER_HAS_SEEN_BOTTOM_TAB_GUIDE";
 export const USER_HAS_SEEN_EXPLORE_TOP_BAR_TOUR_GUIDE =

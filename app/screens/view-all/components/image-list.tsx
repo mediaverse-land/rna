@@ -5,10 +5,9 @@ import { Box } from "../../../components/box";
 import type { Image as ImageType } from "../../../types/image";
 import { PaddingContainer } from "../../../styles/grid";
 import { windowSize } from "../../../utils/window-size";
-import { Image, TouchableOpacity } from "react-native";
+import { FlatList, Image, TouchableOpacity } from "react-native";
 import { theme } from "../../../constaints/theme";
 import { UserNameCard } from "../../../components/username-card";
-import { SINGLE_IMAGE_SCREEN } from "../../../constaints/consts";
 import {
   HORIZONTAL_SLIDER_GRADIENT,
   PROFILE_ONE,
@@ -22,7 +21,7 @@ type Props = {
 
 const { width: WINDOW_WIDTH } = windowSize();
 
-const itemWidth = Math.floor(WINDOW_WIDTH) / 2 - 40;
+const itemWidth = Math.floor(WINDOW_WIDTH) / 2 - 38;
 
 const theme_text_color = theme.color.light.TEXT;
 const title_text_size = 16;
@@ -32,7 +31,7 @@ const ViewAllImageList = ({ data, navigate }: Props) => {
   const renderItem = ({ item }: { item: ImageType }) => {
     return (
       <TouchableOpacity
-        onPress={() => navigateTo.singleImage({navigate, id: item.id})}
+        onPress={() => navigateTo.singleImage({ navigate, id: item.id })}
         activeOpacity={1}
       >
         <Box
@@ -101,13 +100,15 @@ const ViewAllImageList = ({ data, navigate }: Props) => {
   return (
     <Box marginTop={56}>
       <PaddingContainer>
-        <FlashList
-          style={{ justifyContent: "space-between" }}
+        <FlatList
+          contentContainerStyle={{ justifyContent: "space-between" }}
+          columnWrapperStyle={{ justifyContent: "space-between" }}
+          // contentContainerStyle={{ justifyContent: "space-between" }}
           data={data}
           numColumns={2}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
-          estimatedItemSize={15}
+          // estimatedItemSize={15}
           onEndReached={() => console.log("onEndReached")}
         />
       </PaddingContainer>

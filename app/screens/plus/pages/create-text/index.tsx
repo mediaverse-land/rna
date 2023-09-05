@@ -6,7 +6,7 @@ import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { ScreenGradient } from "../../../../components/screen-gradient";
 import { CREATE_TEXT } from "../../constaints";
 import { createTextFormStructure } from "./form-structure";
-import { FileSystemController } from "../../../../controllers/file-system-controller";
+import { FileSystemController } from "../../../../controllers/file-system.controller";
 import { useContext, useEffect, useState } from "react";
 import { tokenContext } from "../../../../context/token";
 import { userContext } from "../../../../context/user";

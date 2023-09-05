@@ -12,6 +12,8 @@ import profileSlicer from "../slices/profile.slicer";
 import { profileService } from "../services/profile.service";
 import { viewAllService } from "../services/view-all.service";
 import { languageService } from "../services/language.service";
+import { liveService } from "../services/live.service";
+import liveSlice from "../slices/live.slice";
 // import { setupListeners } from '@reduxjs/toolkit/query'
 
 const store = configureStore({
@@ -26,10 +28,12 @@ const store = configureStore({
     [profileService.reducerPath]: profileService.reducer,
     [viewAllService.reducerPath]: viewAllService.reducer,
     [languageService.reducerPath]: languageService.reducer,
+    [liveService.reducerPath]: liveService.reducer,
     imageSlice: singleImageSlice,
     tourSlice: tourSlice,
     plusSlice: plusSlice,
     profileSlice: profileSlicer,
+    liveSlice: liveSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
@@ -40,6 +44,7 @@ const store = configureStore({
       languageService.middleware,
       exploreService.middleware,
       singleVideoService.middleware,
+      liveService.middleware,
       viewAllService.middleware,
       uploadService.middleware,
     ]),

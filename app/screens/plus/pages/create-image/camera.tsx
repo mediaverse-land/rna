@@ -1,7 +1,7 @@
 import { useState, useEffect, forwardRef, useImperativeHandle } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import * as ExpoCamera from "expo-camera";
-import { ImageController } from "../../../../controllers/image-controller";
+import { ImageController } from "../../../../controllers/image.controller";
 
 const _imageController = new ImageController();
 

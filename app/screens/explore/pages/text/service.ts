@@ -2,8 +2,7 @@ import { ApiHandler } from "../../../../utils/api-handler";
 
 const _api = new ApiHandler();
 
-export async function getTextDataApiHandler(token: string) {
-  const url = `/texts/newest`;
+export async function getTextDataApiHandler(url: string, token: string) {
 
   const config = {
     headers: { Authorization: `Bearer ${token}`, "X-App": "_ReactNative" },

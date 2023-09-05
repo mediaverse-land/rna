@@ -38,7 +38,7 @@ export const ProfileScreenVideoPage = () => {
   const { ACTIVE_PAGE }: { ACTIVE_PAGE: "subscribe" | "ownership" } =
     useSelector((store: RootState) => store.profileSlice);
 
-  const { refetch } = useGetUserProfileQuery({ token });
+  // const { refetch } = useGetUserProfileQuery({ token });
 
   const isFocused = useIsFocused();
   const tokenCtx = useContext(tokenContext);

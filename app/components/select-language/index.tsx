@@ -1,28 +1,27 @@
-import React, { memo, useEffect, useMemo } from "react";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { useGetLanguagesQuery } from "../../../services/language.service";
-import { FlatList, TouchableOpacity } from "react-native";
-import { VirtualizedList } from "../../../components/virtualized-list";
+import React, { memo, useEffect } from "react";
+import { TouchableOpacity } from "react-native";
 import { BottomSheetFlatList } from "@gorhom/bottom-sheet";
-import { LoadingSpinner } from "../../../components/loader-spinner";
-import { theme } from "../../../constaints/theme";
+import { useGetLanguagesQuery } from "../../services/language.service";
+import { Box } from "../box";
+import { theme } from "../../constaints/theme";
+import { Text } from "../text";
+import { LoadingSpinner } from "../loader-spinner";
 
-const SelectLanguage = ({
+const SelectLanguageBottomSheet = ({
   setSelectedLanguage,
-  isFocused
+  isFocused,
 }: {
   setSelectedLanguage: (lang: string) => void;
-  isFocused: boolean
+  isFocused: boolean;
 }) => {
-  const { data, isFetching, refetch } =
-    useGetLanguagesQuery();
 
-    useEffect(() => {
-      if(isFocused){
-        refetch();
-      }
-    }, [isFocused])
+  const { data, isFetching, refetch } = useGetLanguagesQuery();
+
+  useEffect(() => {
+    if (isFocused) {
+      refetch();
+    }
+  }, [isFocused]);
 
   const renderItem = ({ item }: { item: string }) => {
     return (
@@ -55,7 +54,6 @@ const SelectLanguage = ({
         <LoadingSpinner />
       ) : (
         <BottomSheetFlatList
-          // focusHook={useFocusEffect}
           data={Object.keys(data)}
           keyExtractor={_key}
           renderItem={renderItem}
@@ -78,4 +76,4 @@ const SelectLanguage = ({
   );
 };
 
-export default memo(SelectLanguage);
+export default memo(SelectLanguageBottomSheet);

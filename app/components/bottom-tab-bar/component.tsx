@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { memo, useContext, useEffect, useRef, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -33,6 +33,7 @@ import {
   deActivrDisableOnIntractions,
   seeButtomNavigationTour,
 } from "../../slices/tour.slice";
+import { PLUS_BUTTON_BG } from "../../constaints/images";
 
 const icons: any = {
   explore: {
@@ -104,21 +105,17 @@ const tourGuides: Record<number, string> = {
 const CoachmarkWrapper: any = Coachmark;
 const _storageService = new StorageService();
 
-export function BottomTabBarComponent({ state, descriptors, navigation }: any) {
-
-  const {  DISABLE_INTRACTION } = useSelector(
+function BottomTabBarComponent({ state, descriptors, navigation }: any) {
+  const { DISABLE_INTRACTION } = useSelector(
     (state: RootState) => state.tourSlice
   );
 
   const tabBarItemClickNavigateHandler = (screenName: string) => {
-    if(DISABLE_INTRACTION){
+    if (DISABLE_INTRACTION) {
       return;
     }
     navigation?.navigate(screenName);
   };
-
-  console.log({DISABLE_INTRACTION})
-
 
   const plusNavigationHandler = () => {
     navigation?.navigate("Plus");
@@ -225,8 +222,12 @@ export function BottomTabBarComponent({ state, descriptors, navigation }: any) {
             style={styles.plusButton}
             onPress={plusNavigationHandler}
           >
+            <PLUS_BUTTON_BG style={styles.plusButtonBg} 
+            width={110} height={110}
+            />
             <ICON_PLUS_SVG width={20} height={20} />
           </TouchableOpacity>
+
           <View style={styles.subContent}>
             {state.routes.map((route: any, i: number) => {
               const isFocused = state.index === i;
@@ -301,7 +302,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     height: 100,
     width: Dimensions.get("window").width - 30,
-    maxWidth: 429,
+    maxWidth: 326,
     marginBottom: "4%",
     position: "absolute",
     bottom: "1%",
@@ -319,10 +320,21 @@ const styles = StyleSheet.create({
     height: 56,
     borderRadius: 100,
     position: "absolute",
-    top: 12,
+    top: 13,
     zIndex: 10,
-    left: "42.3%",
+    left: "41.4%",
     justifyContent: "center",
     alignItems: "center",
+    borderColor:'transparent',
+    backgroundColor:'transparent',
+  },
+  plusButtonBg: {
+    width: 56,
+    height: 56,
+    position:'absolute',
+    top: -19
   },
 });
+
+
+export default memo(BottomTabBarComponent)
