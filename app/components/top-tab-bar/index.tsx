@@ -26,6 +26,8 @@ import {
 } from "../../constaints/icons";
 import { View, StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
+import { Canvas, Blur, Image, useImage } from "@shopify/react-native-skia";
+import { Glassmorphism } from "./glass";
 
 function getTobBarItemsIcon(tobBarItemName: string, isFocused: boolean) {
   let iconPath: ReactElement<SVGElement>;
@@ -196,6 +198,10 @@ function TopTabBar({
     textsRef?.current,
   ]);
 
+  const image = useImage(
+    require("./../../../assets/img/clean.png")
+  );
+
   return (
     <Box
       paddingLeft={hasFullWidth ? 0 : 24}
@@ -207,12 +213,12 @@ function TopTabBar({
       backgroundColor="transparent"
     >
       <View style={styles.container}>
-      <View style={styles.background} />
+        <View style={styles.background} />
 
         <BlurView
           renderToHardwareTextureAndroid
           style={styles.blurView}
-          intensity={90} // Adjust the intensity value to control the blur effect
+          intensity={100} // Adjust the intensity value to control the blur effect
           tint="dark" // Set the tint color ('light' or 'dark')
         >
           <TabBarComponents.TabBar
@@ -323,7 +329,7 @@ const styles = StyleSheet.create({
   },
   background: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)', // Adjust the opacity and color as needed
+    backgroundColor: "rgba(255, 255, 255, 0.2)", // Adjust the opacity and color as needed
   },
   blurView: {
     position: "absolute",
@@ -337,3 +343,5 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
+
+////////////////////////////////////////

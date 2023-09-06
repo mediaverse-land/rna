@@ -1,7 +1,6 @@
 import { View, StyleSheet } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { AllPageMostViewed } from "./most-viewed";
 import { AllPageTopTenText } from "./top-ten-texts";
 import { AllPageChillSongs } from "./chill-songs";

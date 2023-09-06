@@ -7,5 +7,6 @@ export type UseNavigationType = {
         screenName: string,
         navigationOptions?: Record<string, string | number | boolean>
     ) => void;
+    setParams: ({}: any) => void;
     goBack?: () => void;
 };

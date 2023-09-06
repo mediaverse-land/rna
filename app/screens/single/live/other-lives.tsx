@@ -14,36 +14,30 @@ type Props = {
   data: Live[];
   isLoading: boolean;
   disableOnIntractions?: boolean;
-  navigation: UseNavigationType;
+  handleRedirect: any;
 };
-
+``;
 export const SingleLiveOtherLives: FC<Props> = ({
   data,
   isLoading,
-  navigation,
+  handleRedirect,
 }) => {
   const { isRtl } = useRtl();
 
-  const handleRedirect = (id: number) => {
-    navigation.navigate(SINGLE_LIVE_SCREEN, { id: id });
-  };
-
   const renderItems = ({ item, index }: { item: Live; index: number }) => {
     return (
-      <TouchableOpacity onPress={() => handleRedirect(item.id)} activeOpacity={1}>
-        <Box marginLeft={index === 0 ? 24 : 0}>
-          <HorizontalSlide
-            id={item.id}
-            title={null}
-            thumbnailPath={item.thumbnail}
-            username={null}
-            profileUri={null}
-            type={null}
-            isRtl={isRtl}
-            slidePressRedirectHandler={() => {}}
-          />
-        </Box>
-      </TouchableOpacity>
+      <Box marginLeft={index === 0 ? 24 : 0}>
+        <HorizontalSlide
+          id={item.id}
+          title={null}
+          thumbnailPath={item.thumbnail}
+          username={null}
+          profileUri={null}
+          type={null}
+          isRtl={isRtl}
+          slidePressRedirectHandler={() => handleRedirect(item.id)}
+        />
+      </Box>
     );
   };
 

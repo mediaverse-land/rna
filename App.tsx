@@ -11,6 +11,7 @@ import messaging from "@react-native-firebase/messaging";
 import * as ScreenCapture from "expo-screen-capture";
 import { useEffect } from "react";
 import { ScreenController } from "./app/controllers/screen.controller";
+import { DatabaseConnectionProvider } from "./app/db";
 
 const firebaseConfig = {
   apiKey:
@@ -24,11 +25,9 @@ const firebaseConfig = {
   measurementId: "G-measurement-id",
 };
 
-
 const _screenController = new ScreenController();
 
 _screenController.preventScreenShot();
-
 
 export default function App() {
   // usePreventScreenCapture();
@@ -95,22 +94,19 @@ export default function App() {
   // }, []);
 
   return (
-    <Provider store={store}>
-      <CopilotProvider>
-        {/* <TourGuideProvider {...{ borderRadius: 16 }}> */}
-        {/* <TourGuideProvider tooltipComponent={GuideTooltip}> */}
-        <ClickOutsideProvider>
-          <TokenContextProvider>
-            <UserContextProvider>
-              <AlertContextProvider>
-                <RootNavigator />
-              </AlertContextProvider>
-            </UserContextProvider>
-          </TokenContextProvider>
-        </ClickOutsideProvider>
-        {/* </TourGuideProvider> */}
-      </CopilotProvider>
+    <>
+        <Provider store={store}>
+          <ClickOutsideProvider>
+            <TokenContextProvider>
+              <UserContextProvider>
+                <AlertContextProvider>
+                  <RootNavigator />
+                </AlertContextProvider>
+              </UserContextProvider>
+            </TokenContextProvider>
+          </ClickOutsideProvider>
+        </Provider>
       <StatusBar backgroundColor={"#0c0c21"} barStyle="light-content" />
-    </Provider>
+    </>
   );
 }

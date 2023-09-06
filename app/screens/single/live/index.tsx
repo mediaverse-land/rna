@@ -13,19 +13,22 @@ import { SingleLiveOtherLives } from "./other-lives";
 import { useGetLivesQuery } from "../../../services/explore.service";
 import { SingleLiveComponents } from "./components";
 import BottomSheet from "@gorhom/bottom-sheet";
-import { Button } from "../../../components/button";
 import { useRecordLiveMutation } from "../../../services/live.service";
 import { ToastAndroid } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
 import {
   addRecordLive,
-  getRecordById,
   removeRecordById,
 } from "../../../slices/live.slice";
+import { SINGLE_LIVE_SCREEN } from "../../../constaints/consts";
+import { Button } from "../../../components/button";
+import { useIsFocused } from "@react-navigation/native";
 
 export function SingleLiveScreen({ navigation, route }: any) {
   const { id } = route.params;
+
+  console.log({id})
 
   const [data, setData] = useState<Live>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -37,6 +40,7 @@ export function SingleLiveScreen({ navigation, route }: any) {
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   const dispatch = useDispatch<AppDispatch>();
+  const isFocused = useIsFocused();
 
   const tokenCtx = useContext(tokenContext);
 
@@ -54,10 +58,10 @@ export function SingleLiveScreen({ navigation, route }: any) {
   ] = useRecordLiveMutation();
 
   useEffect(() => {
-    if (id) {
+    if (isFocused && id) {
       getLiveData();
     }
-  }, []);
+  }, [id, isFocused]);
 
   useEffect(() => {
     if (recordingItems?.length) {
@@ -151,6 +155,11 @@ export function SingleLiveScreen({ navigation, route }: any) {
     dispatch(addRecordLive(recordBody));
   };
 
+  const handleRedirect = (id: number) => {
+    navigation.navigate(SINGLE_LIVE_SCREEN, { id});
+  };
+
+
   return (
     <>
       <SafeAreaView style={{ flex: 1 }}>
@@ -169,10 +178,11 @@ export function SingleLiveScreen({ navigation, route }: any) {
                 openRecordBottomSheetHandler={openRecordBottomSheetHandler}
                 isLiveRecording={isLiveRecording}
               />
+              {/* <Button text="Button" varient="primary" onpressHandler={handleRedirect}/> */}
               <SingleLiveOtherLives
                 data={_livesData}
                 isLoading={_isLivesLoading}
-                navigation={navigation}
+                handleRedirect={handleRedirect}
               />
             </RenderIf>
           </VirtualizedList>

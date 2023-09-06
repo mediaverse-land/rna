@@ -1,6 +1,5 @@
 import { imageUriResolver } from "../utils/image-uri-resolver";
 import SIGNINS_LIST_ITEM_GRADIET_PATH from "./../../assets/img/signin-list/signins-list-gradient.png";
-import SIGNINS_LIST_ITEM_LIGHT_GRADIET_PATH from "./../../assets/img/signin-list/signins-list-light-gradient.png";
 import ADD_ACCOUNT_BUTTON_GRADIENT_PATH from "./../../assets/img/add-account-btn-background.png";
 import SINGLE_VIDEO_COVER_IMAGE_GRADIENT_PATH from "./../../assets/img/gradients/signle-video-cover-image-gradient.png";
 import SINGLE_SOUND_COVER_IMAGE_GRADIENT_PATH from "./../../assets/img/gradients/single-sound-screen-header-gradient.png";
@@ -19,16 +18,10 @@ import AUTH_EMOJY_PATH from "./../../assets/img/auth/emojy.svg";
 import WALLET_SLIDER_BACKGROUND_PATH from "./../../assets/img/wallet/slider-background.png";
 import LOADER_PATH from "./../../assets/img/loader.png";
 import LOADER_SPINNER_PATH from "./../../assets/img/loader-spinner.png";
-import INVENTORY_BOX_GRADIENT_PATH from "./../../assets/img/gradients/inventory-box-gradient.svg";
-import BANNER_STREAMS_PNG from "./../../assets/img/banners/banner-streams.png";
-import BANNER_PODCAST_PNG from "./../../assets/img/banners/banner-podcast.png";
-import BANNER_VLOG_PNG from "./../../assets/img/banners/banner-vlog.png";
-import BANNER_ITEM_GRADIENT_PNG from "./../../assets/img/banners/banner-item-gradient.png";
-import TEXT_SLIDER_ITEM_GRADIENT_PNG from "./../../assets/img/banners/banner-item-gradient.png";
+// import TEXT_SLIDER_ITEM_GRADIENT_PNG from "./../../assets/img/banners/banner-item-gradient.png";
 import HORIZONTAL_SLIDER_GRADIENT_PNG from "./../../assets/img/horizontal-slider/horizontla-slidre-gradient.png";
 import VIDEO_LIST_ITEM_GRADIENT_PNG from "./../../assets/img/video-list/video-list-item-gradient.png";
 import TEXT_SWIPER_GRADIENT_PNG from "./../../assets/img/text-swiper/gradient.png";
-import MUSIC_PLAYER_GRADIENT_PNG from "./../../assets/img/music-player/music-player-gradient.png";
 import MUSIC_PLAYER_STOP_BUTTON_GRADIENT_PNG from "./../../assets/img/music-player/music-player-stop-button-gradient.png";
 import DAILY_RECOMMENDED_IMG_ONE_PNG from "./../../assets/img/daily-recommended/img-3.png";
 import DAILY_RECOMMENDED_IMG_TWO_PNG from "./../../assets/img/daily-recommended/img-2.png";
@@ -37,7 +30,6 @@ import TOPBAR_BACKGROUND_PNG from "./../../assets/img/topbar/topbar-bg.png";
 import PROFILE_ONE_PNG from "./../../assets/img/profiles/img-1.png";
 import PROFILE_TWO_PNG from "./../../assets/img/profiles/img-2.png";
 import PROFILE_THREE_PNG from "./../../assets/img/profiles/img-3.png";
-import PROFILE_HEAD_ITEM_GRADIENT_PNG from "./../../assets/img/profile/profile-head-item-gradient.png";
 import CONFIRM_MODAL_BACKGROUND_PATH from "./../../assets/img/confirm-modal-background.png";
 import GALLERY_MODAL_BG_PATH from "./../../assets/img/gallery/gallery-bg.svg";
 import BLUR_BG_PATH from "./../../assets/blur-bg.png";
@@ -48,13 +40,12 @@ import TEXT_THUMBNAIL_PLACEHOLDER_PNG from "./../../assets/img/thumbnail-placeho
 import TEXT_SLIDER_COVER_BG_SVG from "./../../assets/img/text-slider/text_slider_cover_bg.svg";
 import PLUS_BUTTON_BG_SVG from "./../../assets/img/gradients/plus-btn-bg.svg";
 
-import TOP_BAR_BG_PNG from "./../../assets/img/gradients/Rectangle 212.png";
+// import TOP_BAR_BG_PNG from "./../../assets/img/gradients/Rectangle 212.png";
 
-import TOP_BAR_BACKGROUND_SVG from "./../../assets/img/gradients/Rectangle 212.svg";
-export const TOP_BAR_BACKGROUND = TOP_BAR_BACKGROUND_SVG;
+// import TOP_BAR_BACKGROUND_SVG from "./../../assets/img/gradients/Rectangle 212.svg";
 export const PLUS_BUTTON_BG = PLUS_BUTTON_BG_SVG;
 
-export const TOP_BAR_BG = imageUriResolver(TOP_BAR_BG_PNG);
+// export const TOP_BAR_BG = imageUriResolver(TOP_BAR_BG_PNG);
 
 export const TEXT_SLIDER_COVER_BG = TEXT_SLIDER_COVER_BG_SVG;
 
@@ -75,17 +66,18 @@ export const TEXT_THUMBNAIL_PLACEHOLDER = imageUriResolver(
 
 export const __TEXT_THUMBNAIL_PLACEHOLDER_PNG = TEXT_THUMBNAIL_PLACEHOLDER_PNG
 
-export const PROFILE_HEAD_ITEM_GRADIENT = imageUriResolver(
-  PROFILE_HEAD_ITEM_GRADIENT_PNG
-);
+// export const PROFILE_HEAD_ITEM_GRADIENT = imageUriResolver(
+//   PROFILE_HEAD_ITEM_GRADIENT_PNG
+// );
 export const BLUR_BG = imageUriResolver(BLUR_BG_PATH);
 
-export const BANNER_STREAMS_IMAGE = imageUriResolver(BANNER_STREAMS_PNG);
-export const BANNER_PODCAST_IMAGE = imageUriResolver(BANNER_PODCAST_PNG);
-export const BANNER_VLOG_IMAGE = imageUriResolver(BANNER_VLOG_PNG);
-export const BANNER_ITEM_GRADIENT_IMAGE = imageUriResolver(
-  BANNER_ITEM_GRADIENT_PNG
-);
+// export const BANNER_STREAMS_IMAGE = imageUriResolver(BANNER_STREAMS_PNG);
+// export const BANNER_PODCAST_IMAGE = imageUriResolver(BANNER_PODCAST_PNG);
+// export const BANNER_VLOG_IMAGE = imageUriResolver(BANNER_VLOG_PNG);
+// export const BANNER_ITEM_GRADIENT_IMAGE = imageUriResolver(
+//   BANNER_ITEM_GRADIENT_PNG
+// );
+
 export const HORIZONTAL_SLIDER_GRADIENT = imageUriResolver(
   HORIZONTAL_SLIDER_GRADIENT_PNG
 );
@@ -101,16 +93,16 @@ export const DAILY_RECOMMENDED_IMG_THREE = imageUriResolver(
 export const PROFILE_ONE = imageUriResolver(PROFILE_ONE_PNG);
 export const PROFILE_TWO = imageUriResolver(PROFILE_TWO_PNG);
 export const PROFILE_THREE = imageUriResolver(PROFILE_THREE_PNG);
-export const TEXT_SLIDER_ITEM_GRADIENT = imageUriResolver(
-  TEXT_SLIDER_ITEM_GRADIENT_PNG
-);
+// export const TEXT_SLIDER_ITEM_GRADIENT = imageUriResolver(
+//   TEXT_SLIDER_ITEM_GRADIENT_PNG
+// );
 export const VIDEO_LIST_ITEM_GRADIENT = imageUriResolver(
   VIDEO_LIST_ITEM_GRADIENT_PNG
 );
 export const TEXT_SWIPER_GRADIENT = imageUriResolver(TEXT_SWIPER_GRADIENT_PNG);
-export const MUSIC_PLAYER_GRADIENT = imageUriResolver(
-  MUSIC_PLAYER_GRADIENT_PNG
-);
+// export const MUSIC_PLAYER_GRADIENT = imageUriResolver(
+//   MUSIC_PLAYER_GRADIENT_PNG
+// );
 export const MUSIC_PLAYER_STOP_BUTTON_GRADIENT = imageUriResolver(
   MUSIC_PLAYER_STOP_BUTTON_GRADIENT_PNG
 );
@@ -118,9 +110,9 @@ export const TOPBAR_BACKGROUND = imageUriResolver(TOPBAR_BACKGROUND_PNG);
 export const SIGNINS_LIST_ITEM_GRADIET = imageUriResolver(
   SIGNINS_LIST_ITEM_GRADIET_PATH
 );
-export const SIGNINS_LIST_ITEM_LIGHT_GRADIET = imageUriResolver(
-  SIGNINS_LIST_ITEM_LIGHT_GRADIET_PATH
-);
+// export const SIGNINS_LIST_ITEM_LIGHT_GRADIET = imageUriResolver(
+//   SIGNINS_LIST_ITEM_LIGHT_GRADIET_PATH
+// );
 export const ADD_ACCOUNT_BUTTON_GRADIENT = imageUriResolver(
   ADD_ACCOUNT_BUTTON_GRADIENT_PATH
 );
@@ -159,7 +151,7 @@ export const TACKING_BOX_GRADEINT = imageUriResolver(TACKING_BOX_GRADEINT_PATH);
 export const AUTH_SHAPE_LEFT = AUTH_SHAPE_LEFT_PATH;
 export const AUTH_SHAPE_RIGHT = AUTH_SHAPE_RIGHT_PATH;
 export const AUTH_EMOJY = AUTH_EMOJY_PATH;
-export const INVENTORY_BOX_GRADIENT = INVENTORY_BOX_GRADIENT_PATH;
+// export const INVENTORY_BOX_GRADIENT = INVENTORY_BOX_GRADIENT_PATH;
 export const WALLET_SLIDER_BACKGROUND = imageUriResolver(
   WALLET_SLIDER_BACKGROUND_PATH
 );

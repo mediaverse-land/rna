@@ -150,7 +150,6 @@ const List = ({ navigation }: { navigation: UseNavigationType }) => {
     country: search_params?.selectedCountry?.toLowerCase() || null,
   });
   const navigateToLivePage = (id: number) => {
-    console.log('navigation.navigate')
     navigation.navigate(SINGLE_LIVE_SCREEN, {
       id,
     });
