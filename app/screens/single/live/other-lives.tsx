@@ -1,14 +1,12 @@
 import { FC, useCallback } from "react";
 import { Live } from "../../../types/live";
-import { UseNavigationType } from "../../../types/use-navigation";
 import { useRtl } from "../../../hooks/use-rtl";
-import { OTHER_CAHNNELS, SINGLE_LIVE_SCREEN } from "../../../constaints/consts";
+import { OTHER_CAHNNELS } from "../../../constaints/consts";
 import { HorizontalSlide } from "../../../components/horizontal-slider/slide";
 import { Box } from "../../../components/box";
 import { Title } from "../../../components/title";
 import { RenderIf } from "../../../components/render-if";
 import { FlatList } from "react-native-gesture-handler";
-import { TouchableOpacity } from "react-native";
 
 type Props = {
   data: Live[];

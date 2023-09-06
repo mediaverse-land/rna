@@ -110,7 +110,6 @@ const appRoutes: Route[] = [
 ];
 
 export function RootNavigator() {
-  // useTourGuide();
 
   const [isUserAuthenticated, setIsUserAuthenticated] = useState<
     boolean | string

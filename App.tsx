@@ -1,17 +1,17 @@
-import { Alert, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
 import { AlertContextProvider } from "./app/context/alert";
 import { TokenContextProvider } from "./app/context/token";
 import { UserContextProvider } from "./app/context/user";
 import { RootNavigator } from "./root-navigator";
 import { Provider } from "react-redux";
 import { ClickOutsideProvider } from "react-native-click-outside";
-import { CopilotProvider } from "react-native-copilot";
+// import { CopilotProvider } from "react-native-copilot";
 import store from "./app/store";
-import messaging from "@react-native-firebase/messaging";
-import * as ScreenCapture from "expo-screen-capture";
-import { useEffect } from "react";
+// import messaging from "@react-native-firebase/messaging";
+// import * as ScreenCapture from "expo-screen-capture";
+// import { useEffect } from "react";
 import { ScreenController } from "./app/controllers/screen.controller";
-import { DatabaseConnectionProvider } from "./app/db";
+// import { DatabaseConnectionProvider } from "./app/db";
 
 const firebaseConfig = {
   apiKey:

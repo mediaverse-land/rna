@@ -26,8 +26,6 @@ import {
 } from "../../constaints/icons";
 import { View, StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
-import { Canvas, Blur, Image, useImage } from "@shopify/react-native-skia";
-import { Glassmorphism } from "./glass";
 
 function getTobBarItemsIcon(tobBarItemName: string, isFocused: boolean) {
   let iconPath: ReactElement<SVGElement>;
@@ -197,10 +195,6 @@ function TopTabBar({
     soundsRef?.current,
     textsRef?.current,
   ]);
-
-  const image = useImage(
-    require("./../../../assets/img/clean.png")
-  );
 
   return (
     <Box

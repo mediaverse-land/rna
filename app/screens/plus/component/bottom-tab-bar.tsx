@@ -14,7 +14,6 @@ import { theme } from "../../../constaints/theme";
 import { UseNavigationType } from "../../../types/use-navigation";
 import { CREATE_IMAGE, CREATE_SOUND, CREATE_TEXT } from "../constaints";
 import { windowSize } from "../../../utils/window-size";
-import { TourGuideZone, useTourGuideController } from "rn-tourguide";
 import { useIsFocused } from "@react-navigation/native";
 import { StorageService } from "../../../services/storage.service";
 import { HAS_USER_SEEN_PLUS_TOUR } from "../../../constaints/consts";
