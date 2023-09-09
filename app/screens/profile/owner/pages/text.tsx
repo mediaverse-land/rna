@@ -103,9 +103,6 @@ export const ProfileScreenTextPage = () => {
     if (ACTIVE_PAGE === "subscribe") {
       __uri = SUBSCRIBE_BASE_URL + (__currPage ? __currPage : currentPage);
     }
-
-    console.log(__uri)
-
     // const url = BASE_URL + (__currPage ? __currPage : currentPage);
 
     const { isError, res, isSuccess } = await getProfileTextDataApiHandler(

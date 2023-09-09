@@ -29,6 +29,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { setPage } from "../../../slices/profile.slicer";
 import { useGetUserProfileQuery } from "../../../services/profile.service";
+import { Logger } from "../../../utils/logger";
 
 const initialState: ProfileStatic = {
   assets: null,
@@ -51,6 +52,7 @@ const SETTINGS_TOUR_GUIDE =
 const CoachmarkWrapper: any = Coachmark;
 
 const _storageService = new StorageService();
+const _logger = new Logger();
 
 const SUBSCRIPTION_OWNER_TAB_STYLES = {
   fontSize: 14,
@@ -117,7 +119,7 @@ export function ProfileScreenHead() {
       { token }
     );
 
-  console.log({ data, isLoading, isError, isFetching, error });
+  _logger.log({ data, isLoading, isError, isFetching, error });
 
   useEffect(() => {
     getData();

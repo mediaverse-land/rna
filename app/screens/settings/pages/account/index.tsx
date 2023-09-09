@@ -33,6 +33,7 @@ import {
   removeButtomNavitationTour,
   removeExploreTopBarTour,
 } from "../../../../slices/tour.slice";
+import { Logger } from "../../../../utils/logger";
 
 const data: ListColumnItem[] = [
   {
@@ -88,6 +89,7 @@ const signOutData: ListColumnItem[] = [
 ];
 
 const _storageService = new StorageService();
+const _logger = new Logger();
 
 export function AccountPage() {
   const _tokenCtx = useContext(tokenContext);
@@ -122,7 +124,7 @@ export function AccountPage() {
       await _storageService.removeItem("user_data");
       await _tokenCtx.clearToken();
     } catch (err) {
-      console.log(`error[in: signoutHandler], res: ${JSON.stringify(err)}`);
+      _logger.logErro(`error[in: signoutHandler], res: ${JSON.stringify(err)}`);
     }
     // dispatch(hideExploreNavigationTour());
   };

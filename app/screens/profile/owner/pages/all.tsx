@@ -7,8 +7,6 @@ import { UseSelectContent } from "../../hooks/use-select-content";
 import { retriveToken } from "../../../../utils/retrive-token";
 import {
   getProfileAllDataApiHandler,
-  getProfileImageDataApiHandler,
-  getProfileSoundDataApiHandler,
   removeAssetApiHandler,
 } from "../../service";
 import { ASSET_TYPES } from "../../../../heloers/asset-types";
@@ -23,14 +21,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 import { createArrayOfAssetObject } from "../../../../utils/create-array-of-asset-object";
 import {
-  profileService,
   useGetUserProfileQuery,
 } from "./../../../../services/profile.service";
+import { Logger } from "../../../../utils/logger";
 
 const OWNERSHIPE_BASE_URL = "/profile/assets?page=";
 const SUBSCRIBE_BASE_URL = "/profile/subscriptions  ?page=";
 const GRADIENTS_COLORS = ["#030340", "#030340"];
 const GRADIENT_AXIS = { x: 0.7, y: 0 };
+
+const _logger = new Logger();
 
 export const ProfileScreenAllPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -194,7 +194,7 @@ export const ProfileScreenAllPage = () => {
         assetType,
         id
       );
-      console.log({ isError, isSuccess, res, errorRes });
+      _logger.log({ isError, isSuccess, res, errorRes });
     }
 
     refetch();

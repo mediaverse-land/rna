@@ -115,9 +115,9 @@ export function SoundsPageMusicPlayer({ data }: Props) {
               thumbTintColor="#0E0E12"
               minimumTrackTintColor="#0E0E12"
               maximumTrackTintColor="#0E0E12"
-              onSlidingComplete={() => {
-                console.log("");
-              }}
+              // onSlidingComplete={() => {
+              //   console.log("");
+              // }}
             />
             <CurrentSliderTime>20:15</CurrentSliderTime>
           </Flex>

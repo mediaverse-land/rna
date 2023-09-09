@@ -224,9 +224,7 @@ export function SingleVideoHeader({
   }: RequestAPiHandler) => {
     const token = await retriveToken();
     if (!token) {
-      console.log(
-        "no_token in video-header, func:_convertVideoToSoundHandler "
-      );
+      return;
     }
     const { isSuccess, isError, errorRes } = await method(token, id);
 
@@ -257,7 +255,6 @@ export function SingleVideoHeader({
   const retriveToken = async () => {
     const tk = await tokenCtx.getToken();
     if (tk === null) {
-      console.log("no_token in video-header, func:retriveToken ");
       return null;
     }
     return await tokenStringResolver(tk);

@@ -183,7 +183,6 @@ export function SingleSoundScreen({ navigation, route }: any) {
   const _convertAudioToText = async () => {
     const token = await retriveToken(tokenCtx);
     if (!token) {
-      console.log(`no token, func: _convertAudioToText`);
       return;
     }
 
@@ -218,7 +217,6 @@ export function SingleSoundScreen({ navigation, route }: any) {
 
     const token = await retriveToken(tokenCtx);
     if (!token) {
-      console.log(`no token, func: _convertAudioToText`);
       return;
     }
 
@@ -337,8 +335,6 @@ export function SingleSoundScreen({ navigation, route }: any) {
 
   const hasPermission = isOwner || isSubscriber;
   const snapPoints = useMemo(() => ["25%", "50%"], []);
-
-  console.log('counting re-renders', (counter += 1));
 
   return (
     <>

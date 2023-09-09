@@ -183,7 +183,6 @@ export const ProfileScreenVideoPage = () => {
         assetType,
         id
       );
-      console.log({ isError, isSuccess, res, errorRes });
     }
 
     onRefresh();

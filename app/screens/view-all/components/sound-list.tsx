@@ -105,7 +105,7 @@ const ViewAllSoundList = ({ data, navigate , marginTop}: Props) => {
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           estimatedItemSize={15}
-          onEndReached={() => console.log("onEndReached")}
+          // onEndReached={() => console.log("onEndReached")}
         />
     </Box>
   );

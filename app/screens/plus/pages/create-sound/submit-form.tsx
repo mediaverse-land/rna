@@ -24,7 +24,6 @@ export const SubmitForm = ({ isLoading, createAssetRequest }: Props) => {
     if (isLoading) {
       return;
     }
-    console.log({'selectedOption.forkability_status': selectedOption.forkability_status})
     const { name, description, price } = data;
     const plan = 1;
 

@@ -15,9 +15,11 @@ import { Toaster } from "../../../../utils/toaster";
 import { useCreateSingleTextMutation } from "../../../../services/single-text.service";
 import { SINGLE_TEXT_SCREEN } from "../../../../constaints/consts";
 import { CreateAssetForm } from "../../component/create-asset-form";
+import { Logger } from "../../../../utils/logger";
 
 const _fileSystemController = new FileSystemController();
 const _toast = new Toaster();
+const _logger = new Logger();
 
 export const CreateTextScreen = () => {
   const {
@@ -105,7 +107,7 @@ export const CreateTextScreen = () => {
     setIsLoading(true);
     createNewAsset(newOption)
       .then(async (res: any) => {
-        console.log(res);
+        _logger.log(res);
         const asset_id = res?.data?.asset_id;
 
         if (!asset_id) {
@@ -120,7 +122,7 @@ export const CreateTextScreen = () => {
       })
       .catch((err: any) => {
         setIsLoading(false);
-        console.log(err);
+        _logger.log(err);
       });
   };
 
@@ -131,7 +133,7 @@ export const CreateTextScreen = () => {
     id: number
   ) => {
     if (!file) {
-      console.log("no file");
+      _logger.logErro("no file");
       return;
     }
     try {

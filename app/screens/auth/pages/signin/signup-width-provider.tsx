@@ -21,6 +21,7 @@ import {
   REACT_APP_EXPO_CLIENT_ID,
 } from "@env";
 import { Toaster } from "../../../../utils/toaster";
+import { Logger } from "../../../../utils/logger";
 
 type Props = {
   height: number;
@@ -29,6 +30,8 @@ type Props = {
 };
 
 const _toaster = new Toaster();
+
+const _logger = new Logger()
 
 export const SignUpWithProvider: FC<Props> = ({
   height,
@@ -41,7 +44,7 @@ export const SignUpWithProvider: FC<Props> = ({
     expoClientId: REACT_APP_EXPO_CLIENT_ID,
   });
 
-  console.log({request, response})
+  _logger.log({request, response})
 
   // const { setToken } = useContext(signupContext);
 
@@ -63,8 +66,8 @@ export const SignUpWithProvider: FC<Props> = ({
       ress.accessToken
     );
 
-    console.log("errorRes");
-    console.log({ errorRes });
+    _logger.log("errorRes");
+    _logger.log({ errorRes });
 
     if (isError) {
       _toaster.show("A problem occured while submiting data");

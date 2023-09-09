@@ -28,8 +28,6 @@ import { useIsFocused } from "@react-navigation/native";
 export function SingleLiveScreen({ navigation, route }: any) {
   const { id } = route.params;
 
-  console.log({id})
-
   const [data, setData] = useState<Live>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isLiveRecording, setIsLiveRecording] = useState(false);

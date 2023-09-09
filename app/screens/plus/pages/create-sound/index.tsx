@@ -24,6 +24,7 @@ import { tokenStringResolver } from "../../../../utils/token-string-resolver";
 import { useCreateSingleSoundMutation } from "../../../../services/single-sound.service";
 import { Toaster } from "../../../../utils/toaster";
 import { SINGLE_SOUND_SCREEN } from "../../../../constaints/consts";
+import { Logger } from "../../../../utils/logger";
 
 const WINDOW_HEIGHT = windowSize().height;
 const PLACE_HODLDER_HEIGHT = Math.floor(WINDOW_HEIGHT) - 100;
@@ -36,8 +37,8 @@ const _recordingController = new RecordingController();
 const _fileSystemController = new FileSystemController();
 
 const _api = new ApiHandler();
-
 const _toast = new Toaster();
+const _logger = new Logger();
 
 export const CreateSoundScreen = () => {
   const [recording, setRecording] = useState<Audio.Recording>(null);
@@ -63,7 +64,7 @@ export const CreateSoundScreen = () => {
     }
     setup();
   }, [recording?.getStatusAsync()]);
-  console.log(recording?.getStatusAsync());
+  _logger.log(recording?.getStatusAsync());
 
   useEffect(() => {
     if (!isFocused) {
@@ -122,7 +123,7 @@ export const CreateSoundScreen = () => {
       })
       .catch((error) => {
         ToastAndroid.show("Item creation failed", 3000);
-        console.log(JSON.stringify(error));
+        _logger.log(JSON.stringify(error));
         setIsLoading(false);
       });
   };
@@ -220,11 +221,11 @@ export const CreateSoundScreen = () => {
 
     createNewAsset(newOption)
       .then(async (res: any) => {
-        console.log(forkability_status)
+        _logger.log(forkability_status)
         const asset_id = res?.data?.asset_id;
         if (!asset_id) {
           setIsLoading(false);
-          console.log("no asset_id");
+          _logger.logErro("no asset_id");
           _toast.show("Something went wrong, try again");
 
           return;
@@ -234,7 +235,7 @@ export const CreateSoundScreen = () => {
       })
       .catch((err: any) => {
         setIsLoading(false);
-        console.log(err);
+        _logger.logErro(err);
       });
 
     setIsLoading(true);

@@ -34,7 +34,6 @@ const RESULT_OPTIONS = [
 ];
 
 export const Result = ({ imageUri }: { imageUri: string }) => {
-  console.log({ imageUri });
   return (
     <Box
       width="100%"

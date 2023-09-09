@@ -180,7 +180,6 @@ export const ProfileScreenSoundPage = () => {
         assetType,
         id
       );
-      console.log({ isError, isSuccess, res, errorRes });
     }
 
     refetch();

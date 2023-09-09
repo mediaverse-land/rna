@@ -172,8 +172,6 @@ export function SingleTextScreen({
       body
     );
 
-    console.log({ isError, isSuccess, errorRes, res });
-
     if (isSuccess) {
       ToastAndroid.show(
         "Translate text requested successfully",
@@ -267,8 +265,6 @@ export function SingleTextScreen({
     const { isError, isSuccess, errorRes, res } =
       await convertTextToAudioHandler(token, data?.id, body);
 
-    console.log({ isError, isSuccess, errorRes, res });
-
     if (isSuccess) {
       ToastAndroid.show(
         "Convert text to audio requested successfully",
@@ -326,8 +322,6 @@ export function SingleTextScreen({
 
   const hasEditPermission =
     data?.asset?.forkability_status === 2 ? true : false;
-
-  // console.log({ forkability_status: data?.asset?.forkability_status });
 
   const TOOLBAR_OPTIONS = [
     {

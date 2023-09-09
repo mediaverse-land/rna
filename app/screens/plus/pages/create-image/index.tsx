@@ -25,6 +25,7 @@ import {
   SINGLE_IMAGE_SCREEN,
   SINGLE_VIDEO_SCREEN,
 } from "../../../../constaints/consts";
+import { Logger } from "../../../../utils/logger";
 
 type CapturedImage = {
   height: number;
@@ -42,6 +43,7 @@ export type CreateImageRequestBody = {
   forkability_status: boolean
 };
 
+const _logger = new Logger();
 const _toast = new Toaster();
 const _fileSystemController = new FileSystemController();
 
@@ -131,7 +133,7 @@ export const CreateImageScreen = () => {
 
   const convertVideoToBased64 = async (capturedVideoUri: any) => {
     if (!capturedVideoUri) {
-      console.log(`func: convertVideoToBased64, capturedVideo is empty`);
+      _logger.log(`func: convertVideoToBased64, capturedVideo is empty`);
       return null;
     }
     const result = await _fileSystemController.convertFileToBase64(
@@ -215,7 +217,7 @@ export const CreateImageScreen = () => {
           const errorMessage =
             res?.error?.data?.error || "Something went wrong, try again";
           stopLoad();
-          console.log(errorMessage);
+          _logger.log(errorMessage);
           _toast.show(errorMessage);
           return;
         }
@@ -251,7 +253,7 @@ export const CreateImageScreen = () => {
           const errorMessage =
             res?.error?.data?.error || "Something went wrong, try again";
           stopLoad();
-          console.log(errorMessage);
+          _logger.logErro(errorMessage);
           _toast.show(errorMessage);
           return;
         }

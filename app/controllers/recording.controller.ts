@@ -1,4 +1,6 @@
 import { Audio } from "expo-av";
+import { Logger } from "../utils/logger";
+const _logger = new Logger()
 
 export class RecordingController {
     _storedSound: any = null;
@@ -14,14 +16,14 @@ export class RecordingController {
         playsInSilentModeIOS: true,
       });
 
-      console.log("Starting recording..");
+      _logger.log("Starting recording..");
       const { recording } = await Audio.Recording.createAsync(
         Audio.RecordingOptionsPresets.HIGH_QUALITY
       );
       setRecording(recording);
-      console.log("Recording started");
+      _logger.log("Recording started");
     } catch (err) {
-      console.error("Failed to start recording", err);
+      _logger.logErro("Failed to start recording");
     }
   }
 
@@ -30,7 +32,7 @@ export class RecordingController {
     setRecording: (recording: any) => void
   ) {
     try {
-      console.log("Stopping recording..");
+      _logger.log("Stopping recording..");
       setRecording(null);
 
       await recording.stopAndUnloadAsync();
@@ -41,9 +43,9 @@ export class RecordingController {
 
       const uri = recording.getURI();
       this._storedSound = uri;
-      console.log("Recording stopped and stored at", uri);
+      _logger.log(`Recording stopped and stored at ${uri}`);
     } catch (err) {
-      console.log({ err });
+      _logger.logErro({ err });
     }
   }
 

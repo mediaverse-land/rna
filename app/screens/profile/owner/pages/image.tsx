@@ -21,11 +21,14 @@ import { Spacer } from "../../../../components/spacer";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 import { useGetUserProfileQuery } from "../../../../services/profile.service";
+import { Logger } from "../../../../utils/logger";
 
 const SUBSCRIBE_BASE_URL = "/subscriptions/images?page=";
 const OWNERSHIP_BASE_URL = "/profile/images?page=";
 const GRADIENTS_COLORS = ["#030340", "#030340"];
 const GRADIENT_AXIS = { x: 0.7, y: 0 };
+
+const _logger = new Logger();
 
 export const ProfileScreenImagePage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -184,7 +187,7 @@ export const ProfileScreenImagePage = () => {
         assetType,
         id
       );
-      console.log({ isError, isSuccess, res, errorRes });
+      _logger.log({ isError, isSuccess, res, errorRes });
     }
 
     refetch();

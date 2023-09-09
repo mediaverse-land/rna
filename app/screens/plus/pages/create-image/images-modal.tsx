@@ -15,11 +15,15 @@ import { windowSize } from "../../../../utils/window-size";
 import { Text } from "../../../../components/text";
 import { ICON_ARROW_DOWN_SVG } from "../../../../constaints/icons";
 import { GALLERY_MODAL_BG } from "../../../../constaints/images";
+import { Logger } from "../../../../utils/logger";
 
 type Props = {
   openModal: boolean;
   setOpenModal: (cond: boolean) => void;
 };
+
+
+const _logger = new Logger();
 
 const dropDownList: any = [
   {
@@ -85,7 +89,7 @@ export const ImagesModal = ({ openModal, setOpenModal }: Props) => {
 
   // callbacks
   const handleSheetChange = useCallback((index: any) => {
-    console.log("handleSheetChange", index);
+    _logger.log("handleSheetChange", index);
   }, []);
 
   const handleClosePress = useCallback(() => {

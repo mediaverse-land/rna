@@ -19,11 +19,14 @@ import { Text } from "../../components/text";
 import { RadioButton } from "../../components/form";
 import { getAssetApiHandler, updateAssetApiHandler } from "./service";
 import { userContext } from "../../context/user";
+import { Logger } from "../../utils/logger";
 
 type Params = {
   id: number;
   assetType: "image" | "video" | "sound" | "text";
 };
+
+const _logger = new Logger();
 
 const { ThumbnailWrapper, EditableTitleInput, EditableInput } =
   EditScreenStyles;
@@ -160,7 +163,7 @@ export const EditScreen = ({ navigation, route }: any) => {
       assetType,
       updatedData
     );
-    console.log({res, isSuccess, isError, errorRes })
+    _logger.log({res, isSuccess, isError, errorRes })
     if (isSuccess) {
       ToastAndroid.show("Asset edited successfully", ToastAndroid.BOTTOM);
       navigation?.goBack();

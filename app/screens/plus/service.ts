@@ -1,8 +1,10 @@
 import axios from "axios";
 import { Toaster } from "../../utils/toaster";
 import { UseNavigationType } from "../../types/use-navigation";
+import { Logger } from "../../utils/logger";
 
 const _toast = new Toaster();
+const _logger = new Logger();
 
 type Args = {
   token: string;
@@ -37,12 +39,12 @@ export const uploadHandler = async ({
       config
     );
 
-    console.log(result__);
+    _logger.log(result__);
     _toast.show("Item created successfully");
     setIsLoading(false);
     return "Ok";
   } catch (err) {
-    console.log(JSON.stringify(err));
+    _logger.logErro(JSON.stringify(err));
     _toast.show("Item creation failed");
     setIsLoading(false);
     return "Err";

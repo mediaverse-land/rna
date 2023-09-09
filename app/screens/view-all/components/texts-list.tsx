@@ -103,7 +103,7 @@ const ViewAllTextsList = ({ data, navigate, marginTop }: Props) => {
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           // estimatedItemSize={20}
-          onEndReached={() => console.log("onEndReached")}
+          // onEndReached={() => console.log("onEndReached")}
         />
       </PaddingContainer>
     </Box>

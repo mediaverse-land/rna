@@ -22,9 +22,6 @@ export const liveService: any = createApi({
     }),
     getSearchLive: builder.query({
       query: (args) => {
-
-        console.log({args})
-
         let url = 'lives?'
 
         if(args.lang) url = url+`language=${args.lang}`

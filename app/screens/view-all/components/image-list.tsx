@@ -109,7 +109,7 @@ const ViewAllImageList = ({ data, navigate }: Props) => {
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           // estimatedItemSize={15}
-          onEndReached={() => console.log("onEndReached")}
+          // onEndReached={() => console.log("onEndReached")}
         />
       </PaddingContainer>
     </Box>
