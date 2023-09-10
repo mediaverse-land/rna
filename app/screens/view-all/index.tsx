@@ -23,6 +23,17 @@ import {
   ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG,
 } from "../../constaints/icons";
 import { getViewAllDataApiHandler } from "./service";
+import {
+  GDrive,
+  MimeTypes,
+} from "@robinbobin/react-native-google-drive-api-wrapper";
+import { enviroments } from "../../../enviroments/enviroments";
+import * as Google from "expo-auth-session/providers/google";
+import { Button } from "../../components/button";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import GDriveApi from "@robinbobin/react-native-google-drive-api-wrapper/api/GDriveApi";
+// import { GoogleSignin, GoogleDrive } from "react-native-google-drive-api";
+import axios from "axios";
 
 type Props = {
   navigation: UseNavigationType;
@@ -171,10 +182,78 @@ const viewAllPages: Record<
   },
 };
 
+async function initializeGoogleDrive() {
+  // try {
+  //   await GoogleSignin.configure({
+  //     scopes: ['https://www.googleapis.com/auth/drive.file'],
+  //     webClientId: enviroments.REACT_APP_EXPO_CLIENT_ID
+  //   });
+  //   await GoogleSignin.signIn();
+  //   console.log('Google Drive initialized successfully.');
+  // } catch (error) {
+  //   console.error('Failed to initialize Google Drive:', error);
+  // }
+}
+
+// Call the initialization function when needed.
+initializeGoogleDrive();
+
+const getToken = async () => {
+  return await AsyncStorage.getItem("GOOGLE_ACCESS_TOKEN");
+};
+
 const ViewAllScreen = ({ navigation, route }: Props) => {
   const { params } = route;
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    androidClientId: enviroments.REACT_APP_ANDROID_CLIENT_ID,
+    iosClientId: enviroments.REACT_APP_IOS_CLIENT_ID,
+    expoClientId: enviroments.REACT_APP_EXPO_CLIENT_ID,
+    scopes: ['https://www.googleapis.com/auth/drive.file']
+  });
 
-  const current_page = viewAllPages[params?.pageDirection || ""];       
+  useEffect(() => {
+    if (response?.type === "success") {
+      const res = response?.authentication;
+      console.log(res)
+      if (res?.accessToken) {
+        AsyncStorage.setItem("GOOGLE_ACCESS_TOKEN", res?.accessToken);
+        uploadFile(res?.accessToken)
+      }
+    }
+  }, [response]);
+
+
+  async function uploadFile(access: string) {
+    try {
+      const uploadUrl = "https://www.googleapis.com/upload/drive/v3/files";
+      // console.log(AsyncStorage.getItem("GOOGLE_ACCESS_TOKEN"))
+      const headers = {
+        Authorization: `Bearer ${access}`,
+        "Content-Type": "application/json",
+      };
+
+      const fileData = new FormData();
+      fileData.append(
+        "metadata",
+        JSON.stringify({
+          name: "example.txt",
+          parents: [],
+        })
+      );
+      fileData.append("file", {
+        uri: "https://cdn.dribbble.com/users/4536274/screenshots/13988146/media/d079a6ca8b7f5db3229815799098a9b6.png?resize=1000x750&vertical=center",
+        type: "text/plain",
+        name: "example.txt",
+      });
+
+      const response = await axios.post(uploadUrl, fileData, { headers });
+      console.log("File uploaded successfully. File ID:", response.data.id);
+    } catch (error) {
+      console.error(JSON.stringify(error?.response?.data));
+    }
+  }
+
+  const current_page = viewAllPages[params?.pageDirection || ""];
 
   if (!current_page) {
     return (
@@ -187,50 +266,22 @@ const ViewAllScreen = ({ navigation, route }: Props) => {
   const tokenCtx = useContext(tokenContext);
   const isFocused = useIsFocused();
 
-  // const [preventDataFetching, setPreventDataFetching] = useState(true);
-  // const [token, setToken] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [assetList, setAssetList] = useState<any>([]);
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  // const [randomNumber, setRandomNumber] = useState(Math.random());
-
   const { icon, title, url, ListComponent } = current_page;
-
-  // const { data, isError, isSuccess, error, isLoading, isFetching } =
-  //   useGetAssetListQuery(
-  //     {
-  //       url: `${url}?page=${currentPage}`,
-  //       token,
-  //       sessionId: randomNumber,
-  //     },
-  //     {
-  //       skip: preventDataFetching,
-  //     },
-  //     // false
-  //   );
-
-  // useEffect(() => {
-  //   getToken();
-  // }, []);
 
   useEffect(() => {
     if (isFocused) {
       setIsLoading(true);
       getData();
-      // setRandomNumber(Math.`random());
-      // setPreventDataFetching(false);`
     }
     if (!isFocused) {
       setAssetList([]);
     }
   }, [isFocused]);
-
-  // useEffect(() => {
-  //   copyDataToAssetList();
-  // }, [data]);
-
   const getData = async () => {
     const token = await retriveToken(tokenCtx);
     if (!token) {
@@ -268,14 +319,6 @@ const ViewAllScreen = ({ navigation, route }: Props) => {
     setIsLoading(false);
   };
 
-  const getToken = async () => {
-    // const token = await retriveToken(tokenCtx);
-    // if (!token) {
-    //   _logger.logErro("no token at view-all.tsx line 105");
-    // }
-    // setToken(token);
-  };
-
   if (error) {
     <Box>
       <Text color="red">Error while fetching list</Text>
@@ -291,6 +334,11 @@ const ViewAllScreen = ({ navigation, route }: Props) => {
         start={{ x: 0.7, y: 0 }}
       >
         <VirtualizedList>
+          <Button
+            text="Signin"
+            varient="primary"
+            onpressHandler={() => promptAsync()}
+          />
           <ViewAllTitle title={title} icon={icon} goBack={navigation.goBack} />
           {ListComponent ? (
             <Box paddingBottom={100}>
@@ -302,7 +350,6 @@ const ViewAllScreen = ({ navigation, route }: Props) => {
               <LoadingSpinner />
             </Box>
           ) : null}
-          {/* <ViewAllImageList data={assetList} navigate={navigation.navigate} /> */}
         </VirtualizedList>
       </LinearGradient>
     </>
