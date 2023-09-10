@@ -7,7 +7,7 @@ import { Box } from "../box";
 import { Asset } from "../../types/asset";
 import { UseNavigationType } from "../../types/use-navigation";
 import {
-  BANNER_ITEM_GRADIENT_IMAGE,
+  // BANNER_ITEM_GRADIENT_IMAGE,
   IMAGE_THUMBNAIL_PLACEHOLDER,
 } from "../../constaints/images";
 import type { Image as ImageType } from "./../../types/image";
@@ -19,7 +19,7 @@ type Props = {
 
 const { MasonryWrapper, MasonryRow } = MasonryComponents;
 
-const defaultThumb = BANNER_ITEM_GRADIENT_IMAGE;
+// const defaultThumb = BANNER_ITEM_GRADIENT_IMAGE;
 
 function Masonry({ data, disableOnIntractions = false }: Props) {
   const navigation = useNavigation<UseNavigationType>();
@@ -94,6 +94,7 @@ function Masonry({ data, disableOnIntractions = false }: Props) {
                               _oneInOneItem?.asset?.thumbnails["226x226"] ||
                               IMAGE_THUMBNAIL_PLACEHOLDER,
                           }}
+                          
                           style={[
                             styles.oneInOneImageStyle,
                             {

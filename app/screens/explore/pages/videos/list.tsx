@@ -98,6 +98,7 @@ export function VideoPageList({
                 source={{
                   uri: thumbUri,
                 }}
+                resizeMode="contain"
               />
               <VideoListItemGradietImage
                 source={{ uri: VIDEO_LIST_ITEM_GRADIENT }}

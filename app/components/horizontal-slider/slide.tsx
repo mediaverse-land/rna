@@ -66,9 +66,9 @@ export function HorizontalSlide({
       <Box>
         <SlideThumbnail
           source={{ uri: thumbnailPath || placeholderThumbnail }}
-          resizeMode="cover"
+          resizeMode="contain"
         />
-        <SliderThumbnailGradient source={{ uri: HORIZONTAL_SLIDER_GRADIENT }} />
+        <SliderThumbnailGradient source={{ uri: HORIZONTAL_SLIDER_GRADIENT }} resizeMode="contain"/>
       </Box>
       <Box direction="row">
         <SlideTitle>{title}</SlideTitle>

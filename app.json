@@ -2,7 +2,7 @@
   "expo": {
     "name": "Mediaverse",
     "slug": "mediaverse",
-    "version": "0.0.04",
+    "version": "0.0.05",
     "orientation": "portrait",
     "icon": "./assets/flat_icon.png",
     "userInterfaceStyle": "light",

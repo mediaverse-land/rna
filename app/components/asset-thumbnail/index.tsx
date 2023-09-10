@@ -24,7 +24,8 @@ export const AssetThumbnail = ({ assetType, thumnailImageUri }: Props) => {
               borderBottomLeftRadius: 16,
               borderBottomRightRadius: 16,
             }}
-            resizeMode="cover"
+            // resizeMode="cover"
+            resizeMode="contain"
           />
         ) : null}
       </Box>

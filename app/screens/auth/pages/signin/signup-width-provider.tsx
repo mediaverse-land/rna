@@ -1,10 +1,4 @@
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-/////////////////////////////////
-
-import { FC, useContext } from "react";
+import { FC } from "react";
 import { TouchableOpacity } from "react-native";
 import { AuthProviderButton } from "../../components/auth-provider-button";
 import { providerButtons } from "../../mock-data";
@@ -12,16 +6,11 @@ import { theme } from "../../../../constaints/theme";
 import { Box } from "../../../../components/box";
 import { Text } from "../../../../components/text";
 import * as Google from "expo-auth-session/providers/google";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { googleAuthApiHandler } from "./service";
-import { signupContext } from "./context";
-import {
-  REACT_APP_ANDROID_CLIENT_ID,
-  REACT_APP_IOS_CLIENT_ID,
-  REACT_APP_EXPO_CLIENT_ID,
-} from "@env";
 import { Toaster } from "../../../../utils/toaster";
 import { Logger } from "../../../../utils/logger";
+import { enviroments } from "../../../../../enviroments/enviroments";
 
 type Props = {
   height: number;
@@ -39,14 +28,10 @@ export const SignUpWithProvider: FC<Props> = ({
   navigateToFillData,
 }) => {
   const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId: REACT_APP_ANDROID_CLIENT_ID,
-    iosClientId: REACT_APP_IOS_CLIENT_ID,
-    expoClientId: REACT_APP_EXPO_CLIENT_ID,
+    androidClientId: enviroments.REACT_APP_ANDROID_CLIENT_ID,
+    iosClientId: enviroments.REACT_APP_IOS_CLIENT_ID,
+    expoClientId: enviroments.REACT_APP_EXPO_CLIENT_ID,
   });
-
-  _logger.log({request, response})
-
-  // const { setToken } = useContext(signupContext);
 
   useEffect(() => {
     const persistAuth = async (res: any) => {
