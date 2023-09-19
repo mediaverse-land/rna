@@ -29,6 +29,8 @@ import { EDIT_SCREEN } from "../../../constaints/consts";
 import { PaddingContainer } from "../../../styles/grid";
 import { Toolbar } from "../components/toolbar";
 import { IMAGE_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
+import { singleImageStyles } from "./styles";
+import { SingleAssetFooter } from "../components/footer";
 
 export function SingleImageScreen({ navigation, route }: any) {
   const { id } = route.params;
@@ -153,8 +155,7 @@ export function SingleImageScreen({ navigation, route }: any) {
   };
 
   const thumnailImageUri =
-    data?.asset?.thumbnails?.["390x218"] ||
-     IMAGE_THUMBNAIL_PLACEHOLDER;
+    data?.asset?.thumbnails?.["390x218"] || IMAGE_THUMBNAIL_PLACEHOLDER;
 
   const price = data?.asset?.price || null;
   const file = data?.asset?.file;
@@ -193,23 +194,29 @@ export function SingleImageScreen({ navigation, route }: any) {
   const isLoadedAndDataExists = !isLoading && data?.id ? true : false;
 
   const navigateToEditScreen = () => {
+    const isDisableEditIcon =
+      data?.asset?.user?.id === currentUserId ? false : true;
+
+    if (isDisableEditIcon) {
+      return;
+    }
     navigation.navigate(EDIT_SCREEN, {
       id: data?.id,
       assetType: "image",
     });
   };
 
-  const isDisableEditIcon =
-    data?.asset?.user?.id === currentUserId ? false : true;
+  const accountId: number = userCtx.getUser().id;
 
-  const TOOLBAR_OPTIONS = [
-    {
-      id: 4,
-      func: navigateToEditScreen,
-      icon: <ICON_EDIT_DARK width={20} height={20} />,
-      isDisable: isDisableEditIcon,
-    },
-  ];
+
+  // const TOOLBAR_OPTIONS = [
+  //   {
+  //     id: 4,
+  //     func: navigateToEditScreen,
+  //     icon: <ICON_EDIT_DARK width={20} height={20} />,
+  //     isDisable: isDisableEditIcon,
+  //   },
+  // ];
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -229,9 +236,9 @@ export function SingleImageScreen({ navigation, route }: any) {
                   openReportModalHandler={_openReportModalHandler}
                 />
                 <RenderIfWithoutLoading condition={hasPermission}>
-                  <PaddingContainer>
+                  {/* <PaddingContainer>
                     <Toolbar toolbarList={TOOLBAR_OPTIONS} />
-                  </PaddingContainer>
+                  </PaddingContainer> */}
                 </RenderIfWithoutLoading>
                 <SingleImageContent
                   description={data?.description}
@@ -258,6 +265,15 @@ export function SingleImageScreen({ navigation, route }: any) {
             isOwner={isOwner}
           />
         </RenderIfWithoutLoading>
+        <RenderIfWithoutLoading condition={isOwner}>
+          <SingleAssetFooter
+            fileName={data?.name}
+            editorHandler={navigateToEditScreen}
+            asset_Id={data?.id}
+            parent_Id={accountId}
+            tokenCtx={tokenCtx}
+          />
+        </RenderIfWithoutLoading>
       </ScreenGradient>
       <RenderIfWithoutLoading condition={showLargeImage}>
         <AssetLargeImage
@@ -268,18 +284,7 @@ export function SingleImageScreen({ navigation, route }: any) {
         />
       </RenderIfWithoutLoading>
       {data?.asset_id && openReportModal ? (
-        <View
-          ref={ref}
-          style={{
-            position: "absolute",
-            zIndex: 40000,
-            top: 270,
-            right: 20,
-            backgroundColor: "#0f172cab",
-            width: 250,
-            height: 250,
-          }}
-        >
+        <View ref={ref} style={singleImageStyles.reportModalStyles}>
           <ReportModal
             assetId={data?.asset_id}
             reportModalCloseHandler={_closeReportModalHandler}

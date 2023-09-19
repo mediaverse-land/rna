@@ -28,7 +28,10 @@ const liveSlice = createSlice({
   name: "live_slice",
   initialState,
   reducers: {
-    setSearchParams: (state, action: PayloadAction<{ lang?: string, country?:string }>) => {
+    setSearchParams: (
+      state,
+      action: PayloadAction<{ lang?: string; country?: string; title?: string }>
+    ) => {
       if (action.payload.lang) {
         const _newState = {
           ...state.search_params,
@@ -36,17 +39,24 @@ const liveSlice = createSlice({
         };
         state.search_params = _newState;
       }
-      if(action.payload.country){
+      if (action.payload.country) {
         const _newState = {
           ...state.search_params,
           selectedCountry: action.payload.country,
         };
         state.search_params = _newState;
       }
+      if (action.payload.title || action.payload.title === "") {
+        const _newState = {
+          ...state.search_params,
+          title: action.payload.title,
+        };
+        state.search_params = _newState;
+      }
     },
     clearSearchParams: (state) => {
-      state.search_params = null
-    } ,
+      state.search_params = null;
+    },
     addRecordLive: (state, action: PayloadAction<Item>) => {
       const item = action.payload;
       const filteredRecords = state.recordingItems.filter(

@@ -22,16 +22,22 @@ export const liveService: any = createApi({
     }),
     getSearchLive: builder.query({
       query: (args) => {
-        let url = 'lives?'
+        let url = "lives?";
 
-        if(args.lang) url = url+`language=${args.lang}`
+        if (args.lang) url = url + `language=${args.lang}`;
 
-        if(args.country){
-          if(url.charAt(url.length -1) === '?'){
-            url = url + `country=${args.country}`
+        if (args.country) {
+          if (url.charAt(url.length - 1) === "?") {
+            url = url + `country=${args.country}`;
+          } else {
+            url = url + `&country=${args.country}`;
           }
-          else{
-            url = url + `&country=${args.country}`
+        }
+        if (args.title) {
+          if (url.charAt(url.length - 1) === "?") {
+            url = url + `title=${args.title}`;
+          } else {
+            url = url + `&title=${args.title}`;
           }
         }
 

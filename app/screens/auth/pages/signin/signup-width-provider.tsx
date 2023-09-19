@@ -1,12 +1,12 @@
+import { useEffect } from "react";
 import { FC } from "react";
 import { TouchableOpacity } from "react-native";
+import * as Google from "expo-auth-session/providers/google";
 import { AuthProviderButton } from "../../components/auth-provider-button";
 import { providerButtons } from "../../mock-data";
 import { theme } from "../../../../constaints/theme";
 import { Box } from "../../../../components/box";
 import { Text } from "../../../../components/text";
-import * as Google from "expo-auth-session/providers/google";
-import { useEffect } from "react";
 import { googleAuthApiHandler } from "./service";
 import { Toaster } from "../../../../utils/toaster";
 import { Logger } from "../../../../utils/logger";

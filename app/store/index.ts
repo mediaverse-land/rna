@@ -14,6 +14,7 @@ import { viewAllService } from "../services/view-all.service";
 import { languageService } from "../services/language.service";
 import { liveService } from "../services/live.service";
 import liveSlice from "../slices/live.slice";
+import { assetService } from "../services/asset.service";
 // import { setupListeners } from '@reduxjs/toolkit/query'
 
 const store = configureStore({
@@ -29,6 +30,7 @@ const store = configureStore({
     [viewAllService.reducerPath]: viewAllService.reducer,
     [languageService.reducerPath]: languageService.reducer,
     [liveService.reducerPath]: liveService.reducer,
+    [assetService.reducerPath]: assetService.reducer,
     imageSlice: singleImageSlice,
     tourSlice: tourSlice,
     plusSlice: plusSlice,
@@ -45,6 +47,7 @@ const store = configureStore({
       exploreService.middleware,
       singleVideoService.middleware,
       liveService.middleware,
+      assetService.middleware,
       viewAllService.middleware,
       uploadService.middleware,
     ]),

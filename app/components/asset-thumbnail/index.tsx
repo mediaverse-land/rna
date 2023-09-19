@@ -19,7 +19,8 @@ export const AssetThumbnail = ({ assetType, thumnailImageUri }: Props) => {
           <Image
             source={{ uri: thumnailImageUri }}
             style={{
-              width: "100%",
+              flex: 1,
+              // width: "100%",
               height: thumbnailHeight,
               borderBottomLeftRadius: 16,
               borderBottomRightRadius: 16,
