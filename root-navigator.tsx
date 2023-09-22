@@ -20,6 +20,7 @@ import { PlusScreen } from "./app/screens/plus";
 import { AppStack } from "./app/screens/stack";
 import { EditScreen } from "./app/screens/edit";
 import {
+  ACCOUNTS_SCREEN,
   APP_STACK,
   AUTH_SCREEN,
   EDIT_SCREEN,
@@ -33,6 +34,8 @@ import {
   SINGLE_VIDEO_SCREEN,
   WALLET_STACK,
 } from "./app/constaints/consts";
+import { AccountPage } from "./app/screens/settings/pages/account";
+import AccountsScreen from "./app/screens/accounts";
 
 type Route = { id: number; name: string; component: FC | any };
 
@@ -106,6 +109,11 @@ const appRoutes: Route[] = [
     id: 12,
     name: EDIT_SCREEN,
     component: EditScreen,
+  },
+  {
+    id: 13,
+    name: ACCOUNTS_SCREEN,
+    component: AccountsScreen,
   },
 ];
 

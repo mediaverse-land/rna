@@ -25,6 +25,8 @@ export const EDIT_TEXT_SCREEN = "EditTextScreen";
 export const EDIT_SOUND_SCREEN = "EditSoundScreen";
 export const EDIT_VIDEO_SCREEN = "EditVideoScreen";
 
+export const ACCOUNTS_SCREEN = "AccountsScreen";
+
 export const ALL_LIVES_SCREEN = "AllLivesScreen";
 
 export const USER_HAS_SEEN_BOTTOM_TAB_GUIDE = "USER_HAS_SEEN_BOTTOM_TAB_GUIDE";

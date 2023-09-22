@@ -5,7 +5,6 @@ import { GeneralInformationPage } from './pages/account/general-information';
 import { SignInsPage } from './pages/account/singins';
 import { SessionsPage } from './pages/account/seassions';
 import { MessagesPage } from './pages/messages';
-import { ShareEccountPage } from './pages/share-account';
 import { MessageDetail } from './pages/message-detail';
 
 const Stack = createStackNavigator();
@@ -46,12 +45,6 @@ const routes = [
         title: 'Analytics',
         component: IndexMenu,
         name: 'analytics'
-    },
-    {
-        id: 5,
-        title: 'Share account',
-        component: ShareEccountPage,
-        name: 'share account'
     },
     {
         id: 6,

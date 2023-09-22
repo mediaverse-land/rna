@@ -18,6 +18,7 @@ import { FocusedStatusBar } from "../../../components/focused-statusbar";
 import { userContext } from "../../../context/user";
 import { StorageService } from "../../../services/storage.service";
 import { useIsFocused } from "@react-navigation/native";
+import { ACCOUNTS_SCREEN } from "../../../constaints/consts";
 
 const _storageService = new StorageService();
 
@@ -124,12 +125,12 @@ export function IndexMenu() {
       id: 2,
       title: "Share account",
       icon: ICON_SHARE,
-      // routePath: 'share account',
+      routePath: ACCOUNTS_SCREEN,
       iconStyle: {
         width: 18,
         height: 18,
       },
-      isDisabled: true,
+      // isDisabled: true,
     },
   ];
 

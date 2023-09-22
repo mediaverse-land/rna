@@ -10,7 +10,7 @@ import { LoadingSpinner } from "../loader-spinner";
 import { useGetExternalAccountsListQuery } from "../../services/auth.service";
 import { ICONS_GOOGLE_BLUE } from "../../constaints/icons";
 import { UseNavigationType } from "../../types/use-navigation";
-import { ExternalAccount } from "../../types/external-account";
+import { ExternalAccount as IExternalAccount } from "../../types/external-account";
 
 type Props = {
   setSelectedLanguage: (lang: string) => void;
@@ -19,7 +19,7 @@ type Props = {
 
 const ExternalAccount: FC<Props> = ({ setSelectedLanguage, token }) => {
   const [page, setPage] = useState(1);
-  const [__dataList, setDataList] = useState<ExternalAccount[]>([]);
+  const [__dataList, setDataList] = useState<IExternalAccount[]>([]);
 
   const { data, isFetching, isLoading, refetch } =
     useGetExternalAccountsListQuery({
@@ -61,7 +61,7 @@ const ExternalAccount: FC<Props> = ({ setSelectedLanguage, token }) => {
   const totalRecords = data?.total;
   const shouldLoadMore = totalRecords > __dataList?.length * page;
 
-  const renderItem = useCallback(({ item }: { item: ExternalAccount }) => {
+  const renderItem = useCallback(({ item }: { item: IExternalAccount }) => {
     return (
       <TouchableOpacity
         activeOpacity={1}
@@ -88,7 +88,7 @@ const ExternalAccount: FC<Props> = ({ setSelectedLanguage, token }) => {
     );
   }, []);
 
-  const _key = (item: ExternalAccount) => item.id.toString();
+  const _key = (item: IExternalAccount) => item.id.toString();
 
   return (
     <>

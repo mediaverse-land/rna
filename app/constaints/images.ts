@@ -43,11 +43,15 @@ import SINGLE_ASSET_FOOTER_BG_GTADIENT_SVG from "./../../assets/img/gradients/si
 import SINGLE_ASSET_FOOTER_BG_GTADIENT_PNG from "./../../assets/img/gradients/single-asset-footer-bg-gradient.png.png";
 import DOWNLOAD_BTN_BG_GTADIENT_PNG from "./../../assets/img/gradients/download-btn-bg-gradinet.png";
 import EDIT_BTN_BG_GTADIENT_PNG from "./../../assets/img/gradients/edit-button-bg-gradient.png";
+import ADD_SHARE_ACCOUNT_BG_SVG from "./../../assets/img/gradients/add-share-account-svg-bg.svg";
+import SHARE_ACCOUNT_ITEM_BG_PNG from "./../../assets/img/gradients/share-account-item-bg-png.png";
 
 export const SINGLE_ASSET_FOOTER_BG_GTADIENT = SINGLE_ASSET_FOOTER_BG_GTADIENT_SVG
 export const SINGLE_ASSET_FOOTER_BG_PNG_GRADIENT = imageUriResolver(SINGLE_ASSET_FOOTER_BG_GTADIENT_PNG)
 export const DOWNLOAD_BTN_BG_GTADIENT = imageUriResolver(DOWNLOAD_BTN_BG_GTADIENT_PNG)
 export const EDIT_BTN_BG_GTADIENT = imageUriResolver(EDIT_BTN_BG_GTADIENT_PNG)
+export const SHARE_ACCOUNT_ITEM_BG = imageUriResolver(SHARE_ACCOUNT_ITEM_BG_PNG)
+export const ADD_SHARE_ACCOUNT_BG = ADD_SHARE_ACCOUNT_BG_SVG
 
 
 // import TOP_BAR_BACKGROUND_SVG from "./../../assets/img/gradients/Rectangle 212.svg";

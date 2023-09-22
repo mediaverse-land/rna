@@ -19,6 +19,7 @@ import CONTROL_ROM_PATH from "./../../assets/img/apps/Control Room.svg";
 import AI_AND_PRODUCTION_PATH from "./../../assets/icons/AI & Production.svg";
 import STUDIO_PATH from "./../../assets/icons/Studio.svg";
 import GOOGLE_BLUE_SVG from "./../../assets/icons/icon__google-blue.svg";
+import SHARE_ACCOUNT_ITEM_SVG from "./../../assets/img/gradients/share-account-item-svg-bg.svg";
 
 export const MEDIA_SUIT = MEDIA_SUIT_PATH;
 export const CG_PLAYOUT = CG_PLAYOUT_PATH;
@@ -27,6 +28,8 @@ export const CONTROL_ROM = CONTROL_ROM_PATH;
 export const AI_AND_PRODUCTION = AI_AND_PRODUCTION_PATH;
 export const STUDIO = STUDIO_PATH;
 export const ICONS_GOOGLE_BLUE = GOOGLE_BLUE_SVG;
+
+export const SHARE_ACCOUNT_ITEM = SHARE_ACCOUNT_ITEM_SVG;
 
 export const ICON_WARNING = ICON_WARNING_PATH;
 
