@@ -1,15 +1,16 @@
 import React, { FC, memo, useCallback, useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { BottomSheetFlatList } from "@gorhom/bottom-sheet";
 import { Box } from "../box";
 import { theme } from "../../constaints/theme";
 import { Text } from "../text";
+import { Button } from "../button";
 import { LoadingSpinner } from "../loader-spinner";
 import { useGetExternalAccountsListQuery } from "../../services/auth.service";
 import { ICONS_GOOGLE_BLUE } from "../../constaints/icons";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { Button } from "../button";
 import { UseNavigationType } from "../../types/use-navigation";
+import { ExternalAccount } from "../../types/external-account";
 
 type Props = {
   setSelectedLanguage: (lang: string) => void;
@@ -18,7 +19,7 @@ type Props = {
 
 const ExternalAccount: FC<Props> = ({ setSelectedLanguage, token }) => {
   const [page, setPage] = useState(1);
-  const [__dataList, setDataList] = useState<any[]>([]);
+  const [__dataList, setDataList] = useState<ExternalAccount[]>([]);
 
   const { data, isFetching, isLoading, refetch } =
     useGetExternalAccountsListQuery({
@@ -60,7 +61,7 @@ const ExternalAccount: FC<Props> = ({ setSelectedLanguage, token }) => {
   const totalRecords = data?.total;
   const shouldLoadMore = totalRecords > __dataList?.length * page;
 
-  const renderItem = useCallback(({ item }: { item: any }) => {
+  const renderItem = useCallback(({ item }: { item: ExternalAccount }) => {
     return (
       <TouchableOpacity
         activeOpacity={1}
@@ -87,7 +88,7 @@ const ExternalAccount: FC<Props> = ({ setSelectedLanguage, token }) => {
     );
   }, []);
 
-  const _key = (item: any) => item.id.toString();
+  const _key = (item: ExternalAccount) => item.id.toString();
 
   return (
     <>
