@@ -21,13 +21,9 @@ import { AssetLargeImage } from "./large-image";
 import { FocusedStatusBar } from "../../../components/focused-statusbar";
 import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
 import { ReportModal } from "../components/report-modal";
-import { FullScreenSpinnerLoader } from "../../../components/loader-spinner";
 import { getImageDetailApiHandler } from "../service";
 import { Image } from "../../../types/image";
-import { ICON_EDIT_DARK, ICON_TEXT_WHITE } from "../../../constaints/icons";
 import { EDIT_SCREEN } from "../../../constaints/consts";
-import { PaddingContainer } from "../../../styles/grid";
-import { Toolbar } from "../components/toolbar";
 import { IMAGE_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
 import { singleImageStyles } from "./styles";
 import { SingleAssetFooter } from "../components/footer";
@@ -41,20 +37,15 @@ export function SingleImageScreen({ navigation, route }: any) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<Image>(null);
 
+  const [token, setToken] = useState<string>(null);
+
   const [openReportModal, setOpenReportModal] = useState(false);
   const [currentUserId, setCurrentUserId] = useState<number>(null);
 
   const tokenCtx = useContext(tokenContext);
   const userCtx = useContext(userContext);
 
-  // const token = tokenCtx.getToken();
-
   const isFocuses = useIsFocused();
-
-  // // @ts-ignore
-  // if (token === null || !token) {
-  //   return <FullScreenSpinnerLoader />;
-  // }
 
   useEffect(() => {
     if (isFocuses) {
@@ -69,15 +60,17 @@ export function SingleImageScreen({ navigation, route }: any) {
 
   const getData = async () => {
     setIsLoading(true);
-    const token = await tokenCtx.getToken();
+    const _token = await tokenCtx.getToken();
 
-    if (token === null) {
+    if (_token === null) {
       setIsLoading(false);
 
       return;
     }
 
-    const formattedToken = tokenStringResolver(token);
+    const formattedToken = tokenStringResolver(_token);
+
+    setToken(formattedToken);
 
     await getSingleData(formattedToken);
 
@@ -208,7 +201,6 @@ export function SingleImageScreen({ navigation, route }: any) {
 
   const accountId: number = userCtx.getUser().id;
 
-
   // const TOOLBAR_OPTIONS = [
   //   {
   //     id: 4,
@@ -272,6 +264,7 @@ export function SingleImageScreen({ navigation, route }: any) {
             asset_Id={data?.id}
             parent_Id={accountId}
             tokenCtx={tokenCtx}
+            token={token}
           />
         </RenderIfWithoutLoading>
       </ScreenGradient>

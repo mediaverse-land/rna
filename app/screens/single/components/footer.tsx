@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { Box } from "../../../components/box";
 import * as Google from "expo-auth-session/providers/google";
-import { Image, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
 import { Text } from "../../../components/text";
 import { theme } from "../../../constaints/theme";
 import { ICON_DOWNLOAD_WHITE } from "../../../constaints/icons";
@@ -18,6 +18,9 @@ import {
   SINGLE_ASSET_FOOTER_BG_PNG_GRADIENT,
 } from "../../../constaints/images";
 import { enviroments } from "../../../../enviroments/enviroments";
+import ExternalAccountBottomSheet from "../../../components/external-account-bottom-sheet";
+import { ModalBottomSheet } from "../../../components/bottom-sheet-modal";
+import { useClickOutside } from "react-native-click-outside";
 
 type Props = {
   fileName: string;
@@ -25,6 +28,7 @@ type Props = {
   parent_Id: number;
   editorHandler: () => void;
   tokenCtx: any;
+  token: string;
 };
 
 const _storageService = new StorageService();
@@ -36,19 +40,27 @@ export const SingleAssetFooter = ({
   asset_Id,
   parent_Id,
   tokenCtx,
+  token,
 }: Props) => {
   const [request, response, promptAsync]: any = Google.useAuthRequest({
     androidClientId: enviroments.REACT_APP_ANDROID_CLIENT_ID,
     iosClientId: enviroments.REACT_APP_IOS_CLIENT_ID,
     clientSecret: enviroments.REACT_APP_WEB_CLIENT_SECTET,
     expoClientId: enviroments.REACT_APP_EXPO_CLIENT_ID,
+    scopes: [
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/drive.file",
+      "https://www.googleapis.com/auth/youtube.upload",
+    ],
     extraParams: {
       access_type: "offline",
     },
-    scopes: [
-      "https://www.googleapis.com/auth/plus.login",
-      "https://www.googleapis.com/auth/userinfo.email",
-    ],
+  });
+
+  const selectAccountRef = useRef(null);
+
+  const innerSelectAccountRef = useClickOutside<View>(() => {
+    selectAccountRef?.current.close();
   });
 
   const [downalodHandler, { isLoading, isFetching, error }] =
@@ -57,10 +69,13 @@ export const SingleAssetFooter = ({
   const [addExternalAccountHandler] = useAddExternalAccountMutation();
 
   useEffect(() => {
-    manageGoogleResponse();
+    // manageGoogleResponse();
   }, [response]);
 
   const manageGoogleResponse = async () => {
+    const token = await getToken();
+
+    console.log({ token });
     if (response?.authentication) {
       // const shouldOpenPrompt = await shouldSignInToGoogle();
       // if (shouldOpenPrompt) {
@@ -70,16 +85,24 @@ export const SingleAssetFooter = ({
       const googleRefreshToken = response?.authentication?.refreshToken;
       const googleAccessToken = response?.authentication?.accessToken;
 
+      console.log("tokens__________________________________");
+      console.log({
+        googleRefreshToken,
+        googleAccessToken,
+      });
+      console.log("tokens__________________________________");
+
+      if (!googleRefreshToken) {
+        console.log("no refresh token");
+        return;
+      }
+
       try {
         // Save data to async storage
         await saveGoogleAccountDataToStorage({
           googleAccessToken,
           googleRefreshToken,
         });
-
-        const token = await getToken();
-
-        console.log(token)
 
         const _googleResponse = await getUserRequestEmail(googleAccessToken);
         if (!_googleResponse) {
@@ -93,8 +116,7 @@ export const SingleAssetFooter = ({
           body: {
             type: 1,
             title: email,
-            refresh_token:
-              googleRefreshToken || (await getGoogleRefreshTokenFromStorage()),
+            refresh_token: googleRefreshToken,
             access_token: googleAccessToken,
           },
         };
@@ -106,18 +128,16 @@ export const SingleAssetFooter = ({
           return;
         }
 
-        // Download
-        const downloadSourceRequestBody = {
-          asset: asset_Id,
-          account: parent_Id,
-        };
+        // // Download
+        // const downloadSourceRequestBody = {
+        //   asset: 6199,
+        //   account: 98,
+        // };
 
-        console.log({ asset: asset_Id, account: parent_Id });
-
-        const result = await downalodHandler({
-          body: downloadSourceRequestBody,
-          token,
-        });
+        // const result = await downalodHandler({
+        //   body: downloadSourceRequestBody,
+        //   token,
+        // });
 
         // console.log({ result: JSON.stringify(result) });
       } catch (err) {
@@ -152,23 +172,21 @@ export const SingleAssetFooter = ({
     return await tokenStringResolver(token);
   };
 
-  const downaloderHandler = async () => {
-    const shouldOpenPrompt = await shouldSignInToGoogle();
-
-    if (!shouldOpenPrompt) {
-      await promptAsync();
-      return;
-    }
-    const requestBody = {
-      asset: asset_Id,
-      account: parent_Id,
-    };
-
-    // console.log({requestBody})
-    const token = await getToken();
-
-    const result = await downalodHandler({ body: requestBody, token });
-    console.log(result?.error);
+  const openDownloadModal = async () => {
+    selectAccountRef?.current?.open();
+    // const shouldOpenPrompt = await shouldSignInToGoogle();
+    // if (!shouldOpenPrompt) {
+    //   await promptAsync();
+    //   return;
+    // }
+    // const requestBody = {
+    //   asset: asset_Id,
+    //   account: parent_Id,
+    // };
+    // // console.log({requestBody})
+    // const token = await getToken();
+    // const result = await downalodHandler({ body: requestBody, token });
+    // console.log(result?.error);
   };
 
   const getGoogleRefreshTokenFromStorage = async (): Promise<string | null> => {
@@ -211,22 +229,45 @@ export const SingleAssetFooter = ({
     return hasRefreshToken || hasExternalAccount ? false : true;
   };
 
+  const snapPoints = useMemo(() => ["25%", "50%"], []);
+
+  if (!token) {
+    return;
+  }
+
   return (
-    <Box width="100%" height={160} position="relative">
-      <GradientBg />
-      <Box
-        width="100%"
-        height="100%"
-        position="absolute"
-        top={0}
-        left={0}
-        padding={24}
-        zIndex={10}
-      >
-        <DownloadButton handler={downaloderHandler} fileName={fileName} />
-        <EditButton handler={editorHandler} />
+    <>
+      <Box width="100%" height={160} position="relative">
+        <GradientBg />
+        <Box
+          width="100%"
+          height="100%"
+          position="absolute"
+          top={0}
+          left={0}
+          padding={24}
+          zIndex={10}
+        >
+          <DownloadButton handler={openDownloadModal} fileName={fileName} />
+          <EditButton handler={editorHandler} />
+        </Box>
       </Box>
-    </Box>
+      <ModalBottomSheet ref={selectAccountRef} snapPoints={snapPoints}>
+        <View
+          ref={innerSelectAccountRef}
+          style={{
+            marginBottom: 200,
+            flex: 1,
+            height: 1000,
+          }}
+        >
+          <ExternalAccountBottomSheet
+            setSelectedLanguage={() => {}}
+            token={token}
+          />
+        </View>
+      </ModalBottomSheet>
+    </>
   );
 };
 

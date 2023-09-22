@@ -6,7 +6,7 @@ export const languageService: any = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: enviroments.BASE_URL,
   }),
-    // tagTypes: ['Language'],
+  tagTypes: ["Language", "country"],
   endpoints: (builder) => ({
     getLanguages: builder.query({
       query: (args) => {
@@ -32,11 +32,7 @@ export const languageService: any = createApi({
         };
       },
     }),
- 
   }),
 });
 
-export const {
-  useGetLanguagesQuery,
-  useGetCountriesQuery
-} = languageService;
+export const { useGetLanguagesQuery, useGetCountriesQuery } = languageService;
