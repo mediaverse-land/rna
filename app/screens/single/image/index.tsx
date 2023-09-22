@@ -58,6 +58,8 @@ export function SingleImageScreen({ navigation, route }: any) {
     setOpenReportModal(false);
   });
 
+  
+
   const getData = async () => {
     setIsLoading(true);
     const _token = await tokenCtx.getToken();

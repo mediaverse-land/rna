@@ -66,6 +66,7 @@ export const ModalBottomSheet = forwardRef(
               snapPoints={snapPoints}
               ref={confirmAlertSheetRef}
               onClose={() => setIsModalOpen(false)}
+              enablePanDownToClose
               handleComponent={null}
               backgroundStyle={{
                 backgroundColor: theme.color.light.ADD_ACCOUNT_MODAL_BAKGROUND,

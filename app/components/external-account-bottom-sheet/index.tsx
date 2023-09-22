@@ -7,8 +7,9 @@ import { Text } from "../text";
 import { LoadingSpinner } from "../loader-spinner";
 import { useGetExternalAccountsListQuery } from "../../services/auth.service";
 import { ICONS_GOOGLE_BLUE } from "../../constaints/icons";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { Button } from "../button";
+import { UseNavigationType } from "../../types/use-navigation";
 
 type Props = {
   setSelectedLanguage: (lang: string) => void;
@@ -19,11 +20,14 @@ const ExternalAccount: FC<Props> = ({ setSelectedLanguage, token }) => {
   const [page, setPage] = useState(1);
   const [__dataList, setDataList] = useState<any[]>([]);
 
-  const { data, isFetching, refetch } = useGetExternalAccountsListQuery({
-    token: token,
-  });
+  const { data, isFetching, isLoading, refetch } =
+    useGetExternalAccountsListQuery({
+      token,
+      page,
+    });
 
   const isFocuses = useIsFocused();
+  const navigation = useNavigation<UseNavigationType>();
 
   useEffect(() => {
     if (isFocuses) {
@@ -41,14 +45,20 @@ const ExternalAccount: FC<Props> = ({ setSelectedLanguage, token }) => {
     }
 
     if (data?.data) {
-      setDataList((prev) => [...prev, data?.data]);
+      setDataList((prev) => [...prev, ...data?.data]);
     }
   }, [data?.data]);
 
-  console.log(__dataList);
+  const setNextPage = () => {
+    setPage((prev) => prev + 1);
+  };
+
+  const createAccountHandler = () => {
+    navigation.navigate("AccountsView");
+  };
 
   const totalRecords = data?.total;
-  const shouldLoadMore = totalRecords > data?.data?.length * page;
+  const shouldLoadMore = totalRecords > __dataList?.length * page;
 
   const renderItem = useCallback(({ item }: { item: any }) => {
     return (
@@ -77,43 +87,69 @@ const ExternalAccount: FC<Props> = ({ setSelectedLanguage, token }) => {
     );
   }, []);
 
-  const _key = (item: any) => Math.random();
+  const _key = (item: any) => item.id.toString();
 
   return (
     <>
-      {isFetching ? (
-        <LoadingSpinner />
-      ) : (
-        <BottomSheetFlatList
-          data={__dataList}
-          // keyExtractor={_key}
-          renderItem={renderItem}
-          ListHeaderComponent={
-            <Box width="100%" marginBottom={32}>
-              <Text
-                color={theme.color.light.WHITE}
-                fontSize={16}
-                fontWeight={600}
-              >
-                Select an account to continue
-              </Text>
-            </Box>
-          }
-          ListFooterComponent={
-            <Box>
-              {shouldLoadMore ? (
-                <Button varient="dark" text="Load more..." borderRadius={16} />
-              ) : null}
-            </Box>
-          }
-          contentContainerStyle={{
-            paddingLeft: 24,
-            paddingRight: 24,
-            paddingTop: 16,
-            paddingBottom: 800,
-          }}
-        />
-      )}
+      <BottomSheetFlatList
+        data={__dataList}
+        keyExtractor={_key}
+        renderItem={renderItem}
+        ListHeaderComponent={
+          <Box
+            width="100%"
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            marginBottom={32}
+          >
+            <Text
+              color={theme.color.light.WHITE}
+              fontSize={16}
+              fontWeight={600}
+            >
+              Select an account to continue
+            </Text>
+            <Text color={theme.color.light.TEXT} fontSize={14} fontWeight={400}>
+              Manage accounts
+            </Text>
+          </Box>
+        }
+        ListFooterComponent={
+          <>
+            {isFetching || isLoading ? (
+              <LoadingSpinner />
+            ) : !__dataList?.length ? (
+              <Box hasBlackBorder>
+                <Button
+                  onpressHandler={createAccountHandler}
+                  varient="dark"
+                  text="No accounts yet? create one"
+                  borderRadius={16}
+                />
+              </Box>
+            ) : (
+              <Box marginTop={16}>
+                {shouldLoadMore ? (
+                  <Button
+                    onpressHandler={setNextPage}
+                    varient="dark"
+                    text="Load more"
+                    size="lg"
+                    borderRadius={16}
+                  />
+                ) : null}
+              </Box>
+            )}
+          </>
+        }
+        contentContainerStyle={{
+          paddingLeft: 24,
+          paddingRight: 24,
+          paddingTop: 16,
+          paddingBottom: 650,
+        }}
+      />
     </>
   );
 };

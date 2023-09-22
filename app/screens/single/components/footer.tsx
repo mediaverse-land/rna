@@ -252,7 +252,7 @@ export const SingleAssetFooter = ({
           <EditButton handler={editorHandler} />
         </Box>
       </Box>
-      <ModalBottomSheet ref={selectAccountRef} snapPoints={snapPoints}>
+      <ModalBottomSheet  ref={selectAccountRef} snapPoints={snapPoints}>
         <View
           ref={innerSelectAccountRef}
           style={{

@@ -12,7 +12,7 @@ export const authService: any = createApi({
       query: (args) => {
         console.log(`Bearer ${args.token}`)
         return {
-          url: "external-accounts",
+          url: `external-accounts?page=${args.page}`,
           method: "GET",
           headers: {
             Authorization: `Bearer ${args.token}`,
