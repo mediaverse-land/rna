@@ -1,4 +1,4 @@
-import React, { FC, memo, useEffect, useState } from "react";
+import React, { FC, ReactNode, memo, useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { BottomSheetFlatList } from "@gorhom/bottom-sheet";
@@ -16,9 +16,14 @@ import { ACCOUNTS_SCREEN } from "../../constaints/consts";
 type Props = {
   setSelectedAccount: (account: IExternalAccount) => void;
   token: string;
+  headerElement?: ReactNode;
 };
 
-const ExternalAccount: FC<Props> = ({ setSelectedAccount, token }) => {
+const ExternalAccount: FC<Props> = ({
+  setSelectedAccount,
+  token,
+  headerElement,
+}) => {
   const [page, setPage] = useState(1);
   const [__dataList, setDataList] = useState<IExternalAccount[]>([]);
 
@@ -85,7 +90,6 @@ const ExternalAccount: FC<Props> = ({ setSelectedAccount, token }) => {
           justifyContent="space-between"
         >
           <ICONS_GOOGLE_BLUE />
-          <Text>{item.id}</Text>
           <Text color={theme.color.light.WHITE} fontSize={14} fontWeight={600}>
             {item.title}
           </Text>
@@ -103,40 +107,43 @@ const ExternalAccount: FC<Props> = ({ setSelectedAccount, token }) => {
         keyExtractor={_key}
         renderItem={renderItem}
         ListHeaderComponent={
-          <Box
-            width="100%"
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            marginBottom={32}
-          >
-            <Text
-              color={theme.color.light.WHITE}
-              fontSize={16}
-              fontWeight={600}
-            >
-              Select an account to continue
-            </Text>
-            <TouchableOpacity
-              onPress={navigateToSharedAccountsScreen}
-              activeOpacity={1}
+          <>
+            {headerElement ? headerElement : null}
+            <Box
+              width="100%"
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+              marginBottom={32}
             >
               <Text
-                color={theme.color.light.TEXT}
-                fontSize={14}
-                fontWeight={400}
+                color={theme.color.light.WHITE}
+                fontSize={16}
+                fontWeight={600}
               >
-                Manage accounts
+                Select an account to continue
               </Text>
-            </TouchableOpacity>
-          </Box>
+              <TouchableOpacity
+                onPress={navigateToSharedAccountsScreen}
+                activeOpacity={1}
+              >
+                <Text
+                  color={theme.color.light.TEXT}
+                  fontSize={14}
+                  fontWeight={400}
+                >
+                  Manage accounts
+                </Text>
+              </TouchableOpacity>
+            </Box>
+          </>
         }
         ListFooterComponent={
           <>
             {isFetching || isLoading ? (
               <LoadingSpinner />
             ) : !__dataList?.length ? (
-              <Box >
+              <Box>
                 <Button
                   onpressHandler={createAccountHandler}
                   varient="dark"

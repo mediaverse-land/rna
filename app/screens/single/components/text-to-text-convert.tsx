@@ -78,10 +78,10 @@ export class TextToTextConvert implements ITextToTextConvert {
     try {
       const result = await func({ token: this.token, body });
       if (result?.error) {
-        console.log(JSON.stringify(result?.error))
         _toaster.show("Convert text to text failed");
       }
       if (result?.data) {
+        this.closeModal();
         _toaster.show("Text converted successfully");
       }
     } catch (err) {

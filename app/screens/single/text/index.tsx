@@ -89,7 +89,10 @@ export function SingleTextScreen({
     textToTextRef?.current?.close();
   });
 
-  const [_shareYoutubeApiFunction] = useYoutubeShareMutation();
+  const [
+    _shareYoutubeApiFunction,
+    { isLoading: isYoutubeShareLoading, isFetching: isYoutubeShareFetching },
+  ] = useYoutubeShareMutation();
   const [
     _convertTextToTextApiFunction,
     {
@@ -103,15 +106,17 @@ export function SingleTextScreen({
     modalWrapperRef: youtubeShareWrapperRef,
     token: token,
     shareYoutubeApiFunction: _shareYoutubeApiFunction,
+    assetId: data?.asset_id,
+    isLoading: isYoutubeShareLoading || isYoutubeShareFetching,
   });
 
   _textToTextConver.config({
     ref: textToTextRef,
     innerRef: textToTextWrapperRef,
     _apiFunction: _convertTextToTextApiFunction,
-    isLoading: (_convertTextToTextIsLoading || _convertTextToTextIsFetching),
+    isLoading: _convertTextToTextIsLoading || _convertTextToTextIsFetching,
     token,
-    assetId: data?.id
+    assetId: data?.id,
   });
 
   const ref = useClickOutside<View>(() => {
