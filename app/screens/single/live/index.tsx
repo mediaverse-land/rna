@@ -17,10 +17,7 @@ import { useRecordLiveMutation } from "../../../services/live.service";
 import { ToastAndroid } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
-import {
-  addRecordLive,
-  removeRecordById,
-} from "../../../slices/live.slice";
+import { addRecordLive, removeRecordById } from "../../../slices/live.slice";
 import { SINGLE_LIVE_SCREEN } from "../../../constaints/consts";
 import { Button } from "../../../components/button";
 import { useIsFocused } from "@react-navigation/native";
@@ -154,9 +151,8 @@ export function SingleLiveScreen({ navigation, route }: any) {
   };
 
   const handleRedirect = (id: number) => {
-    navigation.navigate(SINGLE_LIVE_SCREEN, { id});
+    navigation.navigate(SINGLE_LIVE_SCREEN, { id });
   };
-
 
   return (
     <>
@@ -176,7 +172,6 @@ export function SingleLiveScreen({ navigation, route }: any) {
                 openRecordBottomSheetHandler={openRecordBottomSheetHandler}
                 isLiveRecording={isLiveRecording}
               />
-              {/* <Button text="Button" varient="primary" onpressHandler={handleRedirect}/> */}
               <SingleLiveOtherLives
                 data={_livesData}
                 isLoading={_isLivesLoading}

@@ -1,39 +1,55 @@
-import React, { FC, useCallback, useContext, useEffect, useState } from "react";
-import {
-  Dimensions,
-  FlatList,
-  Image,
-  SafeAreaView,
-  TouchableOpacity,
-} from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { SafeAreaView } from "react-native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { ScreenGradient } from "../../components/screen-gradient";
-import { Box } from "../../components/box";
-import { Text } from "../../components/text";
-import { theme } from "../../constaints/theme";
-import {
-  ICONS_GOOGLE_BLUE,
-  ICON_ADD,
-  ICON_ARROW_LEFT_SVG,
-  ICON_TRASHBEEN,
-} from "../../constaints/icons";
 import { VirtualizedList } from "../../components/virtualized-list";
-import {
-  ADD_SHARE_ACCOUNT_BG,
-  SHARE_ACCOUNT_ITEM_BG,
-} from "../../constaints/images";
 import { useGetExternalAccountsListQuery } from "../../services/auth.service";
 import { tokenContext } from "../../context/token";
 import { tokenStringResolver } from "../../utils/token-string-resolver";
 import { ExternalAccount } from "../../types/external-account";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { UseNavigationType } from "../../types/use-navigation";
-import { LoadingSpinner } from "../../components/loader-spinner";
-import { AddAccountButton } from "./style";
+import * as Google from "expo-auth-session/providers/google";
+import { enviroments } from "../../../enviroments/enviroments";
+import { AccountsSCreenComponents } from "./components";
+import {
+  useAddExternalAccountMutation,
+  useRemoveExternalAccountMutation,
+  useUpdateExternalAccountMutation,
+} from "../../services/asset.service";
+import { getUserEmailByAccessToken } from "./service";
+import { Toaster } from "../../utils/toaster";
+
+// const _ID_TOKEN =
+//   "eyJhbGciOiJSUzI1NiIsImtpZCI6IjZmNzI1NDEwMWY1NmU0MWNmMzVjOTkyNmRlODRhMmQ1NTJiNGM2ZjEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI1Njc1MTA5NjgxNC1jOGR2bThzMHU2NnN2NDFjcjhwZmFhZms4dmkxb2NrZi5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsImF1ZCI6IjU2NzUxMDk2ODE0LWM4ZHZtOHMwdTY2c3Y0MWNyOHBmYWFmazh2aTFvY2tmLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTAyNzM4MDkwNzMxNzYzMzk0NzkzIiwiZW1haWwiOiJtYWhkaTkxOTM1MTQ0MThAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJ3NGw0TnRYY192NWxWbjBvYldMd3l3IiwibmFtZSI6Ik1laGRpIEFsaXBvb3IiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmktRUVNcWpqdWFPbUg4X24tWmlnUkRob2I3NXRobUduUE96R2Q0ZjVfPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6Ik1laGRpIiwiZmFtaWx5X25hbWUiOiJBbGlwb29yIiwibG9jYWxlIjoiZmEiLCJpYXQiOjE2OTU0NjM2NjcsImV4cCI6MTY5NTQ2NzI2N30.X-aJE_cx9tUgM3L_H3l9JjAzElAiJNZUoMfmInW1-a-W3xE9nkDV2ZAvNL5ZG6UQwsBdZR67kC4DWaMPKOIh-9KWUFoF99htu14E3qcC4uyiver3sO9mIyJNE8AKxSjv8yyTTVc7rsNyNVRdcxXlRy1Bjd3CanxufaVEIKJigZbYRf5f61Rv7UEOiahXx_3XXRs7Q4l58DMLGUe-yPpXcMApDEqGqMekZFFj0v-45s0hHKyMz5fU_b5IIBwtsIUsEZJ1y4osNI1GC6OMQfdm3zFi8pfTNVjtigx0HvRdo_QhLFjzwCmaDfuomfDQAjKL5X54xgtXts30OIMVeAp1cg";
+// const _ACCESS_TOKEN =
+//   "ya29.a0AfB_byBqAECQBmSdsUmy7dWGYrtO8aDrf-U77vSMFy4MYxDcOyNqFftS0Yg2qfVcZXS18NHdABl9DS4K4nfgHPX0mJHSefYb78DdRzN3boHlQnL6uml3fXaVuuO37r_lwINeDvcvYEDoXgdoO9AfWabCgcoH27MTQCEaCgYKAU0SARISFQGOcNnCpA3hZQ0-pPahy3H42vM2Kw0170";
+
+type CreateAccount = {
+  accessToken: string;
+  refreshToken: string;
+  email: string;
+};
+
+const _toaster = new Toaster();
 
 const AccountsScreen = (props: any) => {
   const [page, setPage] = useState(1);
   const [token, setToken] = useState<string>(null);
   const [__dataList, setDataList] = useState<ExternalAccount[]>([]);
+  const [shouldCreateUser, setShouldCreateUser] = useState(false);
+
+  const [selectedAccount, setSelectedAccount] = useState<ExternalAccount>(null);
+
+  const [request, response, promptAsync]: any = Google.useAuthRequest({
+    androidClientId: enviroments.REACT_APP_ANDROID_CLIENT_ID,
+    iosClientId: enviroments.REACT_APP_IOS_CLIENT_ID,
+    clientSecret: enviroments.REACT_APP_WEB_CLIENT_SECTET,
+    expoClientId: enviroments.REACT_APP_EXPO_CLIENT_ID,
+    scopes: enviroments.GOOGLE_AUTH_SCOPE,
+    extraParams: {
+      access_type: "offline",
+    },
+  });
 
   const tokenCtx = useContext(tokenContext);
 
@@ -43,21 +59,55 @@ const AccountsScreen = (props: any) => {
       page,
     });
 
+  const [createAccountApiHandler] = useAddExternalAccountMutation();
+  const [updateAccountApiHandler] = useUpdateExternalAccountMutation();
+  const [removeAccountApiHandler] = useRemoveExternalAccountMutation();
+
   const isFocuses = useIsFocused();
   const navigation = useNavigation<UseNavigationType>();
 
   const totalRecords = data?.total;
-  const shouldLoadMore = totalRecords > __dataList?.length * page;
+  const shouldLoadMore = totalRecords > __dataList?.length;
 
+  // Handle acctions of google signin
   useEffect(() => {
-    if (!isFocuses) {
-      return;
+    if (shouldCreateUser || selectedAccount?.id) {
+      manageGoogleApi();
     }
-    getToken();
-  }, []);
+  }, [response, shouldCreateUser]);
+
+  const manageGoogleApi = async () => {
+    if (response?.authentication) {
+      const accessToken = response?.authentication?.accessToken;
+      const refreshToken = response?.authentication?.refreshToken;
+
+      try {
+        const userGoogleData = await getUserEmailByAccessToken(accessToken);
+
+        // This means the external account should be create
+        if (refreshToken) {
+          await _createAccountMiddleware({
+            email: userGoogleData?.email,
+            accessToken,
+            refreshToken,
+          });
+        }
+
+        // This means the external account should be update
+        if (!refreshToken && selectedAccount) {
+          await _updateAccountMiddleware({
+            accessToken,
+          });
+        }
+
+        setShouldCreateUser(false);
+      } catch (err) {}
+    }
+  };
 
   useEffect(() => {
     if (isFocuses) {
+      getToken();
       refetch();
     }
     if (!isFocuses) {
@@ -75,6 +125,69 @@ const AccountsScreen = (props: any) => {
       setDataList((prev) => [...prev, ...data?.data]);
     }
   }, [data?.data]);
+
+  const _createAccountMiddleware = async ({
+    email,
+    accessToken,
+    refreshToken,
+  }: CreateAccount) => {
+    const requestBody = {
+      body: {
+        title: email,
+        refresh_token: refreshToken,
+        access_token: accessToken,
+        type: 1,
+      },
+      token,
+    };
+
+    const response = await createAccountApiHandler(requestBody);
+    if (response?.error) {
+      if (response?.error?.status === 422) {
+        _toaster.show(
+          "Error while creating new external account; Your email is registered"
+        );
+      } else {
+        _toaster.show("Error while creating new external account");
+      }
+    }
+    if (response?.data) {
+      setDataList([]);
+      setPage(1);
+      refetch();
+      _toaster.show("New external account has been created successfully");
+    }
+  };
+
+  const _updateAccountMiddleware = async ({
+    accessToken,
+  }: {
+    accessToken: string;
+  }) => {
+    const requestBody = {
+      id: selectedAccount.id,
+      body: {
+        title: selectedAccount?.title,
+        refresh_token: selectedAccount?.information?.refresh_token,
+        access_token: accessToken,
+        type: 1,
+      },
+      token,
+    };
+
+    const response = await updateAccountApiHandler(requestBody);
+    if (response?.error) {
+      _toaster.show("Error while updating external account");
+    }
+    if (response?.data) {
+      setDataList([]);
+      setPage(1);
+      refetch();
+      _toaster.show("external account has been updated successfully");
+    }
+
+    setSelectedAccount(null);
+  };
 
   const getToken = async () => {
     const _tk: unknown = await tokenCtx.getToken();
@@ -102,163 +215,59 @@ const AccountsScreen = (props: any) => {
   const onRefresh = () => {
     setDataList([]);
     setPage(1);
-
-    refetch();
   };
 
   const goBackHandler = () => {
     navigation.goBack();
   };
 
+  const createExternalAccount = async () => {
+    setShouldCreateUser(() => {
+      promptAsync();
+      return true;
+    });
+  };
+
+  const updateAccountHandler = async (item: ExternalAccount) => {
+    setSelectedAccount(() => {
+      promptAsync();
+      return item;
+    });
+  };
+
+  const removaAccountHandler = async (item: ExternalAccount) => {
+    const result = await removeAccountApiHandler({
+      token,
+      body: { id: item.id },
+    });
+    if (result?.error) {
+      _toaster?.show("Deleting account failed");
+      return;
+    }
+
+    _toaster?.show("Account deleted successfully");
+    setDataList([]);
+    setPage(1);
+    refetch();
+  };
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScreenGradient>
         <VirtualizedList onEndReached={onEndReached} onRefresh={onRefresh}>
-          <Title goBackHandler={goBackHandler} />
-          <List
+          <AccountsSCreenComponents.Title goBackHandler={goBackHandler} />
+          <AccountsSCreenComponents.List
             data={__dataList}
+            updateAccountHandler={updateAccountHandler}
+            removaAccountHandler={removaAccountHandler}
             isLoading={isFetching || isLoading ? true : false}
           />
         </VirtualizedList>
-
-        <Footer />
+        <AccountsSCreenComponents.Footer
+          createAccountHandler={createExternalAccount}
+        />
       </ScreenGradient>
     </SafeAreaView>
-  );
-};
-
-type ListProps = {
-  data: ExternalAccount[];
-  isLoading: boolean;
-};
-
-const List: FC<ListProps> = ({ data, isLoading }) => {
-  console.log({ isLoading });
-  const renderItem = useCallback(({ item }: { item: ExternalAccount }) => {
-    return (
-      <TouchableOpacity
-        activeOpacity={1}
-        // onPress={() => setSelectedLanguage("item")}
-      >
-        <Box width={"100%"} height={56} marginBottom={16} borderRadius={16}>
-          <Image
-            source={{
-              uri: SHARE_ACCOUNT_ITEM_BG,
-            }}
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: 56,
-            }}
-            resizeMode="stretch"
-          />
-          <Box
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            height={56}
-            paddingLeft={16}
-            paddingRight={16}
-          >
-            <Box direction="row" alignItems="center">
-              <ICONS_GOOGLE_BLUE />
-              <Box marginLeft={16}>
-                <Text
-                  color={theme.color.light.WHITE}
-                  fontSize={14}
-                  fontWeight={600}
-                >
-                  {item.title}
-                </Text>
-              </Box>
-            </Box>
-            <ICON_TRASHBEEN />
-          </Box>
-        </Box>
-      </TouchableOpacity>
-    );
-  }, []);
-
-  const _key = (item: ExternalAccount) => item.id.toString();
-
-  return (
-    <Box marginTop={48} paddingRight={24} paddingLeft={24}>
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={_key}
-        ListFooterComponent={
-          <Box height={52}>{isLoading ? <LoadingSpinner /> : null}</Box>
-        }
-      />
-    </Box>
-  );
-};
-
-const Footer = () => {
-  return (
-    <Box
-      width="100%"
-      height={104}
-      borderTopEndRadius={16}
-      borderTopStartRadius={16}
-      paddingLeft={24}
-      paddingTop={24}
-      paddingRight={24}
-      paddingBottom={32}
-    >
-      <ADD_SHARE_ACCOUNT_BG
-        width={Dimensions.get("window").width}
-        height={Dimensions.get("window").width / 3}
-        style={{
-          position: "absolute",
-          top: -20,
-          left: 1,
-        }}
-      />
-      <AddAccountButton activeOpacity={1}>
-        <Text color="#83839C" fontSize={14} lineHeight={20} fontWeight={600}>
-          Add account
-        </Text>
-        <ICON_ADD
-          width={20}
-          style={{
-            position: "relative",
-            top: 1.5,
-          }}
-        />
-      </AddAccountButton>
-    </Box>
-  );
-};
-
-const Title = ({ goBackHandler }: { goBackHandler: () => void }) => {
-  return (
-    <Box
-      id="title"
-      width="100%"
-      marginTop={32}
-      direction="row"
-      justifyContent="center"
-      position="relative"
-    >
-      <Text color={theme.color.light.WHITE} fontSize={16} fontWeight={600}>
-        Share account
-      </Text>
-      <TouchableOpacity
-        onPress={goBackHandler}
-        style={{
-          position: "absolute",
-          left: 24,
-          top: 5,
-        }}
-        activeOpacity={1}
-      >
-        <ICON_ARROW_LEFT_SVG />
-      </TouchableOpacity>
-    </Box>
   );
 };
 

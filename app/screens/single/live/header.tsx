@@ -1,16 +1,12 @@
 import { useEffect, useState, useRef } from "react";
+import { ToastAndroid } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import * as ScreenOrientation from "expo-screen-orientation";
+import { AVPlaybackStatus } from "expo-av";
 import { Box } from "../../../components/box";
 import { PaddingContainer } from "../../../styles/grid";
 import { GoBackButton } from "../components/goback-button";
-import {
-  ICON_RECORD_VOIC_ACTIVE,
-  ICON_RECORD_VOIC_IS_RECORDING,
-  ICON_TAKE_PHOTO,
-} from "../../../constaints/icons";
-import { AVPlaybackStatus } from "expo-av";
-import * as ScreenOrientation from "expo-screen-orientation";
 import { Toaster } from "../../../utils/toaster";
-import { useNavigation } from "@react-navigation/native";
 import { UseNavigationType } from "../../../types/use-navigation";
 import { useDispatch } from "react-redux";
 import { addImage } from "../../../slices/single-image.slice";
@@ -19,7 +15,11 @@ import { setParam } from "../../../slices/plus.slice";
 import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
 import { Toolbar } from "../components/toolbar";
 import { SingleLiveComponents } from "./components";
-import { ToastAndroid } from "react-native";
+import {
+  ICON_IS_RECORDING,
+  ICON_NO_RECORD,
+  ICON_SCREENSHOT,
+} from "../../../constaints/icons";
 
 type Props = {
   goBackHandler: () => void;
@@ -122,16 +122,16 @@ export function SingleLiveHeader({
       id: 1,
       func: _recordLiveHandler,
       icon: isLiveRecording ? (
-        <ICON_RECORD_VOIC_IS_RECORDING width={20} height={20} />
+        <ICON_IS_RECORDING width={24} height={24} />
       ) : (
-        <ICON_RECORD_VOIC_ACTIVE width={20} height={20} />
+        <ICON_NO_RECORD width={24} height={24} />
       ),
       isDisable: false,
     },
     {
       id: 2,
       func: _takeScreenShotHandler,
-      icon: <ICON_TAKE_PHOTO />,
+      icon: <ICON_SCREENSHOT width={24} height={24} />,
       isDisable: false,
     },
   ];

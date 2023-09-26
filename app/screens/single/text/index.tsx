@@ -3,7 +3,7 @@ import { ToastAndroid, View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useClickOutside } from "react-native-click-outside";
-import SelectLanguageBottomSheet from './../../../components/select-language'
+import SelectLanguageBottomSheet from "./../../../components/select-language";
 import { SingleTextHeader } from "./header";
 import { SingleTextContent } from "./content";
 import { AssetModal } from "./text-modal";
@@ -32,18 +32,29 @@ import {
 import { ComponentNavigationProps } from "../../../types/component-navigation-props";
 import type { Text as TextType } from "../../../types/text";
 import {
-  ICON_EDIT_DARK,
-  ICON_IMAGE_WHITE,
-  ICON_SOUND_WHITE,
-  ICON_TEXT_WHITE,
+  ICON_SHARE_YOUTUBE,
+  ICON_SINGLE_CONVERT_TO_AUDIO,
+  ICON_SINGLE_CONVERT_TO_IMAGE,
+  ICON_SINGLE_EDIT,
+  ICON_SINGLE_TRANSLATE,
+  ICON_TEXT_TO_TEXT,
 } from "../../../constaints/icons";
 import {
   TEXT_THUMBNAIL_PLACEHOLDER,
   __TEXT_THUMBNAIL_PLACEHOLDER_PNG,
 } from "../../../constaints/images";
 import { EDIT_SCREEN } from "../../../constaints/consts";
-import { Share } from "react-native";
-import { Button } from "../../../components/button";
+import { PaddingContainer } from "../../../styles/grid";
+import { Toolbar } from "../components/toolbar";
+import { YoutubeShare } from "../components/youtube-share";
+import { useYoutubeShareMutation } from "../../../services/asset.service";
+import { Toaster } from "../../../utils/toaster";
+import { TextToTextConvert } from "../components/text-to-text-convert";
+import { useConvertTextToTextMutation } from "../../../services/single-text.service";
+
+const _toaster = new Toaster();
+const _textToTextConver = new TextToTextConvert();
+const _youtubeShare = new YoutubeShare();
 
 export function SingleTextScreen({
   navigation,
@@ -54,26 +65,60 @@ export function SingleTextScreen({
   const [data, setData] = useState<TextType>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isOwner, setIsOwner] = useState<boolean>(null);
+  const [token, setToken] = useState(null);
   const [isSubscriber, setIsSubscriber] = useState<boolean>(null);
-  // const [translateModalOpen, setTranslateModalOpen] = useState(false);
+
   const [openReportModal, setOpenReportModal] = useState(false);
   const [showTextModal, setShowTextModal] = useState(false);
-  // const [isTranslateLoading, setIsTranslateLoading] = useState(false);
+
   const [currentUserId, setCurrentUserId] = useState<number>(null);
 
   const [selectedLanguage, setSelectedLanguage] = useState("");
 
   const isFocused = useIsFocused();
   const selectLanguageRef = useRef(null);
+  const youtubeShareRef = useRef(null);
 
-  // ReportModalRef
-  // close while clicked outside
+  const textToTextRef = useRef(null);
+
+  const youtubeShareWrapperRef = useClickOutside<View>(() => {
+    youtubeShareRef?.current?.close();
+  });
+
+  const textToTextWrapperRef = useClickOutside<View>(() => {
+    textToTextRef?.current?.close();
+  });
+
+  const [_shareYoutubeApiFunction] = useYoutubeShareMutation();
+  const [
+    _convertTextToTextApiFunction,
+    {
+      isLoading: _convertTextToTextIsLoading,
+      isFetching: _convertTextToTextIsFetching,
+    },
+  ] = useConvertTextToTextMutation();
+
+  _youtubeShare.config({
+    modalRef: youtubeShareRef,
+    modalWrapperRef: youtubeShareWrapperRef,
+    token: token,
+    shareYoutubeApiFunction: _shareYoutubeApiFunction,
+  });
+
+  _textToTextConver.config({
+    ref: textToTextRef,
+    innerRef: textToTextWrapperRef,
+    _apiFunction: _convertTextToTextApiFunction,
+    isLoading: (_convertTextToTextIsLoading || _convertTextToTextIsFetching),
+    token,
+    assetId: data?.id
+  });
+
   const ref = useClickOutside<View>(() => {
     setOpenReportModal(false);
   });
 
   const innerSelectLanguageBottomSheet = useClickOutside<View>(() => {
-    // setOpenReportModal(false);
     selectLanguageRef?.current.close();
   });
 
@@ -99,6 +144,7 @@ export function SingleTextScreen({
     }
 
     const formattedToken = tokenStringResolver(token);
+    setToken(formattedToken);
 
     await getSingleData(formattedToken);
     setIsLoading(false);
@@ -120,7 +166,9 @@ export function SingleTextScreen({
     const assetData = res.data;
 
     const currentUserId = userCtx.getUser();
+
     setCurrentUserId(currentUserId.id);
+
     const isUserOwner = ifUserIsOwner(
       assetData?.asset?.user?.id,
       currentUserId.id
@@ -148,8 +196,6 @@ export function SingleTextScreen({
   };
 
   const _translateTextHandler = async () => {
-    // setIsTranslateLoading(true);
-    // const { language } = _formData;
     if (!selectedLanguage) {
       return;
     }
@@ -173,13 +219,10 @@ export function SingleTextScreen({
     );
 
     if (isSuccess) {
-      ToastAndroid.show(
-        "Translate text requested successfully",
-        ToastAndroid.LONG
-      );
+      _toaster.show("Translate text requested successfully");
     }
     if (isError) {
-      ToastAndroid.show("Translate text requested faliled", ToastAndroid.LONG);
+      _toaster.show("Translate text requested faliled");
     }
 
     selectLanguageRef?.current?.close();
@@ -236,16 +279,10 @@ export function SingleTextScreen({
       await convertTextToImageHandler(token, data?.id, body);
 
     if (isSuccess) {
-      ToastAndroid.show(
-        "Convert text to image requested successfully",
-        ToastAndroid.LONG
-      );
+      _toaster.show("Convert text to image requested successfully");
     }
     if (isError) {
-      ToastAndroid.show(
-        "Convert text to image requested faliled",
-        ToastAndroid.LONG
-      );
+      _toaster.show("Convert text to image requested faliled");
     }
   };
 
@@ -266,16 +303,10 @@ export function SingleTextScreen({
       await convertTextToAudioHandler(token, data?.id, body);
 
     if (isSuccess) {
-      ToastAndroid.show(
-        "Convert text to audio requested successfully",
-        ToastAndroid.LONG
-      );
+      _toaster.show("Convert text to audio requested successfully");
     }
     if (isError) {
-      ToastAndroid.show(
-        "Convert text to audio requested faliled",
-        ToastAndroid.LONG
-      );
+      _toaster.show("Convert text to audio requested faliled");
     }
   };
 
@@ -291,10 +322,6 @@ export function SingleTextScreen({
     isLoadedAndDataExists && data?.asset?.file ? true : false;
 
   const shouldShowTextModal = fileUrl && showTextModal ? true : false;
-
-  // const eligible_for_audio_extraction = data?.asset?.eligible_for_audio_extraction;
-  // const eligible_for_image_extraction = data?.asset?.eligible_for_image_extraction;
-  // const eligible_for_video_extraction = data?.asset?.eligible_for_video_extraction;
 
   const metaDataList: MetaDataType[] =
     [
@@ -317,6 +344,14 @@ export function SingleTextScreen({
     });
   };
 
+  const shareToYoutubeHandler = () => {
+    _youtubeShare.openModal();
+  };
+
+  const openTextToTextConvertModal = () => {
+    _textToTextConver.openModal();
+  };
+
   const isDisableEditIcon =
     data?.asset?.user?.id === currentUserId ? false : true;
 
@@ -325,28 +360,39 @@ export function SingleTextScreen({
 
   const TOOLBAR_OPTIONS = [
     {
+      id: 6,
+      func: openTextToTextConvertModal,
+      icon: <ICON_TEXT_TO_TEXT width={24} height={24} />,
+      isDisable: false,
+    },
+    {
+      id: 5,
+      func: shareToYoutubeHandler,
+      icon: <ICON_SHARE_YOUTUBE width={24} height={24} />,
+      isDisable: false,
+    },
+    {
       id: 1,
       func: _convertTextToImageHandler,
-      icon: <ICON_IMAGE_WHITE />,
+      icon: <ICON_SINGLE_CONVERT_TO_IMAGE width={24} height={24} />,
       isDisable: !hasEditPermission,
     },
     {
       id: 2,
       func: openAddCardAlertHandler,
-      icon: <ICON_TEXT_WHITE />,
+      icon: <ICON_SINGLE_TRANSLATE width={24} height={24} />,
       isDisable: !hasEditPermission,
     },
     {
       id: 3,
       func: _convertTextToAudioHandler,
-      icon: <ICON_SOUND_WHITE />,
+      icon: <ICON_SINGLE_CONVERT_TO_AUDIO width={24} height={24} />,
       isDisable: !hasEditPermission,
     },
     {
       id: 4,
       func: navigateToEditScreen,
-      // icon: <ICON_TEXT_WHITE />,
-      icon: <ICON_EDIT_DARK width={20} height={20} />,
+      icon: <ICON_SINGLE_EDIT width={24} height={24} />,
       isDisable: isDisableEditIcon,
     },
   ];
@@ -363,36 +409,8 @@ export function SingleTextScreen({
 
   const snapPoints = useMemo(() => ["25%", "50%"], []);
 
-  const shareApp = async () => {
-    const url =
-      "https://play.google.com/store/apps/details?id=com.instagram.android&hl=en_IN&gl=US";
-
-    try {
-      const result = await Share.share({
-        message: "Instagram | A time wasting application" + "\n" + url,
-      });
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
-      }
-    } catch (error: any) {
-      alert(error.message);
-    }
-
-    // try {
-    //   // sharing only works with `file://` urls on Android so we need to copy it out of assets
-    //   await Sharing.shareAsync({}, {
-    //     dialogTitle: "Is it a snake or a hat?",
-    //   });
-    // } catch (e) {
-    //   console.error(e);
-    // }
-  };
+  const youtubeShareTemplate = _youtubeShare.template();
+  const textToTextTranslateTemplate = _textToTextConver.template();
 
   return (
     <>
@@ -413,11 +431,11 @@ export function SingleTextScreen({
                   toolbar_options={TOOLBAR_OPTIONS}
                   hasPermission={isOwner || isSubscriber}
                 />
-                {/* <Button
-                  varient="primary"
-                  text="Share"
-                  onpressHandler={shareApp}
-                /> */}
+                <RenderIfWithoutLoading condition={isOwner || isSubscriber}>
+                  <PaddingContainer>
+                    <Toolbar toolbarList={TOOLBAR_OPTIONS} />
+                  </PaddingContainer>
+                </RenderIfWithoutLoading>
                 <SingleTextContent
                   description={data?.description}
                   metaDataList={metaDataList}
@@ -486,6 +504,8 @@ export function SingleTextScreen({
           />
         </View>
       </ModalBottomSheet>
+      {youtubeShareTemplate}
+      {textToTextTranslateTemplate}
     </>
   );
 }

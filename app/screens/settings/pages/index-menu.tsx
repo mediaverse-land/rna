@@ -111,7 +111,7 @@ export function IndexMenu() {
 
   const listTwoRows: ListColumnItem[] = [
     {
-      id: 1,
+      id: 311,
       title: "Analytics",
       icon: ICON_ANALYTICS,
       // routePath: 'analytics',
@@ -122,7 +122,7 @@ export function IndexMenu() {
       isDisabled: true,
     },
     {
-      id: 2,
+      id: 312,
       title: "Share account",
       icon: ICON_SHARE,
       routePath: ACCOUNTS_SCREEN,

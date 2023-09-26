@@ -32,6 +32,9 @@ import { retriveToken } from "../../../utils/retrive-token";
 import { Toolbar } from "../components/toolbar";
 import {
   ICON_EDIT_DARK,
+  ICON_SINGLE_CONVERT_TO_IMAGE,
+  ICON_SINGLE_CONVERT_TO_TEXT,
+  ICON_SINGLE_EDIT,
   ICON_SOUND_WHITE,
   ICON_TEXT_WHITE,
 } from "../../../constaints/icons";
@@ -303,21 +306,21 @@ export function SingleSoundScreen({ navigation, route }: any) {
     {
       id: 2,
       func: _convertAudioToText,
-      icon: <ICON_SOUND_WHITE />,
+      icon: <ICON_SINGLE_CONVERT_TO_IMAGE width={23} height={23}/>,
       isDisable: !hasEditPermission,
     },
     {
       id: 3,
       func: openTranslateModalHandler,
       // func: _translateAudio,
-      icon: <ICON_TEXT_WHITE />,
+      icon: <ICON_SINGLE_CONVERT_TO_TEXT width={24} height={24}/>,
       isDisable: !hasEditPermission,
     },
     {
       id: 1,
       func: navigateToEditScreen,
       // icon: <ICON_TEXT_WHITE />,
-      icon: <ICON_EDIT_DARK width={20} height={20} />,
+      icon: <ICON_SINGLE_EDIT width={25} height={25}/>,
       isDisable: isDisableEditIcon,
     },
   ];

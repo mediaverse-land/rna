@@ -64,28 +64,27 @@ export const ProfileScreenTextPage = () => {
 
   useEffect(() => {
     setup(isFocused);
-  }, [isFocused, ACTIVE_PAGE]);
+  }, [isFocused]);
 
   useEffect(() => {
-    setData([]);
-    setCurrentPage(1);
-  }, [ACTIVE_PAGE]);
+    setData([])
+    setCurrentPage(1)
+  }, [ACTIVE_PAGE])
 
   useEffect(() => {
     getData();
-  }, [currentPage]);
+  }, [currentPage, ACTIVE_PAGE]);
 
-  const setup = async (__isFocused: boolean) => {
+ const setup = async (__isFocused: boolean) => {
     setData([]);
     if (__isFocused) {
       await getData();
     }
     if (!__isFocused) {
       setCurrentPage(1);
-
-      setData([]);
     }
   };
+
 
   const getData = async (__currPage?: number) => {
     startLoad();

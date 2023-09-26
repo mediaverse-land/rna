@@ -25,9 +25,9 @@ const firebaseConfig = {
   measurementId: "G-measurement-id",
 };
 
-const _screenController = new ScreenController();
+// const _screenController = new ScreenController();
 
-_screenController.preventScreenShot();
+// _screenController.preventScreenShot();
 
 export default function App() {
   // usePreventScreenCapture();

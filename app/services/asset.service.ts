@@ -16,8 +16,19 @@ export const assetService: any = createApi({
         };
       },
     }),
+    youtubeShare: builder.mutation({
+      query: (args) => {
+        return {
+          url: `/share/youtube`,
+          method: "POST",
+          body: args.body,
+          headers: { Authorization: `Bearer ${args.token}` },
+        };
+      },
+    }),
     addExternalAccount: builder.mutation({
       query: (args) => {
+        console.log({args})
         return {
           url: `/external-accounts`,
           method: "POST",
@@ -26,7 +37,34 @@ export const assetService: any = createApi({
         };
       },
     }),
+    updateExternalAccount: builder.mutation({
+      query: (args) => {
+        return {
+          url: `/external-accounts/${args.id}`,
+          method: "PUT",
+          body: args.body,
+          headers: { Authorization: `Bearer ${args.token}` },
+        };
+      },
+    }),
+    removeExternalAccount: builder.mutation({
+      query: (args) => {
+        return {
+          url: `/external-accounts/${args.body?.id}`,
+          method: "DELETE",
+          // body: args.body,
+          headers: { Authorization: `Bearer ${args.token}` },
+        };
+      },
+    }),
   }),
 });
 
-export const { useGoogleDriveShareMutation, useAddExternalAccountMutation } = assetService;
+export const {
+  useGoogleDriveShareMutation,
+  useAddExternalAccountMutation,
+  useUpdateExternalAccountMutation,
+  useYoutubeShareMutation,
+
+  useRemoveExternalAccountMutation
+} = assetService;

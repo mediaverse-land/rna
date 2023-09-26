@@ -20,6 +20,30 @@ import AI_AND_PRODUCTION_PATH from "./../../assets/icons/AI & Production.svg";
 import STUDIO_PATH from "./../../assets/icons/Studio.svg";
 import GOOGLE_BLUE_SVG from "./../../assets/icons/icon__google-blue.svg";
 import SHARE_ACCOUNT_ITEM_SVG from "./../../assets/img/gradients/share-account-item-svg-bg.svg";
+import ICON_SINGLE_CONVERT_TO_AUDIO_SVG from "./../../assets/icons/icon__single-convert-to-audio.svg";
+import ICON_SINGLE_CONVERT_TO_IMAGE_SVG from "./../../assets/icons/icon__single-convert-to-image.svg";
+import ICON_SINGLE_CONVERT_TO_TEXT_SVG from "./../../assets/icons/icon__single-convert-to-text.svg";
+import ICON_SINGLE_EDIT_SVG from "./../../assets/icons/icon__single-edit-svg.svg";
+import ICON_SCREENSHOT_SVG from "./../../assets/icons/icon__screenshot.svg";
+import ICON_SINGLE_TRANSLATE_SVG from "./../../assets/icons/icon__single-tranlate.svg";
+import ICON_NO_RECORD_SVG from "./../../assets/icons/icon__no-record.svg";
+import ICON_IS_RECORDING_SVG from "./../../assets/icons/icon__is-recording.svg";
+import ICON_SHARE_YOUTUBE_SVG from "./../../assets/icons/icon__share-youtube.svg";
+import ICON_RESET_SVG from "./../../assets/icons/icon__reset.svg";
+import ICON_TEXT_TO_TEXT_SVG from "./../../assets/icons/icon__convert-text-to-text.svg";
+
+export const ICON_NO_RECORD = ICON_NO_RECORD_SVG;
+export const ICON_IS_RECORDING = ICON_IS_RECORDING_SVG;
+export const ICON_SHARE_YOUTUBE = ICON_SHARE_YOUTUBE_SVG;
+export const ICON_RESET = ICON_RESET_SVG;
+export const ICON_TEXT_TO_TEXT = ICON_TEXT_TO_TEXT_SVG;
+
+export const ICON_SINGLE_CONVERT_TO_AUDIO = ICON_SINGLE_CONVERT_TO_AUDIO_SVG;
+export const ICON_SINGLE_CONVERT_TO_IMAGE = ICON_SINGLE_CONVERT_TO_IMAGE_SVG;
+export const ICON_SINGLE_CONVERT_TO_TEXT = ICON_SINGLE_CONVERT_TO_TEXT_SVG;
+export const ICON_SINGLE_EDIT = ICON_SINGLE_EDIT_SVG;
+export const ICON_SCREENSHOT = ICON_SCREENSHOT_SVG;
+export const ICON_SINGLE_TRANSLATE = ICON_SINGLE_TRANSLATE_SVG;
 
 export const MEDIA_SUIT = MEDIA_SUIT_PATH;
 export const CG_PLAYOUT = CG_PLAYOUT_PATH;
@@ -227,7 +251,6 @@ export const ICON_FORM_ERROR = ICON_FORM_ERROR_PATH;
 import ICON_SEARCH_WHITE_PATH from "./../../assets/icons/icon__search-white.svg";
 export const ICON_SEARCH_WHITE = ICON_SEARCH_WHITE_PATH;
 
-
 import ICON_FOLDER_WHITE_PATH from "./../../assets/icons/icon__folder-white.svg";
 export const ICON_FOLDER_WHITE = ICON_FOLDER_WHITE_PATH;
 
@@ -261,7 +284,6 @@ export const ICON_RECORD_VOIC_ACTIVE = ICON_RECORD_VOIC_ACTIVE_PATH;
 
 import ICON_RECORD_VOIC_IS_RECORDING_PATH from "./../../assets/icons/icon__record-voice-is-recording.svg";
 export const ICON_RECORD_VOIC_IS_RECORDING = ICON_RECORD_VOIC_IS_RECORDING_PATH;
-
 
 import ICON_RECORD_VOICE_LIGHT_PATH from "./../../assets/icons/icon__record-voice-light.svg";
 export const ICON_RECORD_VOICE_LIGHT = ICON_RECORD_VOICE_LIGHT_PATH;

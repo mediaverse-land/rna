@@ -110,8 +110,8 @@ export const ReportModal = ({
       categoryId
     );
 
-    if(!isError){
-      toaster.show('Reported successfully');
+    if (!isError) {
+      toaster.show("Reported successfully");
     }
     setIsLoading(false);
     reportModalCloseHandler();
@@ -123,7 +123,7 @@ export const ReportModal = ({
         width: "100%",
         height: 250,
         padding: 16,
-        borderRadius: 16
+        borderRadius: 16,
       }}
     >
       {isLoading ? (
@@ -144,7 +144,7 @@ export const ReportModal = ({
           </TouchableOpacity>
         ))
       )}
-      <Box width='100%' height={20}></Box>
+      <Box width="100%" height={20}></Box>
     </ScrollView>
   );
 };

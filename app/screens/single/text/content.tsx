@@ -25,7 +25,7 @@ export function SingleTextContent({
 
   return (
     <PaddingContainer>
-      <Box position="relative" zIndex={20} width="100%" marginTop={32}>
+      <Box position="relative" zIndex={20} width="100%" marginTop={16}>
         <SingleItemDescription description={description} />
         <TouchableOpacity activeOpacity={1} onPress={showTextModalHandler}>
           {hasPermission ? <Text color="#fff">more...</Text> : null}

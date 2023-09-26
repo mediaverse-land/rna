@@ -263,7 +263,7 @@ export function SingleImageScreen({ navigation, route }: any) {
           <SingleAssetFooter
             fileName={data?.name}
             editorHandler={navigateToEditScreen}
-            asset_Id={data?.id}
+            asset_Id={data?.asset_id}
             parent_Id={accountId}
             tokenCtx={tokenCtx}
             token={token}

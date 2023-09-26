@@ -14,12 +14,10 @@ export const Toolbar = ({ toolbarList }: { toolbarList: Props[] }) => {
       <Box
         id="tool-bar"
         width="100%"
-        height={50}
         direction="row"
         alignItems="center"
         justifyContent="flex-end"
         marginTop={8}
-        // marginBottom={-30}
       >
         {toolbarList.map((f) => {
           if(f.isDisable){
@@ -33,7 +31,8 @@ export const Toolbar = ({ toolbarList }: { toolbarList: Props[] }) => {
             }}
           >
             <Box
-              width={40}
+              // width={40}
+              marginLeft={16}
               justifyContent="center"
               alignItems="center"
               height={40}

@@ -10,7 +10,6 @@ export const authService: any = createApi({
   endpoints: (builder) => ({
     getExternalAccountsList: builder.query({
       query: (args) => {
-        console.log(`Bearer ${args.token}`)
         return {
           url: `external-accounts?page=${args.page}`,
           method: "GET",

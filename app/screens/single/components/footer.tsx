@@ -1,6 +1,5 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { Box } from "../../../components/box";
-import * as Google from "expo-auth-session/providers/google";
 import { Image, TouchableOpacity, View } from "react-native";
 import { Text } from "../../../components/text";
 import { theme } from "../../../constaints/theme";
@@ -8,19 +7,18 @@ import { ICON_DOWNLOAD_WHITE } from "../../../constaints/icons";
 import { tokenStringResolver } from "../../../utils/token-string-resolver";
 import { StorageService } from "../../../services/storage.service";
 import { Logger } from "../../../utils/logger";
-import {
-  useAddExternalAccountMutation,
-  useGoogleDriveShareMutation,
-} from "../../../services/asset.service";
+import { useGoogleDriveShareMutation } from "../../../services/asset.service";
 import {
   DOWNLOAD_BTN_BG_GTADIENT,
   EDIT_BTN_BG_GTADIENT,
   SINGLE_ASSET_FOOTER_BG_PNG_GRADIENT,
 } from "../../../constaints/images";
-import { enviroments } from "../../../../enviroments/enviroments";
 import ExternalAccountBottomSheet from "../../../components/external-account-bottom-sheet";
 import { ModalBottomSheet } from "../../../components/bottom-sheet-modal";
 import { useClickOutside } from "react-native-click-outside";
+import { ExternalAccount } from "../../../types/external-account";
+import { Toaster } from "../../../utils/toaster";
+import { LoadingSpinner } from "../../../components/loader-spinner";
 
 type Props = {
   fileName: string;
@@ -31,8 +29,8 @@ type Props = {
   token: string;
 };
 
-const _storageService = new StorageService();
 const _logger = new Logger();
+const _toaster = new Toaster();
 
 export const SingleAssetFooter = ({
   fileName,
@@ -42,20 +40,8 @@ export const SingleAssetFooter = ({
   tokenCtx,
   token,
 }: Props) => {
-  const [request, response, promptAsync]: any = Google.useAuthRequest({
-    androidClientId: enviroments.REACT_APP_ANDROID_CLIENT_ID,
-    iosClientId: enviroments.REACT_APP_IOS_CLIENT_ID,
-    clientSecret: enviroments.REACT_APP_WEB_CLIENT_SECTET,
-    expoClientId: enviroments.REACT_APP_EXPO_CLIENT_ID,
-    scopes: [
-      "https://www.googleapis.com/auth/drive",
-      "https://www.googleapis.com/auth/drive.file",
-      "https://www.googleapis.com/auth/youtube.upload",
-    ],
-    extraParams: {
-      access_type: "offline",
-    },
-  });
+  const [_selectedAccount, setSelectedAccount] =
+    useState<ExternalAccount>(null);
 
   const selectAccountRef = useRef(null);
 
@@ -65,108 +51,7 @@ export const SingleAssetFooter = ({
 
   const [downalodHandler, { isLoading, isFetching, error }] =
     useGoogleDriveShareMutation();
-
-  const [addExternalAccountHandler] = useAddExternalAccountMutation();
-
-  useEffect(() => {
-    // manageGoogleResponse();
-  }, [response]);
-
-  const manageGoogleResponse = async () => {
-    const token = await getToken();
-
-    console.log({ token });
-    if (response?.authentication) {
-      // const shouldOpenPrompt = await shouldSignInToGoogle();
-      // if (shouldOpenPrompt) {
-      //   return;
-      // }
-
-      const googleRefreshToken = response?.authentication?.refreshToken;
-      const googleAccessToken = response?.authentication?.accessToken;
-
-      console.log("tokens__________________________________");
-      console.log({
-        googleRefreshToken,
-        googleAccessToken,
-      });
-      console.log("tokens__________________________________");
-
-      if (!googleRefreshToken) {
-        console.log("no refresh token");
-        return;
-      }
-
-      try {
-        // Save data to async storage
-        await saveGoogleAccountDataToStorage({
-          googleAccessToken,
-          googleRefreshToken,
-        });
-
-        const _googleResponse = await getUserRequestEmail(googleAccessToken);
-        if (!_googleResponse) {
-          return;
-        }
-
-        const email = _googleResponse?.email;
-
-        const requestBody = {
-          token,
-          body: {
-            type: 1,
-            title: email,
-            refresh_token: googleRefreshToken,
-            access_token: googleAccessToken,
-          },
-        };
-
-        const __result = await addExternalAccountHandler(requestBody);
-
-        if (!__result) {
-          _logger.log(`error in footer.tsx/line=102`);
-          return;
-        }
-
-        // // Download
-        // const downloadSourceRequestBody = {
-        //   asset: 6199,
-        //   account: 98,
-        // };
-
-        // const result = await downalodHandler({
-        //   body: downloadSourceRequestBody,
-        //   token,
-        // });
-
-        // console.log({ result: JSON.stringify(result) });
-      } catch (err) {
-        _logger.log(`Errrrrrorrrrr: ___${JSON.stringify(err)}`);
-      }
-    }
-  };
-
-  async function getUserRequestEmail(token: string) {
-    try {
-      const response = await fetch(
-        "https://www.googleapis.com/oauth2/v3/userinfo",
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      return await response.json();
-    } catch (err) {
-      _logger.logErro(JSON.stringify(err));
-      return null;
-    }
-  }
-
+    
   const getToken = async () => {
     const token = await tokenCtx.getToken();
     return await tokenStringResolver(token);
@@ -174,59 +59,34 @@ export const SingleAssetFooter = ({
 
   const openDownloadModal = async () => {
     selectAccountRef?.current?.open();
-    // const shouldOpenPrompt = await shouldSignInToGoogle();
-    // if (!shouldOpenPrompt) {
-    //   await promptAsync();
-    //   return;
-    // }
-    // const requestBody = {
-    //   asset: asset_Id,
-    //   account: parent_Id,
-    // };
-    // // console.log({requestBody})
-    // const token = await getToken();
-    // const result = await downalodHandler({ body: requestBody, token });
-    // console.log(result?.error);
   };
 
-  const getGoogleRefreshTokenFromStorage = async (): Promise<string | null> => {
-    const storedRefreshToken = await _storageService.get("googleRefreshToken");
-    return storedRefreshToken || null;
+  const closeDownoadModal = () => {
+    selectAccountRef?.current?.close();
   };
 
-  // const existsGoogleDataInStorage = async (): Promise<boolean> => {
-  //   const storedRefreshToken = await getGoogleRefreshTokenFromStorage();
-  //   return storedRefreshToken ? true : false;
-  // };
+  const downalodToGoogleDriveHandler = async (accounId: number) => {
+    const requestBody = {
+      asset: asset_Id,
+      account: accounId,
+    };
 
-  // const existsUserExternalAccountInStorage = async (): Promise<boolean> => {
-  //   const existsInStorage = await _storageService.get(
-  //     "HAS_USER_GOOGLE_EXTERNAL_ACCOUNT"
-  //   );
-  //   return existsInStorage ? true : false;
-  // };
+    const token = await getToken();
 
-  const saveGoogleAccountDataToStorage = async ({
-    googleRefreshToken,
-    googleAccessToken,
-  }: {
-    googleRefreshToken: string;
-    googleAccessToken: string;
-  }) => {
-    if (googleRefreshToken) {
-      await _storageService.set("googleRefreshToken", googleRefreshToken);
+    const result = await downalodHandler({ body: requestBody, token });
+    if (result?.error) {
+      _toaster.show("Error while saving asset to your google drive");
     }
-    if (googleAccessToken) {
-      await _storageService.set("googleAccessToken", googleAccessToken);
+    if (result?.data) {
+      _toaster.show("Asset saved to your google drive successfully");
     }
   };
 
-  const shouldSignInToGoogle = async () => {
-    const hasRefreshToken = await _storageService.get("googleRefreshToken");
-    const hasExternalAccount = await _storageService.get(
-      "HAS_USER_GOOGLE_EXTERNAL_ACCOUNT"
-    );
-    return hasRefreshToken || hasExternalAccount ? false : true;
+  const getExternalAccountHandler = async (_account: ExternalAccount) => {
+    const accounId: number = _account?.id;
+
+    await downalodToGoogleDriveHandler(accounId);
+    closeDownoadModal();
   };
 
   const snapPoints = useMemo(() => ["25%", "50%"], []);
@@ -252,7 +112,7 @@ export const SingleAssetFooter = ({
           <EditButton handler={editorHandler} />
         </Box>
       </Box>
-      <ModalBottomSheet  ref={selectAccountRef} snapPoints={snapPoints}>
+      <ModalBottomSheet ref={selectAccountRef} snapPoints={snapPoints}>
         <View
           ref={innerSelectAccountRef}
           style={{
@@ -261,10 +121,14 @@ export const SingleAssetFooter = ({
             height: 1000,
           }}
         >
-          <ExternalAccountBottomSheet
-            setSelectedLanguage={() => {}}
-            token={token}
-          />
+          {isLoading || isFetching ? (
+            <LoadingSpinner />
+          ) : (
+            <ExternalAccountBottomSheet
+              setSelectedAccount={getExternalAccountHandler}
+              token={token}
+            />
+          )}
         </View>
       </ModalBottomSheet>
     </>

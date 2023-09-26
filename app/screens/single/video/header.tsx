@@ -23,6 +23,9 @@ import { StorageService } from "../../../services/storage.service";
 import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
 import {
   ICON_EDIT_DARK,
+  ICON_SCREENSHOT,
+  ICON_SINGLE_CONVERT_TO_AUDIO,
+  ICON_SINGLE_EDIT,
   ICON_SOUND_WHITE,
   ICON_TAKE_PHOTO,
   ICON_TEXT_WHITE,
@@ -293,20 +296,20 @@ export function SingleVideoHeader({
     {
       id: 1,
       func: _convertVideoToSoundHandler,
-      icon: <ICON_SOUND_WHITE />,
+      icon: <ICON_SINGLE_CONVERT_TO_AUDIO width={24} height={24}/>,
       isDisable: !forkability_status,
     },
     {
       id: 2,
       func: _takeScreenShotHandler,
-      icon: <ICON_TAKE_PHOTO />,
+      icon: <ICON_SCREENSHOT width={27} height={27}/>,
       isDisable: !forkability_status,
     },
     {
       id: 4,
       func: navigateToEditScreen,
       // icon: <ICON_TEXT_WHITE />,
-      icon: <ICON_EDIT_DARK width={20} height={20} />,
+      icon: <ICON_SINGLE_EDIT width={25} height={25} />,
       isDisable: isDisableEditIcon,
     },
   ];

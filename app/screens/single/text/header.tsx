@@ -162,11 +162,6 @@ export function SingleTextHeader({
           {thumbnailHeaderGradient}
         </Box>
       </Box>
-      <RenderIfWithoutLoading condition={hasPermission}>
-        <PaddingContainer>
-          <Toolbar toolbarList={toolbar_options} />
-        </PaddingContainer>
-      </RenderIfWithoutLoading>
     </>
   );
 }
