@@ -23,6 +23,12 @@ import { RenderIfWithoutLoading } from "../../../components/render-if-without-lo
 import { retriveToken } from "../../../utils/retrive-token";
 import { FocusedStatusBar } from "../../../components/focused-statusbar";
 import { VIDEO_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
+import { SingleAssetFooter } from "../components/footer";
+import { EDIT_SCREEN } from "../../../constaints/consts";
+import { useYoutubeShareMutation } from "../../../services/asset.service";
+import { YoutubeShare } from "../components/youtube-share";
+
+const _youtubeShare = new YoutubeShare();
 
 export function SingleVideoScreen({ navigation, route }: any) {
   const { id } = route.params;
@@ -34,6 +40,8 @@ export function SingleVideoScreen({ navigation, route }: any) {
   const [isSubscriber, setIsSubscriber] = useState<boolean>(null);
   const [videoUri, setVideoUri] = useState<string>(null);
   const [openReportModal, setOpenReportModal] = useState(false);
+  const [token, setToken] = useState(null);
+
   const [_currentUserId, _setCurrentUserId] = useState<number>(null);
 
   // ReportModalRef close while clicked outside
@@ -43,6 +51,27 @@ export function SingleVideoScreen({ navigation, route }: any) {
 
   const tokenCtx = useContext(tokenContext);
   const userCtx = useContext(userContext);
+
+  
+  const youtubeShareRef = useRef(null);
+
+  const youtubeShareWrapperRef = useClickOutside<View>(() => {
+    youtubeShareRef?.current?.close();
+  });
+
+  const [
+    _shareYoutubeApiFunction,
+    { isLoading: isYoutubeShareLoading, isFetching: isYoutubeShareFetching },
+  ] = useYoutubeShareMutation();
+
+  _youtubeShare.config({
+    modalRef: youtubeShareRef,
+    modalWrapperRef: youtubeShareWrapperRef,
+    token: token,
+    shareYoutubeApiFunction: _shareYoutubeApiFunction,
+    assetId: data?.asset_id,
+    isLoading: isYoutubeShareLoading || isYoutubeShareFetching,
+  });
 
   useEffect(() => {
     getData();
@@ -57,6 +86,7 @@ export function SingleVideoScreen({ navigation, route }: any) {
       return;
     }
 
+    setToken(token);
     await getSingleData(token);
     stopLoad();
   };
@@ -81,7 +111,6 @@ export function SingleVideoScreen({ navigation, route }: any) {
 
     // is user owner
     const currentUserId = userCtx.getUser();
-
     _setCurrentUserId(currentUserId.id);
 
     const isUserOwner = ifUserIsOwner(
@@ -129,6 +158,19 @@ export function SingleVideoScreen({ navigation, route }: any) {
     setOpenReportModal(false);
   };
 
+  const navigateToEditScreen = () => {
+    const isDisableEditIcon =
+      data?.asset?.user?.id === _currentUserId ? false : true;
+
+    if (isDisableEditIcon) {
+      return;
+    }
+    navigation.navigate(EDIT_SCREEN, {
+      id: data?.id,
+      assetType: "video",
+    });
+  };
+
   const thumnailImageUri =
     data?.asset?.thumbnails?.["390x264"] || VIDEO_THUMBNAIL_PLACEHOLDER;
 
@@ -165,6 +207,14 @@ export function SingleVideoScreen({ navigation, route }: any) {
 
   const isDisableEditIcon =
     data?.asset?.user?.id === _currentUserId ? false : true;
+  const accountId: number = userCtx.getUser().id;
+
+  
+  const shareToYoutubeHandler = () => {
+    _youtubeShare.openModal();
+  };
+  const youtubeShareTemplate = _youtubeShare.template();
+
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -187,6 +237,7 @@ export function SingleVideoScreen({ navigation, route }: any) {
                   id={data?.id}
                   asset_id={data?.asset_id}
                   userId={data?.asset?.user?.id}
+                  shareToYoutubeHandler={shareToYoutubeHandler}
                   isDisableEditIcon={isDisableEditIcon}
                   forkability_status={
                     data?.asset?.forkability_status === 2 ? true : false
@@ -220,6 +271,16 @@ export function SingleVideoScreen({ navigation, route }: any) {
             isOwner={isOwner}
           />
         ) : null}
+        <RenderIfWithoutLoading condition={isOwner}>
+          <SingleAssetFooter
+            fileName={data?.name}
+            editorHandler={navigateToEditScreen}
+            asset_Id={data?.asset_id}
+            parent_Id={accountId}
+            tokenCtx={tokenCtx}
+            token={token}
+          />
+        </RenderIfWithoutLoading>
         {data?.asset_id && openReportModal ? (
           <View
             ref={ref}
@@ -240,6 +301,7 @@ export function SingleVideoScreen({ navigation, route }: any) {
           </View>
         ) : null}
       </ScreenGradient>
+      {youtubeShareTemplate}
     </SafeAreaView>
   );
 }

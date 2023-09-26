@@ -18,6 +18,7 @@ import {
 } from "../../services/asset.service";
 import { getUserEmailByAccessToken } from "./service";
 import { Toaster } from "../../utils/toaster";
+import { Logger } from "../../utils/logger";
 
 // const _ID_TOKEN =
 //   "eyJhbGciOiJSUzI1NiIsImtpZCI6IjZmNzI1NDEwMWY1NmU0MWNmMzVjOTkyNmRlODRhMmQ1NTJiNGM2ZjEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI1Njc1MTA5NjgxNC1jOGR2bThzMHU2NnN2NDFjcjhwZmFhZms4dmkxb2NrZi5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsImF1ZCI6IjU2NzUxMDk2ODE0LWM4ZHZtOHMwdTY2c3Y0MWNyOHBmYWFmazh2aTFvY2tmLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTAyNzM4MDkwNzMxNzYzMzk0NzkzIiwiZW1haWwiOiJtYWhkaTkxOTM1MTQ0MThAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJ3NGw0TnRYY192NWxWbjBvYldMd3l3IiwibmFtZSI6Ik1laGRpIEFsaXBvb3IiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSmktRUVNcWpqdWFPbUg4X24tWmlnUkRob2I3NXRobUduUE96R2Q0ZjVfPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6Ik1laGRpIiwiZmFtaWx5X25hbWUiOiJBbGlwb29yIiwibG9jYWxlIjoiZmEiLCJpYXQiOjE2OTU0NjM2NjcsImV4cCI6MTY5NTQ2NzI2N30.X-aJE_cx9tUgM3L_H3l9JjAzElAiJNZUoMfmInW1-a-W3xE9nkDV2ZAvNL5ZG6UQwsBdZR67kC4DWaMPKOIh-9KWUFoF99htu14E3qcC4uyiver3sO9mIyJNE8AKxSjv8yyTTVc7rsNyNVRdcxXlRy1Bjd3CanxufaVEIKJigZbYRf5f61Rv7UEOiahXx_3XXRs7Q4l58DMLGUe-yPpXcMApDEqGqMekZFFj0v-45s0hHKyMz5fU_b5IIBwtsIUsEZJ1y4osNI1GC6OMQfdm3zFi8pfTNVjtigx0HvRdo_QhLFjzwCmaDfuomfDQAjKL5X54xgtXts30OIMVeAp1cg";
@@ -31,6 +32,7 @@ type CreateAccount = {
 };
 
 const _toaster = new Toaster();
+const _logger = new Logger();
 
 const AccountsScreen = (props: any) => {
   const [page, setPage] = useState(1);
@@ -76,11 +78,16 @@ const AccountsScreen = (props: any) => {
     }
   }, [response, shouldCreateUser]);
 
+  // _toaster.show(JSON.stringify({response, request}));
+
   const manageGoogleApi = async () => {
     if (response?.authentication) {
       const accessToken = response?.authentication?.accessToken;
       const refreshToken = response?.authentication?.refreshToken;
-
+      if (!accessToken) {
+        _logger.log("NO ACCESS TOKEN");
+        return;
+      }
       try {
         const userGoogleData = await getUserEmailByAccessToken(accessToken);
 
@@ -93,15 +100,9 @@ const AccountsScreen = (props: any) => {
           });
         }
 
-        // This means the external account should be update
-        if (!refreshToken && selectedAccount) {
-          await _updateAccountMiddleware({
-            accessToken,
-          });
-        }
-
-        setShouldCreateUser(false);
-      } catch (err) {}
+      } catch (err) {
+        console.log(`errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr, ${err}`);
+      }
     }
   };
 
@@ -145,7 +146,8 @@ const AccountsScreen = (props: any) => {
     if (response?.error) {
       if (response?.error?.status === 422) {
         _toaster.show(
-          "Error while creating new external account; Your email is registered"
+          response?.error?.data?.error ||
+            "Error while creating new external account; Your email is registered"
         );
       } else {
         _toaster.show("Error while creating new external account");
@@ -161,13 +163,15 @@ const AccountsScreen = (props: any) => {
 
   const _updateAccountMiddleware = async ({
     accessToken,
+    _innerEmail,
   }: {
     accessToken: string;
+    _innerEmail?: string;
   }) => {
     const requestBody = {
       id: selectedAccount.id,
       body: {
-        title: selectedAccount?.title,
+        title: _innerEmail ? _innerEmail : selectedAccount?.title,
         refresh_token: selectedAccount?.information?.refresh_token,
         access_token: accessToken,
         type: 1,
@@ -175,7 +179,13 @@ const AccountsScreen = (props: any) => {
       token,
     };
 
-    const response = await updateAccountApiHandler(requestBody);
+    let response;
+    if (_innerEmail) {
+      response = await createAccountApiHandler(requestBody);
+    } else {
+      response = await updateAccountApiHandler(requestBody);
+    }
+
     if (response?.error) {
       _toaster.show("Error while updating external account");
     }

@@ -15,34 +15,34 @@ import { RadioButton } from "../../../../components/form";
 import { Button } from "../../../../components/button";
 
 const recordLiveOptions: Record<string, string[]> = {
-  recordDurationOptions: ["10 minutes", "20 minutes", "30 minutes", "1 hour"],
-  recordDelayOptions: ["Right now", "10 minutes", "20 minutes", "30 minutes"],
+  recordDurationOptions: ["2 minutes", "3 minutes", "4 minutes", "5 minutes"],
+  recordDelayOptions: ["Right now", "2 minutes", "3 minutes", "4 minutes"],
 };
 
 // Values are in minutes
 const durationKeys: Record<string, number> = {
-  "10 minutes": 10,
-  "20 minutes": 20,
-  "30 minutes": 30,
-  "1 hour": 60,
+  "2 minutes": 2,
+  "3 minutes": 3,
+  "4 minutes": 4,
+  "5 minutes": 5,
 };
 
 type Props = {
   bottomSheetRef: BottomSheet | any;
   // Length in minutes
   recoedLiveHandler: (length: number) => void;
-  isLoading: boolean
+  isLoading: boolean;
 };
 
 /**
- * 
- * @param recoedLiveHandler : (length: minutes) => length  
- * @param isLoading true while submiting record api  
+ *
+ * @param recoedLiveHandler : (length: minutes) => length
+ * @param isLoading true while submiting record api
  */
 export const SingleLiveRecordBottomSheet = ({
   bottomSheetRef,
   recoedLiveHandler,
-  isLoading
+  isLoading,
 }: Props) => {
   // Record duration. for example: start record until 20 minutes
   const [duration, setDuration] = useState(
@@ -60,7 +60,7 @@ export const SingleLiveRecordBottomSheet = ({
   //     setDelay(option);
   //   };
 
-  const recordVideoSubmitHandler = async() => {
+  const recordVideoSubmitHandler = async () => {
     const selectedDurationValue = durationKeys[duration];
     await recoedLiveHandler(selectedDurationValue);
   };

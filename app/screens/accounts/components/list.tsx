@@ -60,23 +60,11 @@ export const AccountsScreenListComponent: FC<ListProps> = ({
                   fontSize={14}
                   fontWeight={600}
                 >
-                  {item.title} / {item.id}
+                  {item.title}
                 </Text>
               </Box>
             </Box>
             <Box direction="row" alignItems="center">
-              <TouchableOpacity
-                activeOpacity={1}
-                onPress={() => updateAccountHandler(item)}
-              >
-                <ICON_RESET
-                  width={22}
-                  height={22}
-                  style={{
-                    marginRight: 8,
-                  }}
-                />
-              </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={1}
                 onPress={() => removaAccountHandler(item)}

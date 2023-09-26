@@ -24,6 +24,7 @@ import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
 import {
   ICON_EDIT_DARK,
   ICON_SCREENSHOT,
+  ICON_SHARE_YOUTUBE,
   ICON_SINGLE_CONVERT_TO_AUDIO,
   ICON_SINGLE_EDIT,
   ICON_SOUND_WHITE,
@@ -40,6 +41,7 @@ import {
 type Props = {
   goBackHandler: () => void;
   openReportModalHandler: () => void;
+  shareToYoutubeHandler: () => void;
   thumnailImageUri: string;
   contentName: string;
   isOwner?: boolean;
@@ -86,7 +88,8 @@ export function SingleVideoHeader({
   forkability_status,
   userId,
   isDisableEditIcon,
-  tokenCtx
+  tokenCtx,
+  shareToYoutubeHandler
 }: Props) {
   // rotationStatus 1 = landscape and 3 = portrait
   const [rotationStatus, setRotationStatus] = useState<1 | 3>(3);
@@ -293,6 +296,12 @@ export function SingleVideoHeader({
   // const isDisableEditIcon = id === userId ? false : true;
 
   const TOOLABR_OPTIONS = [
+    {
+      id: 6,
+      func: shareToYoutubeHandler,
+      icon: <ICON_SHARE_YOUTUBE width={24} height={24}/>,
+      isDisable: isOwner ? false: true,
+    },
     {
       id: 1,
       func: _convertVideoToSoundHandler,

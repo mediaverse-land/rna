@@ -94,6 +94,7 @@ export const SingleAssetFooter = ({
   if (!token) {
     return;
   }
+ 
 
   return (
     <>

@@ -1,4 +1,4 @@
-import {  TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Box } from "../../../components/box";
 import { Text } from "../../../components/text";
 import { ICON_IMAGE_WHITE } from "../../../constaints/icons";
@@ -6,6 +6,8 @@ import { PaddingContainer } from "../../../styles/grid";
 import { GoBackButton } from "../components/goback-button";
 import { theme } from "../../../constaints/theme";
 import { AssetThumbnail } from "../../../components/asset-thumbnail";
+import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
+import { Toolbar } from "../components/toolbar";
 
 type Props = {
   goBackHandler: () => void;
@@ -15,8 +17,9 @@ type Props = {
   isSubscriber?: boolean;
   showLargeImagePressHandler: () => void;
   openReportModalHandler: () => void;
+  toolbarOptions: any;
+  hasPermission: boolean;
 };
-
 
 export function SingleImageHeader({
   goBackHandler,
@@ -26,11 +29,12 @@ export function SingleImageHeader({
   isSubscriber,
   showLargeImagePressHandler,
   openReportModalHandler,
+  toolbarOptions,
+  hasPermission,
 }: Props) {
-
   return (
     <>
-      <TouchableOpacity activeOpacity={1} onPress={showLargeImagePressHandler}>
+      <TouchableOpacity activeOpacity={1}>
         <Box position="relative" zIndex={20}>
           <Box>
             {/* GoBack button place */}
@@ -39,10 +43,15 @@ export function SingleImageHeader({
               hasBackground={true}
               isOwner={isOwner}
             />
-            <AssetThumbnail
-              assetType="image"
-              thumnailImageUri={thumnailImageUri}
-            />
+            <TouchableOpacity
+              onPress={showLargeImagePressHandler}
+              activeOpacity={1}
+            >
+              <AssetThumbnail
+                assetType="image"
+                thumnailImageUri={thumnailImageUri}
+              />
+            </TouchableOpacity>
             <Box position="absolute" zIndex={11} bottom={24} left={24}>
               <ICON_IMAGE_WHITE
                 style={{
@@ -51,6 +60,13 @@ export function SingleImageHeader({
                 }}
               />
             </Box>
+          </Box>
+          <Box >
+            <RenderIfWithoutLoading condition={hasPermission}>
+              <PaddingContainer>
+                <Toolbar toolbarList={toolbarOptions} />
+              </PaddingContainer>
+            </RenderIfWithoutLoading>
           </Box>
           {/* Title */}
           <PaddingContainer>

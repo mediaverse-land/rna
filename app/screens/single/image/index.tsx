@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState, useRef } from "react";
 import { View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -27,6 +27,13 @@ import { EDIT_SCREEN } from "../../../constaints/consts";
 import { IMAGE_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
 import { singleImageStyles } from "./styles";
 import { SingleAssetFooter } from "../components/footer";
+import { PaddingContainer } from "../../../styles/grid";
+import { Toolbar } from "../components/toolbar";
+import { ICON_SHARE_YOUTUBE } from "../../../constaints/icons";
+import { YoutubeShare } from "../components/youtube-share";
+import { useYoutubeShareMutation } from "../../../services/asset.service";
+
+const _youtubeShare = new YoutubeShare();
 
 export function SingleImageScreen({ navigation, route }: any) {
   const { id } = route.params;
@@ -47,6 +54,26 @@ export function SingleImageScreen({ navigation, route }: any) {
 
   const isFocuses = useIsFocused();
 
+  const youtubeShareRef = useRef(null);
+
+  const youtubeShareWrapperRef = useClickOutside<View>(() => {
+    youtubeShareRef?.current?.close();
+  });
+
+  const [
+    _shareYoutubeApiFunction,
+    { isLoading: isYoutubeShareLoading, isFetching: isYoutubeShareFetching },
+  ] = useYoutubeShareMutation();
+
+  _youtubeShare.config({
+    modalRef: youtubeShareRef,
+    modalWrapperRef: youtubeShareWrapperRef,
+    token: token,
+    shareYoutubeApiFunction: _shareYoutubeApiFunction,
+    assetId: data?.asset_id,
+    isLoading: isYoutubeShareLoading || isYoutubeShareFetching,
+  });
+
   useEffect(() => {
     if (isFocuses) {
       getData();
@@ -57,8 +84,6 @@ export function SingleImageScreen({ navigation, route }: any) {
   const ref = useClickOutside<View>(() => {
     setOpenReportModal(false);
   });
-
-  
 
   const getData = async () => {
     setIsLoading(true);
@@ -201,16 +226,23 @@ export function SingleImageScreen({ navigation, route }: any) {
     });
   };
 
+
+  const shareToYoutubeHandler = () => {
+    _youtubeShare.openModal();
+  };
+
+  const TOOLBAR_OPTIONS = [
+    {
+      id: 5,
+      func: shareToYoutubeHandler,
+      icon: <ICON_SHARE_YOUTUBE width={24} height={24} />,
+      isDisable: isOwner ? false : true,
+    },
+  ];
+
   const accountId: number = userCtx.getUser().id;
 
-  // const TOOLBAR_OPTIONS = [
-  //   {
-  //     id: 4,
-  //     func: navigateToEditScreen,
-  //     icon: <ICON_EDIT_DARK width={20} height={20} />,
-  //     isDisable: isDisableEditIcon,
-  //   },
-  // ];
+  const youtubeShareTemplate = _youtubeShare.template();
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -228,12 +260,9 @@ export function SingleImageScreen({ navigation, route }: any) {
                   isSubscriber={isSubscriber}
                   showLargeImagePressHandler={_showLargeImagePressHandler}
                   openReportModalHandler={_openReportModalHandler}
+                  toolbarOptions={TOOLBAR_OPTIONS}
+                  hasPermission={hasPermission}
                 />
-                <RenderIfWithoutLoading condition={hasPermission}>
-                  {/* <PaddingContainer>
-                    <Toolbar toolbarList={TOOLBAR_OPTIONS} />
-                  </PaddingContainer> */}
-                </RenderIfWithoutLoading>
                 <SingleImageContent
                   description={data?.description}
                   metaDataList={metaDataList}
@@ -286,6 +315,7 @@ export function SingleImageScreen({ navigation, route }: any) {
           />
         </View>
       ) : null}
+      {youtubeShareTemplate}
     </SafeAreaView>
   );
 }

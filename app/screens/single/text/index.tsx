@@ -51,6 +51,7 @@ import { useYoutubeShareMutation } from "../../../services/asset.service";
 import { Toaster } from "../../../utils/toaster";
 import { TextToTextConvert } from "../components/text-to-text-convert";
 import { useConvertTextToTextMutation } from "../../../services/single-text.service";
+import { SingleAssetFooter } from "../components/footer";
 
 const _toaster = new Toaster();
 const _textToTextConver = new TextToTextConvert();
@@ -93,6 +94,7 @@ export function SingleTextScreen({
     _shareYoutubeApiFunction,
     { isLoading: isYoutubeShareLoading, isFetching: isYoutubeShareFetching },
   ] = useYoutubeShareMutation();
+  
   const [
     _convertTextToTextApiFunction,
     {
@@ -368,13 +370,13 @@ export function SingleTextScreen({
       id: 6,
       func: openTextToTextConvertModal,
       icon: <ICON_TEXT_TO_TEXT width={24} height={24} />,
-      isDisable: false,
+      isDisable: !hasEditPermission,
     },
     {
       id: 5,
       func: shareToYoutubeHandler,
       icon: <ICON_SHARE_YOUTUBE width={24} height={24} />,
-      isDisable: false,
+      isDisable: isOwner? false: true,
     },
     {
       id: 1,
@@ -416,6 +418,7 @@ export function SingleTextScreen({
 
   const youtubeShareTemplate = _youtubeShare.template();
   const textToTextTranslateTemplate = _textToTextConver.template();
+  const accountId: number = userCtx.getUser().id;
 
   return (
     <>
@@ -464,6 +467,16 @@ export function SingleTextScreen({
               assetId={data?.asset_id || data?.id}
               isSubscriber={isSubscriber}
               isOwner={isOwner}
+            />
+          </RenderIfWithoutLoading>
+          <RenderIfWithoutLoading condition={isOwner}>
+            <SingleAssetFooter
+              fileName={data?.name}
+              editorHandler={navigateToEditScreen}
+              asset_Id={data?.asset_id}
+              parent_Id={accountId}
+              tokenCtx={tokenCtx}
+              token={token}
             />
           </RenderIfWithoutLoading>
           <RenderIfWithoutLoading condition={shouldShowTextModal}>

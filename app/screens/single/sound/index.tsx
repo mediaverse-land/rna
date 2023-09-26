@@ -32,6 +32,7 @@ import { retriveToken } from "../../../utils/retrive-token";
 import { Toolbar } from "../components/toolbar";
 import {
   ICON_EDIT_DARK,
+  ICON_SHARE_YOUTUBE,
   ICON_SINGLE_CONVERT_TO_IMAGE,
   ICON_SINGLE_CONVERT_TO_TEXT,
   ICON_SINGLE_EDIT,
@@ -42,13 +43,17 @@ import { PaddingContainer } from "../../../styles/grid";
 import { AUDIO_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
 import { EDIT_SCREEN } from "../../../constaints/consts";
 import { ModalBottomSheet } from "../../../components/bottom-sheet-modal";
-import SelectLanguageBottomSheet from './../../../components/select-language'
+import SelectLanguageBottomSheet from "./../../../components/select-language";
+import { SingleAssetFooter } from "../components/footer";
+import { useYoutubeShareMutation } from "../../../services/asset.service";
+import { YoutubeShare } from "../components/youtube-share";
 
 let counter = 0;
 
+const _youtubeShare = new YoutubeShare();
+
 export function SingleSoundScreen({ navigation, route }: any) {
   const { id } = route.params;
-
 
   const [openReportModal, setOpenReportModal] = useState(false);
   const [data, setData] = useState<Sound>(null);
@@ -58,6 +63,8 @@ export function SingleSoundScreen({ navigation, route }: any) {
   const [sound, setSound] = useState<any>();
   const [soundUri, setSoundUri] = useState<string>(null);
   const [file, setFile] = useState<any>(null);
+
+  const [token, setToken] = useState<string>(null);
 
   const [currentUserId, setCurrentUserId] = useState<number>(null);
   const [selectedLanguage, setSelectedLanguage] = useState("");
@@ -73,10 +80,28 @@ export function SingleSoundScreen({ navigation, route }: any) {
   });
 
   const innerSelectLanguageBottomSheet = useClickOutside<View>(() => {
-    // setOpenReportModal(false);
     selectLanguageRef?.current.close();
   });
-  // const {data, error, isLoading, isSuccess} = useGetSingleVideoDataQuery()
+
+  const youtubeShareRef = useRef(null);
+
+  const youtubeShareWrapperRef = useClickOutside<View>(() => {
+    youtubeShareRef?.current?.close();
+  });
+
+  const [
+    _shareYoutubeApiFunction,
+    { isLoading: isYoutubeShareLoading, isFetching: isYoutubeShareFetching },
+  ] = useYoutubeShareMutation();
+
+  _youtubeShare.config({
+    modalRef: youtubeShareRef,
+    modalWrapperRef: youtubeShareWrapperRef,
+    token: token,
+    shareYoutubeApiFunction: _shareYoutubeApiFunction,
+    assetId: data?.asset_id,
+    isLoading: isYoutubeShareLoading || isYoutubeShareFetching,
+  });
 
   const tokenCtx = useContext(tokenContext);
   const userCtx = useContext(userContext);
@@ -130,6 +155,7 @@ export function SingleSoundScreen({ navigation, route }: any) {
     }
 
     const formattedToken = tokenStringResolver(token);
+    setToken(formattedToken);
 
     await getSingleData(formattedToken);
     setIsLoading(false);
@@ -302,25 +328,37 @@ export function SingleSoundScreen({ navigation, route }: any) {
   const hasEditPermission =
     data?.asset?.forkability_status === 2 ? true : false;
 
+    
+  const shareToYoutubeHandler = () => {
+    _youtubeShare.openModal();
+  };
+
+
   const toolbarOptions = [
+    {
+      id: 5,
+      func: shareToYoutubeHandler,
+      icon: <ICON_SHARE_YOUTUBE width={24} height={24} />,
+      isDisable: isOwner ? false : true,
+    },
     {
       id: 2,
       func: _convertAudioToText,
-      icon: <ICON_SINGLE_CONVERT_TO_IMAGE width={23} height={23}/>,
+      icon: <ICON_SINGLE_CONVERT_TO_IMAGE width={23} height={23} />,
       isDisable: !hasEditPermission,
     },
     {
       id: 3,
       func: openTranslateModalHandler,
       // func: _translateAudio,
-      icon: <ICON_SINGLE_CONVERT_TO_TEXT width={24} height={24}/>,
+      icon: <ICON_SINGLE_CONVERT_TO_TEXT width={24} height={24} />,
       isDisable: !hasEditPermission,
     },
     {
       id: 1,
       func: navigateToEditScreen,
       // icon: <ICON_TEXT_WHITE />,
-      icon: <ICON_SINGLE_EDIT width={25} height={25}/>,
+      icon: <ICON_SINGLE_EDIT width={25} height={25} />,
       isDisable: isDisableEditIcon,
     },
   ];
@@ -338,6 +376,10 @@ export function SingleSoundScreen({ navigation, route }: any) {
 
   const hasPermission = isOwner || isSubscriber;
   const snapPoints = useMemo(() => ["25%", "50%"], []);
+  const accountId: number = userCtx.getUser().id;
+
+  const youtubeShareTemplate = _youtubeShare.template();
+
 
   return (
     <>
@@ -391,6 +433,16 @@ export function SingleSoundScreen({ navigation, route }: any) {
               isOwner={isOwner}
             />
           ) : null}
+          <RenderIfWithoutLoading condition={isOwner}>
+            <SingleAssetFooter
+              fileName={data?.name}
+              editorHandler={navigateToEditScreen}
+              asset_Id={data?.asset_id}
+              parent_Id={accountId}
+              tokenCtx={tokenCtx}
+              token={token}
+            />
+          </RenderIfWithoutLoading>
           {data?.asset_id && openReportModal ? (
             <View
               ref={ref}
@@ -427,6 +479,7 @@ export function SingleSoundScreen({ navigation, route }: any) {
           />
         </View>
       </ModalBottomSheet>
+      {youtubeShareTemplate}
     </>
   );
 }

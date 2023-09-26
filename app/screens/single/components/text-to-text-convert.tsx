@@ -1,4 +1,4 @@
-import { LegacyRef, ReactNode, Ref, RefObject } from "react";
+import { LegacyRef, ReactNode, RefObject } from "react";
 import { ModalBottomSheet } from "../../../components/bottom-sheet-modal";
 import { View } from "react-native";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
@@ -8,7 +8,6 @@ import { theme } from "../../../constaints/theme";
 import { Input } from "../../../components/form";
 import { Button } from "../../../components/button";
 import { LoadingSpinner } from "../../../components/loader-spinner";
-import { Logger } from "../../../utils/logger";
 import { Toaster } from "../../../utils/toaster";
 
 type BottomSheetModalCustomType = {
