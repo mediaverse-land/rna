@@ -47,13 +47,15 @@ import SelectLanguageBottomSheet from "./../../../components/select-language";
 import { SingleAssetFooter } from "../components/footer";
 import { useYoutubeShareMutation } from "../../../services/asset.service";
 import { YoutubeShare } from "../components/youtube-share";
+import { BackButtonRedirector } from "../utils/back-button-redirector";
 
 let counter = 0;
 
+const _backButtonRedirector = new BackButtonRedirector();
 const _youtubeShare = new YoutubeShare();
 
 export function SingleSoundScreen({ navigation, route }: any) {
-  const { id } = route.params;
+  const { id, ORIGIN } = route.params;
 
   const [openReportModal, setOpenReportModal] = useState(false);
   const [data, setData] = useState<Sound>(null);
@@ -105,6 +107,15 @@ export function SingleSoundScreen({ navigation, route }: any) {
 
   const tokenCtx = useContext(tokenContext);
   const userCtx = useContext(userContext);
+
+  useEffect(() => {
+    _backButtonRedirector.addListener(ORIGIN, navigation);
+
+    if (!isFocused) {
+      return _backButtonRedirector.cleanup(navigation);
+    }
+  }, []);
+
 
   async function playSoundHandler() {
     if (isOwner === true || isSubscriber === true) {

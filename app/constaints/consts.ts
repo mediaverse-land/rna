@@ -27,6 +27,8 @@ export const EDIT_VIDEO_SCREEN = "EditVideoScreen";
 
 export const ACCOUNTS_SCREEN = "AccountsScreen";
 
+export const REDIRECTED_FROM_CREATE_ASSET = 'REDIRECTED_FROM_CREATE_ASSET'
+
 export const ALL_LIVES_SCREEN = "AllLivesScreen";
 
 export const USER_HAS_SEEN_BOTTOM_TAB_GUIDE = "USER_HAS_SEEN_BOTTOM_TAB_GUIDE";

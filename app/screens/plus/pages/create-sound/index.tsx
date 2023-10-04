@@ -23,7 +23,7 @@ import { userContext } from "../../../../context/user";
 import { tokenStringResolver } from "../../../../utils/token-string-resolver";
 import { useCreateSingleSoundMutation } from "../../../../services/single-sound.service";
 import { Toaster } from "../../../../utils/toaster";
-import { SINGLE_SOUND_SCREEN } from "../../../../constaints/consts";
+import { REDIRECTED_FROM_CREATE_ASSET, SINGLE_SOUND_SCREEN } from "../../../../constaints/consts";
 import { Logger } from "../../../../utils/logger";
 
 const WINDOW_HEIGHT = windowSize().height;
@@ -119,6 +119,7 @@ export const CreateSoundScreen = () => {
         navigation?.navigate(SINGLE_SOUND_SCREEN, {
           id,
           asset_id: id,
+          ORIGIN: REDIRECTED_FROM_CREATE_ASSET
         });
       })
       .catch((error) => {

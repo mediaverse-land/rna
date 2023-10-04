@@ -40,8 +40,6 @@ const AccountsScreen = (props: any) => {
   const [__dataList, setDataList] = useState<ExternalAccount[]>([]);
   const [shouldCreateUser, setShouldCreateUser] = useState(false);
 
-  const [selectedAccount, setSelectedAccount] = useState<ExternalAccount>(null);
-
   const [request, response, promptAsync]: any = Google.useAuthRequest({
     androidClientId: enviroments.REACT_APP_ANDROID_CLIENT_ID,
     iosClientId: enviroments.REACT_APP_IOS_CLIENT_ID,
@@ -51,6 +49,7 @@ const AccountsScreen = (props: any) => {
     extraParams: {
       access_type: "offline",
     },
+    responseType:'token'
   });
 
   const tokenCtx = useContext(tokenContext);
@@ -62,7 +61,7 @@ const AccountsScreen = (props: any) => {
     });
 
   const [createAccountApiHandler] = useAddExternalAccountMutation();
-  const [updateAccountApiHandler] = useUpdateExternalAccountMutation();
+  // const [updateAccountApiHandler] = useUpdateExternalAccountMutation();
   const [removeAccountApiHandler] = useRemoveExternalAccountMutation();
 
   const isFocuses = useIsFocused();
@@ -73,23 +72,33 @@ const AccountsScreen = (props: any) => {
 
   // Handle acctions of google signin
   useEffect(() => {
-    if (shouldCreateUser || selectedAccount?.id) {
-      manageGoogleApi();
-    }
+    // if (shouldCreateUser) {
+    manageGoogleApi();
+    // }
   }, [response, shouldCreateUser]);
 
   // _toaster.show(JSON.stringify({response, request}));
+
+  const __ = {
+    request,
+    response,
+  };
+  _toaster.show(JSON.stringify(`STEP_ONE, ${request}`));
 
   const manageGoogleApi = async () => {
     if (response?.authentication) {
       const accessToken = response?.authentication?.accessToken;
       const refreshToken = response?.authentication?.refreshToken;
+
       if (!accessToken) {
         _logger.log("NO ACCESS TOKEN");
         return;
       }
+
       try {
         const userGoogleData = await getUserEmailByAccessToken(accessToken);
+
+        _toaster.show(JSON.stringify(`STEP_TWO, ${userGoogleData}`));
 
         // This means the external account should be create
         if (refreshToken) {
@@ -99,7 +108,6 @@ const AccountsScreen = (props: any) => {
             refreshToken,
           });
         }
-
       } catch (err) {
         console.log(`errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr, ${err}`);
       }
@@ -143,6 +151,10 @@ const AccountsScreen = (props: any) => {
     };
 
     const response = await createAccountApiHandler(requestBody);
+    console.log(response);
+
+    _toaster.show(JSON.stringify(`STEP_THREE, ${response}`));
+
     if (response?.error) {
       if (response?.error?.status === 422) {
         _toaster.show(
@@ -159,44 +171,6 @@ const AccountsScreen = (props: any) => {
       refetch();
       _toaster.show("New external account has been created successfully");
     }
-  };
-
-  const _updateAccountMiddleware = async ({
-    accessToken,
-    _innerEmail,
-  }: {
-    accessToken: string;
-    _innerEmail?: string;
-  }) => {
-    const requestBody = {
-      id: selectedAccount.id,
-      body: {
-        title: _innerEmail ? _innerEmail : selectedAccount?.title,
-        refresh_token: selectedAccount?.information?.refresh_token,
-        access_token: accessToken,
-        type: 1,
-      },
-      token,
-    };
-
-    let response;
-    if (_innerEmail) {
-      response = await createAccountApiHandler(requestBody);
-    } else {
-      response = await updateAccountApiHandler(requestBody);
-    }
-
-    if (response?.error) {
-      _toaster.show("Error while updating external account");
-    }
-    if (response?.data) {
-      setDataList([]);
-      setPage(1);
-      refetch();
-      _toaster.show("external account has been updated successfully");
-    }
-
-    setSelectedAccount(null);
   };
 
   const getToken = async () => {
@@ -232,17 +206,13 @@ const AccountsScreen = (props: any) => {
   };
 
   const createExternalAccount = async () => {
-    setShouldCreateUser(() => {
-      promptAsync();
-      return true;
-    });
-  };
-
-  const updateAccountHandler = async (item: ExternalAccount) => {
-    setSelectedAccount(() => {
-      promptAsync();
-      return item;
-    });
+    try{
+      const result = await promptAsync({ useProxy: false, showInRecent: true });
+      console.log(result)
+    }
+    catch(err){
+      _toaster.show(`PROMPT_ERROR, ${err}`)
+    }
   };
 
   const removaAccountHandler = async (item: ExternalAccount) => {
@@ -268,7 +238,7 @@ const AccountsScreen = (props: any) => {
           <AccountsSCreenComponents.Title goBackHandler={goBackHandler} />
           <AccountsSCreenComponents.List
             data={__dataList}
-            updateAccountHandler={updateAccountHandler}
+            updateAccountHandler={() => {}}
             removaAccountHandler={removaAccountHandler}
             isLoading={isFetching || isLoading ? true : false}
           />
@@ -282,3 +252,48 @@ const AccountsScreen = (props: any) => {
 };
 
 export default AccountsScreen;
+
+// const _updateAccountMiddleware = async ({
+//   accessToken,
+//   _innerEmail,
+// }: {
+//   accessToken: string;
+//   _innerEmail?: string;
+// }) => {
+//   const requestBody = {
+//     id: selectedAccount.id,
+//     body: {
+//       title: _innerEmail ? _innerEmail : selectedAccount?.title,
+//       refresh_token: selectedAccount?.information?.refresh_token,
+//       access_token: accessToken,
+//       type: 1,
+//     },
+//     token,
+//   };
+
+//   let response;
+//   if (_innerEmail) {
+//     response = await createAccountApiHandler(requestBody);
+//   } else {
+//     response = await updateAccountApiHandler(requestBody);
+//   }
+
+//   if (response?.error) {
+//     _toaster.show("Error while updating external account");
+//   }
+//   if (response?.data) {
+//     setDataList([]);
+//     setPage(1);
+//     refetch();
+//     _toaster.show("external account has been updated successfully");
+//   }
+
+//   setSelectedAccount(null);
+// };
+
+// const updateAccountHandler = async (item: ExternalAccount) => {
+//   setSelectedAccount(() => {
+//     promptAsync();
+//     return item;
+//   });
+// };

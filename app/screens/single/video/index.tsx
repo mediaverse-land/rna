@@ -27,11 +27,13 @@ import { SingleAssetFooter } from "../components/footer";
 import { EDIT_SCREEN } from "../../../constaints/consts";
 import { useYoutubeShareMutation } from "../../../services/asset.service";
 import { YoutubeShare } from "../components/youtube-share";
+import { BackButtonRedirector } from "../utils/back-button-redirector";
 
 const _youtubeShare = new YoutubeShare();
+const _backButtonRedirector = new BackButtonRedirector();
 
 export function SingleVideoScreen({ navigation, route }: any) {
-  const { id } = route.params;
+  const { id, ORIGIN } = route.params;
   const isFocused = useIsFocused();
 
   const [data, setData] = useState<Video>(null);
@@ -52,7 +54,6 @@ export function SingleVideoScreen({ navigation, route }: any) {
   const tokenCtx = useContext(tokenContext);
   const userCtx = useContext(userContext);
 
-  
   const youtubeShareRef = useRef(null);
 
   const youtubeShareWrapperRef = useClickOutside<View>(() => {
@@ -72,6 +73,14 @@ export function SingleVideoScreen({ navigation, route }: any) {
     assetId: data?.asset_id,
     isLoading: isYoutubeShareLoading || isYoutubeShareFetching,
   });
+
+  useEffect(() => {
+    _backButtonRedirector.addListener(ORIGIN, navigation);
+
+    if (!isFocused) {
+      return _backButtonRedirector.cleanup(navigation);
+    }
+  }, []);
 
   useEffect(() => {
     getData();
@@ -209,12 +218,10 @@ export function SingleVideoScreen({ navigation, route }: any) {
     data?.asset?.user?.id === _currentUserId ? false : true;
   const accountId: number = userCtx.getUser().id;
 
-  
   const shareToYoutubeHandler = () => {
     _youtubeShare.openModal();
   };
   const youtubeShareTemplate = _youtubeShare.template();
-
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

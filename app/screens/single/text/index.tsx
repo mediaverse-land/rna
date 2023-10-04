@@ -1,5 +1,5 @@
 import { useContext, useEffect, useMemo, useRef, useState } from "react";
-import { ToastAndroid, View } from "react-native";
+import { View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useClickOutside } from "react-native-click-outside";
@@ -43,7 +43,11 @@ import {
   TEXT_THUMBNAIL_PLACEHOLDER,
   __TEXT_THUMBNAIL_PLACEHOLDER_PNG,
 } from "../../../constaints/images";
-import { EDIT_SCREEN } from "../../../constaints/consts";
+import {
+  APP_STACK,
+  EDIT_SCREEN,
+  REDIRECTED_FROM_CREATE_ASSET,
+} from "../../../constaints/consts";
 import { PaddingContainer } from "../../../styles/grid";
 import { Toolbar } from "../components/toolbar";
 import { YoutubeShare } from "../components/youtube-share";
@@ -52,16 +56,19 @@ import { Toaster } from "../../../utils/toaster";
 import { TextToTextConvert } from "../components/text-to-text-convert";
 import { useConvertTextToTextMutation } from "../../../services/single-text.service";
 import { SingleAssetFooter } from "../components/footer";
+import { PROFILE } from "../../stack";
+import { BackButtonRedirector } from "../utils/back-button-redirector";
 
 const _toaster = new Toaster();
 const _textToTextConver = new TextToTextConvert();
 const _youtubeShare = new YoutubeShare();
+const _backButtonRedirector = new BackButtonRedirector();
 
 export function SingleTextScreen({
   navigation,
   route,
 }: ComponentNavigationProps) {
-  const { id } = route.params;
+  const { id, ORIGIN } = route.params;
 
   const [data, setData] = useState<TextType>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -94,7 +101,7 @@ export function SingleTextScreen({
     _shareYoutubeApiFunction,
     { isLoading: isYoutubeShareLoading, isFetching: isYoutubeShareFetching },
   ] = useYoutubeShareMutation();
-  
+
   const [
     _convertTextToTextApiFunction,
     {
@@ -131,6 +138,14 @@ export function SingleTextScreen({
 
   const tokenCtx = useContext(tokenContext);
   const userCtx = useContext(userContext);
+
+  useEffect(() => {
+    _backButtonRedirector.addListener(ORIGIN, navigation);
+
+    if (!isFocused) {
+      return _backButtonRedirector.cleanup(navigation);
+    }
+  }, []);
 
   useEffect(() => {
     getData();
@@ -376,7 +391,7 @@ export function SingleTextScreen({
       id: 5,
       func: shareToYoutubeHandler,
       icon: <ICON_SHARE_YOUTUBE width={24} height={24} />,
-      isDisable: isOwner? false: true,
+      isDisable: isOwner ? false : true,
     },
     {
       id: 1,

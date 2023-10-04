@@ -13,7 +13,7 @@ import { userContext } from "../../../../context/user";
 import { tokenStringResolver } from "../../../../utils/token-string-resolver";
 import { Toaster } from "../../../../utils/toaster";
 import { useCreateSingleTextMutation } from "../../../../services/single-text.service";
-import { SINGLE_TEXT_SCREEN } from "../../../../constaints/consts";
+import { REDIRECTED_FROM_CREATE_ASSET, SINGLE_TEXT_SCREEN } from "../../../../constaints/consts";
 import { CreateAssetForm } from "../../component/create-asset-form";
 import { Logger } from "../../../../utils/logger";
 
@@ -83,8 +83,7 @@ export const CreateTextScreen = () => {
         name: data.name,
         user: userId,
         plan: plans[_plan],
-        forkability_status:
-          selectedOption.forkability_status ? 2: 1,
+        forkability_status: selectedOption.forkability_status ? 2 : 1,
         price: selectedOption.plan !== "free" ? data.price : 0,
         description: data.description,
         type: 1,
@@ -161,6 +160,7 @@ export const CreateTextScreen = () => {
       if (reset) {
         navigation?.navigate(SINGLE_TEXT_SCREEN, {
           id,
+          ORIGIN: REDIRECTED_FROM_CREATE_ASSET,
         });
       }
     } catch (err) {

@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState, useRef } from "react";
-import { View } from "react-native";
+import { BackHandler, View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useClickOutside } from "react-native-click-outside";
@@ -23,20 +23,24 @@ import { RenderIfWithoutLoading } from "../../../components/render-if-without-lo
 import { ReportModal } from "../components/report-modal";
 import { getImageDetailApiHandler } from "../service";
 import { Image } from "../../../types/image";
-import { EDIT_SCREEN } from "../../../constaints/consts";
+import {
+  APP_STACK,
+  EDIT_SCREEN,
+  REDIRECTED_FROM_CREATE_ASSET,
+} from "../../../constaints/consts";
 import { IMAGE_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
 import { singleImageStyles } from "./styles";
 import { SingleAssetFooter } from "../components/footer";
-import { PaddingContainer } from "../../../styles/grid";
-import { Toolbar } from "../components/toolbar";
 import { ICON_SHARE_YOUTUBE } from "../../../constaints/icons";
 import { YoutubeShare } from "../components/youtube-share";
 import { useYoutubeShareMutation } from "../../../services/asset.service";
+import { BackButtonRedirector } from "../utils/back-button-redirector";
 
 const _youtubeShare = new YoutubeShare();
+const _backButtonRedirector = new BackButtonRedirector();
 
 export function SingleImageScreen({ navigation, route }: any) {
-  const { id } = route.params;
+  const { id, ORIGIN } = route.params;
 
   const [isOwner, setIsOwner] = useState<boolean>(null);
   const [isSubscriber, setIsSubscriber] = useState<boolean>(null);
@@ -73,6 +77,14 @@ export function SingleImageScreen({ navigation, route }: any) {
     assetId: data?.asset_id,
     isLoading: isYoutubeShareLoading || isYoutubeShareFetching,
   });
+
+  useEffect(() => {
+    _backButtonRedirector.addListener(ORIGIN, navigation);
+
+    if (!isFocuses) {
+      return _backButtonRedirector.cleanup(navigation);
+    }
+  }, []);
 
   useEffect(() => {
     if (isFocuses) {
@@ -225,7 +237,6 @@ export function SingleImageScreen({ navigation, route }: any) {
       assetType: "image",
     });
   };
-
 
   const shareToYoutubeHandler = () => {
     _youtubeShare.openModal();

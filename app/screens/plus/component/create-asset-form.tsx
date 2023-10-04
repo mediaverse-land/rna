@@ -40,9 +40,11 @@ export const CreateAssetForm = ({
   isLoading,
   _getSelectedOption,
 }: Props) => {
-  const [selectedOption, setSelectedOption] = useState<Record<string, string|boolean>>({
-    plan: 'ownership',
-    eligible_for_audio_extraction:true,
+  const [selectedOption, setSelectedOption] = useState<
+    Record<string, string | boolean>
+  >({
+    plan: "ownership",
+    eligible_for_audio_extraction: true,
     eligible_for_image_extraction: true,
     eligible_for_video_extraction: true,
   });
@@ -90,8 +92,6 @@ export const CreateAssetForm = ({
     await onSubmitHandler(data);
   };
 
-  
-
   const nameRef = useRef();
   const priceRef = useRef();
   const descriptionRef = useRef();
@@ -102,7 +102,7 @@ export const CreateAssetForm = ({
     if (hasSeen) {
       return;
     }
-    
+
     if (
       nameRef?.current &&
       priceRef?.current &&
@@ -146,17 +146,12 @@ export const CreateAssetForm = ({
           text: TOUR_GUIDES[62],
           ref: descriptionRef,
         };
-      // case "plan":
-      //   return {
-      //     text: TOUR_GUIDES[63],
-      //     ref: planRef,
-      //   };
     }
     return null;
   };
 
   const getSelectedOption = (option: string, name: string) => {
-    setSelectedOption({...selectedOption, [name]:option})
+    setSelectedOption({ ...selectedOption, [name]: option });
   };
 
   return (
@@ -181,14 +176,16 @@ export const CreateAssetForm = ({
                   {form.type === "radio-button" ? (
                     <CoachmarkWrapper
                       allowBackgroundInteractions={false}
-                      ref={form.labelText === 'Plan' ? planRef: null}
+                      ref={form.labelText === "Plan" ? planRef : null}
                       message="And at the end, determine the method of sale, whether your asset will be offered for free or will be sold as a subscription or ownership"
                     >
                       <Box position="relative">
                         <RadioButton
                           labelText={form.labelText}
                           dataList={form.options}
-                          getSelectedOption={(option: any) => getSelectedOption(option, form.name)}
+                          getSelectedOption={(option: any) =>
+                            getSelectedOption(option, form.name)
+                          }
                           defaultOption={form.defaultSelected}
                         />
                       </Box>

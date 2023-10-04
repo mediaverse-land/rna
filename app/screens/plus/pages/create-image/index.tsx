@@ -22,6 +22,7 @@ import { FileSystemController } from "../../../../controllers/file-system.contro
 import { uploadHandler } from "../../service";
 import { useCreateSingleVideoMutation } from "../../../../services/single.video.service";
 import {
+  REDIRECTED_FROM_CREATE_ASSET,
   SINGLE_IMAGE_SCREEN,
   SINGLE_VIDEO_SCREEN,
 } from "../../../../constaints/consts";
@@ -131,16 +132,16 @@ export const CreateImageScreen = () => {
     _set_capturedVideo_base64_address(result);
   };
 
-  const convertVideoToBased64 = async (capturedVideoUri: any) => {
-    if (!capturedVideoUri) {
-      _logger.log(`func: convertVideoToBased64, capturedVideo is empty`);
-      return null;
-    }
-    const result = await _fileSystemController.convertFileToBase64(
-      capturedVideoUri
-    );
-    return result;
-  };
+  // const convertVideoToBased64 = async (capturedVideoUri: any) => {
+  //   if (!capturedVideoUri) {
+  //     _logger.log(`func: convertVideoToBased64, capturedVideo is empty`);
+  //     return null;
+  //   }
+  //   const result = await _fileSystemController.convertFileToBase64(
+  //     capturedVideoUri
+  //   );
+  //   return result;
+  // };
 
   const _createImageRequest = async ({
     name,
@@ -234,7 +235,8 @@ export const CreateImageScreen = () => {
         if (upload_res === "Ok" && id) {
           navigation?.navigate(SINGLE_VIDEO_SCREEN, {
             id,
-            asset_id: id
+            asset_id: id,
+            ORIGIN: REDIRECTED_FROM_CREATE_ASSET
           });
         }
       })
@@ -275,7 +277,8 @@ export const CreateImageScreen = () => {
           if (id) {
             navigation?.navigate(SINGLE_IMAGE_SCREEN, {
               id,
-              asset_id: id
+              asset_id: id,
+              ORIGIN: REDIRECTED_FROM_CREATE_ASSET
             });
           }
         }
