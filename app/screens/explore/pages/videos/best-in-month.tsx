@@ -6,22 +6,48 @@ import { Box } from "../../../../components/box";
 import { LoadingSpinner } from "../../../../components/loader-spinner";
 import { Text } from "../../../../components/text";
 import { UseNavigationType } from "../../../../types/use-navigation";
+import { ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG } from "../../../../constaints/icons";
+import { BEST_IN_MONTH } from "../../../../constaints/consts";
+import { VIEW_ALL } from "../../../stack";
+import { ViewAllPageEnum } from "../../../view-all";
 
 type Props = {
   isLoading: boolean;
   data: Asset[];
   disableOnIntractions?: boolean;
+  navigation: UseNavigationType;
 };
 
 export function VideoPageBestInMonth({
   isLoading,
   data,
   disableOnIntractions = false,
+  navigation,
 }: Props) {
+  const viewAllNavigationHandler = () => {
+    navigation.navigate(VIEW_ALL, {
+      pageDirection: ViewAllPageEnum.BEST_VIDEOS,
+    });
+  };
+
   return (
     <Box paddingLeft={24}>
       <Box marginRight={32}>
-        <Title str="Best in month" />
+        <Title
+          showViewMoreButton={true}
+          navigateHandler={viewAllNavigationHandler}
+          str={BEST_IN_MONTH}
+          svgIcon={
+            <ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG
+              width={16}
+              height={16}
+              style={{
+                marginRight: 8,
+                marginTop: 3,
+              }}
+            />
+          }
+        />
       </Box>
       <View style={{ marginTop: 24 }}>
         {isLoading ? (

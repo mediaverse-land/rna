@@ -17,10 +17,6 @@ import { AppDispatch, RootState } from "../../../../store";
 import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
 import { StorageService } from "../../../../services/storage.service";
 import { HAS_USER_SEEN_EXPLORE_ALL_TOUR } from "../../../../constaints/consts";
-import {
-  activeDisableOnIntractions,
-  deActivrDisableOnIntractions,
-} from "../../../../slices/tour.slice";
 import { UseNavigationType } from "../../../../types/use-navigation";
 
 const { ContainerStyles } = VideoPageComponents;
@@ -39,7 +35,7 @@ export function VideosPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [videoListData, setVideoListData] = useState<Asset[]>([]);
   const [livesData, setLivesData] = useState<any>([]);
-  const [isDisabledOnIntractions, setIsDisabledOnIntractions]=useState(false)
+  const [isDisabledOnIntractions, setIsDisabledOnIntractions] = useState(false);
 
   const { EXPLORE_TOP_BAR_TOUR_HAS_SEEN } = useSelector(
     (state: RootState) => state.tourSlice
@@ -117,7 +113,6 @@ export function VideosPage() {
 
   const setupTour = async () => {
     if (!EXPLORE_TOP_BAR_TOUR_HAS_SEEN) {
-      
       // dispatch(deActivrDisableOnIntractions());
       return;
     }
@@ -126,13 +121,13 @@ export function VideosPage() {
       return;
     }
     if (livesData?.length && firstLiveText?.current && mostViewdRef?.current) {
-      setIsDisabledOnIntractions(true)
+      setIsDisabledOnIntractions(true);
       setTimeout(() => {
         const composer = new CoachmarkComposer([firstLiveText, mostViewdRef]);
         composer.show().then(async () => {
           await setUserSeenTour();
           // dispatch(deActivrDisableOnIntractions());
-          setIsDisabledOnIntractions(false)
+          setIsDisabledOnIntractions(false);
         });
       }, 3000);
     }
@@ -140,17 +135,17 @@ export function VideosPage() {
 
   useEffect(() => {
     // dispatch(activeDisableOnIntractions());
-  }, [])
+  }, []);
 
   useEffect(() => {
     setupTour();
   }, [livesData?.length, EXPLORE_TOP_BAR_TOUR_HAS_SEEN]);
 
   const _onRefreshHandler = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     setLivesData([]);
     setVideoListData([]);
-    await getData()
+    await getData();
   };
 
   return (
@@ -178,7 +173,12 @@ export function VideosPage() {
             ref={mostViewdRef}
             message="most viewd tour guide"
           >
-            <VideoPageBestInMonth disableOnIntractions={isDisabledOnIntractions} isLoading={isLoading} data={videoListData} />
+            <VideoPageBestInMonth
+              navigation={navigation}
+              disableOnIntractions={isDisabledOnIntractions}
+              isLoading={isLoading}
+              data={videoListData}
+            />
           </CoachmarkWrapper>
           <VideoPageList
             isLoading={isLoading}

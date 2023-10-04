@@ -1,34 +1,57 @@
-import { HorizontalSlider } from '../../../../components/horizontal-slider';
-import { IfNoItem } from '../../../../components/if-no-item';
-import { RenderIf } from '../../../../components/render-if';
-import { Title } from '../../../../components/title';
-import { PaddingContainer } from '../../../../styles/grid';
-import { Sound } from '../../../../types/sound';
-import { Box } from '../../../../components/box';
+import { HorizontalSlider } from "../../../../components/horizontal-slider";
+import { IfNoItem } from "../../../../components/if-no-item";
+import { RenderIf } from "../../../../components/render-if";
+import { Title } from "../../../../components/title";
+import { PaddingContainer } from "../../../../styles/grid";
+import { Sound } from "../../../../types/sound";
+import { Box } from "../../../../components/box";
+import { BEST_IN_MONTH } from "../../../../constaints/consts";
+import { ICON_TOP_TABBAR_SOUND_ACTIVE_SVG } from "../../../../constaints/icons";
+import { VIEW_ALL } from "../../../stack";
+import { ViewAllPageEnum } from "../../../view-all";
+import { UseNavigationType } from "../../../../types/use-navigation";
 
 type Props = {
-    isLoading: boolean;
-    data: Sound[];
+  isLoading: boolean;
+  data: Sound[];
+  navigation: UseNavigationType;
 };
 
-export function SoundsPageBestInMonth({ isLoading, data }: Props) {
-    return (
-        <>
-            <PaddingContainer>
-                <Box marginBottom={24}>
-                    <Title str="Best in month" />
-                </Box>
-            </PaddingContainer>
-            <Box paddingLeft={24}>
-                <RenderIf condition={isLoading}>
-                    <IfNoItem dataLength={data.length}>
-                        <HorizontalSlider
-                            data={data}
-                            navigationScreenName="SingleImageScreen"
-                        />
-                    </IfNoItem>
-                </RenderIf>
-            </Box>
-        </>
-    );
+export function SoundsPageBestInMonth({ navigation, isLoading, data }: Props) {
+  const viewAllNavigationHandler = () => {
+    navigation.navigate(VIEW_ALL, {
+      pageDirection: ViewAllPageEnum.BEST_SONGS,
+    });
+  };
+
+  return (
+    <>
+      <PaddingContainer>
+        <Box marginBottom={24} >
+          <Title
+            str={BEST_IN_MONTH}
+            navigateHandler={viewAllNavigationHandler}
+            showViewMoreButton
+            svgIcon={
+              <ICON_TOP_TABBAR_SOUND_ACTIVE_SVG
+                width={16}
+                height={14.39}
+                style={{ marginRight: 8, marginTop: 3 }}
+              />
+            }
+          />
+        </Box>
+      </PaddingContainer>
+      <Box paddingLeft={24}>
+        <RenderIf condition={isLoading}>
+          <IfNoItem dataLength={data.length}>
+            <HorizontalSlider
+              data={data}
+              navigationScreenName="SingleImageScreen"
+            />
+          </IfNoItem>
+        </RenderIf>
+      </Box>
+    </>
+  );
 }

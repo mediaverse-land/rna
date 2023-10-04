@@ -3,9 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ImagesPageComponents } from "../all/style";
 import { SoundsPageBestInMonth } from "./best-in-moth";
-import { SoundsPageChillSongs } from "./chil-songs";
 import { SoundsPageRecently } from "./recently";
-import { SoundsPageMusicPlayer } from "./music-player";
 import { VirtualizedList } from "../../../../components/virtualized-list";
 import { RenderIf } from "../../../../components/render-if";
 import { IfNoItem } from "../../../../components/if-no-item";
@@ -66,14 +64,10 @@ export function SoundsPage() {
           <RenderIf condition={isSoundsDataLoading}>
             <IfNoItem dataLength={soundsData.length}>
               <SoundsPageBestInMonth
+                navigation={navigation}
                 isLoading={isSoundsDataLoading}
                 data={soundsData}
               />
-              {/* <SoundsPageMusicPlayer data={soundsData} /> */}
-              {/* <SoundsPageChillSongs
-                isLoading={isSoundsDataLoading}
-                data={soundsData}
-              /> */}
               <SoundsPageRecently
                 isLoading={isSoundsDataLoading}
                 data={soundsData}

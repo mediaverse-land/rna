@@ -1,10 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useIsFocused } from "@react-navigation/native";
-import ViewAllImageList from "./components/image-list";
-import ViewAllTextsList from "./components/texts-list";
-import ViewAllVideoList from "./components/video-list";
-import ViewAllSoundList from "./components/sound-list";
 import { FocusedStatusBar } from "../../components/focused-statusbar";
 import { Box } from "../../components/box";
 import { viewAllStyles } from "./styles";
@@ -17,12 +13,6 @@ import { retriveToken } from "../../utils/retrive-token";
 import { LoadingSpinner } from "../../components/loader-spinner";
 import { getViewAllDataApiHandler } from "./service";
 import { Logger } from "../../utils/logger";
-import {
-  ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG,
-  ICON_TOP_TABBAR_SOUND_ACTIVE_SVG,
-  ICON_TOP_TABBAR_TEXT_ACTIVE_SVG,
-  ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG,
-} from "../../constaints/icons";
 import { viewAllPages } from "./models";
 
 type Props = {
@@ -41,6 +31,7 @@ export enum ViewAllPageEnum {
   "TOP_TEXTS" = "TOP_TEXTS",
   "BEST_SONGS" = "BEST_SONGS",
   "BEST_IN_MONTH_IMAGES" = "BEST_IN_MONTH_IMAGES",
+  "BEST_IN_MONTH_TEXTS" = "BEST_IN_MONTH_TEXTS",
   "RECENTLY_IMAGES" = "RECENTLY_IMAGES",
   "RECENTLY_VIDEOS" = "RECENTLY_VIDEOS",
   "RECENTLY_SOUNDS" = "RECENTLY_SOUNDS",

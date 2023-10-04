@@ -21,7 +21,7 @@ export function SoundsPageRecently({ data, navigation }: Props) {
 
   return (
     <Box marginTop={40} flex={1}>
-      <Box paddingLeft={24} marginRight={32}>
+      <Box paddingLeft={24} marginBottom={24} marginRight={32}>
         <Title
           str="Rencntly"
           showViewMoreButton

@@ -7,6 +7,8 @@ export const AUTH_SCREEN = "AuthScreen";
 export const LIVES = "Live channels";
 export const OTHER_CAHNNELS = "Other channel";
 
+export const BEST_IN_MONTH = "Best in month";
+
 export const APP_STACK = "AppStack";
 export const SEARCH_STACK = "Search";
 export const SETTINGS_STACK = "Settings";

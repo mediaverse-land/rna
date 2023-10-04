@@ -78,6 +78,18 @@ export const viewAllPages: Record<
     url: "audios/daily-recommended",
     ListComponent: ViewAllImageList,
   },
+  BEST_IN_MONTH_TEXTS: {
+    icon: (
+      <ICON_TOP_TABBAR_TEXT_ACTIVE_SVG
+        width={16}
+        height={16}
+        style={viewAllStyles.icon}
+      />
+    ),
+    title: "Best in month",
+    url: "texts/daily-recommended",
+    ListComponent: ViewAllImageList,
+  },
   RECENTLY_IMAGES: {
     icon: (
       <ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG

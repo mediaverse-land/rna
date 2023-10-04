@@ -28,7 +28,7 @@ export const ImagePageBestInMonth: FC<Props> = ({
 
   return (
     <Box paddingLeft={24} width="100%" flex={1}>
-        <Box marginBottom={24}>
+        <Box marginBottom={24} paddingRight={24}>
           <Title
             str="Best in month"
             showViewMoreButton

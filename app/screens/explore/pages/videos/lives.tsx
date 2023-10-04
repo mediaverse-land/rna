@@ -7,9 +7,10 @@ import { FlatList } from "react-native";
 import { Live } from "../../../../types/live";
 import { HorizontalSlide } from "../../../../components/horizontal-slider/slide";
 import { PROFILE_ONE } from "../../../../constaints/images";
-import { LIVES, SINGLE_LIVE_SCREEN } from "../../../../constaints/consts";
+import { ALL_LIVES_SCREEN, LIVES, SINGLE_LIVE_SCREEN } from "../../../../constaints/consts";
 import { useNavigation } from "@react-navigation/native";
 import { UseNavigationType } from "../../../../types/use-navigation";
+import { ICON_LIVE_CHANNELS } from "../../../../constaints/icons";
 
 type Props = {
   data: Live[];
@@ -50,11 +51,30 @@ export const VideosPageLives: FC<Props> = ({
   };
 
   const keyExtractor = (item: Live) => item.id.toString();
-
+  
+  const viewAllNavigationHandler = () => {
+    navigation.navigate(ALL_LIVES_SCREEN);
+  };
+  
   return (
     <Box paddingLeft={24} paddingRight={isLoading && 24}>
       <Box marginRight={32}>
-        <Title str={LIVES} />
+        <Title
+          str={LIVES}
+          showViewMoreButton
+          navigateHandler={viewAllNavigationHandler}
+          svgIcon={
+            <ICON_LIVE_CHANNELS
+              width={24}
+              height={24}
+              style={{
+                marginRight: 8,
+                position: "relative",
+                top: 1,
+              }}
+            />
+          }
+        />
       </Box>
       <Box marginTop={24}>
         <RenderIf condition={isLoading}>
