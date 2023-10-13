@@ -62,7 +62,11 @@ export function SingleVideoScreen({ navigation, route }: any) {
 
   const [
     _shareYoutubeApiFunction,
-    { isLoading: isYoutubeShareLoading, isFetching: isYoutubeShareFetching },
+    {
+      isLoading: isYoutubeShareLoading,
+      isFetching: isYoutubeShareFetching,
+      error,
+    },
   ] = useYoutubeShareMutation();
 
   _youtubeShare.config({
@@ -221,6 +225,7 @@ export function SingleVideoScreen({ navigation, route }: any) {
   const shareToYoutubeHandler = () => {
     _youtubeShare.openModal();
   };
+
   const youtubeShareTemplate = _youtubeShare.template();
 
   return (

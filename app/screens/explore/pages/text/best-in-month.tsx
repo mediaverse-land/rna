@@ -21,6 +21,7 @@ export function SoundsPageBestInMonth({ data }: Props) {
       pageDirection: ViewAllPageEnum.BEST_IN_MONTH_TEXTS,
     });
   };
+  
   return (
     <Box flex={1} paddingLeft={24}>
       <Box paddingRight={32}>

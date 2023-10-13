@@ -2,7 +2,7 @@
   "expo": {
     "name": "Mediaverse",
     "slug": "mediaverse",
-    "version": "0.0.06",
+    "version": "0.0.07",
     "orientation": "portrait",
     "icon": "./assets/flat_icon.png",
     "userInterfaceStyle": "light",
@@ -11,9 +11,12 @@
       "resizeMode": "cover",
       "backgroundColor": "#090951"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.emahdi1297.mediaverse"
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -28,6 +31,7 @@
     },
     "plugins": [
       "@react-native-google-signin/google-signin",
+      "@react-native-firebase/app",
       [
         "expo-camera",
         {

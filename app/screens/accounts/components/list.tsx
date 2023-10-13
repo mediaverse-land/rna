@@ -6,6 +6,7 @@ import { SHARE_ACCOUNT_ITEM_BG } from "../../../constaints/images";
 import {
   ICONS_GOOGLE_BLUE,
   ICON_RESET,
+  ICON_STREAM,
   ICON_TRASHBEEN,
 } from "../../../constaints/icons";
 import { Text } from "../../../components/text";
@@ -53,7 +54,11 @@ export const AccountsScreenListComponent: FC<ListProps> = ({
             paddingRight={16}
           >
             <Box direction="row" alignItems="center">
-              <ICONS_GOOGLE_BLUE width={18} height={18} />
+              {item.type === 1 ? (
+                <ICONS_GOOGLE_BLUE width={18} height={18} />
+              ) : (
+                <ICON_STREAM width={18} height={18} />
+              )}
               <Box marginLeft={16}>
                 <Text
                   color={theme.color.light.WHITE}

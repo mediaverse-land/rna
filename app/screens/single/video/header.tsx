@@ -22,14 +22,11 @@ import { Toolbar } from "../components/toolbar";
 import { StorageService } from "../../../services/storage.service";
 import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
 import {
-  ICON_EDIT_DARK,
   ICON_SCREENSHOT,
   ICON_SHARE_YOUTUBE,
   ICON_SINGLE_CONVERT_TO_AUDIO,
   ICON_SINGLE_EDIT,
-  ICON_SOUND_WHITE,
-  ICON_TAKE_PHOTO,
-  ICON_TEXT_WHITE,
+  ICON_STREAM,
   ICON_VIDEO_PLAY,
   ICON_VIDEO_WHITE,
 } from "../../../constaints/icons";
@@ -54,7 +51,7 @@ type Props = {
   userId: number;
   forkability_status: boolean;
   isDisableEditIcon: boolean;
-  tokenCtx: any
+  tokenCtx: any;
 };
 
 const thumbnailHeight = 264;
@@ -89,7 +86,7 @@ export function SingleVideoHeader({
   userId,
   isDisableEditIcon,
   tokenCtx,
-  shareToYoutubeHandler
+  shareToYoutubeHandler,
 }: Props) {
   // rotationStatus 1 = landscape and 3 = portrait
   const [rotationStatus, setRotationStatus] = useState<1 | 3>(3);
@@ -299,19 +296,20 @@ export function SingleVideoHeader({
     {
       id: 6,
       func: shareToYoutubeHandler,
-      icon: <ICON_SHARE_YOUTUBE width={24} height={24}/>,
-      isDisable: isOwner ? false: true,
+      icon: <ICON_SHARE_YOUTUBE width={24} height={24} />,
+      // isDisable: isOwner ? false : true,
+      isDisable: false
     },
     {
       id: 1,
       func: _convertVideoToSoundHandler,
-      icon: <ICON_SINGLE_CONVERT_TO_AUDIO width={24} height={24}/>,
+      icon: <ICON_SINGLE_CONVERT_TO_AUDIO width={24} height={24} />,
       isDisable: !forkability_status,
     },
     {
       id: 2,
       func: _takeScreenShotHandler,
-      icon: <ICON_SCREENSHOT width={27} height={27}/>,
+      icon: <ICON_SCREENSHOT width={27} height={27} />,
       isDisable: !forkability_status,
     },
     {
@@ -324,7 +322,6 @@ export function SingleVideoHeader({
   ];
 
   const hasPermission = isOwner || isSubscriber;
-
 
   /**
    * Checks if user has seen the tour before or not,

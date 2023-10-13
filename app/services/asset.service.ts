@@ -20,6 +20,7 @@ export const assetService: any = createApi({
       query: (args) => {
         return {
           url: `/share/youtube`,
+          // url: `/share/stream`,
           method: "POST",
           body: args.body,
           headers: { Authorization: `Bearer ${args.token}` },
@@ -28,7 +29,6 @@ export const assetService: any = createApi({
     }),
     addExternalAccount: builder.mutation({
       query: (args) => {
-        console.log({args})
         return {
           url: `/external-accounts`,
           method: "POST",
@@ -57,6 +57,7 @@ export const assetService: any = createApi({
         };
       },
     }),
+
   }),
 });
 

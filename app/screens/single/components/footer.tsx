@@ -51,7 +51,7 @@ export const SingleAssetFooter = ({
 
   const [downalodHandler, { isLoading, isFetching, error }] =
     useGoogleDriveShareMutation();
-    
+
   const getToken = async () => {
     const token = await tokenCtx.getToken();
     return await tokenStringResolver(token);
@@ -65,11 +65,18 @@ export const SingleAssetFooter = ({
     selectAccountRef?.current?.close();
   };
 
-  const downalodToGoogleDriveHandler = async (accounId: number) => {
-    const requestBody = {
+  const downalodToGoogleDriveHandler = async (
+    accounId: number,
+    time: string
+  ) => {
+    const requestBody: Record<string, any> = {
       asset: asset_Id,
       account: accounId,
     };
+
+    if (time) {
+      requestBody["times"] = [time];
+    }
 
     const token = await getToken();
 
@@ -82,19 +89,23 @@ export const SingleAssetFooter = ({
     }
   };
 
-  const getExternalAccountHandler = async (_account: ExternalAccount) => {
+  const getExternalAccountHandler = async (
+    _account: ExternalAccount,
+    time: string
+  ) => {
     const accounId: number = _account?.id;
 
-    await downalodToGoogleDriveHandler(accounId);
+    await downalodToGoogleDriveHandler(accounId, time);
     closeDownoadModal();
   };
+
+  const _selectedDateGetter = (date: string) => {};
 
   const snapPoints = useMemo(() => ["25%", "50%"], []);
 
   if (!token) {
     return;
   }
- 
 
   return (
     <>

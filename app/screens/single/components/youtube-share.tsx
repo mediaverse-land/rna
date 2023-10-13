@@ -18,14 +18,14 @@ interface IYoutubeShare {
   addSelectedAccount: (
     _account: ExternalAccount,
     ___shareYoutubeApiFunction: any,
-    assetId: number
+    assetId: number,
+    time: string
   ) => void;
 }
 
 let title = "";
 let description = "";
 const _toaster = new Toaster();
-
 export class YoutubeShare implements IYoutubeShare {
   _modalRef: any;
   _modalWrapperRef: any;
@@ -67,20 +67,22 @@ export class YoutubeShare implements IYoutubeShare {
   async addSelectedAccount(
     _account: ExternalAccount,
     ___func: any,
-    _assetId: number
+    _assetId: number,
+    time: string
   ) {
     this._selectedAccount = _account;
     const accountId = _account.id;
 
-    await this.requestToShareAsset(accountId, ___func, _assetId);
+    await this.requestToShareAsset(accountId, ___func, _assetId, time);
   }
 
   async requestToShareAsset(
     _accountId: number,
     ___shareYoutubeApiFunction: any,
-    _assetId: number
+    _assetId: number,
+    time: string
   ) {
-    const requestBody = {
+    let requestBody: Record<string, any> = {
       account: _accountId,
       asset: _assetId,
       title,
@@ -88,22 +90,24 @@ export class YoutubeShare implements IYoutubeShare {
       privacy: "private",
     };
 
+    if (time) {
+      requestBody["times"] = [time];
+    }
+
     const result = await ___shareYoutubeApiFunction({
       token: this._token,
       body: requestBody,
     });
 
-    console.log(result)
 
     if (result?.data) {
       this.closeModal();
       _toaster.show("Asset shared to youtube successfully");
     }
     if (result?.error) {
-      if(result?.error?.status === 403){
-        _toaster.show(
-          "Share to youtube failed, 403 youtube rate limmit error"
-        );
+      this.closeModal();
+      if (result?.error?.status === 403) {
+        _toaster.show("Share to youtube failed, 403 youtube rate limmit error");
         return;
       }
       _toaster.show(
@@ -152,13 +156,14 @@ export class YoutubeShare implements IYoutubeShare {
             <ExternalAccountBottomSheet
               headerElement={_headerElement}
               token={this._token}
-              setSelectedAccount={(e: any) =>
+              setSelectedAccount={(e: any, time) => {
                 this.addSelectedAccount(
                   e,
                   this._shareYoutubeApiFunction,
-                  this._assetId
-                )
-              }
+                  this._assetId,
+                  time
+                );
+              }}
             />
           )}
         </View>

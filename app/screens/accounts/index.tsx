@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useRef, useState } from "react";
 import { SafeAreaView } from "react-native";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { ScreenGradient } from "../../components/screen-gradient";
@@ -8,15 +8,8 @@ import { tokenContext } from "../../context/token";
 import { tokenStringResolver } from "../../utils/token-string-resolver";
 import { ExternalAccount } from "../../types/external-account";
 import { UseNavigationType } from "../../types/use-navigation";
-import * as Google from "expo-auth-session/providers/google";
-import { enviroments } from "../../../enviroments/enviroments";
 import { AccountsSCreenComponents } from "./components";
-import {
-  useAddExternalAccountMutation,
-  useRemoveExternalAccountMutation,
-  useUpdateExternalAccountMutation,
-} from "../../services/asset.service";
-import { getUserEmailByAccessToken } from "./service";
+import { useRemoveExternalAccountMutation } from "../../services/asset.service";
 import { Toaster } from "../../utils/toaster";
 import { Logger } from "../../utils/logger";
 
@@ -25,12 +18,6 @@ import { Logger } from "../../utils/logger";
 // const _ACCESS_TOKEN =
 //   "ya29.a0AfB_byBqAECQBmSdsUmy7dWGYrtO8aDrf-U77vSMFy4MYxDcOyNqFftS0Yg2qfVcZXS18NHdABl9DS4K4nfgHPX0mJHSefYb78DdRzN3boHlQnL6uml3fXaVuuO37r_lwINeDvcvYEDoXgdoO9AfWabCgcoH27MTQCEaCgYKAU0SARISFQGOcNnCpA3hZQ0-pPahy3H42vM2Kw0170";
 
-type CreateAccount = {
-  accessToken: string;
-  refreshToken: string;
-  email: string;
-};
-
 const _toaster = new Toaster();
 const _logger = new Logger();
 
@@ -38,19 +25,8 @@ const AccountsScreen = (props: any) => {
   const [page, setPage] = useState(1);
   const [token, setToken] = useState<string>(null);
   const [__dataList, setDataList] = useState<ExternalAccount[]>([]);
-  const [shouldCreateUser, setShouldCreateUser] = useState(false);
 
-  const [request, response, promptAsync]: any = Google.useAuthRequest({
-    androidClientId: enviroments.REACT_APP_ANDROID_CLIENT_ID,
-    iosClientId: enviroments.REACT_APP_IOS_CLIENT_ID,
-    clientSecret: enviroments.REACT_APP_WEB_CLIENT_SECTET,
-    expoClientId: enviroments.REACT_APP_EXPO_CLIENT_ID,
-    scopes: enviroments.GOOGLE_AUTH_SCOPE,
-    extraParams: {
-      access_type: "offline",
-    },
-    responseType:'token'
-  });
+  const [forceRefresh, setForceRefresh] = useState(null);
 
   const tokenCtx = useContext(tokenContext);
 
@@ -60,8 +36,6 @@ const AccountsScreen = (props: any) => {
       page,
     });
 
-  const [createAccountApiHandler] = useAddExternalAccountMutation();
-  // const [updateAccountApiHandler] = useUpdateExternalAccountMutation();
   const [removeAccountApiHandler] = useRemoveExternalAccountMutation();
 
   const isFocuses = useIsFocused();
@@ -70,58 +44,14 @@ const AccountsScreen = (props: any) => {
   const totalRecords = data?.total;
   const shouldLoadMore = totalRecords > __dataList?.length;
 
-  // Handle acctions of google signin
-  useEffect(() => {
-    // if (shouldCreateUser) {
-    manageGoogleApi();
-    // }
-  }, [response, shouldCreateUser]);
-
-  // _toaster.show(JSON.stringify({response, request}));
-
-  const __ = {
-    request,
-    response,
-  };
-  _toaster.show(JSON.stringify(`STEP_ONE, ${request}`));
-
-  const manageGoogleApi = async () => {
-    if (response?.authentication) {
-      const accessToken = response?.authentication?.accessToken;
-      const refreshToken = response?.authentication?.refreshToken;
-
-      if (!accessToken) {
-        _logger.log("NO ACCESS TOKEN");
-        return;
-      }
-
-      try {
-        const userGoogleData = await getUserEmailByAccessToken(accessToken);
-
-        _toaster.show(JSON.stringify(`STEP_TWO, ${userGoogleData}`));
-
-        // This means the external account should be create
-        if (refreshToken) {
-          await _createAccountMiddleware({
-            email: userGoogleData?.email,
-            accessToken,
-            refreshToken,
-          });
-        }
-      } catch (err) {
-        console.log(`errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr, ${err}`);
-      }
-    }
-  };
-
   useEffect(() => {
     if (isFocuses) {
       getToken();
       refetch();
     }
     if (!isFocuses) {
-      setDataList(null);
       setPage(1);
+      setDataList(null);
     }
   }, [isFocuses]);
 
@@ -130,48 +60,12 @@ const AccountsScreen = (props: any) => {
       return;
     }
 
-    if (data?.data) {
+    if (page === 0 || page === 1) {
+      setDataList(data?.data);
+    } else {
       setDataList((prev) => [...prev, ...data?.data]);
     }
-  }, [data?.data]);
-
-  const _createAccountMiddleware = async ({
-    email,
-    accessToken,
-    refreshToken,
-  }: CreateAccount) => {
-    const requestBody = {
-      body: {
-        title: email,
-        refresh_token: refreshToken,
-        access_token: accessToken,
-        type: 1,
-      },
-      token,
-    };
-
-    const response = await createAccountApiHandler(requestBody);
-    console.log(response);
-
-    _toaster.show(JSON.stringify(`STEP_THREE, ${response}`));
-
-    if (response?.error) {
-      if (response?.error?.status === 422) {
-        _toaster.show(
-          response?.error?.data?.error ||
-            "Error while creating new external account; Your email is registered"
-        );
-      } else {
-        _toaster.show("Error while creating new external account");
-      }
-    }
-    if (response?.data) {
-      setDataList([]);
-      setPage(1);
-      refetch();
-      _toaster.show("New external account has been created successfully");
-    }
-  };
+  }, [forceRefresh, data?.data]);
 
   const getToken = async () => {
     const _tk: unknown = await tokenCtx.getToken();
@@ -196,23 +90,13 @@ const AccountsScreen = (props: any) => {
     setPage((prev) => prev + 1);
   };
 
-  const onRefresh = () => {
-    setDataList([]);
-    setPage(1);
+  const onRefresh = async() => {
+    await refetchData();
+    await setForceRefresh(new Date());
   };
 
   const goBackHandler = () => {
     navigation.goBack();
-  };
-
-  const createExternalAccount = async () => {
-    try{
-      const result = await promptAsync({ useProxy: false, showInRecent: true });
-      console.log(result)
-    }
-    catch(err){
-      _toaster.show(`PROMPT_ERROR, ${err}`)
-    }
   };
 
   const removaAccountHandler = async (item: ExternalAccount) => {
@@ -226,6 +110,10 @@ const AccountsScreen = (props: any) => {
     }
 
     _toaster?.show("Account deleted successfully");
+    refetchData();
+  };
+
+  const refetchData = () => {
     setDataList([]);
     setPage(1);
     refetch();
@@ -243,8 +131,9 @@ const AccountsScreen = (props: any) => {
             isLoading={isFetching || isLoading ? true : false}
           />
         </VirtualizedList>
-        <AccountsSCreenComponents.Footer
-          createAccountHandler={createExternalAccount}
+        <AccountsSCreenComponents.SelectAccountBottomSheet
+          refetchData={refetchData}
+          token={token}
         />
       </ScreenGradient>
     </SafeAreaView>
@@ -252,48 +141,3 @@ const AccountsScreen = (props: any) => {
 };
 
 export default AccountsScreen;
-
-// const _updateAccountMiddleware = async ({
-//   accessToken,
-//   _innerEmail,
-// }: {
-//   accessToken: string;
-//   _innerEmail?: string;
-// }) => {
-//   const requestBody = {
-//     id: selectedAccount.id,
-//     body: {
-//       title: _innerEmail ? _innerEmail : selectedAccount?.title,
-//       refresh_token: selectedAccount?.information?.refresh_token,
-//       access_token: accessToken,
-//       type: 1,
-//     },
-//     token,
-//   };
-
-//   let response;
-//   if (_innerEmail) {
-//     response = await createAccountApiHandler(requestBody);
-//   } else {
-//     response = await updateAccountApiHandler(requestBody);
-//   }
-
-//   if (response?.error) {
-//     _toaster.show("Error while updating external account");
-//   }
-//   if (response?.data) {
-//     setDataList([]);
-//     setPage(1);
-//     refetch();
-//     _toaster.show("external account has been updated successfully");
-//   }
-
-//   setSelectedAccount(null);
-// };
-
-// const updateAccountHandler = async (item: ExternalAccount) => {
-//   setSelectedAccount(() => {
-//     promptAsync();
-//     return item;
-//   });
-// };

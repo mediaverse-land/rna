@@ -31,12 +31,14 @@ import ICON_IS_RECORDING_SVG from "./../../assets/icons/icon__is-recording.svg";
 import ICON_SHARE_YOUTUBE_SVG from "./../../assets/icons/icon__share-youtube.svg";
 import ICON_RESET_SVG from "./../../assets/icons/icon__reset.svg";
 import ICON_TEXT_TO_TEXT_SVG from "./../../assets/icons/icon__convert-text-to-text.svg";
+import ICON_STREAM_SVG from "./../../assets/icons/icon__stream.svg";
 
 export const ICON_NO_RECORD = ICON_NO_RECORD_SVG;
 export const ICON_IS_RECORDING = ICON_IS_RECORDING_SVG;
 export const ICON_SHARE_YOUTUBE = ICON_SHARE_YOUTUBE_SVG;
 export const ICON_RESET = ICON_RESET_SVG;
 export const ICON_TEXT_TO_TEXT = ICON_TEXT_TO_TEXT_SVG;
+export const ICON_STREAM = ICON_STREAM_SVG;
 
 export const ICON_SINGLE_CONVERT_TO_AUDIO = ICON_SINGLE_CONVERT_TO_AUDIO_SVG;
 export const ICON_SINGLE_CONVERT_TO_IMAGE = ICON_SINGLE_CONVERT_TO_IMAGE_SVG;
