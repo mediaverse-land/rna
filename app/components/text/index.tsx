@@ -17,6 +17,7 @@ type Props = {
   fontWeight?: any;
   textStyles?: TextStyle;
   isTextArea?: boolean;
+  selectable?: boolean;
 };
 
 export function Text({
@@ -35,11 +36,12 @@ export function Text({
   fontWeight,
   textStyles,
   isTextArea,
+    selectable = false
 }: Props) {
   let defaultStyles = [];
 
   function addDefinedStyles() {
-    
+
     const styles = [
       { fontSize },
       { lineHeight },
@@ -73,7 +75,7 @@ export function Text({
       {isTextArea ? (
         <TextInput style={[...defaultStyles, textStyles]}>{children}</TextInput>
       ) : (
-        <ReactNativeText style={[...defaultStyles, textStyles]}>
+        <ReactNativeText selectable={selectable} style={[...defaultStyles, textStyles]}>
           {children}
         </ReactNativeText>
       )}

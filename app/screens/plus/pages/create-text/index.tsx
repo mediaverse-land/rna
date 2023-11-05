@@ -145,7 +145,7 @@ export const CreateTextScreen = () => {
         headers: {
           "Content-type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
-          "X-App": "_ReactNative",
+          "X-App": "_Android",
         },
       };
 

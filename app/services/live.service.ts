@@ -15,7 +15,7 @@ export const liveService: any = createApi({
           body: args.body,
           headers: {
             Authorization: `Bearer ${args.token}`,
-            "X-App": "_ReactNative",
+            "X-App": "_Android",
           },
         };
       },
@@ -52,7 +52,7 @@ export const liveService: any = createApi({
           method: "get",
           headers: {
             // Authorization: `Bearer ${args.token}`,
-            "X-App": "_ReactNative",
+            "X-App": "_Android",
           },
         };
       },

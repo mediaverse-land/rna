@@ -8,7 +8,7 @@ import { UseNavigationType } from "../../types/use-navigation";
 import {
   PROFILE_ONE,
   TEXT_SLIDER_COVER_BG,
-  TEXT_SLIDER_ITEM_GRADIENT,
+  // TEXT_SLIDER_ITEM_GRADIENT,
 } from "../../constaints/images";
 import { UserNameCard } from "../username-card";
 import { theme } from "../../constaints/theme";
@@ -42,6 +42,7 @@ export const TextSlider: FC<Props> = ({
     user_image_url: string,
     asset_username: string
   ) => {
+
     if (disableOnIntractions) {
       return;
     }
@@ -66,10 +67,7 @@ export const TextSlider: FC<Props> = ({
     return (
       <TextSlide>
         <TEXT_SLIDER_COVER_BG />
-        {/* <TextSlideBackgroundGradient
-          source={{ uri: TEXT_SLIDER_ITEM_GRADIENT }}
-          resizeMode="stretch"
-        /> */}
+
         <TextSlideBody
           onPress={() =>
             textScreenNavigationHandler(
@@ -82,7 +80,9 @@ export const TextSlider: FC<Props> = ({
           }
           activeOpacity={1}
         >
-          <TextSlideTitle>{data.name}</TextSlideTitle>
+          <Box width='100%' height={16}>
+            <TextSlideTitle>{data.name}</TextSlideTitle>
+          </Box>
           <TextSlideContentText>{data.description}</TextSlideContentText>
           <Box marginTop={16}>
             <UserNameCard

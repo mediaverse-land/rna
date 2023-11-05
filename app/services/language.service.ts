@@ -15,7 +15,7 @@ export const languageService: any = createApi({
           method: "GET",
           headers: {
             // Authorization: `Bearer ${args.token}`
-            "X-App": "_ReactNative",
+            "X-App": "_Android",
           },
         };
       },
@@ -27,7 +27,7 @@ export const languageService: any = createApi({
           method: "GET",
           headers: {
             // Authorization: `Bearer ${args.token}`
-            "X-App": "_ReactNative",
+            "X-App": "_Android",
           },
         };
       },

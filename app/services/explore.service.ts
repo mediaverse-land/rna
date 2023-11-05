@@ -15,7 +15,7 @@ export const exploreService: any = createApi({
           method: "GET",
           headers: {
             // Authorization: `Bearer ${args.token}`
-            "X-App": "_ReactNative",
+            "X-App": "_Android",
           },
         };
       },
@@ -27,7 +27,7 @@ export const exploreService: any = createApi({
           method: "GET",
           headers: {
             // Authorization: `Bearer ${args.token}`
-            "X-App": "_ReactNative",
+            "X-App": "_Android",
           },
         };
       },
@@ -35,11 +35,11 @@ export const exploreService: any = createApi({
     getTopTenTexts: builder.query({
       query: (args) => {
         return {
-          url: "texts",
+          url: "texts/",
           method: "GET",
           headers: {
             // Authorization: `Bearer ${args.token}`
-            "X-App": "_ReactNative",
+            "X-App": "_Android",
           },
         };
       },
@@ -51,7 +51,7 @@ export const exploreService: any = createApi({
           method: "GET",
           headers: {
             // Authorization: `Bearer ${args.token}`
-            "X-App": "_ReactNative",
+            "X-App": "_Android",
           },
         };
       },
@@ -63,7 +63,7 @@ export const exploreService: any = createApi({
           method: "GET",
           headers: {
             // Authorization: `Bearer ${args.token}`
-            "X-App": "_ReactNative",
+            "X-App": "_Android",
           },
         };
       },

@@ -4,7 +4,7 @@ const _api = new ApiHandler();
 
 export const getWalletsApiHandler = async (token: string) => {
     const config = {
-        headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", }
+        headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", }
     };
 
     const url = '/wallets';
@@ -14,7 +14,7 @@ export const getWalletsApiHandler = async (token: string) => {
 
 export const getHistoryApiHandler = async (token: string) => {
     const config = {
-        headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", }
+        headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", }
     };
 
     const url = '/transactions';

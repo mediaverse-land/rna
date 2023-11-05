@@ -11,7 +11,6 @@ import { IfNoItem } from "../../../../components/if-no-item";
 import { FocusedStatusBar } from "../../../../components/focused-statusbar";
 import { getTextDataApiHandler } from "./service";
 import { ImagesPageComponents } from "../all/style";
-import type { Text } from "../../../../types/text";
 import { UseNavigationType } from "../../../../types/use-navigation";
 import { SoundsPageRecently } from "./recently";
 
@@ -22,10 +21,10 @@ export function TextsPage() {
   const tokenCtx = useContext(tokenContext);
   const navigation = useNavigation<UseNavigationType>();
 
-  const [bestInMonthData, setBestInMothData] = useState<Text[]>([]);
+  const [bestInMonthData, setBestInMothData] = useState<any>([]);
   const [isBestInMonthLoading, setIsBestInMonthLoading] = useState(true);
 
-  const [recentlyData, setRecentlyData] = useState<Text[]>([]);
+  const [recentlyData, setRecentlyData] = useState<any>([]);
   const [isRecentlyLoading, setIsRecentlyLoading] = useState(true);
 
   useEffect(() => {

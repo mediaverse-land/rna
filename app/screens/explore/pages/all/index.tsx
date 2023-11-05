@@ -56,6 +56,8 @@ export function AllPage({ navigation }: { navigation: UseNavigationType }) {
     refetch: refetchTopTenText,
   } = useGetTopTenTextsQuery();
 
+  console.log({_topTenTextData})
+
   const {
     data: _chillSongsData,
     isError: _isChillSongsError,
@@ -106,7 +108,7 @@ export function AllPage({ navigation }: { navigation: UseNavigationType }) {
           />
           <AllPageTopTenText
             isLoading={_isTopTenTextLoading}
-            data={_topTenTextData || []}
+            data={_topTenTextData?.data || []}
             disableOnIntractions={DISABLE_INTRACTION}
             navigation={navigation}
           />

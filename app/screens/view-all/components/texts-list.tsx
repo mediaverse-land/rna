@@ -10,6 +10,7 @@ import { UserNameCard } from "../../../components/username-card";
 import { PROFILE_ONE, TEXT_SLIDER_COVER_BG } from "../../../constaints/images";
 import { navigateTo } from "../utils/navigate-to-single-screen";
 import { Text as TextType } from "../../../types/text";
+import { LinearGradient } from "expo-linear-gradient";
 
 type Props = {
   data: TextType[];
@@ -34,56 +35,78 @@ const ViewAllTextsList = ({ data, navigate, marginTop }: Props) => {
       >
         <Box
           width={itemWidth}
-          height={154}
-          marginBottom={34}
+          // hasBlackBorder
+          height={itemWidth}
+          marginBottom={16}
           position="relative"
-          paddingLeft={16}
-          paddingRight={16}
-          paddingTop={24}
         >
-          <Box id="tite" height={16}>
-            <Text
-              color={"#CCCCFF"}
-              lineHeight={title_text_size}
-              fontSize={title_text_size}
+          <LinearGradient
+            colors={["#19194a", "rgba(207, 207, 252, 0.3)"]}
+            start={{ x: 0.8, y: 1 }}
+            style={{
+              flex: 1,
+              position: "absolute",
+              padding: 1,
+              width: "100%",
+              height: "100%",
+              borderRadius: 16,
+            }}
+          >
+            <Box
+              width="100%"
+              height="100%"
+              backgroundColor="#19194a"
+              borderRadius={16}
+              paddingLeft={16}
+              paddingRight={16}
+              paddingTop={24}
             >
-              {item.name}
-            </Text>
-          </Box>
-          <Box id="description" marginTop={8} height={42}>
-            <Text
-              color="#666680"
-              lineHeight={title_text_size}
-              fontSize={title_text_size}
-            >
-              {item.description}
-            </Text>
-          </Box>
-          <Box id="username" marginTop={16}>
-            <UserNameCard
-              username={item.asset.user.username}
-              profileUri={PROFILE_ONE}
-              profileImageStyles={{
-                width: 16,
-                height: 16,
-              }}
-              usernameStyles={{
-                color: theme_text_color,
-                marginLeft: 8,
-                fontSize: username_text_size,
-                lineheight: username_text_size,
-              }}
-            />
-          </Box>
-          <TEXT_SLIDER_COVER_BG
-            width="130%"
-            height="130%"
+              <Box id="tite" height={16}>
+                <Text
+                  color={"#CCCCFF"}
+                  lineHeight={title_text_size}
+                  fontSize={title_text_size}
+                >
+                  {item.name}
+                </Text>
+              </Box>
+              <Box id="description" marginTop={8} height={48}>
+                <Text
+                  color="#666680"
+                  lineHeight={title_text_size}
+                  fontSize={title_text_size}
+                >
+                  {item.description}
+                </Text>
+              </Box>
+              <Box width="100%" height={18} id="username" marginTop={11}>
+                <UserNameCard
+                  username={item.asset.user.username}
+                  profileUri={PROFILE_ONE}
+                  profileImageStyles={{
+                    width: 16,
+                    height: 16,
+                  }}
+                  usernameStyles={{
+                    color: theme_text_color,
+                    marginLeft: 8,
+                    fontSize: username_text_size,
+                    lineheight: username_text_size,
+                  }}
+                />
+              </Box>
+            </Box>
+          </LinearGradient>
+
+          {/* <TEXT_SLIDER_COVER_BG
+            width="106%"
+            height="106%"
             style={{
               position: "absolute",
-              top: 0,
+              // top: -50,
               left: 0,
             }}
-          />
+          /> */}
         </Box>
       </TouchableOpacity>
     );
@@ -102,8 +125,6 @@ const ViewAllTextsList = ({ data, navigate, marginTop }: Props) => {
           numColumns={2}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
-          // estimatedItemSize={20}
-          // onEndReached={() => console.log("onEndReached")}
         />
       </PaddingContainer>
     </Box>

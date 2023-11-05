@@ -17,7 +17,7 @@ export const getAssetApiHandler = async(
   const url = urls[assetType] + `/${id}`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}`, "X-App": "_ReactNative" },
+    headers: { Authorization: `Bearer ${token}`, "X-App": "_Android" },
   };
 
   return await _app.get(url,  config);
@@ -32,7 +32,7 @@ export const updateAssetApiHandler = async (
   const url = urls[assetType] + `/${id}`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}`, "X-App": "_ReactNative" },
+    headers: { Authorization: `Bearer ${token}`, "X-App": "_Android" },
   };
 
   return await _app.put(url, data, config);

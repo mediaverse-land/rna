@@ -1,6 +1,6 @@
 {
   "name": "mediaverse",
-  "version": "0.0.07",
+  "version": "0.0.09",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -17,6 +17,7 @@
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.4.6",
     "@react-native-async-storage/async-storage": "1.17.11",
+    "@react-native-community/blur": "^4.3.2",
     "@react-native-community/datetimepicker": "6.7.3",
     "@react-native-community/slider": "^4.4.2",
     "@react-native-firebase/app": "^18.5.0",
@@ -34,9 +35,9 @@
     "buffer": "^6.0.3",
     "eas-cli": "^3.14.0",
     "expo": "^48.0.0",
+    "expo-application": "~5.1.1",
     "expo-auth-session": "~4.0.3",
     "expo-av": "~13.2.1",
-    "expo-blur": "~12.2.2",
     "expo-camera": "~13.2.1",
     "expo-cli": "^6.3.9",
     "expo-constants": "~14.2.1",
@@ -45,6 +46,7 @@
     "expo-device": "~5.2.1",
     "expo-file-system": "~15.2.2",
     "expo-image-picker": "~14.1.1",
+    "expo-intent-launcher": "~10.5.2",
     "expo-linear-gradient": "~12.1.2",
     "expo-localization": "~14.1.1",
     "expo-media-library": "~15.2.3",
@@ -57,7 +59,7 @@
     "expo-web-browser": "~12.1.1",
     "react": "18.2.0",
     "react-hook-form": "^7.44.3",
-    "react-native": "0.71.13",
+    "react-native": "0.71.14",
     "react-native-click-outside": "^0.1.0",
     "react-native-coachmark": "^0.2.0",
     "react-native-dotenv": "^3.4.8",
@@ -73,7 +75,8 @@
     "react-native-tab-view": "^3.5.1",
     "react-native-view-shot": "3.5.0",
     "react-redux": "^8.1.1",
-    "styled-components": "^5.3.10"
+    "styled-components": "^5.3.10",
+    "expo-blur": "~12.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Mediaverse",
     "slug": "mediaverse",
-    "version": "0.0.07",
+    "version": "0.0.09",
     "orientation": "portrait",
     "icon": "./assets/flat_icon.png",
     "userInterfaceStyle": "light",
@@ -11,9 +11,7 @@
       "resizeMode": "cover",
       "backgroundColor": "#090951"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.emahdi1297.mediaverse"
@@ -28,6 +26,10 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "notification": {
+      "icon": "./assets/logo-mediaverse.png",
+      "color": "#597AFF"
     },
     "plugins": [
       "@react-native-google-signin/google-signin",
@@ -45,6 +47,14 @@
           "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos.",
           "isAccessMediaLocationEnabled": true
         }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/logo-mediaverse.png",
+          "color": "#597AFF",
+          "sounds": []
+        }
       ]
     ],
     "extra": {
@@ -52,6 +62,7 @@
         "projectId": "2ecc9ab0-6195-4d80-97b7-5e15f2a89bbe"
       }
     },
+    // "developmentClient": false,
     "owner": "emahdi1297"
   }
 }

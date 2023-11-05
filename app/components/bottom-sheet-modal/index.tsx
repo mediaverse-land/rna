@@ -65,7 +65,10 @@ export const ModalBottomSheet = forwardRef(
             //   animateOnMount={true}
               snapPoints={snapPoints}
               ref={confirmAlertSheetRef}
-              onClose={() => setIsModalOpen(false)}
+              onClose={() => {
+                setIsModalOpen(false);
+                // onCloseHandler()
+              }}
               enablePanDownToClose
               handleComponent={null}
               backgroundStyle={{

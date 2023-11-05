@@ -34,8 +34,14 @@ import {
   SINGLE_VIDEO_SCREEN,
   WALLET_STACK,
 } from "./app/constaints/consts";
-import { AccountPage } from "./app/screens/settings/pages/account";
 import AccountsScreen from "./app/screens/accounts";
+import { userContext } from "./app/context/user";
+import axios from "axios";
+import { Toaster } from "./app/utils/toaster";
+import { PushNotificationPermissionAlert } from "./app/components/push-notification-permission-alert";
+import { useSetFirebasePushNotificationAccountMutation } from "./app/services/auth.service";
+import PushNotificationWrapper from "./app/components/push-notification-wrapper";
+import { tokenStringResolver } from "./app/utils/token-string-resolver";
 
 type Route = { id: number; name: string; component: FC | any };
 
@@ -117,20 +123,71 @@ const appRoutes: Route[] = [
   },
 ];
 
-export function RootNavigator() {
+const deliverNotificationTokenToApi = async (
+  token: string,
+  userToken: string
+) => {
+  try {
+    const result = await axios.post(
+      `https://api.mediaverse.land/v2/push-notifications/firebase-tokens`,
+      { token },
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+          "X-App": "_Android",
+        },
+      }
+    );
+    // console.log(result);
+  } catch (err: any) {
+    // console.log(err?.response);
+  }
+};
 
+type Props = {
+  firebaseToken: string;
+};
+
+const _toaster = new Toaster();
+
+export function RootNavigator({ firebaseToken }: Props) {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState<
     boolean | string
   >("__false__");
 
+  const [userToken, setUserToken] = useState<string>("");
+
   const [isLoading, setIsLoading] = useState(true);
 
+  const [_setAccountHandler] = useSetFirebasePushNotificationAccountMutation();
+
   const tokenCtx = useContext(tokenContext);
-  const getToken = tokenCtx.getToken();
+  const userCtx: any = useContext(userContext);
+  const getToken: any = tokenCtx.getToken();
 
   useEffect(() => {
     getTokenHandler();
   }, [getToken]);
+
+  useEffect(() => {
+    registerFirebaseToken();
+  }, [firebaseToken, userToken]);
+
+  const registerFirebaseToken = async () => {
+    if (!firebaseToken || !userToken) {
+      return;
+    }
+
+    const _token = tokenStringResolver(userToken)
+
+    const requestBody = { token: firebaseToken };
+    const response = await _setAccountHandler({
+      body: requestBody,
+      token: _token,
+    });
+
+    console.log({response});
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -142,53 +199,76 @@ export function RootNavigator() {
     const tk = await tokenCtx.getToken();
 
     if (typeof tk === "string") {
+      setUserToken(tk)
       setIsUserAuthenticated(true);
     } else setIsUserAuthenticated(false);
   };
 
-  return (
-    <NavigationContainer>
-      {isLoading ? (
-        <SafeAreaView style={{ flex: 1 }}>
-          <StatusBar backgroundColor={"#030340"} barStyle="light-content" />
-          <LinearGradient
-            colors={["#030340", "#030340"]}
-            start={{ x: 0.7, y: 0 }}
-            style={{ flex: 1 }}
-          >
-            <FullScreenSpinnerLoader />
-          </LinearGradient>
-        </SafeAreaView>
-      ) : isUserAuthenticated === "boolean" || isUserAuthenticated === false ? (
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-            cardStyleInterpolator: fadeTransition,
-            // unmountOnBlur: true,
-            // detachPreviousScreen: true,
-          }}
-        >
-          <Stack.Screen name={authRoute.name} component={authRoute.component} />
-        </Stack.Navigator>
-      ) : (
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-            cardStyleInterpolator: fadeTransition,
-            // unmountOnBlur: true,
-            // detachPreviousScreen: true,
+  const saveDeviceFirebasePushNotificationToken = async () => {
+    if (!firebaseToken) {
+      _toaster.show("NO FIREBASE TOKEN FOR THIS DEVICE");
+    }
 
-          }}
-        >
-          {appRoutes.map((route) => (
+    const userData = await userCtx.getUser();
+    const tk: any = await tokenCtx.getToken();
+    if (!userData || !tk) {
+      return;
+    }
+
+    const { id } = userData;
+    const token: string = tk;
+
+    await deliverNotificationTokenToApi(firebaseToken, token);
+    // }
+  };
+
+  const isAuth = isUserAuthenticated === true;
+
+  return (
+    <>
+      <NavigationContainer>
+        <PushNotificationPermissionAlert isAuth={isAuth} />
+        {isLoading ? (
+          <SafeAreaView style={{ flex: 1 }}>
+            <StatusBar backgroundColor={"#030340"} barStyle="light-content" />
+            <LinearGradient
+              colors={["#030340", "#030340"]}
+              start={{ x: 0.7, y: 0 }}
+              style={{ flex: 1 }}
+            >
+              <FullScreenSpinnerLoader />
+            </LinearGradient>
+          </SafeAreaView>
+        ) : isUserAuthenticated === "boolean" ||
+          isUserAuthenticated === false ? (
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+              cardStyleInterpolator: fadeTransition,
+            }}
+          >
             <Stack.Screen
-              key={route.id}
-              name={route.name}
-              component={route.component}
+              name={authRoute.name}
+              component={authRoute.component}
             />
-          ))}
-        </Stack.Navigator>
-      )}
-    </NavigationContainer>
+          </Stack.Navigator>
+        ) : (
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+              cardStyleInterpolator: fadeTransition,
+            }}
+          >
+            {appRoutes.map((route) => (
+              <Stack.Screen
+                key={route.id}
+                name={route.name}
+                component={route.component}
+              />
+            ))}
+          </Stack.Navigator>
+        )}
+      </NavigationContainer>
+    </>
   );
 }

@@ -29,7 +29,7 @@ export const uploadHandler = async ({
       headers: {
         "Content-type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
-        "X-App": "_ReactNative",
+        "X-App": "_Android",
       },
     };
 

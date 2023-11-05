@@ -7,7 +7,7 @@ export const getProfileAllDataApiHandler = async (token:string, url: string) => 
 
     const config = {
         headers: { Authorization: `Bearer ${token}`,
-        "X-App": "_ReactNative", }
+        "X-App": "_Android", }
     };
 
     return await _api.get(url, config);
@@ -18,7 +18,7 @@ export const getProfileImageDataApiHandler = async (token:string, uri: string) =
 
     const config = {
         headers: { Authorization: `Bearer ${token}`,
-        "X-App": "_ReactNative", }
+        "X-App": "_Android", }
     };
 
     return await _api.get(uri, config);
@@ -29,7 +29,7 @@ export const getProfileTextDataApiHandler = async (token:string, uri: string) =>
 
     const config = {
         headers: { Authorization: `Bearer ${token}`,
-        "X-App": "_ReactNative", }
+        "X-App": "_Android", }
     };
 
     return await _api.get(uri, config);
@@ -39,7 +39,7 @@ export const getProfileSoundDataApiHandler = async (token:string, uri: string) =
     const url = `/profile/audios`;
 
     const config = {
-        headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", }
+        headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", }
     };
 
     return await _api.get(uri, config);
@@ -49,7 +49,7 @@ export const getProfileVideoDataApiHandler = async (token:string, uri: string) =
     const url = `/profile/videos`;
 
     const config = {
-        headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", }
+        headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", }
     };
 
     return await _api.get(uri, config);
@@ -59,7 +59,7 @@ export const getProfileStaticsApiHandler = async (token:string) => {
     const url = `/profile/statics`;
 
     const config = {
-        headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", }
+        headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", }
     };
 
     return await _api.get(url, config);
@@ -70,7 +70,7 @@ export const removeAssetApiHandler = async (token:string, type: string, id: numb
     const url = `/${type}/${id}`;
 
     const config = {
-        headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", }
+        headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", }
     };
 
     return await _api.delete(url, config);

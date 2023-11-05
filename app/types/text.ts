@@ -39,6 +39,9 @@ export interface Text {
       "100x150": string;
       "150x100": string;
       "270x370": string;
+      "525x525": string;
+      "336x366": string;
+      "226x226": string;
       "852x480": string;
     };
     thumbnail: {

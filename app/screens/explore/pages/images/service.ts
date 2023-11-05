@@ -11,7 +11,7 @@ export const getBestInMonthApiHandler = async (token: string) => {
 
     const config = {
         headers: { Authorization: `Bearer ${token}` ,
-        "X-App": "_ReactNative",
+        "X-App": "_Android",
     }
     };
     return await _api.get(url, config);

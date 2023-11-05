@@ -15,7 +15,7 @@ export const profileService = createApi({
           method: "GET",
           headers: {
             Authorization: `Bearer ${args.token}`,
-            "X-App": "_ReactNative",
+            "X-App": "_Android",
           },
         };
       },

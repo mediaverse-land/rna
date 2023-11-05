@@ -1,4 +1,12 @@
-import { Alert, Platform, StatusBar, Text } from "react-native";
+import {
+  Alert,
+  Linking,
+  Platform,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import { AlertContextProvider } from "./app/context/alert";
 import { TokenContextProvider } from "./app/context/token";
 import { UserContextProvider } from "./app/context/user";
@@ -6,44 +14,154 @@ import { RootNavigator } from "./root-navigator";
 import { Provider } from "react-redux";
 import { ClickOutsideProvider } from "react-native-click-outside";
 import store from "./app/store";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Toaster } from "./app/utils/toaster";
 import * as Notifications from "expo-notifications";
 import messaging from "@react-native-firebase/messaging";
-import axios from "axios";
-// import { DatabaseConnectionProvider } from "./app/db";
+import { ActivityAction, startActivityAsync } from "expo-intent-launcher";
+import * as Application from "expo-application";
+import * as IntentLauncher from "expo-intent-launcher";
+import { Button } from "./app/components/button";
+import PushNotificationWrapper from "./app/components/push-notification-wrapper";
 
 const _toaster = new Toaster();
+
+Notifications.setNotificationChannelAsync("location-reached", {
+  name: "location-reached",
+  importance: Notifications.AndroidImportance.MAX,
+  vibrationPattern: [0, 250, 250, 250],
+  lightColor: "#597AFF",
+  showBadge: true,
+  sound: "default",
+});
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
     shouldPlaySound: true,
     shouldSetBadge: true,
+    priority: Notifications.AndroidNotificationPriority.MAX,
   }),
 });
 
-const deliverNotificationTokenToApi = async (
-  token: string,
-  userToken: string
-) => {
-  console.log(token);
-  try {
-    const result = await axios.post(
-      `https://api.mediaverse.land/v2/push-notifications/firebase-tokens`,
-      { token },
-      {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-          "X-App": "_ReactNative",
-        },
+export default function App() {
+  const [loading, setLoading] = useState(true);
+  const [initialRoute, setInitialRoute] = useState("Home");
+  const [token, setToken] = useState("");
+
+  const [newPushMessage, setNewPushMessage] = useState<any>(null);
+
+  const isDevMode = () => __DEV__;
+
+  const handleOpenSettings = async () => {
+    try {
+      if (Platform.OS === "ios") {
+        // Linking.openURL('app-settings:');
+      } else {
+        // await startActivityAsync(
+        //     IntentLauncher.ActivityAction.APP_NOTIFICATION_SETTINGS,
+        //     {
+        //         extra: {'android.provider.extra.APP_PACKAGE': Application.applicationId}
+        //     },
+        // )
       }
-    );
-    console.log(result);
-  } catch (err: any) {
-    console.log(err?.response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // For ios
+  async function requestUserPermission() {
+    try {
+      // handleOpenSettings();
+      const authStatus = await messaging().requestPermission();
+      const enabled =
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+      if (enabled) {
+        console.log("Authorization status:", authStatus);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
-};
+
+  useEffect(() => {
+    if (isDevMode()) {
+      return;
+    }
+
+    handleOpenSettings();
+    if (requestUserPermission()) {
+      // Return fcm token key
+      messaging()
+        .getToken()
+        .then((token: string) => {
+          setToken(token);
+        });
+    } else {
+      _toaster.show("failed to getToken");
+    }
+
+    // Getting initial notification
+    messaging()
+      .getInitialNotification()
+      .then((remoteMessage: any) => {
+        if (remoteMessage) {
+          console.log(
+            "Notification caused app to open from quit state:",
+            remoteMessage.notification
+          );
+          // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
+        }
+        // setLoading(false);
+      });
+
+    // Assume a message-notification contains a "type" property in the data payload of the screen to open
+
+    messaging().onNotificationOpenedApp((remoteMessage) => {
+      console.log(
+        "Notification caused app to open from background state:",
+        remoteMessage.notification
+      );
+    });
+
+    // Register background handler
+    messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+      console.log("Message handled in the background!", remoteMessage);
+    });
+
+    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+      setNewPushMessage(remoteMessage);
+    });
+
+    return unsubscribe;
+  }, []);
+
+
+  return (
+    <>
+      <Provider store={store}>
+
+        <ClickOutsideProvider>
+          <TokenContextProvider>
+            <UserContextProvider>
+              <AlertContextProvider>
+                <RootNavigator firebaseToken={token} />
+                <PushNotificationWrapper
+                  message={newPushMessage}
+                  setMessage={setNewPushMessage}
+                /> 
+              </AlertContextProvider>
+            </UserContextProvider>
+          </TokenContextProvider>
+        </ClickOutsideProvider>
+      </Provider>
+      <StatusBar backgroundColor={"#0c0c21"} barStyle="light-content" />
+    </>
+  );
+}
 
 // async function sendPushNotification(nativePushToken: string) {
 //   return axios.post(
@@ -125,141 +243,44 @@ const deliverNotificationTokenToApi = async (
 //   return token;
 // }
 
-export default function App() {
-  // const [expoPushToken, setExpoPushToken] = useState<any>("");
-  // const [notification, setNotification] = useState<any>(false);
-  // const [response, setResponse] = useState("");
+// const [expoPushToken, setExpoPushToken] = useState<any>("");
+// const [notification, setNotification] = useState<any>(false);
+// const [response, setResponse] = useState("");
 
-  // const notificationListener = useRef<any>();
-  // const responseListener = useRef<any>();
+// const notificationListener = useRef<any>();
+// const responseListener = useRef<any>();
 
-  // useEffect(() => {
-  //   registerForPushNotificationsAsync().then((token) =>
-  //     setExpoPushToken(token)
-  //   );
+// useEffect(() => {
+//   registerForPushNotificationsAsync().then((token) =>
+//     setExpoPushToken(token)
+//   );
 
-  //   notificationListener.current =
-  //     Notifications.addNotificationReceivedListener((notification) => {
-  //       setNotification(notification);
-  //     });
+//   notificationListener.current =
+//     Notifications.addNotificationReceivedListener((notification) => {
+//       setNotification(notification);
+//     });
 
-  //   responseListener.current =
-  //     Notifications.addNotificationResponseReceivedListener((response) => {
-  //       console.log({ response });
-  //     });
+//   responseListener.current =
+//     Notifications.addNotificationResponseReceivedListener((response) => {
+//       console.log({ response });
+//     });
 
-  //   return () => {
-  //     Notifications.removeNotificationSubscription(
-  //       notificationListener.current
-  //     );
-  //     Notifications.removeNotificationSubscription(responseListener.current);
-  //   };
-  // }, []);
+//   return () => {
+//     Notifications.removeNotificationSubscription(
+//       notificationListener.current
+//     );
+//     Notifications.removeNotificationSubscription(responseListener.current);
+//   };
+// }, []);
 
-  // const sender = async () => {
-  //   setResponse("");
-  //   try {
-  //     const result = await sendPushNotification(expoPushToken?.data);
-  //     console.log(result);
-  //     setResponse(JSON.stringify(result));
-  //   } catch (err: any) {
-  //     setResponse(JSON.stringify({err}));
-  //     console.log({ err });
-  //   }
-  // };
-  const [loading, setLoading] = useState(true);
-  const [initialRoute, setInitialRoute] = useState("Home");
-  const [token, setToken] = useState("");
-
-  // For ios
-  async function requestUserPermission() {
-    const authStatus = await messaging().requestPermission();
-    const enabled =
-      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-    if (enabled) {
-      console.log("Authorization status:", authStatus);
-    }
-  }
-
-  useEffect(() => {
-    if (requestUserPermission()) {
-      // Return fcm token key
-      messaging()
-        .getToken()
-        .then((token: string) => {
-          setToken(token);
-        });
-    } else {
-      _toaster.show("failed to getToken");
-    }
-
-    // Getting initial notification
-    messaging()
-      .getInitialNotification()
-      .then((remoteMessage: any) => {
-        if (remoteMessage) {
-          console.log(
-            "Notification caused app to open from quit state:",
-            remoteMessage.notification
-          );
-          // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
-        }
-        // setLoading(false);
-      });
-
-    // Assume a message-notification contains a "type" property in the data payload of the screen to open
-
-    messaging().onNotificationOpenedApp((remoteMessage) => {
-      console.log(
-        "Notification caused app to open from background state:",
-        remoteMessage.notification
-      );
-    });
-
-    // Register background handler
-    messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-      console.log("Message handled in the background!", remoteMessage);
-    });
-
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      Alert.alert("A new FCM message arrived!", JSON.stringify(remoteMessage));
-    });
-
-    return unsubscribe;
-  }, []);
-
-  useEffect(() => {
-    deliverNotificationTokenToApi(
-      "drdUTZJCQeijjPzcccO-is:APA91bFxFDpUSg8Q9Evos-BUTmJfhNCownkjJicLty0xFWeMH4dLhqICn1TQr4ejhkj5rqR9zsKNwNAmVD4QEsvTEaYWgK16oqqoW15FNiYTUvidppCI6FZYLEPxxBtA8XQb0vX5N5tV",
-      "afe10149a57e3a3eacf1d516eeb50ed573fdb72e930dd3cb9259802ac9058a9b1d8bedf7a22990c83e8852dabfdbdc1e263e24371063818068f06379fce39b7e"
-    );
-  }, []);
-
-  return (
-    <>
-      <Provider store={store}>
-        {/* <Text selectable>Your expo push token: {token || "no token"}</Text> */}
-        {/* 
-        <Button
-          varient="primary"
-          text="send notification"
-          onpressHandler={sender}
-        />
-        <Text selectable>response: {response}</Text> */}
-
-        <ClickOutsideProvider>
-          <TokenContextProvider>
-            <UserContextProvider>
-              <AlertContextProvider>
-                <RootNavigator />
-              </AlertContextProvider>
-            </UserContextProvider>
-          </TokenContextProvider>
-        </ClickOutsideProvider>
-      </Provider>
-      <StatusBar backgroundColor={"#0c0c21"} barStyle="light-content" />
-    </>
-  );
-}
+// const sender = async () => {
+//   setResponse("");
+//   try {
+//     const result = await sendPushNotification(expoPushToken?.data);
+//     console.log(result);
+//     setResponse(JSON.stringify(result));
+//   } catch (err: any) {
+//     setResponse(JSON.stringify({err}));
+//     console.log({ err });
+//   }
+// };

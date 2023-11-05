@@ -17,7 +17,7 @@ export const searchAllApiHandler = async ({ name, tag, plan, token }: Args) => {
     if (name) url = url + `&q=${name}`;
 
     const config = {
-        headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", }
+        headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", }
     };
 
     return await _api.get(url, config);
@@ -35,7 +35,7 @@ export const searchImageApiHandler = async ({
     if (name) url = url + `&q=${name}`;
 
     const config = {
-        headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", }
+        headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", }
     };
 
     return await _api.get(url, config);
@@ -53,7 +53,7 @@ export const searchSoundApiHandler = async ({
     if (name) url = url + `&name=${name}`;
 
     const config = {
-        headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", }
+        headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", }
     };
 
     return await _api.get(url, config);
@@ -71,7 +71,7 @@ export const searchTextApiHandler = async ({
     if (name) url = url + `&name=${name}`;
 
     const config = {
-        headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", }
+        headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", }
     };
 
     return await _api.get(url, config);
@@ -89,7 +89,7 @@ export const searchVideoApiHandler = async ({
     if (name) url = url + `&name=${name}`;
 
     const config = {
-        headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", }
+        headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", }
     };
 
     return await _api.get(url, config);

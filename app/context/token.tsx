@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const tokenContext = createContext({
-    getToken: () => {},
+    getToken: (): any => {},
     setToken: (tokenStr: string) => {},
     clearToken: () => {},
     getUser: (): any => {},

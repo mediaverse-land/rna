@@ -8,7 +8,7 @@ export const getCommentApiHandler = async (token: string, assetId: number) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
-      "X-App": "_ReactNative",
+      "X-App": "_Android",
     },
   };
 
@@ -19,7 +19,7 @@ export const submitCommentApiHandler = async (token: string, body: any) => {
   const url = `/assets/comments`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}`, "X-App": "_ReactNative" },
+    headers: { Authorization: `Bearer ${token}`, "X-App": "_Android" },
   };
 
   return await _api.post(url, body, config);

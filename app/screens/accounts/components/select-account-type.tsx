@@ -53,14 +53,21 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
   const [request, response, promptAsync]: any = Google.useAuthRequest({
     androidClientId: enviroments.REACT_APP_ANDROID_CLIENT_ID,
     iosClientId: enviroments.REACT_APP_IOS_CLIENT_ID,
-    clientSecret: enviroments.REACT_APP_WEB_CLIENT_SECTET,
     expoClientId: enviroments.REACT_APP_EXPO_CLIENT_ID,
     scopes: enviroments.GOOGLE_AUTH_SCOPE,
-    // extraParams: {
-    //   access_type: "offline",
-    // },
-    // responseType: "code",
   });
+
+  // const [request, response, promptAsync]: any = Google.useAuthRequest({
+  //   androidClientId: enviroments.REACT_APP_ANDROID_CLIENT_ID,
+  //   iosClientId: enviroments.REACT_APP_IOS_CLIENT_ID,
+  //   clientSecret: enviroments.REACT_APP_WEB_CLIENT_SECTET,
+  //   expoClientId: enviroments.REACT_APP_EXPO_CLIENT_ID,
+  //   scopes: enviroments.GOOGLE_AUTH_SCOPE,
+  //   // extraParams: {
+  //   //   access_type: "offline",
+  //   // },
+  //   // responseType: "code",
+  // });
 
   const [createAccountApiHandler, { isLoading, isFetching }] =
     useAddExternalAccountMutation();
@@ -73,7 +80,7 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
   };
 
   const selectAccountModalRefWrapperRef = useClickOutside<View>(() => {
-    // modalCloser();
+    modalCloser();
   });
 
   useEffect(() => {
@@ -110,18 +117,20 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
 
   const manageGoogleApi = async () => {
     if (response?.authentication) {
-      
-      _toaster.show(JSON.stringify(response?.authentication));
-      const googleTokens: any = getGoogleTokens(response?.authentication);
+      // const googleTokens: any = getGoogleTokens(response?.authentication);
+      // console.log({googleTokens})
 
-      _toaster.show(JSON.stringify(googleTokens));
+      // _toaster.show(JSON.stringify(googleTokens));
       // console.log(googleTokens)
 
-      if (!googleTokens) {
-        return;
-      }
+      // if (!googleTokens) {
+      //     return;
+      // }
 
-      const { accessToken, refreshToken } = googleTokens;
+      const accessToken = response?.authentication?.accessToken;
+      const refreshToken = response?.authentication?.refreshToken || null;
+
+      // const {accessToken, refreshToken} = googleTokens;
 
       const userGoogleData = await getUserEmailByAccessToken(accessToken);
       if (!userGoogleData) {
@@ -192,6 +201,9 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
 
   return (
     <>
+      {/*<Box backgroundColor='#fff' padding={20}>*/}
+      {/*    <Text selectable>{JSON.stringify(response?.authentication)}</Text>*/}
+      {/*</Box>*/}
       <AccountsSCreenComponents.Footer createAccountHandler={openModal} />
       {/* <BottomSheet /> */}
       <ModalBottomSheet
@@ -389,3 +401,5 @@ const BottomSheet: FC<BottomSheetProps> = ({
 };
 
 export const SelectAccountTypeMemo = memo(SelectAccountType);
+
+// https://www.tradingview.com/chart/?symbol=BINGX%3AARKMUSDT.PS

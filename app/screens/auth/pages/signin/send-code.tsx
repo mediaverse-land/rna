@@ -75,10 +75,12 @@ export const SendCode = ({
         if (isLoading || !otp_code || !phoneNumber) return;
 
         const phoneInputValue = removeZeroFromPhoneNumber(phoneNumber);
-        const { isError, isSuccess, res } = await submitCodeApiHandler(
+        const { isError, isSuccess, res, errorRes } = await submitCodeApiHandler(
             phoneInputValue,
             otp_code
         );
+
+        console.log({errorRes})
 
         if (isError || !isSuccess) {
             setIsLoading(false);

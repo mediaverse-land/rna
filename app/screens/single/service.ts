@@ -10,7 +10,7 @@ export const getImageDetailApiHandler = async (
   const url = shouldSearchByAssetId ? `/search/${id}` : `/images/${id}`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}` ,"X-App": "_ReactNative",},
+    headers: { Authorization: `Bearer ${token}` ,"X-App": "_Android",},
   };
 
   return await _app.get(url, config);
@@ -24,7 +24,7 @@ export const getVideoDetailApiHandler = async (
   const url = shouldSearchByAssetId ? `/search/${id}` : `/videos/${id}`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", },
+    headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", },
   };
 
   return await _app.get(url, config);
@@ -38,7 +38,7 @@ export const getTextDetailApiHandler = async (
   const url = `/texts/${id}`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}` ,"X-App": "_ReactNative",},
+    headers: { Authorization: `Bearer ${token}` ,"X-App": "_Android",},
   };
 
   return await _app.get(url, config);
@@ -52,7 +52,7 @@ export const getSoundDetailApiHandler = async (
   const url = shouldSearchByAssetId ? `/search/${id}` : `/audios/${id}`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", },
+    headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", },
   };
 
   return await _app.get(url, config);
@@ -62,7 +62,7 @@ export const getFilesApiHandler = async (token: string, file_id: number) => {
   const url = `/assets/files/${file_id}`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", },
+    headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", },
   };
 
   return await _app.get(url, config);
@@ -72,7 +72,7 @@ export const getLiveDataApiHandler = async (token: string, id: number) => {
   const url = `/lives/${id}`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", },
+    headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", },
   };
 
   return await _app.get(url, config);
@@ -96,7 +96,7 @@ export const reportAssetApiHandler = async (
   };
 
   const config = {
-    headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", },
+    headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", },
   };
 
   return await _app.post(url, data, config);
@@ -112,7 +112,7 @@ export const convertVideoToSoundHandler = async (token: string, id: number) => {
   };
 
   const config = {
-    headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", },
+    headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", },
   };
 
   return await _app.post(url, body, config);
@@ -122,7 +122,7 @@ export const recordVideoHandler = async (token: string, id: number) => {
   const url = `/convert/texts/${id}/image`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", },
+    headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", },
   };
 
   return await _app.post(url, {}, config);
@@ -136,7 +136,7 @@ export const convertTextToImageHandler = async (
   const url = `/convert/text-image`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}` ,"X-App": "_ReactNative",},
+    headers: { Authorization: `Bearer ${token}` ,"X-App": "_Android",},
   };
 
   return await _app.post(url, body, config);
@@ -150,7 +150,7 @@ export const convertTextToAudioHandler = async (
   const url = `/convert/text-audio`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}` ,"X-App": "_ReactNative",},
+    headers: { Authorization: `Bearer ${token}` ,"X-App": "_Android",},
   };
 
   return await _app.post(url, body, config);
@@ -164,7 +164,7 @@ export const translateTextApiHandler = async (
   const url = `/translate/text`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", },
+    headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", },
   };
 
   return await _app.post(url, body, config);
@@ -179,7 +179,7 @@ export const convertAudioToImageHandler = async (
   const url = `/convert/audio-text`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", },
+    headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", },
   };
 
   return await _app.post(url, body, config);
@@ -193,7 +193,7 @@ export const translateAudioHandler = async (
   const url = `/translate/audio`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}`,"X-App": "_ReactNative", },
+    headers: { Authorization: `Bearer ${token}`,"X-App": "_Android", },
   };
 
   return await _app.post(url, body, config);

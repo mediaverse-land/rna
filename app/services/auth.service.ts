@@ -15,15 +15,44 @@ export const authService: any = createApi({
           method: "GET",
           headers: {
             Authorization: `Bearer ${args.token}`,
-            "X-App": "_ReactNative",
+            "X-App": "_Android",
           },
         };
       },
     }),
-
+    setFirebasePushNotificationAccount: builder.mutation({
+      query: (args) => {
+        console.log(args)
+        return {
+          url: `push-notifications/firebase-tokens`,
+          method: "POST",
+          body: args.body,
+          headers: {
+            Authorization: `Bearer ${args.token}`,
+            "X-App": "_Android",
+          },
+        };
+      },
+    }),
+    signIn: builder.mutation({
+      query: (args) => {
+        return {
+          url: `auth/sign-in`,
+          method: "POST",
+          body: args.body,
+          headers: {
+            "X-App": "_Android",
+            // "Accept-Language": "en-US"
+          },
+        };
+      },
+    }),
+    
   }),
 });
 
 export const {
-  useGetExternalAccountsListQuery
+  useGetExternalAccountsListQuery,
+  useSetFirebasePushNotificationAccountMutation,
+  useSignInMutation,
 } = authService;

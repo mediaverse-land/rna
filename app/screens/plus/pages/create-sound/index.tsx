@@ -96,7 +96,7 @@ export const CreateSoundScreen = () => {
         authorization: `Bearer ${token}`,
         origin: "https://assets.mediaverse.land",
         referer: "https://assets.mediaverse.land/",
-        "X-App": "_ReactNative",
+        "X-App": "_Android",
         "sec-ch-ua":
           '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
         "sec-ch-ua-mobile": "?0",
