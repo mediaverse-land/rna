@@ -62,7 +62,7 @@
         "projectId": "2ecc9ab0-6195-4d80-97b7-5e15f2a89bbe"
       }
     },
-    // "developmentClient": false,
+    // "developmentClient": true,
     "owner": "emahdi1297"
   }
 }

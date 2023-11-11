@@ -1,5 +1,5 @@
 import { FC, useContext, useEffect, useState } from "react";
-import { SafeAreaView, StatusBar } from "react-native";
+import { SafeAreaView } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { SearchPage } from "./app/screens/search";
@@ -38,9 +38,9 @@ import AccountsScreen from "./app/screens/accounts";
 import { userContext } from "./app/context/user";
 import axios from "axios";
 import { Toaster } from "./app/utils/toaster";
-import { PushNotificationPermissionAlert } from "./app/components/push-notification-permission-alert";
+// import { PushNotificationPermissionAlert } from "./app/components/push-notification-permission-alert";
 import { useSetFirebasePushNotificationAccountMutation } from "./app/services/auth.service";
-import PushNotificationWrapper from "./app/components/push-notification-wrapper";
+// import PushNotificationWrapper from "./app/components/push-notification-wrapper";
 import { tokenStringResolver } from "./app/utils/token-string-resolver";
 
 type Route = { id: number; name: string; component: FC | any };
@@ -178,7 +178,7 @@ export function RootNavigator({ firebaseToken }: Props) {
       return;
     }
 
-    const _token = tokenStringResolver(userToken)
+    const _token = tokenStringResolver(userToken);
 
     const requestBody = { token: firebaseToken };
     const response = await _setAccountHandler({
@@ -186,7 +186,7 @@ export function RootNavigator({ firebaseToken }: Props) {
       token: _token,
     });
 
-    console.log({response});
+    console.log({ response });
   };
 
   useEffect(() => {
@@ -199,7 +199,7 @@ export function RootNavigator({ firebaseToken }: Props) {
     const tk = await tokenCtx.getToken();
 
     if (typeof tk === "string") {
-      setUserToken(tk)
+      setUserToken(tk);
       setIsUserAuthenticated(true);
     } else setIsUserAuthenticated(false);
   };
@@ -227,10 +227,10 @@ export function RootNavigator({ firebaseToken }: Props) {
   return (
     <>
       <NavigationContainer>
-        <PushNotificationPermissionAlert isAuth={isAuth} />
+        {/* <PushNotificationPermissionAlert isAuth={isAuth} /> */}
         {isLoading ? (
           <SafeAreaView style={{ flex: 1 }}>
-            <StatusBar backgroundColor={"#030340"} barStyle="light-content" />
+            {/* <StatusBar backgroundColor={"#030340"} barStyle="light-content" /> */}
             <LinearGradient
               colors={["#030340", "#030340"]}
               start={{ x: 0.7, y: 0 }}

@@ -1,10 +1,6 @@
 import {
-  Alert,
-  Linking,
   Platform,
   StatusBar,
-  StyleSheet,
-  Text,
   TouchableOpacity,
 } from "react-native";
 import { AlertContextProvider } from "./app/context/alert";
@@ -17,11 +13,8 @@ import store from "./app/store";
 import { useEffect, useState } from "react";
 import { Toaster } from "./app/utils/toaster";
 import * as Notifications from "expo-notifications";
-import messaging from "@react-native-firebase/messaging";
-import { ActivityAction, startActivityAsync } from "expo-intent-launcher";
-import * as Application from "expo-application";
-import * as IntentLauncher from "expo-intent-launcher";
-import { Button } from "./app/components/button";
+// import messaging from "@react-native-firebase/messaging";
+// import { Button } from "./app/components/button";
 import PushNotificationWrapper from "./app/components/push-notification-wrapper";
 
 const _toaster = new Toaster();
@@ -51,93 +44,87 @@ export default function App() {
 
   const [newPushMessage, setNewPushMessage] = useState<any>(null);
 
-  const isDevMode = () => __DEV__;
+  // const isDevMode = () => __DEV__;
 
-  const handleOpenSettings = async () => {
-    try {
-      if (Platform.OS === "ios") {
-        // Linking.openURL('app-settings:');
-      } else {
-        // await startActivityAsync(
-        //     IntentLauncher.ActivityAction.APP_NOTIFICATION_SETTINGS,
-        //     {
-        //         extra: {'android.provider.extra.APP_PACKAGE': Application.applicationId}
-        //     },
-        // )
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const handleOpenSettings = async () => {
+  //   try {
+  //     if (Platform.OS === "ios") {
+  //       // Linking.openURL('app-settings:');
+  //     } else {
+  //       // await startActivityAsync(
+  //       //     IntentLauncher.ActivityAction.APP_NOTIFICATION_SETTINGS,
+  //       //     {
+  //       //         extra: {'android.provider.extra.APP_PACKAGE': Application.applicationId}
+  //       //     },
+  //       // )
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-  // For ios
-  async function requestUserPermission() {
-    try {
-      // handleOpenSettings();
-      const authStatus = await messaging().requestPermission();
-      const enabled =
-        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+  // async function requestUserPermission() {
+  //   try {
+  //     const authStatus = await messaging().requestPermission();
+  //     const enabled =
+  //       authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+  //       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
-      if (enabled) {
-        console.log("Authorization status:", authStatus);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  //     if (enabled) {
+  //       console.log("Authorization status:", authStatus);
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
-  useEffect(() => {
-    if (isDevMode()) {
-      return;
-    }
+  // useEffect(() => {
+  //   if (isDevMode()) {
+  //     return;
+  //   }
 
-    handleOpenSettings();
-    if (requestUserPermission()) {
-      // Return fcm token key
-      messaging()
-        .getToken()
-        .then((token: string) => {
-          setToken(token);
-        });
-    } else {
-      _toaster.show("failed to getToken");
-    }
+  //   handleOpenSettings();
+  //   if (requestUserPermission()) {
+  //     // Return fcm token key
+  //     messaging()
+  //       .getToken()
+  //       .then((token: string) => {
+  //         setToken(token);
+  //       });
+  //   } else {
+  //     _toaster.show("failed to getToken");
+  //   }
 
-    // Getting initial notification
-    messaging()
-      .getInitialNotification()
-      .then((remoteMessage: any) => {
-        if (remoteMessage) {
-          console.log(
-            "Notification caused app to open from quit state:",
-            remoteMessage.notification
-          );
-          // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
-        }
-        // setLoading(false);
-      });
+  //   // Getting initial notification
+  //   messaging()
+  //     .getInitialNotification()
+  //     .then((remoteMessage: any) => {
+  //       if (remoteMessage) {
+  //         console.log(
+  //           "Notification caused app to open from quit state:",
+  //           remoteMessage.notification
+  //         );
+  //       }
+  //     });
 
-    // Assume a message-notification contains a "type" property in the data payload of the screen to open
 
-    messaging().onNotificationOpenedApp((remoteMessage) => {
-      console.log(
-        "Notification caused app to open from background state:",
-        remoteMessage.notification
-      );
-    });
+  //   messaging().onNotificationOpenedApp((remoteMessage) => {
+  //     console.log(
+  //       "Notification caused app to open from background state:",
+  //       remoteMessage.notification
+  //     );
+  //   });
 
-    // Register background handler
-    messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-      console.log("Message handled in the background!", remoteMessage);
-    });
+  //   messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+  //     console.log("Message handled in the background!", remoteMessage);
+  //   });
 
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-      setNewPushMessage(remoteMessage);
-    });
+  //   const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+  //     setNewPushMessage(remoteMessage);
+  //   });
 
-    return unsubscribe;
-  }, []);
+  //   return unsubscribe;
+  // }, []);
 
 
   return (
