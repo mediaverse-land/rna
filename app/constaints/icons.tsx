@@ -32,6 +32,11 @@ import ICON_SHARE_YOUTUBE_SVG from "./../../assets/icons/icon__share-youtube.svg
 import ICON_RESET_SVG from "./../../assets/icons/icon__reset.svg";
 import ICON_TEXT_TO_TEXT_SVG from "./../../assets/icons/icon__convert-text-to-text.svg";
 import ICON_STREAM_SVG from "./../../assets/icons/icon__stream.svg";
+import ICON_SPEAKER_BLACK_SVG from "./../../assets/icons/icon__speaker-black.svg";
+import ICON_MENU_VERTICAL_SVG from "./../../assets/icons/icon__menu-vertical.svg";
+
+export const ICON_MENU_VERTICAL = ICON_MENU_VERTICAL_SVG;
+export const ICON_SPEAKER_BLACK = ICON_SPEAKER_BLACK_SVG;
 
 export const ICON_NO_RECORD = ICON_NO_RECORD_SVG;
 export const ICON_IS_RECORDING = ICON_IS_RECORDING_SVG;

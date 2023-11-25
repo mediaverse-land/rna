@@ -26,7 +26,7 @@ import {
 import { Logger } from "../../../../utils/logger";
 
 const OWNERSHIPE_BASE_URL = "/profile/assets?page=";
-const SUBSCRIBE_BASE_URL = "/profile/subscriptions  ?page=";
+const SUBSCRIBE_BASE_URL = "/profile/subscriptions?page=";
 const GRADIENTS_COLORS = ["#030340", "#030340"];
 const GRADIENT_AXIS = { x: 0.7, y: 0 };
 

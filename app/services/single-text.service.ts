@@ -27,7 +27,6 @@ export const singleTextService: any = createApi({
     }),
     convertTextToText: builder.mutation({
       query: (args) => {
-        console.log({args})
         return {
           url: "/convert/text-text",
           method: "POST",

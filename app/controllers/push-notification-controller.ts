@@ -35,7 +35,6 @@ export class FirebasePushNotificationController implements IFirebasePushNotifica
                 )
             }
         } catch (err) {
-            console.log(err)
         }
     }
 
@@ -48,7 +47,6 @@ export class FirebasePushNotificationController implements IFirebasePushNotifica
                 authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
             if (enabled) {
-                console.log("Authorization status:", authStatus);
             }
             return enabled;
         } catch (err) {

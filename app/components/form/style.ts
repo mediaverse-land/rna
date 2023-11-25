@@ -31,14 +31,14 @@ export const InputComponent: any = {
     padding-top: 3px;
     color: ${theme.color.light.GRAY};
   `,
-  InputBox: styled.TextInput<{ textAlign: string; hasError?: boolean }>`
+  InputBox: styled.TextInput<{ textAlign: string; hasError?: boolean, showBorder:boolean }>`
     width: 100%;
     height: 48px;
     border-radius: 8px;
     border: 1px solid
       ${(props) =>
-        props.hasError ? theme.color.light.DANGER : theme.color.light.TEXT};
-    background-color: rgba(14, 14, 18, 0.5);
+        props.hasError ? theme.color.light.DANGER : (props.showBorder ? theme.color.light.TEXT: 'transparent')};
+    background-color: rgba(28, 28, 35, 0.75);
     color: ${(props) =>
       props.hasError ? theme.color.light.DANGER : theme.color.light.WHITE};
     font-size: ${theme.fontSize.md};

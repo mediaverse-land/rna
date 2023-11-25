@@ -10,7 +10,6 @@ export const TimePicker = () => {
 
   const onChange = (event: any, selectedDate: any) => {
     const currentDate = selectedDate;
-    console.log(currentDate)
     setShow(false);
     setDate(currentDate);
   };

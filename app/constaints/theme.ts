@@ -30,6 +30,7 @@ export const theme = {
             LIGHT_DESCRIPTION: '#83839C',
             SONG_CARD_TITLE_TEXT: '#CCCCFF',
             CARD_TITLE_TEXT: '#D9D9FF',
+            ACTIVE_TEXT: '#D9D9FF',
             ADD_CARD_COLOR: '#4E4E61',
             ADD_ACCOUNT_MODAL_BAKGROUND: 'rgba(78, 78, 97, 0.75)',
             ALL_LIVE_SEARCH_INPUT_BG: '#25254b'

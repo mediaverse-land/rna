@@ -1,8 +1,13 @@
+import { useEffect, useState } from "react";
 import {
+  Dimensions,
+  I18nManager,
   Platform,
   StatusBar,
   TouchableOpacity,
+  View,
 } from "react-native";
+import * as Notifications from "expo-notifications";
 import { AlertContextProvider } from "./app/context/alert";
 import { TokenContextProvider } from "./app/context/token";
 import { UserContextProvider } from "./app/context/user";
@@ -10,12 +15,13 @@ import { RootNavigator } from "./root-navigator";
 import { Provider } from "react-redux";
 import { ClickOutsideProvider } from "react-native-click-outside";
 import store from "./app/store";
-import { useEffect, useState } from "react";
 import { Toaster } from "./app/utils/toaster";
-import * as Notifications from "expo-notifications";
-// import messaging from "@react-native-firebase/messaging";
+import messaging from "@react-native-firebase/messaging";
 // import { Button } from "./app/components/button";
 import PushNotificationWrapper from "./app/components/push-notification-wrapper";
+import { addEventListener } from "@react-native-community/netinfo";
+import { Text } from "./app/components/text";
+import * as Updates from 'expo-updates';
 
 const _toaster = new Toaster();
 
@@ -38,108 +44,140 @@ Notifications.setNotificationHandler({
 });
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
-  const [initialRoute, setInitialRoute] = useState("Home");
   const [token, setToken] = useState("");
+
+  const [isOffline, setIsOffline] = useState(false);
 
   const [newPushMessage, setNewPushMessage] = useState<any>(null);
 
-  // const isDevMode = () => __DEV__;
+  if (I18nManager.isRTL && Platform.OS !== 'web') {
+    I18nManager.allowRTL(false);
+    I18nManager.forceRTL(false);
+    Updates.reloadAsync();
+  }
 
-  // const handleOpenSettings = async () => {
-  //   try {
-  //     if (Platform.OS === "ios") {
-  //       // Linking.openURL('app-settings:');
-  //     } else {
-  //       // await startActivityAsync(
-  //       //     IntentLauncher.ActivityAction.APP_NOTIFICATION_SETTINGS,
-  //       //     {
-  //       //         extra: {'android.provider.extra.APP_PACKAGE': Application.applicationId}
-  //       //     },
-  //       // )
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+  const isDevMode = () => __DEV__;
 
-  // async function requestUserPermission() {
-  //   try {
-  //     const authStatus = await messaging().requestPermission();
-  //     const enabled =
-  //       authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-  //       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+  async function requestUserPermission() {
+    try {
+      const authStatus = await messaging().requestPermission();
+      const enabled =
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
-  //     if (enabled) {
-  //       console.log("Authorization status:", authStatus);
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+      if (enabled) {
+        console.log("Authorization status:", authStatus);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
-  // useEffect(() => {
-  //   if (isDevMode()) {
-  //     return;
-  //   }
+  useEffect(() => {
+    const unsubscribe = addEventListener((state) => {
+      if (!state.isConnected) {
+        setIsOffline(true);
+        return;
+      }
+      setIsOffline(false);
+    });
+    // Unsubscribe
+    unsubscribe();
+  }, []);
 
-  //   handleOpenSettings();
-  //   if (requestUserPermission()) {
-  //     // Return fcm token key
-  //     messaging()
-  //       .getToken()
-  //       .then((token: string) => {
-  //         setToken(token);
-  //       });
-  //   } else {
-  //     _toaster.show("failed to getToken");
-  //   }
+  useEffect(() => {
+    if (isDevMode()) {
+      return;
+    }
 
-  //   // Getting initial notification
-  //   messaging()
-  //     .getInitialNotification()
-  //     .then((remoteMessage: any) => {
-  //       if (remoteMessage) {
-  //         console.log(
-  //           "Notification caused app to open from quit state:",
-  //           remoteMessage.notification
-  //         );
-  //       }
-  //     });
+    if (requestUserPermission()) {
+      // Return fcm token key
+      messaging()
+        .getToken()
+        .then((token: string) => {
+          setToken(token);
+        });
+    } else {
+      _toaster.show("failed to getToken");
+    }
 
+    // Getting initial notification
+    messaging()
+      .getInitialNotification()
+      .then((remoteMessage: any) => {
+        if (remoteMessage) {
+          console.log(
+            "Notification caused app to open from quit state:",
+            remoteMessage.notification
+          );
+        }
+      });
 
-  //   messaging().onNotificationOpenedApp((remoteMessage) => {
-  //     console.log(
-  //       "Notification caused app to open from background state:",
-  //       remoteMessage.notification
-  //     );
-  //   });
+    messaging().onNotificationOpenedApp((remoteMessage: any) => {
+      console.log(
+        "Notification caused app to open from background state:",
+        remoteMessage.notification
+      );
+    });
 
-  //   messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-  //     console.log("Message handled in the background!", remoteMessage);
-  //   });
+    messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
+      console.log("Message handled in the background!", remoteMessage);
+    });
 
-  //   const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-  //     setNewPushMessage(remoteMessage);
-  //   });
+    const unsubscribe = messaging().onMessage(async (remoteMessage: any) => {
+      setNewPushMessage(remoteMessage);
+    });
 
-  //   return unsubscribe;
-  // }, []);
+    return unsubscribe;
+  }, []);
 
+  const checkConnection = () => {
+    addEventListener((state) => {
+      if (!state.isConnected) {
+        setIsOffline(true);
+        return;
+      }
+      setIsOffline(false);
+    });
+  };
+
+  const offlineView = (
+    <View
+      style={{
+        width: "100%",
+        minHeight: Dimensions.get("screen").height,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Text color="black">Please connect to internet to continue</Text>
+      <TouchableOpacity
+        style={{
+          marginTop: 14,
+        }}
+        onPress={checkConnection}
+      >
+        <Text color="blue">Retry</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <>
       <Provider store={store}>
-
         <ClickOutsideProvider>
           <TokenContextProvider>
             <UserContextProvider>
               <AlertContextProvider>
-                <RootNavigator firebaseToken={token} />
+                {isOffline ? (
+                  offlineView
+                ) : (
+                  <RootNavigator firebaseToken={token} />
+                )}
                 <PushNotificationWrapper
                   message={newPushMessage}
                   setMessage={setNewPushMessage}
-                /> 
+                />
               </AlertContextProvider>
             </UserContextProvider>
           </TokenContextProvider>

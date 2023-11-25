@@ -24,7 +24,7 @@ export const VirtualizedList: FC<Props> = ({ children, props,ListFooterComponent
             style={{
                 paddingTop: paddingTop,
                 backgroundColor: 'transparent',
-                width: '100%'
+                width: '100%',
             }}
             onEndReached={onEndReached}
             onEndReachedThreshold={onEndReachedThreshold}

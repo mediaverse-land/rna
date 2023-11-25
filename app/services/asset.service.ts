@@ -57,6 +57,15 @@ export const assetService: any = createApi({
         };
       },
     }),
+    getAssetList: builder.query({
+      query: (args) => {
+        return {
+          url: args.url,
+          method: "GET",
+          headers: { Authorization: `Bearer ${args.token}` },
+        };
+      },
+    }),
 
   }),
 });
@@ -66,6 +75,6 @@ export const {
   useAddExternalAccountMutation,
   useUpdateExternalAccountMutation,
   useYoutubeShareMutation,
-
+  useGetAssetListQuery,
   useRemoveExternalAccountMutation
 } = assetService;

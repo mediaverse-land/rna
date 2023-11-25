@@ -1,4 +1,4 @@
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Box } from "../../../components/box";
 import { Flex } from "../../../styles/grid";
 import { Text } from "../../../components/text";
@@ -10,53 +10,65 @@ type Props = {
   category: string;
   imagePath: string;
   isDisable?: boolean;
+  navigateToScreen: (screenName: string) => void;
+  screenName: string;
 };
 
-export function AppItem({ title, category, imagePath, isDisable }: Props) {
+export function AppItem({
+  title,
+  imagePath,
+  isDisable,
+  navigateToScreen,
+  screenName,
+}: Props) {
   return (
-    <Box
-      width="100%"
-      height={72}
-      paddingBottom={16}
-      borderRadius={16}
-      marginBottom={8}
-      additionalStyles={{
-        opacity: isDisable ? 0.6 : 1,
-      }}
+    <TouchableOpacity
+      onPress={() => navigateToScreen(screenName)}
+      activeOpacity={1}
     >
-      <Image
-        source={{
-          uri: SIGNINS_LIST_ITEM_GRADIET,
+      <Box
+        width="100%"
+        height={72}
+        paddingBottom={16}
+        borderRadius={16}
+        marginBottom={8}
+        additionalStyles={{
+          opacity: isDisable ? 0.6 : 1,
         }}
-        style={{
-          width: "100%",
-          height: 72,
-          position: "absolute",
-          top: 0,
-          left: 0,
-          borderRadius: 16,
-        }}
-        resizeMode="stretch"
-      />
-      <Box direction="row">
-        <Box width={80} paddingTop={10} height='100%' >
-        {imagePath}
-        </Box>
-        <Box  width="100%" height="100%">
-          <Box direction="row"  paddingTop={30}>
-            <Text
-              color={theme.color.light.WHITE}
-              fontSize={16}
-              lineHeight={16}
-              fontWeight={600}
-            >
-              {title}
-            </Text>
+      >
+        <Image
+          source={{
+            uri: SIGNINS_LIST_ITEM_GRADIET,
+          }}
+          style={{
+            width: "100%",
+            height: 72,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            borderRadius: 16,
+          }}
+          resizeMode="stretch"
+        />
+        <Box direction="row">
+          <Box width={80} paddingTop={10} height="100%">
+            {imagePath}
           </Box>
-         
+          <Box width="100%" height="100%">
+            <Box direction="row" paddingTop={30}>
+              <Text
+                color={theme.color.light.WHITE}
+                fontSize={16}
+                lineHeight={16}
+                fontWeight={600}
+              >
+                {title}
+              </Text>
+            </Box>
+          </Box>
         </Box>
       </Box>
-    </Box>
+    </TouchableOpacity>
   );
 }
 

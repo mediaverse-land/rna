@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import { FlatList, StyleSheet } from "react-native";
 import { ScreenGradient } from "../../components/screen-gradient";
@@ -15,13 +15,18 @@ import {
   activeDisableOnIntractions,
   deActivrDisableOnIntractions,
 } from "../../slices/tour.slice";
+import { UseNavigationType } from "../../types/use-navigation";
 
 const TOUR_GUIDE =
   "You are the manager of a social TV and this is your TV channel, you have your conductor, playout, control room, etc. and this section is right here";
 
 const _storageService = new StorageService();
 
-export function AppsPageAllScreen() {
+export function AppsPageAllScreen({
+  navigation,
+}: {
+  navigation: UseNavigationType;
+}) {
   // const { DISABLE_INTRACTION } = useSelector(
   //   (state: RootState) => state.tourSlice
   // );
@@ -77,32 +82,36 @@ export function AppsPageAllScreen() {
     }
   }, [firstAppItemRef, isFocused]);
 
-  const renderItem = ({
-    item,
-    index,
-  }: {
-    item: AppItemType;
-    index: number;
-  }) => {
-    const showTour = index === 0 ? true : false;
-
-    return (
-      <CoachmarkWrapper
-        allowBackgroundInteractions={false}
-        ref={showTour ? firstAppItemRef : null}
-        message={TOUR_GUIDE}
-      >
-        <AppItem
-          title={item.title}
-          category={item.category}
-          isDisable={item.isDisable}
-          imagePath={item.imagePath}
-        />
-      </CoachmarkWrapper>
-    );
+  const navigateToScreen = (screenName: string) => {
+    navigation.navigate(screenName);
   };
 
-  const keyExtractor = (item: AppItemType) => item.id.toString();
+  const __memorizedRenderItem = useCallback(
+    ({ item, index }: { item: AppItemType; index: number }) => {
+      const showTour = index === 0 ? true : false;
+
+      return (
+        <CoachmarkWrapper
+          allowBackgroundInteractions={false}
+          ref={showTour ? firstAppItemRef : null}
+          message={TOUR_GUIDE}
+        >
+          <AppItem
+            title={item.title}
+            category={item.category}
+            navigateToScreen={navigateToScreen}
+            isDisable={item.isDisable}
+            screenName={item.screenName}
+            imagePath={item.imagePath}
+          />
+        </CoachmarkWrapper>
+      );
+    },
+    []
+  );
+
+  // const keyExtractor = (item: AppItemType) => item.id.toString()
+  const __memorizedKeyExtractor = useCallback((item: AppItemType) => item.id.toString(), [])
 
   return (
     <>
@@ -112,8 +121,8 @@ export function AppsPageAllScreen() {
             <FlatList
               contentContainerStyle={styles.list}
               data={appItemListMockData}
-              renderItem={renderItem}
-              keyExtractor={keyExtractor}
+              renderItem={__memorizedRenderItem}
+              keyExtractor={__memorizedKeyExtractor}
             />
           </Box>
         </PaddingContainer>

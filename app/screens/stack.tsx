@@ -4,9 +4,10 @@ import { BottomTabBar } from "../components/bottom-tab-bar";
 import { AppsStack } from "./apps";
 import { WalletStack } from "./wallet/navigation";
 import { ProfileScreen } from "./profile";
-import { ALL_LIVES_SCREEN } from "../constaints/consts";
+import { ALL_LIVES_SCREEN, CHANNEL_MANAGEMENT_SCREEN } from "../constaints/consts";
 import { AllSLivescreen } from "./all-lives";
 import ViewAllScreen  from "./view-all";
+import { ChannelManagementScreen } from "./channel-management";
 
 type RoutesType = {
   Explore: undefined;
@@ -67,6 +68,12 @@ const routes = [
     name: ALL_LIVES_SCREEN,
     component: AllSLivescreen,
     title: "live channel",
+  },
+  {
+    id: 8,
+    name: CHANNEL_MANAGEMENT_SCREEN,
+    component: ChannelManagementScreen,
+    title: "channel management",
   },
 ];
 

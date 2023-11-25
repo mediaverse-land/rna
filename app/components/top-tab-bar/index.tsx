@@ -27,6 +27,7 @@ import {
 import { View, StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
 
+
 function getTobBarItemsIcon(tobBarItemName: string, isFocused: boolean) {
   let iconPath: ReactElement<SVGElement>;
   let iconStyle: ImageStyle;
@@ -91,7 +92,7 @@ function TopTabBar({
   hasFullWidth = false,
   isProfilePage = false,
 }: any) {
-  const topStyle = isProfilePage ? 8 : hasFullWidth ? 120 : 104;
+  const topStyle = isProfilePage ? 8 : hasFullWidth ? 120 : 94;
   const dispatch = useDispatch<AppDispatch>();
 
   const { BOTTOM_NAVIGATION_TOUR_HAS_SEEN, DISABLE_INTRACTION } = useSelector(
@@ -212,7 +213,7 @@ function TopTabBar({
         <BlurView
           renderToHardwareTextureAndroid
           style={styles.blurView}
-          intensity={100} // Adjust the intensity value to control the blur effect
+          intensity={70} // Adjust the intensity value to control the blur effect
           tint="dark" // Set the tint color ('light' or 'dark')
         >
           <TabBarComponents.TabBar
@@ -320,10 +321,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 16,
+    height: 50,
+    overflow: "hidden",
   },
   background: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(255, 255, 255, 0.2)", // Adjust the opacity and color as needed
+    // overflow:'hidden',
+    // backgroundColor: "rgba(255, 255, 255, 0.2)", // Adjust the opacity and color as needed
   },
   blurView: {
     position: "absolute",

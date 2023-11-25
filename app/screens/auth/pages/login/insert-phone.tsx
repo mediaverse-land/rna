@@ -83,9 +83,7 @@ export const InsertPhone: FC<Props> = ({ setWindowHandler }) => {
       newData
     );
 
-    console.log(errorRes);
-
-    if (errorRes) {
+    if (errorRes || typeof errorRes === "string") {
       ToastAndroid.show(errorRes?.message, ToastAndroid.SHORT);
       showErrors(errorRes?.message);
       setIsLoading(false);
@@ -97,11 +95,13 @@ export const InsertPhone: FC<Props> = ({ setWindowHandler }) => {
       return;
     }
 
-    const response = res.data;
+    if (isSuccess) {
+      const response = res.data;
 
-    await userCtx.setUser(response.user);
+      await userCtx.setUser(response.user);
 
-    await tokenCtx.setToken(response.token);
+      await tokenCtx.setToken(response.token);
+    }
     setIsLoading(false);
   };
 

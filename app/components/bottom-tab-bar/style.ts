@@ -14,7 +14,7 @@ export const BottomTabBarComponents = {
         height: 64px;
         justify-content: center;
         align-items: center;
-        border: 1px solid black;
+        // border: 1px solid black;
         background-color: ${theme.color.light.WHITE};
     `
 };

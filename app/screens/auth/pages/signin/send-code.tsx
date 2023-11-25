@@ -80,8 +80,6 @@ export const SendCode = ({
             otp_code
         );
 
-        console.log({errorRes})
-
         if (isError || !isSuccess) {
             setIsLoading(false);
             setError('otp_code', {});

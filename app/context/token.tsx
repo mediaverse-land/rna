@@ -29,8 +29,6 @@ export const TokenContextProvider: React.FC<Props> = ({ children }) => {
             setToken(tk);
         };
 
-        console.log(token)
-
         getDefaultToken();
     }, []);
 

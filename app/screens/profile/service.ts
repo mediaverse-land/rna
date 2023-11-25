@@ -3,7 +3,6 @@ import { ApiHandler } from '../../utils/api-handler';
 const _api = new ApiHandler();
 
 export const getProfileAllDataApiHandler = async (token:string, url: string) => {
-    // const url = ;
 
     const config = {
         headers: { Authorization: `Bearer ${token}`,
