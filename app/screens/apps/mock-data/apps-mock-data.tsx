@@ -33,13 +33,13 @@ export const appItemListMockData: AppItemType[] = [
     imagePath: <CHANNLE_MANAGEMENT />,
     screenName: CHANNEL_MANAGEMENT_SCREEN
   },
-  {
-    id: 3,
-    title: "Control Room",
-    category: "Share",
-    isDisable: true,
-    imagePath: <CONTROL_ROM />,
-  },
+  // {
+  //   id: 3,
+  //   title: "Control Room",
+  //   category: "Share",
+  //   isDisable: true,
+  //   imagePath: <CONTROL_ROM />,
+  // },
   // {
   //   id: 4,
   //   title: "Studio",
