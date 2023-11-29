@@ -1,13 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import { VideoPageBestInMonth } from "./best-in-month";
 import { VideoPageList } from "./list";
-import { VideoPageComponents } from "./style";
 import { VirtualizedList } from "../../../../components/virtualized-list";
 import { getVideosPageDatApiHandler } from "./service";
 import { Asset } from "../../../../types/asset";
-import { FocusedStatusBar } from "../../../../components/focused-statusbar";
 import { Live } from "../../../../types/live";
 import { getLivesApiHandler } from "../all/service";
 import { VideosPageLives } from "./lives";
@@ -18,8 +15,7 @@ import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
 import { StorageService } from "../../../../services/storage.service";
 import { HAS_USER_SEEN_EXPLORE_ALL_TOUR } from "../../../../constaints/consts";
 import { UseNavigationType } from "../../../../types/use-navigation";
-
-const { ContainerStyles } = VideoPageComponents;
+import { ExploreGradientWrapper } from "../../components/gradient-wrapper";
 
 const LIVE_TOUR =
   "Click on these icons and enjoy watching your favorite TV channel to create better content!";
@@ -150,12 +146,7 @@ export function VideosPage() {
 
   return (
     <>
-      <FocusedStatusBar color="#0c0c21" />
-      <LinearGradient
-        style={[ContainerStyles]}
-        colors={["#030340", "#030340"]}
-        start={{ x: 0.7, y: 0 }}
-      >
+      <ExploreGradientWrapper>
         <VirtualizedList paddingTop={197} onRefresh={_onRefreshHandler}>
           <CoachmarkWrapper
             allowBackgroundInteractions={false}
@@ -191,7 +182,7 @@ export function VideosPage() {
           />
           <View style={{ width: "100%", height: 320 }}></View>
         </VirtualizedList>
-      </LinearGradient>
+      </ExploreGradientWrapper>
     </>
   );
 }

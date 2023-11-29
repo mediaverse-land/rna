@@ -85,13 +85,11 @@ export default function App() {
         //   return;
         // }
         const authStatus = await messaging().requestPermission();
-        console.log(authStatus)
         const enabled =
             authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
             authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
         if (enabled) {
-            console.log("Authorization status:", authStatus);
         }
     }
 

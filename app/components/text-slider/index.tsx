@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { IfNoItem } from "../if-no-item";
 import { Box } from "../box";
 import { FlatList } from "react-native";
@@ -55,49 +55,50 @@ export const TextSlider: FC<Props> = ({
     });
   };
 
-  const renderItem = ({ item }: { item: Text }) => {
-    const data = {
-      name: item?.name,
-      description: item?.description,
-    };
+  const renderItem = useCallback(({ item, index}: { item: Text, index: number }) => {
+      const data = {
+        name: item?.name,
+        description: item?.description,
+      };
+  
+      const user_image_url = item?.asset?.user?.image_url;
+      const asset_username = item?.asset?.user?.username;
+  
+      return (
+        <TextSlide style={[index === 0 && {marginLeft: 24}]}>
+          <TEXT_SLIDER_COVER_BG />
+  
+          <TextSlideBody
+            onPress={() =>
+              textScreenNavigationHandler(
+                item.name,
+                item.asset_id,
+                item.id,
+                user_image_url,
+                asset_username
+              )
+            }
+            activeOpacity={1}
+          >
+            <Box width='100%' height={16}>
+              <TextSlideTitle>{data.name}</TextSlideTitle>
+            </Box>
+            <TextSlideContentText>{data.description}</TextSlideContentText>
+            <Box marginTop={16}>
+              <UserNameCard
+                username={asset_username}
+                profileUri={user_image_url || PROFILE_ONE}
+                usernameStyles={{
+                  color: theme.color.light.TEXT,
+                  marginLeft: 8,
+                }}
+              />
+            </Box>
+          </TextSlideBody>
+        </TextSlide>
+      );
+  } ,[])
 
-    const user_image_url = item?.asset?.user?.image_url;
-    const asset_username = item?.asset?.user?.username;
-
-    return (
-      <TextSlide>
-        <TEXT_SLIDER_COVER_BG />
-
-        <TextSlideBody
-          onPress={() =>
-            textScreenNavigationHandler(
-              item.name,
-              item.asset_id,
-              item.id,
-              user_image_url,
-              asset_username
-            )
-          }
-          activeOpacity={1}
-        >
-          <Box width='100%' height={16}>
-            <TextSlideTitle>{data.name}</TextSlideTitle>
-          </Box>
-          <TextSlideContentText>{data.description}</TextSlideContentText>
-          <Box marginTop={16}>
-            <UserNameCard
-              username={asset_username}
-              profileUri={user_image_url || PROFILE_ONE}
-              usernameStyles={{
-                color: theme.color.light.TEXT,
-                marginLeft: 8,
-              }}
-            />
-          </Box>
-        </TextSlideBody>
-      </TextSlide>
-    );
-  };
   return (
     <RenderIf condition={isLoading}>
       <IfNoItem dataLength={data.length}>

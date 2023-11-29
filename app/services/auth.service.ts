@@ -20,6 +20,19 @@ export const authService: any = createApi({
         };
       },
     }),
+    removeExternalAccount: builder.mutation({
+      query: (args) => {
+        return {
+          url: `external-accounts/${args.id}`,
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${args.token}`,
+            "X-App": "_Android",
+          },
+        };
+      },
+    }),
+
     setFirebasePushNotificationAccount: builder.mutation({
       query: (args) => {
         console.log(args)
@@ -53,6 +66,9 @@ export const authService: any = createApi({
 
 export const {
   useGetExternalAccountsListQuery,
+
+  useRemoveExternalAccountMutation,
+
   useSetFirebasePushNotificationAccountMutation,
   useSignInMutation,
 } = authService;

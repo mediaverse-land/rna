@@ -31,8 +31,8 @@ export function ExplorePageBestVideos({
   };
 
   return (
-    <Box paddingLeft={24}>
-      <Box marginRight={32}>
+    <Box>
+      <Box marginRight={32} paddingLeft={24}>
         <Title
           showViewMoreButton={true}
           navigateHandler={viewAllNavigationHandler}

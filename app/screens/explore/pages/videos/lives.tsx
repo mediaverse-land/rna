@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { Title } from "../../../../components/title";
 import { Box } from "../../../../components/box";
 import { useRtl } from "../../../../hooks/use-rtl";
@@ -35,10 +35,11 @@ export const VideosPageLives: FC<Props> = ({
     });
   };
 
-  const renderItems = ({ item }: { item: Live }) => {
+  const renderItems = useCallback(({ item, index }: { item: Live, index: number }) => {
     return (
       <HorizontalSlide
         id={item.id}
+        index={index}
         title={item.title}
         thumbnailPath={item.thumbnail}
         username={null}
@@ -48,7 +49,8 @@ export const VideosPageLives: FC<Props> = ({
         slidePressRedirectHandler={() => handleRedirect(item.id)}
       />
     );
-  };
+
+  }, [])
 
   const keyExtractor = (item: Live) => item.id.toString();
   
@@ -57,8 +59,8 @@ export const VideosPageLives: FC<Props> = ({
   };
   
   return (
-    <Box paddingLeft={24} paddingRight={isLoading && 24}>
-      <Box marginRight={32}>
+    <Box paddingRight={isLoading && 24}>
+      <Box paddingLeft={24} marginRight={32}>
         <Title
           str={LIVES}
           showViewMoreButton

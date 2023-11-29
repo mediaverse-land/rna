@@ -1,14 +1,5 @@
-import {
-  Platform,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 import { Box } from "../../../components/box";
-import { theme } from "../../../constaints/theme";
-import { Text } from "../../../components/text";
-import { ICON_ADD, ICON_ARROW_DOWN_SVG } from "../../../constaints/icons";
 import {
   lazy,
   memo,
@@ -20,16 +11,19 @@ import {
 } from "react";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
-import { useClickOutside } from "react-native-click-outside";
 import { Calendar } from "../../../components/calendar";
 import { FlashList } from "@shopify/flash-list";
-import { Button } from "../../../components/button";
 import { alertContext } from "../../../context/alert";
-import BottomSheet, {
-} from "@gorhom/bottom-sheet";
-import { Input } from "../../../components/form";
+import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { windowSize } from "../../../utils/window-size";
-// import { SelectContentModal } from "../components/select-content-modal";
+import { CreateConductorFormMemo } from "../components/create-conductor-form";
+import { BorderButton } from "../components/border-button";
+import { SelectAccountModal } from "../components/select-account-modal";
+import { useShareMutation } from "../../../services/asset.service";
+import { Toaster } from "../../../utils/toaster";
+import { ExternalAccount } from "../../../types/external-account";
+import { retriveToken } from "../../../utils/retrive-token";
+import { tokenContext } from "../../../context/token";
 
 //@ts-ignore
 const SelectContentModal = lazy(
@@ -37,27 +31,57 @@ const SelectContentModal = lazy(
   () => import("../components/select-content-modal")
 );
 
-const {  height } = windowSize();
+const { height } = windowSize();
+
+const _toaster = new Toaster();
 
 const BOTTOM_SHEET_BLUR_BG =
   Platform.OS === "android" ? "rgba(78, 78, 97, 0.75)" : "transparent";
 
+const bgGradientConfig = {
+  style: {
+    width: "100%",
+    flex: 1,
+    borderRadius: 16,
+    padding: 1,
+  },
+  colors: ["#0F0F66", "#030340"],
+  start: {
+    x: 0.2,
+    y: 0.1,
+  },
+};
+
 const BOTTOM_SHEET_BLUR_PERCENT = Platform.OS === "android" ? 50 : 80;
 
-export const ConductorPage = ({
-  headerComponent,
-}: any) => {
-  const [activeMonth, setActiveMonth] = useState<string>(null);
-  const [activeYear, setActiveYear] = useState<number>(null);
-
+export const ConductorPage = ({ headerComponent }: any) => {
+  const [activeDay, setActiveDay] = useState<{
+    month: string;
+    day: number;
+    year: number;
+  }>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenContentModal, setIsOpenContentModal] = useState(false);
+  const [selectedChannel, setSelectedChannel] = useState<ExternalAccount>(null);
+  const [action, setAction] = useState<"Archive" | "Stream" | "Share">(null);
+  const [titleInput, setTitleInput] = useState("");
+  const [descriptionInput, setDescriptionInput] = useState("");
+  const [isOpenSelectAccountModal, setIsOpenSelectAccountModal] =
+    useState(false);
+  const [selectedAssetToShareId, setSelectedAssetToShareId] =
+    useState<number>(null);
 
   const sheetRef = useRef<BottomSheet>(null);
   const contentModalSheetRef = useRef<BottomSheet>(null);
+  const selectAccountModalSheetRef = useRef<BottomSheet>(null);
+
+  const [_shareApiHandler, { isLoading, isFetching }] = useShareMutation();
 
   const snapPoints = useMemo(() => ["100%"], []);
   const contentModalSnapPoints = useMemo(() => ["100%"], []);
+  const selectAccountModalSnapPoints = useMemo(() => ["100%"], []);
+
+  const tokenCtx = useContext(tokenContext);
 
   const alrtCtx = useContext(alertContext);
 
@@ -65,33 +89,33 @@ export const ConductorPage = ({
     alrtCtx?.open();
   }, []);
 
-  const hideContentModalBottomTabbar = useCallback(() => {
-    alrtCtx?.open();
-  }, []);
-
   const showBottomSheet = useCallback(() => {
-    alrtCtx?.close();
-  }, []);
-
-  const showContentModalBottomSheet = useCallback(() => {
     alrtCtx?.close();
   }, []);
 
   const handleOnChangeBottomSheet = useCallback((index: number) => {
     if (index === -1) {
-      //   showBottomSheet();
       setIsOpen(false);
     } else {
       setIsOpen(true);
     }
   }, []);
 
+  const handleSelectAccountOnChangeBottomSheet = useCallback(
+    (index: number) => {
+      if (index === -1) {
+        setIsOpenSelectAccountModal(false);
+      } else {
+        setIsOpenSelectAccountModal(true);
+      }
+    },
+    []
+  );
+
   const handleContentModalOnChangeBottomSheet = useCallback((index: number) => {
     if (index === -1) {
-      showContentModalBottomSheet();
       setIsOpenContentModal(false);
     } else {
-      hideBottomTabbar();
       setIsOpenContentModal(true);
     }
   }, []);
@@ -103,11 +127,18 @@ export const ConductorPage = ({
     sheetRef.current?.expand();
   }, []);
 
-  const handleContnentModalOpenPres = useCallback(() => {
+  const handleContnentModalOpenPress = useCallback(() => {
     setIsOpenContentModal(true);
     hideBottomTabbar();
 
     contentModalSheetRef.current?.expand();
+  }, []);
+
+  const handleSelectAccountModalOpenPress = useCallback(() => {
+    setIsOpenSelectAccountModal(true);
+    hideBottomTabbar();
+
+    selectAccountModalSheetRef?.current?.expand();
   }, []);
 
   const handleClosePres = () => {
@@ -119,10 +150,113 @@ export const ConductorPage = ({
     contentModalSheetRef.current?.close();
   };
 
-  const closeFormModalAndOpenContenModal = () => {
-    handleClosePres();
-    handleContnentModalOpenPres();
+  const handleselectAccountModalClosePress = () => {
+    selectAccountModalSheetRef?.current?.close();
   };
+
+  const closeFormModalAndOpenContenModal = () => {
+    handleContnentModalOpenPress();
+  };
+
+  const addAssetHandler = (assetId: number) => {
+    if(!assetId){
+      return;
+    }
+    setSelectedAssetToShareId(assetId);
+    handleContentModalClosePres();
+  };
+
+  const setSelectedChannelHandler = (account: ExternalAccount) => {
+    setSelectedChannel(account);
+    handleselectAccountModalClosePress();
+  };
+
+  const createConductorHandler = async () => {
+    if (!selectedChannel) {
+      _toaster.show("Please select a channel to continue");
+      return;
+    }
+    if (!selectedAssetToShareId) {
+      _toaster.show("Please select a content to continue");
+      return;
+    }
+
+    if (!action) {
+      _toaster.show("Please select an action to continue");
+      return;
+    }
+
+    if (action === "Stream" && !titleInput) {
+      _toaster.show("Please insert title");
+      return;
+    }
+
+    if(!activeDay?.year || !activeDay?.month || !activeDay?.day){
+      _toaster.show("Please select a date to continue");
+      return;
+    }
+
+    // Archive = Drive
+    // Share = Youtube
+    // Stream
+
+    const asset = selectedAssetToShareId;
+    const account = selectedChannel?.id;
+
+    const times = [
+      `${activeDay?.year}-${activeDay?.month}-${activeDay?.day} 00:00:00`,
+    ];
+
+    let requestBody;
+
+    let url;
+
+    // Google Drive
+    if (action === "Archive") {
+      url = "/share/google-drive";
+      requestBody = {
+        asset,
+        account,
+        times,
+      };
+    }
+
+    // Youtube
+    if (action == "Share") {
+      url = "/share/youtube";
+      requestBody = {
+        asset,
+        account,
+        title: titleInput,
+        description: descriptionInput,
+        times,
+      };
+    }
+
+    // Stream(RTMP)
+    if (action === "Stream") {
+      url = "/share/stream";
+      requestBody = {
+        asset,
+        account,
+        times,
+      };
+    }
+
+    const token = await retriveToken(tokenCtx);
+
+    console.log(requestBody)
+    const response = await _shareApiHandler({ token, url, body: requestBody });
+    if (response?.error) {
+      console.log(response?.error)
+      _toaster.show("Failed");
+    }
+    if (response?.data) {
+      _toaster.show("Shared successfully");
+    }
+  };
+
+  const shwoInputValue = action === "Stream";
 
   return (
     <>
@@ -145,12 +279,7 @@ export const ConductorPage = ({
               flex={1}
               paddingBottom={130}
             >
-              <Calendar
-                setActiveMonth={setActiveMonth}
-                activeYear={activeYear}
-                activeMonth={activeMonth}
-                setActiveYear={setActiveYear}
-              />
+              <Calendar setActiveDay={setActiveDay} />
               <AddUpcommingButton
                 title="Add channel"
                 handler={handleOpenPres}
@@ -165,25 +294,39 @@ export const ConductorPage = ({
           <BottomSheet
             ref={sheetRef}
             snapPoints={snapPoints}
-            // enablePanDownToClose
             onChange={handleOnChangeBottomSheet}
             handleComponent={null}
             backgroundStyle={{
               backgroundColor: BOTTOM_SHEET_BLUR_BG,
             }}
           >
-            <BlurView
-              style={styles.blur}
-              tint="dark"
-              intensity={BOTTOM_SHEET_BLUR_PERCENT}
+            <BottomSheetScrollView
+              style={{
+                flex: 1,
+              }}
             >
-              <CreateConductorForm
-                handleClosePres={handleClosePres}
-                closeFormModalAndOpenContenModal={
-                  closeFormModalAndOpenContenModal
-                }
-              />
-            </BlurView>
+              <BlurView
+                style={styles.blur}
+                tint="dark"
+                intensity={BOTTOM_SHEET_BLUR_PERCENT}
+              >
+                <CreateConductorForm
+                  handleClosePres={handleClosePres}
+                  closeFormModalAndOpenContenModal={
+                    closeFormModalAndOpenContenModal
+                  }
+                  handleSelectAccountModalOpenPress={
+                    handleSelectAccountModalOpenPress
+                  }
+                  setTitleInput={setTitleInput}
+                  setDescriptionInput={setDescriptionInput}
+                  showTitleInput={shwoInputValue}
+                  setAction={setAction}
+                  isLoading={isLoading || isFetching}
+                  createConductorHandler={createConductorHandler}
+                />
+              </BlurView>
+            </BottomSheetScrollView>
           </BottomSheet>
         </View>
       ) : null}
@@ -192,7 +335,6 @@ export const ConductorPage = ({
           <BottomSheet
             ref={contentModalSheetRef}
             snapPoints={contentModalSnapPoints}
-            // enablePanDownToClose
             onChange={handleContentModalOnChangeBottomSheet}
             handleComponent={null}
             backgroundStyle={{
@@ -205,7 +347,36 @@ export const ConductorPage = ({
                 flex: 1,
               }}
             >
-              <SelectContentModal />
+              <SelectContentModal
+                closeModalHandler={handleContentModalClosePres}
+                addAssetHandler={addAssetHandler}
+              />
+            </LinearGradient>
+          </BottomSheet>
+        </View>
+      ) : null}
+      {isOpenSelectAccountModal ? (
+        <View style={styles.contentModalContainer}>
+          <BottomSheet
+            ref={selectAccountModalSheetRef}
+            snapPoints={selectAccountModalSnapPoints}
+            onChange={handleSelectAccountOnChangeBottomSheet}
+            handleComponent={null}
+            backgroundStyle={{
+              backgroundColor: BOTTOM_SHEET_BLUR_BG,
+            }}
+          >
+            <LinearGradient
+              {...bgGradientConfig}
+              style={{
+                flex: 1,
+              }}
+            >
+              <SelectAccountModal
+                closerHandler={handleselectAccountModalClosePress}
+                setSelectedChannel={setSelectedChannelHandler}
+                
+              />
             </LinearGradient>
           </BottomSheet>
         </View>
@@ -213,125 +384,9 @@ export const ConductorPage = ({
     </>
   );
 };
-const bgGradientConfig = {
-  style: {
-    width: "100%",
-    flex: 1,
-    borderRadius: 16,
-    padding: 1,
-  },
-  colors: ["#0F0F66", "#030340"],
-  start: {
-    x: 0.2,
-    y: 0.1,
-  },
-};
-
-const CreateConductorFormMemo = ({
-  handleClosePres,
-  closeFormModalAndOpenContenModal,
-}: {
-  handleClosePres: () => void;
-  closeFormModalAndOpenContenModal: () => void;
-}) => {
-  return (
-    <ScrollView style={{ flex: 1 }}>
-      <Box
-        width="100%"
-        padding={16}
-        paddingTop={24}
-        paddingLeft={32}
-        paddingRight={32}
-        height="100%"
-      >
-        <Title handleClosePres={handleClosePres} />
-        <Box marginTop={-16}>
-          <BorderButtonMemo
-            handler={closeFormModalAndOpenContenModal}
-            title="Add upcoming"
-          />
-        </Box>
-        <Box id="form" marginTop={24}>
-          <Input showBorder={false} labelText="Channel" placeholder="Choose" />
-          <Box marginTop={16}></Box>
-          <Input showBorder={false} labelText="Action" placeholder="Choose" />
-          <Box marginTop={16}></Box>
-          <Input
-            isTextArea
-            showBorder={false}
-            labelText="Description"
-            placeholder="Description"
-          />
-
-          <Box marginTop={24}></Box>
-          <Button varient="dark" text="Add" />
-        </Box>
-      </Box>
-    </ScrollView>
-  );
-};
-
-const Title = ({ handleClosePres }: { handleClosePres: () => void }) => {
-  return (
-    <Box
-      id="title"
-      direction="row"
-      alignItems="center"
-      justifyContent="space-between"
-    >
-      <Text color={theme.color.light.WHITE} fontSize={16} fontWeight={600}>
-        Add upcoming
-      </Text>
-      <Box>
-        <TouchableOpacity onPress={handleClosePres}>
-          <Text
-            fontSize={14}
-            fontWeight={300}
-            color={theme.color.light.LIGHT_TEXT}
-          >
-            Cancel
-          </Text>
-        </TouchableOpacity>
-      </Box>
-    </Box>
-  );
-};
-
-const BorderButtonMemo = ({
-  handler,
-  title,
-}: {
-  handler: () => void;
-  title: string;
-}) => {
-  return (
-    <Box marginTop={40}>
-      <Button
-        varient="flat"
-        text={title}
-        additionalStyles={{
-          height: 56,
-        }}
-        onpressHandler={handler}
-        icon={
-          <ICON_ADD
-            style={{
-              position: "relative",
-              top: -3,
-            }}
-            color="666680"
-            width={16}
-            height={16}
-          />
-        }
-        size="lg"
-      />
-    </Box>
-  );
-};
 
 const CreateConductorForm = memo(CreateConductorFormMemo);
-const AddUpcommingButton = memo(BorderButtonMemo);
+const AddUpcommingButton = memo(BorderButton);
 
 const styles = StyleSheet.create({
   editViewWrapper: {
@@ -350,15 +405,15 @@ const styles = StyleSheet.create({
     height: 200,
   },
   blur: {
-    width: "100%",
     height: "100%",
     borderRadius: 16,
     borderTopRightRadius: 16,
+    borderWidth: 1,
     borderTopLeftRadius: 16,
   },
   container: {
     flex: 1,
-    height: 500,
+    height: 470,
     width: "100%",
     padding: 24,
     position: "absolute",

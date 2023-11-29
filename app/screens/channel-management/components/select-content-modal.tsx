@@ -26,7 +26,6 @@ import { BottomSheetFlatList } from "@gorhom/bottom-sheet";
 import { useGetAssetListQuery } from "../../../services/view-all.service";
 import { tokenContext } from "../../../context/token";
 import { retriveToken } from "../../../utils/retrive-token";
-import { PROFILE_ONE } from "../../../constaints/images";
 import { Button } from "../../../components/button";
 
 type AssetType = "Subscribe" | "Ownership";
@@ -59,9 +58,18 @@ const URLS: Record<AssetType, Record<ActiveNav, string>> = {
   },
 };
 
-const SelectContentModalMemo = () => {
+
+const SelectContentModalMemo = ({
+  closeModalHandler,
+  addAssetHandler,
+}: {
+  closeModalHandler: () => void;
+  addAssetHandler: (id: number) => void;
+}) => {
   const [assetType, setAssetType] = useState<AssetType>("Subscribe");
   const [activeNav, setActiveNav] = useState<ActiveNav>("All");
+
+  const [selectedItemId, setSelectedItemId] = useState<number>(null);
 
   const [token, setToken] = useState<string>(null);
   const [page, setPage] = useState(1);
@@ -81,9 +89,18 @@ const SelectContentModalMemo = () => {
 
   const setAssetTypeHandler = (type: AssetType) => setAssetType(type);
 
-  const renderMemorizedItem = useCallback(({ item }: { item: any }) => {
-    return <ContentListItem item={item} />;
-  }, []);
+  const renderMemorizedItem = useCallback(
+    ({ item }: { item: any }) => {
+      return (
+        <ContentListItem
+          item={item}
+          setSelectedItemId={setSelectedItemId}
+          selectedItemId={selectedItemId}
+        />
+      );
+    },
+    [selectedItemId]
+  );
 
   const key = useCallback(() => Math.random().toString(), []);
 
@@ -109,6 +126,23 @@ const SelectContentModalMemo = () => {
     }
   }, [data?.data, error]);
 
+  const closeSelectContentModalHandler = () => {
+    closeModalHandler();
+  };
+
+  // const currentUrl = URLS[assetType][activeNav];
+
+  const toastContent = {
+    currentUrl,
+    assetType,
+    activeNav,
+    page,
+    WIDTH_PAGE_URL : `${currentUrl}${page}`,
+    dataLenght: data?.data?.length,
+    isError: isError,
+    error: error,
+  };
+
   return (
     <>
       <BottomSheetFlatList
@@ -131,9 +165,13 @@ const SelectContentModalMemo = () => {
             <AssetTypeNav
               setAssetType={setAssetTypeHandler}
               assetType={assetType}
+              closeSelectContentModalHandler={closeSelectContentModalHandler}
             />
             <Box marginBottom={40}>
               <Nav setActiveNav={setActiveNav} activeNav={activeNav} />
+            </Box>
+            <Box width='100%' padding={20} hasBlackBorder>
+              <Text color="#fff" fontSize={16} fontWeight={400}>{JSON.stringify(toastContent)}</Text>
             </Box>
           </>
         }
@@ -153,7 +191,11 @@ const SelectContentModalMemo = () => {
         bottom={32}
         zIndex={100000}
       >
-        <Button varient="primary" text="Add"/>
+        <Button
+          varient="primary"
+          text="Add"
+          onpressHandler={() => addAssetHandler(selectedItemId)}
+        />
       </Box>
     </>
   );
@@ -161,7 +203,7 @@ const SelectContentModalMemo = () => {
 
 const ITEM_WIDTH = (width - 48 - 16) / 2;
 
-const ContentListItem = ({ item }: any) => {
+const ContentListItem = ({ item, setSelectedItemId, selectedItemId }: any) => {
   const thumbnail =
     item?.asset?.thumbnails?.["336x366"] ||
     item?.asset?.thumbnails?.["226x226"];
@@ -169,58 +211,70 @@ const ContentListItem = ({ item }: any) => {
   const userData = item?.asset?.user;
 
   return (
-    <Box width={ITEM_WIDTH} flex={1} marginBottom={32}>
-      <Box
-        position="relative"
-        id="thumbnail_box"
-        width={ITEM_WIDTH}
-        height={ITEM_WIDTH}
-      >
-        <Image
-          source={{ uri: thumbnail }}
-          style={{
-            width: ITEM_WIDTH,
-            height: ITEM_WIDTH,
-            borderRadius: 16,
-          }}
-        />
+    <TouchableOpacity
+      activeOpacity={1}
+      onPress={() => setSelectedItemId(item.id)}
+      style={{
+        marginBottom: 32,
+      }}
+    >
+      <Box width={ITEM_WIDTH} flex={1}>
         <Box
-          id="fade-bg"
-          width={ITEM_WIDTH - 1}
-          height={ITEM_WIDTH - 3}
-          position="absolute"
-          borderRadius={16}
-          top={1}
-          left={1}
-          backgroundColor="#00000042"
-        ></Box>
-      </Box>
-      <Box
-        id="body"
-        width={ITEM_WIDTH}
-        paddingRight={8}
-        paddingLeft={8}
-        marginTop={16}
-        height={50}
-      >
-        <Text color={theme.color.light.TEXT} fontWeight={400} fontSize={14}>
-          {item?.name}
-        </Text>
-        <Box marginTop={8} direction="row" alignItems="center">
+          position="relative"
+          id="thumbnail_box"
+          width={ITEM_WIDTH}
+          height={ITEM_WIDTH}
+        >
           <Image
-            source={{
-              uri: PROFILE_ONE,
-            }}
+            source={{ uri: thumbnail }}
             style={{
-              width: 16,
-              height: 16,
-              marginRight: 8,
+              width: ITEM_WIDTH,
+              height: ITEM_WIDTH,
+              borderRadius: 16,
+              borderWidth: selectedItemId === item.id ? 2 : 0,
+              borderColor: selectedItemId === item.id ? "blue" : "transparent",
             }}
           />
-          <Text color={theme.color.light.TEXT}>{userData?.username}</Text>
+          <Box
+            id="fade-bg"
+            width={ITEM_WIDTH - 1}
+            height={ITEM_WIDTH - 3}
+            position="absolute"
+            borderRadius={16}
+            top={1}
+            left={1}
+            backgroundColor="#00000042"
+          ></Box>
+        </Box>
+        <Box
+          id="body"
+          width={ITEM_WIDTH}
+          paddingRight={8}
+          paddingLeft={8}
+          marginTop={16}
+          height={50}
+        >
+          <Text color={theme.color.light.TEXT} fontWeight={400} fontSize={14}>
+            {item?.name}
+          </Text>
+          <Box marginTop={8} direction="row" alignItems="center">
+            {userData?.image_url ? (
+              <Image
+                source={{
+                  uri: userData?.image_url,
+                }}
+                style={{
+                  width: 16,
+                  height: 16,
+                  marginRight: 8,
+                }}
+              />
+            ) : null}
+            <Text color={theme.color.light.TEXT}>{userData?.username}</Text>
+          </Box>
         </Box>
       </Box>
-    </Box>
+    </TouchableOpacity>
   );
 };
 
@@ -299,9 +353,11 @@ const Nav = ({
 const AssetTypeNav = ({
   assetType,
   setAssetType,
+  closeSelectContentModalHandler,
 }: {
   assetType: string;
   setAssetType: (type: AssetType) => void;
+  closeSelectContentModalHandler: () => void;
 }) => {
   const navigator = useMemo(() => {
     return (
@@ -375,7 +431,7 @@ const AssetTypeNav = ({
       paddingLeft={24}
       paddingRight={24}
     >
-      <Title />
+      <Title closeSelectContentModalHandler={closeSelectContentModalHandler} />
       <Box
         width="100%"
         height={56}
@@ -389,7 +445,11 @@ const AssetTypeNav = ({
   );
 };
 
-const Title = () => {
+const Title = ({
+  closeSelectContentModalHandler,
+}: {
+  closeSelectContentModalHandler: () => void;
+}) => {
   return (
     <>
       <Box
@@ -404,7 +464,10 @@ const Title = () => {
         </Text>
       </Box>
       <Box width={22} height={17} position="absolute" left={24} top={35}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={closeSelectContentModalHandler}
+        >
           <ICON_ARROW_LEFT_SVG />
         </TouchableOpacity>
       </Box>

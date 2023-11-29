@@ -41,20 +41,24 @@ export const AllPageLives: FC<Props> = ({
     });
   };
 
-  const renderItems = ({ item }: { item: Live }) => {
-    return (
-      <HorizontalSlide
-        id={item.id}
-        title={item.title}
-        thumbnailPath={item.thumbnail}
-        username={null}
-        profileUri={null}
-        type={null}
-        isRtl={isRtl}
-        slidePressRedirectHandler={() => handleRedirect(item.id)}
-      />
-    );
-  };
+  const renderItems = useCallback(
+    ({ item, index }: { item: Live; index: number }) => {
+      return (
+        <HorizontalSlide
+          id={item.id}
+          index={index}
+          title={item.title}
+          thumbnailPath={item.thumbnail}
+          username={null}
+          profileUri={null}
+          type={null}
+          isRtl={isRtl}
+          slidePressRedirectHandler={() => handleRedirect(item.id)}
+        />
+      );
+    },
+    []
+  );
 
   const keyExtractor = (item: Live) => item.id.toString();
 
@@ -63,8 +67,8 @@ export const AllPageLives: FC<Props> = ({
   };
 
   return (
-    <Box marginLeft={24} marginTop={40}>
-      <Box marginRight={32}>
+    <Box marginTop={40}>
+      <Box paddingLeft={24} marginRight={32}>
         <Title
           str={LIVES}
           showViewMoreButton

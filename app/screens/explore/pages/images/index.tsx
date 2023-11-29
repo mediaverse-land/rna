@@ -1,24 +1,20 @@
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { LinearGradient } from "expo-linear-gradient";
-import { ImagesPageComponents } from "../all/style";
 import { ImagePageBestInMonth } from "./bes-in-month";
 import { VirtualizedList } from "../../../../components/virtualized-list";
-import {
-  getBestInMonthApiHandler,
-  getImagesPageDatApiHandler,
-} from "./service";
 import { Asset } from "../../../../types/asset";
 import { ImagePageMasonryList } from "./masonry-list";
-import { FocusedStatusBar } from "../../../../components/focused-statusbar";
 import { Box } from "../../../../components/box";
 import { LoadingSpinner } from "../../../../components/loader-spinner";
 import { tokenContext } from "../../../../context/token";
 import { tokenStringResolver } from "../../../../utils/token-string-resolver";
 import { UseNavigationType } from "../../../../types/use-navigation";
-
-const { ContainerStyles } = ImagesPageComponents;
+import { ExploreGradientWrapper } from "../../components/gradient-wrapper";
+import {
+  getBestInMonthApiHandler,
+  getImagesPageDatApiHandler,
+} from "./service";
 
 export function ImagesPage() {
   const isFocused = useIsFocused();
@@ -125,12 +121,7 @@ export function ImagesPage() {
 
   return (
     <>
-      <FocusedStatusBar color="#0c0c21" />
-      <LinearGradient
-        style={[ContainerStyles]}
-        colors={["#030340", "#030340"]}
-        start={linearGradient}
-      >
+      <ExploreGradientWrapper>
         <VirtualizedList paddingTop={197} onRefresh={_onRefreshHandler}>
           <ImagePageBestInMonth
             data={bestInMonthData}
@@ -155,7 +146,7 @@ export function ImagesPage() {
           </VirtualizedList>
           <View style={styles.seperator} />
         </VirtualizedList>
-      </LinearGradient>
+      </ExploreGradientWrapper>
     </>
   );
 }
@@ -170,8 +161,3 @@ const styles = StyleSheet.create({
     paddingTop: 196,
   },
 });
-
-const linearGradient = {
-  x: 0.7,
-  y: 0,
-};

@@ -36,10 +36,9 @@ export const AllPageTopTenText: FC<Props> = ({
     <Box
       id="top-ten-text-slider-wrapper"
       marginTop={35}
-      paddingLeft={24}
       flex={1}
     >
-      <Box paddingRight={32}>
+      <Box paddingRight={32} paddingLeft={24}>
         <Title
           str={TOP_TEN_TEXTS}
           showViewMoreButton

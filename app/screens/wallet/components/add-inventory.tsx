@@ -7,10 +7,12 @@ import { theme } from '../../../constaints/theme';
 import { Button } from '../../../components/button';
 
 type Props = {
+    isLoading: boolean
     closeAddInventoryAlertHandler: () => void;
+    addCardPressHandler: () => void;
 };
 
-export function AddInventory({ closeAddInventoryAlertHandler }: Props) {
+export function AddInventory({ closeAddInventoryAlertHandler,addCardPressHandler,  isLoading }: Props) {
     return (
         <PaddingContainer>
             <Box paddingTop={16}>
@@ -50,6 +52,8 @@ export function AddInventory({ closeAddInventoryAlertHandler }: Props) {
                         marginTop={24}
                         borderRadius={16}
                         size="lg"
+                        isLoading={isLoading}
+                        onpressHandler={addCardPressHandler}
                     />
                 </Box>
             </Box>

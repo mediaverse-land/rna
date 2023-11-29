@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { Title } from "../../../../components/title";
-import { PaddingContainer } from "../../../../styles/grid";
 import { HorizontalSlider } from "../../../../components/horizontal-slider";
 import { Asset } from "../../../../types/asset";
 import { Box } from "../../../../components/box";
@@ -27,22 +26,22 @@ export const ImagePageBestInMonth: FC<Props> = ({
   };
 
   return (
-    <Box paddingLeft={24} width="100%" flex={1}>
-        <Box marginBottom={24} paddingRight={24}>
-          <Title
-            str="Best in month"
-            showViewMoreButton
-            navigateHandler={viewAllNavigationHandler}
+    <Box width="100%" flex={1}>
+      <Box paddingLeft={24} paddingRight={32} marginBottom={24}>
+        <Title
+          str="Best in month"
+          showViewMoreButton
+          navigateHandler={viewAllNavigationHandler}
+        />
+      </Box>
+      <RenderIf condition={isLoading}>
+        <IfNoItem dataLength={data.length}>
+          <HorizontalSlider
+            data={data}
+            navigationScreenName="SingleImageScreen"
           />
-        </Box>
-        <RenderIf condition={isLoading}>
-          <IfNoItem dataLength={data.length}>
-            <HorizontalSlider
-              data={data}
-              navigationScreenName="SingleImageScreen"
-            />
-          </IfNoItem>
-        </RenderIf>
+        </IfNoItem>
+      </RenderIf>
     </Box>
   );
 };

@@ -124,7 +124,7 @@ export const InsertPhone: FC<Props> = ({ setWindowHandler }) => {
     }
   };
 
-  const renderForm = formStructure.map((f) => {
+  const renderForm = formStructure.map((f: any) => {
     return (
       <Box width="100%" marginBottom={16} key={f.id}>
         <Controller
@@ -134,7 +134,7 @@ export const InsertPhone: FC<Props> = ({ setWindowHandler }) => {
               placeholder={f.placeholder}
               labelText={f.labelText}
               onBlur={onBlur}
-              onChangeText={(value) => {
+              onChangeText={(value: any) => {
                 onChange(value || "");
               }}
               value={value}

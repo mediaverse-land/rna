@@ -6,12 +6,24 @@ export const paymentService: any = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: enviroments.BASE_URL,
   }),
-  //   tagTypes: ['ExploreLives'],
   endpoints: (builder) => ({
-    getExternalAccountsList: builder.query({
+    connectToStripe: builder.mutation({
       query: (args) => {
         return {
-          url: `external-accounts?page=${args.page}`,
+          url: `stripe/connect`,
+          method: "POST",
+          body: {},
+          headers: {
+            Authorization: `Bearer ${args.token}`,
+            "X-App": "_Android",
+          },
+        };
+      },
+    }),
+    chargeStripe: builder.mutation({
+      query: (args) => {
+        return {
+          url: `stripe/gateway`,
           method: "GET",
           headers: {
             Authorization: `Bearer ${args.token}`,
@@ -20,13 +32,11 @@ export const paymentService: any = createApi({
         };
       },
     }),
-    setFirebasePushNotificationAccount: builder.mutation({
+    checkStripeAccount: builder.query({
       query: (args) => {
-        console.log(args)
         return {
-          url: `push-notifications/firebase-tokens`,
-          method: "POST",
-          body: args.body,
+          url: `stripe/account`,
+          method: "GET",
           headers: {
             Authorization: `Bearer ${args.token}`,
             "X-App": "_Android",
@@ -34,22 +44,25 @@ export const paymentService: any = createApi({
         };
       },
     }),
-    signIn: builder.mutation({
+    checkStripeAccountBalance: builder.query({
       query: (args) => {
         return {
-          url: `auth/sign-in`,
-          method: "POST",
-          body: args.body,
+          url: `stripe/balance`,
+          method: "GET",
           headers: {
+            Authorization: `Bearer ${args.token}`,
             "X-App": "_Android",
-            // "Accept-Language": "en-US"
           },
         };
       },
     }),
-    
+
   }),
 });
 
 export const {
+  useConnectToStripeMutation,
+  useCheckStripeAccountQuery,
+  useChargeStripeMutation,
+  useCheckStripeAccountBalanceQuery,
 } = paymentService;

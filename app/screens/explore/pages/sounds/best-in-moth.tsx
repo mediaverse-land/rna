@@ -26,8 +26,7 @@ export function SoundsPageBestInMonth({ navigation, isLoading, data }: Props) {
 
   return (
     <>
-      <PaddingContainer>
-        <Box marginBottom={24} >
+        <Box paddingLeft={24} marginBottom={24} >
           <Title
             str={BEST_IN_MONTH}
             navigateHandler={viewAllNavigationHandler}
@@ -41,8 +40,7 @@ export function SoundsPageBestInMonth({ navigation, isLoading, data }: Props) {
             }
           />
         </Box>
-      </PaddingContainer>
-      <Box paddingLeft={24}>
+      <Box>
         <RenderIf condition={isLoading}>
           <IfNoItem dataLength={data.length}>
             <HorizontalSlider

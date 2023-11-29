@@ -169,7 +169,7 @@ const CommentsList = ({ data }: { data: Comment[] }) => {
         )
     }
 
-    const keyExtractor = (item) => item.id.toString();
+    const keyExtractor = (item: any) => item.id.toString();
 
     return (
         <Box

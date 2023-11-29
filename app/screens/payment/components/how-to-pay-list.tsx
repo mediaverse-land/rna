@@ -53,32 +53,32 @@ export function HowToPayList({ userBalance }: Props) {
       title: "Wallet",
       description: `Inventory: ${userBalance} $`,
     },
-    {
-      id: 2,
-      icon: (
-        <ICON_PAYPAL
-          style={{
-            width: 40,
-            height: 40,
-          }}
-        />
-      ),
-      title: "PayPal",
-      description: "Online pay",
-    },
-    {
-      id: 3,
-      icon: (
-        <ICON_MASTER_CARD
-          style={{
-            width: 40,
-            height: 40,
-          }}
-        />
-      ),
-      title: "MasterCard",
-      description: "Online pay",
-    },
+    // {
+    //   id: 2,
+    //   icon: (
+    //     <ICON_PAYPAL
+    //       style={{
+    //         width: 40,
+    //         height: 40,
+    //       }}
+    //     />
+    //   ),
+    //   title: "PayPal",
+    //   description: "Online pay",
+    // },
+    // {
+    //   id: 3,
+    //   icon: (
+    //     <ICON_MASTER_CARD
+    //       style={{
+    //         width: 40,
+    //         height: 40,
+    //       }}
+    //     />
+    //   ),
+    //   title: "MasterCard",
+    //   description: "Online pay",
+    // },
   ];
 
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>(

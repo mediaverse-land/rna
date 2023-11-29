@@ -72,9 +72,6 @@ export function AppsPageAllScreen({
     }
   };
 
-  // useEffect(() => {
-  // }, []);
-
   useEffect(() => {
     if (isFocused) {
       dispatch(activeDisableOnIntractions());
@@ -82,7 +79,12 @@ export function AppsPageAllScreen({
     }
   }, [firstAppItemRef, isFocused]);
 
-  const navigateToScreen = (screenName: string) => {
+  const navigateToScreen = async(screenName: string) => {
+    const _hasUserSeenTour  = await hasUserSeenTour();
+
+    if(!_hasUserSeenTour){
+      return;
+    }
     navigation.navigate(screenName);
   };
 

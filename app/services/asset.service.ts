@@ -27,6 +27,16 @@ export const assetService: any = createApi({
         };
       },
     }),
+    share: builder.mutation({
+      query: (args) =>{ 
+        return {
+          url:args.url,
+          body: args.body,
+          method: "POST",
+          headers: { Authorization: `Bearer ${args.token}` },
+        }
+      }
+    }),
     addExternalAccount: builder.mutation({
       query: (args) => {
         return {
@@ -50,7 +60,7 @@ export const assetService: any = createApi({
     removeExternalAccount: builder.mutation({
       query: (args) => {
         return {
-          url: `/external-accounts/${args.body?.id}`,
+          url: `/external-accounts/${args.id}`,
           method: "DELETE",
           // body: args.body,
           headers: { Authorization: `Bearer ${args.token}` },
@@ -76,5 +86,6 @@ export const {
   useUpdateExternalAccountMutation,
   useYoutubeShareMutation,
   useGetAssetListQuery,
+  useShareMutation, 
   useRemoveExternalAccountMutation
 } = assetService;

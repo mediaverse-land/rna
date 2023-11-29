@@ -36,7 +36,7 @@ export const AllPageMostViewed: FC<Props> = ({
   return (
     <PaddingContainer>
       <Box marginTop={40} flex={1}>
-        <Box paddingRight={9}>
+        <Box paddingLeft={0} paddingRight={9} >
           <Title
             showViewMoreButton={true}
             navigateHandler={viewAllNavigationHandler}

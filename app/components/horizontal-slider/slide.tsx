@@ -25,6 +25,7 @@ type Props = {
   username: string;
   profileUri: string;
   id: number;
+  index: number;
   type?: 1 | 2 | 3 | 4 | null;
   isRtl?: boolean;
 };
@@ -47,6 +48,7 @@ export function HorizontalSlide({
   username,
   id,
   type,
+  index
 }: Props) {
   const icon = detectTypeIcon(type);
 
@@ -61,6 +63,9 @@ export function HorizontalSlide({
           !title && {
             height: 144,
           },
+          index === 0  && {
+            marginLeft: 24
+          }
       ]}
     >
       <Box>

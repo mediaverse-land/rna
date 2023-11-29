@@ -1,6 +1,5 @@
 import { useState, useContext, useEffect } from "react";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { LinearGradient } from "expo-linear-gradient";
 import { SoundsPageBestInMonth } from "./best-in-month";
 import { VirtualizedList } from "../../../../components/virtualized-list";
 import { Spacer } from "../../../../components/spacer";
@@ -8,13 +7,10 @@ import { tokenContext } from "../../../../context/token";
 import { tokenStringResolver } from "../../../../utils/token-string-resolver";
 import { RenderIf } from "../../../../components/render-if";
 import { IfNoItem } from "../../../../components/if-no-item";
-import { FocusedStatusBar } from "../../../../components/focused-statusbar";
 import { getTextDataApiHandler } from "./service";
-import { ImagesPageComponents } from "../all/style";
 import { UseNavigationType } from "../../../../types/use-navigation";
 import { SoundsPageRecently } from "./recently";
-
-const { ContainerStyles } = ImagesPageComponents;
+import { ExploreGradientWrapper } from "../../components/gradient-wrapper";
 
 export function TextsPage() {
   const isFocused = useIsFocused();
@@ -81,8 +77,6 @@ export function TextsPage() {
   }
 
   const _onRefreshHandler = async () => {
-    // setIsLoading(true);
-    // setData([]);
     setRecentlyData([]);
     setBestInMothData([]);
     await getData();
@@ -90,12 +84,7 @@ export function TextsPage() {
 
   return (
     <>
-      <FocusedStatusBar color="#0c0c21" />
-      <LinearGradient
-        style={[ContainerStyles]}
-        colors={["#030340", "#030340"]}
-        start={{ x: 0.7, y: 0 }}
-      >
+      <ExploreGradientWrapper>
         <VirtualizedList paddingTop={197} onRefresh={_onRefreshHandler}>
           <RenderIf condition={isBestInMonthLoading}>
             <IfNoItem dataLength={bestInMonthData.length}>
@@ -110,15 +99,13 @@ export function TextsPage() {
                 data={recentlyData?.data}
                 navigation={navigation}
               />
-              {/* <TextPageSwiper data={data} />
-              <TextPageBestWriters /> */}
             </IfNoItem>
           </RenderIf>
           <Spacer />
           <Spacer />
           <Spacer />
         </VirtualizedList>
-      </LinearGradient>
+      </ExploreGradientWrapper>
     </>
   );
 }

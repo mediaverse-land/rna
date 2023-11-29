@@ -23,8 +23,8 @@ export function SoundsPageBestInMonth({ data }: Props) {
   };
   
   return (
-    <Box flex={1} paddingLeft={24}>
-      <Box paddingRight={32}>
+    <Box flex={1}>
+      <Box paddingLeft={24} paddingRight={32}>
         <Title
           str={BEST_IN_MONTH}
           showViewMoreButton

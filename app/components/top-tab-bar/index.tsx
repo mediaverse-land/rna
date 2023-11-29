@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactElement, useEffect, useRef } from "react";
-import { ImageStyle } from "react-native";
+import { ImageStyle, Platform } from "react-native";
 import { Box } from "../box";
 import { TabBarComponents } from "./style";
 import { theme } from "../../constaints/theme";
@@ -92,7 +92,7 @@ function TopTabBar({
   hasFullWidth = false,
   isProfilePage = false,
 }: any) {
-  const topStyle = isProfilePage ? 8 : hasFullWidth ? 120 : 94;
+  const topStyle = isProfilePage ? 8 : hasFullWidth ? 120 : (Platform.OS === 'android' ? 104 : 84);
   const dispatch = useDispatch<AppDispatch>();
 
   const { BOTTOM_NAVIGATION_TOUR_HAS_SEEN, DISABLE_INTRACTION } = useSelector(
@@ -213,8 +213,8 @@ function TopTabBar({
         <BlurView
           renderToHardwareTextureAndroid
           style={styles.blurView}
-          intensity={70} // Adjust the intensity value to control the blur effect
-          tint="dark" // Set the tint color ('light' or 'dark')
+          intensity={70} 
+          tint="dark" 
         >
           <TabBarComponents.TabBar
             style={{
@@ -339,6 +339,8 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     zIndex: 999999999999,
+    backgroundColor:'rgba(14, 14, 18, 0.50)',
+
     borderRadius: 10,
   },
 });

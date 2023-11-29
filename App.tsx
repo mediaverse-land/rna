@@ -1,12 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Dimensions,
-  I18nManager,
-  Platform,
-  StatusBar,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Dimensions, StatusBar, TouchableOpacity, View } from "react-native";
 import * as Notifications from "expo-notifications";
 import { AlertContextProvider } from "./app/context/alert";
 import { TokenContextProvider } from "./app/context/token";
@@ -21,7 +14,7 @@ import messaging from "@react-native-firebase/messaging";
 import PushNotificationWrapper from "./app/components/push-notification-wrapper";
 import { addEventListener } from "@react-native-community/netinfo";
 import { Text } from "./app/components/text";
-import * as Updates from 'expo-updates';
+import * as Updates from "expo-updates";
 
 const _toaster = new Toaster();
 
@@ -46,15 +39,9 @@ Notifications.setNotificationHandler({
 export default function App() {
   const [token, setToken] = useState("");
 
-  const [isOffline, setIsOffline] = useState(false);
+  // const [isOffline, setIsOffline] = useState(false);
 
   const [newPushMessage, setNewPushMessage] = useState<any>(null);
-
-  if (I18nManager.isRTL && Platform.OS !== 'web') {
-    I18nManager.allowRTL(false);
-    I18nManager.forceRTL(false);
-    Updates.reloadAsync();
-  }
 
   const isDevMode = () => __DEV__;
 
@@ -74,22 +61,9 @@ export default function App() {
   }
 
   useEffect(() => {
-    const unsubscribe = addEventListener((state) => {
-      if (!state.isConnected) {
-        setIsOffline(true);
-        return;
-      }
-      setIsOffline(false);
-    });
-    // Unsubscribe
-    unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    if (isDevMode()) {
+    if(isDevMode()){
       return;
     }
-
     if (requestUserPermission()) {
       // Return fcm token key
       messaging()
@@ -131,36 +105,36 @@ export default function App() {
     return unsubscribe;
   }, []);
 
-  const checkConnection = () => {
-    addEventListener((state) => {
-      if (!state.isConnected) {
-        setIsOffline(true);
-        return;
-      }
-      setIsOffline(false);
-    });
-  };
+  // const checkConnection = () => {
+  //   addEventListener((state) => {
+  //     if (!state.isConnected) {
+  //       setIsOffline(true);
+  //       return;
+  //     }
+  //     setIsOffline(false);
+  //   });
+  // };
 
-  const offlineView = (
-    <View
-      style={{
-        width: "100%",
-        minHeight: Dimensions.get("screen").height,
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Text color="black">Please connect to internet to continue</Text>
-      <TouchableOpacity
-        style={{
-          marginTop: 14,
-        }}
-        onPress={checkConnection}
-      >
-        <Text color="blue">Retry</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  // const offlineView = (
+  //   <View
+  //     style={{
+  //       width: "100%",
+  //       minHeight: Dimensions.get("screen").height,
+  //       alignItems: "center",
+  //       justifyContent: "center",
+  //     }}
+  //   >
+  //     <Text color="black">Please connect to internet to continue</Text>
+  //     <TouchableOpacity
+  //       style={{
+  //         marginTop: 14,
+  //       }}
+  //       onPress={checkConnection}
+  //     >
+  //       <Text color="blue">Retry</Text>
+  //     </TouchableOpacity>
+  //   </View>
+  // );
 
   return (
     <>
@@ -169,15 +143,15 @@ export default function App() {
           <TokenContextProvider>
             <UserContextProvider>
               <AlertContextProvider>
-                {isOffline ? (
+                {/* {isOffline ? (
                   offlineView
-                ) : (
-                  <RootNavigator firebaseToken={token} />
-                )}
-                <PushNotificationWrapper
-                  message={newPushMessage}
-                  setMessage={setNewPushMessage}
-                />
+                ) : ( */}
+                <RootNavigator firebaseToken={token} />
+                {/* // )}
+                // <PushNotificationWrapper
+                //   message={newPushMessage}
+                //   setMessage={setNewPushMessage}
+                // /> */}
               </AlertContextProvider>
             </UserContextProvider>
           </TokenContextProvider>

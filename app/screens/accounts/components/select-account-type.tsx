@@ -117,15 +117,6 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
 
   const manageGoogleApi = async () => {
     if (response?.authentication) {
-      // const googleTokens: any = getGoogleTokens(response?.authentication);
-      // console.log({googleTokens})
-
-      // _toaster.show(JSON.stringify(googleTokens));
-      // console.log(googleTokens)
-
-      // if (!googleTokens) {
-      //     return;
-      // }
 
       const accessToken = response?.authentication?.accessToken;
       const refreshToken = response?.authentication?.refreshToken || null;

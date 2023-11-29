@@ -11,6 +11,7 @@ import { googleAuthApiHandler } from "./service";
 import { Toaster } from "../../../../utils/toaster";
 import { Logger } from "../../../../utils/logger";
 import { enviroments } from "../../../../../enviroments/enviroments";
+import { Button } from "../../../../components/button";
 
 type Props = {
   height: number;
@@ -20,7 +21,7 @@ type Props = {
 
 const _toaster = new Toaster();
 
-const _logger = new Logger()
+const _logger = new Logger();
 
 export const SignUpWithProvider: FC<Props> = ({
   height,
@@ -33,7 +34,6 @@ export const SignUpWithProvider: FC<Props> = ({
     expoClientId: enviroments.REACT_APP_EXPO_CLIENT_ID,
     scopes: enviroments.GOOGLE_AUTH_SCOPE,
   });
-
 
   useEffect(() => {
     const persistAuth = async (res: any) => {
@@ -99,7 +99,12 @@ export const SignUpWithProvider: FC<Props> = ({
         </Box>
       </Box>
       <Box width="100%" position="absolute" bottom={5}>
-        <TouchableOpacity
+        <Button
+          text="Sign up with number"
+          onpressHandler={setSIgnupWithUsernameHandler}
+          varient="muted"
+        />
+        {/* <TouchableOpacity
           activeOpacity={1}
           onPress={setSIgnupWithUsernameHandler}
         >
@@ -120,13 +125,11 @@ export const SignUpWithProvider: FC<Props> = ({
               Sign up with number
             </Text>
           </Box>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </Box>
     </Box>
   );
 };
-
-
 
 // import { useEffect } from "react";
 // import { FC } from "react";
@@ -165,7 +168,6 @@ export const SignUpWithProvider: FC<Props> = ({
 //   });
 
 //   console.log(response?.params?.id_token);
-  
 
 //   useEffect(() => {
 //     const persistAuth = async (res: any) => {

@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { ImagesPageComponents } from "../all/style";
 import { SoundsPageBestInMonth } from "./best-in-moth";
 import { SoundsPageRecently } from "./recently";
 import { VirtualizedList } from "../../../../components/virtualized-list";
@@ -9,11 +7,9 @@ import { RenderIf } from "../../../../components/render-if";
 import { IfNoItem } from "../../../../components/if-no-item";
 import { getSoundPageDatApiHandler } from "./service";
 import { Sound } from "../../../../types/sound";
-import { FocusedStatusBar } from "../../../../components/focused-statusbar";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { UseNavigationType } from "../../../../types/use-navigation";
-
-const { ContainerStyles } = ImagesPageComponents;
+import { ExploreGradientWrapper } from "../../components/gradient-wrapper";
 
 export function SoundsPage() {
   const isFocused = useIsFocused();
@@ -54,12 +50,7 @@ export function SoundsPage() {
 
   return (
     <>
-      <FocusedStatusBar color="#0c0c21" />
-      <LinearGradient
-        style={[ContainerStyles]}
-        colors={["#030340", "#030340"]}
-        start={linearGradient}
-      >
+      <ExploreGradientWrapper>
         <VirtualizedList paddingTop={197} onRefresh={_onRefreshHandler}>
           <RenderIf condition={isSoundsDataLoading}>
             <IfNoItem dataLength={soundsData.length}>
@@ -77,7 +68,7 @@ export function SoundsPage() {
           </RenderIf>
           <View style={styles.seperator}></View>
         </VirtualizedList>
-      </LinearGradient>
+      </ExploreGradientWrapper>
     </>
   );
 }
@@ -92,8 +83,3 @@ const styles = StyleSheet.create({
     paddingTop: 196,
   },
 });
-
-const linearGradient = {
-  x: 0.7,
-  y: 0,
-};

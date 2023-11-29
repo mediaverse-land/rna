@@ -70,7 +70,7 @@ export function HorizontalSlider({
     }
   }
 
-  const renderItem = ({ item }: { item: Asset | Sound | Text | any }) => {
+  const renderItem = ({ item, index }: { item: Asset | Sound | Text | any, index: number }) => {
     const thumbUri =
     item?.asset?.thumbnails["525x525"]||
       item?.asset?.thumbnails["336x366"] ||
@@ -91,6 +91,7 @@ export function HorizontalSlider({
         thumbnailPath={thumbUri}
         username={username}
         profileUri={PROFILE_ONE}
+        index={index}
         type={type}
         isRtl={isRtl}
         slidePressRedirectHandler={() =>

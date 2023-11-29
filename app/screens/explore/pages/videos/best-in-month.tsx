@@ -31,8 +31,8 @@ export function VideoPageBestInMonth({
   };
 
   return (
-    <Box paddingLeft={24}>
-      <Box marginRight={32}>
+    <Box>
+      <Box paddingLeft={24} marginRight={32}>
         <Title
           showViewMoreButton={true}
           navigateHandler={viewAllNavigationHandler}

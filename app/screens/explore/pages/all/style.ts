@@ -55,7 +55,6 @@ export const ImagesPageComponents = {
     DailyRecomended: styled.View`
         width: 100%;
         margin-top: 40px;
-        padding-left: 24px;
     `,
     // ${(props) => (props.isRtl ? `padding-right: 24px` : `padding-left: 24`)}
     ContainerStyles: styles.container,

@@ -42,7 +42,7 @@ const store = configureStore({
     liveSlice: liveSlice,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat([
+    getDefaultMiddleware({immutableCheck: false}).concat([
       singleImageService.middleware,
       singleSoundService.middleware,
       singleTextService.middleware,

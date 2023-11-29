@@ -1,14 +1,11 @@
 import { View, StyleSheet } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { AllPageMostViewed } from "./most-viewed";
 import { AllPageTopTenText } from "./top-ten-texts";
 import { AllPageChillSongs } from "./chill-songs";
 import { VirtualizedList } from "../../../../components/virtualized-list";
-import { FocusedStatusBar } from "../../../../components/focused-statusbar";
 import { AllPageLives } from "./lives";
 import { RootState } from "../../../../store";
-import { ImagesPageComponents } from "./style";
 import {
   useGetBestVideosQuery,
   useGetChillSongsQuery,
@@ -18,10 +15,14 @@ import {
 } from "../../../../services/explore.service";
 import { UseNavigationType } from "../../../../types/use-navigation";
 import { ExplorePageBestVideos } from "./best-videos";
-
-const { ContainerStyles } = ImagesPageComponents;
+import { ExploreGradientWrapper } from "../../components/gradient-wrapper";
+import { useCallback } from "react";
 
 export function AllPage({ navigation }: { navigation: UseNavigationType }) {
+  const { DISABLE_INTRACTION }: { DISABLE_INTRACTION: boolean } = useSelector(
+    (state: RootState) => state.tourSlice
+  );
+
   const {
     data: _livesData,
     isError: _isLivesError,
@@ -56,8 +57,6 @@ export function AllPage({ navigation }: { navigation: UseNavigationType }) {
     refetch: refetchTopTenText,
   } = useGetTopTenTextsQuery();
 
-  console.log({_topTenTextData})
-
   const {
     data: _chillSongsData,
     isError: _isChillSongsError,
@@ -67,26 +66,18 @@ export function AllPage({ navigation }: { navigation: UseNavigationType }) {
     refetch: regreshChillSongs,
   } = useGetChillSongsQuery();
 
-  const { DISABLE_INTRACTION }: { DISABLE_INTRACTION: boolean } = useSelector(
-    (state: RootState) => state.tourSlice
-  );
 
-  const onRefreshHandler = async () => {
+  const onRefreshHandler = useCallback(async () => {
     refreshLives();
     refetchImages();
     refetchTopTenText();
     regreshChillSongs();
     refreshBestVideos();
-  };
+  }, []);
 
   return (
     <>
-      <FocusedStatusBar color="#0c0c21" />
-      <LinearGradient
-        style={[ContainerStyles]}
-        colors={["#030340", "#030340"]}
-        start={{ x: 0.7, y: 0 }}
-      >
+      <ExploreGradientWrapper>
         <VirtualizedList paddingTop={160} onRefresh={onRefreshHandler}>
           <AllPageLives
             navigation={navigation}
@@ -119,7 +110,7 @@ export function AllPage({ navigation }: { navigation: UseNavigationType }) {
           />
           <View style={styles.space}></View>
         </VirtualizedList>
-      </LinearGradient>
+      </ExploreGradientWrapper>
     </>
   );
 }

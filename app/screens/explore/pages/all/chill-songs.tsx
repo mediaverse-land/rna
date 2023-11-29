@@ -33,7 +33,7 @@ export const AllPageChillSongs: FC<Props> = ({
 
   return (
     <DailyRecomended>
-      <Box marginBottom={24} paddingRight={32}>
+      <Box marginBottom={24} paddingLeft={24} paddingRight={32}>
         <Title
           str={CHILL_SONGS}
           navigateHandler={viewAllNavigationHandler}

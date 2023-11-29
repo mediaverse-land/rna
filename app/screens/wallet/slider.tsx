@@ -1,5 +1,11 @@
 import { useContext, useRef, useState, useEffect } from "react";
-import { Image, ScrollView, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  Linking,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { ScreenGradient } from "../../components/screen-gradient";
 import { CardSlider } from "./components/card-slider";
 import { Box } from "../../components/box";
@@ -27,9 +33,16 @@ import { StorageService } from "../../services/storage.service";
 import {
   HAS_USER_SEEN_PLUS_CREATE_FORM_TOUR,
   HAS_USER_SEEN_WALLET_TOUR,
+  SETTINGS_STACK,
 } from "../../constaints/consts";
+import {
+  useChargeStripeMutation,
+  useCheckStripeAccountBalanceQuery,
+  useCheckStripeAccountQuery,
+  useConnectToStripeMutation,
+} from "../../services/payment.service";
 
-const { width: WINDOW_WIDTH } = windowSize();
+const { width: WINDOW_WIDTH, height } = windowSize();
 
 const CoachmarkWrapper: any = Coachmark;
 
@@ -43,6 +56,8 @@ const ADD_INVENTORY_GUIDE =
 const _storageService = new StorageService();
 
 export function WalletSlider() {
+  const [_token, setToken] = useState("");
+
   const confirmAlertRef = useRef(null);
   const addInventoryAlertRef = useRef(null);
   const addCardAlertRef = useRef(null);
@@ -72,6 +87,7 @@ export function WalletSlider() {
     }
 
     const formattedToken = tokenStringResolver(token);
+    setToken(formattedToken);
     await getBalenceData(formattedToken);
   };
 
@@ -149,164 +165,235 @@ export function WalletSlider() {
     }
   };
 
+  const { data, isError, error } = useCheckStripeAccountBalanceQuery(
+    {
+      token: _token,
+    },
+    {
+      skip: !_token ? true : false,
+    }
+  );
+
+  const { data: stripeData } = useCheckStripeAccountQuery(
+    {
+      token: _token,
+    },
+    {
+      skip: !_token ? true : false,
+    }
+  );
+
+  // console.log(stripeData)
+
+  const [_connectHandler,
+    { isLoading: isAddingLoading, isFetching: isAddingFetching },
+
+  ] = useConnectToStripeMutation();
+
+  const [
+    _chargeHandler,
+    { isLoading: isChargeLoading, isFetching: isChargeFetching },
+  ] = useChargeStripeMutation();
+
+  const balance = data?.available?.[0]?.amount?.toString();
+
   useEffect(() => {
     if (isFocused) {
       setupTour();
     }
   }, [balanceRef, historyRef, addAccountRef, addInventroyRef]);
 
+  const addCardPressHandler = async () => {
+    const response = await _chargeHandler({ token: _token });
+    if (response?.data?.url) {
+      Linking.openURL(response?.data?.url);
+    }
+  };
+
+  const createAccountHandler = async () => {
+    const response = await _connectHandler({ token: _token });
+    if (response?.data?.url) {
+      Linking.openURL(response?.data?.url);
+    }
+  };
+
+  const redirectToAccountsPage = async () => {
+    const response = await _connectHandler({ token: _token });
+    if (response?.data?.url) {
+      Linking.openURL(response?.data?.url);
+    }
+  };
+
   return (
     <>
       <ScreenGradient>
         <ScrollView style={{ flex: 1, width: "100%" }}>
-          <Box>
-            <PaddingContainer>
-              <Box
-                width={Math.floor(WINDOW_WIDTH) - 48}
-                marginTop={40}
-                height={56}
-                borderRadius={16}
-                alignItems="center"
-                justifyContent="center"
-                additionalStyles={{
-                  overflow: "hidden",
-                }}
-              >
-                <>
-                  <Image
-                    source={{
-                      uri: INVENTORY_BOX_PNG,
-                    }}
-                    style={{
-                      width: "100%",
-                      height: 56,
-                      position: "absolute",
-                      top: 0,
-                    }}
-                    resizeMode="stretch"
-                  />
+          {stripeData ? (
+            <>
+              <Box>
+                <PaddingContainer>
                   <Box
-                    width="100%"
+                    width={Math.floor(WINDOW_WIDTH) - 48}
+                    marginTop={40}
                     height={56}
-                    paddingLeft={16}
-                    paddingRight={16}
-                    direction="row"
+                    borderRadius={16}
                     alignItems="center"
+                    justifyContent="center"
+                    additionalStyles={{
+                      overflow: "hidden",
+                    }}
                   >
-                    <Box
-                      width={80}
-                      height={32}
-                      direction="row"
-                      alignItems="center"
-                      additionalStyles={{
-                        borderRightWidth: 1,
-                        borderRightColor: theme.color.light.TEXT,
-                      }}
-                    >
-                      <Text
-                        color={theme.color.light.TEXT}
-                        lineHeight={16}
-                        fontSize={14}
-                        fontWeight={400}
+                    <>
+                      <Image
+                        source={{
+                          uri: INVENTORY_BOX_PNG,
+                        }}
+                        style={{
+                          width: "100%",
+                          height: 56,
+                          position: "absolute",
+                          top: 0,
+                        }}
+                        resizeMode="stretch"
+                      />
+                      <Box
+                        width="100%"
+                        height={56}
+                        paddingLeft={16}
+                        paddingRight={16}
+                        direction="row"
+                        alignItems="center"
                       >
-                        Inventory
-                      </Text>
-                    </Box>
-                    <Box
-                      flex={1}
-                      marginLeft={16}
-                      direction="row"
-                      alignItems="center"
-                      justifyContent="space-between"
-                    >
-                      <CoachmarkWrapper
-                        allowBackgroundInteractions={false}
-                        ref={balanceRef}
-                        message={INVENTORY_GUIDE}
-                      >
-                        <Text
-                          color={theme.color.light.WHITE}
-                          fontSize={16}
-                          fontWeight={600}
-                        >
-                          {balence}
-                        </Text>
-                      </CoachmarkWrapper>
-
-                      <CoachmarkWrapper
-                        ref={historyRef}
-                        allowBackgroundInteractions={false}
-                        message={HISTORY_GUIDE}
-                      >
-                        <TouchableOpacity
-                          onPress={redirectToHistoryHandler}
-                          activeOpacity={1}
+                        <Box
+                          width={80}
+                          height={32}
+                          direction="row"
+                          alignItems="center"
+                          additionalStyles={{
+                            borderRightWidth: 1,
+                            borderRightColor: theme.color.light.TEXT,
+                          }}
                         >
                           <Text
-                            color={theme.color.light.PRIMARY}
+                            color={theme.color.light.TEXT}
+                            lineHeight={16}
                             fontSize={14}
                             fontWeight={400}
                           >
-                            History
+                            Inventory
                           </Text>
-                        </TouchableOpacity>
-                      </CoachmarkWrapper>
-                    </Box>
+                        </Box>
+                        <Box
+                          flex={1}
+                          marginLeft={16}
+                          direction="row"
+                          alignItems="center"
+                          justifyContent="space-between"
+                        >
+                          <CoachmarkWrapper
+                            allowBackgroundInteractions={false}
+                            ref={balanceRef}
+                            message={INVENTORY_GUIDE}
+                          >
+                            <Text
+                              color={theme.color.light.WHITE}
+                              fontSize={16}
+                              fontWeight={600}
+                            >
+                              {balance}
+                            </Text>
+                          </CoachmarkWrapper>
+
+                          <CoachmarkWrapper
+                            ref={historyRef}
+                            allowBackgroundInteractions={false}
+                            message={HISTORY_GUIDE}
+                          >
+                            <TouchableOpacity
+                              onPress={redirectToHistoryHandler}
+                              activeOpacity={1}
+                            >
+                              <Text
+                                color={theme.color.light.PRIMARY}
+                                fontSize={14}
+                                fontWeight={400}
+                              >
+                                History
+                              </Text>
+                            </TouchableOpacity>
+                          </CoachmarkWrapper>
+                        </Box>
+                      </Box>
+                    </>
                   </Box>
-                </>
-              </Box>
-            </PaddingContainer>
-            <CardSlider />
-            <Box>
-              <Box
-                direction="row"
-                width={"100%"}
-                justifyContent="center"
-                position="relative"
-              >
-                <CoachmarkWrapper
-                  allowBackgroundInteractions={false}
-                  ref={addAccountRef}
-                  message={ADD_CARD_GUIDE}
-                >
-                  <Box width={230} paddingTop={30}>
-                    <Button
-                      varient="flat"
-                      text="Add account"
-                      onpressHandler={openAddCardAlertHandler}
-                      icon={<ICON_ADD width={16} height={16} />}
-                      size="lg"
-                    />
-                  </Box>
-                </CoachmarkWrapper>
-              </Box>
-            </Box>
-            <Box>
-              <CoachmarkWrapper
-                allowBackgroundInteractions={false}
-                ref={addInventroyRef}
-                message={ADD_INVENTORY_GUIDE}
-              >
-                <Box
-                  direction="row"
-                  width={"100%"}
-                  justifyContent="center"
-                  position="relative"
-                >
-                  <Box width={"90%"} paddingTop={30}>
-                    <Button
-                      varient="flat"
-                      text="Add inventory"
-                      onpressHandler={openAddInventoryAlertHandler}
-                      icon={<ICON_ADD width={16} height={16} />}
-                      size="lg"
-                    />
+                </PaddingContainer>
+                <CardSlider />
+                <Box>
+                  <Box
+                    direction="row"
+                    width={"100%"}
+                    justifyContent="center"
+                    position="relative"
+                  >
+                    <CoachmarkWrapper
+                      allowBackgroundInteractions={false}
+                      ref={addAccountRef}
+                      message={ADD_CARD_GUIDE}
+                    >
+                      <Box width={230} paddingTop={30}>
+                        <Button
+                          varient="flat"
+                          text="Add account"
+                          onpressHandler={openAddCardAlertHandler}
+                          icon={<ICON_ADD width={16} height={16} />}
+                          size="lg"
+                        />
+                      </Box>
+                    </CoachmarkWrapper>
                   </Box>
                 </Box>
-              </CoachmarkWrapper>
+                <Box>
+                  <CoachmarkWrapper
+                    allowBackgroundInteractions={false}
+                    ref={addInventroyRef}
+                    message={ADD_INVENTORY_GUIDE}
+                  >
+                    <Box
+                      direction="row"
+                      width={"100%"}
+                      justifyContent="center"
+                      position="relative"
+                    >
+                      <Box width={"90%"} paddingTop={30}>
+                        <Button
+                          varient="flat"
+                          text="Add inventory"
+                          onpressHandler={openAddInventoryAlertHandler}
+                          icon={<ICON_ADD width={16} height={16} />}
+                          size="lg"
+                        />
+                      </Box>
+                    </Box>
+                  </CoachmarkWrapper>
+                </Box>
+              </Box>
+              <Spacer />
+            </>
+          ) : (
+            <Box
+              position="relative"
+              marginTop={height / 2 - 50}
+              width="100%"
+              // direction="row"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Text color="#fff">Please create an stripe account</Text>
+              <TouchableOpacity onPress={redirectToAccountsPage}>
+                <Text color="#eee">Click here</Text>
+              </TouchableOpacity>
             </Box>
-          </Box>
-          <Spacer />
+          )}
         </ScrollView>
       </ScreenGradient>
 
@@ -317,7 +404,9 @@ export function WalletSlider() {
       >
         <Box width={"100%"} flex={1} position="absolute" zIndex={100}>
           <AddInventory
+            isLoading={isChargeFetching || isChargeLoading}
             closeAddInventoryAlertHandler={closeAddInventoryAlertHandler}
+            addCardPressHandler={addCardPressHandler}
           />
         </Box>
       </ModalBottomSheet>
@@ -327,7 +416,11 @@ export function WalletSlider() {
         snapPoints={WINDOW_WIDTH < 370 ? ["50"] : ["38"]}
       >
         <Box width={"100%"} flex={1} position="absolute" zIndex={100}>
-          <AddCard closeAddCardAlertHandler={closeAddCardAlertHandler} />
+          <AddCard
+          isLoading={isAddingFetching || isAddingLoading}
+            closeAddCardAlertHandler={closeAddCardAlertHandler}
+            addCardPressHandler={createAccountHandler}
+          />
         </Box>
       </ModalBottomSheet>
       <ConfirmAlert ref={confirmAlertRef} />

@@ -12,21 +12,16 @@ import { daysInMonth, getDayName } from "../../utils/format-date";
 
 const { width } = screenSize();
 
-
-
 const date = new Date();
 
 const MemoCalendar = ({
-  setActiveMonth,
-  setActiveYear,
-  activeMonth,
-  activeYear,
+  setActiveDay,
 }: {
-  setActiveYear: (year: number) => void;
-  setActiveMonth: (number: string) => void;
-  activeMonth: string;
-  activeYear: number;
+  setActiveDay: (item: { month: string; day: number; year: number }) => void;
 }) => {
+  const [activeMonth, setActiveMonth] = useState<string>(null);
+  const [activeYear, setActiveYear] = useState<number>(null);
+
   const [selectedDay, setSelectedDay] = useState<{
     month: string;
     day: number;
@@ -38,6 +33,10 @@ const MemoCalendar = ({
   const [daysOfMonth, setDaysOfMonth] = useState<any>(null);
   const [daysFakeArray, setDaysFakeArray] = useState<any>(null);
   const [firstDayOfMonth, setFirstDayOfMonth] = useState<any>(null);
+
+  useEffect(() => {
+    setActiveDay({ ...selectedDay, year: activeYear });
+  }, [selectedDay, activeYear]);
 
   useEffect(() => {
     if (months[date.getMonth()]) {
@@ -384,7 +383,7 @@ const MonthDropdown = ({
       style={{
         position: "absolute",
         width: 124,
-        height: 300,
+        height: 445,
         zIndex: 100000000,
         // right: 16,
         top: 28,
@@ -392,12 +391,12 @@ const MonthDropdown = ({
     >
       <LinearGradient {...menuWindowGradientProps}>
         <BlurView
-          style={{ width: "100%", height: "100%", borderRadius: 16 }}
+          style={{ width: "100%", height: "100%",flex: 1, borderRadius: 16 }}
           tint="dark"
           intensity={90}
         >
           <ScrollView style={{ flex: 1 }}>
-            <Box width="100%" padding={16} height="100%">
+            <Box width="100%" padding={16} flex={1}>
               {months.map((month) => {
                 return (
                   <TouchableOpacity
@@ -443,6 +442,7 @@ const menuWindowGradientProps = {
     borderRadius: 16,
     padding: 1,
     opacity: 0.5,
+    flex: 1,
   },
   colors: ["#4b4b55", "#38383c"],
   start: {

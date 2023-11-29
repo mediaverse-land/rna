@@ -28,15 +28,10 @@ export function Title({
       direction="row"
       position="relative"
       paddingLeft={8}
+      
     >
       <Box direction="row" alignItems="center">
         {svgIcon ? svgIcon : null}
-        {/* {iconPath ? (
-          <>
-            <SvgUri uri={iconPath} width={16} height={16} />
-            <View style={{ width: 8, height: 16, marginRight: 8 }}></View>
-          </>
-        ) : null} */}
         <Text>
           <TitleComponent>{str}</TitleComponent>
         </Text>
