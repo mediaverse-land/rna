@@ -5,7 +5,6 @@ import { Input } from "../../../components/form";
 import { Select } from "../../../components/form/select";
 import { Button } from "../../../components/button";
 import { BorderButton } from "./border-button";
-import { useState } from "react";
 import { Text } from "../../../components/text";
 import { ICON_ARROW_DOWN_SVG } from "../../../constaints/icons";
 
@@ -18,7 +17,9 @@ export const CreateConductorFormMemo = ({
   setDescriptionInput,
   showTitleInput,
   setAction,
-  isLoading
+  isLoading,
+  showYoutubeFields,
+  setPrivacy
 }: {
   handleClosePres: () => void;
   closeFormModalAndOpenContenModal: () => void;
@@ -28,7 +29,9 @@ export const CreateConductorFormMemo = ({
   setDescriptionInput: (val: string) => void;
   showTitleInput: boolean;
   setAction: any;
-  isLoading: boolean
+  isLoading: boolean;
+  showYoutubeFields: boolean;
+  setPrivacy: (item:'public'|'private') => void
 }) => {
   return (
     <>
@@ -98,7 +101,7 @@ export const CreateConductorFormMemo = ({
               placeholder="Description"
               onChangeText={(text: string) => setDescriptionInput(text)}
             />
-            {showTitleInput ? (
+            {showTitleInput || showYoutubeFields ? (
               <>
                 <Box marginTop={16}></Box>
                 <Input
@@ -106,6 +109,18 @@ export const CreateConductorFormMemo = ({
                   labelText="Title"
                   placeholder="Title..."
                   onChangeText={(text: string) => setTitleInput(text)}
+                />
+              </>
+            ) : null}
+            {showYoutubeFields ? (
+              <>
+                <Box marginTop={16}></Box>
+                <Select
+                  labelText="Privacy"
+                  placeholder="Choose"
+                  setSelected={(e) => setPrivacy(e)}
+                  value={'public'}
+                  options={["public", "private"]}
                 />
               </>
             ) : null}

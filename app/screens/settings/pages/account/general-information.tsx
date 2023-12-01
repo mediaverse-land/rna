@@ -16,8 +16,11 @@ import { useForm, Controller } from "react-hook-form";
 import { tokenStringResolver } from "../../../../utils/token-string-resolver";
 import { useIsFocused } from "@react-navigation/native";
 import { StatusBar } from "react-native";
+import { Toaster } from "../../../../utils/toaster";
 
 const { width } = windowSize();
+
+const _toaster = new Toaster();
 
 export function GeneralInformationPage() {
   const {
@@ -45,12 +48,14 @@ export function GeneralInformationPage() {
   };
 
   const updateData = async (token: string, updateBody: any) => {
-    const { res, isSuccess, isError } = await updateProfileApiHandler(
+    const { res, isSuccess, isError, errorRes } = await updateProfileApiHandler(
       token,
       updateBody
     );
 
-    if (isError || !isSuccess) {
+
+    if (isError || !isSuccess || errorRes) {
+      _toaster.show(errorRes?.message)
       return;
     }
 

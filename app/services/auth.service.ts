@@ -60,7 +60,18 @@ export const authService: any = createApi({
         };
       },
     }),
-    
+    getTermsOfUse: builder.query({
+      query: () => {
+        return {
+          url: `terms`,
+          method: "GET",
+          headers: {
+            "X-App": "_Android",
+            // "Accept-Language": "en-US"
+          },
+        };
+      },
+    }),
   }),
 });
 
@@ -68,7 +79,7 @@ export const {
   useGetExternalAccountsListQuery,
 
   useRemoveExternalAccountMutation,
-
+  useGetTermsOfUseQuery, 
   useSetFirebasePushNotificationAccountMutation,
   useSignInMutation,
 } = authService;

@@ -98,27 +98,27 @@ export function AccountPage() {
   const signOutHandler = async () => {
     try {
       // Clear bottom nvaigator tour
-      dispatch(removeButtomNavitationTour());
+      // dispatch(removeButtomNavitationTour());
 
-      // Clear explore top bar nvaigator tour
-      dispatch(removeExploreTopBarTour());
-      dispatch(activeDisableOnIntractions());
+      // // Clear explore top bar nvaigator tour
+      // dispatch(removeExploreTopBarTour());
+      // dispatch(activeDisableOnIntractions());
 
-      await _storageService.removeItem(USER_HAS_SEEN_BOTTOM_TAB_GUIDE);
-      await _storageService.removeItem(
-        USER_HAS_SEEN_EXPLORE_TOP_BAR_TOUR_GUIDE
-      );
-      await _storageService.removeItem(HAS_USER_SEEN_EXPLORE_ALL_TOUR);
-      await _storageService.removeItem(HAS_USER_SEEN_APPS_TOUR);
-      await _storageService.removeItem(HAS_USER_SEEN_PLUS_TOUR);
-      await _storageService.removeItem(HAS_USER_SEEN_PLUS_CREATE_FORM_TOUR);
-      await _storageService.removeItem(HAS_USER_SEEN_WALLET_TOUR);
-      await _storageService.removeItem(HAS_USER_SEEN_PROFILE_HEADER_TOUR);
-      await _storageService.removeItem(HAS_USER_SEEN_PROFILE_ITEMS_TOUR);
-      await _storageService.removeItem(HAS_USER_SEEN_SETTINGS_TOUR);
-      await _storageService.removeItem(HAS_USER_SEEN_BUY_BUTTON_TOUR);
-      await _storageService.removeItem(HAS_USER_SEEN_OWNER_VIDEO_TOUR);
-      await _storageService.removeItem(HAS_USER_SEEN_PAYMENT_TOUR);
+      // await _storageService.removeItem(USER_HAS_SEEN_BOTTOM_TAB_GUIDE);
+      // await _storageService.removeItem(
+      //   USER_HAS_SEEN_EXPLORE_TOP_BAR_TOUR_GUIDE
+      // );
+      // await _storageService.removeItem(HAS_USER_SEEN_EXPLORE_ALL_TOUR);
+      // await _storageService.removeItem(HAS_USER_SEEN_APPS_TOUR);
+      // await _storageService.removeItem(HAS_USER_SEEN_PLUS_TOUR);
+      // await _storageService.removeItem(HAS_USER_SEEN_PLUS_CREATE_FORM_TOUR);
+      // await _storageService.removeItem(HAS_USER_SEEN_WALLET_TOUR);
+      // await _storageService.removeItem(HAS_USER_SEEN_PROFILE_HEADER_TOUR);
+      // await _storageService.removeItem(HAS_USER_SEEN_PROFILE_ITEMS_TOUR);
+      // await _storageService.removeItem(HAS_USER_SEEN_SETTINGS_TOUR);
+      // await _storageService.removeItem(HAS_USER_SEEN_BUY_BUTTON_TOUR);
+      // await _storageService.removeItem(HAS_USER_SEEN_OWNER_VIDEO_TOUR);
+      // await _storageService.removeItem(HAS_USER_SEEN_PAYMENT_TOUR);
 
       await _storageService.removeItem("notifs_length");
       await _storageService.removeItem("user_data");

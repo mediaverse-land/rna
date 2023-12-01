@@ -1,16 +1,13 @@
-import { ReactNode } from "react"
-import { Text } from "../text"
+import { ReactNode, memo } from "react";
 
 type Props = {
-    condition: boolean
-    children: ReactNode,
-    id?:string
-}
+  condition: boolean;
+  children: ReactNode;
+  id?: string;
+};
 
-export const RenderIfWithoutLoading = ({condition, children}:Props)=>{
-    return (
-        <>
-            {condition === true ? children: null}
-        </>
-    )
-}
+const RenderIfWithoutLoadingMemo = ({ condition, children }: Props) => {
+  return <>{condition === true ? children : null}</>;
+};
+
+export const RenderIfWithoutLoading = memo(RenderIfWithoutLoadingMemo);

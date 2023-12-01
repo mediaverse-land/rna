@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {REACT_APP_BASE_URL} from '@env'
+import { enviroments } from "../../enviroments/enviroments";
 
 export const viewAllService: any = createApi({
   reducerPath: "viewAllService",
   baseQuery: fetchBaseQuery({
-    baseUrl: REACT_APP_BASE_URL,
+    baseUrl: enviroments.BASE_URL,
   }),
   endpoints: (builder) => ({
     getAssetList: builder.query({

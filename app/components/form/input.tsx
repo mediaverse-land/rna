@@ -29,7 +29,7 @@ type Props = {
   onChangeText?: any;
   value?: any;
   isTextArea?: boolean;
-  showBorder?:boolean
+  showBorder?: boolean;
 };
 
 export function Input({
@@ -43,7 +43,7 @@ export function Input({
   value,
   isTextArea = false,
   inputMode,
-  showBorder = true
+  showBorder = true,
 }: Props) {
   const [labelWidth, setLabelWidth] = useState<number>(0);
 
@@ -71,7 +71,7 @@ export function Input({
               <Text
                 fontSize={14}
                 lineHeight={theme.numericLineHeight.md}
-                color={'#fff'}
+                color={"#fff"}
                 paddingRight={!isRtl ? 16 : 0}
                 paddingLeft={isRtl ? 16 : 0}
               >
@@ -90,7 +90,9 @@ export function Input({
         ) : null}
         <InputBox
           placeholder={placeholder}
-          placeholderTextColor={'#4E4E61'}
+          placeholderTextColor={
+            isTextArea ? "#4E4E61" : labelWidth ? "#4E4E61" : "transparent"
+          }
           showBorder={showBorder}
           style={{
             paddingLeft: isTextArea ? 12 : labelWidth,

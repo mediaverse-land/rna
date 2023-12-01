@@ -8,7 +8,7 @@ import { LoadingSpinner } from "../loader-spinner";
 import { LinearGradient } from "expo-linear-gradient";
 
 type Varient = "muted" | "primary" | "flat" | "dark";
-type Size = "lg" | "sm";
+type Size = "lg" | "sm" | "xlg";
 
 type Props = {
   onpressHandler?: (event: GestureResponderEvent) => void;
@@ -93,18 +93,25 @@ export const Button: FC<Props> = ({
     };
   }, []);
 
-  const sizes: SizeObject = {
-    sm: {
-      fontSize: 12,
-      fontWeight: 400,
-      lineHeight: 20,
-    },
-    lg: {
-      fontWeight: 600,
-      fontSize: 16,
-      lineHeight: 16,
-    },
-  };
+  const sizes: SizeObject = useMemo(() => {
+    return {
+      sm: {
+        fontSize: 12,
+        fontWeight: 400,
+        lineHeight: 20,
+      },
+      lg: {
+        fontWeight: 600,
+        fontSize: 14,
+        lineHeight: 16,
+      },
+      xlg: {
+        fontWeight: 600,
+        fontSize: 16,
+        lineHeight: 16,
+      },
+    };
+  }, []);
 
   const { backgroundColor, textColor, gradient } = varients[varient];
   const { fontSize, fontWeight, lineHeight } = sizes[size] || sizes["sm"];

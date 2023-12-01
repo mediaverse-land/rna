@@ -76,6 +76,24 @@ export const assetService: any = createApi({
         };
       },
     }),
+    getShareList: builder.query({
+      query: (args) => {
+        return {
+          url: `/share-schedules?page=${args.page}`,
+          method: "GET",
+          headers: { Authorization: `Bearer ${args.token}` },
+        };
+      },
+    }),
+    removeShareItem: builder.mutation({
+      query: (args) => {
+        return {
+          url: `/share-schedules/${args.id}`,
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${args.token}` },
+        };
+      },
+    }),
 
   }),
 });
@@ -87,5 +105,8 @@ export const {
   useYoutubeShareMutation,
   useGetAssetListQuery,
   useShareMutation, 
-  useRemoveExternalAccountMutation
+  useGetShareListQuery, 
+  useRemoveExternalAccountMutation,
+  useRemoveShareItemMutation,
+
 } = assetService;

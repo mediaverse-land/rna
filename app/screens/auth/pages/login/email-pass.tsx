@@ -7,7 +7,9 @@ import { Button } from "../../../../components/button";
 import { FC, useContext, useMemo } from "react";
 import { LoginNavigationEvent } from "../types";
 import { Controller, useForm } from "react-hook-form";
-import { usernameLoginformStructure } from "./form-strucutre";
+import {
+  emailLoginformStructure,
+} from "./form-strucutre";
 import { useSignInMutation } from "../../../../services/auth.service";
 import { Toaster } from "../../../../utils/toaster";
 import { tokenContext } from "../../../../context/token";
@@ -20,7 +22,7 @@ type Props = {
 
 const _toaster = new Toaster();
 
-export const UserPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
+export const EmailPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
   const {
     handleSubmit,
     control,
@@ -37,13 +39,14 @@ export const UserPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
   const onSubmit = async (data: any) => {
     const requestBody = {
       password: data.password,
-      username: data.username.toLowerCase()
-    }
+      email: data.email,
+    };
 
     const response = await _loginHandler({ body: requestBody });
 
     if (response?.data) {
       const { token, user } = response?.data;
+      // const response = res.data;
       saveDataToContext(token, user);
     }
 
@@ -58,7 +61,7 @@ export const UserPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
   };
 
   const renderForm = useMemo(() => {
-    return usernameLoginformStructure.map((f: any, index: number) => {
+    return emailLoginformStructure.map((f: any, index: number) => {
       return (
         <Box width="100%" marginBottom={index === 0 ? 16 : 0} key={f.id}>
           <Controller
@@ -76,6 +79,7 @@ export const UserPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
                 additionalProps={{
                   inputMode: f.type,
                   secureTextEntry: f.type === "password" ? true : false,
+                  autoComplete: f.type === "password" ? "off" : "email",
                 }}
               />
             )}
@@ -104,27 +108,13 @@ export const UserPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
             fontSize={12}
             fontWeight={600}
           >
-            Insert your username to login
+            Insert your email to login
           </Text>
           <Box width="100%" marginTop={32}>
             {renderForm}
           </Box>
 
           <Box marginTop={32}>
-            <TouchableOpacity
-              onPress={loginNavigationEventsHandler.navigateToEmailLogin}
-            >
-              <Text
-                lineHeight={16}
-                fontWeight={400}
-                fontSize={12}
-                color={theme.color.light.LIGHT_DESCRIPTION}
-              >
-                Login with email
-              </Text>
-            </TouchableOpacity>
-          </Box>
-          <Box marginTop={8}>
             <TouchableOpacity
               onPress={loginNavigationEventsHandler.navigateToPhoneLogin}
             >
@@ -135,6 +125,20 @@ export const UserPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
                 color={theme.color.light.LIGHT_DESCRIPTION}
               >
                 Log in with phone
+              </Text>
+            </TouchableOpacity>
+          </Box>
+          <Box marginTop={8}>
+            <TouchableOpacity
+              onPress={loginNavigationEventsHandler.navigateToUsernameLogin}
+            >
+              <Text
+                lineHeight={16}
+                fontWeight={400}
+                fontSize={12}
+                color={theme.color.light.LIGHT_DESCRIPTION}
+              >
+                Log in with username
               </Text>
             </TouchableOpacity>
           </Box>

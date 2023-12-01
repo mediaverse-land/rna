@@ -7,6 +7,7 @@ import {
   useState,
 } from "react";
 import {
+  FlatList,
   Platform,
   StyleSheet,
   View,
@@ -76,10 +77,10 @@ export const ChannelsPage = ({ headerComponent }: any) => {
 
   return (
     <>
-      <FlashList
+      <FlatList
         data={[]}
         ListHeaderComponentStyle={styles.header}
-        estimatedItemSize={50}
+        // estimatedItemSize={50}
         ListHeaderComponent={headerComponent}
         ListFooterComponent={
           <>

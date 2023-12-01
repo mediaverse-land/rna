@@ -42,6 +42,7 @@ import { Toaster } from "./app/utils/toaster";
 import { useSetFirebasePushNotificationAccountMutation } from "./app/services/auth.service";
 // import PushNotificationWrapper from "./app/components/push-notification-wrapper";
 import { tokenStringResolver } from "./app/utils/token-string-resolver";
+import { PushNotificationPermissionAlert } from "./app/components/push-notification-permission-alert";
 
 type Route = { id: number; name: string; component: FC | any };
 
@@ -181,12 +182,11 @@ export function RootNavigator({ firebaseToken }: Props) {
     const _token = tokenStringResolver(userToken);
 
     const requestBody = { token: firebaseToken };
+    
     const response = await _setAccountHandler({
       body: requestBody,
       token: _token,
     });
-
-    console.log({ response });
   };
 
   useEffect(() => {
@@ -219,7 +219,6 @@ export function RootNavigator({ firebaseToken }: Props) {
     const token: string = tk;
 
     await deliverNotificationTokenToApi(firebaseToken, token);
-    // }
   };
 
   const isAuth = isUserAuthenticated === true;
@@ -227,10 +226,9 @@ export function RootNavigator({ firebaseToken }: Props) {
   return (
     <>
       <NavigationContainer>
-        {/* <PushNotificationPermissionAlert isAuth={isAuth} /> */}
+        <PushNotificationPermissionAlert isAuth={isAuth} />
         {isLoading ? (
           <SafeAreaView style={{ flex: 1 }}>
-            {/* <StatusBar backgroundColor={"#030340"} barStyle="light-content" /> */}
             <LinearGradient
               colors={["#030340", "#030340"]}
               start={{ x: 0.7, y: 0 }}

@@ -1,8 +1,8 @@
-import { memo, useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { useGetExternalAccountsListQuery } from "../../../services/auth.service";
 import { useClickOutside } from "react-native-click-outside";
 import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
-import { ChannelItem } from "../types";
+import { ChannelItem, ShareItem } from "../types";
 import { Box } from "../../../components/box";
 import { LinearGradient } from "expo-linear-gradient";
 import {
@@ -13,7 +13,12 @@ import { Text } from "../../../components/text";
 import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
 import { ActivityIndicator } from "react-native";
 import { BlurView } from "expo-blur";
-import { useRemoveExternalAccountMutation } from "../../../services/asset.service";
+import {
+  useGetShareListQuery,
+  useRemoveExternalAccountMutation,
+  useRemoveShareItemMutation,
+} from "../../../services/asset.service";
+import { Toaster } from "../../../utils/toaster";
 
 const gradientProps = {
   style: {
@@ -65,23 +70,24 @@ const accountTypes = {
   4: "RTMP",
 };
 
-const MemoChannelsList = ({ token }: { token: string }) => {
+const _toaster = new Toaster();
+
+const MemoShareList = ({ token }: { token: string }) => {
   const [activeEditWindowId, setActiveEditWindowId] = useState<number>(null);
 
   const [selectedItem, setSelectedItem] = useState<number>(null);
 
-  const [dataList, setDataList] = useState<ChannelItem[]>([]);
+  const [dataList, setDataList] = useState<ShareItem[]>([]);
 
   const [page, setPage] = useState(1);
 
   const openEditWindowHandler = (id: number) => setActiveEditWindowId(id);
   const closeEditWindowHandler = () => setActiveEditWindowId(null);
 
-  const { data, isLoading, isFetching, refetch } =
-    useGetExternalAccountsListQuery({
-      token,
-      page,
-    });
+  const { data, isLoading, isFetching, refetch, error } = useGetShareListQuery({
+    token,
+    page,
+  });
 
   const current_page = data?.current_page;
   const total = data?.total;
@@ -101,19 +107,27 @@ const MemoChannelsList = ({ token }: { token: string }) => {
   });
 
   const [
-    _removeAccountHandler,
+    _removeItemHandler,
     { isLoading: isRremoveLoading, isFetching: isRremoveFetching },
-  ] = useRemoveExternalAccountMutation();
+  ] = useRemoveShareItemMutation();
 
   const removeExternalAccountHandler = async (accountId: number) => {
     setSelectedItem(accountId);
 
-    const resposne = await _removeAccountHandler({
+    const resposne = await _removeItemHandler({
       token,
       id: accountId,
     });
-    if (resposne) {
-      refetch();
+
+    if (resposne && !resposne?.error) {
+      _toaster.show("Item deleted successfully");
+      setSelectedItem(null);
+      const filteredList = dataList?.filter((f) => f.id !== accountId);
+      setDataList(filteredList);
+      closeEditWindowHandler();
+    }
+    if (resposne?.error) {
+      _toaster.show("Failed");
     }
   };
 
@@ -129,11 +143,9 @@ const MemoChannelsList = ({ token }: { token: string }) => {
     setPage((pg) => pg + 1);
   };
 
-  const renderItem = ({ item }: { item: ChannelItem }) => {
+  const renderItem = ({ item }: { item: ShareItem }) => {
     return (
-      <TouchableOpacity
-        activeOpacity={1}
-      >
+      <TouchableOpacity activeOpacity={1}>
         <Box
           width="100%"
           marginBottom={16}
@@ -176,22 +188,14 @@ const MemoChannelsList = ({ token }: { token: string }) => {
                       fontSize={16}
                     >
                       {/* @ts-ignore */}
-                      {accountTypes[item.type]}
+                      share to {item?.type}
                     </Text>
                     <Text
                       color="rgba(102, 102, 128, 1)"
                       fontWeight={400}
                       fontSize={12}
                     >
-                      {isRremoveFetching || isRremoveLoading
-                        ? selectedItem === item.id
-                          ? "..."
-                          : item.status === "pending"
-                          ? "..."
-                          : "Finished"
-                        : item.status === "pending"
-                        ? "..."
-                        : "Finished"}
+                      {item?.time}
                     </Text>
                   </Box>
                 </Box>
@@ -217,17 +221,13 @@ const MemoChannelsList = ({ token }: { token: string }) => {
             <View ref={modalWrapperRef} style={styles.editViewWrapper}>
               <LinearGradient {...menuWindowGradientProps}>
                 <BlurView style={styles.blur} tint="dark" intensity={80}>
-                  <Box width="100%" paddingLeft={16} paddingRight={16} paddingTop={14} height="100%">
-                    {/* <TouchableOpacity activeOpacity={1}>
-                      <Text
-                        color="#D9D9FF"
-                        marginBottom={16}
-                        fontSize={14}
-                        fontWeight={600}
-                      >
-                        Edit
-                      </Text>
-                    </TouchableOpacity> */}
+                  <Box
+                    width="100%"
+                    paddingLeft={16}
+                    paddingRight={16}
+                    paddingTop={12}
+                    height="100%"
+                  >
                     <TouchableOpacity
                       activeOpacity={1}
                       onPress={() => removeExternalAccountHandler(item?.id)}
@@ -241,11 +241,6 @@ const MemoChannelsList = ({ token }: { token: string }) => {
                         Delete
                       </Text>
                     </TouchableOpacity>
-                    {/* <TouchableOpacity activeOpacity={1}>
-                      <Text color="#D9D9FF" fontSize={14} fontWeight={600}>
-                        Refresh
-                      </Text>
-                    </TouchableOpacity> */}
                   </Box>
                 </BlurView>
               </LinearGradient>
@@ -256,23 +251,30 @@ const MemoChannelsList = ({ token }: { token: string }) => {
     );
   };
 
-  const key = useCallback((item: ChannelItem) => item.id.toString(), []);
+  const key = useCallback(
+    (item: ShareItem, index: number) => item?.id?.toString(),
+    []
+  );
 
   return (
     <Box id="channels-list" width="100%" marginTop={32}>
-      {data?.data?.length ? (
-        <FlatList
-          data={data?.data}
-          renderItem={renderItem}
-          keyExtractor={key}
-          style={{
-            overflow: "visible",
-            paddingBottom: 100,
-          }}
-          onEndReached={nextPageHandler}
-        />
-      ) : null}
-      <RenderIfWithoutLoading condition={isLoading || isFetching}>
+      {/* {data?.data?.length ? ( */}
+      <FlatList
+        data={dataList}
+        renderItem={renderItem}
+        keyExtractor={key}
+        style={{
+          overflow: "visible",
+          paddingBottom: 100,
+        }}
+        onEndReached={nextPageHandler}
+      />
+      {/* ) : null} */}
+      <RenderIfWithoutLoading
+        condition={
+          isLoading || isFetching || isRremoveFetching || isRremoveLoading
+        }
+      >
         <Box marginTop={-100}>
           <ActivityIndicator color="#8A8AE5" />
         </Box>
@@ -280,13 +282,13 @@ const MemoChannelsList = ({ token }: { token: string }) => {
     </Box>
   );
 };
-export const ChannelsList = memo(MemoChannelsList);
+export const ShareList = memo(MemoShareList);
 
 const styles = StyleSheet.create({
   editViewWrapper: {
     position: "absolute",
     width: 124,
-    height: 50,
+    height: 124,
     zIndex: 100000000,
     right: 16,
     top: 58,

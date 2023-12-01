@@ -39,7 +39,7 @@ Notifications.setNotificationHandler({
 export default function App() {
   const [token, setToken] = useState("");
 
-  // const [isOffline, setIsOffline] = useState(false);
+  const [isOffline, setIsOffline] = useState(false);
 
   const [newPushMessage, setNewPushMessage] = useState<any>(null);
 
@@ -61,9 +61,9 @@ export default function App() {
   }
 
   useEffect(() => {
-    if(isDevMode()){
-      return;
-    }
+    // if (isDevMode()) {
+    //   return;
+    // }
     if (requestUserPermission()) {
       // Return fcm token key
       messaging()
@@ -105,36 +105,37 @@ export default function App() {
     return unsubscribe;
   }, []);
 
-  // const checkConnection = () => {
-  //   addEventListener((state) => {
-  //     if (!state.isConnected) {
-  //       setIsOffline(true);
-  //       return;
-  //     }
-  //     setIsOffline(false);
-  //   });
-  // };
+  const checkConnection = () => {
+    addEventListener((state) => {
+      if (!state.isConnected) {
+        setIsOffline(true);
+        return;
+      }
+      setIsOffline(false);
+      Updates.reloadAsync()
+    });
+  };
 
-  // const offlineView = (
-  //   <View
-  //     style={{
-  //       width: "100%",
-  //       minHeight: Dimensions.get("screen").height,
-  //       alignItems: "center",
-  //       justifyContent: "center",
-  //     }}
-  //   >
-  //     <Text color="black">Please connect to internet to continue</Text>
-  //     <TouchableOpacity
-  //       style={{
-  //         marginTop: 14,
-  //       }}
-  //       onPress={checkConnection}
-  //     >
-  //       <Text color="blue">Retry</Text>
-  //     </TouchableOpacity>
-  //   </View>
-  // );
+  const offlineView = (
+    <View
+      style={{
+        width: "100%",
+        minHeight: Dimensions.get("screen").height,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Text color="black">Please connect to internet to continue</Text>
+      <TouchableOpacity
+        style={{
+          marginTop: 14,
+        }}
+        onPress={checkConnection}
+      >
+        <Text color="blue">Retry</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <>
@@ -143,15 +144,11 @@ export default function App() {
           <TokenContextProvider>
             <UserContextProvider>
               <AlertContextProvider>
-                {/* {isOffline ? (
+                {isOffline ? (
                   offlineView
-                ) : ( */}
-                <RootNavigator firebaseToken={token} />
-                {/* // )}
-                // <PushNotificationWrapper
-                //   message={newPushMessage}
-                //   setMessage={setNewPushMessage}
-                // /> */}
+                ) : (
+                  <RootNavigator firebaseToken={token} />
+                )}
               </AlertContextProvider>
             </UserContextProvider>
           </TokenContextProvider>

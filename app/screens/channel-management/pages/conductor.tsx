@@ -1,10 +1,11 @@
-import { Platform, StyleSheet, View } from "react-native";
+import { FlatList, Platform, StyleSheet, View } from "react-native";
 import { Box } from "../../../components/box";
 import {
   lazy,
   memo,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -15,15 +16,16 @@ import { Calendar } from "../../../components/calendar";
 import { FlashList } from "@shopify/flash-list";
 import { alertContext } from "../../../context/alert";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
-import { windowSize } from "../../../utils/window-size";
 import { CreateConductorFormMemo } from "../components/create-conductor-form";
 import { BorderButton } from "../components/border-button";
 import { SelectAccountModal } from "../components/select-account-modal";
-import { useShareMutation } from "../../../services/asset.service";
+import { useGetShareListQuery, useShareMutation } from "../../../services/asset.service";
 import { Toaster } from "../../../utils/toaster";
 import { ExternalAccount } from "../../../types/external-account";
 import { retriveToken } from "../../../utils/retrive-token";
 import { tokenContext } from "../../../context/token";
+import { channelManagementStyles } from "../styles";
+import { ShareList } from "../components/share-list";
 
 //@ts-ignore
 const SelectContentModal = lazy(
@@ -31,7 +33,7 @@ const SelectContentModal = lazy(
   () => import("../components/select-content-modal")
 );
 
-const { height } = windowSize();
+const styles = channelManagementStyles;
 
 const _toaster = new Toaster();
 
@@ -54,6 +56,21 @@ const bgGradientConfig = {
 
 const BOTTOM_SHEET_BLUR_PERCENT = Platform.OS === "android" ? 50 : 80;
 
+const monthIndex: Record<string, number> = {
+  January: 1,
+  February: 2,
+  March: 3,
+  April: 4,
+  May: 5,
+  June: 6,
+  July: 7,
+  August: 8,
+  September: 9,
+  October: 10,
+  November: 11,
+  December: 12,
+};
+
 export const ConductorPage = ({ headerComponent }: any) => {
   const [activeDay, setActiveDay] = useState<{
     month: string;
@@ -65,7 +82,9 @@ export const ConductorPage = ({ headerComponent }: any) => {
   const [selectedChannel, setSelectedChannel] = useState<ExternalAccount>(null);
   const [action, setAction] = useState<"Archive" | "Stream" | "Share">(null);
   const [titleInput, setTitleInput] = useState("");
+  const [token, setToken] = useState("");
   const [descriptionInput, setDescriptionInput] = useState("");
+  const [privacy, setPrivacy] = useState<'public'|'private'>('public');
   const [isOpenSelectAccountModal, setIsOpenSelectAccountModal] =
     useState(false);
   const [selectedAssetToShareId, setSelectedAssetToShareId] =
@@ -77,13 +96,28 @@ export const ConductorPage = ({ headerComponent }: any) => {
 
   const [_shareApiHandler, { isLoading, isFetching }] = useShareMutation();
 
+  const {refetch} = useGetShareListQuery({
+    page: 1,
+    token,
+  }, {
+    skip: !token? true: false
+  });
+
   const snapPoints = useMemo(() => ["100%"], []);
   const contentModalSnapPoints = useMemo(() => ["100%"], []);
   const selectAccountModalSnapPoints = useMemo(() => ["100%"], []);
 
   const tokenCtx = useContext(tokenContext);
-
   const alrtCtx = useContext(alertContext);
+
+  useEffect(() => {
+    const getToken = async () => {
+      const _tk = await retriveToken(tokenCtx);
+      setToken(_tk);
+    };
+
+    getToken();
+  }, []);
 
   const hideBottomTabbar = useCallback(() => {
     alrtCtx?.open();
@@ -159,7 +193,7 @@ export const ConductorPage = ({ headerComponent }: any) => {
   };
 
   const addAssetHandler = (assetId: number) => {
-    if(!assetId){
+    if (!assetId) {
       return;
     }
     setSelectedAssetToShareId(assetId);
@@ -170,6 +204,11 @@ export const ConductorPage = ({ headerComponent }: any) => {
     setSelectedChannel(account);
     handleselectAccountModalClosePress();
   };
+
+
+  const shwoInputValue = action === "Stream";
+
+  const showYoutubeFields = action === "Share";
 
   const createConductorHandler = async () => {
     if (!selectedChannel) {
@@ -191,20 +230,18 @@ export const ConductorPage = ({ headerComponent }: any) => {
       return;
     }
 
-    if(!activeDay?.year || !activeDay?.month || !activeDay?.day){
+    if (!activeDay?.year || !activeDay?.month || !activeDay?.day) {
       _toaster.show("Please select a date to continue");
       return;
     }
 
-    // Archive = Drive
-    // Share = Youtube
-    // Stream
-
     const asset = selectedAssetToShareId;
     const account = selectedChannel?.id;
 
+    const __monthIndex = monthIndex[activeDay?.month];
+
     const times = [
-      `${activeDay?.year}-${activeDay?.month}-${activeDay?.day} 00:00:00`,
+      `${activeDay?.year}-${__monthIndex}-${activeDay?.day} 00:00:00`,
     ];
 
     let requestBody;
@@ -230,6 +267,7 @@ export const ConductorPage = ({ headerComponent }: any) => {
         title: titleInput,
         description: descriptionInput,
         times,
+        privacy
       };
     }
 
@@ -243,30 +281,30 @@ export const ConductorPage = ({ headerComponent }: any) => {
       };
     }
 
-    const token = await retriveToken(tokenCtx);
-
-    console.log(requestBody)
     const response = await _shareApiHandler({ token, url, body: requestBody });
+    console.log(response)
     if (response?.error) {
-      console.log(response?.error)
       _toaster.show("Failed");
     }
     if (response?.data) {
       _toaster.show("Shared successfully");
+      handleClosePres();
+      await refetch();
     }
   };
 
-  const shwoInputValue = action === "Stream";
+
 
   return (
     <>
-      <FlashList
+      <FlatList
         data={[]}
         style={{}}
         ListHeaderComponentStyle={{
           flex: 1,
           height: 200,
         }}
+        onEndReachedThreshold={4}
         ListHeaderComponent={headerComponent}
         ListFooterComponent={
           <>
@@ -278,12 +316,14 @@ export const ConductorPage = ({ headerComponent }: any) => {
               paddingTop={32}
               flex={1}
               paddingBottom={130}
+              
             >
               <Calendar setActiveDay={setActiveDay} />
               <AddUpcommingButton
                 title="Add channel"
                 handler={handleOpenPres}
               />
+              <ShareList token={token} />
             </Box>
           </>
         }
@@ -321,9 +361,11 @@ export const ConductorPage = ({ headerComponent }: any) => {
                   setTitleInput={setTitleInput}
                   setDescriptionInput={setDescriptionInput}
                   showTitleInput={shwoInputValue}
+                  showYoutubeFields={showYoutubeFields}
                   setAction={setAction}
                   isLoading={isLoading || isFetching}
                   createConductorHandler={createConductorHandler}
+                  setPrivacy={setPrivacy}
                 />
               </BlurView>
             </BottomSheetScrollView>
@@ -375,7 +417,6 @@ export const ConductorPage = ({ headerComponent }: any) => {
               <SelectAccountModal
                 closerHandler={handleselectAccountModalClosePress}
                 setSelectedChannel={setSelectedChannelHandler}
-                
               />
             </LinearGradient>
           </BottomSheet>
@@ -387,66 +428,3 @@ export const ConductorPage = ({ headerComponent }: any) => {
 
 const CreateConductorForm = memo(CreateConductorFormMemo);
 const AddUpcommingButton = memo(BorderButton);
-
-const styles = StyleSheet.create({
-  editViewWrapper: {
-    position: "absolute",
-    width: 124,
-    height: 124,
-    zIndex: 100000000,
-    right: 16,
-    top: 58,
-  },
-  safeAreaView: {
-    flex: 1,
-  },
-  header: {
-    flex: 1,
-    height: 200,
-  },
-  blur: {
-    height: "100%",
-    borderRadius: 16,
-    borderTopRightRadius: 16,
-    borderWidth: 1,
-    borderTopLeftRadius: 16,
-  },
-  container: {
-    flex: 1,
-    height: 470,
-    width: "100%",
-    padding: 24,
-    position: "absolute",
-    bottom: 0,
-    backgroundColor: "transparent",
-    borderTopRightRadius: 16,
-    borderTopLeftRadius: 16,
-  },
-  contentModalContainer: {
-    flex: 1,
-    height: height,
-    width: "100%",
-    padding: 24,
-    position: "absolute",
-    bottom: 0,
-    backgroundColor: "transparent",
-    borderTopRightRadius: 16,
-    borderTopLeftRadius: 16,
-  },
-  contentContainer: {
-    flex: 1,
-    alignItems: "center",
-  },
-  bottomSheetScrollView: {
-    width: "100%",
-    borderTopRightRadius: 16,
-    borderTopLeftRadius: 16,
-  },
-  bottomSheetBlurView: {
-    width: "100%",
-    flex: 1,
-    minHeight: 300,
-    borderTopRightRadius: 16,
-    borderTopLeftRadius: 16,
-  },
-});

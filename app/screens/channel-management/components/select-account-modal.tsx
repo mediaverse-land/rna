@@ -56,10 +56,10 @@ const accountTypes = {
 
 export const SelectAccountModal = ({
   closerHandler,
-  setSelectedChannel
+  setSelectedChannel,
 }: {
   closerHandler: () => void;
-  setSelectedChannel:(channel: ExternalAccount) => void;
+  setSelectedChannel: (channel: ExternalAccount) => void;
 }) => {
   const [token, setToken] = useState("");
 
@@ -85,7 +85,11 @@ export const SelectAccountModal = ({
     }
   );
 
-  const renderItem = ({ item }: { item: ChannelItem | ExternalAccount | any }) => {
+  const renderItem = ({
+    item,
+  }: {
+    item: ChannelItem | ExternalAccount | any;
+  }) => {
     return (
       <TouchableOpacity
         activeOpacity={1}
@@ -182,7 +186,7 @@ export const SelectAccountModal = ({
               fontSize={16}
               fontWeight={600}
             >
-              Select content
+              Select channel
             </Text>
           </Box>
           <Box width={22} height={17} position="absolute" left={24} top={35}>
@@ -197,6 +201,20 @@ export const SelectAccountModal = ({
       }}
       data={data?.data}
       renderItem={renderItem}
+      ListFooterComponent={
+        <>
+          {!isLoading && !isFetching && !data?.data?.length ? (
+            <Box
+              width="100%"
+              marginTop={32}
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Text color={theme.color.light.WHITE}>No account found</Text>
+            </Box>
+          ) : null}
+        </>
+      }
       keyExtractor={key}
     />
   );

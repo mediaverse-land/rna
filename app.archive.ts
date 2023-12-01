@@ -63,7 +63,7 @@ export default function App() {
     const handleOpenSettings = async() => {
         if (Platform.OS === 'ios') {
             Linking.openURL('app-settings:');
-        } else {
+        } else {zzzzzzzzzz
             await startActivityAsync(
                 IntentLauncher.ActivityAction.APP_NOTIFICATION_SETTINGS,
                 {

@@ -37,8 +37,8 @@ export const InputComponent: any = {
     border-radius: 8px;
     border: 1px solid
       ${(props) =>
-        props.hasError ? theme.color.light.DANGER : (props.showBorder ? theme.color.light.TEXT: 'transparent')};
-    background-color: rgba(28, 28, 35, 0.75);
+        props.hasError ? theme.color.light.DANGER : (props.showBorder ?  theme.color.light.INPUT_PLACEHOLDER : 'transparent')};
+    background-color: rgba(14, 14, 18, 0.50);
     color: ${(props) =>
       props.hasError ? theme.color.light.DANGER : theme.color.light.WHITE};
     font-size: ${theme.fontSize.md};

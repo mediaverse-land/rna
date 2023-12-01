@@ -34,15 +34,12 @@ const _logger = new Logger();
 
 export const ProfileScreenAllPage = () => {
   const [isLoading, setIsLoading] = useState(true);
+  
   const [isInfinitLoading, setIsInfinitLoading] = useState(false);
   const [totalAssetsCount, setTotalAssetsCount] = useState<number>(null);
   const [data, setData] = useState<Asset[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [token, setToken] = useState("");
-
-  // const { PROFILE_HEADER_TOUR_HAS_SEEN } = useSelector(
-  //   (state: RootState) => state.tourSlice
-  // );
 
   const { ACTIVE_PAGE }: { ACTIVE_PAGE: "subscribe" | "ownership" } =
     useSelector((store: RootState) => store.profileSlice);
@@ -171,6 +168,7 @@ export const ProfileScreenAllPage = () => {
   const isListFinished = () => {
     return totalAssetsCount === data.length ? true : false;
   };
+  
   const isSelectBarVisible = selectedContents.length ? true : false;
 
   const deleteAssetsHandler = async () => {
