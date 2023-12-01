@@ -53,10 +53,10 @@ export default function App() {
         authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
       if (enabled) {
-        console.log("Authorization status:", authStatus);
+        // console.log("Authorization status:", authStatus);
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   }
 
@@ -80,22 +80,22 @@ export default function App() {
       .getInitialNotification()
       .then((remoteMessage: any) => {
         if (remoteMessage) {
-          console.log(
-            "Notification caused app to open from quit state:",
-            remoteMessage.notification
-          );
+          // console.log(
+          //   "Notification caused app to open from quit state:",
+          //   remoteMessage.notification
+          // );
         }
       });
 
     messaging().onNotificationOpenedApp((remoteMessage: any) => {
-      console.log(
-        "Notification caused app to open from background state:",
-        remoteMessage.notification
-      );
+      // console.log(
+      //   "Notification caused app to open from background state:",
+      //   remoteMessage.notification
+      // );
     });
 
     messaging().setBackgroundMessageHandler(async (remoteMessage: any) => {
-      console.log("Message handled in the background!", remoteMessage);
+      // console.log("Message handled in the background!", remoteMessage);
     });
 
     const unsubscribe = messaging().onMessage(async (remoteMessage: any) => {

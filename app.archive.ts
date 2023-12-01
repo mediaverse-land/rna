@@ -113,10 +113,10 @@ export default function App() {
             .getInitialNotification()
             .then((remoteMessage: any) => {
                 if (remoteMessage) {
-                    console.log(
-                        "Notification caused app to open from quit state:",
-                        remoteMessage.notification
-                    );
+                    // console.log(
+                    //     "Notification caused app to open from quit state:",
+                    //     remoteMessage.notification
+                    // );
                     // setInitialRoute(remoteMessage.data.type); // e.g. "Settings"
                 }
                 // setLoading(false);
@@ -125,19 +125,19 @@ export default function App() {
         // Assume a message-notification contains a "type" property in the data payload of the screen to open
 
         messaging().onNotificationOpenedApp((remoteMessage) => {
-            console.log(
-                "Notification caused app to open from background state:",
-                remoteMessage.notification
-            );
+            // console.log(
+            //     "Notification caused app to open from background state:",
+            //     remoteMessage.notification
+            // );
         });
 
         // Register background handler
         messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-            console.log("Message handled in the background!", remoteMessage);
+            // console.log("Message handled in the background!", remoteMessage);
         });
 
         const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-            Alert.alert("A new FCM message arrived!", JSON.stringify(remoteMessage));
+            // Alert.alert("A new FCM message arrived!", JSON.stringify(remoteMessage));
         });
 
         return unsubscribe;
