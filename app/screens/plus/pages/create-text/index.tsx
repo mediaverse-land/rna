@@ -111,7 +111,7 @@ export const CreateTextScreen = () => {
 
         if (!asset_id) {
           setIsLoading(false);
-          _toast.show("Something went wrong, try again");
+          _toast.show(res?.error?.data?.message || "Something went wrong, try again");
           return;
         }
 

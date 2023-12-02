@@ -100,6 +100,7 @@ export class YoutubeShare implements IYoutubeShare {
     });
 
 
+
     if (result?.data) {
       this.closeModal();
       _toaster.show("Asset shared to youtube successfully");

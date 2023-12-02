@@ -14,6 +14,7 @@ import { LoadingSpinner } from "../../components/loader-spinner";
 import { getViewAllDataApiHandler } from "./service";
 import { Logger } from "../../utils/logger";
 import { viewAllPages } from "./models";
+import { Button } from "../../components/button";
 
 type Props = {
   navigation: UseNavigationType;
@@ -63,7 +64,7 @@ const ViewAllScreen = ({ navigation, route }: Props) => {
     if (!isFocused) {
       setAssetList([]);
     }
-  }, [isFocused]);
+  }, [isFocused, currentPage]);
 
   const getData = async () => {
     const token = await retriveToken(tokenCtx);
@@ -102,9 +103,8 @@ const ViewAllScreen = ({ navigation, route }: Props) => {
     setIsLoading(false);
   };
 
-
   const handleNextPage = () => {
-    if(isLoading){
+    if (isLoading) {
       return;
     }
     setCurrentPage((pg) => pg + 1);
@@ -136,10 +136,10 @@ const ViewAllScreen = ({ navigation, route }: Props) => {
           <ViewAllTitle title={title} icon={icon} goBack={navigation.goBack} />
           {ListComponent ? (
             <Box paddingBottom={100}>
-              <ListComponent
-                data={assetList}
-                navigate={navigation.navigate}
-              />
+              <ListComponent data={assetList} navigate={navigation.navigate} />
+              {/* <Box paddingLeft={24} paddingRight={24}>
+                <Button varient="primary" text="Load more"onpressHandler={handleNextPage} />
+              </Box> */}
             </Box>
           ) : null}
           {isLoading ? (

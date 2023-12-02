@@ -79,6 +79,7 @@ export class TextToTextConvert implements ITextToTextConvert {
       if (result?.error) {
         _toaster.show("Convert text to text failed");
       }
+
       if (result?.data) {
         this.closeModal();
         _toaster.show("Text converted successfully");

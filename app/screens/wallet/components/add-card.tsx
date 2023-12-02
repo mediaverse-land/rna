@@ -1,12 +1,7 @@
 import { Image, TouchableOpacity } from "react-native";
 import { Box } from "../../../components/box";
-import { Input } from "../../../components/form";
 import { Text } from "../../../components/text";
 import { PaddingContainer } from "../../../styles/grid";
-import {
-  ICON_MASTER_CARD_BLUE,
-  ICON_PAYPAL_GRAY,
-} from "../../../constaints/icons";
 import { theme } from "../../../constaints/theme";
 import { Button } from "../../../components/button";
 import { PAYMENT_PNG } from "../../../constaints/images";
@@ -33,7 +28,7 @@ export function AddCard({ closeAddCardAlertHandler, addCardPressHandler, isLoadi
             fontSize={16}
             lineHeight={16}
           >
-            Add card
+            Add inventory
           </Text>
           <TouchableOpacity
             onPress={closeAddCardAlertHandler}
@@ -75,7 +70,7 @@ export function AddCard({ closeAddCardAlertHandler, addCardPressHandler, isLoadi
           </Box>
         </Box>
         <Box marginTop={25}>
-          <Input placeholder="Insert amount..." labelText="Wallet" />
+          {/* <Input placeholder="Insert amount..." labelText="Wallet" /> */}
           <Button
             varient="dark"
             text="Pay"

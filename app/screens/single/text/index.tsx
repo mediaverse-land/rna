@@ -240,6 +240,7 @@ export function SingleTextScreen({
       body
     );
 
+
     if (isSuccess) {
       _toaster.show("Translate text requested successfully");
     }
@@ -323,6 +324,7 @@ export function SingleTextScreen({
 
     const { isError, isSuccess, errorRes, res } =
       await convertTextToAudioHandler(token, data?.id, body);
+
 
     if (isSuccess) {
       _toaster.show("Convert text to audio requested successfully");

@@ -11,7 +11,10 @@ export const assetService: any = createApi({
         return {
           url: args.url,
           method: "GET",
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: {
+            "X-App": "_Android",
+            Authorization: `Bearer ${args.token}`,
+          },
         };
       },
     }),
@@ -22,7 +25,10 @@ export const assetService: any = createApi({
           url: `/share/google-drive`,
           method: "POST",
           body: args.body,
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: {
+            "X-App": "_Android",
+            Authorization: `Bearer ${args.token}`,
+          },
         };
       },
     }),
@@ -33,19 +39,25 @@ export const assetService: any = createApi({
           // url: `/share/stream`,
           method: "POST",
           body: args.body,
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: {
+            "X-App": "_Android",
+            Authorization: `Bearer ${args.token}`,
+          },
         };
       },
     }),
     share: builder.mutation({
-      query: (args) =>{ 
+      query: (args) => {
         return {
-          url:args.url,
+          url: args.url,
           body: args.body,
           method: "POST",
-          headers: { Authorization: `Bearer ${args.token}` },
-        }
-      }
+          headers: {
+            "X-App": "_Android",
+            Authorization: `Bearer ${args.token}`,
+          },
+        };
+      },
     }),
     addExternalAccount: builder.mutation({
       query: (args) => {
@@ -53,7 +65,10 @@ export const assetService: any = createApi({
           url: `/external-accounts`,
           method: "POST",
           body: args.body,
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: {
+            "X-App": "_Android",
+            Authorization: `Bearer ${args.token}`,
+          },
         };
       },
     }),
@@ -64,7 +79,10 @@ export const assetService: any = createApi({
           url: `/external-accounts/${args.id}`,
           method: "PUT",
           body: args.body,
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: {
+            "X-App": "_Android",
+            Authorization: `Bearer ${args.token}`,
+          },
         };
       },
     }),
@@ -74,7 +92,10 @@ export const assetService: any = createApi({
           url: `/external-accounts/${args.id}`,
           method: "DELETE",
           // body: args.body,
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: {
+            "X-App": "_Android",
+            Authorization: `Bearer ${args.token}`,
+          },
         };
       },
     }),
@@ -83,7 +104,10 @@ export const assetService: any = createApi({
         return {
           url: args.url,
           method: "GET",
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: {
+            "X-App": "_Android",
+            Authorization: `Bearer ${args.token}`,
+          },
         };
       },
     }),
@@ -92,7 +116,10 @@ export const assetService: any = createApi({
         return {
           url: `/share-schedules?page=${args.page}`,
           method: "GET",
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: {
+            "X-App": "_Android",
+            Authorization: `Bearer ${args.token}`,
+          },
         };
       },
     }),
@@ -101,11 +128,13 @@ export const assetService: any = createApi({
         return {
           url: `/share-schedules/${args.id}`,
           method: "DELETE",
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: {
+            "X-App": "_Android",
+            Authorization: `Bearer ${args.token}`,
+          },
         };
       },
     }),
-
   }),
 });
 
@@ -115,10 +144,10 @@ export const {
   useUpdateExternalAccountMutation,
   useYoutubeShareMutation,
   useGetAssetListQuery,
-  useShareMutation, 
-  useGetShareListQuery, 
+  useShareMutation,
+  useGetShareListQuery,
   useRemoveExternalAccountMutation,
   useRemoveShareItemMutation,
 
-  useSearchMutation
+  useSearchMutation,
 } = assetService;

@@ -40,8 +40,8 @@ export type CreateImageRequestBody = {
   plan: 1 | 2 | 3 | 4;
   price: number;
   description: string;
-  subscription_period?:number,
-  forkability_status: boolean
+  subscription_period?: number;
+  forkability_status: boolean;
 };
 
 const _logger = new Logger();
@@ -78,12 +78,12 @@ export const CreateImageScreen = () => {
   }, []);
 
   useEffect(() => {
-    if(!isFocused){
-      setCapturedImage(null)
-      _set_capturedVideo_base64_address(null)
-      setSapturedVideo(null)
+    if (!isFocused) {
+      setCapturedImage(null);
+      _set_capturedVideo_base64_address(null);
+      setSapturedVideo(null);
     }
-  }, [isFocused])
+  }, [isFocused]);
 
   useEffect(() => {
     if (latest_image_uri) {
@@ -149,7 +149,7 @@ export const CreateImageScreen = () => {
     price,
     description,
     subscription_period,
-    forkability_status
+    forkability_status,
   }: CreateImageRequestBody) => {
     const token = await retriveToken();
     const userId = await retriveUserId();
@@ -162,23 +162,23 @@ export const CreateImageScreen = () => {
         plan,
         price,
         description,
-        forkability_status : forkability_status ? 2: 1,
-        type: capturedVideo_base64_address ?4: 2,
+        forkability_status: forkability_status ? 2 : 1,
+        type: capturedVideo_base64_address ? 4 : 2,
       },
     };
 
-    let newBody: any ={
+    let newBody: any = {
       ...options.body,
-    }
+    };
 
-    if(subscription_period){
-      newBody.subscription_period = subscription_period
+    if (subscription_period) {
+      newBody.subscription_period = subscription_period;
     }
 
     const newOption = {
       token: options.token,
-      body: newBody
-    }
+      body: newBody,
+    };
 
     startLoad();
 
@@ -216,7 +216,7 @@ export const CreateImageScreen = () => {
 
         if (!asset_id || res?.error) {
           const errorMessage =
-            res?.error?.data?.error || "Something went wrong, try again";
+          res?.error?.data?.message || "Something went wrong, try again";
           stopLoad();
           _logger.log(errorMessage);
           _toast.show(errorMessage);
@@ -231,12 +231,11 @@ export const CreateImageScreen = () => {
           setIsLoading,
         });
 
-
         if (upload_res === "Ok" && id) {
           navigation?.navigate(SINGLE_VIDEO_SCREEN, {
             id,
             asset_id: id,
-            ORIGIN: REDIRECTED_FROM_CREATE_ASSET
+            ORIGIN: REDIRECTED_FROM_CREATE_ASSET,
           });
         }
       })
@@ -253,7 +252,7 @@ export const CreateImageScreen = () => {
 
         if (!asset_id) {
           const errorMessage =
-            res?.error?.data?.error || "Something went wrong, try again";
+            res?.error?.data?.message || "Something went wrong, try again";
           stopLoad();
           _logger.logErro(errorMessage);
           _toast.show(errorMessage);
@@ -268,7 +267,6 @@ export const CreateImageScreen = () => {
           setIsLoading,
         });
 
-
         if (upload_res === "Ok") {
           if (params?.IS_REDIRECTED_FROM_CREATE_SCREENSHOT) {
             navigation.goBack();
@@ -278,7 +276,7 @@ export const CreateImageScreen = () => {
             navigation?.navigate(SINGLE_IMAGE_SCREEN, {
               id,
               asset_id: id,
-              ORIGIN: REDIRECTED_FROM_CREATE_ASSET
+              ORIGIN: REDIRECTED_FROM_CREATE_ASSET,
             });
           }
         }
@@ -298,7 +296,7 @@ export const CreateImageScreen = () => {
   };
 
   const goBackHandler = () => {
-    if (capturedImage  || capturedVideo_base64_address) {
+    if (capturedImage || capturedVideo_base64_address) {
       setCapturedImage(null);
       _set_capturedVideo_base64_address(null);
       return;

@@ -46,6 +46,7 @@ import EDIT_BTN_BG_GTADIENT_PNG from "./../../assets/img/gradients/edit-button-b
 import ADD_SHARE_ACCOUNT_BG_SVG from "./../../assets/img/gradients/add-share-account-svg-bg.svg";
 import SHARE_ACCOUNT_ITEM_BG_PNG from "./../../assets/img/gradients/share-account-item-bg-png.png";
 import PAYMENT_IMG_PNG from "./../../assets/img/payment.png";
+import STRIPE_IMG_PNG from "./../../assets/img/Stripe.png";
 
 export const SINGLE_ASSET_FOOTER_BG_GTADIENT = SINGLE_ASSET_FOOTER_BG_GTADIENT_SVG
 export const SINGLE_ASSET_FOOTER_BG_PNG_GRADIENT = imageUriResolver(SINGLE_ASSET_FOOTER_BG_GTADIENT_PNG)
@@ -53,6 +54,7 @@ export const DOWNLOAD_BTN_BG_GTADIENT = imageUriResolver(DOWNLOAD_BTN_BG_GTADIEN
 export const EDIT_BTN_BG_GTADIENT = imageUriResolver(EDIT_BTN_BG_GTADIENT_PNG)
 export const SHARE_ACCOUNT_ITEM_BG = imageUriResolver(SHARE_ACCOUNT_ITEM_BG_PNG)
 export const PAYMENT_PNG = imageUriResolver(PAYMENT_IMG_PNG)
+export const STRIPE_IMG = imageUriResolver(STRIPE_IMG_PNG)
 export const ADD_SHARE_ACCOUNT_BG = ADD_SHARE_ACCOUNT_BG_SVG
 
 

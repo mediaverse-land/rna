@@ -23,7 +23,10 @@ import { userContext } from "../../../../context/user";
 import { tokenStringResolver } from "../../../../utils/token-string-resolver";
 import { useCreateSingleSoundMutation } from "../../../../services/single-sound.service";
 import { Toaster } from "../../../../utils/toaster";
-import { REDIRECTED_FROM_CREATE_ASSET, SINGLE_SOUND_SCREEN } from "../../../../constaints/consts";
+import {
+  REDIRECTED_FROM_CREATE_ASSET,
+  SINGLE_SOUND_SCREEN,
+} from "../../../../constaints/consts";
 import { Logger } from "../../../../utils/logger";
 
 const WINDOW_HEIGHT = windowSize().height;
@@ -59,9 +62,7 @@ export const CreateSoundScreen = () => {
   }, [recording]);
 
   useEffect(() => {
-    const setup = async() => {
-      
-    }
+    const setup = async () => {};
     setup();
   }, [recording?.getStatusAsync()]);
   _logger.log(recording?.getStatusAsync());
@@ -119,7 +120,7 @@ export const CreateSoundScreen = () => {
         navigation?.navigate(SINGLE_SOUND_SCREEN, {
           id,
           asset_id: id,
-          ORIGIN: REDIRECTED_FROM_CREATE_ASSET
+          ORIGIN: REDIRECTED_FROM_CREATE_ASSET,
         });
       })
       .catch((error) => {
@@ -188,9 +189,8 @@ export const CreateSoundScreen = () => {
     price,
     description,
     subscription_period,
-    forkability_status
+    forkability_status,
   }: any) => {
-
     const token = await retriveToken();
     const userId = await retriveUserId();
 
@@ -203,7 +203,7 @@ export const CreateSoundScreen = () => {
         price,
         description,
         type: 3,
-        forkability_status : forkability_status ? 2: 1
+        forkability_status: forkability_status ? 2 : 1,
       },
     };
 
@@ -222,12 +222,12 @@ export const CreateSoundScreen = () => {
 
     createNewAsset(newOption)
       .then(async (res: any) => {
-        _logger.log(forkability_status)
+        _logger.log(forkability_status);
         const asset_id = res?.data?.asset_id;
         if (!asset_id) {
           setIsLoading(false);
           _logger.logErro("no asset_id");
-          _toast.show("Something went wrong, try again");
+          _toast.show(res?.error?.data?.message || "Something went wrong, try again");
 
           return;
         }

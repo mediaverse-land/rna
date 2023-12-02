@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { SearchParam } from ".";
 import { useMemo, useState } from "react";
 import { ActiveNav } from "../channel-management/types";
@@ -36,10 +36,17 @@ export function Navigator({ searchParams }: Props) {
   }, [activeNav]);
 
   return (
-    <View style={{ width: "100%", flex: 1 }}>
+    <View style={styles.view}>
       <SearchPageNav activeNav={activeNav} setActiveNav={setActiveNav} />
-
       <SearchResult searchObject={searchObject} searchParams={searchParams} />
     </View>
   );
 }
+
+
+const styles = StyleSheet.create({
+  view: {
+    width:'100%',
+    flex: 1
+  }
+})

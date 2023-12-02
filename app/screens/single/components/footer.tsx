@@ -40,6 +40,8 @@ export const SingleAssetFooter = ({
   tokenCtx,
   token,
 }: Props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const [_selectedAccount, setSelectedAccount] =
     useState<ExternalAccount>(null);
 
@@ -99,8 +101,6 @@ export const SingleAssetFooter = ({
     closeDownoadModal();
   };
 
-  const _selectedDateGetter = (date: string) => {};
-
   const snapPoints = useMemo(() => ["25%", "50%"], []);
 
   if (!token) {
@@ -109,22 +109,36 @@ export const SingleAssetFooter = ({
 
   return (
     <>
-      <Box width="100%" height={160} position="relative">
-        <GradientBg />
-        <Box
-          width="100%"
-          height="100%"
-          position="absolute"
-          top={0}
-          left={0}
-          padding={24}
-          zIndex={10}
-        >
-          <DownloadButton handler={openDownloadModal} fileName={fileName} />
-          <EditButton handler={editorHandler} />
+      {!isOpen ? (
+        <Box width="100%" height={160} position="relative">
+          <GradientBg />
+          <Box
+            width="100%"
+            height="100%"
+            position="absolute"
+            top={0}
+            left={0}
+            padding={24}
+            zIndex={10}
+          >
+            <DownloadButton handler={openDownloadModal} fileName={fileName} />
+            <EditButton handler={editorHandler} />
+          </Box>
         </Box>
-      </Box>
-      <ModalBottomSheet ref={selectAccountRef} snapPoints={snapPoints}>
+      ) : null}
+      <ModalBottomSheet
+      // @ts-ignore
+        onChange={(e) => {
+          if (e !== 1) {
+            setIsOpen(true);
+          }
+          if (e === -1) {
+            setIsOpen(false);
+          }
+        }}
+        ref={selectAccountRef}
+        snapPoints={snapPoints}
+      >
         <View
           ref={innerSelectAccountRef}
           style={{

@@ -1,6 +1,6 @@
 import { ViewStyle, Image } from 'react-native';
 import { Box } from '../../../components/box';
-import { WALLET_SLIDER_BACKGROUND } from '../../../constaints/images';
+import { STRIPE_IMG, WALLET_SLIDER_BACKGROUND } from '../../../constaints/images';
 import { Text } from '../../../components/text';
 import { ICON_PAYPAL_LARGE, ICON_SIMCARD } from '../../../constaints/icons';
 import { theme } from '../../../constaints/theme';
@@ -72,7 +72,16 @@ export function CardSlider() {
                         justifyContent="center"
                         alignItems="center"
                     >
-                        <ICON_PAYPAL_LARGE width={35} height={42} />
+                        <Image 
+                            source={{
+                                uri: STRIPE_IMG,
+                            }}
+                            style={{
+                                width: 35,
+                                height: 42,
+                                borderRadius: 8
+                            }}
+                        />
                         <Text
                             fontSize={14}
                             fontWeight={400}

@@ -18,10 +18,11 @@ type Props = {
   children: ReactNode;
   height?: number;
   snapPoints: string[];
+  onChange?: any
 };
 
 export const ModalBottomSheet = forwardRef(
-  ({ children, height, snapPoints }: Props, ref) => {
+  ({ children,onChange,  height, snapPoints }: Props, ref) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
@@ -70,6 +71,7 @@ export const ModalBottomSheet = forwardRef(
                 // onCloseHandler()
               }}
               enablePanDownToClose
+              onChange={onChange}
               handleComponent={null}
               backgroundStyle={{
                 backgroundColor: theme.color.light.ADD_ACCOUNT_MODAL_BAKGROUND,
