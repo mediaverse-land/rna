@@ -6,6 +6,16 @@ export const assetService: any = createApi({
     baseUrl: "https://api.mediaverse.land/v2",
   }),
   endpoints: (builder) => ({
+    search: builder.mutation({
+      query: (args) => {
+        return {
+          url: args.url,
+          method: "GET",
+          headers: { Authorization: `Bearer ${args.token}` },
+        };
+      },
+    }),
+
     googleDriveShare: builder.mutation({
       query: (args) => {
         return {
@@ -47,6 +57,7 @@ export const assetService: any = createApi({
         };
       },
     }),
+
     updateExternalAccount: builder.mutation({
       query: (args) => {
         return {
@@ -109,4 +120,5 @@ export const {
   useRemoveExternalAccountMutation,
   useRemoveShareItemMutation,
 
+  useSearchMutation
 } = assetService;

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ReactElement, useEffect, useRef } from "react";
+import { ReactElement, useEffect, useMemo, useRef } from "react";
 import { ImageStyle, Platform } from "react-native";
 import { Box } from "../box";
 import { TabBarComponents } from "./style";
@@ -9,7 +9,6 @@ import { AppDispatch, RootState } from "../../store";
 import { StorageService } from "../../services/storage.service";
 import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
 import {
-  activeDisableOnIntractions,
   deActivrDisableOnIntractions,
   seeExploreTopBarTour,
 } from "../../slices/tour.slice";
@@ -26,7 +25,6 @@ import {
 } from "../../constaints/icons";
 import { View, StyleSheet } from "react-native";
 import { BlurView } from "expo-blur";
-
 
 function getTobBarItemsIcon(tobBarItemName: string, isFocused: boolean) {
   let iconPath: ReactElement<SVGElement>;
@@ -91,8 +89,15 @@ function TopTabBar({
   navigation,
   hasFullWidth = false,
   isProfilePage = false,
+  hasBorderRadius = true,
 }: any) {
-  const topStyle = isProfilePage ? 8 : hasFullWidth ? 120 : (Platform.OS === 'android' ? 104 : 84);
+  const topStyle = isProfilePage
+    ? 8
+    : hasFullWidth
+    ? 120
+    : Platform.OS === "android"
+    ? 104
+    : 84;
   const dispatch = useDispatch<AppDispatch>();
 
   const { BOTTOM_NAVIGATION_TOUR_HAS_SEEN, DISABLE_INTRACTION } = useSelector(
@@ -107,13 +112,15 @@ function TopTabBar({
 
   // role 38 = admin
 
-  const refs: Record<number, any> = {
-    0: allRef,
-    1: imagesRef,
-    2: videosRef,
-    3: soundsRef,
-    4: textsRef,
-  };
+  const refs: Record<number, any> = useMemo(() => {
+    return {
+      0: allRef,
+      1: imagesRef,
+      2: videosRef,
+      3: soundsRef,
+      4: textsRef,
+    };
+  }, []);
 
   const returnRef = (index: number) => {
     const currentRef = refs[index];
@@ -205,22 +212,28 @@ function TopTabBar({
       top={topStyle}
       zIndex={100}
       width="100%"
-      backgroundColor="transparent"
     >
-      <View style={styles.container}>
-        <View style={styles.background} />
+      <View
+        style={[
+          styles.container,
+          hasBorderRadius ? { borderRadius: 16 } : { borderRadius: 0 },
+        ]}
+      >
+        <View style={[styles.background]} />
 
         <BlurView
           renderToHardwareTextureAndroid
-          style={styles.blurView}
-          intensity={70} 
-          tint="dark" 
+          style={[styles.blurView]}
+          intensity={70}
+          tint="dark"
         >
           <TabBarComponents.TabBar
-            style={{
-              flexDirection: "row",
-              borderRadius: hasFullWidth ? 0 : 16,
-            }}
+            style={[
+              {
+                flexDirection: "row",
+              },
+              hasBorderRadius ? { borderRadius: 16 } : { borderRadius: 0 },
+            ]}
           >
             {state.routes.map(
               (route: ReturnType<(typeof state.routes)[0]>, index: number) => {
@@ -327,8 +340,6 @@ const styles = StyleSheet.create({
   },
   background: {
     ...StyleSheet.absoluteFillObject,
-    // overflow:'hidden',
-    // backgroundColor: "rgba(255, 255, 255, 0.2)", // Adjust the opacity and color as needed
   },
   blurView: {
     position: "absolute",
@@ -339,7 +350,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     zIndex: 999999999999,
-    backgroundColor:'rgba(14, 14, 18, 0.50)',
+    backgroundColor: "rgba(14, 14, 18, 0.50)",
 
     borderRadius: 10,
   },

@@ -10,11 +10,9 @@ import { retriveToken } from "../../../utils/retrive-token";
 import { Button } from "../../../components/button";
 import { ContentListItem } from "./content-list-item";
 import { ActiveNav, AssetType } from "../types";
-import {
-  SelectContentAssetTypeNav,
-  SelectContentModalNav,
-} from "./select-content-modeal-nav";
 import { Asset } from "../../../types/asset";
+import { Nav } from "../../../components/nav";
+import { SelectContentAssetTypeNav } from "./content-asset-type-nav";
 
 const { width, height } = windowSize();
 
@@ -154,7 +152,7 @@ const SelectContentModalMemo = ({
               assetType={assetType}
               closeSelectContentModalHandler={closeSelectContentModalHandler}
             />
-            <SelectContentModalNav
+            <Nav
               setActiveNav={setActiveNav}
               activeNav={activeNav}
             />

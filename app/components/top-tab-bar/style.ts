@@ -18,7 +18,6 @@ const TabBar = styled.View`
     height: 40px;
   `,
   Container = styled.TouchableOpacity`
-
     width: 100%;
     justify-content: space-between;
     border-bottom: 1px solid ${theme.color.light.PRIMARY};
@@ -32,7 +31,6 @@ const TabBar = styled.View`
     justidy-content: center;
     position: absolute;
     top: -40px;
-
   `,
   Label = styled.Text`
     color: ${theme.color.light.WHITE};
@@ -41,7 +39,6 @@ const TabBar = styled.View`
     width: 100%;
     text-align: center;
     padding-right: 10px;
-    
   `,
   SpacerBorder = styled.View`
     width: 100%;

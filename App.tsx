@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Dimensions, StatusBar, TouchableOpacity, View } from "react-native";
 import * as Notifications from "expo-notifications";
 import { AlertContextProvider } from "./app/context/alert";
@@ -15,6 +15,10 @@ import PushNotificationWrapper from "./app/components/push-notification-wrapper"
 import { addEventListener } from "@react-native-community/netinfo";
 import { Text } from "./app/components/text";
 import * as Updates from "expo-updates";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+
+SplashScreen.preventAutoHideAsync();
 
 const _toaster = new Toaster();
 
@@ -36,12 +40,33 @@ Notifications.setNotificationHandler({
   }),
 });
 
+// const [isLoaded] = useFonts({
+//   "mrt-mid": require("./assets/fonts/Montserrat-Medium.ttf"),
+//   "mrt-bold": require("./assets/fonts/Montserrat-Bold.ttf"),
+//   "mrt-xbold": require("./assets/fonts/Montserrat-ExtraBold.ttf"),
+// });
+
 export default function App() {
   const [token, setToken] = useState("");
-
   const [isOffline, setIsOffline] = useState(false);
-
   const [newPushMessage, setNewPushMessage] = useState<any>(null);
+
+  const [isLoaded] = useFonts({
+    default: require("./assets/fonts/IRANSans.ttf"),
+    light: require("./assets/fonts/IRANSans_Light.ttf"),
+    medium: require("./assets/fonts/IRANSans_Medium.ttf"),
+    bold: require("./assets/fonts/IRANSans_Bold.ttf"),
+  });
+
+  useEffect(() => {
+    const handleOnLayout = async () => {
+      if (isLoaded) {
+        await SplashScreen.hideAsync();
+      }
+    };
+
+    handleOnLayout();
+  }, [isLoaded]);
 
   const isDevMode = () => __DEV__;
 
@@ -61,9 +86,9 @@ export default function App() {
   }
 
   useEffect(() => {
-    // if (isDevMode()) {
-    //   return;
-    // }
+    if (isDevMode()) {
+      return;
+    }
     if (requestUserPermission()) {
       // Return fcm token key
       messaging()
@@ -112,7 +137,7 @@ export default function App() {
         return;
       }
       setIsOffline(false);
-      Updates.reloadAsync()
+      Updates.reloadAsync();
     });
   };
 
@@ -136,6 +161,10 @@ export default function App() {
       </TouchableOpacity>
     </View>
   );
+
+  if (!isLoaded) {
+    return null;
+  }
 
   return (
     <>

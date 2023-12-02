@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { Text } from "../../../components/text";
 import { FlashList } from "@shopify/flash-list";
 import { Box } from "../../../components/box";
@@ -16,7 +16,8 @@ import { Sound } from "../../../types/sound";
 type Props = {
   data: Sound[];
   navigate: (...args: any) => void;
-  marginTop?: number 
+  marginTop?: number;
+  onEndReached: () => void;
 };
 
 const { width: WINDOW_WIDTH } = windowSize();
@@ -27,8 +28,13 @@ const theme_text_color = theme.color.light.TEXT;
 const title_text_size = 16;
 const username_text_size = 12;
 
-const ViewAllSoundList = ({ data, navigate , marginTop}: Props) => {
-  const renderItem = ({ item }: { item: Sound }) => {
+const ViewAllSoundList = ({
+  data,
+  navigate,
+  marginTop,
+  onEndReached,
+}: Props) => {
+  const _renderItem = useCallback(({ item }: { item: Sound }) => {
     return (
       <TouchableOpacity
         onPress={() => navigateTo.singleSound({ navigate, id: item.id })}
@@ -73,7 +79,7 @@ const ViewAllSoundList = ({ data, navigate , marginTop}: Props) => {
                 color: theme_text_color,
                 marginLeft: 8,
                 fontSize: username_text_size,
-                lineheight: username_text_size,
+                lineHeight: username_text_size,
               }}
             />
           </Box>
@@ -93,20 +99,25 @@ const ViewAllSoundList = ({ data, navigate , marginTop}: Props) => {
         </Box>
       </TouchableOpacity>
     );
-  };
+  }, []);
 
   const keyExtractor = (item: Sound) => item.id.toString();
 
   return (
-    <Box marginTop={marginTop? marginTop : 56} paddingLeft={24} paddingRight={10}>
-        <FlashList
-          data={data}
-          numColumns={2}
-          renderItem={renderItem}
-          keyExtractor={keyExtractor}
-          estimatedItemSize={15}
-          // onEndReached={() => console.log("onEndReached")}
-        />
+    <Box
+      marginTop={marginTop ? marginTop : 56}
+      paddingLeft={24}
+      paddingRight={10}
+    >
+      <FlashList
+        data={data}
+        numColumns={2}
+        renderItem={_renderItem}
+        keyExtractor={keyExtractor}
+        estimatedItemSize={15}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={10}
+      />
     </Box>
   );
 };

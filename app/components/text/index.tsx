@@ -18,6 +18,7 @@ type Props = {
   textStyles?: TextStyle;
   isTextArea?: boolean;
   selectable?: boolean;
+  fontFamily?: string;
 };
 
 export function Text({
@@ -34,48 +35,35 @@ export function Text({
   paddingLeft,
   paddingRight,
   fontWeight,
+  fontFamily = "normal",
   textStyles,
   isTextArea,
-    selectable = false
+  selectable = false,
 }: Props) {
-  let defaultStyles = [];
-
-  function addDefinedStyles() {
-
-    const styles = [
-      { fontSize },
-      { lineHeight },
-      { color },
-      { marginTop },
-      { marginBottom },
-      { marginLeft },
-      { marginRight },
-      { paddingTop },
-      { paddingBottom },
-      { paddingLeft },
-      { paddingRight },
-      { fontWeight },
-    ];
-
-    let newStyles: Record<string, string | number>[] = [];
-
-    for (const item of styles) {
-      if (typeof Object.values(item)[0] !== "undefined") {
-        newStyles = [...newStyles, item];
-      }
-    }
-
-    return newStyles;
-  }
-
-  defaultStyles = useMemo(() => addDefinedStyles(),[])
+  const styles: any = useMemo(() => {
+    return {
+      fontSize,
+      lineHeight,
+      color,
+      marginTop,
+      marginBottom,
+      marginLeft,
+      marginRight,
+      paddingTop,
+      paddingBottom,
+      paddingLeft,
+      paddingRight,
+      fontWeight,
+      fontFamily,
+    };
+  }, []);
 
   return (
     <>
       {isTextArea ? (
-        <TextInput style={[...defaultStyles, textStyles]}>{children}</TextInput>
+        <TextInput style={[styles, textStyles]}>{children}</TextInput>
       ) : (
-        <ReactNativeText selectable={selectable} style={[...defaultStyles, textStyles]}>
+        <ReactNativeText selectable={selectable} style={[styles, textStyles]}>
           {children}
         </ReactNativeText>
       )}

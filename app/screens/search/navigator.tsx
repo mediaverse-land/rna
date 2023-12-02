@@ -1,74 +1,45 @@
-import { View } from 'react-native';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { ImagePage } from './pages/image';
-import { VideosPage } from './pages/video';
-import { SoundsPage } from './pages/sound';
-import { TextsPage } from './pages/text';
-import { AllPage } from './pages/all';
-import { SearchParam } from '.';
-import TopTabBar from '../../components/top-tab-bar';
+import { View } from "react-native";
+import { SearchParam } from ".";
+import { useMemo, useState } from "react";
+import { ActiveNav } from "../channel-management/types";
+import { SearchResult } from "./search-result";
+import { SearchPageNav } from "./components/nav";
 
 type Props = { searchParams: SearchParam };
 
-const Tab = createMaterialTopTabNavigator();
+export type SearchObjectProperty = Record<string, number | string>;
+export type SearchObject = Record<string, SearchObjectProperty>;
+
+const searchItems: SearchObject = {
+  All: {
+    type: "All",
+  },
+  Images: {
+    type: 2,
+  },
+  Videos: {
+    type: 4,
+  },
+  Sounds: {
+    type: 3,
+  },
+  Texts: {
+    type: 1,
+  },
+};
 
 export function Navigator({ searchParams }: Props) {
+  const [activeNav, setActiveNav] = useState<ActiveNav>("All");
 
-    return (
-        <View style={{ width: '100%', flex: 1 }}>
-            <Tab.Navigator
-                tabBar={(props) => <TopTabBar hasFullWidth {...props} />}
-                screenOptions={{
-                    animationEnabled: false,
-                    swipeEnabled: false
-                }}
-            >
-                <Tab.Screen
-                    name="AllPage"
-                    component={(props: any) => (
-                        <AllPage searchParams={searchParams} {...props} />
-                    )}
-                    options={{
-                        title: 'All'
-                    }}
-                />
-                <Tab.Screen
-                    name="SearchImage"
-                    component={(props: any) => (
-                        <ImagePage searchParams={searchParams} {...props} />
-                    )}
-                    options={{
-                        title: 'image'
-                    }}
-                />
-                <Tab.Screen
-                    name="SearchVideo"
-                    component={(props: any) => (
-                        <VideosPage searchParams={searchParams} {...props} />
-                    )}
-                    options={{
-                        title: 'video'
-                    }}
-                />
-                <Tab.Screen
-                    name="SearchSound"
-                    component={(props: any) => (
-                        <SoundsPage searchParams={searchParams} {...props} />
-                    )}
-                    options={{
-                        title: 'sound'
-                    }}
-                />
-                <Tab.Screen
-                    name="SearchText"
-                    component={(props: any) => (
-                        <TextsPage searchParams={searchParams} {...props} />
-                    )}
-                    options={{
-                        title: 'text'
-                    }}
-                />
-            </Tab.Navigator>
-        </View>
-    );
+  const searchObject = useMemo<SearchObjectProperty>(() => {
+    return searchItems[activeNav];
+  }, [activeNav]);
+
+  return (
+    <View style={{ width: "100%", flex: 1 }}>
+      <SearchPageNav activeNav={activeNav} setActiveNav={setActiveNav} />
+
+      <SearchResult searchObject={searchObject} searchParams={searchParams} />
+    </View>
+  );
 }

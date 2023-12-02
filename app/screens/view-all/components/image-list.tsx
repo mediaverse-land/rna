@@ -17,6 +17,7 @@ import { navigateTo } from "../utils/navigate-to-single-screen";
 type Props = {
   data: ImageType[];
   navigate: (...args: any) => void;
+  onEndReached: () => void
 };
 
 const { width: WINDOW_WIDTH } = windowSize();
@@ -27,7 +28,7 @@ const theme_text_color = theme.color.light.TEXT;
 const title_text_size = 16;
 const username_text_size = 12;
 
-const ViewAllImageList = ({ data, navigate }: Props) => {
+const ViewAllImageList = ({ data, navigate, onEndReached }: Props) => {
   const renderItem = ({ item }: { item: ImageType }) => {
     return (
       <TouchableOpacity
@@ -73,7 +74,7 @@ const ViewAllImageList = ({ data, navigate }: Props) => {
                 color: theme_text_color,
                 marginLeft: 8,
                 fontSize: username_text_size,
-                lineheight: username_text_size,
+                lineHeight: username_text_size,
               }}
             />
           </Box>
@@ -109,7 +110,7 @@ const ViewAllImageList = ({ data, navigate }: Props) => {
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           // estimatedItemSize={15}
-          // onEndReached={() => console.log("onEndReached")}
+          onEndReached={onEndReached}
         />
       </PaddingContainer>
     </Box>

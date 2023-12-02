@@ -64,7 +64,7 @@ const ViewAllScreen = ({ navigation, route }: Props) => {
       setAssetList([]);
     }
   }, [isFocused]);
-  
+
   const getData = async () => {
     const token = await retriveToken(tokenCtx);
     if (!token) {
@@ -102,6 +102,14 @@ const ViewAllScreen = ({ navigation, route }: Props) => {
     setIsLoading(false);
   };
 
+
+  const handleNextPage = () => {
+    if(isLoading){
+      return;
+    }
+    setCurrentPage((pg) => pg + 1);
+  };
+
   if (error) {
     <Box>
       <Text color="red">Error while fetching list</Text>
@@ -128,7 +136,10 @@ const ViewAllScreen = ({ navigation, route }: Props) => {
           <ViewAllTitle title={title} icon={icon} goBack={navigation.goBack} />
           {ListComponent ? (
             <Box paddingBottom={100}>
-              <ListComponent data={assetList} navigate={navigation.navigate} />
+              <ListComponent
+                data={assetList}
+                navigate={navigation.navigate}
+              />
             </Box>
           ) : null}
           {isLoading ? (

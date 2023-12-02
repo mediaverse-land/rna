@@ -7,9 +7,10 @@
     "icon": "./assets/flat_icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/iphone-splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#090951"
+      // "image": "./assets/mediaverse-icon.png",
+      // "resizeMode": "contain",
+      "backgroundColor": "#090951",
+      "width":200
     },
     "assetBundlePatterns": [
       "**/*"

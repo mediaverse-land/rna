@@ -91,7 +91,7 @@ const ViewAllTextsList = ({ data, navigate, marginTop }: Props) => {
                     color: theme_text_color,
                     marginLeft: 8,
                     fontSize: username_text_size,
-                    lineheight: username_text_size,
+                    lineHeight: username_text_size,
                   }}
                 />
               </Box>

@@ -28,7 +28,6 @@ export function Title({
       direction="row"
       position="relative"
       paddingLeft={8}
-      
     >
       <Box direction="row" alignItems="center">
         {svgIcon ? svgIcon : null}

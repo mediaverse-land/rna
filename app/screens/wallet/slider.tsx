@@ -228,8 +228,8 @@ export function WalletSlider() {
     <>
       <ScreenGradient>
         <ScrollView style={{ flex: 1, width: "100%" }}>
-          {stripeData ? (
-            <>
+          {/* {stripeData ? (
+            <> */}
               <Box>
                 <PaddingContainer>
                   <Box
@@ -378,22 +378,22 @@ export function WalletSlider() {
                 </Box>
               </Box>
               <Spacer />
-            </>
-          ) : (
-            <Box
-              position="relative"
-              marginTop={height / 2 - 50}
-              width="100%"
-              // direction="row"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Text color="#fff">Please create an stripe account</Text>
-              <TouchableOpacity onPress={redirectToAccountsPage}>
-                <Text color="#eee">Click here</Text>
-              </TouchableOpacity>
-            </Box>
-          )}
+            {/* </> */}
+          {/* // ) : (
+          //   <Box
+          //     position="relative"
+          //     marginTop={height / 2 - 50}
+          //     width="100%"
+          //     // direction="row"
+          //     alignItems="center"
+          //     justifyContent="center"
+          //   >
+          //     <Text color="#fff">Please create an stripe account</Text>
+          //     <TouchableOpacity onPress={redirectToAccountsPage}>
+          //       <Text color="#eee">Click here</Text>
+          //     </TouchableOpacity>
+          //   </Box>
+          // )} */}
         </ScrollView>
       </ScreenGradient>
 
