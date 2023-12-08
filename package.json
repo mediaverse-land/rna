@@ -76,7 +76,8 @@
     "react-native-tab-view": "^3.5.1",
     "react-native-view-shot": "3.5.0",
     "react-redux": "^8.1.1",
-    "styled-components": "^5.3.10"
+    "styled-components": "^5.3.10",
+    "expo-navigation-bar": "~2.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
