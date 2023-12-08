@@ -35,7 +35,7 @@ export function Text({
   paddingLeft,
   paddingRight,
   fontWeight,
-  fontFamily = "normal",
+  fontFamily ,
   textStyles,
   isTextArea,
   selectable = false,

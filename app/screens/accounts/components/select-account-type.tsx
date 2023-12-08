@@ -30,7 +30,6 @@ import {
   ERROR_EXTERNAL_ACCOUNT_CREATION_MSG,
   ERROR_FETCH_GOOGLE_DATA,
   EXTERNAL_ACCOUNT_CREATION_SUCCESS_MSG,
-  NO_ACCESS_TOKEN_MSG,
 } from "../../../constaints/errors-and-messages";
 
 type Props = {

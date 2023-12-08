@@ -27,6 +27,9 @@ export function AddCard({ closeAddCardAlertHandler, addCardPressHandler, isLoadi
             fontWeight={600}
             fontSize={16}
             lineHeight={16}
+            textStyles={{
+              paddingTop: 4
+            }}
           >
             Add inventory
           </Text>
@@ -39,6 +42,9 @@ export function AddCard({ closeAddCardAlertHandler, addCardPressHandler, isLoadi
               fontWeight={400}
               fontSize={14}
               lineHeight={16}
+              textStyles={{
+                paddingTop: 2
+              }}
             >
               Cancel
             </Text>

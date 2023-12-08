@@ -4,6 +4,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Platform,
 } from "react-native";
 import { Box } from "../box";
 import { InputComponent } from "./style";
@@ -15,6 +16,8 @@ import { ICON_ARROW_DOWN_SVG, ICON_FORM_ERROR } from "../../constaints/icons";
 import { useClickOutside } from "react-native-click-outside";
 
 const { InputBox, Label } = InputComponent;
+
+const IS_IOS = Platform.OS === 'ios'
 
 type Props = {
   labelText: string;
@@ -63,10 +66,18 @@ export function Select({
           <Label>
             <Box
               height="100%"
-              additionalStyles={{
-                borderRightWidth: 1,
-                borderRightColor: theme.color.light.WHITE,
-              }}
+              additionalStyles={[
+                IS_IOS
+                  ? {
+                      height: 50,
+                      paddingLeft: 16,
+                      paddingTop: 22,
+                    }
+                  : {
+                      borderRightWidth: 1,
+                      borderRightColor: theme.color.light.WHITE,
+                    },
+              ]}
             >
               <Text
                 fontSize={14}

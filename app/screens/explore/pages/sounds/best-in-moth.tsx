@@ -7,9 +7,9 @@ import { Sound } from "../../../../types/sound";
 import { Box } from "../../../../components/box";
 import { BEST_IN_MONTH } from "../../../../constaints/consts";
 import { ICON_TOP_TABBAR_SOUND_ACTIVE_SVG } from "../../../../constaints/icons";
-import { VIEW_ALL } from "../../../stack";
 import { ViewAllPageEnum } from "../../../view-all";
 import { UseNavigationType } from "../../../../types/use-navigation";
+import { VIEW_ALL } from "../../types";
 
 type Props = {
   isLoading: boolean;

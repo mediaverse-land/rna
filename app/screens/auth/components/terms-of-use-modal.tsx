@@ -1,11 +1,12 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
+import { ScrollView, Text, View } from "react-native";
+//@ts-ignore
+import HTMLView from "react-native-htmlview";
 import { Box } from "../../../components/box";
 import { windowSize } from "../../../utils/window-size";
 import { useGetTermsOfUseQuery } from "../../../services/auth.service";
-import { ScrollView } from "react-native";
-//@ts-ignore
-import HTMLView from "react-native-htmlview";
 import { Button } from "../../../components/button";
+import { FullScreenSpinnerLoader } from "../../../components/loader-spinner";
 
 type Props = {
   isOpen: boolean;
@@ -20,14 +21,7 @@ const TermsOfUseModal: FC<Props> = ({
   openTermsModalHandler,
   closeTermsModalHandler,
 }) => {
-  const [parsedData, setParesedData] = useState<any>(null);
-
-  const { data, isLoading, isFetching } = useGetTermsOfUseQuery();
-
-  useEffect(() => {
-    if (data?.data) {
-    }
-  }, [data?.data]);
+  const { data, isLoading, isFetching, error } = useGetTermsOfUseQuery();
 
   if (!isOpen) {
     return;
@@ -44,7 +38,7 @@ const TermsOfUseModal: FC<Props> = ({
         top={-133}
       ></Box>
 
-      <ScrollView
+      <View
         style={{
           width: width - 48,
           position: "absolute",
@@ -56,24 +50,44 @@ const TermsOfUseModal: FC<Props> = ({
           zIndex: 1000,
           borderRadius: 16,
           paddingHorizontal: 24,
-          paddingVertical: 32,
+          // paddingVertical: 32,
+          paddingTop: 32,
         }}
       >
+        <ScrollView
+          style={{
+            flex: 1,
+          }}
+        >
+          {isLoading || isFetching ? <FullScreenSpinnerLoader /> : null}
+          {error ? (
+            <Text
+              style={{
+                color: "white",
+                fontSize: 14,
+                lineHeight: 20,
+              }}
+              selectable
+            >
+              {JSON.stringify(error)}
+            </Text>
+          ) : null}
+          {data?.content ? (
+            <>
+              <HTMLView value={data?.content} />
+            </>
+          ) : null}
+        </ScrollView>
         {data?.content ? (
-          <>
-            <HTMLView
-              value={data?.content}
-            />
-            <Button
-              marginTop={32}
-              marginBottom={64}
-              text="Confirm"
-              varient="primary"
-              onpressHandler={closeTermsModalHandler}
-            />
-          </>
+          <Button
+            marginTop={32}
+            marginBottom={32}
+            text="I agree"
+            varient="primary"
+            onpressHandler={closeTermsModalHandler}
+          />
         ) : null}
-      </ScrollView>
+      </View>
     </>
   );
 };

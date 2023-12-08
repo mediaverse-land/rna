@@ -119,7 +119,6 @@ export function ProfileScreenHead() {
       { token }
     );
 
-  _logger.log({ data, isLoading, isError, isFetching, error });
 
   useEffect(() => {
     getData();

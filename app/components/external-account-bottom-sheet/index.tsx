@@ -14,12 +14,16 @@ import { ExternalAccount as IExternalAccount } from "../../types/external-accoun
 import { ACCOUNTS_SCREEN } from "../../constaints/consts";
 import { RadioButton } from "../form";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { isIos } from "../../controllers/platform.controller";
 
 type Props = {
   setSelectedAccount: (account: IExternalAccount, time: string) => void;
   token: string;
   headerElement?: ReactNode;
 };
+
+
+const isIosPlatform = isIos();
 
 const ExternalAccount: FC<Props> = ({
   setSelectedAccount,
@@ -163,10 +167,13 @@ const ExternalAccount: FC<Props> = ({
         data={__dataList}
         keyExtractor={_key}
         renderItem={renderItem}
+        style={{
+          flex: 1,
+        }}
         ListHeaderComponent={
           <>
             {headerElement ? headerElement : null}
-            <Box width="100%" marginTop={-8} marginBottom={24}>
+            <Box width="100%"  marginTop={-8} marginBottom={24}>
               <Box marginTop={16}>
                 <RadioButton
                   labelText="When to share asset?"
@@ -203,7 +210,6 @@ const ExternalAccount: FC<Props> = ({
                   />
                 )}
 
-                {/* {selectedShareTime } */}
               </Box>
             </Box>
             <Box
@@ -266,8 +272,9 @@ const ExternalAccount: FC<Props> = ({
         contentContainerStyle={{
           paddingLeft: 24,
           paddingRight: 24,
-          paddingTop: 16,
+          paddingTop: isIosPlatform ? 0 :16,
           paddingBottom: 650,
+          marginTop: isIosPlatform ? 24: 0
         }}
       />
     </>

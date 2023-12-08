@@ -118,9 +118,9 @@ export function BottomTabBar({
 
   const tabBarItemClickNavigateHandler = (screenName: string) => {
     // Prevent intreactions if user has not seen tour guide
-    if(preventIntractions){
-      return;
-    }
+    // if(preventIntractions){
+    //   return;
+    // }
     navigation?.navigate(screenName);
   };
 

@@ -16,6 +16,8 @@ import { useCreateSingleTextMutation } from "../../../../services/single-text.se
 import { REDIRECTED_FROM_CREATE_ASSET, SINGLE_TEXT_SCREEN } from "../../../../constaints/consts";
 import { CreateAssetForm } from "../../component/create-asset-form";
 import { Logger } from "../../../../utils/logger";
+import { GoBackButton } from "../../../single/components/goback-button";
+import { Box } from "../../../../components/box";
 
 const _fileSystemController = new FileSystemController();
 const _toast = new Toaster();
@@ -98,10 +100,18 @@ export const CreateTextScreen = () => {
       newBody.subscription_period = data.subscription_period;
     }
 
+    const removePriceIfPlanFree = () => {
+      if(newBody?.plan === 1){
+        delete newBody.price;
+      }
+    }
+    removePriceIfPlanFree();
+
     const newOption = {
       token: options.token,
       body: newBody,
     };
+
 
     setIsLoading(true);
     createNewAsset(newOption)
@@ -191,10 +201,10 @@ export const CreateTextScreen = () => {
 
   const _submitButtonHandler = async () => {};
 
-  const goBackHandler = () => {
-    reset();
-    navigation.goBack();
-  };
+  // const goBackHandler = () => {
+  //   reset();
+  //   navigation.goBack();
+  // };
 
   return (
     <ScreenGradient>

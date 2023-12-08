@@ -1,16 +1,17 @@
 import { useState, ReactNode, useMemo } from "react";
-import { PaddingContainer } from "../../../../styles/grid";
+import { Platform } from "react-native";
 import { Box } from "../../../../components/box";
+import { InsertPhone } from "./insert-phone";
+import { UserPass } from "./user-pass";
+import { EmailPass } from "./email-pass";
 import { windowSize } from "../../../../utils/window-size";
+import { PaddingContainer } from "../../../../styles/grid";
 import {
   AuthWindows,
   INSERT_PHONE,
   LoginNavigationEvent,
   LoginWindows,
 } from "../types";
-import { InsertPhone } from "./insert-phone";
-import { UserPass } from "./user-pass";
-import { EmailPass } from "./email-pass";
 
 type Props = {
   setWindowHandler: (window: AuthWindows) => void;
@@ -18,8 +19,12 @@ type Props = {
 
 const { height } = windowSize();
 
-export function Login({ setWindowHandler }: Props) {
+const flooredHeight = Math.floor(height);
 
+const PAGE_WIDTH =
+  Platform.OS === "android" ? flooredHeight - 132 : flooredHeight - 10;
+
+export function Login({ setWindowHandler }: Props) {
   const [currentWindow, setCurrentWindow] =
     useState<LoginWindows>(INSERT_PHONE);
 
@@ -58,7 +63,7 @@ export function Login({ setWindowHandler }: Props) {
 
   return (
     <PaddingContainer>
-      <Box height={Math.floor(height) - 132}>{windows[currentWindow]}</Box>
+      <Box height={PAGE_WIDTH}>{windows[currentWindow]}</Box>
     </PaddingContainer>
   );
 }

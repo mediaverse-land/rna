@@ -225,6 +225,10 @@ export function WalletSlider() {
     }
   };
 
+  const openBottomTabHandler = () => {
+    alertCtx.close();
+  }
+
   return (
     <>
       <ScreenGradient>
@@ -387,6 +391,11 @@ export function WalletSlider() {
         ref={addCardAlertRef}
         height={WINDOW_WIDTH < 370 ? 500 : 400}
         snapPoints={WINDOW_WIDTH < 370 ? ["50"] : ["38"]}
+        onChange={(e: number) => {
+          if (e === -1) {
+            openBottomTabHandler()
+          }
+        }}
       >
         <Box width={"100%"} flex={1} position="absolute" zIndex={100}>
           <AddCard

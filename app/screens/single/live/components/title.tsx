@@ -28,7 +28,7 @@ export const SinglLiveTitle = ({ videoUri, imageUrl, contentName }: Props) => {
           height: 48,
           borderRadius: 8,
         }}
-        resizeMode="contain"
+        resizeMode="cover"
       />
       <Box flex={1}>
         <Text
@@ -37,6 +37,10 @@ export const SinglLiveTitle = ({ videoUri, imageUrl, contentName }: Props) => {
           lineHeight={16}
           fontWeight={400}
           marginLeft={8}
+          textStyles={{
+            height: 20,
+            paddingTop: 5,
+          }}
         >
           Live channel {contentName}
         </Text>

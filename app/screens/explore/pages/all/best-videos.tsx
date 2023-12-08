@@ -6,10 +6,10 @@ import { Box } from "../../../../components/box";
 import { LoadingSpinner } from "../../../../components/loader-spinner";
 import { Text } from "../../../../components/text";
 import { UseNavigationType } from "../../../../types/use-navigation";
-import { VIEW_ALL } from "../../../stack";
 import { ViewAllPageEnum } from "../../../view-all";
 import { BEST_VIDEOS } from "../../../../constaints/consts";
 import { ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG } from "../../../../constaints/icons";
+import { VIEW_ALL } from "../../types";
 
 type Props = {
   isLoading: boolean;

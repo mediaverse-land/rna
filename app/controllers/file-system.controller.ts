@@ -10,12 +10,20 @@ export class FileSystemController {
   }
 
   async convertFileToBase64(fileUri: string) {
-    const result = await FileSystem.readAsStringAsync(
-      fileUri,
-      ENCODING_OPTIONS
-    );
-
-    return result
+    if(!fileUri){
+      return;
+    }
+    try{
+      const result = await FileSystem.readAsStringAsync(
+        fileUri,
+        ENCODING_OPTIONS
+      );
+  
+      return result
+    }
+    catch(err){
+      console.log(err)
+    }
   }
 
   async convertTextToBase64(text: string){

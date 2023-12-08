@@ -220,9 +220,9 @@ export const CreateSoundScreen = () => {
       body: newBody,
     };
 
+    
     createNewAsset(newOption)
       .then(async (res: any) => {
-        _logger.log(forkability_status);
         const asset_id = res?.data?.asset_id;
         if (!asset_id) {
           setIsLoading(false);

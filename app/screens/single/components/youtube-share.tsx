@@ -9,6 +9,7 @@ import { Text } from "../../../components/text";
 import { Input } from "../../../components/form";
 import { Toaster } from "../../../utils/toaster";
 import { LoadingSpinner } from "../../../components/loader-spinner";
+import { BlurView } from "expo-blur";
 
 interface IYoutubeShare {
   closeModal: () => void;
@@ -26,6 +27,7 @@ interface IYoutubeShare {
 let title = "";
 let description = "";
 const _toaster = new Toaster();
+
 export class YoutubeShare implements IYoutubeShare {
   _modalRef: any;
   _modalWrapperRef: any;
@@ -99,8 +101,6 @@ export class YoutubeShare implements IYoutubeShare {
       body: requestBody,
     });
 
-
-
     if (result?.data) {
       this.closeModal();
       _toaster.show("Asset shared to youtube successfully");
@@ -144,29 +144,38 @@ export class YoutubeShare implements IYoutubeShare {
     return (
       <ModalBottomSheet ref={this._modalRef} snapPoints={this._snapPoints}>
         <View
-          ref={this._modalWrapperRef}
           style={{
-            marginBottom: 200,
-            flex: 1,
-            height: 1000,
+            overflow: "hidden",
+            borderTopLeftRadius: 16,
+            borderTopRightRadius: 16,
           }}
         >
-          {this._isLoading ? (
-            <LoadingSpinner />
-          ) : (
-            <ExternalAccountBottomSheet
-              headerElement={_headerElement}
-              token={this._token}
-              setSelectedAccount={(e: any, time) => {
-                this.addSelectedAccount(
-                  e,
-                  this._shareYoutubeApiFunction,
-                  this._assetId,
-                  time
-                );
-              }}
-            />
-          )}
+          <BlurView
+            tint="dark"
+            intensity={40}
+            style={{
+              marginBottom: 200,
+              flex: 1,
+              height: 1000,
+            }}
+          >
+            {this._isLoading ? (
+              <LoadingSpinner />
+            ) : (
+              <ExternalAccountBottomSheet
+                headerElement={_headerElement}
+                token={this._token}
+                setSelectedAccount={(e: any, time) => {
+                  this.addSelectedAccount(
+                    e,
+                    this._shareYoutubeApiFunction,
+                    this._assetId,
+                    time
+                  );
+                }}
+              />
+            )}
+          </BlurView>
         </View>
       </ModalBottomSheet>
     );

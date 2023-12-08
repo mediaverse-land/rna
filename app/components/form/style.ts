@@ -11,9 +11,9 @@ export const InputComponent: any = {
     padding-left: 16px;
     border-radius: 8px;
   `,
-  Label: styled.Text<{ isRtl: boolean }>`
+  Label: styled.Text<{ isRtl: boolean; isIOS?: boolean }>`
     height: 100%;
-    padding: 16px;
+    ${(props) => (!props?.isIOS ? "padding: 16px" : null)}
     position: absolute;
     color: #fff;
     ${(props) => (!props.isRtl ? `right: 0` : `left: 0`)};
@@ -31,14 +31,22 @@ export const InputComponent: any = {
     padding-top: 3px;
     color: ${theme.color.light.GRAY};
   `,
-  InputBox: styled.TextInput<{ textAlign: string; hasError?: boolean, showBorder:boolean }>`
+  InputBox: styled.TextInput<{
+    textAlign: string;
+    hasError?: boolean;
+    showBorder: boolean;
+  }>`
     width: 100%;
     height: 48px;
     border-radius: 8px;
     border: 1px solid
       ${(props) =>
-        props.hasError ? theme.color.light.DANGER : (props.showBorder ?  theme.color.light.INPUT_PLACEHOLDER : 'transparent')};
-    background-color: rgba(14, 14, 18, 0.50);
+        props.hasError
+          ? theme.color.light.DANGER
+          : props.showBorder
+          ? theme.color.light.INPUT_PLACEHOLDER
+          : "transparent"};
+    background-color: rgba(14, 14, 18, 0.5);
     color: ${(props) =>
       props.hasError ? theme.color.light.DANGER : theme.color.light.WHITE};
     font-size: ${theme.fontSize.md};

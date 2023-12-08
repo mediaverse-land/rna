@@ -31,7 +31,7 @@ export const AllPageLives: FC<Props> = ({
   navigation,
 }) => {
   const { isRtl } = useRtl();
-
+  
   const handleRedirect = (id: number) => {
     if (disableOnIntractions) {
       return;

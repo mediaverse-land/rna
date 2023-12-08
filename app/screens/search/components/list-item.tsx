@@ -5,12 +5,12 @@ import { UserNameCard } from "../../../components/username-card";
 import { theme } from "../../../constaints/theme";
 import { HORIZONTAL_SLIDER_GRADIENT } from "../../../constaints/images";
 import {
-  ICON_CHECK_WHITE,
   ICON_IMAGE_WHITE,
   ICON_SOUND_WHITE,
   ICON_TEXT_WHITE,
   ICON_VIDEO_WHITE,
 } from "../../../constaints/icons";
+import { windowSize } from "../../../utils/window-size";
 
 type Props = {
   width: number;
@@ -33,6 +33,10 @@ const contentTypeIcon: any = {
   4: <ICON_VIDEO_WHITE width={19} height={14} />,
 };
 
+const { width } = windowSize();
+
+const ITEM_WIDTH = width / 2 - 32;
+
 export function ListItem({
   imagePath,
   title,
@@ -49,7 +53,7 @@ export function ListItem({
 
   return (
     <Box
-      width={"48%"}
+      width={ITEM_WIDTH}
       paddingTop={index === 0 || index === 1 ? 40 : 0}
       marginBottom={30}
     >
@@ -60,55 +64,39 @@ export function ListItem({
       >
         <Box
           width={"100%"}
-          height={163}
           borderColor={isSelected ? theme.color.light.PRIMARY : null}
           borderRadius={16}
         >
-          <Image source={{ uri: imagePath }} style={styles.thumbnail} />
+          <Image
+            source={{ uri: imagePath }}
+            style={[
+              styles.thumbnail,
+              {
+                width: ITEM_WIDTH,
+                height: ITEM_WIDTH,
+              },
+            ]}
+          />
           {!isSelected ? (
             <Image
               source={{
                 uri: HORIZONTAL_SLIDER_GRADIENT,
               }}
-              style={styles.nonSelectedItemPlaceholder}
+              style={[
+                styles.nonSelectedItemPlaceholder,
+                {
+                  width: ITEM_WIDTH,
+                  height: ITEM_WIDTH,
+                },
+              ]}
             />
-          ) : null}
-          {isSelected ? (
-            <>
-              <Box
-                width="100%"
-                height={163}
-                backgroundColor={theme.color.light.PRIMARY}
-                additionalStyles={styles.selectedItem}
-                position="absolute"
-                top={0}
-                borderRadius={16}
-                zIndex={11}
-                alignItems="center"
-                justifyContent="center"
-              ></Box>
-              <Box
-                width={32}
-                height={32}
-                backgroundColor={theme.color.light.PRIMARY}
-                position="absolute"
-                top={0}
-                borderRadius={8}
-                zIndex={12}
-                additionalStyles={styles.selectedItemPlaceholder}
-                alignItems="center"
-                justifyContent="center"
-              >
-                {<ICON_CHECK_WHITE width={18} height={14} />}
-              </Box>
-            </>
           ) : null}
 
           {contentIcon !== null ? (
             <Box
               width="100%"
               position="absolute"
-              bottom={15}
+              top={ITEM_WIDTH - 20}
               alignItems="flex-end"
               paddingRight={14}
               paddingLeft={14}
@@ -124,7 +112,6 @@ export function ListItem({
               color={theme.color.light.TEXT}
               fontWeight={400}
               fontSize={theme.numericFontSize.md}
-              // lineHeight={16}
             >
               {title}
             </Text>
@@ -146,19 +133,13 @@ export function ListItem({
 const styles = StyleSheet.create({
   thumbnail: {
     borderRadius: 16,
-    width: "100%",
-    height: 163,
-    borderWidth: 1,
   },
   nonSelectedItemPlaceholder: {
     borderRadius: 16,
-    width: "100%",
-    height: 163,
     position: "absolute",
     top: 0,
     left: 0,
     zIndex: 10,
-    borderWidth: 2,
   },
   selectedItem: {
     opacity: 0.1,

@@ -200,6 +200,9 @@ const ButtonText = (props: any) => {
         lineHeight={lineHeight}
         fontSize={fontSize}
         fontWeight={fontWeight}
+        textStyles={{
+          paddingTop: 2
+        }}
       >
         {isLoading ? (
           isLoading === true ? (

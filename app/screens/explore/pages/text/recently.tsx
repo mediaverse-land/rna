@@ -1,11 +1,10 @@
-import { useNavigation } from "@react-navigation/native";
 import { Title } from "../../../../components/title";
 import { Box } from "../../../../components/box";
 import { Text } from "../../../../types/text";
 import { UseNavigationType } from "../../../../types/use-navigation";
 import ViewAllTextsList from "../../../view-all/components/texts-list";
-import { VIEW_ALL } from "../../../stack";
 import { ViewAllPageEnum } from "../../../view-all";
+import { VIEW_ALL } from "../../types";
 
 type Props = {
   data: Text[];

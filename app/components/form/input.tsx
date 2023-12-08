@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react";
-import { TextInputProps } from "react-native";
+import { Platform, TextInputProps } from "react-native";
 import { Box } from "../box";
 import { InputComponent } from "./style";
 import { Text } from "../text";
@@ -9,6 +9,8 @@ import { useRtl } from "../../hooks/use-rtl";
 import { ICON_FORM_ERROR } from "../../constaints/icons";
 
 const { InputBox, Label } = InputComponent;
+
+const isIOS = Platform.OS === "ios";
 
 type Props = {
   labelText: string;
@@ -60,13 +62,22 @@ export function Input({
               const { width } = e.nativeEvent.layout;
               setLabelWidth(Math.floor(width));
             }}
+            isIOS={isIOS}
           >
             <Box
               height="100%"
-              additionalStyles={{
-                borderRightWidth: 1,
-                borderRightColor: theme.color.light.WHITE,
-              }}
+              additionalStyles={[
+                isIOS
+                  ? {
+                      height: 50,
+                      paddingLeft: 16,
+                      paddingTop: 22,
+                    }
+                  : {
+                      borderRightWidth: 1,
+                      borderRightColor: theme.color.light.WHITE,
+                    },
+              ]}
             >
               <Text
                 fontSize={14}

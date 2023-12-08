@@ -6,8 +6,8 @@ import { TextSlider } from "../../../../components/text-slider";
 import { UseNavigationType } from "../../../../types/use-navigation";
 import { BEST_IN_MONTH } from "../../../../constaints/consts";
 import { ICON_TOP_TABBAR_TEXT_ACTIVE_SVG } from "../../../../constaints/icons";
-import { VIEW_ALL } from "../../../stack";
 import { ViewAllPageEnum } from "../../../view-all";
+import { VIEW_ALL } from "../../types";
 
 type Props = {
   data: Text[];

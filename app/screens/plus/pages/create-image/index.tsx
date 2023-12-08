@@ -125,23 +125,20 @@ export const CreateImageScreen = () => {
   };
 
   const _stopVideoSubmitButtonHandler = async () => {
-    await cameraRef?.current?.stopVideo();
-    const uri = capturedVideo?.uri;
+    try{
 
-    const result = await _fileSystemController.convertFileToBase64(uri);
-    _set_capturedVideo_base64_address(result);
+      await cameraRef?.current?.stopVideo();
+      const uri = capturedVideo?.uri;
+      
+      const result = await _fileSystemController.convertFileToBase64(uri);
+      if (result) {
+        _set_capturedVideo_base64_address(result);
+      }
+    }
+    catch(err){
+      console.log(err)
+    }
   };
-
-  // const convertVideoToBased64 = async (capturedVideoUri: any) => {
-  //   if (!capturedVideoUri) {
-  //     _logger.log(`func: convertVideoToBased64, capturedVideo is empty`);
-  //     return null;
-  //   }
-  //   const result = await _fileSystemController.convertFileToBase64(
-  //     capturedVideoUri
-  //   );
-  //   return result;
-  // };
 
   const _createImageRequest = async ({
     name,
@@ -166,6 +163,10 @@ export const CreateImageScreen = () => {
         type: capturedVideo_base64_address ? 4 : 2,
       },
     };
+
+    if(plan === 1){
+      delete options.body.price;
+    }
 
     let newBody: any = {
       ...options.body,
@@ -216,7 +217,7 @@ export const CreateImageScreen = () => {
 
         if (!asset_id || res?.error) {
           const errorMessage =
-          res?.error?.data?.message || "Something went wrong, try again";
+            res?.error?.data?.message || "Something went wrong, try again";
           stopLoad();
           _logger.log(errorMessage);
           _toast.show(errorMessage);
@@ -344,8 +345,8 @@ export const CreateImageScreen = () => {
               navigation={navigation}
               submitButtonHandler={_submitButtonHandler}
               longPressSubmitButtonHandler={_createVideoSubmitButtonHandler}
-              longressOutSubmitButtonHandler={() =>
-                _stopVideoSubmitButtonHandler()
+              longressOutSubmitButtonHandler={
+                () =>_stopVideoSubmitButtonHandler()
               }
             />
           </ScreenGradient>

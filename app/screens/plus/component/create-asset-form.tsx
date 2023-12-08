@@ -8,9 +8,11 @@ import { PaddingContainer } from "../../../styles/grid";
 import { Title } from "../../../components/title";
 import { Input, RadioButton } from "../../../components/form";
 import { Button } from "../../../components/button";
-import { useIsFocused } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { StorageService } from "../../../services/storage.service";
 import { HAS_USER_SEEN_PLUS_CREATE_FORM_TOUR } from "../../../constaints/consts";
+import { GoBackButton } from "../../single/components/goback-button";
+import { UseNavigationType } from "../../../types/use-navigation";
 
 type Props = {
   formStructure: any;
@@ -50,6 +52,7 @@ export const CreateAssetForm = ({
   });
 
   const isFocused = useIsFocused();
+  const navigation = useNavigation<UseNavigationType>();
 
   const {
     handleSubmit,
@@ -167,7 +170,8 @@ export const CreateAssetForm = ({
     >
       <ScreenGradient>
         <VirtualizedList>
-          <Box width="100%" flex={1} paddingBottom={100} paddingTop={100}>
+          <Box width="100%" flex={1} paddingBottom={100} paddingTop={75}>
+            <GoBackButton hasBackground goBackHandler={() => navigation.goBack()}/>
             <PaddingContainer>
               <Title str="Fill data" />
               <Box marginTop={24}></Box>

@@ -9,8 +9,8 @@ import { TOP_TEN_TEXTS } from "../../../../constaints/consts";
 import type { Text as TextType } from "../../../../types/text";
 import { RenderIf } from "../../../../components/render-if";
 import { Text } from "../../../../components/text";
-import { VIEW_ALL } from "../../../stack";
 import { ViewAllPageEnum } from "../../../view-all";
+import { VIEW_ALL } from "../../types";
 
 type Props = {
   isLoading: boolean;

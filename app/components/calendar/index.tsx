@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Box } from "../box";
 import { screenSize } from "../../utils/screen-size";
 import { ScrollView, TouchableOpacity, View } from "react-native";
@@ -265,14 +265,16 @@ const MemoCalendar = ({
                   onPress={() =>
                     setSelectedDay({ day: dayIndex, month: activeMonth })
                   }
-                  style={{
-                    // width: '10%',
-                    minWidth: "14.2%",
-                    marginBottom: 21,
-                    alignItems: "center",
-                    position: "relative",
-                    height: 28,
-                  }}
+                  style={[
+                    {
+                      // width: '10%',
+                      minWidth: "14.2%",
+                      marginBottom: 21,
+                      alignItems: "center",
+                      position: "relative",
+                      height: 28,
+                    }
+                  ]}
                   activeOpacity={1}
                 >
                   <Text
@@ -285,6 +287,7 @@ const MemoCalendar = ({
                         ? selectedDayStyles
                         : {
                             color: theme.color.light.TEXT,
+                            borderRadius: 100,
                           }
                     }
                   >
@@ -391,7 +394,7 @@ const MonthDropdown = ({
     >
       <LinearGradient {...menuWindowGradientProps}>
         <BlurView
-          style={{ width: "100%", height: "100%",flex: 1, borderRadius: 16 }}
+          style={{ width: "100%", height: "100%", flex: 1, borderRadius: 16 }}
           tint="dark"
           intensity={90}
         >

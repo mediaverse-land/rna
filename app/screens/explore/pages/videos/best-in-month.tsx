@@ -8,8 +8,8 @@ import { Text } from "../../../../components/text";
 import { UseNavigationType } from "../../../../types/use-navigation";
 import { ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG } from "../../../../constaints/icons";
 import { BEST_IN_MONTH } from "../../../../constaints/consts";
-import { VIEW_ALL } from "../../../stack";
 import { ViewAllPageEnum } from "../../../view-all";
+import { VIEW_ALL } from "../../types";
 
 type Props = {
   isLoading: boolean;

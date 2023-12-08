@@ -17,8 +17,8 @@ import { Text } from "../../../../components/text";
 import { windowSize } from "../../../../utils/window-size";
 import { formatTime } from "../../../../utils/format-time";
 import { Title } from "../../../../components/title";
-import { VIEW_ALL } from "../../../stack";
 import { ViewAllPageEnum } from "../../../view-all";
+import { VIEW_ALL } from "../../types";
 
 type Props = {
   isLoading: boolean;

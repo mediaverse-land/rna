@@ -6,8 +6,8 @@ import { IfNoItem } from "../../../../components/if-no-item";
 import { HorizontalSlider } from "../../../../components/horizontal-slider";
 import { Sound } from "../../../../types/sound";
 import ViewAllSoundList from "../../../view-all/components/sound-list";
-import { VIEW_ALL } from "../../../stack";
 import { ViewAllPageEnum } from "../../../view-all";
+import { VIEW_ALL } from "../../types";
 
 type Props = {
   isLoading: boolean;
@@ -35,7 +35,7 @@ export function SoundsPageRecently({ isLoading, data, navigate }: Props) {
       <Box>
         <RenderIf condition={isLoading}>
           <IfNoItem dataLength={data.length}>
-            <ViewAllSoundList marginTop={-4} data={data} navigate={navigate} />
+            <ViewAllSoundList onEndReached={() => {}} marginTop={-4} data={data} navigate={navigate} />
           </IfNoItem>
         </RenderIf>
       </Box>

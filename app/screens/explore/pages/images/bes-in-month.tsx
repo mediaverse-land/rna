@@ -5,8 +5,8 @@ import { Asset } from "../../../../types/asset";
 import { Box } from "../../../../components/box";
 import { RenderIf } from "../../../../components/render-if";
 import { IfNoItem } from "../../../../components/if-no-item";
-import { VIEW_ALL } from "../../../stack";
 import { ViewAllPageEnum } from "../../../view-all";
+import { VIEW_ALL } from "../../types";
 
 type Props = {
   isLoading: boolean;

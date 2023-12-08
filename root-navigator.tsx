@@ -226,7 +226,7 @@ export function RootNavigator({ firebaseToken }: Props) {
   return (
     <>
       <NavigationContainer>
-        <PushNotificationPermissionAlert isAuth={isAuth} />
+        {/* <PushNotificationPermissionAlert isAuth={isAuth} /> */}
         {isLoading ? (
           <SafeAreaView style={{ flex: 1 }}>
             <LinearGradient

@@ -29,11 +29,9 @@ export const AllSLivescreen = () => {
   const selectCountryRef = useRef(null);
 
   const innerSelectLanguageBottomSheet = useClickOutside<View>(() => {
-    // setOpenReportModal(false);
     selectLanguageRef?.current.close();
   });
   const innerSelectCountryBottomSheet = useClickOutside<View>(() => {
-    // setOpenReportModal(false);
     selectCountryRef?.current.close();
   });
 

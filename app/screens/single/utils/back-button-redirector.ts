@@ -3,8 +3,8 @@ import {
   APP_STACK,
   REDIRECTED_FROM_CREATE_ASSET,
 } from "../../../constaints/consts";
-import { PROFILE } from "../../stack";
 import { UseNavigationType } from "../../../types/use-navigation";
+import { PROFILE } from "../../explore/types";
 
 export class BackButtonRedirector {
   navigation: UseNavigationType = null;
