@@ -3,7 +3,7 @@ import { HeaderStyles } from "./style";
 import { useNavigation } from "@react-navigation/native";
 import { UseNavigationType } from "../../types/use-navigation";
 
-export function Header() {
+export function Header() { 
   const navigation = useNavigation<UseNavigationType>();
 
   function navigateToSearchPage() {

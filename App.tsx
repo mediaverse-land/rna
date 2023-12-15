@@ -11,7 +11,6 @@ import { SystemLoggerController } from "./app/controllers/system-logger.controll
 splashScreenController.preventAutoHiding();
 navigationBarController.fadeNavbarHandler();
 
-
 const _systemLoggerController = new SystemLoggerController();
 _systemLoggerController.hideLogsOnDevelopment();
 
@@ -30,7 +29,7 @@ export default function App() {
       <AppProviders>
         <RootNavigator firebaseToken={token} />
       </AppProviders>
-      <StatusBar backgroundColor={'red'} barStyle="light-content" />
+      <StatusBar backgroundColor={"transparent"} barStyle="light-content" />
     </>
   );
 }
