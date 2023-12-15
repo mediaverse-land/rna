@@ -12,15 +12,11 @@ npm-debug.*
 web-build/
 .env
 ./google-services.json
+./GoogleService-Info.plist
+./eas.json
 # macOS
 .DS_Store
 
-
-GoogleService-Info.plist
-./GoogleService-Info.plist
-
-google-services.json
-./google-services.json
 
 # Temporary files created by Metro to check the health of the file watcher
 .metro-health-check*
