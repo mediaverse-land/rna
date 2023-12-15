@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyChJRn1R6QfKG_BL9XQJ3IulVRQPwxT4ko</string>
+	<key>GCM_SENDER_ID</key>
+	<string>519271936627</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.emahdi1297.mediaverse</string>
+	<key>PROJECT_ID</key>
+	<string>mediaverse-test-notification</string>
+	<key>STORAGE_BUCKET</key>
+	<string>mediaverse-test-notification.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:519271936627:ios:b37580b01e2e6a76a5f006</string>
+</dict>
+</plist>

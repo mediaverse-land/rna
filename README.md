@@ -33,7 +33,6 @@ Codebase common technologies are listed bellow:
 
 **Typescript**: Codebase is written is typescript
 
-**Redux Toolkit**: Codebase is written is typescript
 
 ### Folder structure
 
