@@ -1,6 +1,4 @@
-<div align="center">
-[Mediaverse](./assets/mediaverse-icon.png)
-</div>
+
 # Mediaverse
 
 Mediaverse Platform is the next generation of media asset management tools for social TVs (or social media) that helps users manage the content cycle from procurement (or production) to distribution.
@@ -79,4 +77,4 @@ EXPO_APP_FIREBASE_MESUREMENT_ID=
 ```
 
 ### Attention
-Please download the google-services.json and GoogleService-Info.plist and attach them in root of project
+Please download the google-services.json and GoogleService-Info.plist from your firebase console and attach them in root of project
