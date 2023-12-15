@@ -7,7 +7,7 @@ Mediaverse Platform is the next generation of media asset management tools for s
 
 ## Application setup
 
-Mediaverse mobile application is developed under React native Expo managed workflow system. To start develop the app, run
+Mediaverse mobile application is developed under React native Expo managed workflow system. To start develop the app, follow the bellow steps.
 
 The first step to running mediaverse locally is downloading node_modules dependencies by running:
 
@@ -77,4 +77,4 @@ EXPO_APP_FIREBASE_MESUREMENT_ID=
 ```
 
 ### Attention
-Please download the google-services.json and GoogleService-Info.plist from your firebase console and attach them in root of project
+Please download the google-services.json and GoogleService-Info.plist from your firebase console and attach them in root of project. And add your own eas.json file to root of your project
