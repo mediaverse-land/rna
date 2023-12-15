@@ -46,7 +46,7 @@ export const BASE_64_URI =
 //       formData.append("image", imageBlob, "image.jpg");
 
 //       const response = await axios(
-//         "https://api.mediaverse.land/v2/assets/1499/files",
+//         `${process.env.EXPO_APPBASE_URL}/v2/assets/1499/files`,
 //         {
 //           method: "POST",
 //           data: formData,

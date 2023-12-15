@@ -11,7 +11,7 @@ const _getToken = async () => {
 export const singleImageService: any = createApi({
   reducerPath: "singleImageService",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.mediaverse.land/v2",
+    baseUrl: process.env.EXPO_APPBASE_URL,
   }),
   endpoints: (builder) => ({
     getSingleImage: builder.query<Image, {id: number}>({

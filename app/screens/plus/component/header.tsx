@@ -30,19 +30,6 @@ export const CreateContentHeader = ({
         position="absolute"
         zIndex={10000000000}
       >
-        <TouchableOpacity  onPress={goBackHandler}>
-          <Box
-            id="go-back-button"
-            width={72}
-            height={40}
-            backgroundColor="rgba(14, 14, 18, 0.5)"
-            borderRadius={20}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <ICON_ARROW_LEFT_WHITE />
-          </Box>
-        </TouchableOpacity>
         {!justBackButtonVisible ? (
           <Box direction="row" alignItems="center">
             <TouchableOpacity

@@ -150,6 +150,7 @@ export function MessagesPage() {
                         paddingLeft={16}
                         paddingRight={16}
                     >
+                        {""}
                         {/* {item.description} */}
                     </Text>
                 </Box>

@@ -89,14 +89,13 @@ export const CreateSoundScreen = () => {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: `https://api.mediaverse.land/v2/files`,
+      url: `${process.env.EXPO_APPBASE_URL}/files`,
       headers: {
-        authority: "api.mediaverse.land",
         accept: "*/*",
         "accept-language": "en-US,en;q=0.9",
         authorization: `Bearer ${token}`,
-        origin: "https://assets.mediaverse.land",
-        referer: "https://assets.mediaverse.land/",
+        origin: process.env.EXPO_APPBASE_URL,
+        referer: process.env.EXPO_APPBASE_URL,
         "X-App": "_Android",
         "sec-ch-ua":
           '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',

@@ -34,6 +34,9 @@ import ICON_TEXT_TO_TEXT_SVG from "./../../assets/icons/icon__convert-text-to-te
 import ICON_STREAM_SVG from "./../../assets/icons/icon__stream.svg";
 import ICON_SPEAKER_BLACK_SVG from "./../../assets/icons/icon__speaker-black.svg";
 import ICON_MENU_VERTICAL_SVG from "./../../assets/icons/icon__menu-vertical.svg";
+import ICON_ADD_IMAGE_SVG from "./../../assets/icons/icon_add-image.svg";
+
+export const ICON_ADD_IMAGE = ICON_ADD_IMAGE_SVG;
 
 export const ICON_MENU_VERTICAL = ICON_MENU_VERTICAL_SVG;
 export const ICON_SPEAKER_BLACK = ICON_SPEAKER_BLACK_SVG;

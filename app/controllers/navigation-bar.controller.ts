@@ -1,8 +1,11 @@
 import * as NavigationBar from "expo-navigation-bar";
+import { isAndroid } from "./platform.controller";
 
 export const navigationBarController = {
   fadeNavbarHandler: () => {
-    NavigationBar.setPositionAsync("absolute");
-    NavigationBar.setBackgroundColorAsync("#ffffff01");
+    if (isAndroid()) {
+      NavigationBar.setPositionAsync("absolute");
+      NavigationBar.setBackgroundColorAsync("#ffffff01");
+    }
   },
 };

@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const assetService: any = createApi({
   reducerPath: "assetService",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.mediaverse.land/v2",
+    baseUrl: process.env.EXPO_APPBASE_URL,
   }),
   endpoints: (builder) => ({
     search: builder.mutation({
@@ -135,6 +135,20 @@ export const assetService: any = createApi({
         };
       },
     }),
+    createAsset: builder.mutation({
+      query: (args) => {
+        return {
+          url: args.url,
+          method: "POST",
+          body: args.body,
+          headers: {
+            "X-App": "_Android",
+            Authorization: `Bearer ${args.token}`,
+          },
+        };
+      },
+    }),
+
   }),
 });
 
@@ -148,6 +162,8 @@ export const {
   useGetShareListQuery,
   useRemoveExternalAccountMutation,
   useRemoveShareItemMutation,
+
+  useCreateAssetMutation,
 
   useSearchMutation,
 } = assetService;

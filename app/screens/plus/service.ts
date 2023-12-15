@@ -34,7 +34,7 @@ export const uploadHandler = async ({
     };
 
     const result__ = await axios.post(
-      `https://api.mediaverse.land/v2/files`,
+      `${process.env.EXPO_APPBASE_URL}/files`,
       formData,
       config
     );

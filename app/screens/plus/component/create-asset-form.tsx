@@ -170,8 +170,13 @@ export const CreateAssetForm = ({
     >
       <ScreenGradient>
         <VirtualizedList>
-          <Box width="100%" flex={1} paddingBottom={100} paddingTop={75}>
-            <GoBackButton hasBackground goBackHandler={() => navigation.goBack()}/>
+          <Box width="100%" flex={1} paddingBottom={100} >
+            <Box marginBottom={90} marginTop={24}>
+              <GoBackButton
+                hasBackground
+                goBackHandler={() => navigation.goBack()}
+              />
+            </Box>
             <PaddingContainer>
               <Title str="Fill data" />
               <Box marginTop={24}></Box>

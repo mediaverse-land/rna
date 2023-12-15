@@ -1,40 +1,38 @@
 import { useEffect, useContext, useState, useRef } from "react";
-import { BackHandler, View } from "react-native";
+import { View } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useClickOutside } from "react-native-click-outside";
 import { ScreenGradient } from "../../../components/screen-gradient";
 import { Box } from "../../../components/box";
 import { CommentCard } from "../../../components/comment-card";
-import { SingleImageHeader } from "./header";
-import { SingleImageContent } from "./content";
 import { BuyBottom } from "../components/buy-button";
 import { VirtualizedList } from "../../../components/virtualized-list";
-import { tokenContext } from "../../../context/token";
-import { tokenStringResolver } from "../../../utils/token-string-resolver";
 import { RenderIf } from "../../../components/render-if";
 import { MetaDataType } from "../components/item-metadata";
-import { userContext } from "../../../context/user";
-import { ifUserIsOwner } from "../../../utils/if-user-is-owner";
 import { SingleItemFiles } from "../components/files";
-import { AssetLargeImage } from "./large-image";
 import { FocusedStatusBar } from "../../../components/focused-statusbar";
 import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
 import { ReportModal } from "../components/report-modal";
+import { SingleAssetFooter } from "../components/footer";
+import { YoutubeShare } from "../components/youtube-share";
+import { CustomSafeArea } from "../../../components/custom-safe-area";
+import { SingleImageHeader } from "./header";
+import { SingleImageContent } from "./content";
+import { AssetLargeImage } from "./large-image";
 import { getImageDetailApiHandler } from "../service";
 import { Image } from "../../../types/image";
-import {
-  APP_STACK,
-  EDIT_SCREEN,
-  REDIRECTED_FROM_CREATE_ASSET,
-} from "../../../constaints/consts";
-import { IMAGE_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
-import { singleImageStyles } from "./styles";
-import { SingleAssetFooter } from "../components/footer";
 import { ICON_SHARE_YOUTUBE } from "../../../constaints/icons";
-import { YoutubeShare } from "../components/youtube-share";
 import { useYoutubeShareMutation } from "../../../services/asset.service";
+import { tokenStringResolver } from "../../../utils/token-string-resolver";
+import { ifUserIsOwner } from "../../../utils/if-user-is-owner";
 import { BackButtonRedirector } from "../utils/back-button-redirector";
+import { userContext } from "../../../context/user";
+import { tokenContext } from "../../../context/token";
+import { singleImageStyles } from "./styles";
+import { IMAGE_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
+import {
+  EDIT_SCREEN,
+} from "../../../constaints/consts";
 
 const _youtubeShare = new YoutubeShare();
 const _backButtonRedirector = new BackButtonRedirector();
@@ -256,7 +254,7 @@ export function SingleImageScreen({ navigation, route }: any) {
   const youtubeShareTemplate = _youtubeShare.template();
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <CustomSafeArea>
       <FocusedStatusBar />
       <ScreenGradient>
         <VirtualizedList>
@@ -327,6 +325,6 @@ export function SingleImageScreen({ navigation, route }: any) {
         </View>
       ) : null}
       {youtubeShareTemplate}
-    </SafeAreaView>
+    </CustomSafeArea>
   );
 }

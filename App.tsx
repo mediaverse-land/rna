@@ -6,10 +6,14 @@ import { useLoadFonts } from "./app/hooks/use-load-fonts";
 import { splashScreenController } from "./app/controllers/splash-screen.controller";
 import { useFirebasePushNotification } from "./app/hooks/use-firebase-push-notification";
 import { AppProviders } from "./app-providets";
+import { SystemLoggerController } from "./app/controllers/system-logger.controller";
 
 splashScreenController.preventAutoHiding();
-
 navigationBarController.fadeNavbarHandler();
+
+
+const _systemLoggerController = new SystemLoggerController();
+_systemLoggerController.hideLogsOnDevelopment();
 
 export default function App() {
   usePreventScreenCapture();
@@ -26,7 +30,7 @@ export default function App() {
       <AppProviders>
         <RootNavigator firebaseToken={token} />
       </AppProviders>
-      <StatusBar backgroundColor={"#0c0c21"} barStyle="light-content" />
+      <StatusBar backgroundColor={'red'} barStyle="light-content" />
     </>
   );
 }

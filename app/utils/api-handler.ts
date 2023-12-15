@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 
-const BASE_URL = 'https://api.mediaverse.land/v2';
+const BASE_URL = process.env.EXPO_APPBASE_URL;
 
 export class ApiHandler {
     async post(endpoint: string, data: object, config?: object) {

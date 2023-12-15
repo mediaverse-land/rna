@@ -43,6 +43,7 @@ import { useSetFirebasePushNotificationAccountMutation } from "./app/services/au
 // import PushNotificationWrapper from "./app/components/push-notification-wrapper";
 import { tokenStringResolver } from "./app/utils/token-string-resolver";
 import { PushNotificationPermissionAlert } from "./app/components/push-notification-permission-alert";
+import { CustomSafeArea } from "./app/components/custom-safe-area";
 
 type Route = { id: number; name: string; component: FC | any };
 
@@ -130,7 +131,7 @@ const deliverNotificationTokenToApi = async (
 ) => {
   try {
     const result = await axios.post(
-      `https://api.mediaverse.land/v2/push-notifications/firebase-tokens`,
+      `${process.env.EXPO_APPBASE_URL}/push-notifications/firebase-tokens`,
       { token },
       {
         headers: {
@@ -228,7 +229,7 @@ export function RootNavigator({ firebaseToken }: Props) {
       <NavigationContainer>
         {/* <PushNotificationPermissionAlert isAuth={isAuth} /> */}
         {isLoading ? (
-          <SafeAreaView style={{ flex: 1 }}>
+          <CustomSafeArea style={{ flex: 1 }}>
             <LinearGradient
               colors={["#030340", "#030340"]}
               start={{ x: 0.7, y: 0 }}
@@ -236,7 +237,7 @@ export function RootNavigator({ firebaseToken }: Props) {
             >
               <FullScreenSpinnerLoader />
             </LinearGradient>
-          </SafeAreaView>
+          </CustomSafeArea>
         ) : isUserAuthenticated === "boolean" ||
           isUserAuthenticated === false ? (
           <Stack.Navigator

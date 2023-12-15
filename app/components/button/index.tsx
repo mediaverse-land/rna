@@ -1,5 +1,5 @@
 import { FC, ReactNode, useMemo } from "react";
-import { GestureResponderEvent, TouchableOpacity } from "react-native";
+import { ActivityIndicator, GestureResponderEvent, TouchableOpacity } from "react-native";
 import { ButtonComponents } from "./style";
 import { Box } from "../box";
 import { Text } from "../text";
@@ -116,6 +116,14 @@ export const Button: FC<Props> = ({
   const { backgroundColor, textColor, gradient } = varients[varient];
   const { fontSize, fontWeight, lineHeight } = sizes[size] || sizes["sm"];
 
+  const _onpressHandler = (event: GestureResponderEvent) =>{
+    if(isLoading){
+      return;
+    }
+
+    onpressHandler(event);
+  }
+
   return (
     <Box
       width={width ? width : "100%"}
@@ -126,7 +134,7 @@ export const Button: FC<Props> = ({
     >
       <TouchableOpacity
         activeOpacity={1}
-        onPress={onpressHandler}
+        onPress={_onpressHandler}
         style={{
           width: "100%",
         }}
@@ -206,7 +214,7 @@ const ButtonText = (props: any) => {
       >
         {isLoading ? (
           isLoading === true ? (
-            <LoadingSpinner color="red" />
+            <ActivityIndicator />
           ) : (
             text
           )

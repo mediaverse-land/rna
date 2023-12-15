@@ -65,7 +65,7 @@ export function VideoPageList({
   const renderVidoeListItem = ({ item }: { item: any }) => {
     const asset_username = item?.asset?.user?.username;
     const asset_user_image_url =
-      item?.asset?.user?.image_url === "https://api.mediaverse.land/storage/"
+      item?.asset?.user?.image_url === `${process.env.EXPO_APP_URL}/storage/`
         ? PROFILE_IMAGE
         : item?.asset?.user?.image_url;
 

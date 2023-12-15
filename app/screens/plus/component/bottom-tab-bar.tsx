@@ -1,25 +1,23 @@
 import { useState, useEffect, useRef } from "react";
-import { TouchableOpacity, View } from "react-native";
-import {
-  ICON_CREATE_TEXT_ACTIVE,
-  ICON_CREATE_TEXT_LIGHT,
-  ICON_RECORD_VOICE_LIGHT,
-  ICON_RECORD_VOIC_ACTIVE,
-  ICON_TAKE_PHOTO,
-  ICON_TAKE_PHOTO_LIGHT,
-} from "./../../../constaints/icons";
+import { ActivityIndicator, TouchableOpacity } from "react-native";
+import { useIsFocused } from "@react-navigation/native";
 import { Box } from "../../../components/box";
-import { PLUS_SCREEN_FOOTER_BACKGROUND } from "../../../constaints/images";
 import { theme } from "../../../constaints/theme";
 import { UseNavigationType } from "../../../types/use-navigation";
 import { CREATE_IMAGE, CREATE_SOUND, CREATE_TEXT } from "../constaints";
 import { windowSize } from "../../../utils/window-size";
-import { useIsFocused } from "@react-navigation/native";
 import { StorageService } from "../../../services/storage.service";
 import { HAS_USER_SEEN_PLUS_TOUR } from "../../../constaints/consts";
 import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
-
-type CurrentPage = "CREATE_SOUND" | "CREATE_TEXT" | "CREATE_IMAGE";
+import { isAndroid } from "../../../controllers/platform.controller";
+import { TabbarBackground } from "./tabbar-background";
+import {
+  menuOrdersIfImageScreen,
+  menuOrdersIfSoundScreen,
+  menuOrdersIfTextScreen,
+} from "../models";
+import { CurrentPage } from "../types";
+import { msg } from "../msg";
 
 type Props = {
   navigation: UseNavigationType;
@@ -29,60 +27,12 @@ type Props = {
   longPressSubmitButtonHandler?: (args?: any) => void;
   longressOutSubmitButtonHandler?: (args?: any) => void;
   currentPage: CurrentPage;
+  isLoading: boolean;
 };
 
-const menuOrdersIfImageScreen = {
-  prev: {
-    icon: <ICON_RECORD_VOICE_LIGHT />,
-    screen: "createSound",
-  },
-  center: {
-    icon: <ICON_TAKE_PHOTO />,
-    screen: "createImage",
-  },
-  next: {
-    icon: <ICON_CREATE_TEXT_LIGHT />,
-    screen: "createText",
-  },
-};
+const _isAndroid = isAndroid();
 
-const menuOrdersIfSoundScreen = {
-  prev: {
-    icon: <ICON_CREATE_TEXT_LIGHT />,
-    screen: "createText",
-  },
-  center: {
-    icon: <ICON_RECORD_VOIC_ACTIVE />,
-    screen: "createSound",
-  },
-  next: {
-    icon: <ICON_TAKE_PHOTO_LIGHT />,
-    screen: "createImage",
-  },
-};
-
-const menuOrdersIfTextScreen = {
-  prev: {
-    icon: <ICON_TAKE_PHOTO />,
-    screen: "createImage",
-  },
-  center: {
-    icon: <ICON_CREATE_TEXT_ACTIVE />,
-    screen: "createText",
-  },
-  next: {
-    icon: <ICON_RECORD_VOICE_LIGHT />,
-    screen: "createSound",
-  },
-};
-
-const WINDOW_HEIGHT = Math.floor(windowSize().height);
-const WINDOW_WIDTH = Math.floor(windowSize().width);
-
-const CAMERA_GUIDE =
-  "Put your thumb on the plus and start creating digital assets. Here the image is created";
-const AUDIO_GUIDE = "Here is the sound";
-const TEXT_GUIDE = "َAnd finally the text";
+const { height } = windowSize();
 
 const _storageService = new StorageService();
 
@@ -96,6 +46,7 @@ export function BottomTabBar({
   longPressSubmitButtonHandler,
   longressOutSubmitButtonHandler,
   currentPage,
+  isLoading,
 }: Props) {
   let currentIcons;
 
@@ -114,13 +65,12 @@ export function BottomTabBar({
   const isFocused = useIsFocused();
 
   const [menuOrder, setMenuOrder] = useState(currentIcons);
-  const [preventIntractions, setPreventIntractions] = useState(true);
 
   const tabBarItemClickNavigateHandler = (screenName: string) => {
+    if (isLoading) {
+      return;
+    }
     // Prevent intreactions if user has not seen tour guide
-    // if(preventIntractions){
-    //   return;
-    // }
     navigation?.navigate(screenName);
   };
 
@@ -132,9 +82,9 @@ export function BottomTabBar({
   const hasUserSeenTour = async () => {
     const hasUserSeen = await _storageService.get(HAS_USER_SEEN_PLUS_TOUR);
     const res = hasUserSeen ? true : false;
-    if (res) {
-      setPreventIntractions(false);
-    }
+    // if (res) {
+    //   setPreventIntractions(false);
+    // }
     return res;
   };
 
@@ -165,13 +115,16 @@ export function BottomTabBar({
         ]);
         composer.show().then(async () => {
           await setUserSeenTour();
-          setPreventIntractions(false);
+          // setPreventIntractions(false);
         });
       }, 3000);
     }
   };
 
   useEffect(() => {
+    if (!_isAndroid) {
+      return;
+    }
     if (isFocused) {
       setupTour();
     }
@@ -179,122 +132,116 @@ export function BottomTabBar({
 
   return (
     <>
-      <Box
-        id="plus__bottom-tab-bar"
-        width="100%"
-        height={200}
-        position="absolute"
-        top={WINDOW_HEIGHT - 200}
-        direction="row"
-        alignItems="center"
-        justifyContent="center"
-      >
-        <PLUS_SCREEN_FOOTER_BACKGROUND
-          width={
-            WINDOW_WIDTH > 700
-              ? `${(WINDOW_WIDTH / 400) * 100}%`
-              : windowSize().width
-          }
-          height={WINDOW_WIDTH > 700 ? "160%" : "100%"}
-          style={{
-            position: "relative",
-            top: 40,
-          }}
-        />
+      <Box width="100%" height={200} position="absolute" bottom={1}>
+        <TabbarBackground />
         <Box
           width="100%"
-          height={118}
+          height={height / 7}
+          bottom={-2}
           position="absolute"
-          bottom={1}
           direction="row"
           alignItems="center"
-          justifyContent="space-between"
-          paddingLeft={64}
-          paddingRight={64}
+          justifyContent="center"
         >
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={() =>
-              tabBarItemClickNavigateHandler(menuOrder?.next.screen)
-            }
+          <Box
+            id="buttons-wrapper"
+            width="100%"
+            height={118}
+            position="absolute"
+            bottom={1}
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            paddingLeft={64}
+            paddingRight={64}
           >
-            <CoachmarkWrapper
-              allowBackgroundInteractions={false}
-              ref={textButtonRef}
-              message={TEXT_GUIDE}
-            >
-              <Box
-                width={40}
-                height="100%"
-                alignItems="center"
-                justifyContent="center"
-                position="relative"
-              >
-                {menuOrder?.next.icon}
-              </Box>
-            </CoachmarkWrapper>
-          </TouchableOpacity>
-          <Box height="100%">
             <TouchableOpacity
               activeOpacity={1}
-              onPress={submitButtonHandler}
-              onLongPress={longPressSubmitButtonHandler}
-              onPressOut={longressOutSubmitButtonHandler}
+              onPress={() =>
+                tabBarItemClickNavigateHandler(menuOrder?.next.screen)
+              }
             >
               <CoachmarkWrapper
                 allowBackgroundInteractions={false}
-                ref={imageButtonRef}
-                message={CAMERA_GUIDE}
+                ref={textButtonRef}
+                message={msg.TEXT_GUIDE}
               >
                 <Box
-                  id="selected-content-button-blue-border"
-                  width={72}
-                  height={72}
-                  backgroundColor={theme.color.light.PRIMARY}
-                  borderRadius={100}
+                  width={40}
+                  height="100%"
                   alignItems="center"
                   justifyContent="center"
                   position="relative"
-                  top={-25}
+                >
+                  {menuOrder?.next.icon}
+                </Box>
+              </CoachmarkWrapper>
+            </TouchableOpacity>
+            <Box position="relative" top={20} height="100%">
+              <TouchableOpacity
+                activeOpacity={1}
+                onPress={submitButtonHandler}
+                onLongPress={longPressSubmitButtonHandler}
+                onPressOut={longressOutSubmitButtonHandler}
+              >
+                <CoachmarkWrapper
+                  allowBackgroundInteractions={false}
+                  ref={imageButtonRef}
+                  message={msg.CAMERA_GUIDE}
                 >
                   <Box
-                    id="selected-content-button-dark-body"
-                    width={56}
-                    height={56}
-                    backgroundColor="#030340"
+                    id="selected-content-button-blue-border"
+                    width={72}
+                    height={72}
+                    backgroundColor={theme.color.light.PRIMARY}
                     borderRadius={100}
                     alignItems="center"
                     justifyContent="center"
+                    position="relative"
+                    top={-25}
                   >
-                    {menuOrder?.center.icon}
+                    <Box
+                      id="selected-content-button-dark-body"
+                      width={56}
+                      height={56}
+                      backgroundColor="#030340"
+                      borderRadius={100}
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      {isLoading ? (
+                        <ActivityIndicator />
+                      ) : (
+                        menuOrder?.center.icon
+                      )}
+                    </Box>
                   </Box>
+                </CoachmarkWrapper>
+              </TouchableOpacity>
+            </Box>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() =>
+                tabBarItemClickNavigateHandler(menuOrder?.prev.screen)
+              }
+            >
+              <CoachmarkWrapper
+                allowBackgroundInteractions={false}
+                ref={soundButtonRef}
+                message={msg.AUDIO_GUIDE}
+              >
+                <Box
+                  width={40}
+                  height="100%"
+                  alignItems="center"
+                  justifyContent="center"
+                  position="relative"
+                >
+                  {menuOrder?.prev.icon}
                 </Box>
               </CoachmarkWrapper>
-              {/* </TourGuideZone> */}
             </TouchableOpacity>
           </Box>
-          <TouchableOpacity
-            activeOpacity={1}
-            onPress={() =>
-              tabBarItemClickNavigateHandler(menuOrder?.prev.screen)
-            }
-          >
-            <CoachmarkWrapper
-              allowBackgroundInteractions={false}
-              ref={soundButtonRef}
-              message={AUDIO_GUIDE}
-            >
-              <Box
-                width={40}
-                height="100%"
-                alignItems="center"
-                justifyContent="center"
-                position="relative"
-              >
-                {menuOrder?.prev.icon}
-              </Box>
-            </CoachmarkWrapper>
-          </TouchableOpacity>
         </Box>
       </Box>
     </>

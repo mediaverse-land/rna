@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const singleTextService: any = createApi({
   reducerPath: "singleTextService",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://api.mediaverse.land/v2",
+    baseUrl: process.env.EXPO_APPBASE_URL,
   }),
   endpoints: (builder) => ({
     getSingleImage: builder.query({

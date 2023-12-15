@@ -25,7 +25,7 @@ export const theme = {
       DANGER: "#D90429",
       FACEBOOK: "#1771E6",
       APPLE: "#000000",
-      INPUT_PLACEHOLDER: "#353542",
+      INPUT_PLACEHOLDER: "#4E4E61",
       WHITE: "#FFF",
       LIGHT_DESCRIPTION: "#83839C",
       SONG_CARD_TITLE_TEXT: "#CCCCFF",
@@ -35,6 +35,8 @@ export const theme = {
       ADD_ACCOUNT_MODAL_BAKGROUND: "rgba(78, 78, 97, 0.75)",
       ALL_LIVE_SEARCH_INPUT_BG: "#25254b",
       SEARCH_PAGE_INPUT_BG: "#26263e",
+      DARK_INPUT_PLACEHOLDER: '#353542',
+      DARK_INPUT_BORDER: '#353542',
     },
     dark: {},
   },
@@ -57,6 +59,10 @@ export const theme = {
     sm: 12,
     md: 16,
   },
+  gradients: {
+    PLUS_PAGE_GRADIENT:["#080851", "#040441"],
+    PUBLISH_BUTTON_GRADIENT: ["#303168", "#19194a"]
+  }
 };
 
 // const colors = {

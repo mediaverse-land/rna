@@ -35,7 +35,7 @@ export function Text({
   paddingLeft,
   paddingRight,
   fontWeight,
-  fontFamily ,
+  fontFamily,
   textStyles,
   isTextArea,
   selectable = false,
@@ -61,7 +61,12 @@ export function Text({
   return (
     <>
       {isTextArea ? (
-        <TextInput style={[styles, textStyles]}>{children}</TextInput>
+        <TextInput
+          
+          style={[styles, textStyles]}
+        >
+          {children}
+        </TextInput>
       ) : (
         <ReactNativeText selectable={selectable} style={[styles, textStyles]}>
           {children}
