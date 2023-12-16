@@ -1,8 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { enviroments } from "../../enviroments/enviroments";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { enviroments } from '../../enviroments/enviroments';
 
 export const paymentService: any = createApi({
-  reducerPath: "paymentService",
+  reducerPath: 'paymentService',
   baseQuery: fetchBaseQuery({
     baseUrl: enviroments.BASE_URL,
   }),
@@ -11,11 +11,11 @@ export const paymentService: any = createApi({
       query: (args) => {
         return {
           url: `stripe/connect`,
-          method: "POST",
+          method: 'POST',
           body: {},
           headers: {
             Authorization: `Bearer ${args.token}`,
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },
@@ -24,10 +24,10 @@ export const paymentService: any = createApi({
       query: (args) => {
         return {
           url: `stripe/gateway`,
-          method: "GET",
+          method: 'GET',
           headers: {
             Authorization: `Bearer ${args.token}`,
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },
@@ -36,10 +36,10 @@ export const paymentService: any = createApi({
       query: (args) => {
         return {
           url: `stripe/account`,
-          method: "GET",
+          method: 'GET',
           headers: {
             Authorization: `Bearer ${args.token}`,
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },
@@ -48,15 +48,14 @@ export const paymentService: any = createApi({
       query: (args) => {
         return {
           url: `stripe/balance`,
-          method: "GET",
+          method: 'GET',
           headers: {
             Authorization: `Bearer ${args.token}`,
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },
     }),
-
   }),
 });
 

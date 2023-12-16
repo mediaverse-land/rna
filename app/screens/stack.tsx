@@ -1,13 +1,13 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { ExploreStack } from "./explore";
-import { BottomTabBar } from "../components/bottom-tab-bar";
-import { AppsStack } from "./apps";
-import { WalletStack } from "./wallet/navigation";
-import { ProfileScreen } from "./profile";
-import { ALL_LIVES_SCREEN, CHANNEL_MANAGEMENT_SCREEN } from "../constaints/consts";
-import { AllSLivescreen } from "./all-lives";
-import ViewAllScreen  from "./view-all";
-import { ChannelManagementScreen } from "./channel-management";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { ExploreStack } from './explore';
+import { BottomTabBar } from '../components/bottom-tab-bar';
+import { AppsStack } from './apps';
+import { WalletStack } from './wallet/navigation';
+import { ProfileScreen } from './profile';
+import { ALL_LIVES_SCREEN, CHANNEL_MANAGEMENT_SCREEN } from '../constaints/consts';
+import { AllSLivescreen } from './all-lives';
+import ViewAllScreen from './view-all';
+import { ChannelManagementScreen } from './channel-management';
 
 type RoutesType = {
   Explore: undefined;
@@ -17,12 +17,12 @@ type RoutesType = {
   Profile: undefined;
 };
 
-export const EXPORE = "Explore",
-  APPS = "Apps",
-  WALLET = "Wallet",
-  PROFILE = "Profile",
-  CREATE_CONTENT = "CreateContent",
-  VIEW_ALL = "ViewAll";
+export const EXPORE = 'Explore',
+  APPS = 'Apps',
+  WALLET = 'Wallet',
+  PROFILE = 'Profile',
+  CREATE_CONTENT = 'CreateContent',
+  VIEW_ALL = 'ViewAll';
 
 const Tab = createBottomTabNavigator<RoutesType>();
 
@@ -31,49 +31,49 @@ const routes = [
     id: 1,
     name: EXPORE,
     component: ExploreStack,
-    title: "explore",
+    title: 'explore',
   },
   {
     id: 2,
     name: APPS,
     component: AppsStack,
-    title: "apps",
+    title: 'apps',
   },
   {
     id: 3,
     name: CREATE_CONTENT,
     component: ExploreStack,
-    title: "createContent",
+    title: 'createContent',
   },
   {
     id: 4,
     name: WALLET,
     component: WalletStack,
-    title: "wallet",
+    title: 'wallet',
   },
   {
     id: 5,
     name: PROFILE,
     component: ProfileScreen,
-    title: "profile",
+    title: 'profile',
   },
   {
     id: 6,
     name: VIEW_ALL,
     component: ViewAllScreen,
-    title: "view all",
+    title: 'view all',
   },
   {
     id: 7,
     name: ALL_LIVES_SCREEN,
     component: AllSLivescreen,
-    title: "live channel",
+    title: 'live channel',
   },
   {
     id: 8,
     name: CHANNEL_MANAGEMENT_SCREEN,
     component: ChannelManagementScreen,
-    title: "channel management",
+    title: 'channel management',
   },
 ];
 

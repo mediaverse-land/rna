@@ -1,30 +1,27 @@
-import { useState, useContext, useEffect } from "react";
-import { LinearGradient } from "expo-linear-gradient";
-import { useIsFocused } from "@react-navigation/native";
-import { Asset } from "../../../../types/asset";
-import { tokenContext } from "../../../../context/token";
-import { UseSelectContent } from "../../hooks/use-select-content";
-import { retriveToken } from "../../../../utils/retrive-token";
-import {
-  getProfileImageDataApiHandler,
-  removeAssetApiHandler,
-} from "../../service";
-import { ASSET_TYPES } from "../../../../heloers/asset-types";
-import { stickyStyles } from "../../../../styles/sticky";
-import { SelectBar } from "../../components/select-bar";
-import { VirtualizedList } from "../../../../components/virtualized-list";
-import RenderList from "../../components/render-list";
-import { Box } from "../../../../components/box";
-import { LoadingSpinner } from "../../../../components/loader-spinner";
-import { Spacer } from "../../../../components/spacer";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../store";
-import { useGetUserProfileQuery } from "../../../../services/profile.service";
-import { Logger } from "../../../../utils/logger";
+import { useState, useContext, useEffect } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useIsFocused } from '@react-navigation/native';
+import { Asset } from '../../../../types/asset';
+import { tokenContext } from '../../../../context/token';
+import { UseSelectContent } from '../../hooks/use-select-content';
+import { retriveToken } from '../../../../utils/retrive-token';
+import { getProfileImageDataApiHandler, removeAssetApiHandler } from '../../service';
+import { ASSET_TYPES } from '../../../../heloers/asset-types';
+import { stickyStyles } from '../../../../styles/sticky';
+import { SelectBar } from '../../components/select-bar';
+import { VirtualizedList } from '../../../../components/virtualized-list';
+import RenderList from '../../components/render-list';
+import { Box } from '../../../../components/box';
+import { LoadingSpinner } from '../../../../components/loader-spinner';
+import { Spacer } from '../../../../components/spacer';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
+import { useGetUserProfileQuery } from '../../../../services/profile.service';
+import { Logger } from '../../../../utils/logger';
 
-const SUBSCRIBE_BASE_URL = "/subscriptions/images?page=";
-const OWNERSHIP_BASE_URL = "/profile/images?page=";
-const GRADIENTS_COLORS = ["#030340", "#030340"];
+const SUBSCRIBE_BASE_URL = '/subscriptions/images?page=';
+const OWNERSHIP_BASE_URL = '/profile/images?page=';
+const GRADIENTS_COLORS = ['#030340', '#030340'];
 const GRADIENT_AXIS = { x: 0.7, y: 0 };
 
 const _logger = new Logger();
@@ -37,10 +34,11 @@ export const ProfileScreenImagePage = () => {
 
   const [data, setData] = useState<Asset[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState('');
 
-  const { ACTIVE_PAGE }: { ACTIVE_PAGE: "subscribe" | "ownership" } =
-    useSelector((store: RootState) => store.profileSlice);
+  const { ACTIVE_PAGE }: { ACTIVE_PAGE: 'subscribe' | 'ownership' } = useSelector(
+    (store: RootState) => store.profileSlice,
+  );
 
   const { refetch } = useGetUserProfileQuery({ token });
 
@@ -100,17 +98,14 @@ export const ProfileScreenImagePage = () => {
     }
 
     let __uri: string;
-    if (ACTIVE_PAGE === "ownership") {
+    if (ACTIVE_PAGE === 'ownership') {
       __uri = OWNERSHIP_BASE_URL + (__currPage ? __currPage : currentPage);
     }
-    if (ACTIVE_PAGE === "subscribe") {
+    if (ACTIVE_PAGE === 'subscribe') {
       __uri = SUBSCRIBE_BASE_URL + (__currPage ? __currPage : currentPage);
     }
 
-    const { isError, res, isSuccess } = await getProfileImageDataApiHandler(
-      token,
-      __uri
-    );
+    const { isError, res, isSuccess } = await getProfileImageDataApiHandler(token, __uri);
 
     if (isError || !isSuccess) {
       stopLoad();
@@ -185,7 +180,7 @@ export const ProfileScreenImagePage = () => {
       const { isError, isSuccess, res, errorRes } = await removeAssetApiHandler(
         token,
         assetType,
-        id
+        id,
       );
       _logger.log({ isError, isSuccess, res, errorRes });
     }
@@ -195,7 +190,7 @@ export const ProfileScreenImagePage = () => {
   };
 
   const isSelectBarVisible = selectedContents.length ? true : false;
-  const IS_OWNERSHIP_ACTIVE = ACTIVE_PAGE === "ownership" ? true : false;
+  const IS_OWNERSHIP_ACTIVE = ACTIVE_PAGE === 'ownership' ? true : false;
 
   return (
     <LinearGradient
@@ -210,11 +205,7 @@ export const ProfileScreenImagePage = () => {
           deleteAssetsHandler={deleteAssetsHandler}
         />
       ) : null}
-      <VirtualizedList
-        paddingTop={-100}
-        onRefresh={onRefresh}
-        onEndReachedThreshold={2}
-      >
+      <VirtualizedList paddingTop={-100} onRefresh={onRefresh} onEndReachedThreshold={2}>
         <RenderList
           data={data}
           isLoading={isLoading}

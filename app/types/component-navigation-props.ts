@@ -1,4 +1,4 @@
-import { UseNavigationType } from "./use-navigation";
+import { UseNavigationType } from './use-navigation';
 
 export type ComponentNavigationProps = {
   navigation: UseNavigationType;

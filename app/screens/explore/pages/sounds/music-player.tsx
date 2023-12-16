@@ -1,19 +1,15 @@
-import { useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { SoundsPageComponents } from "./style";
-import { Flex, PaddingContainer } from "../../../../styles/grid";
+import { useState, useEffect } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { SoundsPageComponents } from './style';
+import { Flex, PaddingContainer } from '../../../../styles/grid';
 import {
   AUDIO_THUMBNAIL_PLACEHOLDER,
   MUSIC_PLAYER_STOP_BUTTON_GRADIENT,
   TEXT_SWIPER_GRADIENT,
-} from "../../../../constaints/images";
-import Slider from "@react-native-community/slider";
-import {
-  ICON_PLAY_SVG,
-  ICON_NEXT_SVG,
-  ICON_PREV_SVG,
-} from "../../../../constaints/icons";
-import { Sound } from "../../../../types/sound";
+} from '../../../../constaints/images';
+import Slider from '@react-native-community/slider';
+import { ICON_PLAY_SVG, ICON_NEXT_SVG, ICON_PREV_SVG } from '../../../../constaints/icons';
+import { Sound } from '../../../../types/sound';
 
 const {
   MusicPlayerContainer,
@@ -40,7 +36,7 @@ export function SoundsPageMusicPlayer({ data }: Props) {
     return null;
   }
 
-  const [currentSlide, setCurrentSlide] = useState<Sound| any>(null);
+  const [currentSlide, setCurrentSlide] = useState<Sound | any>(null);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(1);
 
   useEffect(() => {
@@ -64,15 +60,14 @@ export function SoundsPageMusicPlayer({ data }: Props) {
 
   const currentSlideThumbnail = {
     thumbnail:
-      currentSlide?.asset?.thumbnail?.thumbnails?.["852x480"] ||
-      AUDIO_THUMBNAIL_PLACEHOLDER,
-    title: currentSlide?.name || "",
+      currentSlide?.asset?.thumbnail?.thumbnails?.['852x480'] || AUDIO_THUMBNAIL_PLACEHOLDER,
+    title: currentSlide?.name || '',
   };
   const prevSlideThumbnail =
-    data[currentSlideIndex - 1]?.asset?.thumbnail?.thumbnails?.["852x480"] ||
+    data[currentSlideIndex - 1]?.asset?.thumbnail?.thumbnails?.['852x480'] ||
     AUDIO_THUMBNAIL_PLACEHOLDER;
   const nextSlideThumbnail =
-    data[currentSlideIndex + 1]?.asset?.thumbnail?.thumbnails?.["852x480"] ||
+    data[currentSlideIndex + 1]?.asset?.thumbnail?.thumbnails?.['852x480'] ||
     AUDIO_THUMBNAIL_PLACEHOLDER;
 
   return (
@@ -82,17 +77,9 @@ export function SoundsPageMusicPlayer({ data }: Props) {
         <MusicPlayerBox>
           <MusicPlayerBoxTitle>Explore limitless!</MusicPlayerBoxTitle>
           <MusicCoverSliderWrapper>
-            <PrevMusicCoverSlide
-              source={{ uri: prevSlideThumbnail }}
-              blurRadius={10}
-            />
-            <CurrentMusicCoverSlide
-              source={{ uri: currentSlideThumbnail.thumbnail }}
-            />
-            <NextMusicCoverSlide
-              source={{ uri: nextSlideThumbnail }}
-              blurRadius={10}
-            />
+            <PrevMusicCoverSlide source={{ uri: prevSlideThumbnail }} blurRadius={10} />
+            <CurrentMusicCoverSlide source={{ uri: currentSlideThumbnail.thumbnail }} />
+            <NextMusicCoverSlide source={{ uri: nextSlideThumbnail }} blurRadius={10} />
           </MusicCoverSliderWrapper>
           <View>
             <CurrentTrackTitle>{currentSlideThumbnail.title}</CurrentTrackTitle>
@@ -141,7 +128,7 @@ export function SoundsPageMusicPlayer({ data }: Props) {
                 width={18}
                 height={18}
                 style={{
-                  position: "absolute",
+                  position: 'absolute',
                   zIndex: 10,
                   left: 17,
                   top: 14,

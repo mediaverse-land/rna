@@ -1,22 +1,22 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { singleImageService } from "../services/single-image.service";
-import { singleSoundService } from "../services/single-sound.service";
-import { uploadService } from "../services/create-asset";
-import { singleTextService } from "../services/single-text.service";
-import singleImageSlice from "../slices/single-image.slice";
-import { singleVideoService } from "../services/single.video.service";
-import plusSlice from "../slices/plus.slice";
-import tourSlice from "../slices/tour.slice";
-import { exploreService } from "../services/explore.service";
-import profileSlicer from "../slices/profile.slicer";
-import { profileService } from "../services/profile.service";
-import { viewAllService } from "../services/view-all.service";
-import { languageService } from "../services/language.service";
-import { liveService } from "../services/live.service";
-import liveSlice from "../slices/live.slice";
-import { assetService } from "../services/asset.service";
-import { authService } from "../services/auth.service";
-import { paymentService } from "../services/payment.service";
+import { configureStore } from '@reduxjs/toolkit';
+import { singleImageService } from '../services/single-image.service';
+import { singleSoundService } from '../services/single-sound.service';
+import { uploadService } from '../services/create-asset';
+import { singleTextService } from '../services/single-text.service';
+import singleImageSlice from '../slices/single-image.slice';
+import { singleVideoService } from '../services/single.video.service';
+import plusSlice from '../slices/plus.slice';
+import tourSlice from '../slices/tour.slice';
+import { exploreService } from '../services/explore.service';
+import profileSlicer from '../slices/profile.slicer';
+import { profileService } from '../services/profile.service';
+import { viewAllService } from '../services/view-all.service';
+import { languageService } from '../services/language.service';
+import { liveService } from '../services/live.service';
+import liveSlice from '../slices/live.slice';
+import { assetService } from '../services/asset.service';
+import { authService } from '../services/auth.service';
+import { paymentService } from '../services/payment.service';
 // import { setupListeners } from '@reduxjs/toolkit/query'
 
 const store = configureStore({

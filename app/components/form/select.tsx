@@ -1,19 +1,15 @@
-import { ReactNode, useEffect, useState } from "react";
-import {
-  TextInputProps,
-  TouchableOpacity,
-  Platform,
-} from "react-native";
-import { Box } from "../box";
-import { InputComponent } from "./style";
-import { Text } from "../text";
-import { theme } from "../../constaints/theme";
-import { useRtl } from "../../hooks/use-rtl";
-import { ICON_ARROW_DOWN_SVG, ICON_FORM_ERROR } from "../../constaints/icons";
+import { ReactNode, useEffect, useState } from 'react';
+import { TextInputProps, TouchableOpacity, Platform } from 'react-native';
+import { Box } from '../box';
+import { InputComponent } from './style';
+import { Text } from '../text';
+import { theme } from '../../constaints/theme';
+import { useRtl } from '../../hooks/use-rtl';
+import { ICON_ARROW_DOWN_SVG, ICON_FORM_ERROR } from '../../constaints/icons';
 
-const {  Label } = InputComponent;
+const { Label } = InputComponent;
 
-const IS_IOS = Platform.OS === 'ios'
+const IS_IOS = Platform.OS === 'ios';
 
 type Props = {
   labelText: string;
@@ -24,8 +20,8 @@ type Props = {
   value?: any;
   isTextArea?: boolean;
   showBorder?: boolean;
-  options: string[]
-  setSelected: (...args: any) =>void
+  options: string[];
+  setSelected: (...args: any) => void;
 };
 
 export function Select({
@@ -36,12 +32,12 @@ export function Select({
   value,
   isTextArea = false,
   options,
-  setSelected
+  setSelected,
 }: Props) {
   const { isRtl } = useRtl();
 
   const [isSelectBoxOpen, setIsSelectBoxOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOption, setSelectedOption] = useState('');
 
   useEffect(() => {
     if (value) {
@@ -51,7 +47,7 @@ export function Select({
 
   const selectOptionHandler = (item: string) => {
     setSelectedOption(item);
-    setSelected(item)
+    setSelected(item);
     setIsSelectBoxOpen(false);
   };
 
@@ -78,7 +74,7 @@ export function Select({
               <Text
                 fontSize={14}
                 lineHeight={theme.numericLineHeight.md}
-                color={"#fff"}
+                color={'#fff'}
                 paddingRight={!isRtl ? 16 : 0}
                 paddingLeft={isRtl ? 16 : 0}
               >
@@ -88,7 +84,7 @@ export function Select({
                   </Box>
                 ) : null}
                 <Text>
-                  {labelIcon ? "   " : null}
+                  {labelIcon ? '   ' : null}
                   {labelText}
                 </Text>
               </Text>
@@ -97,7 +93,7 @@ export function Select({
         ) : null}
         <TouchableOpacity
           style={{
-            width: "100%",
+            width: '100%',
           }}
           activeOpacity={1}
           onPress={() => setIsSelectBoxOpen(!isSelectBoxOpen)}
@@ -130,27 +126,15 @@ export function Select({
           marginTop={8}
           additionalStyles={{
             borderWidth: 1,
-            borderColor: "#353542",
+            borderColor: '#353542',
           }}
           borderRadius={8}
         >
           {options.map((item: string, index: number) => {
             return (
-              <TouchableOpacity
-                key={index}
-                onPress={() => selectOptionHandler(item)}
-              >
-                <Box
-                  width="100%"
-                  height={48}
-                  direction="row"
-                  alignItems="center"
-                >
-                  <Text
-                    color={theme.color.light.WHITE}
-                    fontSize={14}
-                    fontWeight={400}
-                  >
+              <TouchableOpacity key={index} onPress={() => selectOptionHandler(item)}>
+                <Box width="100%" height={48} direction="row" alignItems="center">
+                  <Text color={theme.color.light.WHITE} fontSize={14} fontWeight={400}>
                     {item}
                   </Text>
                 </Box>
@@ -164,7 +148,7 @@ export function Select({
           width={18.21}
           height={16}
           style={{
-            position: "absolute",
+            position: 'absolute',
             right: 16,
             top: 16,
           }}

@@ -1,24 +1,19 @@
-import { useContext, useEffect, useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Box } from "../../../components/box";
-import { SettingsScreenHeader } from "../components/header";
-import { ScreenGradient } from "../../../components/screen-gradient";
-import { PaddingContainer } from "../../../styles/grid";
-import { ListColumn, ListColumnItem } from "../components/list";
-import {
-  ICON_ANALYTICS,
-  ICON_MAIL,
-  ICON_SHARE,
-  ICON_USER,
-} from "../../../constaints/icons";
-import { tokenContext } from "../../../context/token";
-import { tokenStringResolver } from "../../../utils/token-string-resolver";
-import { getMessagesApiHandler } from "../service";
-import { FocusedStatusBar } from "../../../components/focused-statusbar";
-import { userContext } from "../../../context/user";
-import { StorageService } from "../../../services/storage.service";
-import { useIsFocused } from "@react-navigation/native";
-import { ACCOUNTS_SCREEN } from "../../../constaints/consts";
+import { useContext, useEffect, useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Box } from '../../../components/box';
+import { SettingsScreenHeader } from '../components/header';
+import { ScreenGradient } from '../../../components/screen-gradient';
+import { PaddingContainer } from '../../../styles/grid';
+import { ListColumn, ListColumnItem } from '../components/list';
+import { ICON_ANALYTICS, ICON_MAIL, ICON_SHARE, ICON_USER } from '../../../constaints/icons';
+import { tokenContext } from '../../../context/token';
+import { tokenStringResolver } from '../../../utils/token-string-resolver';
+import { getMessagesApiHandler } from '../service';
+import { FocusedStatusBar } from '../../../components/focused-statusbar';
+import { userContext } from '../../../context/user';
+import { StorageService } from '../../../services/storage.service';
+import { useIsFocused } from '@react-navigation/native';
+import { ACCOUNTS_SCREEN } from '../../../constaints/consts';
 
 const _storageService = new StorageService();
 
@@ -37,7 +32,7 @@ export function IndexMenu() {
     getData();
 
     const getMessagesLength = async () => {
-      const getLength = await _storageService.get("notifs_length");
+      const getLength = await _storageService.get('notifs_length');
       if (getLength) {
         setReadMessages(parseInt(getLength));
       }
@@ -67,17 +62,16 @@ export function IndexMenu() {
     setMessagesLength(data.length);
   };
 
-  const unReadMessages =
-    messagesLength - readMessages <= 0 ? "0" : messagesLength - readMessages;
+  const unReadMessages = messagesLength - readMessages <= 0 ? '0' : messagesLength - readMessages;
 
   const listOneRows: ListColumnItem[] = [
     {
       id: 90,
-      title: "Account",
+      title: 'Account',
       value: username,
       bage: null,
       icon: ICON_USER,
-      routePath: "account",
+      routePath: 'account',
       iconStyle: {
         width: 14.4,
         height: 18,
@@ -85,11 +79,11 @@ export function IndexMenu() {
     },
     {
       id: 91,
-      title: "Inbox",
+      title: 'Inbox',
       value: null,
       bage: unReadMessages,
       icon: ICON_MAIL,
-      routePath: "massage",
+      routePath: 'massage',
       iconStyle: {
         width: 18,
         height: 14.4,
@@ -97,11 +91,11 @@ export function IndexMenu() {
     },
     {
       id: 92,
-      title: "Wallet",
+      title: 'Wallet',
       value: `${wallets?.[0]?.balance || 0} $`,
       bage: null,
       icon: ICON_MAIL,
-      routePath: "Wallet",
+      routePath: 'Wallet',
       iconStyle: {
         width: 18,
         height: 14.4,
@@ -112,7 +106,7 @@ export function IndexMenu() {
   const listTwoRows: ListColumnItem[] = [
     {
       id: 311,
-      title: "Analytics",
+      title: 'Analytics',
       icon: ICON_ANALYTICS,
       // routePath: 'analytics',
       iconStyle: {
@@ -123,7 +117,7 @@ export function IndexMenu() {
     },
     {
       id: 312,
-      title: "Share account",
+      title: 'Share account',
       icon: ICON_SHARE,
       routePath: ACCOUNTS_SCREEN,
       iconStyle: {

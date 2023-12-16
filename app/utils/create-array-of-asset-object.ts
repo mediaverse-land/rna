@@ -1,4 +1,4 @@
-import { uniqueAssetArray } from "./unique-assets";
+import { uniqueAssetArray } from './unique-assets';
 
 export const createArrayOfAssetObject = (inputData: any, data: any) => {
   const { videos, texts, audios, images } = inputData;
@@ -9,5 +9,5 @@ export const createArrayOfAssetObject = (inputData: any, data: any) => {
 
   const result = uniqueAssetArray(combinedData);
 
-  return result
+  return result;
 };

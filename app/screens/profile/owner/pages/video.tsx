@@ -1,29 +1,26 @@
-import { useState, useContext, useEffect } from "react";
-import { useIsFocused } from "@react-navigation/native";
-import { LinearGradient } from "expo-linear-gradient";
-import { tokenContext } from "../../../../context/token";
-import { UseSelectContent } from "../../hooks/use-select-content";
-import { retriveToken } from "../../../../utils/retrive-token";
-import {
-  getProfileVideoDataApiHandler,
-  removeAssetApiHandler,
-} from "../../service";
-import { ASSET_TYPES } from "../../../../heloers/asset-types";
-import { stickyStyles } from "../../../../styles/sticky";
-import { SelectBar } from "../../components/select-bar";
-import { VirtualizedList } from "../../../../components/virtualized-list";
-import RenderList from "../../components/render-list";
-import { Box } from "../../../../components/box";
-import { LoadingSpinner } from "../../../../components/loader-spinner";
-import { Spacer } from "../../../../components/spacer";
-import { Asset } from "../../../../types/asset";
-import { RootState } from "../../../../store";
-import { useSelector } from "react-redux";
+import { useState, useContext, useEffect } from 'react';
+import { useIsFocused } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { tokenContext } from '../../../../context/token';
+import { UseSelectContent } from '../../hooks/use-select-content';
+import { retriveToken } from '../../../../utils/retrive-token';
+import { getProfileVideoDataApiHandler, removeAssetApiHandler } from '../../service';
+import { ASSET_TYPES } from '../../../../heloers/asset-types';
+import { stickyStyles } from '../../../../styles/sticky';
+import { SelectBar } from '../../components/select-bar';
+import { VirtualizedList } from '../../../../components/virtualized-list';
+import RenderList from '../../components/render-list';
+import { Box } from '../../../../components/box';
+import { LoadingSpinner } from '../../../../components/loader-spinner';
+import { Spacer } from '../../../../components/spacer';
+import { Asset } from '../../../../types/asset';
+import { RootState } from '../../../../store';
+import { useSelector } from 'react-redux';
 
-const SUBSCRIBE_BASE_URL = "/subscriptions/videos?page=";
-const OWNERSHIP_BASE_URL = "/profile/videos?page=";
+const SUBSCRIBE_BASE_URL = '/subscriptions/videos?page=';
+const OWNERSHIP_BASE_URL = '/profile/videos?page=';
 
-const GRADIENTS_COLORS = ["#030340", "#030340"];
+const GRADIENTS_COLORS = ['#030340', '#030340'];
 const GRADIENT_AXIS = { x: 0.7, y: 0 };
 
 export const ProfileScreenVideoPage = () => {
@@ -34,8 +31,9 @@ export const ProfileScreenVideoPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   // const [token, setToken] = useState("");
 
-  const { ACTIVE_PAGE }: { ACTIVE_PAGE: "subscribe" | "ownership" } =
-    useSelector((store: RootState) => store.profileSlice);
+  const { ACTIVE_PAGE }: { ACTIVE_PAGE: 'subscribe' | 'ownership' } = useSelector(
+    (store: RootState) => store.profileSlice,
+  );
 
   // const { refetch } = useGetUserProfileQuery({ token });
 
@@ -95,18 +93,15 @@ export const ProfileScreenVideoPage = () => {
     }
 
     let __uri: string;
-    if (ACTIVE_PAGE === "ownership") {
+    if (ACTIVE_PAGE === 'ownership') {
       __uri = OWNERSHIP_BASE_URL + (__currPage ? __currPage : currentPage);
     }
-    if (ACTIVE_PAGE === "subscribe") {
+    if (ACTIVE_PAGE === 'subscribe') {
       __uri = SUBSCRIBE_BASE_URL + (__currPage ? __currPage : currentPage);
     }
     // const url = BASE_URL + (__currPage ? __currPage : currentPage);
 
-    const { isError, res, isSuccess } = await getProfileVideoDataApiHandler(
-      token,
-      __uri
-    );
+    const { isError, res, isSuccess } = await getProfileVideoDataApiHandler(token, __uri);
 
     if (isError || !isSuccess) {
       stopLoad();
@@ -178,18 +173,14 @@ export const ProfileScreenVideoPage = () => {
 
       const assetType = ASSET_TYPES[type];
 
-       await removeAssetApiHandler(
-        token,
-        assetType,
-        id
-      );
+      await removeAssetApiHandler(token, assetType, id);
     }
 
     onRefresh();
   };
 
   const isSelectBarVisible = selectedContents.length ? true : false;
-  const IS_OWNERSHIP_ACTIVE = ACTIVE_PAGE === "ownership" ? true : false;
+  const IS_OWNERSHIP_ACTIVE = ACTIVE_PAGE === 'ownership' ? true : false;
 
   return (
     <LinearGradient

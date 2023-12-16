@@ -1,18 +1,18 @@
-import styled from "styled-components/native";
-import { theme } from "../../constaints/theme";
-import { StyleSheet } from "react-native";
+import styled from 'styled-components/native';
+import { theme } from '../../constaints/theme';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   wrapper: {
-    width: "100%",
+    width: '100%',
     height: 120,
     zIndex: 10,
-    backgroundColor: "#2b2b48",
-    position: "absolute",
+    backgroundColor: '#2b2b48',
+    position: 'absolute',
     top: 0,
     left: 0,
-    alignItems: "center",
-    justifyContent: "space-between",
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingLeft: 24,
     paddingRight: 24,
   },
@@ -32,9 +32,9 @@ export const SearchBoxComponents = {
     border: 1px solid ${theme.color.light.INPUT_PLACEHOLDER};
     padding-left: 17px;
     margin-top: 24px;
-    color: #D9D9FF;
+    color: #d9d9ff;
     background-color: #0e0e12a0;
-    text-align: ${(props) => props.textAlign || "left"};
+    text-align: ${(props) => props.textAlign || 'left'};
   `,
   SearchIcon: styled.Image`
     width: 16px;

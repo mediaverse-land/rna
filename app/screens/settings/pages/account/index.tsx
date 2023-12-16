@@ -1,25 +1,25 @@
-import { StatusBar } from "react-native";
-import { useContext } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useIsFocused } from "@react-navigation/native";
-import { ScreenGradient } from "../../../../components/screen-gradient";
-import { Box } from "../../../../components/box";
-import { ListColumn, ListColumnItem } from "../../components/list";
-import { PaddingContainer } from "../../../../styles/grid";
-import { ICON_ARROW_RIGHT } from "../../../../constaints/icons";
-import { SettingsScreenTitle } from "../../components/title";
-import { tokenContext } from "../../../../context/token";
-import { StorageService } from "../../../../services/storage.service";
-import { Logger } from "../../../../utils/logger";
+import { StatusBar } from 'react-native';
+import { useContext } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useIsFocused } from '@react-navigation/native';
+import { ScreenGradient } from '../../../../components/screen-gradient';
+import { Box } from '../../../../components/box';
+import { ListColumn, ListColumnItem } from '../../components/list';
+import { PaddingContainer } from '../../../../styles/grid';
+import { ICON_ARROW_RIGHT } from '../../../../constaints/icons';
+import { SettingsScreenTitle } from '../../components/title';
+import { tokenContext } from '../../../../context/token';
+import { StorageService } from '../../../../services/storage.service';
+import { Logger } from '../../../../utils/logger';
 
 const data: ListColumnItem[] = [
   {
     id: 1,
-    title: "General information",
+    title: 'General information',
     value: null,
     icon: ICON_ARROW_RIGHT,
-    routePath: "general_information",
-    direction: "row-reverse",
+    routePath: 'general_information',
+    direction: 'row-reverse',
     iconStyle: {
       width: 5.68,
       height: 12,
@@ -27,11 +27,11 @@ const data: ListColumnItem[] = [
   },
   {
     id: 2,
-    title: "Sign ins",
+    title: 'Sign ins',
     value: null,
     icon: ICON_ARROW_RIGHT,
-    routePath: "sign_ins",
-    direction: "row-reverse",
+    routePath: 'sign_ins',
+    direction: 'row-reverse',
     iconStyle: {
       width: 5.68,
       height: 12,
@@ -39,11 +39,11 @@ const data: ListColumnItem[] = [
   },
   {
     id: 3,
-    title: "Seassions",
+    title: 'Seassions',
     value: null,
     icon: ICON_ARROW_RIGHT,
-    routePath: "seassions",
-    direction: "row-reverse",
+    routePath: 'seassions',
+    direction: 'row-reverse',
     iconStyle: {
       width: 5.68,
       height: 12,
@@ -54,10 +54,10 @@ const data: ListColumnItem[] = [
 const signOutData: ListColumnItem[] = [
   {
     id: 1,
-    title: "Sign out",
+    title: 'Sign out',
     value: null,
     icon: ICON_ARROW_RIGHT,
-    direction: "row-reverse",
+    direction: 'row-reverse',
     iconStyle: {
       width: 5.68,
       height: 12,
@@ -96,8 +96,8 @@ export function AccountPage() {
       // await _storageService.removeItem(HAS_USER_SEEN_OWNER_VIDEO_TOUR);
       // await _storageService.removeItem(HAS_USER_SEEN_PAYMENT_TOUR);
 
-      await _storageService.removeItem("notifs_length");
-      await _storageService.removeItem("user_data");
+      await _storageService.removeItem('notifs_length');
+      await _storageService.removeItem('user_data');
       await _tokenCtx.clearToken();
     } catch (err) {
       _logger.logErro(`error[in: signoutHandler], res: ${JSON.stringify(err)}`);
@@ -109,9 +109,7 @@ export function AccountPage() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      {isFocused ? (
-        <StatusBar backgroundColor={"#030340"} barStyle="light-content" />
-      ) : null}
+      {isFocused ? <StatusBar backgroundColor={'#030340'} barStyle="light-content" /> : null}
       <ScreenGradient>
         <PaddingContainer>
           <SettingsScreenTitle title="Account" />

@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { useFonts } from "expo-font";
-import { splashScreenController } from "../controllers/splash-screen.controller";
+import { useEffect } from 'react';
+import { useFonts } from 'expo-font';
+import { splashScreenController } from '../controllers/splash-screen.controller';
 
 export const useLoadFonts = () => {
   const [isLoaded] = useFonts({
@@ -13,7 +13,7 @@ export const useLoadFonts = () => {
   useEffect(() => {
     const handleOnLayout = async () => {
       if (isLoaded) {
-        await splashScreenController.hide(); 
+        await splashScreenController.hide();
       }
     };
 

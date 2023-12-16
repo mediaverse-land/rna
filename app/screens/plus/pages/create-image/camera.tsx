@@ -1,15 +1,14 @@
 /* eslint-disable react/display-name */
-import { useState, useEffect, forwardRef, useImperativeHandle } from "react";
-import { View, StyleSheet } from "react-native";
-import * as ExpoCamera from "expo-camera";
-import { ImageController } from "../../../../controllers/image.controller";
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { View, StyleSheet } from 'react-native';
+import * as ExpoCamera from 'expo-camera';
+import { ImageController } from '../../../../controllers/image.controller';
 
 const _imageController = new ImageController();
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
-const BACK_CAMERA = ExpoCamera.Camera.Constants.Type.back
-
+const BACK_CAMERA = ExpoCamera.Camera.Constants.Type.back;
 
 export const Camera = forwardRef((props, ref: any) => {
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -19,7 +18,7 @@ export const Camera = forwardRef((props, ref: any) => {
   useEffect(() => {
     const setup = async () => {
       const cameraStatus: any = await _imageController.askForPermission();
-      setHasCameraPermission(cameraStatus.status === "granted");
+      setHasCameraPermission(cameraStatus.status === 'granted');
     };
 
     setup();
@@ -30,16 +29,15 @@ export const Camera = forwardRef((props, ref: any) => {
     return data;
   };
 
-
   const takeVideo = async () => {
     const data = await _imageController.takeVideo(camera, setVideo);
     return data || video;
   };
 
-  const stopVideo = async() => {
+  const stopVideo = async () => {
     const data = await _imageController.stopVideo(camera, setVideo);
-    return data ;
-  }
+    return data;
+  };
 
   useImperativeHandle(ref, () => ({
     async snap() {
@@ -50,10 +48,10 @@ export const Camera = forwardRef((props, ref: any) => {
       const res = await takeVideo();
       return res;
     },
-    async stopVideo(){
+    async stopVideo() {
       const res = await stopVideo();
       return res;
-    }
+    },
   }));
 
   if (hasCameraPermission === null || hasCameraPermission === false) {
@@ -68,7 +66,7 @@ export const Camera = forwardRef((props, ref: any) => {
             ref={(ref) => setCamera(ref)}
             style={styles.camera}
             type={BACK_CAMERA}
-            ratio={"1:1"}
+            ratio={'1:1'}
           />
         </View>
       </View>
@@ -79,7 +77,7 @@ export const Camera = forwardRef((props, ref: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignContent: "center",
+    alignContent: 'center',
   },
   camera: {
     flex: 1,
@@ -87,7 +85,7 @@ const styles = StyleSheet.create({
   },
   cameraContainer: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column',
   },
   button: {
     flex: 1,

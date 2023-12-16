@@ -1,8 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { enviroments } from "../../enviroments/enviroments";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { enviroments } from '../../enviroments/enviroments';
 
 export const viewAllService: any = createApi({
-  reducerPath: "viewAllService",
+  reducerPath: 'viewAllService',
   baseQuery: fetchBaseQuery({
     baseUrl: enviroments.BASE_URL,
   }),
@@ -11,7 +11,7 @@ export const viewAllService: any = createApi({
       query: (args) => {
         return {
           url: args.url,
-          method: "GET",
+          method: 'GET',
           headers: { Authorization: `Bearer ${args.token}` },
         };
       },
@@ -19,6 +19,4 @@ export const viewAllService: any = createApi({
   }),
 });
 
-export const { 
-  useGetAssetListQuery
- } = viewAllService;
+export const { useGetAssetListQuery } = viewAllService;

@@ -8,5 +8,5 @@ export interface ImageAlbum {
   mediaType: string;
   modificationTime: number;
   uri: string;
-  width: number
+  width: number;
 }

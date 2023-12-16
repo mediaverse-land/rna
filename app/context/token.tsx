@@ -6,68 +6,66 @@ import { StorageService } from '../services/storage.service';
 import { User } from '../types/user';
 
 type Props = {
-    children: ReactNode;
+  children: ReactNode;
 };
 
 export const tokenContext = createContext({
-    getToken: (): any => {},
-    setToken: (tokenStr: string) => {},
-    clearToken: () => {},
-    getUser: (): any => {},
-    setUser: (user: User): any => {}
+  getToken: (): any => {},
+  setToken: (tokenStr: string) => {},
+  clearToken: () => {},
+  getUser: (): any => {},
+  setUser: (user: User): any => {},
 });
 
 const _storageService = new StorageService();
 
 export const TokenContextProvider: FC<Props> = ({ children }) => {
-    const [token, setToken] = useState<string>(null);
-    const [userData, setUserData] = useState<User>(null);
+  const [token, setToken] = useState<string>(null);
+  const [userData, setUserData] = useState<User>(null);
 
-    useEffect(() => {
-        const getDefaultToken = async () => {
-            const tk = await _storageService.get('user_data');
-            setToken(tk);
-        };
-
-        getDefaultToken();
-    }, []);
-
-    const getTokenHandler=  async () => {
-        return token;
+  useEffect(() => {
+    const getDefaultToken = async () => {
+      const tk = await _storageService.get('user_data');
+      setToken(tk);
     };
 
-    const setTokenHandler = async (tokenStr: string) => {
-        await _storageService.set('user_data', tokenStr);
-        setToken(tokenStr);
-    };
+    getDefaultToken();
+  }, []);
 
-    const clearTokenHandler = () => {
-        setToken(null);
-    };
+  const getTokenHandler = async () => {
+    return token;
+  };
 
-    const setUserHandler = (user: User) => {
-        setUserData(user);
-    };
+  const setTokenHandler = async (tokenStr: string) => {
+    await _storageService.set('user_data', tokenStr);
+    setToken(tokenStr);
+  };
 
-    const getUserHandler = () => {
-        return userData;
-    };
+  const clearTokenHandler = () => {
+    setToken(null);
+  };
 
-    const store: {
-        getToken: () => Promise<string>;
-        setToken: (tokenStr: string) => void;
-        clearToken: () => void;
-        getUser: () => any;
-        setUser: any;
-    } = {
-        getToken: getTokenHandler,
-        setToken: setTokenHandler,
-        clearToken: clearTokenHandler,
-        getUser: getUserHandler,
-        setUser: setUserHandler
-    };
+  const setUserHandler = (user: User) => {
+    setUserData(user);
+  };
 
-    return (
-        <tokenContext.Provider value={store}>{children}</tokenContext.Provider>
-    );
+  const getUserHandler = () => {
+    return userData;
+  };
+
+  const store: {
+    getToken: () => Promise<string>;
+    setToken: (tokenStr: string) => void;
+    clearToken: () => void;
+    getUser: () => any;
+    setUser: any;
+  } = {
+    getToken: getTokenHandler,
+    setToken: setTokenHandler,
+    clearToken: clearTokenHandler,
+    getUser: getUserHandler,
+    setUser: setUserHandler,
+  };
+
+  return <tokenContext.Provider value={store}>{children}</tokenContext.Provider>;
 };

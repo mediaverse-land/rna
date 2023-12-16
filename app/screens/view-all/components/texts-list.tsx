@@ -1,14 +1,14 @@
-import React from "react";
-import { Text } from "../../../components/text";
-import { Box } from "../../../components/box";
-import { PaddingContainer } from "../../../styles/grid";
-import { windowSize } from "../../../utils/window-size";
-import { FlatList, TouchableOpacity } from "react-native";
-import { UserNameCard } from "../../../components/username-card";
-import { PROFILE_ONE } from "../../../constaints/images";
-import { navigateTo } from "../utils/navigate-to-single-screen";
-import { Text as TextType } from "../../../types/text";
-import { LinearGradient } from "expo-linear-gradient";
+import React from 'react';
+import { Text } from '../../../components/text';
+import { Box } from '../../../components/box';
+import { PaddingContainer } from '../../../styles/grid';
+import { windowSize } from '../../../utils/window-size';
+import { FlatList, TouchableOpacity } from 'react-native';
+import { UserNameCard } from '../../../components/username-card';
+import { PROFILE_ONE } from '../../../constaints/images';
+import { navigateTo } from '../utils/navigate-to-single-screen';
+import { Text as TextType } from '../../../types/text';
+import { LinearGradient } from 'expo-linear-gradient';
 
 type Props = {
   data: TextType[];
@@ -20,7 +20,7 @@ const { width: WINDOW_WIDTH } = windowSize();
 
 const itemWidth = Math.floor(WINDOW_WIDTH) / 2 - 32;
 
-const theme_text_color = "#CCCCFF";
+const theme_text_color = '#CCCCFF';
 const title_text_size = 16;
 const username_text_size = 12;
 
@@ -39,14 +39,14 @@ const ViewAllTextsList = ({ data, navigate, marginTop }: Props) => {
           position="relative"
         >
           <LinearGradient
-            colors={["#19194a", "rgba(207, 207, 252, 0.3)"]}
+            colors={['#19194a', 'rgba(207, 207, 252, 0.3)']}
             start={{ x: 0.8, y: 1 }}
             style={{
               flex: 1,
-              position: "absolute",
+              position: 'absolute',
               padding: 1,
-              width: "100%",
-              height: "100%",
+              width: '100%',
+              height: '100%',
               borderRadius: 16,
             }}
           >
@@ -60,20 +60,12 @@ const ViewAllTextsList = ({ data, navigate, marginTop }: Props) => {
               paddingTop={24}
             >
               <Box id="tite" height={16}>
-                <Text
-                  color={"#CCCCFF"}
-                  lineHeight={title_text_size}
-                  fontSize={title_text_size}
-                >
+                <Text color={'#CCCCFF'} lineHeight={title_text_size} fontSize={title_text_size}>
                   {item.name}
                 </Text>
               </Box>
               <Box id="description" marginTop={8} height={48}>
-                <Text
-                  color="#666680"
-                  lineHeight={title_text_size}
-                  fontSize={title_text_size}
-                >
+                <Text color="#666680" lineHeight={title_text_size} fontSize={title_text_size}>
                   {item.description}
                 </Text>
               </Box>
@@ -116,9 +108,9 @@ const ViewAllTextsList = ({ data, navigate, marginTop }: Props) => {
     <Box marginTop={marginTop ? marginTop : 56}>
       <PaddingContainer>
         <FlatList
-          style={{ justifyContent: "space-between" }}
-          contentContainerStyle={{ justifyContent: "space-between" }}
-          columnWrapperStyle={{ justifyContent: "space-between" }}
+          style={{ justifyContent: 'space-between' }}
+          contentContainerStyle={{ justifyContent: 'space-between' }}
+          columnWrapperStyle={{ justifyContent: 'space-between' }}
           data={data}
           numColumns={2}
           renderItem={renderItem}

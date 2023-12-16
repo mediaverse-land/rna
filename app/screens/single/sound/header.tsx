@@ -1,18 +1,16 @@
-import { Image, TouchableOpacity } from "react-native";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { GoBackButton } from "../components/goback-button";
-import { SingleItemUsernameAndDuration } from "../components/username-and-duration";
-import {
-  ICON_SOUND_WHITE,
-} from "../../../constaints/icons";
+import { Image, TouchableOpacity } from 'react-native';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { GoBackButton } from '../components/goback-button';
+import { SingleItemUsernameAndDuration } from '../components/username-and-duration';
+import { ICON_SOUND_WHITE } from '../../../constaints/icons';
 import {
   AUDIO_THUMBNAIL_PLACEHOLDER,
   PROFILE_ONE,
   SINGLE_SOUND_COVER_IMAGE_GRADIENT,
   SINGLE_VIDEO_COVER_IMAGE_GRADIENT,
-} from "../../../constaints/images";
-import { theme } from "../../../constaints/theme";
+} from '../../../constaints/images';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
   goBackHandler: () => void;
@@ -34,7 +32,7 @@ export function SingleSoundHeader({
   thumnailImageUri,
   contentName,
   isOwner = false,
-  username = "",
+  username = '',
   userProfileUri = PROFILE_ONE,
   openReportModalHandler,
 }: Props) {
@@ -56,12 +54,12 @@ export function SingleSoundHeader({
         uri: SINGLE_SOUND_COVER_IMAGE_GRADIENT,
       }}
       style={{
-        position: "absolute",
+        position: 'absolute',
         top: -30,
         left: 0,
-        width: "100%",
+        width: '100%',
         zIndex: 2,
-        height: thumbnailHeight+30,
+        height: thumbnailHeight + 30,
         borderBottomLeftRadius: 16,
         borderBottomRightRadius: 16,
       }}
@@ -75,7 +73,7 @@ export function SingleSoundHeader({
         uri: SINGLE_VIDEO_COVER_IMAGE_GRADIENT,
       }}
       style={{
-        position: "absolute",
+        position: 'absolute',
         top: 0,
         left: 0,
         width: 198,
@@ -92,14 +90,10 @@ export function SingleSoundHeader({
     <Box position="relative" zIndex={20}>
       <GoBackButton goBackHandler={goBackHandler} />
       <Box width="100%" height={thumbnailHeight}>
-        <GoBackButton
-          goBackHandler={goBackHandler}
-          hasBackground={false}
-          isOwner={isOwner}
-        />
+        <GoBackButton goBackHandler={goBackHandler} hasBackground={false} isOwner={isOwner} />
         <Box
-          width={"100%"}
-          height={"100%"}
+          width={'100%'}
+          height={'100%'}
           position="relative"
           zIndex={11}
           alignItems="center"
@@ -118,7 +112,7 @@ export function SingleSoundHeader({
               style={{
                 width: 20,
                 height: 17.99,
-                position: "absolute",
+                position: 'absolute',
                 zIndex: 10,
                 left: 24,
                 bottom: 24,
@@ -151,7 +145,7 @@ export function SingleSoundHeader({
             />
             <Box width={50}>
               <TouchableOpacity activeOpacity={1} onPress={openReportModalHandler}>
-                <Text color={"#666680"} fontSize={14} fontWeight={400}>
+                <Text color={'#666680'} fontSize={14} fontWeight={400}>
                   Report
                 </Text>
               </TouchableOpacity>

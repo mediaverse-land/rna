@@ -1,15 +1,10 @@
-import { useState, ReactNode } from "react";
-import { Box } from "../../../../components/box";
-import { PaddingContainer } from "../../../../styles/grid";
-import { windowSize } from "../../../../utils/window-size";
-import { SignUpWithProvider } from "./signup-width-provider";
-import { SignUpWithUsername } from "./signup-with-username";
-import {
-  AuthWindows,
-  SIGNUP_WITH_USERNAME,
-  SINGUP_WITH_PROVIDER,
-  SignupWindows,
-} from "../types";
+import { useState, ReactNode } from 'react';
+import { Box } from '../../../../components/box';
+import { PaddingContainer } from '../../../../styles/grid';
+import { windowSize } from '../../../../utils/window-size';
+import { SignUpWithProvider } from './signup-width-provider';
+import { SignUpWithUsername } from './signup-with-username';
+import { AuthWindows, SIGNUP_WITH_USERNAME, SINGUP_WITH_PROVIDER, SignupWindows } from '../types';
 
 const { height } = windowSize();
 
@@ -19,8 +14,7 @@ type Props = {
 };
 
 export function Signin({ goBackToSigninWindow, setWindowHandler }: Props) {
-  const [shouldIndicateFillData, setShouldIndicateFillData] =
-    useState<boolean>(null);
+  const [shouldIndicateFillData, setShouldIndicateFillData] = useState<boolean>(null);
   const [initial__token, _setInitital__token] = useState<string>(null);
 
   const [signUpCurrentWindow, setSigUpCurrentWindow] =
@@ -49,7 +43,7 @@ export function Signin({ goBackToSigninWindow, setWindowHandler }: Props) {
         height={height}
         goBackToSigninWindow={goBackToSigninWindow}
         setWindowHandler={setWindowHandler}
-        intialWindw={shouldIndicateFillData ? "FILL_DATA" : null}
+        intialWindw={shouldIndicateFillData ? 'FILL_DATA' : null}
         initial__token={initial__token}
       />
     ),

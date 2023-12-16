@@ -1,32 +1,31 @@
-import { Image, TouchableOpacity } from "react-native";
-import { Box } from "../../../../components/box";
-import { ScreenGradient } from "../../../../components/screen-gradient";
-import { VirtualizedList } from "../../../../components/virtualized-list";
+import { Image, TouchableOpacity } from 'react-native';
+import { Box } from '../../../../components/box';
+import { ScreenGradient } from '../../../../components/screen-gradient';
+import { VirtualizedList } from '../../../../components/virtualized-list';
 import {
   ICON_CREATE_IMAGE_RESULT_BG,
   ICON_PUBLISH,
   ICON_SAVE,
   ICON_SHARE_WHITE,
-} from "../../../../constaints/icons";
-import { Spacer } from "../../../../components/spacer";
-import { Text } from "../../../../components/text";
-
+} from '../../../../constaints/icons';
+import { Spacer } from '../../../../components/spacer';
+import { Text } from '../../../../components/text';
 
 const RESULT_OPTIONS = [
   {
     id: 1,
     icon: ICON_SAVE,
-    title: "Save",
+    title: 'Save',
   },
   {
     id: 2,
     icon: ICON_SHARE_WHITE,
-    title: "Save & Share",
+    title: 'Save & Share',
   },
   {
     id: 3,
     icon: ICON_PUBLISH,
-    title: "Save & Publish",
+    title: 'Save & Publish',
   },
 ];
 
@@ -44,18 +43,12 @@ export const Result = ({ imageUri }: { imageUri: string }) => {
     >
       <ScreenGradient>
         <VirtualizedList>
-          <Box
-            width="100%"
-            paddingLeft={44}
-            paddingRight={44}
-            flex={1}
-            paddingTop={100}
-          >
+          <Box width="100%" paddingLeft={44} paddingRight={44} flex={1} paddingTop={100}>
             <Box marginTop={24}>
               <Image
                 source={{ uri: `data:image/jpg;base64,${imageUri}` }}
                 style={{
-                  width: "100%",
+                  width: '100%',
                   flex: 1,
                   borderRadius: 16,
                   aspectRatio: 0.5,
@@ -73,15 +66,11 @@ export const Result = ({ imageUri }: { imageUri: string }) => {
                 {RESULT_OPTIONS.reverse().map((r) => (
                   <TouchableOpacity activeOpacity={1} key={r.id}>
                     <Box width={55}>
-                      <Box
-                        marginBottom={10}
-                        alignItems="center"
-                        justifyContent="center"
-                      >
+                      <Box marginBottom={10} alignItems="center" justifyContent="center">
                         <ICON_CREATE_IMAGE_RESULT_BG />
                         <r.icon
                           style={{
-                            position: "absolute",
+                            position: 'absolute',
                             top: 14,
                             left: 17.5,
                           }}
@@ -89,7 +78,7 @@ export const Result = ({ imageUri }: { imageUri: string }) => {
                       </Box>
                       <Text
                         textStyles={{
-                          textAlign: "center",
+                          textAlign: 'center',
                         }}
                         color="#fff"
                         fontSize={16}

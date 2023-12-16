@@ -1,7 +1,5 @@
-import { CHANNEL_MANAGEMENT_SCREEN } from "../../../constaints/consts";
-import {
-  CHANNLE_MANAGEMENT,
-} from "../../../constaints/icons";
+import { CHANNEL_MANAGEMENT_SCREEN } from '../../../constaints/consts';
+import { CHANNLE_MANAGEMENT } from '../../../constaints/icons';
 
 export type AppItemType = {
   id: number;
@@ -9,7 +7,7 @@ export type AppItemType = {
   title: string;
   category: string;
   isDisable?: boolean;
-  screenName?: string
+  screenName?: string;
 };
 
 export const appItemListMockData: AppItemType[] = [
@@ -22,11 +20,11 @@ export const appItemListMockData: AppItemType[] = [
   // },
   {
     id: 2,
-    title: "Channel Management",
-    category: "Video edit & Share",
+    title: 'Channel Management',
+    category: 'Video edit & Share',
     isDisable: true,
     imagePath: <CHANNLE_MANAGEMENT />,
-    screenName: CHANNEL_MANAGEMENT_SCREEN
+    screenName: CHANNEL_MANAGEMENT_SCREEN,
   },
   // {
   //   id: 3,

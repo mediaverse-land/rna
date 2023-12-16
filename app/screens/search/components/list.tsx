@@ -1,11 +1,11 @@
-import { FC, useCallback } from "react";
-import { FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { Asset } from "../../../types/asset";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { ListItem } from "./list-item";
-import { UseNavigationType } from "../../../types/use-navigation";
+import { FC, useCallback } from 'react';
+import { FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Asset } from '../../../types/asset';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { ListItem } from './list-item';
+import { UseNavigationType } from '../../../types/use-navigation';
 
 type Props = {
   data: Asset[];
@@ -17,65 +17,61 @@ const keyExtractor = (item: Asset) => item.id.toString();
 
 const contentTypes: Record<number, Record<string, string>> = {
   1: {
-    name: "texts",
-    screen: "SingleTextScreen",
+    name: 'texts',
+    screen: 'SingleTextScreen',
   },
   2: {
-    name: "images",
-    screen: "SingleImageScreen",
+    name: 'images',
+    screen: 'SingleImageScreen',
   },
   3: {
-    name: "sounds",
-    screen: "SingleSoundScreen",
+    name: 'sounds',
+    screen: 'SingleSoundScreen',
   },
   4: {
-    name: "vidoes",
-    screen: "SingleVideoScreen",
+    name: 'vidoes',
+    screen: 'SingleVideoScreen',
   },
 };
 
 export const List: FC<Props> = ({ data, isLoading, onEndReached }) => {
   const navigation = useNavigation<UseNavigationType>();
 
-  const renderItem = useCallback(
-    ({ item, index }: { item: Asset | any; index: number }) => {
-      const itemContentType = contentTypes[item.type];
+  const renderItem = useCallback(({ item, index }: { item: Asset | any; index: number }) => {
+    const itemContentType = contentTypes[item.type];
 
-      if (!item.id) {
-        return;
-      }
+    if (!item.id) {
+      return;
+    }
 
-      const thumbnail =
-        item?.asset?.thumbnails?.["226x226"] ||
-        item?.asset?.thumbnails?.["336x366"] ||
-        item?.asset?.thumbnails?.["525x525"];
+    const thumbnail =
+      item?.asset?.thumbnails?.['226x226'] ||
+      item?.asset?.thumbnails?.['336x366'] ||
+      item?.asset?.thumbnails?.['525x525'];
 
-      const user = item?.asset?.user;
+    const user = item?.asset?.user;
 
-      return (
-        <ListItem
-          width={140}
-          imagePath={thumbnail}
-          title={item.name}
-          index={index}
-          username={user?.username}
-          profileUri={user?.image_url}
-          
-          showItemTypeIcon
-          type={item.type}
-          onpress={() => {
-            navigation?.navigate(itemContentType.screen, {
-              id: item.id,
-              asset_user_image_url: user?.image_url,
-              asset_username: user?.username,
-            });
-          }}
-          isSelected={false}
-        />
-      );
-    },
-    []
-  );
+    return (
+      <ListItem
+        width={140}
+        imagePath={thumbnail}
+        title={item.name}
+        index={index}
+        username={user?.username}
+        profileUri={user?.image_url}
+        showItemTypeIcon
+        type={item.type}
+        onpress={() => {
+          navigation?.navigate(itemContentType.screen, {
+            id: item.id,
+            asset_user_image_url: user?.image_url,
+            asset_username: user?.username,
+          });
+        }}
+        isSelected={false}
+      />
+    );
+  }, []);
 
   return (
     <>
@@ -93,7 +89,7 @@ export const List: FC<Props> = ({ data, isLoading, onEndReached }) => {
       ) : (
         <FlatList
           columnWrapperStyle={{
-            justifyContent: "space-between",
+            justifyContent: 'space-between',
           }}
           numColumns={2}
           onEndReached={onEndReached}

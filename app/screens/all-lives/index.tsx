@@ -1,18 +1,18 @@
-import React, { useEffect, useMemo, useRef } from "react";
-import { View } from "react-native";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
-import { useClickOutside } from "react-native-click-outside";
-import { AllLiveComponents } from "./components";
-import SelectLanguageBottomSheet from "../../components/select-language";
-import SelectCountryBottomSheet from "../../components/select-country";
-import { ModalBottomSheet } from "../../components/bottom-sheet-modal";
-import { AppDispatch } from "../../store";
-import { clearSearchParams, setSearchParams } from "../../slices/live.slice";
-import { UseNavigationType } from "../../types/use-navigation";
+import React, { useEffect, useMemo, useRef } from 'react';
+import { View } from 'react-native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { useClickOutside } from 'react-native-click-outside';
+import { AllLiveComponents } from './components';
+import SelectLanguageBottomSheet from '../../components/select-language';
+import SelectCountryBottomSheet from '../../components/select-country';
+import { ModalBottomSheet } from '../../components/bottom-sheet-modal';
+import { AppDispatch } from '../../store';
+import { clearSearchParams, setSearchParams } from '../../slices/live.slice';
+import { UseNavigationType } from '../../types/use-navigation';
 
 export const AllSLivescreen = () => {
-  const snapPoints = useMemo(() => ["25%", "50%"], []);
+  const snapPoints = useMemo(() => ['25%', '50%'], []);
 
   const navigation = useNavigation<UseNavigationType>();
 
@@ -92,10 +92,7 @@ export const AllSLivescreen = () => {
             height: 1000,
           }}
         >
-          <SelectCountryBottomSheet
-            isFocused={isFocused}
-            setSelectedCountry={setSelectedCountry}
-          />
+          <SelectCountryBottomSheet isFocused={isFocused} setSelectedCountry={setSelectedCountry} />
         </View>
       </ModalBottomSheet>
     </>

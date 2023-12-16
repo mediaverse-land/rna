@@ -1,8 +1,8 @@
-import { Box } from "../../../components/box";
-import { Input } from "../../../components/form";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
-import { windowSize } from "../../../utils/window-size";
+import { Box } from '../../../components/box';
+import { Input } from '../../../components/form';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
+import { windowSize } from '../../../utils/window-size';
 
 const { width } = windowSize();
 

@@ -8,7 +8,7 @@
 //   sound: "default",
 // });
 
-import { useState } from "react";
+import { useState } from 'react';
 
 // Notifications.setNotificationHandler({
 //   handleNotification: async () => ({
@@ -19,13 +19,9 @@ import { useState } from "react";
 //   }),
 // });
 
-
-export const useFirebasePushNotification = () =>{
-    
-  const [token, setToken] = useState("");
+export const useFirebasePushNotification = () => {
+  const [token, setToken] = useState('');
   const [newPushMessage, setNewPushMessage] = useState<any>(null);
-
- 
 
   // const isDevMode = () => __DEV__;
 
@@ -89,5 +85,5 @@ export const useFirebasePushNotification = () =>{
   //   return unsubscribe;
   // }, []);
 
-  return [token]
-}
+  return [token];
+};

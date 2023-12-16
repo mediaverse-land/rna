@@ -1,13 +1,13 @@
-import { TouchableOpacity } from "react-native";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { ICON_IMAGE_WHITE } from "../../../constaints/icons";
-import { PaddingContainer } from "../../../styles/grid";
-import { GoBackButton } from "../components/goback-button";
-import { theme } from "../../../constaints/theme";
-import { AssetThumbnail } from "../../../components/asset-thumbnail";
-import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
-import { Toolbar } from "../components/toolbar";
+import { TouchableOpacity } from 'react-native';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { ICON_IMAGE_WHITE } from '../../../constaints/icons';
+import { PaddingContainer } from '../../../styles/grid';
+import { GoBackButton } from '../components/goback-button';
+import { theme } from '../../../constaints/theme';
+import { AssetThumbnail } from '../../../components/asset-thumbnail';
+import { RenderIfWithoutLoading } from '../../../components/render-if-without-loading';
+import { Toolbar } from '../components/toolbar';
 
 type Props = {
   goBackHandler: () => void;
@@ -37,19 +37,9 @@ export function SingleImageHeader({
         <Box position="relative" zIndex={20}>
           <Box>
             {/* GoBack button place */}
-            <GoBackButton
-              goBackHandler={goBackHandler}
-              hasBackground={true}
-              isOwner={isOwner}
-            />
-            <TouchableOpacity
-              onPress={showLargeImagePressHandler}
-              activeOpacity={1}
-            >
-              <AssetThumbnail
-                assetType="image"
-                thumnailImageUri={thumnailImageUri}
-              />
+            <GoBackButton goBackHandler={goBackHandler} hasBackground={true} isOwner={isOwner} />
+            <TouchableOpacity onPress={showLargeImagePressHandler} activeOpacity={1}>
+              <AssetThumbnail assetType="image" thumnailImageUri={thumnailImageUri} />
             </TouchableOpacity>
             <Box position="absolute" zIndex={11} bottom={24} left={24}>
               <ICON_IMAGE_WHITE
@@ -60,7 +50,7 @@ export function SingleImageHeader({
               />
             </Box>
           </Box>
-          <Box >
+          <Box>
             <RenderIfWithoutLoading condition={hasPermission}>
               <PaddingContainer>
                 <Toolbar toolbarList={toolbarOptions} />
@@ -93,7 +83,7 @@ export function SingleImageHeader({
                   position="relative"
                   zIndex={1040}
                 >
-                  <Text color={"#666680"} fontSize={14} fontWeight={400}>
+                  <Text color={'#666680'} fontSize={14} fontWeight={400}>
                     Report
                   </Text>
                 </Box>

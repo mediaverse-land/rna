@@ -1,5 +1,5 @@
-import styled from "styled-components/native";
-import { theme } from "../../constaints/theme";
+import styled from 'styled-components/native';
+import { theme } from '../../constaints/theme';
 
 export const InputComponent: any = {
   FormGroup: styled.View`
@@ -13,7 +13,7 @@ export const InputComponent: any = {
   `,
   Label: styled.Text<{ isRtl: boolean; isIOS?: boolean }>`
     height: 100%;
-    ${(props) => (!props?.isIOS ? "padding: 16px" : null)}
+    ${(props) => (!props?.isIOS ? 'padding: 16px' : null)}
     position: absolute;
     color: #fff;
     ${(props) => (!props.isRtl ? `right: 0` : `left: 0`)};
@@ -45,10 +45,9 @@ export const InputComponent: any = {
           ? theme.color.light.DANGER
           : props.showBorder
           ? theme.color.light.INPUT_PLACEHOLDER
-          : "transparent"};
+          : 'transparent'};
     background-color: rgba(14, 14, 18, 0.5);
-    color: ${(props) =>
-      props.hasError ? theme.color.light.DANGER : theme.color.light.WHITE};
+    color: ${(props) => (props.hasError ? theme.color.light.DANGER : theme.color.light.WHITE)};
     font-size: ${theme.fontSize.md};
     line-height: ${theme.lineHeight.md};
     text-align: ${(props) => props.textAlign};
@@ -56,7 +55,7 @@ export const InputComponent: any = {
   datePiclerIconStyles: {
     width: 22,
     height: 22,
-    position: "absolute",
+    position: 'absolute',
     top: 17,
     zIndex: 3,
     right: 19,

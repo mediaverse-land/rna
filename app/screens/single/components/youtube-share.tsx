@@ -1,15 +1,15 @@
-import React, { ReactNode } from "react";
-import { View } from "react-native";
-import { ModalBottomSheet } from "../../../components/bottom-sheet-modal";
-import ExternalAccountBottomSheet from "../../../components/external-account-bottom-sheet";
-import { ExternalAccount } from "../../../types/external-account";
-import { Box } from "../../../components/box";
-import { theme } from "../../../constaints/theme";
-import { Text } from "../../../components/text";
-import { Input } from "../../../components/form";
-import { Toaster } from "../../../utils/toaster";
-import { LoadingSpinner } from "../../../components/loader-spinner";
-import { BlurView } from "expo-blur";
+import React, { ReactNode } from 'react';
+import { View } from 'react-native';
+import { ModalBottomSheet } from '../../../components/bottom-sheet-modal';
+import ExternalAccountBottomSheet from '../../../components/external-account-bottom-sheet';
+import { ExternalAccount } from '../../../types/external-account';
+import { Box } from '../../../components/box';
+import { theme } from '../../../constaints/theme';
+import { Text } from '../../../components/text';
+import { Input } from '../../../components/form';
+import { Toaster } from '../../../utils/toaster';
+import { LoadingSpinner } from '../../../components/loader-spinner';
+import { BlurView } from 'expo-blur';
 
 interface IYoutubeShare {
   closeModal: () => void;
@@ -20,12 +20,12 @@ interface IYoutubeShare {
     _account: ExternalAccount,
     ___shareYoutubeApiFunction: any,
     assetId: number,
-    time: string
+    time: string,
   ) => void;
 }
 
-let title = "";
-let description = "";
+let title = '';
+let description = '';
 const _toaster = new Toaster();
 
 export class YoutubeShare implements IYoutubeShare {
@@ -37,16 +37,9 @@ export class YoutubeShare implements IYoutubeShare {
   _isLoading = false;
   _shareYoutubeApiFunction: ({ token, requestBody }: any) => void;
 
-  private _snapPoints = ["45%", "50%"];
+  private _snapPoints = ['45%', '50%'];
 
-  config({
-    modalRef,
-    modalWrapperRef,
-    token,
-    shareYoutubeApiFunction,
-    assetId,
-    isLoading,
-  }: any) {
+  config({ modalRef, modalWrapperRef, token, shareYoutubeApiFunction, assetId, isLoading }: any) {
     if (!token) {
       return;
     }
@@ -70,7 +63,7 @@ export class YoutubeShare implements IYoutubeShare {
     _account: ExternalAccount,
     ___func: any,
     _assetId: number,
-    time: string
+    time: string,
   ) {
     this._selectedAccount = _account;
     const accountId = _account.id;
@@ -82,18 +75,18 @@ export class YoutubeShare implements IYoutubeShare {
     _accountId: number,
     ___shareYoutubeApiFunction: any,
     _assetId: number,
-    time: string
+    time: string,
   ) {
     const requestBody: Record<string, any> = {
       account: _accountId,
       asset: _assetId,
       title,
       description,
-      privacy: "private",
+      privacy: 'private',
     };
 
     if (time) {
-      requestBody["times"] = [time];
+      requestBody['times'] = [time];
     }
 
     const result = await ___shareYoutubeApiFunction({
@@ -103,17 +96,15 @@ export class YoutubeShare implements IYoutubeShare {
 
     if (result?.data) {
       this.closeModal();
-      _toaster.show("Asset shared to youtube successfully");
+      _toaster.show('Asset shared to youtube successfully');
     }
     if (result?.error) {
       this.closeModal();
       if (result?.error?.status === 403) {
-        _toaster.show("Share to youtube failed, 403 youtube rate limmit error");
+        _toaster.show('Share to youtube failed, 403 youtube rate limmit error');
         return;
       }
-      _toaster.show(
-        "Share to youtube failed, try refresh your connected account to google"
-      );
+      _toaster.show('Share to youtube failed, try refresh your connected account to google');
     }
   }
 
@@ -128,16 +119,10 @@ export class YoutubeShare implements IYoutubeShare {
           Fill share data
         </Text>
         <Box marginTop={24}>
-          <Input
-            labelText="Title"
-            onChangeText={(text: string) => (title = text)}
-          />
+          <Input labelText="Title" onChangeText={(text: string) => (title = text)} />
         </Box>
         <Box marginTop={8} marginBottom={32}>
-          <Input
-            labelText="Description"
-            onChangeText={(text: string) => (description = text)}
-          />
+          <Input labelText="Description" onChangeText={(text: string) => (description = text)} />
         </Box>
       </Box>
     );
@@ -145,7 +130,7 @@ export class YoutubeShare implements IYoutubeShare {
       <ModalBottomSheet ref={this._modalRef} snapPoints={this._snapPoints}>
         <View
           style={{
-            overflow: "hidden",
+            overflow: 'hidden',
             borderTopLeftRadius: 16,
             borderTopRightRadius: 16,
           }}
@@ -166,12 +151,7 @@ export class YoutubeShare implements IYoutubeShare {
                 headerElement={_headerElement}
                 token={this._token}
                 setSelectedAccount={(e: any, time) => {
-                  this.addSelectedAccount(
-                    e,
-                    this._shareYoutubeApiFunction,
-                    this._assetId,
-                    time
-                  );
+                  this.addSelectedAccount(e, this._shareYoutubeApiFunction, this._assetId, time);
                 }}
               />
             )}

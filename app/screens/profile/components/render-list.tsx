@@ -1,22 +1,22 @@
-import { memo } from "react";
-import { FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { IfNoItem } from "../../../components/if-no-item";
-import { RenderIf } from "../../../components/render-if";
-import { Asset } from "../../../types/asset";
-import { ListItem } from "./list-item";
-import { windowSize } from "../../../utils/window-size";
+import { memo } from 'react';
+import { FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { IfNoItem } from '../../../components/if-no-item';
+import { RenderIf } from '../../../components/render-if';
+import { Asset } from '../../../types/asset';
+import { ListItem } from './list-item';
+import { windowSize } from '../../../utils/window-size';
 import {
   AUDIO_THUMBNAIL_PLACEHOLDER,
   IMAGE_THUMBNAIL_PLACEHOLDER,
   PROFILE_ONE,
   TEXT_THUMBNAIL_PLACEHOLDER,
   VIDEO_THUMBNAIL_PLACEHOLDER,
-} from "../../../constaints/images";
-import { PaddingContainer } from "../../../styles/grid";
-import { Box } from "../../../components/box";
-import { Text } from "../../../types/text";
-import { UseNavigationType } from "../../../types/use-navigation";
+} from '../../../constaints/images';
+import { PaddingContainer } from '../../../styles/grid';
+import { Box } from '../../../components/box';
+import { Text } from '../../../types/text';
+import { UseNavigationType } from '../../../types/use-navigation';
 
 type Data = Asset | Text;
 
@@ -24,8 +24,8 @@ interface Props {
   isLoading: boolean;
   data: Data[];
   isSelectedContent: (itemId: number) => boolean;
-  selectOwnedItemLognPressHandler: ({id,type}:{id: number, type: string}) => void;
-  selectOwnedItemPressHandler: ({id,type}:{id: number, type: string}) => void;
+  selectOwnedItemLognPressHandler: ({ id, type }: { id: number; type: string }) => void;
+  selectOwnedItemPressHandler: ({ id, type }: { id: number; type: string }) => void;
   selectedContentsLength: number;
   onEndReached?: any;
   onRefresh?: () => void;
@@ -64,17 +64,17 @@ function RenderList({
     id: number,
     name: string,
     asset_username: string,
-    asset_user_image_url: string
+    asset_user_image_url: string,
   ) => {
     if (selectedContentsLength !== 0) {
       return;
     }
 
     const availableScreens: Record<number, string> = {
-      1: "SingleTextScreen",
-      2: "SingleImageScreen",
-      3: "SingleSoundScreen",
-      4: "SingleVideoScreen",
+      1: 'SingleTextScreen',
+      2: 'SingleImageScreen',
+      3: 'SingleSoundScreen',
+      4: 'SingleVideoScreen',
     };
 
     const screen = availableScreens[type];
@@ -95,12 +95,10 @@ function RenderList({
     const contentData = {
       id: item.id,
       asset_id: item.asset_id || item.id,
-      thumbnail:
-        item.asset?.thumbnails?.["226x226"] ||
-        placeholderItems[item?.asset?.type],
+      thumbnail: item.asset?.thumbnails?.['226x226'] || placeholderItems[item?.asset?.type],
       title: item.asset?.name || item?.name,
       description: item.asset?.description || item?.description,
-      username: item.asset?.user?.username || "static_username",
+      username: item.asset?.user?.username || 'static_username',
       userProfileUri: item.asset?.user?.image_url,
     };
 
@@ -116,21 +114,23 @@ function RenderList({
           title={contentData.title}
           username={contentData.username}
           profileUri={contentData.userProfileUri || PROFILE_ONE}
-          onlongpress={() => selectOwnedItemLognPressHandler({
-            id:item.id,
-            type: item.asset?.type || item.type
-          })}
+          onlongpress={() =>
+            selectOwnedItemLognPressHandler({
+              id: item.id,
+              type: item.asset?.type || item.type,
+            })
+          }
           onpress={() => {
             selectOwnedItemPressHandler({
-              id:item.id,
-              type: item.asset?.type || item.type
+              id: item.id,
+              type: item.asset?.type || item.type,
             });
             navigateToSinglePageHandler(
               item.asset?.type || item.type,
               contentData.id,
               contentData.title,
               item.asset?.user?.username,
-              item.asset?.user?.image_url
+              item.asset?.user?.image_url,
             );
           }}
           isSelected={isSelected}
@@ -152,7 +152,7 @@ function RenderList({
               keyExtractor={keyExtractor}
               onEndReached={onEndReached}
               columnWrapperStyle={{
-                justifyContent: "space-between",
+                justifyContent: 'space-between',
               }}
               style={{
                 paddingTop: 95,

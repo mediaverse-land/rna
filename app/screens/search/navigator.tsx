@@ -1,9 +1,9 @@
-import { StyleSheet, View } from "react-native";
-import { SearchParam } from ".";
-import { useMemo, useState } from "react";
-import { ActiveNav } from "../channel-management/types";
-import { SearchResult } from "./search-result";
-import { SearchPageNav } from "./components/nav";
+import { StyleSheet, View } from 'react-native';
+import { SearchParam } from '.';
+import { useMemo, useState } from 'react';
+import { ActiveNav } from '../channel-management/types';
+import { SearchResult } from './search-result';
+import { SearchPageNav } from './components/nav';
 
 type Props = { searchParams: SearchParam };
 
@@ -12,7 +12,7 @@ export type SearchObject = Record<string, SearchObjectProperty>;
 
 const searchItems: SearchObject = {
   All: {
-    type: "All",
+    type: 'All',
   },
   Images: {
     type: 2,
@@ -29,7 +29,7 @@ const searchItems: SearchObject = {
 };
 
 export function Navigator({ searchParams }: Props) {
-  const [activeNav, setActiveNav] = useState<ActiveNav>("All");
+  const [activeNav, setActiveNav] = useState<ActiveNav>('All');
 
   const searchObject = useMemo<SearchObjectProperty>(() => {
     return searchItems[activeNav];
@@ -43,10 +43,9 @@ export function Navigator({ searchParams }: Props) {
   );
 }
 
-
 const styles = StyleSheet.create({
   view: {
-    width:'100%',
-    flex: 1
-  }
-})
+    width: '100%',
+    flex: 1,
+  },
+});

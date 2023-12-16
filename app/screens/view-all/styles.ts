@@ -1,14 +1,14 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export const viewAllStyles = StyleSheet.create({
   container: {
-    position: "relative",
+    position: 'relative',
     flex: 1,
-    alignItems: "center",
-    backgroundColor: "#030340",
+    alignItems: 'center',
+    backgroundColor: '#030340',
   },
   fixed: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
@@ -17,7 +17,7 @@ export const viewAllStyles = StyleSheet.create({
   icon: {
     marginRight: 9,
     marginTop: 3,
-    position:'relative',
-    top:-4.5
+    position: 'relative',
+    top: -4.5,
   },
 });

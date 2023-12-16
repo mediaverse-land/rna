@@ -1,11 +1,11 @@
-import { StyleSheet } from "react-native";
-import { windowSize } from "../../utils/window-size";
+import { StyleSheet } from 'react-native';
+import { windowSize } from '../../utils/window-size';
 
-const {height} = windowSize();
+const { height } = windowSize();
 
 export const channelManagementStyles = StyleSheet.create({
   editViewWrapper: {
-    position: "absolute",
+    position: 'absolute',
     width: 124,
     height: 124,
     zIndex: 100000000,
@@ -20,7 +20,7 @@ export const channelManagementStyles = StyleSheet.create({
     height: 200,
   },
   blur: {
-    height: "100%",
+    height: '100%',
     borderRadius: 16,
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,
@@ -28,36 +28,36 @@ export const channelManagementStyles = StyleSheet.create({
   container: {
     flex: 1,
     height: 470,
-    width: "100%",
+    width: '100%',
     padding: 24,
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,
   },
   contentModalContainer: {
     flex: 1,
     height: height,
-    width: "100%",
+    width: '100%',
     padding: 24,
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,
   },
   contentContainer: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
   },
   bottomSheetScrollView: {
-    width: "100%",
+    width: '100%',
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,
   },
   bottomSheetBlurView: {
-    width: "100%",
+    width: '100%',
     flex: 1,
     minHeight: 300,
     borderTopRightRadius: 16,

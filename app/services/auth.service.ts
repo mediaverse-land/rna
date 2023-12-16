@@ -1,8 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { enviroments } from "../../enviroments/enviroments";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { enviroments } from '../../enviroments/enviroments';
 
 export const authService: any = createApi({
-  reducerPath: "authService",
+  reducerPath: 'authService',
   baseQuery: fetchBaseQuery({
     baseUrl: enviroments.BASE_URL,
   }),
@@ -12,10 +12,10 @@ export const authService: any = createApi({
       query: (args) => {
         return {
           url: `external-accounts?page=${args.page}`,
-          method: "GET",
+          method: 'GET',
           headers: {
             Authorization: `Bearer ${args.token}`,
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },
@@ -24,10 +24,10 @@ export const authService: any = createApi({
       query: (args) => {
         return {
           url: `external-accounts/${args.id}`,
-          method: "DELETE",
+          method: 'DELETE',
           headers: {
             Authorization: `Bearer ${args.token}`,
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },
@@ -35,14 +35,14 @@ export const authService: any = createApi({
 
     setFirebasePushNotificationAccount: builder.mutation({
       query: (args) => {
-        console.log(args)
+        console.log(args);
         return {
           url: `push-notifications/firebase-tokens`,
-          method: "POST",
+          method: 'POST',
           body: args.body,
           headers: {
             Authorization: `Bearer ${args.token}`,
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },
@@ -51,10 +51,10 @@ export const authService: any = createApi({
       query: (args) => {
         return {
           url: `auth/sign-in`,
-          method: "POST",
+          method: 'POST',
           body: args.body,
           headers: {
-            "X-App": "_Android",
+            'X-App': '_Android',
             // "Accept-Language": "en-US"
           },
         };
@@ -64,9 +64,9 @@ export const authService: any = createApi({
       query: () => {
         return {
           url: `terms`,
-          method: "GET",
+          method: 'GET',
           headers: {
-            "X-App": "_Android",
+            'X-App': '_Android',
             // "Accept-Language": "en-US"
           },
         };
@@ -79,7 +79,7 @@ export const {
   useGetExternalAccountsListQuery,
 
   useRemoveExternalAccountMutation,
-  useGetTermsOfUseQuery, 
+  useGetTermsOfUseQuery,
   useSetFirebasePushNotificationAccountMutation,
   useSignInMutation,
 } = authService;

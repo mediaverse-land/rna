@@ -1,13 +1,13 @@
-import { FC, ReactNode, useMemo } from "react";
-import { ActivityIndicator, GestureResponderEvent, TouchableOpacity } from "react-native";
-import { ButtonComponents } from "./style";
-import { Box } from "../box";
-import { Text } from "../text";
-import { theme } from "../../constaints/theme";
-import { LinearGradient } from "expo-linear-gradient";
+import { FC, ReactNode, useMemo } from 'react';
+import { ActivityIndicator, GestureResponderEvent, TouchableOpacity } from 'react-native';
+import { ButtonComponents } from './style';
+import { Box } from '../box';
+import { Text } from '../text';
+import { theme } from '../../constaints/theme';
+import { LinearGradient } from 'expo-linear-gradient';
 
-type Varient = "muted" | "primary" | "flat" | "dark";
-type Size = "lg" | "sm" | "xlg";
+type Varient = 'muted' | 'primary' | 'flat' | 'dark';
+type Size = 'lg' | 'sm' | 'xlg';
 
 type Props = {
   onpressHandler?: (event: GestureResponderEvent) => void;
@@ -48,17 +48,17 @@ export const Button: FC<Props> = ({
   const varients: VarientObject = useMemo(() => {
     return {
       muted: {
-        backgroundColor: "#292953",
+        backgroundColor: '#292953',
         textColor: theme.color.light.WHITE,
         gradient: {
           style: {
-            width: "100%",
+            width: '100%',
             height: 48,
             borderRadius: 32,
             marginTop: 16,
             padding: 1,
           },
-          colors: ["#49496d", "#292953"],
+          colors: ['#49496d', '#292953'],
           start: {
             x: 0.1,
             y: 0.7,
@@ -70,11 +70,11 @@ export const Button: FC<Props> = ({
         textColor: theme.color.light.WHITE,
         gradient: {
           style: {
-            width: "100%",
+            width: '100%',
             height: 48,
             padding: 1,
           },
-          colors: ["#8aa1ff", theme.color.light.PRIMARY],
+          colors: ['#8aa1ff', theme.color.light.PRIMARY],
           start: {
             x: 0.1,
             y: 0.7,
@@ -82,7 +82,7 @@ export const Button: FC<Props> = ({
         },
       },
       flat: {
-        backgroundColor: "transparent",
+        backgroundColor: 'transparent',
         textColor: theme.color.light.ADD_CARD_COLOR,
       },
       dark: {
@@ -113,19 +113,19 @@ export const Button: FC<Props> = ({
   }, []);
 
   const { backgroundColor, textColor, gradient } = varients[varient];
-  const { fontSize, fontWeight, lineHeight } = sizes[size] || sizes["sm"];
+  const { fontSize, fontWeight, lineHeight } = sizes[size] || sizes['sm'];
 
-  const _onpressHandler = (event: GestureResponderEvent) =>{
-    if(isLoading){
+  const _onpressHandler = (event: GestureResponderEvent) => {
+    if (isLoading) {
       return;
     }
 
     onpressHandler(event);
-  }
+  };
 
   return (
     <Box
-      width={width ? width : "100%"}
+      width={width ? width : '100%'}
       marginTop={marginTop}
       marginBottom={marginBottom}
       marginLeft={marginLeft}
@@ -135,10 +135,10 @@ export const Button: FC<Props> = ({
         activeOpacity={1}
         onPress={_onpressHandler}
         style={{
-          width: "100%",
+          width: '100%',
         }}
       >
-        <Btn isFlat={varient === "flat" ? true : false}>
+        <Btn isFlat={varient === 'flat' ? true : false}>
           {gradient ? (
             <LinearGradient
               {...gradient}
@@ -198,8 +198,7 @@ export const Button: FC<Props> = ({
 };
 
 const ButtonText = (props: any) => {
-  const { textColor, lineHeight, fontSize, fontWeight, isLoading, text, icon } =
-    props;
+  const { textColor, lineHeight, fontSize, fontWeight, isLoading, text, icon } = props;
   return (
     <>
       <Text
@@ -208,18 +207,10 @@ const ButtonText = (props: any) => {
         fontSize={fontSize}
         fontWeight={fontWeight}
         textStyles={{
-          paddingTop: 2
+          paddingTop: 2,
         }}
       >
-        {isLoading ? (
-          isLoading === true ? (
-            <ActivityIndicator />
-          ) : (
-            text
-          )
-        ) : (
-          text
-        )}
+        {isLoading ? isLoading === true ? <ActivityIndicator /> : text : text}
       </Text>
       {icon ? (
         <Box marginLeft={10} paddingTop={4}>

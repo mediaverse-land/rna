@@ -1,15 +1,15 @@
-import { Image, TouchableOpacity } from "react-native";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { GoBackButton } from "../components/goback-button";
-import { ICON_TEXT_WHITE } from "../../../constaints/icons";
+import { Image, TouchableOpacity } from 'react-native';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { GoBackButton } from '../components/goback-button';
+import { ICON_TEXT_WHITE } from '../../../constaints/icons';
 import {
   SINGLE_SOUND_COVER_IMAGE_GRADIENT,
   SINGLE_TEXT_COVER_GRAIDENT,
   SINGLE_TEXT_THUMBNAIL_GRAIDENT,
-} from "../../../constaints/images";
-import { SingleItemUsernameAndDuration } from "../components/username-and-duration";
-import { theme } from "../../../constaints/theme";
+} from '../../../constaints/images';
+import { SingleItemUsernameAndDuration } from '../components/username-and-duration';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
   goBackHandler: () => void;
@@ -41,10 +41,10 @@ export function SingleTextHeader({
         uri: SINGLE_SOUND_COVER_IMAGE_GRADIENT,
       }}
       style={{
-        position: "absolute",
+        position: 'absolute',
         top: -30,
         left: 0,
-        width: "100.5%",
+        width: '100.5%',
         zIndex: 2,
         height: thumbnailHeight + 30,
         borderBottomLeftRadius: 16,
@@ -58,18 +58,8 @@ export function SingleTextHeader({
     <>
       <Box position="relative" zIndex={20}>
         <Box width="100%" height={thumbnailHeight}>
-          <GoBackButton
-            goBackHandler={goBackHandler}
-            hasBackground={false}
-            isOwner={isOwner}
-          />
-          <Box
-            width={"100%"}
-            height={"100%"}
-            position="relative"
-            zIndex={11}
-            padding={24}
-          >
+          <GoBackButton goBackHandler={goBackHandler} hasBackground={false} isOwner={isOwner} />
+          <Box width={'100%'} height={'100%'} position="relative" zIndex={11} padding={24}>
             <Box
               id="inner"
               width="100%"
@@ -82,13 +72,11 @@ export function SingleTextHeader({
               <Box width={127} height={127}>
                 <Image
                   source={{
-                    uri: thumnailImageUri
-                      ? thumnailImageUri
-                      : SINGLE_TEXT_THUMBNAIL_GRAIDENT,
+                    uri: thumnailImageUri ? thumnailImageUri : SINGLE_TEXT_THUMBNAIL_GRAIDENT,
                   }}
                   style={{
-                    width: "100%",
-                    height: "100%",
+                    width: '100%',
+                    height: '100%',
                     borderRadius: 8,
                   }}
                 />
@@ -98,7 +86,7 @@ export function SingleTextHeader({
                     width: 127,
                     height: 127,
                     borderRadius: 8,
-                    position: "absolute",
+                    position: 'absolute',
                     top: 0,
                     left: 0,
                   }}
@@ -107,7 +95,7 @@ export function SingleTextHeader({
                   style={{
                     width: 20,
                     height: 20,
-                    position: "absolute",
+                    position: 'absolute',
                     top: 53,
                     left: 53,
                   }}
@@ -141,11 +129,8 @@ export function SingleTextHeader({
                     />
                   </Box>
                   <Box width={50}>
-                    <TouchableOpacity
-                      activeOpacity={1}
-                      onPress={openReportModalHandler}
-                    >
-                      <Text color={"#666680"} fontSize={14} fontWeight={400}>
+                    <TouchableOpacity activeOpacity={1} onPress={openReportModalHandler}>
+                      <Text color={'#666680'} fontSize={14} fontWeight={400}>
                         Report
                       </Text>
                     </TouchableOpacity>

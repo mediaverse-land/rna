@@ -1,4 +1,4 @@
-import { Alert } from "react-native";
+import { Alert } from 'react-native';
 
 export class Logger {
   log(logData: any) {

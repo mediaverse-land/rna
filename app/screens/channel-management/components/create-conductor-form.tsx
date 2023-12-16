@@ -1,12 +1,12 @@
-import { ScrollView, TouchableOpacity } from "react-native";
-import { Box } from "../../../components/box";
-import { CondutorTitle } from "./conductor-title";
-import { Input } from "../../../components/form";
-import { Select } from "../../../components/form/select";
-import { Button } from "../../../components/button";
-import { BorderButton } from "./border-button";
-import { Text } from "../../../components/text";
-import { ICON_ARROW_DOWN_SVG } from "../../../constaints/icons";
+import { ScrollView, TouchableOpacity } from 'react-native';
+import { Box } from '../../../components/box';
+import { CondutorTitle } from './conductor-title';
+import { Input } from '../../../components/form';
+import { Select } from '../../../components/form/select';
+import { Button } from '../../../components/button';
+import { BorderButton } from './border-button';
+import { Text } from '../../../components/text';
+import { ICON_ARROW_DOWN_SVG } from '../../../constaints/icons';
 
 export const CreateConductorFormMemo = ({
   handleClosePres,
@@ -19,7 +19,7 @@ export const CreateConductorFormMemo = ({
   setAction,
   isLoading,
   showYoutubeFields,
-  setPrivacy
+  setPrivacy,
 }: {
   handleClosePres: () => void;
   closeFormModalAndOpenContenModal: () => void;
@@ -31,30 +31,18 @@ export const CreateConductorFormMemo = ({
   setAction: any;
   isLoading: boolean;
   showYoutubeFields: boolean;
-  setPrivacy: (item:'public'|'private') => void
+  setPrivacy: (item: 'public' | 'private') => void;
 }) => {
   return (
     <>
       <ScrollView style={{ flex: 1 }}>
-        <Box
-          width="100%"
-          padding={16}
-          paddingTop={24}
-          paddingLeft={32}
-          paddingRight={32}
-        >
+        <Box width="100%" padding={16} paddingTop={24} paddingLeft={32} paddingRight={32}>
           <CondutorTitle handleClosePres={handleClosePres} />
           <Box marginTop={-16}>
-            <BorderButton
-              handler={closeFormModalAndOpenContenModal}
-              title="Select content"
-            />
+            <BorderButton handler={closeFormModalAndOpenContenModal} title="Select content" />
           </Box>
           <Box id="form" marginTop={24}>
-            <TouchableOpacity
-              activeOpacity={1}
-              onPress={handleSelectAccountModalOpenPress}
-            >
+            <TouchableOpacity activeOpacity={1} onPress={handleSelectAccountModalOpenPress}>
               <Box
                 width="100%"
                 height={48}
@@ -91,7 +79,7 @@ export const CreateConductorFormMemo = ({
               labelText="Action"
               placeholder="Choose"
               setSelected={(e) => setAction(e)}
-              options={["Archive", "Share", "Stream"]}
+              options={['Archive', 'Share', 'Stream']}
             />
             <Box marginTop={16}></Box>
             <Input
@@ -120,7 +108,7 @@ export const CreateConductorFormMemo = ({
                   placeholder="Choose"
                   setSelected={(e) => setPrivacy(e)}
                   value={'public'}
-                  options={["public", "private"]}
+                  options={['public', 'private']}
                 />
               </>
             ) : null}

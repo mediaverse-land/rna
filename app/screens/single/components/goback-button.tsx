@@ -1,14 +1,12 @@
-import { FC, useState } from "react";
-import { SingleVideoPageComponents } from "../style";
-import {
-  ICON_ARROW_LEFT_WHITE,
-} from "../../../constaints/icons";
-import { TouchableOpacity } from "react-native";
-import { useRtl } from "../../../hooks/use-rtl";
-import { Box } from "../../../components/box";
-import { windowSize } from "../../../utils/window-size";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
+import { FC, useState } from 'react';
+import { SingleVideoPageComponents } from '../style';
+import { ICON_ARROW_LEFT_WHITE } from '../../../constaints/icons';
+import { TouchableOpacity } from 'react-native';
+import { useRtl } from '../../../hooks/use-rtl';
+import { Box } from '../../../components/box';
+import { windowSize } from '../../../utils/window-size';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
   goBackHandler: () => void;
@@ -17,35 +15,32 @@ type Props = {
 };
 const { BackButton } = SingleVideoPageComponents;
 
-const {  height: windowHeight } = windowSize();
+const { height: windowHeight } = windowSize();
 
 const menuList: { id: number; title: string }[] = [
   {
     id: 1,
-    title: "Edit file",
+    title: 'Edit file',
   },
   {
     id: 2,
-    title: "Edit info",
+    title: 'Edit info',
   },
   {
     id: 3,
-    title: "Download",
+    title: 'Download',
   },
   {
     id: 4,
-    title: "Publish",
+    title: 'Publish',
   },
   {
     id: 5,
-    title: "Share",
+    title: 'Share',
   },
 ];
 
-export const GoBackButton: FC<Props> = ({
-  goBackHandler,
-  hasBackground,
-}) => {
+export const GoBackButton: FC<Props> = ({ goBackHandler, hasBackground }) => {
   const { isRtl } = useRtl();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,13 +49,12 @@ export const GoBackButton: FC<Props> = ({
     setIsMenuOpen(false);
   };
 
-
   const renderGoBackButton = !hasBackground ? (
     <TouchableOpacity
       activeOpacity={1}
       onPress={goBackHandler}
       style={{
-        position: "absolute",
+        position: 'absolute',
         top: 30,
         left: 24,
         zIndex: 10,
@@ -70,7 +64,7 @@ export const GoBackButton: FC<Props> = ({
         style={{
           width: 20,
           height: 15.5,
-          transform: [{ rotate: isRtl ? "180deg" : "0deg" }],
+          transform: [{ rotate: isRtl ? '180deg' : '0deg' }],
         }}
       />
     </TouchableOpacity>
@@ -80,7 +74,7 @@ export const GoBackButton: FC<Props> = ({
         style={{
           width: 20,
           height: 15.5,
-          transform: [{ rotate: isRtl ? "180deg" : "0deg" }],
+          transform: [{ rotate: isRtl ? '180deg' : '0deg' }],
         }}
       />
     </BackButton>
@@ -121,9 +115,9 @@ export const GoBackButton: FC<Props> = ({
       {isMenuOpen ? (
         <TouchableOpacity
           style={{
-            width: "100%",
+            width: '100%',
             height: windowHeight,
-            position: "absolute",
+            position: 'absolute',
             left: 0,
             top: 0,
             zIndex: 40,

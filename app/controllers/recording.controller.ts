@@ -1,9 +1,9 @@
-import { Audio } from "expo-av";
-import { Logger } from "../utils/logger";
-const _logger = new Logger()
+import { Audio } from 'expo-av';
+import { Logger } from '../utils/logger';
+const _logger = new Logger();
 
 export class RecordingController {
-    _storedSound: any = null;
+  _storedSound: any = null;
 
   async askForPermission() {
     await Audio?.requestPermissionsAsync();
@@ -16,23 +16,20 @@ export class RecordingController {
         playsInSilentModeIOS: true,
       });
 
-      _logger.log("Starting recording..");
+      _logger.log('Starting recording..');
       const { recording } = await Audio.Recording.createAsync(
-        Audio.RecordingOptionsPresets.HIGH_QUALITY
+        Audio.RecordingOptionsPresets.HIGH_QUALITY,
       );
       setRecording(recording);
-      _logger.log("Recording started");
+      _logger.log('Recording started');
     } catch (err) {
-      _logger.logErro("Failed to start recording");
+      _logger.logErro('Failed to start recording');
     }
   }
 
-  async stopRecording(
-    recording: Audio.Recording,
-    setRecording: (recording: any) => void
-  ) {
+  async stopRecording(recording: Audio.Recording, setRecording: (recording: any) => void) {
     try {
-      _logger.log("Stopping recording..");
+      _logger.log('Stopping recording..');
       setRecording(null);
 
       await recording.stopAndUnloadAsync();

@@ -1,8 +1,8 @@
-import { memo } from "react";
-import { SvgCss } from "react-native-svg";
-import { windowSize } from "../../../utils/window-size";
+import { memo } from 'react';
+import { SvgCss } from 'react-native-svg';
+import { windowSize } from '../../../utils/window-size';
 
-const {  width } = windowSize();
+const { width } = windowSize();
 
 const xml = `
 <svg xmlns="http://www.w3.org/2000/svg" width=${width} height=${
@@ -32,7 +32,7 @@ const SvgComponent = () => {
   return (
     <SvgCss
       style={{
-        position: "absolute",
+        position: 'absolute',
         bottom: -1,
       }}
       xml={xml}
@@ -42,5 +42,4 @@ const SvgComponent = () => {
   );
 };
 
-
-export const TabbarBackground = memo(SvgComponent)
+export const TabbarBackground = memo(SvgComponent);

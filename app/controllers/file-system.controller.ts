@@ -1,8 +1,8 @@
-import * as FileSystem from "expo-file-system";
-import { Buffer } from "buffer";
+import * as FileSystem from 'expo-file-system';
+import { Buffer } from 'buffer';
 
 const ENCODING_OPTIONS = { encoding: FileSystem.EncodingType.Base64 };
-const BUFFER_TEXT_OPTION = 'base64'
+const BUFFER_TEXT_OPTION = 'base64';
 
 export class FileSystemController {
   constructor() {
@@ -10,19 +10,15 @@ export class FileSystemController {
   }
 
   async convertFileToBase64(fileUri: string) {
-    if(!fileUri){
+    if (!fileUri) {
       return;
     }
-    try{
-      const result = await FileSystem.readAsStringAsync(
-        fileUri,
-        ENCODING_OPTIONS
-      );
-  
-      return result
-    }
-    catch(err){
-      console.log(err)
+    try {
+      const result = await FileSystem.readAsStringAsync(fileUri, ENCODING_OPTIONS);
+
+      return result;
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -39,9 +35,8 @@ export class FileSystemController {
   //   }
   // }
 
-  async convertTextToBase64(text: string){
+  async convertTextToBase64(text: string) {
     const result = new Buffer(text).toString(BUFFER_TEXT_OPTION);
     return result;
   }
 }
-

@@ -1,10 +1,10 @@
 export const getUrl = ({ searchObjectType, page, plan, tag, name }: any) => {
   let url: string;
 
-  if (typeof searchObjectType === "string") {
-    url = "/search?";
+  if (typeof searchObjectType === 'string') {
+    url = '/search?';
   }
-  if (typeof searchObjectType === "number") {
+  if (typeof searchObjectType === 'number') {
     url = `/search?type=${searchObjectType}`;
   }
 

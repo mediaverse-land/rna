@@ -1,22 +1,22 @@
-import { StyleSheet } from "react-native";
-import { HorizontalSliderComponents } from "./style";
-import { UserNameCard } from "../username-card";
+import { StyleSheet } from 'react-native';
+import { HorizontalSliderComponents } from './style';
+import { UserNameCard } from '../username-card';
 import {
   AUDIO_THUMBNAIL_PLACEHOLDER,
   HORIZONTAL_SLIDER_GRADIENT,
   IMAGE_THUMBNAIL_PLACEHOLDER,
   TEXT_THUMBNAIL_PLACEHOLDER,
   VIDEO_THUMBNAIL_PLACEHOLDER,
-} from "../../constaints/images";
+} from '../../constaints/images';
 import {
   ICON_TOP_TABBAR_IMAGE_SVG,
   ICON_TOP_TABBAR_SOUND_SVG,
   ICON_TOP_TABBAR_TEXT_SVG,
   ICON_TOP_TABBAR_VIDEO_SVG,
-} from "../../constaints/icons";
-import { Box } from "../box";
-import { theme } from "../../constaints/theme";
-import { RenderIfWithoutLoading } from "../render-if-without-loading";
+} from '../../constaints/icons';
+import { Box } from '../box';
+import { theme } from '../../constaints/theme';
+import { RenderIfWithoutLoading } from '../render-if-without-loading';
 
 type Props = {
   slidePressRedirectHandler: (id: number) => void;
@@ -30,8 +30,7 @@ type Props = {
   isRtl?: boolean;
 };
 
-const { Slide, SliderThumbnailGradient, SlideThumbnail, SlideTitle } =
-  HorizontalSliderComponents;
+const { Slide, SliderThumbnailGradient, SlideThumbnail, SlideTitle } = HorizontalSliderComponents;
 
 const typesPlaceholderImageUrl = {
   1: TEXT_THUMBNAIL_PLACEHOLDER,
@@ -48,12 +47,12 @@ export function HorizontalSlide({
   username,
   id,
   type,
-  index
+  index,
 }: Props) {
   const icon = detectTypeIcon(type);
 
   const placeholderThumbnail = typesPlaceholderImageUrl[type];
-  
+
   return (
     <Slide
       onPress={() => slidePressRedirectHandler(id)}
@@ -63,9 +62,9 @@ export function HorizontalSlide({
           !title && {
             height: 144,
           },
-          index === 0  && {
-            marginLeft: 24
-          }
+        index === 0 && {
+          marginLeft: 24,
+        },
       ]}
     >
       <Box>
@@ -73,7 +72,10 @@ export function HorizontalSlide({
           source={{ uri: thumbnailPath || placeholderThumbnail }}
           resizeMode="contain"
         />
-        <SliderThumbnailGradient source={{ uri: HORIZONTAL_SLIDER_GRADIENT }} resizeMode="contain"/>
+        <SliderThumbnailGradient
+          source={{ uri: HORIZONTAL_SLIDER_GRADIENT }}
+          resizeMode="contain"
+        />
       </Box>
       <Box direction="row">
         <SlideTitle>{title}</SlideTitle>
@@ -93,43 +95,17 @@ export function HorizontalSlide({
           />
         </Box>
       </RenderIfWithoutLoading>
-      <RenderIfWithoutLoading condition={icon ? true : false}>
-        {icon}
-      </RenderIfWithoutLoading>
+      <RenderIfWithoutLoading condition={icon ? true : false}>{icon}</RenderIfWithoutLoading>
     </Slide>
   );
 }
 
 function detectTypeIcon(type: 1 | 2 | 3 | 4) {
   const types = {
-    2: (
-      <ICON_TOP_TABBAR_IMAGE_SVG
-        width={16}
-        height={16}
-        style={styles.typeIconStyles}
-      />
-    ),
-    4: (
-      <ICON_TOP_TABBAR_VIDEO_SVG
-        width={20.57}
-        height={16}
-        style={styles.typeIconStyles}
-      />
-    ),
-    3: (
-      <ICON_TOP_TABBAR_SOUND_SVG
-        width={16}
-        height={14.39}
-        style={styles.typeIconStyles}
-      />
-    ),
-    1: (
-      <ICON_TOP_TABBAR_TEXT_SVG
-        width={16}
-        height={16}
-        style={styles.typeIconStyles}
-      />
-    ),
+    2: <ICON_TOP_TABBAR_IMAGE_SVG width={16} height={16} style={styles.typeIconStyles} />,
+    4: <ICON_TOP_TABBAR_VIDEO_SVG width={20.57} height={16} style={styles.typeIconStyles} />,
+    3: <ICON_TOP_TABBAR_SOUND_SVG width={16} height={14.39} style={styles.typeIconStyles} />,
+    1: <ICON_TOP_TABBAR_TEXT_SVG width={16} height={16} style={styles.typeIconStyles} />,
   };
 
   return types[type] || null;
@@ -137,7 +113,7 @@ function detectTypeIcon(type: 1 | 2 | 3 | 4) {
 
 const styles = StyleSheet.create({
   typeIconStyles: {
-    position: "absolute",
+    position: 'absolute',
     zIndex: 10,
     bottom: 72,
     right: 16,

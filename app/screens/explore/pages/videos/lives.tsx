@@ -1,15 +1,15 @@
-import { FC, useCallback } from "react";
-import { Title } from "../../../../components/title";
-import { Box } from "../../../../components/box";
-import { useRtl } from "../../../../hooks/use-rtl";
-import { RenderIf } from "../../../../components/render-if";
-import { FlatList } from "react-native";
-import { Live } from "../../../../types/live";
-import { HorizontalSlide } from "../../../../components/horizontal-slider/slide";
-import { ALL_LIVES_SCREEN, LIVES, SINGLE_LIVE_SCREEN } from "../../../../constaints/consts";
-import { useNavigation } from "@react-navigation/native";
-import { UseNavigationType } from "../../../../types/use-navigation";
-import { ICON_LIVE_CHANNELS } from "../../../../constaints/icons";
+import { FC, useCallback } from 'react';
+import { Title } from '../../../../components/title';
+import { Box } from '../../../../components/box';
+import { useRtl } from '../../../../hooks/use-rtl';
+import { RenderIf } from '../../../../components/render-if';
+import { FlatList } from 'react-native';
+import { Live } from '../../../../types/live';
+import { HorizontalSlide } from '../../../../components/horizontal-slider/slide';
+import { ALL_LIVES_SCREEN, LIVES, SINGLE_LIVE_SCREEN } from '../../../../constaints/consts';
+import { useNavigation } from '@react-navigation/native';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { ICON_LIVE_CHANNELS } from '../../../../constaints/icons';
 
 type Props = {
   data: Live[];
@@ -17,11 +17,7 @@ type Props = {
   disableOnIntractions?: boolean;
 };
 
-export const VideosPageLives: FC<Props> = ({
-  data,
-  isLoading,
-  disableOnIntractions = false,
-}) => {
+export const VideosPageLives: FC<Props> = ({ data, isLoading, disableOnIntractions = false }) => {
   const { isRtl } = useRtl();
   const navigation = useNavigation<UseNavigationType>();
 
@@ -34,7 +30,7 @@ export const VideosPageLives: FC<Props> = ({
     });
   };
 
-  const renderItems = useCallback(({ item, index }: { item: Live, index: number }) => {
+  const renderItems = useCallback(({ item, index }: { item: Live; index: number }) => {
     return (
       <HorizontalSlide
         id={item.id}
@@ -48,15 +44,14 @@ export const VideosPageLives: FC<Props> = ({
         slidePressRedirectHandler={() => handleRedirect(item.id)}
       />
     );
-
-  }, [])
+  }, []);
 
   const keyExtractor = (item: Live) => item.id.toString();
-  
+
   const viewAllNavigationHandler = () => {
     navigation.navigate(ALL_LIVES_SCREEN);
   };
-  
+
   return (
     <Box paddingRight={isLoading && 24}>
       <Box paddingLeft={24} marginRight={32}>
@@ -70,7 +65,7 @@ export const VideosPageLives: FC<Props> = ({
               height={24}
               style={{
                 marginRight: 8,
-                position: "relative",
+                position: 'relative',
                 top: 1,
               }}
             />

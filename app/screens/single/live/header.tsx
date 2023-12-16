@@ -1,25 +1,21 @@
-import { useEffect, useState, useRef } from "react";
-import { ToastAndroid } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import * as ScreenOrientation from "expo-screen-orientation";
-import { AVPlaybackStatus } from "expo-av";
-import { Box } from "../../../components/box";
-import { PaddingContainer } from "../../../styles/grid";
-import { GoBackButton } from "../components/goback-button";
-import { Toaster } from "../../../utils/toaster";
-import { UseNavigationType } from "../../../types/use-navigation";
-import { useDispatch } from "react-redux";
-import { addImage } from "../../../slices/single-image.slice";
-import ViewShot from "react-native-view-shot";
-import { setParam } from "../../../slices/plus.slice";
-import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
-import { Toolbar } from "../components/toolbar";
-import { SingleLiveComponents } from "./components";
-import {
-  ICON_IS_RECORDING,
-  ICON_NO_RECORD,
-  ICON_SCREENSHOT,
-} from "../../../constaints/icons";
+import { useEffect, useState, useRef } from 'react';
+import { ToastAndroid } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import * as ScreenOrientation from 'expo-screen-orientation';
+import { AVPlaybackStatus } from 'expo-av';
+import { Box } from '../../../components/box';
+import { PaddingContainer } from '../../../styles/grid';
+import { GoBackButton } from '../components/goback-button';
+import { Toaster } from '../../../utils/toaster';
+import { UseNavigationType } from '../../../types/use-navigation';
+import { useDispatch } from 'react-redux';
+import { addImage } from '../../../slices/single-image.slice';
+import ViewShot from 'react-native-view-shot';
+import { setParam } from '../../../slices/plus.slice';
+import { RenderIfWithoutLoading } from '../../../components/render-if-without-loading';
+import { Toolbar } from '../components/toolbar';
+import { SingleLiveComponents } from './components';
+import { ICON_IS_RECORDING, ICON_NO_RECORD, ICON_SCREENSHOT } from '../../../constaints/icons';
 
 type Props = {
   goBackHandler: () => void;
@@ -60,20 +56,15 @@ export function SingleLiveHeader({
 
   const onFullscreenUpdate = async (_rotationStatus: 1 | 3) => {
     if (_rotationStatus === 1) {
-      await ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.LANDSCAPE
-      );
+      await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
     }
     if (_rotationStatus === 3) {
-      await ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.PORTRAIT
-      );
+      await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
     }
   };
 
   const _getCurrenMilSec = async () => {
-    const position: AVPlaybackStatus | any =
-      await videoRef?.current?.getStatusAsync();
+    const position: AVPlaybackStatus | any = await videoRef?.current?.getStatusAsync();
     return (position?.positionMillis as number) || null;
   };
 
@@ -89,12 +80,12 @@ export function SingleLiveHeader({
         dispatch(
           setParam({
             video_position: position,
-            IS_REDIRECTED_FROM_CREATE_SCREENSHOT: "true",
-          })
+            IS_REDIRECTED_FROM_CREATE_SCREENSHOT: 'true',
+          }),
         );
 
-        toaster.show("Screenshot captured");
-        navigation.navigate("Plus");
+        toaster.show('Screenshot captured');
+        navigation.navigate('Plus');
       }
     });
   };
@@ -111,7 +102,7 @@ export function SingleLiveHeader({
 
   const _recordLiveHandler = async () => {
     if (isLiveRecording) {
-      ToastAndroid.show("Live is already recording", ToastAndroid.SHORT);
+      ToastAndroid.show('Live is already recording', ToastAndroid.SHORT);
       return;
     }
     openRecordBottomSheetHandler();
@@ -140,11 +131,7 @@ export function SingleLiveHeader({
     <>
       <Box position="relative" zIndex={20}>
         <Box>
-          <GoBackButton
-            goBackHandler={goBackHandler}
-            hasBackground={true}
-            isOwner={false}
-          />
+          <GoBackButton goBackHandler={goBackHandler} hasBackground={true} isOwner={false} />
           <Box width="100%" height={thumbnailHeight}>
             <SingleLiveComponents.VideoPlayer
               videoRef={videoRef}

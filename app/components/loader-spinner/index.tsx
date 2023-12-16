@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import { StyleSheet, ColorValue, Image, Animated, Easing } from "react-native";
-import { Box } from "../box";
-import { LOADER, LOADER_SPINNER } from "../../constaints/images";
-import { windowSize } from "../../utils/window-size";
+import React, { useEffect, useRef } from 'react';
+import { StyleSheet, ColorValue, Image, Animated, Easing } from 'react-native';
+import { Box } from '../box';
+import { LOADER, LOADER_SPINNER } from '../../constaints/images';
+import { windowSize } from '../../utils/window-size';
 
 interface Props {
   color?: ColorValue;
@@ -10,17 +10,14 @@ interface Props {
   testID?: string;
 }
 
-const startRotationAnimation = (
-  durationMs: number,
-  rotationDegree: Animated.Value
-): void => {
+const startRotationAnimation = (durationMs: number, rotationDegree: Animated.Value): void => {
   Animated.loop(
     Animated.timing(rotationDegree, {
       toValue: 360,
       duration: durationMs,
       easing: Easing.linear,
       useNativeDriver: true,
-    })
+    }),
   ).start();
 };
 
@@ -34,7 +31,7 @@ export const FullScreenSpinnerLoader = () => {
       alignItems="center"
       justifyContent="center"
       additionalStyles={{
-        direction: "ltr",
+        direction: 'ltr',
       }}
     >
       <LoadingSpinner color="red" />
@@ -42,10 +39,7 @@ export const FullScreenSpinnerLoader = () => {
   );
 };
 
-export const LoadingSpinner = ({
-  durationMs = 1000,
-  testID,
-}: Props): JSX.Element => {
+export const LoadingSpinner = ({ durationMs = 1000, testID }: Props): JSX.Element => {
   const rotationDegree = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -59,7 +53,7 @@ export const LoadingSpinner = ({
       alignItems="center"
       justifyContent="center"
       additionalStyles={{
-        direction:'ltr'
+        direction: 'ltr',
       }}
     >
       <Box width={38} height={38} alignItems="center" justifyContent="center">
@@ -72,7 +66,7 @@ export const LoadingSpinner = ({
                 {
                   rotateZ: rotationDegree.interpolate({
                     inputRange: [0, 360],
-                    outputRange: ["0deg", "360deg"],
+                    outputRange: ['0deg', '360deg'],
                   }),
                 },
               ],
@@ -96,7 +90,7 @@ export const LoadingSpinner = ({
             style={{
               width: 18,
               height: 18,
-              position: "relative",
+              position: 'relative',
               top: -19,
               left: 7,
             }}
@@ -111,16 +105,16 @@ const height = 24;
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
     top: 0,
     paddingTop: 15,
     left: 0,
   },
   background: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
     borderRadius: height / 2,
     borderWidth: 4,
     opacity: 0.25,
@@ -128,6 +122,6 @@ const styles = StyleSheet.create({
   progress: {
     width: 30,
     height: 30,
-    position: "absolute",
+    position: 'absolute',
   },
 });

@@ -1,60 +1,50 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { FlatList, Platform,  View } from "react-native";
-import { Box } from "../../../components/box";
-import {
-  lazy,
-  memo,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { BlurView } from "expo-blur";
-import { LinearGradient } from "expo-linear-gradient";
-import { Calendar } from "../../../components/calendar";
-import { alertContext } from "../../../context/alert";
-import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
-import { CreateConductorFormMemo } from "../components/create-conductor-form";
-import { BorderButton } from "../components/border-button";
-import { SelectAccountModal } from "../components/select-account-modal";
-import { useGetShareListQuery, useShareMutation } from "../../../services/asset.service";
-import { Toaster } from "../../../utils/toaster";
-import { ExternalAccount } from "../../../types/external-account";
-import { retriveToken } from "../../../utils/retrive-token";
-import { tokenContext } from "../../../context/token";
-import { channelManagementStyles } from "../styles";
-import { ShareList } from "../components/share-list";
+import { FlatList, Platform, View } from 'react-native';
+import { Box } from '../../../components/box';
+import { lazy, memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { BlurView } from 'expo-blur';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Calendar } from '../../../components/calendar';
+import { alertContext } from '../../../context/alert';
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import { CreateConductorFormMemo } from '../components/create-conductor-form';
+import { BorderButton } from '../components/border-button';
+import { SelectAccountModal } from '../components/select-account-modal';
+import { useGetShareListQuery, useShareMutation } from '../../../services/asset.service';
+import { Toaster } from '../../../utils/toaster';
+import { ExternalAccount } from '../../../types/external-account';
+import { retriveToken } from '../../../utils/retrive-token';
+import { tokenContext } from '../../../context/token';
+import { channelManagementStyles } from '../styles';
+import { ShareList } from '../components/share-list';
 
 //@ts-ignore
 const SelectContentModal = lazy(
   //@ts-ignore
-  () => import("../components/select-content-modal")
+  () => import('../components/select-content-modal'),
 );
 
 const styles = channelManagementStyles;
 
 const _toaster = new Toaster();
 
-const BOTTOM_SHEET_BLUR_BG =
-  Platform.OS === "android" ? "rgba(78, 78, 97, 0.75)" : "transparent";
+const BOTTOM_SHEET_BLUR_BG = Platform.OS === 'android' ? 'rgba(78, 78, 97, 0.75)' : 'transparent';
 
 const bgGradientConfig = {
   style: {
-    width: "100%",
+    width: '100%',
     flex: 1,
     borderRadius: 16,
     padding: 1,
   },
-  colors: ["#0F0F66", "#030340"],
+  colors: ['#0F0F66', '#030340'],
   start: {
     x: 0.2,
     y: 0.1,
   },
 };
 
-const BOTTOM_SHEET_BLUR_PERCENT = Platform.OS === "android" ? 50 : 80;
+const BOTTOM_SHEET_BLUR_PERCENT = Platform.OS === 'android' ? 50 : 80;
 
 const monthIndex: Record<string, number> = {
   January: 1,
@@ -80,15 +70,13 @@ export const ConductorPage = ({ headerComponent }: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenContentModal, setIsOpenContentModal] = useState(false);
   const [selectedChannel, setSelectedChannel] = useState<ExternalAccount>(null);
-  const [action, setAction] = useState<"Archive" | "Stream" | "Share">(null);
-  const [titleInput, setTitleInput] = useState("");
-  const [token, setToken] = useState("");
-  const [descriptionInput, setDescriptionInput] = useState("");
-  const [privacy, setPrivacy] = useState<'public'|'private'>('public');
-  const [isOpenSelectAccountModal, setIsOpenSelectAccountModal] =
-    useState(false);
-  const [selectedAssetToShareId, setSelectedAssetToShareId] =
-    useState<number>(null);
+  const [action, setAction] = useState<'Archive' | 'Stream' | 'Share'>(null);
+  const [titleInput, setTitleInput] = useState('');
+  const [token, setToken] = useState('');
+  const [descriptionInput, setDescriptionInput] = useState('');
+  const [privacy, setPrivacy] = useState<'public' | 'private'>('public');
+  const [isOpenSelectAccountModal, setIsOpenSelectAccountModal] = useState(false);
+  const [selectedAssetToShareId, setSelectedAssetToShareId] = useState<number>(null);
 
   const sheetRef = useRef<BottomSheet>(null);
   const contentModalSheetRef = useRef<BottomSheet>(null);
@@ -96,16 +84,19 @@ export const ConductorPage = ({ headerComponent }: any) => {
 
   const [_shareApiHandler, { isLoading, isFetching }] = useShareMutation();
 
-  const {refetch} = useGetShareListQuery({
-    page: 1,
-    token,
-  }, {
-    skip: !token? true: false
-  });
+  const { refetch } = useGetShareListQuery(
+    {
+      page: 1,
+      token,
+    },
+    {
+      skip: !token ? true : false,
+    },
+  );
 
-  const snapPoints = useMemo(() => ["100%"], []);
-  const contentModalSnapPoints = useMemo(() => ["100%"], []);
-  const selectAccountModalSnapPoints = useMemo(() => ["100%"], []);
+  const snapPoints = useMemo(() => ['100%'], []);
+  const contentModalSnapPoints = useMemo(() => ['100%'], []);
+  const selectAccountModalSnapPoints = useMemo(() => ['100%'], []);
 
   const tokenCtx = useContext(tokenContext);
   const alrtCtx = useContext(alertContext);
@@ -135,16 +126,13 @@ export const ConductorPage = ({ headerComponent }: any) => {
     }
   }, []);
 
-  const handleSelectAccountOnChangeBottomSheet = useCallback(
-    (index: number) => {
-      if (index === -1) {
-        setIsOpenSelectAccountModal(false);
-      } else {
-        setIsOpenSelectAccountModal(true);
-      }
-    },
-    []
-  );
+  const handleSelectAccountOnChangeBottomSheet = useCallback((index: number) => {
+    if (index === -1) {
+      setIsOpenSelectAccountModal(false);
+    } else {
+      setIsOpenSelectAccountModal(true);
+    }
+  }, []);
 
   const handleContentModalOnChangeBottomSheet = useCallback((index: number) => {
     if (index === -1) {
@@ -205,33 +193,32 @@ export const ConductorPage = ({ headerComponent }: any) => {
     handleselectAccountModalClosePress();
   };
 
+  const shwoInputValue = action === 'Stream';
 
-  const shwoInputValue = action === "Stream";
-
-  const showYoutubeFields = action === "Share";
+  const showYoutubeFields = action === 'Share';
 
   const createConductorHandler = async () => {
     if (!selectedChannel) {
-      _toaster.show("Please select a channel to continue");
+      _toaster.show('Please select a channel to continue');
       return;
     }
     if (!selectedAssetToShareId) {
-      _toaster.show("Please select a content to continue");
+      _toaster.show('Please select a content to continue');
       return;
     }
 
     if (!action) {
-      _toaster.show("Please select an action to continue");
+      _toaster.show('Please select an action to continue');
       return;
     }
 
-    if (action === "Stream" && !titleInput) {
-      _toaster.show("Please insert title");
+    if (action === 'Stream' && !titleInput) {
+      _toaster.show('Please insert title');
       return;
     }
 
     if (!activeDay?.year || !activeDay?.month || !activeDay?.day) {
-      _toaster.show("Please select a date to continue");
+      _toaster.show('Please select a date to continue');
       return;
     }
 
@@ -240,17 +227,15 @@ export const ConductorPage = ({ headerComponent }: any) => {
 
     const __monthIndex = monthIndex[activeDay?.month];
 
-    const times = [
-      `${activeDay?.year}-${__monthIndex}-${activeDay?.day} 00:00:00`,
-    ];
+    const times = [`${activeDay?.year}-${__monthIndex}-${activeDay?.day} 00:00:00`];
 
     let requestBody;
 
     let url;
 
     // Google Drive
-    if (action === "Archive") {
-      url = "/share/google-drive";
+    if (action === 'Archive') {
+      url = '/share/google-drive';
       requestBody = {
         asset,
         account,
@@ -259,21 +244,21 @@ export const ConductorPage = ({ headerComponent }: any) => {
     }
 
     // Youtube
-    if (action == "Share") {
-      url = "/share/youtube";
+    if (action == 'Share') {
+      url = '/share/youtube';
       requestBody = {
         asset,
         account,
         title: titleInput,
         description: descriptionInput,
         times,
-        privacy
+        privacy,
       };
     }
 
     // Stream(RTMP)
-    if (action === "Stream") {
-      url = "/share/stream";
+    if (action === 'Stream') {
+      url = '/share/stream';
       requestBody = {
         asset,
         account,
@@ -282,18 +267,16 @@ export const ConductorPage = ({ headerComponent }: any) => {
     }
 
     const response = await _shareApiHandler({ token, url, body: requestBody });
-    console.log(response)
+    console.log(response);
     if (response?.error) {
-      _toaster.show("Failed");
+      _toaster.show('Failed');
     }
     if (response?.data) {
-      _toaster.show("Shared successfully");
+      _toaster.show('Shared successfully');
       handleClosePres();
       await refetch();
     }
   };
-
-
 
   return (
     <>
@@ -316,13 +299,9 @@ export const ConductorPage = ({ headerComponent }: any) => {
               paddingTop={32}
               flex={1}
               paddingBottom={130}
-              
             >
               <Calendar setActiveDay={setActiveDay} />
-              <AddUpcommingButton
-                title="Add channel"
-                handler={handleOpenPres}
-              />
+              <AddUpcommingButton title="Add channel" handler={handleOpenPres} />
               <ShareList token={token} />
             </Box>
           </>
@@ -345,19 +324,11 @@ export const ConductorPage = ({ headerComponent }: any) => {
                 flex: 1,
               }}
             >
-              <BlurView
-                style={styles.blur}
-                tint="dark"
-                intensity={BOTTOM_SHEET_BLUR_PERCENT}
-              >
+              <BlurView style={styles.blur} tint="dark" intensity={BOTTOM_SHEET_BLUR_PERCENT}>
                 <CreateConductorForm
                   handleClosePres={handleClosePres}
-                  closeFormModalAndOpenContenModal={
-                    closeFormModalAndOpenContenModal
-                  }
-                  handleSelectAccountModalOpenPress={
-                    handleSelectAccountModalOpenPress
-                  }
+                  closeFormModalAndOpenContenModal={closeFormModalAndOpenContenModal}
+                  handleSelectAccountModalOpenPress={handleSelectAccountModalOpenPress}
                   setTitleInput={setTitleInput}
                   setDescriptionInput={setDescriptionInput}
                   showTitleInput={shwoInputValue}

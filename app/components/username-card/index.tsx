@@ -1,6 +1,6 @@
-import { Image, Text, ImageStyle, StyleProp } from "react-native";
-import { RowAlignCenter } from "../../styles/grid";
-import { PROFILE_ONE } from "../../constaints/images";
+import { Image, Text, ImageStyle, StyleProp } from 'react-native';
+import { RowAlignCenter } from '../../styles/grid';
+import { PROFILE_ONE } from '../../constaints/images';
 
 type Props = {
   profileUri: string;
@@ -36,9 +36,7 @@ export function UserNameCard({
           profileImageStyles,
         ]}
       />
-      <Text style={[{ color: "rgba(0, 0, 51, 0.2)" }, usernameStyles]}>
-        {username}
-      </Text>
+      <Text style={[{ color: 'rgba(0, 0, 51, 0.2)' }, usernameStyles]}>{username}</Text>
     </RowAlignCenter>
   );
 }

@@ -1,13 +1,11 @@
-import React, {  useEffect } from "react";
-import { TouchableOpacity } from "react-native";
-import { BottomSheetFlatList } from "@gorhom/bottom-sheet";
-import {
-  useGetCountriesQuery,
-} from "../../services/language.service";
-import { Box } from "../box";
-import { theme } from "../../constaints/theme";
-import { Text } from "../text";
-import { LoadingSpinner } from "../loader-spinner";
+import React, { useEffect } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import { useGetCountriesQuery } from '../../services/language.service';
+import { Box } from '../box';
+import { theme } from '../../constaints/theme';
+import { Text } from '../text';
+import { LoadingSpinner } from '../loader-spinner';
 
 const SelectCountryBottomSheet = ({
   setSelectedCountry,
@@ -26,10 +24,7 @@ const SelectCountryBottomSheet = ({
 
   const renderItem = ({ item }: { item: any }) => {
     return (
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={() => setSelectedCountry(item.iso)}
-      >
+      <TouchableOpacity activeOpacity={1} onPress={() => setSelectedCountry(item.iso)}>
         <Box
           paddingLeft={8}
           paddingBottom={8}
@@ -77,4 +72,4 @@ const SelectCountryBottomSheet = ({
   );
 };
 
-export default SelectCountryBottomSheet
+export default SelectCountryBottomSheet;

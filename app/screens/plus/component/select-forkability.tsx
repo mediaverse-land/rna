@@ -1,27 +1,19 @@
-import { memo, useCallback, useMemo, useRef } from "react";
-import { TouchableOpacity } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import BottomSheet, {
-  BottomSheetFlatList,
-  BottomSheetView,
-} from "@gorhom/bottom-sheet";
-import { theme } from "../../../constaints/theme";
-import { Box } from "../../../components/box";
-import { AppDispatch, RootState } from "../../../store";
-import {
-  closeForkabilityBottomSheet,
-  setForkability,
-} from "../../../slices/plus.slice";
-import { Text } from "../../../components/text";
+import { memo, useCallback, useMemo, useRef } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import BottomSheet, { BottomSheetFlatList, BottomSheetView } from '@gorhom/bottom-sheet';
+import { theme } from '../../../constaints/theme';
+import { Box } from '../../../components/box';
+import { AppDispatch, RootState } from '../../../store';
+import { closeForkabilityBottomSheet, setForkability } from '../../../slices/plus.slice';
+import { Text } from '../../../components/text';
 
 const SelectForkabilityMemo = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const snapPoints = useMemo(() => ["25%", "50%"], []);
+  const snapPoints = useMemo(() => ['25%', '50%'], []);
 
-  const { isForkabilityBottomSheetOpen } = useSelector(
-    (state: RootState) => state.plusSlice
-  );
+  const { isForkabilityBottomSheetOpen } = useSelector((state: RootState) => state.plusSlice);
 
   const bottomSheetRef = useRef(null);
 
@@ -32,7 +24,7 @@ const SelectForkabilityMemo = () => {
   const _selectPlanHandler = (item: string) => {
     let status: boolean;
 
-    if (item === "yes") {
+    if (item === 'yes') {
       status = true;
     } else {
       status = false;
@@ -43,10 +35,7 @@ const SelectForkabilityMemo = () => {
 
   const renderItem = useCallback(({ item }: { item: string }) => {
     return (
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={() => _selectPlanHandler(item)}
-      >
+      <TouchableOpacity activeOpacity={1} onPress={() => _selectPlanHandler(item)}>
         <Box
           paddingLeft={8}
           paddingBottom={8}
@@ -80,17 +69,12 @@ const SelectForkabilityMemo = () => {
           <BottomSheetView>
             <Box width="100%" height={400}>
               <BottomSheetFlatList
-                data={["yes", "no"]}
+                data={['yes', 'no']}
                 keyExtractor={(item) => item}
                 renderItem={renderItem}
                 ListHeaderComponent={
                   <Box marginBottom={24}>
-                    <Text
-                      color="#fff"
-                      fontWeight={400}
-                      fontSize={16}
-                      lineHeight={16}
-                    >
+                    <Text color="#fff" fontWeight={400} fontSize={16} lineHeight={16}>
                       Choose forkability status
                     </Text>
                   </Box>
@@ -110,4 +94,4 @@ const SelectForkabilityMemo = () => {
 };
 
 const SelectForkability = memo(SelectForkabilityMemo);
-export default SelectForkability
+export default SelectForkability;

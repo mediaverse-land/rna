@@ -1,33 +1,33 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useIsFocused } from "@react-navigation/native";
-import { ScreenGradient } from "../../../components/screen-gradient";
-import { Box } from "../../../components/box";
-import { SingleVideoContent } from "./content";
-import { CommentCard } from "../../../components/comment-card";
-import { BuyBottom } from "../components/buy-button";
-import { tokenContext } from "../../../context/token";
-import { VirtualizedList } from "../../../components/virtualized-list";
-import { RenderIf } from "../../../components/render-if";
-import { MetaDataType } from "../components/item-metadata";
-import { userContext } from "../../../context/user";
-import { ifUserIsOwner } from "../../../utils/if-user-is-owner";
-import { SingleVideoHeader } from "./header";
-import { Video } from "../../../types/video";
-import { getVideoDetailApiHandler } from "../service";
-import { SingleItemFiles } from "../components/files";
-import { useClickOutside } from "react-native-click-outside";
-import { ReportModal } from "../components/report-modal";
-import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
-import { retriveToken } from "../../../utils/retrive-token";
-import { FocusedStatusBar } from "../../../components/focused-statusbar";
-import { VIDEO_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
-import { SingleAssetFooter } from "../components/footer";
-import { EDIT_SCREEN } from "../../../constaints/consts";
-import { useYoutubeShareMutation } from "../../../services/asset.service";
-import { YoutubeShare } from "../components/youtube-share";
-import { BackButtonRedirector } from "../utils/back-button-redirector";
+import { useContext, useEffect, useRef, useState } from 'react';
+import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useIsFocused } from '@react-navigation/native';
+import { ScreenGradient } from '../../../components/screen-gradient';
+import { Box } from '../../../components/box';
+import { SingleVideoContent } from './content';
+import { CommentCard } from '../../../components/comment-card';
+import { BuyBottom } from '../components/buy-button';
+import { tokenContext } from '../../../context/token';
+import { VirtualizedList } from '../../../components/virtualized-list';
+import { RenderIf } from '../../../components/render-if';
+import { MetaDataType } from '../components/item-metadata';
+import { userContext } from '../../../context/user';
+import { ifUserIsOwner } from '../../../utils/if-user-is-owner';
+import { SingleVideoHeader } from './header';
+import { Video } from '../../../types/video';
+import { getVideoDetailApiHandler } from '../service';
+import { SingleItemFiles } from '../components/files';
+import { useClickOutside } from 'react-native-click-outside';
+import { ReportModal } from '../components/report-modal';
+import { RenderIfWithoutLoading } from '../../../components/render-if-without-loading';
+import { retriveToken } from '../../../utils/retrive-token';
+import { FocusedStatusBar } from '../../../components/focused-statusbar';
+import { VIDEO_THUMBNAIL_PLACEHOLDER } from '../../../constaints/images';
+import { SingleAssetFooter } from '../components/footer';
+import { EDIT_SCREEN } from '../../../constaints/consts';
+import { useYoutubeShareMutation } from '../../../services/asset.service';
+import { YoutubeShare } from '../components/youtube-share';
+import { BackButtonRedirector } from '../utils/back-button-redirector';
 
 const _youtubeShare = new YoutubeShare();
 const _backButtonRedirector = new BackButtonRedirector();
@@ -62,10 +62,7 @@ export function SingleVideoScreen({ navigation, route }: any) {
 
   const [
     _shareYoutubeApiFunction,
-    {
-      isLoading: isYoutubeShareLoading,
-      isFetching: isYoutubeShareFetching,
-    },
+    { isLoading: isYoutubeShareLoading, isFetching: isYoutubeShareFetching },
   ] = useYoutubeShareMutation();
 
   _youtubeShare.config({
@@ -111,7 +108,7 @@ export function SingleVideoScreen({ navigation, route }: any) {
     const { isError, res } = await getVideoDetailApiHandler(
       token,
       shouldSearchByAssetId,
-      route.params?.saech__asset_id ? route.params?.saech__asset_id : id
+      route.params?.saech__asset_id ? route.params?.saech__asset_id : id,
     );
 
     if (isError) {
@@ -125,10 +122,7 @@ export function SingleVideoScreen({ navigation, route }: any) {
     const currentUserId = userCtx.getUser();
     _setCurrentUserId(currentUserId.id);
 
-    const isUserOwner = ifUserIsOwner(
-      assetData?.asset?.user?.id,
-      currentUserId.id
-    );
+    const isUserOwner = ifUserIsOwner(assetData?.asset?.user?.id, currentUserId.id);
 
     const fileUrl = assetData?.file?.url || assetData?.asset?.file?.url;
 
@@ -171,20 +165,18 @@ export function SingleVideoScreen({ navigation, route }: any) {
   };
 
   const navigateToEditScreen = () => {
-    const isDisableEditIcon =
-      data?.asset?.user?.id === _currentUserId ? false : true;
+    const isDisableEditIcon = data?.asset?.user?.id === _currentUserId ? false : true;
 
     if (isDisableEditIcon) {
       return;
     }
     navigation.navigate(EDIT_SCREEN, {
       id: data?.id,
-      assetType: "video",
+      assetType: 'video',
     });
   };
 
-  const thumnailImageUri =
-    data?.asset?.thumbnails?.["390x264"] || VIDEO_THUMBNAIL_PLACEHOLDER;
+  const thumnailImageUri = data?.asset?.thumbnails?.['390x264'] || VIDEO_THUMBNAIL_PLACEHOLDER;
 
   const price = data?.asset?.price || null;
 
@@ -192,17 +184,17 @@ export function SingleVideoScreen({ navigation, route }: any) {
     [
       {
         id: 1,
-        key: "Genre",
+        key: 'Genre',
         value: data?.genre,
       },
       {
         id: 2,
-        key: "Type",
-        value: "Video/Clip",
+        key: 'Type',
+        value: 'Video/Clip',
       },
       {
         id: 3,
-        key: "Lanuage",
+        key: 'Lanuage',
         value: data?.language,
       },
     ] || [];
@@ -212,13 +204,12 @@ export function SingleVideoScreen({ navigation, route }: any) {
         {
           id: 1,
           chapterName: data?.asset?.file?.details?.name || data?.name,
-          duration: "",
+          duration: '',
         },
       ]
     : null;
 
-  const isDisableEditIcon =
-    data?.asset?.user?.id === _currentUserId ? false : true;
+  const isDisableEditIcon = data?.asset?.user?.id === _currentUserId ? false : true;
   const accountId: number = userCtx.getUser().id;
 
   const shareToYoutubeHandler = () => {
@@ -238,7 +229,7 @@ export function SingleVideoScreen({ navigation, route }: any) {
                 <SingleVideoHeader
                   thumnailImageUri={thumnailImageUri}
                   goBackHandler={goBackHandler}
-                  contentName={data?.name || ""}
+                  contentName={data?.name || ''}
                   tokenCtx={tokenCtx}
                   isOwner={isOwner === true ? true : false}
                   isSubscriber={isSubscriber === true ? true : false}
@@ -250,20 +241,16 @@ export function SingleVideoScreen({ navigation, route }: any) {
                   userId={data?.asset?.user?.id}
                   shareToYoutubeHandler={shareToYoutubeHandler}
                   isDisableEditIcon={isDisableEditIcon}
-                  forkability_status={
-                    data?.asset?.forkability_status === 2 ? true : false
-                  }
+                  forkability_status={data?.asset?.forkability_status === 2 ? true : false}
                 />
                 <SingleVideoContent
-                  description={data?.description || ""}
+                  description={data?.description || ''}
                   metaDataList={metaDataList}
-                  username={data?.asset?.user?.username || ""}
-                  userProfile={data?.asset?.user?.image_url || ""}
+                  username={data?.asset?.user?.username || ''}
+                  userProfile={data?.asset?.user?.image_url || ''}
                   duration={data?.length}
                 />
-                <RenderIfWithoutLoading
-                  condition={data?.asset?.file ? true : false}
-                >
+                <RenderIfWithoutLoading condition={data?.asset?.file ? true : false}>
                   <SingleItemFiles data={textFiles} />
                 </RenderIfWithoutLoading>
                 <CommentCard assetId={data?.id} />
@@ -296,11 +283,11 @@ export function SingleVideoScreen({ navigation, route }: any) {
           <View
             ref={ref}
             style={{
-              position: "absolute",
+              position: 'absolute',
               zIndex: 40000,
               top: 320,
               right: 20,
-              backgroundColor: "#0f172cab",
+              backgroundColor: '#0f172cab',
               width: 250,
               height: 250,
             }}

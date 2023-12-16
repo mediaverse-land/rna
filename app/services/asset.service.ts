@@ -1,7 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const assetService: any = createApi({
-  reducerPath: "assetService",
+  reducerPath: 'assetService',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.EXPO_APPBASE_URL,
   }),
@@ -10,9 +10,9 @@ export const assetService: any = createApi({
       query: (args) => {
         return {
           url: args.url,
-          method: "GET",
+          method: 'GET',
           headers: {
-            "X-App": "_Android",
+            'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
           },
         };
@@ -23,10 +23,10 @@ export const assetService: any = createApi({
       query: (args) => {
         return {
           url: `/share/google-drive`,
-          method: "POST",
+          method: 'POST',
           body: args.body,
           headers: {
-            "X-App": "_Android",
+            'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
           },
         };
@@ -37,10 +37,10 @@ export const assetService: any = createApi({
         return {
           url: `/share/youtube`,
           // url: `/share/stream`,
-          method: "POST",
+          method: 'POST',
           body: args.body,
           headers: {
-            "X-App": "_Android",
+            'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
           },
         };
@@ -51,9 +51,9 @@ export const assetService: any = createApi({
         return {
           url: args.url,
           body: args.body,
-          method: "POST",
+          method: 'POST',
           headers: {
-            "X-App": "_Android",
+            'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
           },
         };
@@ -63,10 +63,10 @@ export const assetService: any = createApi({
       query: (args) => {
         return {
           url: `/external-accounts`,
-          method: "POST",
+          method: 'POST',
           body: args.body,
           headers: {
-            "X-App": "_Android",
+            'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
           },
         };
@@ -77,10 +77,10 @@ export const assetService: any = createApi({
       query: (args) => {
         return {
           url: `/external-accounts/${args.id}`,
-          method: "PUT",
+          method: 'PUT',
           body: args.body,
           headers: {
-            "X-App": "_Android",
+            'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
           },
         };
@@ -90,10 +90,10 @@ export const assetService: any = createApi({
       query: (args) => {
         return {
           url: `/external-accounts/${args.id}`,
-          method: "DELETE",
+          method: 'DELETE',
           // body: args.body,
           headers: {
-            "X-App": "_Android",
+            'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
           },
         };
@@ -103,9 +103,9 @@ export const assetService: any = createApi({
       query: (args) => {
         return {
           url: args.url,
-          method: "GET",
+          method: 'GET',
           headers: {
-            "X-App": "_Android",
+            'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
           },
         };
@@ -115,9 +115,9 @@ export const assetService: any = createApi({
       query: (args) => {
         return {
           url: `/share-schedules?page=${args.page}`,
-          method: "GET",
+          method: 'GET',
           headers: {
-            "X-App": "_Android",
+            'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
           },
         };
@@ -127,9 +127,9 @@ export const assetService: any = createApi({
       query: (args) => {
         return {
           url: `/share-schedules/${args.id}`,
-          method: "DELETE",
+          method: 'DELETE',
           headers: {
-            "X-App": "_Android",
+            'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
           },
         };
@@ -139,16 +139,15 @@ export const assetService: any = createApi({
       query: (args) => {
         return {
           url: args.url,
-          method: "POST",
+          method: 'POST',
           body: args.body,
           headers: {
-            "X-App": "_Android",
+            'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
           },
         };
       },
     }),
-
   }),
 });
 

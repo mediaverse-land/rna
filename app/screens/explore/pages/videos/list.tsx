@@ -1,23 +1,23 @@
-import { FlatList, View, TouchableOpacity } from "react-native";
-import { VideoPageComponents } from "./style";
+import { FlatList, View, TouchableOpacity } from 'react-native';
+import { VideoPageComponents } from './style';
 import {
   PROFILE_IMAGE,
   VIDEO_LIST_ITEM_GRADIENT,
   VIDEO_THUMBNAIL_PLACEHOLDER,
-} from "../../../../constaints/images";
-import { Flex, PaddingContainer } from "../../../../styles/grid";
-import { UserNameCard } from "../../../../components/username-card";
-import { UseNavigationType } from "../../../../types/use-navigation";
-import { theme } from "../../../../constaints/theme";
-import { Asset } from "../../../../types/asset";
-import { Box } from "../../../../components/box";
-import { LoadingSpinner } from "../../../../components/loader-spinner";
-import { Text } from "../../../../components/text";
-import { windowSize } from "../../../../utils/window-size";
-import { formatTime } from "../../../../utils/format-time";
-import { Title } from "../../../../components/title";
-import { ViewAllPageEnum } from "../../../view-all";
-import { VIEW_ALL } from "../../types";
+} from '../../../../constaints/images';
+import { Flex, PaddingContainer } from '../../../../styles/grid';
+import { UserNameCard } from '../../../../components/username-card';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { theme } from '../../../../constaints/theme';
+import { Asset } from '../../../../types/asset';
+import { Box } from '../../../../components/box';
+import { LoadingSpinner } from '../../../../components/loader-spinner';
+import { Text } from '../../../../components/text';
+import { windowSize } from '../../../../utils/window-size';
+import { formatTime } from '../../../../utils/format-time';
+import { Title } from '../../../../components/title';
+import { ViewAllPageEnum } from '../../../view-all';
+import { VIEW_ALL } from '../../types';
 
 type Props = {
   isLoading: boolean;
@@ -48,12 +48,12 @@ export function VideoPageList({
     id: number,
     name: string,
     username: string,
-    asset_user_image_url: string
+    asset_user_image_url: string,
   ) => {
     if (disableOnIntractions) {
       return;
     }
-    navigation.navigate("SingleVideoScreen", {
+    navigation.navigate('SingleVideoScreen', {
       id,
       name: name,
       asset_username: username,
@@ -72,25 +72,19 @@ export function VideoPageList({
 
     const name = item?.name;
 
-    const thumbUri =
-      item?.asset?.thumbnails?.["340x220"] || VIDEO_THUMBNAIL_PLACEHOLDER;
+    const thumbUri = item?.asset?.thumbnails?.['340x220'] || VIDEO_THUMBNAIL_PLACEHOLDER;
 
     return (
       <TouchableOpacity
         activeOpacity={1}
         onPress={() =>
-          navigateToSinglVide(
-            item.id,
-            item.name,
-            asset_username,
-            asset_user_image_url
-          )
+          navigateToSinglVide(item.id, item.name, asset_username, asset_user_image_url)
         }
         style={{
-          width: "100%",
+          width: '100%',
         }}
       >
-        <Box  width="100%" flex={1}>
+        <Box width="100%" flex={1}>
           <VideoListItem>
             <View>
               <VideoListItemThumbnail
@@ -99,9 +93,7 @@ export function VideoPageList({
                 }}
                 resizeMode="contain"
               />
-              <VideoListItemGradietImage
-                source={{ uri: VIDEO_LIST_ITEM_GRADIENT }}
-              />
+              <VideoListItemGradietImage source={{ uri: VIDEO_LIST_ITEM_GRADIENT }} />
               <Box
                 position="absolute"
                 zIndex={10}
@@ -115,9 +107,7 @@ export function VideoPageList({
             </View>
             <View>
               {item.description ? (
-                <VideoListItemDescription>
-                  {item?.description}
-                </VideoListItemDescription>
+                <VideoListItemDescription>{item?.description}</VideoListItemDescription>
               ) : null}
               <Flex
                 direction="row"
@@ -130,8 +120,8 @@ export function VideoPageList({
                 }}
               >
                 <UserNameCard
-                  username={asset_username || ""}
-                  profileUri={asset_user_image_url || ""}
+                  username={asset_username || ''}
+                  profileUri={asset_user_image_url || ''}
                   usernameStyles={{
                     color: theme.color.light.TEXT,
                     marginLeft: 8,
@@ -163,7 +153,7 @@ export function VideoPageList({
         <Title
           showViewMoreButton={true}
           navigateHandler={viewAllNavigationHandler}
-          str={"Recently"}
+          str={'Recently'}
         />
       </Box>
       <Box marginTop={24} width={Math.floor(width) - 48} flex={1}>
@@ -179,12 +169,7 @@ export function VideoPageList({
             <LoadingSpinner color="red" />
           </Box>
         ) : data.length === 0 ? (
-          <Box
-            width="100%"
-            alignItems="flex-start"
-            justifyContent="center"
-            paddingLeft={24}
-          >
+          <Box width="100%" alignItems="flex-start" justifyContent="center" paddingLeft={24}>
             <Text color="#fff">No item to show</Text>
           </Box>
         ) : (

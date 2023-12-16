@@ -1,57 +1,54 @@
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import TopTabBar from "../../components/top-tab-bar";
-import { ProfileScreenAllPage } from "./owner/pages/all";
-import { Box } from "../../components/box";
-import { ProfileScreenImagePage } from "./owner/pages/image";
-import { ProfileScreenVideoPage } from "./owner/pages/video";
-import { ProfileScreenSoundPage } from "./owner/pages/sound";
-import { ProfileScreenTextPage } from "./owner/pages/text";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import TopTabBar from '../../components/top-tab-bar';
+import { ProfileScreenAllPage } from './owner/pages/all';
+import { Box } from '../../components/box';
+import { ProfileScreenImagePage } from './owner/pages/image';
+import { ProfileScreenVideoPage } from './owner/pages/video';
+import { ProfileScreenSoundPage } from './owner/pages/sound';
+import { ProfileScreenTextPage } from './owner/pages/text';
 
 const Tab = createMaterialTopTabNavigator();
 
 const routes = [
   {
     id: 1,
-    title: "All",
+    title: 'All',
     component: ProfileScreenAllPage,
-    name: "all",
+    name: 'all',
   },
   {
     id: 3,
-    title: "image",
+    title: 'image',
     component: ProfileScreenImagePage,
-    name: "image",
+    name: 'image',
   },
   {
     id: 4,
-    title: "video",
+    title: 'video',
     component: ProfileScreenVideoPage,
-    name: "video",
+    name: 'video',
   },
   {
     id: 5,
-    title: "sound",
+    title: 'sound',
     component: ProfileScreenSoundPage,
-    name: "sound",
+    name: 'sound',
   },
   {
     id: 6,
-    title: "text",
+    title: 'text',
     component: ProfileScreenTextPage,
-    name: "text",
+    name: 'text',
   },
 ];
 
 export function Navigator() {
   return (
-    <Box
-      width={"100%"}
-      flex={1}
-    >
+    <Box width={'100%'} flex={1}>
       <Tab.Navigator
         tabBar={(props) => <TopTabBar isProfilePage {...props} />}
         style={{
-          top: 4, 
+          top: 4,
         }}
         screenOptions={{
           animationEnabled: false,

@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { useEffect, useState } from "react";
-import { Box } from "../box";
-import { screenSize } from "../../utils/screen-size";
-import { ScrollView, TouchableOpacity, View } from "react-native";
-import { Text } from "../text";
-import { theme } from "../../constaints/theme";
-import { ICON_ARROW_DOWN_SVG } from "../../constaints/icons";
-import { useClickOutside } from "react-native-click-outside";
-import { LinearGradient } from "expo-linear-gradient";
-import { BlurView } from "expo-blur";
-import { daysInMonth, getDayName } from "../../utils/format-date";
+import { useEffect, useState } from 'react';
+import { Box } from '../box';
+import { screenSize } from '../../utils/screen-size';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
+import { Text } from '../text';
+import { theme } from '../../constaints/theme';
+import { ICON_ARROW_DOWN_SVG } from '../../constaints/icons';
+import { useClickOutside } from 'react-native-click-outside';
+import { LinearGradient } from 'expo-linear-gradient';
+import { BlurView } from 'expo-blur';
+import { daysInMonth, getDayName } from '../../utils/format-date';
 
 const { width } = screenSize();
 
@@ -76,29 +76,29 @@ const MemoCalendar = ({
     setFirstDayOfMonth(_firstDayOfMonth);
 
     // eslint-disable-next-line prefer-const
-    _daysFakeArray = Array(daysOfMonth).fill("");
+    _daysFakeArray = Array(daysOfMonth).fill('');
 
-    if (_firstDayOfMonth?.includes("Tu")) {
+    if (_firstDayOfMonth?.includes('Tu')) {
       const fake: any = [null];
       _daysFakeArray.unshift(...fake);
     }
-    if (_firstDayOfMonth.includes("Wed")) {
+    if (_firstDayOfMonth.includes('Wed')) {
       const fake: any = [null, null];
       _daysFakeArray.unshift(...fake);
     }
-    if (_firstDayOfMonth?.includes("Th")) {
+    if (_firstDayOfMonth?.includes('Th')) {
       const fake: any = [null, null, null];
       _daysFakeArray.unshift(...fake);
     }
-    if (_firstDayOfMonth.includes("Fr")) {
+    if (_firstDayOfMonth.includes('Fr')) {
       const fake: any = [null, null, null, null];
       _daysFakeArray.unshift(...fake);
     }
-    if (_firstDayOfMonth?.includes("Sa")) {
+    if (_firstDayOfMonth?.includes('Sa')) {
       const fake: any = [null, null, null, null, null];
       _daysFakeArray.unshift(...fake);
     }
-    if (_firstDayOfMonth?.includes("Su")) {
+    if (_firstDayOfMonth?.includes('Su')) {
       const fake: any = [null, null, null, null, null, null];
       _daysFakeArray.unshift(...fake);
     }
@@ -144,16 +144,12 @@ const MemoCalendar = ({
           <TouchableOpacity
             onPress={openSelectMonthDropdown}
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
             }}
           >
-            <Text
-              color={theme.color.light.CARD_TITLE_TEXT}
-              fontSize={16}
-              fontWeight={600}
-            >
+            <Text color={theme.color.light.CARD_TITLE_TEXT} fontSize={16} fontWeight={600}>
               {activeMonth}
             </Text>
             <Box>
@@ -165,16 +161,12 @@ const MemoCalendar = ({
           <TouchableOpacity
             onPress={openYearDropdownHandler}
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
             }}
           >
-            <Text
-              color={theme.color.light.CARD_TITLE_TEXT}
-              fontSize={16}
-              fontWeight={600}
-            >
+            <Text color={theme.color.light.CARD_TITLE_TEXT} fontSize={16} fontWeight={600}>
               {activeYear}
             </Text>
             <Box>
@@ -210,12 +202,7 @@ const MemoCalendar = ({
         >
           {days.map((item, index: number) => {
             return (
-              <Box
-                key={index}
-                width="14%"
-                justifyContent="center"
-                alignItems="center"
-              >
+              <Box key={index} width="14%" justifyContent="center" alignItems="center">
                 <Text color={theme.color.light.TEXT}>{item}</Text>
               </Box>
             );
@@ -239,44 +226,42 @@ const MemoCalendar = ({
             daysFakeArray.map((item, index: number) => {
               let dayIndex: number = index + 1;
 
-              if (firstDayOfMonth.includes("Tu")) {
+              if (firstDayOfMonth.includes('Tu')) {
                 dayIndex = index;
               }
-              if (firstDayOfMonth.includes("Wed")) {
+              if (firstDayOfMonth.includes('Wed')) {
                 dayIndex = index - 1;
               }
-              if (firstDayOfMonth.includes("Th")) {
+              if (firstDayOfMonth.includes('Th')) {
                 dayIndex = index - 2;
               }
-              if (firstDayOfMonth.includes("Fr")) {
+              if (firstDayOfMonth.includes('Fr')) {
                 dayIndex = index - 3;
               }
-              if (firstDayOfMonth.includes("Sa")) {
+              if (firstDayOfMonth.includes('Sa')) {
                 dayIndex = index - 4;
               }
-              if (firstDayOfMonth.includes("Su")) {
+              if (firstDayOfMonth.includes('Su')) {
                 dayIndex = index - 5;
               }
 
               if (item === null) {
-                return <Box key={item.id} width={"14.2%"}></Box>;
+                return <Box key={item.id} width={'14.2%'}></Box>;
               }
 
               return (
                 <TouchableOpacity
-                key={item.id}
-                  onPress={() =>
-                    setSelectedDay({ day: dayIndex, month: activeMonth })
-                  }
+                  key={item.id}
+                  onPress={() => setSelectedDay({ day: dayIndex, month: activeMonth })}
                   style={[
                     {
                       // width: '10%',
-                      minWidth: "14.2%",
+                      minWidth: '14.2%',
                       marginBottom: 21,
-                      alignItems: "center",
-                      position: "relative",
+                      alignItems: 'center',
+                      position: 'relative',
                       height: 28,
-                    }
+                    },
                   ]}
                   activeOpacity={1}
                 >
@@ -285,8 +270,7 @@ const MemoCalendar = ({
                     fontWeight={600}
                     // @ts-ignore
                     textStyles={
-                      selectedDay?.day === dayIndex &&
-                      selectedDay?.month === activeMonth
+                      selectedDay?.day === dayIndex && selectedDay?.month === activeMonth
                         ? selectedDayStyles
                         : {
                             color: theme.color.light.TEXT,
@@ -325,7 +309,7 @@ const YearDropdown = ({
     <View
       ref={_modalWrapperRef}
       style={{
-        position: "absolute",
+        position: 'absolute',
         width: 124,
         height: 140,
         zIndex: 100000000,
@@ -335,7 +319,7 @@ const YearDropdown = ({
     >
       <LinearGradient {..._menuWindowGradientProps}>
         <BlurView
-          style={{ width: "100%", height: "100%", borderRadius: 16 }}
+          style={{ width: '100%', height: '100%', borderRadius: 16 }}
           tint="dark"
           intensity={90}
         >
@@ -348,12 +332,7 @@ const YearDropdown = ({
                     key={index}
                     activeOpacity={1}
                   >
-                    <Text
-                      color="#D9D9FF"
-                      marginBottom={16}
-                      fontSize={14}
-                      fontWeight={600}
-                    >
+                    <Text color="#D9D9FF" marginBottom={16} fontSize={14} fontWeight={600}>
                       {year}
                     </Text>
                   </TouchableOpacity>
@@ -386,7 +365,7 @@ const MonthDropdown = ({
     <View
       ref={modalWrapperRef}
       style={{
-        position: "absolute",
+        position: 'absolute',
         width: 124,
         height: 445,
         zIndex: 100000000,
@@ -396,7 +375,7 @@ const MonthDropdown = ({
     >
       <LinearGradient {...menuWindowGradientProps}>
         <BlurView
-          style={{ width: "100%", height: "100%", flex: 1, borderRadius: 16 }}
+          style={{ width: '100%', height: '100%', flex: 1, borderRadius: 16 }}
           tint="dark"
           intensity={90}
         >
@@ -409,12 +388,7 @@ const MonthDropdown = ({
                     key={month}
                     activeOpacity={1}
                   >
-                    <Text
-                      color="#D9D9FF"
-                      marginBottom={16}
-                      fontSize={14}
-                      fontWeight={600}
-                    >
+                    <Text color="#D9D9FF" marginBottom={16} fontSize={14} fontWeight={600}>
                       {month}
                     </Text>
                   </TouchableOpacity>
@@ -431,10 +405,10 @@ const MonthDropdown = ({
 const selectedDayStyles = {
   width: 40,
   height: 40,
-  backgroundColor: "#597AFF",
-  position: "absolute",
+  backgroundColor: '#597AFF',
+  position: 'absolute',
   borderRadius: 100,
-  textAlign: "center",
+  textAlign: 'center',
   top: -10,
   paddingTop: 10,
   color: theme.color.light.WHITE,
@@ -449,7 +423,7 @@ const menuWindowGradientProps = {
     opacity: 0.5,
     flex: 1,
   },
-  colors: ["#4b4b55", "#38383c"],
+  colors: ['#4b4b55', '#38383c'],
   start: {
     x: 0.1,
     y: 0.7,
@@ -464,7 +438,7 @@ const _menuWindowGradientProps = {
   },
 };
 
-const days = ["Mo", "Tu", "We", "Th", "Fr", "sa", "su"];
+const days = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'sa', 'su'];
 
 const monthIndex: Record<string, number> = {
   January: 1,
@@ -482,16 +456,16 @@ const monthIndex: Record<string, number> = {
 };
 
 const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ];

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { Image, TouchableOpacity, View } from "react-native";
-import { windowSize } from "../../../utils/window-size";
-import * as ScreenOrientation from "expo-screen-orientation";
-import { Box } from "../../../components/box";
-import { ICON_X_WHITE } from "../../../constaints/icons";
+import { useEffect, useState } from 'react';
+import { Image, TouchableOpacity, View } from 'react-native';
+import { windowSize } from '../../../utils/window-size';
+import * as ScreenOrientation from 'expo-screen-orientation';
+import { Box } from '../../../components/box';
+import { ICON_X_WHITE } from '../../../constaints/icons';
 
 type Props = {
   hasFile: boolean;
@@ -24,8 +24,7 @@ export function AssetLargeImage({
   }>(null);
 
   const [orientation, setOrientation] = useState<
-    | ScreenOrientation.OrientationLock.PORTRAIT
-    | ScreenOrientation.OrientationLock.LANDSCAPE
+    ScreenOrientation.OrientationLock.PORTRAIT | ScreenOrientation.OrientationLock.LANDSCAPE
   >(ScreenOrientation.OrientationLock.PORTRAIT);
 
   const [_windowSize, _setWindowSize] = useState(windowSize());
@@ -54,11 +53,9 @@ export function AssetLargeImage({
     });
 
     // subscribe to future changes
-    const subscription = ScreenOrientation.addOrientationChangeListener(
-      (evt: any) => {
-        setOrientation(evt.orientationInfo.orientation);
-      }
-    );
+    const subscription = ScreenOrientation.addOrientationChangeListener((evt: any) => {
+      setOrientation(evt.orientationInfo.orientation);
+    });
 
     // return a clean up function to unsubscribe from notifications
     return () => {
@@ -92,9 +89,7 @@ export function AssetLargeImage({
   const lockScreenOrientationHandler = async () => {
     setOrientation(ScreenOrientation.OrientationLock.LANDSCAPE);
 
-    await ScreenOrientation.lockAsync(
-      ScreenOrientation.OrientationLock.PORTRAIT
-    );
+    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
   };
 
   return (
@@ -115,8 +110,8 @@ export function AssetLargeImage({
             width: 76,
             height: 40,
             borderRadius: 16,
-            alignItems: "center",
-            justifyContent: "center",
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
           onPress={hideLargeImageHandler}
         >
@@ -125,19 +120,19 @@ export function AssetLargeImage({
       </Box>
       <TouchableOpacity
         style={{
-          width: "100%",
+          width: '100%',
           height: _windowSize.height,
-          backgroundColor: "#0c0d0ebd",
-          position: "absolute",
+          backgroundColor: '#0c0d0ebd',
+          position: 'absolute',
           top: 0,
           bottom: 0,
           left: 0,
           right: 0,
           margin: 0,
           zIndex: 100,
-          alignContent: "center",
-          alignItems: "center",
-          justifyContent: "center",
+          alignContent: 'center',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
         activeOpacity={1}
       >
@@ -150,7 +145,7 @@ export function AssetLargeImage({
               style={{
                 width: imageSize.imgWidth,
                 height: imageSize.imgHeight,
-                position: "relative",
+                position: 'relative',
                 zIndex: 110,
               }}
             />

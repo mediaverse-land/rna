@@ -1,4 +1,4 @@
-import * as ScreenCapture from "expo-screen-capture";
+import * as ScreenCapture from 'expo-screen-capture';
 
 export class ScreenController {
   async preventScreenShot() {

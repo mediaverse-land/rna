@@ -1,5 +1,5 @@
-import { useState, useCallback } from "react";
-import { useFocusEffect } from "@react-navigation/native";
+import { useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 
 export const UseSelectContent = () => {
   const [selectedContents, setSelectedContents] = useState([]);
@@ -9,7 +9,7 @@ export const UseSelectContent = () => {
       return () => {
         setSelectedContents([]);
       };
-    }, [])
+    }, []),
   );
 
   const selectOwnedItemLognPressHandler = (itemId: any) => {
@@ -47,8 +47,7 @@ export const UseSelectContent = () => {
     setSelectedContents([]);
   };
 
-  const findSelectedContent = (itemId: number) =>
-    selectedContents.find((f) => f.id === itemId);
+  const findSelectedContent = (itemId: number) => selectedContents.find((f) => f.id === itemId);
 
   return {
     selectedContents,

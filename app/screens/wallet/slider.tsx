@@ -1,59 +1,51 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useContext, useRef, useState, useEffect } from "react";
-import {
-  Image,
-  Linking,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
-import { ScreenGradient } from "../../components/screen-gradient";
-import { CardSlider } from "./components/card-slider";
-import { Box } from "../../components/box";
-import { ConfirmAlert } from "../../components/confirm-alert";
-import { alertContext } from "../../context/alert";
-import { ModalBottomSheet } from "../../components/bottom-sheet-modal";
-import { AddCard } from "./components/add-card";
-import { windowSize } from "../../utils/window-size";
-import { Button } from "../../components/button";
-import { ICON_ADD } from "../../constaints/icons";
-import { tokenContext } from "../../context/token";
-import { tokenStringResolver } from "../../utils/token-string-resolver";
-import { getWalletsApiHandler } from "./service";
-import { Wallet } from "../../types/wallet";
-import { Spacer } from "../../components/spacer";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { UseNavigationType } from "../../types/use-navigation";
-import { Text } from "../../components/text";
-import { theme } from "../../constaints/theme";
-import { INVENTORY_BOX_PNG } from "../../constaints/images";
-import { PaddingContainer } from "../../styles/grid";
-import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
-import { StorageService } from "../../services/storage.service";
-import { HAS_USER_SEEN_WALLET_TOUR } from "../../constaints/consts";
+import { useContext, useRef, useState, useEffect } from 'react';
+import { Image, Linking, ScrollView, TouchableOpacity } from 'react-native';
+import { ScreenGradient } from '../../components/screen-gradient';
+import { CardSlider } from './components/card-slider';
+import { Box } from '../../components/box';
+import { ConfirmAlert } from '../../components/confirm-alert';
+import { alertContext } from '../../context/alert';
+import { ModalBottomSheet } from '../../components/bottom-sheet-modal';
+import { AddCard } from './components/add-card';
+import { windowSize } from '../../utils/window-size';
+import { Button } from '../../components/button';
+import { ICON_ADD } from '../../constaints/icons';
+import { tokenContext } from '../../context/token';
+import { tokenStringResolver } from '../../utils/token-string-resolver';
+import { getWalletsApiHandler } from './service';
+import { Wallet } from '../../types/wallet';
+import { Spacer } from '../../components/spacer';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { UseNavigationType } from '../../types/use-navigation';
+import { Text } from '../../components/text';
+import { theme } from '../../constaints/theme';
+import { INVENTORY_BOX_PNG } from '../../constaints/images';
+import { PaddingContainer } from '../../styles/grid';
+import { Coachmark, CoachmarkComposer } from 'react-native-coachmark';
+import { StorageService } from '../../services/storage.service';
+import { HAS_USER_SEEN_WALLET_TOUR } from '../../constaints/consts';
 import {
   useChargeStripeMutation,
   useCheckStripeAccountBalanceQuery,
   useCheckStripeAccountQuery,
   useConnectToStripeMutation,
-} from "../../services/payment.service";
-import {
-  FullScreenSpinnerLoader,
-  LoadingSpinner,
-} from "../../components/loader-spinner";
+} from '../../services/payment.service';
+import { FullScreenSpinnerLoader, LoadingSpinner } from '../../components/loader-spinner';
 
 const { width: WINDOW_WIDTH, height } = windowSize();
 
 const CoachmarkWrapper: any = Coachmark;
 
 const HISTORY_GUIDE =
-  "You can spend money in Mediaverse and of course , you will earn money, the history of your transactions will always be available in history !";
-const INVENTORY_GUIDE = "See your inventory in the list!";
-const ADD_CARD_GUIDE = "Specify a bank account for payment";
+  'You can spend money in Mediaverse and of course , you will earn money, the history of your transactions will always be available in history !';
+const INVENTORY_GUIDE = 'See your inventory in the list!';
+const ADD_CARD_GUIDE = 'Specify a bank account for payment';
 
 const _storageService = new StorageService();
 
 export function WalletSlider() {
-  const [_token, setToken] = useState("");
+  const [_token, setToken] = useState('');
 
   const confirmAlertRef = useRef(null);
   const addInventoryAlertRef = useRef(null);
@@ -69,7 +61,7 @@ export function WalletSlider() {
   const [balence, setBalance] = useState<number>(null);
 
   const redirectToHistoryHandler = () => {
-    navigation.navigate("HistoryPage");
+    navigation.navigate('HistoryPage');
   };
 
   useEffect(() => {
@@ -128,10 +120,7 @@ export function WalletSlider() {
   };
 
   const _userSeenTourHandler = async () => {
-    await _storageService.set(
-      HAS_USER_SEEN_WALLET_TOUR,
-      HAS_USER_SEEN_WALLET_TOUR
-    );
+    await _storageService.set(HAS_USER_SEEN_WALLET_TOUR, HAS_USER_SEEN_WALLET_TOUR);
   };
 
   const setupTour = async () => {
@@ -167,7 +156,7 @@ export function WalletSlider() {
     },
     {
       skip: !_token ? true : false,
-    }
+    },
   );
 
   const {
@@ -180,18 +169,14 @@ export function WalletSlider() {
     },
     {
       skip: !_token ? true : false,
-    }
+    },
   );
 
-  const [
-    _connectHandler,
-    { isLoading: isAddingLoading, isFetching: isAddingFetching },
-  ] = useConnectToStripeMutation();
+  const [_connectHandler, { isLoading: isAddingLoading, isFetching: isAddingFetching }] =
+    useConnectToStripeMutation();
 
-  const [
-    _chargeHandler,
-    { isLoading: isChargeLoading, isFetching: isChargeFetching },
-  ] = useChargeStripeMutation();
+  const [_chargeHandler, { isLoading: isChargeLoading, isFetching: isChargeFetching }] =
+    useChargeStripeMutation();
 
   const balance = data?.available?.[0]?.amount?.toString();
 
@@ -224,12 +209,12 @@ export function WalletSlider() {
 
   const openBottomTabHandler = () => {
     alertCtx.close();
-  }
+  };
 
   return (
     <>
       <ScreenGradient>
-        <ScrollView style={{ flex: 1, width: "100%" }}>
+        <ScrollView style={{ flex: 1, width: '100%' }}>
           {isLoading || isFetching ? (
             <FullScreenSpinnerLoader />
           ) : (
@@ -246,7 +231,7 @@ export function WalletSlider() {
                         alignItems="center"
                         justifyContent="center"
                         additionalStyles={{
-                          overflow: "hidden",
+                          overflow: 'hidden',
                         }}
                       >
                         <>
@@ -255,9 +240,9 @@ export function WalletSlider() {
                               uri: INVENTORY_BOX_PNG,
                             }}
                             style={{
-                              width: "100%",
+                              width: '100%',
                               height: 56,
-                              position: "absolute",
+                              position: 'absolute',
                               top: 0,
                             }}
                             resizeMode="stretch"
@@ -337,7 +322,7 @@ export function WalletSlider() {
                     <Box>
                       <Box
                         direction="row"
-                        width={"100%"}
+                        width={'100%'}
                         justifyContent="center"
                         position="relative"
                       >
@@ -387,14 +372,14 @@ export function WalletSlider() {
       <ModalBottomSheet
         ref={addCardAlertRef}
         height={WINDOW_WIDTH < 370 ? 500 : 400}
-        snapPoints={WINDOW_WIDTH < 370 ? ["50"] : ["38"]}
+        snapPoints={WINDOW_WIDTH < 370 ? ['50'] : ['38']}
         onChange={(e: number) => {
           if (e === -1) {
-            openBottomTabHandler()
+            openBottomTabHandler();
           }
         }}
       >
-        <Box width={"100%"} flex={1} position="absolute" zIndex={100}>
+        <Box width={'100%'} flex={1} position="absolute" zIndex={100}>
           <AddCard
             isLoading={isAddingFetching || isAddingLoading}
             closeAddCardAlertHandler={closeAddCardAlertHandler}

@@ -1,11 +1,11 @@
-import React, { memo, useEffect } from "react";
-import { TouchableOpacity } from "react-native";
-import { BottomSheetFlatList } from "@gorhom/bottom-sheet";
-import { useGetLanguagesQuery } from "../../services/language.service";
-import { Box } from "../box";
-import { theme } from "../../constaints/theme";
-import { Text } from "../text";
-import { LoadingSpinner } from "../loader-spinner";
+import React, { memo, useEffect } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import { useGetLanguagesQuery } from '../../services/language.service';
+import { Box } from '../box';
+import { theme } from '../../constaints/theme';
+import { Text } from '../text';
+import { LoadingSpinner } from '../loader-spinner';
 
 const SelectLanguageBottomSheet = ({
   setSelectedLanguage,
@@ -14,7 +14,6 @@ const SelectLanguageBottomSheet = ({
   setSelectedLanguage: (lang: string) => void;
   isFocused: boolean;
 }) => {
-
   const { data, isFetching, refetch } = useGetLanguagesQuery();
 
   useEffect(() => {
@@ -25,10 +24,7 @@ const SelectLanguageBottomSheet = ({
 
   const renderItem = ({ item }: { item: string }) => {
     return (
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={() => setSelectedLanguage(item)}
-      >
+      <TouchableOpacity activeOpacity={1} onPress={() => setSelectedLanguage(item)}>
         <Box
           paddingLeft={8}
           paddingBottom={8}

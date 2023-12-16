@@ -1,8 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { enviroments } from "../../enviroments/enviroments";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { enviroments } from '../../enviroments/enviroments';
 
 export const liveService: any = createApi({
-  reducerPath: "liveService",
+  reducerPath: 'liveService',
   baseQuery: fetchBaseQuery({
     baseUrl: enviroments.BASE_URL,
   }),
@@ -10,31 +10,31 @@ export const liveService: any = createApi({
     recordLive: builder.mutation({
       query: (args) => {
         return {
-          url: "edit/live/record",
-          method: "POST",
+          url: 'edit/live/record',
+          method: 'POST',
           body: args.body,
           headers: {
             Authorization: `Bearer ${args.token}`,
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },
     }),
     getSearchLive: builder.query({
       query: (args) => {
-        let url = "lives?";
+        let url = 'lives?';
 
         if (args.lang) url = url + `language=${args.lang}`;
 
         if (args.country) {
-          if (url.charAt(url.length - 1) === "?") {
+          if (url.charAt(url.length - 1) === '?') {
             url = url + `country=${args.country}`;
           } else {
             url = url + `&country=${args.country}`;
           }
         }
         if (args.title) {
-          if (url.charAt(url.length - 1) === "?") {
+          if (url.charAt(url.length - 1) === '?') {
             url = url + `title=${args.title}`;
           } else {
             url = url + `&title=${args.title}`;
@@ -49,10 +49,10 @@ export const liveService: any = createApi({
 
         return {
           url: url,
-          method: "get",
+          method: 'get',
           headers: {
             // Authorization: `Bearer ${args.token}`,
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },

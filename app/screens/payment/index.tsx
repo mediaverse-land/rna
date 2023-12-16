@@ -29,7 +29,7 @@ export function PaymentScreen({ navigation, route }: any) {
   // const userCtx = useContext(userContext);
   const tokenCtx = useContext(tokenContext);
 
-  const { data,  isError } = useCheckStripeAccountBalanceQuery(
+  const { data, isError } = useCheckStripeAccountBalanceQuery(
     { token },
     {
       skip: !token ? true : false,

@@ -1,24 +1,24 @@
-import { useEffect, useRef, useState } from "react";
-import { View } from "react-native";
-import { VideoPageBestInMonth } from "./best-in-month";
-import { VideoPageList } from "./list";
-import { VirtualizedList } from "../../../../components/virtualized-list";
-import { getVideosPageDatApiHandler } from "./service";
-import { Asset } from "../../../../types/asset";
-import { Live } from "../../../../types/live";
-import { getLivesApiHandler } from "../all/service";
-import { VideosPageLives } from "./lives";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import {  useSelector } from "react-redux";
-import {  RootState } from "../../../../store";
-import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
-import { StorageService } from "../../../../services/storage.service";
-import { HAS_USER_SEEN_EXPLORE_ALL_TOUR } from "../../../../constaints/consts";
-import { UseNavigationType } from "../../../../types/use-navigation";
-import { ExploreGradientWrapper } from "../../components/gradient-wrapper";
+import { useEffect, useRef, useState } from 'react';
+import { View } from 'react-native';
+import { VideoPageBestInMonth } from './best-in-month';
+import { VideoPageList } from './list';
+import { VirtualizedList } from '../../../../components/virtualized-list';
+import { getVideosPageDatApiHandler } from './service';
+import { Asset } from '../../../../types/asset';
+import { Live } from '../../../../types/live';
+import { getLivesApiHandler } from '../all/service';
+import { VideosPageLives } from './lives';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
+import { Coachmark, CoachmarkComposer } from 'react-native-coachmark';
+import { StorageService } from '../../../../services/storage.service';
+import { HAS_USER_SEEN_EXPLORE_ALL_TOUR } from '../../../../constaints/consts';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { ExploreGradientWrapper } from '../../components/gradient-wrapper';
 
 const LIVE_TOUR =
-  "Click on these icons and enjoy watching your favorite TV channel to create better content!";
+  'Click on these icons and enjoy watching your favorite TV channel to create better content!';
 
 const CoachmarkWrapper: any = Coachmark;
 
@@ -33,9 +33,7 @@ export function VideosPage() {
   const [livesData, setLivesData] = useState<any>([]);
   const [isDisabledOnIntractions, setIsDisabledOnIntractions] = useState(false);
 
-  const { EXPLORE_TOP_BAR_TOUR_HAS_SEEN } = useSelector(
-    (state: RootState) => state.tourSlice
-  );
+  const { EXPLORE_TOP_BAR_TOUR_HAS_SEEN } = useSelector((state: RootState) => state.tourSlice);
 
   useEffect(() => {
     if (isFocused) {
@@ -57,16 +55,15 @@ export function VideosPage() {
     setIsLoading(false);
   };
 
-
   const setValue = async (
     promiseData: PromiseSettledResult<{
       isSuccess: boolean;
       isError: boolean;
       res: any;
     }>,
-    dataSetter: (data: Asset[] | Live[] | any) => void
+    dataSetter: (data: Asset[] | Live[] | any) => void,
   ) => {
-    if (promiseData.status !== "fulfilled") {
+    if (promiseData.status !== 'fulfilled') {
       return;
     }
 
@@ -90,17 +87,12 @@ export function VideosPage() {
     if (!EXPLORE_TOP_BAR_TOUR_HAS_SEEN) {
       return;
     }
-    const hasUserSeen = await _storageService.get(
-      HAS_USER_SEEN_EXPLORE_ALL_TOUR
-    );
+    const hasUserSeen = await _storageService.get(HAS_USER_SEEN_EXPLORE_ALL_TOUR);
     return hasUserSeen ? true : false;
   };
 
   const setUserSeenTour = async () => {
-    await _storageService.set(
-      HAS_USER_SEEN_EXPLORE_ALL_TOUR,
-      HAS_USER_SEEN_EXPLORE_ALL_TOUR
-    );
+    await _storageService.set(HAS_USER_SEEN_EXPLORE_ALL_TOUR, HAS_USER_SEEN_EXPLORE_ALL_TOUR);
   };
 
   const firstLiveText = useRef<Coachmark>(null);
@@ -179,7 +171,7 @@ export function VideosPage() {
               // console.log('end')
             }}
           />
-          <View style={{ width: "100%", height: 320 }}></View>
+          <View style={{ width: '100%', height: 320 }}></View>
         </VirtualizedList>
       </ExploreGradientWrapper>
     </>

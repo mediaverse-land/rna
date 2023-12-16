@@ -65,7 +65,7 @@
 //     style?: StyleProp<ViewStyle>
 //     children?: any
 //   }
-  
+
 //   const Button = ({ wrapperStyle, style, children, ...rest }: Props) => (
 //     <View style={[styles.button, wrapperStyle]}>
 //       <Text style={[styles.buttonText, style]} testID={'TourGuideButtonText'} {...rest}>
@@ -73,8 +73,6 @@
 //       </Text>
 //     </View>
 //   )
-
-
 
 //   export const Z_INDEX: number = 100
 // export const MARGIN: number = 13

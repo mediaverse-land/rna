@@ -1,27 +1,24 @@
-import React, {
-  useMemo,
-  useState,
-} from "react";
-import { StyleSheet } from "react-native";
-import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
-import { Box } from "../../../../components/box";
-import { theme } from "../../../../constaints/theme";
-import { Text } from "../../../../components/text";
-import { RenderIfWithoutLoading } from "../../../../components/render-if-without-loading";
-import { RadioButton } from "../../../../components/form";
-import { Button } from "../../../../components/button";
+import React, { useMemo, useState } from 'react';
+import { StyleSheet } from 'react-native';
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import { Box } from '../../../../components/box';
+import { theme } from '../../../../constaints/theme';
+import { Text } from '../../../../components/text';
+import { RenderIfWithoutLoading } from '../../../../components/render-if-without-loading';
+import { RadioButton } from '../../../../components/form';
+import { Button } from '../../../../components/button';
 
 const recordLiveOptions: Record<string, string[]> = {
-  recordDurationOptions: ["2 minutes", "3 minutes", "4 minutes", "5 minutes"],
-  recordDelayOptions: ["Right now", "2 minutes", "3 minutes", "4 minutes"],
+  recordDurationOptions: ['2 minutes', '3 minutes', '4 minutes', '5 minutes'],
+  recordDelayOptions: ['Right now', '2 minutes', '3 minutes', '4 minutes'],
 };
 
 // Values are in minutes
 const durationKeys: Record<string, number> = {
-  "2 minutes": 2,
-  "3 minutes": 3,
-  "4 minutes": 4,
-  "5 minutes": 5,
+  '2 minutes': 2,
+  '3 minutes': 3,
+  '4 minutes': 4,
+  '5 minutes': 5,
 };
 
 type Props = {
@@ -42,9 +39,7 @@ export const SingleLiveRecordBottomSheet = ({
   isLoading,
 }: Props) => {
   // Record duration. for example: start record until 20 minutes
-  const [duration, setDuration] = useState(
-    recordLiveOptions.recordDurationOptions[0]
-  );
+  const [duration, setDuration] = useState(recordLiveOptions.recordDurationOptions[0]);
 
   // Record delay. for example: start record after 20 minutes
   //   const [delay, setDelay] = useState(recordLiveOptions.recordDelayOptions[0]);
@@ -106,12 +101,7 @@ export const SingleLiveRecordBottomSheet = ({
 const Title = () => {
   return (
     <Box id="title">
-      <Text
-        color={theme.color.light.WHITE}
-        fontSize={16}
-        fontWeight={500}
-        lineHeight={16}
-      >
+      <Text color={theme.color.light.WHITE} fontSize={16} fontWeight={500} lineHeight={16}>
         Record live
       </Text>
     </Box>
@@ -120,11 +110,11 @@ const Title = () => {
 
 const styles = StyleSheet.create({
   bottomSheetView: {
-    position: "absolute",
+    position: 'absolute',
     backgroundColor: theme.color.light.ADD_ACCOUNT_MODAL_BAKGROUND,
     top: 0,
     left: 0,
-    width: "100%",
+    width: '100%',
     height: 430,
     zIndex: 1000,
     borderTopLeftRadius: 16,

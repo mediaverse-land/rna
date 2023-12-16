@@ -1,18 +1,18 @@
-import { useEffect, useRef, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
-import { Box } from "../../../components/box";
-import { ScreenGradient } from "../../../components/screen-gradient";
-import { VirtualizedList } from "../../../components/virtualized-list";
-import { PaddingContainer } from "../../../styles/grid";
-import { Title } from "../../../components/title";
-import { Input, RadioButton } from "../../../components/form";
-import { Button } from "../../../components/button";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { StorageService } from "../../../services/storage.service";
-import { HAS_USER_SEEN_PLUS_CREATE_FORM_TOUR } from "../../../constaints/consts";
-import { GoBackButton } from "../../single/components/goback-button";
-import { UseNavigationType } from "../../../types/use-navigation";
+import { useEffect, useRef, useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { Coachmark, CoachmarkComposer } from 'react-native-coachmark';
+import { Box } from '../../../components/box';
+import { ScreenGradient } from '../../../components/screen-gradient';
+import { VirtualizedList } from '../../../components/virtualized-list';
+import { PaddingContainer } from '../../../styles/grid';
+import { Title } from '../../../components/title';
+import { Input, RadioButton } from '../../../components/form';
+import { Button } from '../../../components/button';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { StorageService } from '../../../services/storage.service';
+import { HAS_USER_SEEN_PLUS_CREATE_FORM_TOUR } from '../../../constaints/consts';
+import { GoBackButton } from '../../single/components/goback-button';
+import { UseNavigationType } from '../../../types/use-navigation';
 
 type Props = {
   formStructure: any;
@@ -24,13 +24,13 @@ type Props = {
 
 const TOUR_GUIDES = {
   // Name
-  60: "Specify the name of the digital asset",
+  60: 'Specify the name of the digital asset',
   // Price
-  61: "Announce its selling price",
+  61: 'Announce its selling price',
   // Description
-  62: "Explain about it",
+  62: 'Explain about it',
   // Sales type
-  63: "And at the end, determine the method of sale, whether your asset will be offered for free or will be sold as a subscription or ownership",
+  63: 'And at the end, determine the method of sale, whether your asset will be offered for free or will be sold as a subscription or ownership',
 };
 
 const _storageService = new StorageService();
@@ -42,10 +42,8 @@ export const CreateAssetForm = ({
   isLoading,
   _getSelectedOption,
 }: Props) => {
-  const [selectedOption, setSelectedOption] = useState<
-    Record<string, string | boolean>
-  >({
-    plan: "ownership",
+  const [selectedOption, setSelectedOption] = useState<Record<string, string | boolean>>({
+    plan: 'ownership',
     eligible_for_audio_extraction: true,
     eligible_for_image_extraction: true,
     eligible_for_video_extraction: true,
@@ -65,16 +63,16 @@ export const CreateAssetForm = ({
   useEffect(() => {
     _getSelectedOption(selectedOption);
 
-    if (selectedOption.plan === "free") {
-      setValue("price", 10);
+    if (selectedOption.plan === 'free') {
+      setValue('price', 10);
     } else {
-      resetField("price");
+      resetField('price');
     }
 
-    if (selectedOption.plan !== "subscription") {
-      setValue("subscription_period", "__");
+    if (selectedOption.plan !== 'subscription') {
+      setValue('subscription_period', '__');
     } else {
-      resetField("subscription_period");
+      resetField('subscription_period');
     }
   }, [selectedOption]);
 
@@ -86,7 +84,7 @@ export const CreateAssetForm = ({
   const _userSeenTourHandler = async () => {
     await _storageService.set(
       HAS_USER_SEEN_PLUS_CREATE_FORM_TOUR,
-      HAS_USER_SEEN_PLUS_CREATE_FORM_TOUR
+      HAS_USER_SEEN_PLUS_CREATE_FORM_TOUR,
     );
   };
 
@@ -105,19 +103,9 @@ export const CreateAssetForm = ({
       return;
     }
 
-    if (
-      nameRef?.current &&
-      priceRef?.current &&
-      descriptionRef?.current &&
-      planRef?.current
-    ) {
+    if (nameRef?.current && priceRef?.current && descriptionRef?.current && planRef?.current) {
       setTimeout(() => {
-        const composer = new CoachmarkComposer([
-          nameRef,
-          priceRef,
-          descriptionRef,
-          planRef,
-        ]);
+        const composer = new CoachmarkComposer([nameRef, priceRef, descriptionRef, planRef]);
         composer.show().then(async () => {
           await _userSeenTourHandler();
         });
@@ -133,17 +121,17 @@ export const CreateAssetForm = ({
 
   const getCurrentTour = (name: string) => {
     switch (name) {
-      case "name":
+      case 'name':
         return {
           text: TOUR_GUIDES[60],
           ref: nameRef,
         };
-      case "price":
+      case 'price':
         return {
           text: TOUR_GUIDES[61],
           ref: priceRef,
         };
-      case "description":
+      case 'description':
         return {
           text: TOUR_GUIDES[62],
           ref: descriptionRef,
@@ -169,50 +157,42 @@ export const CreateAssetForm = ({
     >
       <ScreenGradient>
         <VirtualizedList>
-          <Box width="100%" flex={1} paddingBottom={100} >
+          <Box width="100%" flex={1} paddingBottom={100}>
             <Box marginBottom={90} marginTop={24}>
-              <GoBackButton
-                hasBackground
-                goBackHandler={() => navigation.goBack()}
-              />
+              <GoBackButton hasBackground goBackHandler={() => navigation.goBack()} />
             </Box>
             <PaddingContainer>
               <Title str="Fill data" />
               <Box marginTop={24}></Box>
               {formStructure.map((form: any) => (
                 <Box key={form.id} marginBottom={16}>
-                  {form.type === "radio-button" ? (
+                  {form.type === 'radio-button' ? (
                     <CoachmarkWrapper
                       allowBackgroundInteractions={false}
-                      ref={form.labelText === "Plan" ? planRef : null}
+                      ref={form.labelText === 'Plan' ? planRef : null}
                       message="And at the end, determine the method of sale, whether your asset will be offered for free or will be sold as a subscription or ownership"
                     >
                       <Box position="relative">
                         <RadioButton
                           labelText={form.labelText}
                           dataList={form.options}
-                          getSelectedOption={(option: any) =>
-                            getSelectedOption(option, form.name)
-                          }
+                          getSelectedOption={(option: any) => getSelectedOption(option, form.name)}
                           defaultOption={form.defaultSelected}
                         />
                       </Box>
                     </CoachmarkWrapper>
                   ) : null}
-                  {form.type === "input" || form.type === "textarea" ? (
+                  {form.type === 'input' || form.type === 'textarea' ? (
                     <Controller
                       control={control}
                       render={({ field: { onChange, onBlur, value } }) => {
                         // Get current input {text, ref} for indicating tour guide
                         const _currentTour = getCurrentTour(form.name);
 
-                        if (selectedOption.plan === "free" && form.id === 2) {
+                        if (selectedOption.plan === 'free' && form.id === 2) {
                           return null;
                         }
-                        if (
-                          form.id === 7 &&
-                          selectedOption.plan !== "subscription"
-                        ) {
+                        if (form.id === 7 && selectedOption.plan !== 'subscription') {
                           return null;
                         }
 
@@ -233,9 +213,7 @@ export const CreateAssetForm = ({
                                 additionalProps={{
                                   inputMode: form.inputMode,
                                 }}
-                                isTextArea={
-                                  form?.type === "textarea" ? true : false
-                                }
+                                isTextArea={form?.type === 'textarea' ? true : false}
                               />
                             </Box>
                           </CoachmarkWrapper>
@@ -250,13 +228,7 @@ export const CreateAssetForm = ({
             </PaddingContainer>
           </Box>
         </VirtualizedList>
-        <Box
-          width="100%"
-          position="absolute"
-          bottom={10}
-          paddingLeft={24}
-          paddingRight={24}
-        >
+        <Box width="100%" position="absolute" bottom={10} paddingLeft={24} paddingRight={24}>
           <Button
             onpressHandler={handleSubmit(onSubmit)}
             varient="primary"

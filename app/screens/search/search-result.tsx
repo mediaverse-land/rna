@@ -1,15 +1,15 @@
-import { FC, useCallback, useContext, useEffect, useState } from "react";
-import { Box } from "../../components/box";
-import { SearchObjectProperty } from "./navigator";
-import { SearchParam } from ".";
-import { useSearchMutation } from "../../services/asset.service";
-import { tokenContext } from "../../context/token";
-import { retriveToken } from "../../utils/retrive-token";
-import { getUrl } from "./utils";
-import { addTypeToAsset } from "../../utils/add-type-to-assets";
-import { Asset } from "../../types/asset";
-import { List } from "./components/list";
-import { ActivityIndicator } from "react-native";
+import { FC, useCallback, useContext, useEffect, useState } from 'react';
+import { Box } from '../../components/box';
+import { SearchObjectProperty } from './navigator';
+import { SearchParam } from '.';
+import { useSearchMutation } from '../../services/asset.service';
+import { tokenContext } from '../../context/token';
+import { retriveToken } from '../../utils/retrive-token';
+import { getUrl } from './utils';
+import { addTypeToAsset } from '../../utils/add-type-to-assets';
+import { Asset } from '../../types/asset';
+import { List } from './components/list';
+import { ActivityIndicator } from 'react-native';
 
 type Props = {
   searchObject: SearchObjectProperty;
@@ -40,7 +40,7 @@ export const SearchResult: FC<Props> = ({ searchObject, searchParams }) => {
 
   const applySearh = async () => {
     const url = await generateUrl();
-    if (url === "/search?&page=1") {
+    if (url === '/search?&page=1') {
       return;
     }
 
@@ -73,12 +73,7 @@ export const SearchResult: FC<Props> = ({ searchObject, searchParams }) => {
   const formatInputData = (inputData: any) => {
     const { videos, texts, audios, images } = inputData;
 
-    if (
-      !videos?.length &&
-      !texts?.length &&
-      !audios?.length &&
-      !images?.length
-    ) {
+    if (!videos?.length && !texts?.length && !audios?.length && !images?.length) {
       setHasMoreItem(false);
       return;
     }
@@ -119,11 +114,7 @@ export const SearchResult: FC<Props> = ({ searchObject, searchParams }) => {
 
   return (
     <Box flex={1} marginTop={120} paddingLeft={24} paddingRight={24}>
-      <List
-        data={assetList}
-        onEndReached={onEndReached}
-        isLoading={isLoading || isFetching}
-      />
+      <List data={assetList} onEndReached={onEndReached} isLoading={isLoading || isFetching} />
       {isLoading || isFetching ? (
         <Box height={50}>
           <ActivityIndicator color="#666680" />

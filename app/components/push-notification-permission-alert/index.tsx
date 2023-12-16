@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { Box } from "../box";
-import { Text } from "../text";
-import { theme } from "../../constaints/theme";
-import { windowSize } from "../../utils/window-size";
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Box } from '../box';
+import { Text } from '../text';
+import { theme } from '../../constaints/theme';
+import { windowSize } from '../../utils/window-size';
 // import { FirebasePushNotificationController } from "../../controllers/push-notification-controller";
-import { StorageService } from "../../services/storage.service";
-import * as Device from "expo-device";
-import * as Notifications from "expo-notifications";
-import Constants from "expo-constants";
-import { useEffect, useState } from "react";
-import { RenderIfWithoutLoading } from "../render-if-without-loading";
-import { useIsFocused } from "@react-navigation/native";
-import { BackHandler } from "react-native";
+import { StorageService } from '../../services/storage.service';
+import * as Device from 'expo-device';
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
+import { useEffect, useState } from 'react';
+import { RenderIfWithoutLoading } from '../render-if-without-loading';
+import { useIsFocused } from '@react-navigation/native';
+import { BackHandler } from 'react-native';
 
 type Props = {
   isAuth: boolean;
@@ -31,34 +31,27 @@ export function PushNotificationPermissionAlert({ isAuth }: Props) {
 
   const isFocused = useIsFocused();
 
-  BackHandler.addEventListener("hardwareBackPress", () =>
-    _deviceBackButtonClickHandler()
-  );
+  BackHandler.addEventListener('hardwareBackPress', () => _deviceBackButtonClickHandler());
 
   const _deviceBackButtonClickHandler: any = () => {
     // console.log("lkfjkslf");
   };
 
   const hasUserSeenNotificationPermissionBox = async () => {
-    const hasUserSeen = await _storageService.get(
-      "HAS_USER_SEEN_NOTIFICATION_BOX"
-    );
+    const hasUserSeen = await _storageService.get('HAS_USER_SEEN_NOTIFICATION_BOX');
     return !!hasUserSeen;
   };
 
   const hasUserChangeNotificationPermission = async () => {
-    const result = await _storageService.get(
-      "HAS_USER_CHANGE_APP_NOTIFICATION_PERMISSION"
-    );
+    const result = await _storageService.get('HAS_USER_CHANGE_APP_NOTIFICATION_PERMISSION');
     return !!result;
   };
 
   const doesAppHasPermission = async () => {
     try {
-      const { status: existingStatus } =
-        await Notifications.getPermissionsAsync();
+      const { status: existingStatus } = await Notifications.getPermissionsAsync();
 
-      return existingStatus === "granted";
+      return existingStatus === 'granted';
       // const {status} = await Notifications.requestPermissionsAsync();
     } catch (err) {
       return false;
@@ -67,7 +60,7 @@ export function PushNotificationPermissionAlert({ isAuth }: Props) {
 
   useEffect(() => {
     const setupNotifPermissions = async () => {
-    //   const _hasPermission = await doesAppHasPermission();
+      //   const _hasPermission = await doesAppHasPermission();
       const _hasPermission = await doesAppHasPermission();
       if (_hasPermission) {
         setOpenBox(false);
@@ -90,7 +83,7 @@ export function PushNotificationPermissionAlert({ isAuth }: Props) {
   }
 
   const _openSettingsHandler = async () => {
-    setOpenBox(false)
+    setOpenBox(false);
     // await _firebasePushNotificationController.openSettings();
   };
 
@@ -115,7 +108,7 @@ export function PushNotificationPermissionAlert({ isAuth }: Props) {
         >
           <Box
             width={NOTIFICATION_BOX_ALERT_WIDTH}
-            backgroundColor={"#fff"}
+            backgroundColor={'#fff'}
             position="relative"
             zIndex={101}
             borderRadius={16}
@@ -126,14 +119,13 @@ export function PushNotificationPermissionAlert({ isAuth }: Props) {
                 fontSize={16}
                 fontWeight={600}
                 textStyles={{
-                  textAlign: "center",
+                  textAlign: 'center',
                   color: theme.color.light.TEXT,
                 }}
                 lineHeight={20}
                 marginBottom={24}
               >
-                To receive push notifications, please enable notification
-                permission in settings.
+                To receive push notifications, please enable notification permission in settings.
               </Text>
             </Box>
             <Box
@@ -144,7 +136,10 @@ export function PushNotificationPermissionAlert({ isAuth }: Props) {
               justifyContent="center"
             >
               <Box width="50%" height={48} borderRadius={8}>
-                <TouchableOpacity style={styles.buttonsTouchableOpacity} onPress={modalCloserHandler}>
+                <TouchableOpacity
+                  style={styles.buttonsTouchableOpacity}
+                  onPress={modalCloserHandler}
+                >
                   <Text>Cancel</Text>
                 </TouchableOpacity>
               </Box>
@@ -171,10 +166,10 @@ export function PushNotificationPermissionAlert({ isAuth }: Props) {
 
 const styles = StyleSheet.create({
   buttonsTouchableOpacity: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     height: 48,
-    width: "100%",
+    width: '100%',
     paddingBottom: 3,
   },
 });

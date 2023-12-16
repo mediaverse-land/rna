@@ -1,4 +1,4 @@
-import { PayloadAction,  createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export type SingleImageInitialState = {
   latest_image_uri: string;
@@ -9,7 +9,7 @@ const initialState: SingleImageInitialState = {
 };
 
 const imageSlice = createSlice({
-  name: "image_slice",
+  name: 'image_slice',
   initialState,
   reducers: {
     addImage: (state, action: PayloadAction<any>) => {
@@ -23,7 +23,6 @@ const imageSlice = createSlice({
 
 export const { addImage, removeImage } = imageSlice.actions;
 
-export const getImagesDataFromSlice = (state: SingleImageInitialState) =>
-  state.latest_image_uri
+export const getImagesDataFromSlice = (state: SingleImageInitialState) => state.latest_image_uri;
 
 export default imageSlice.reducer;

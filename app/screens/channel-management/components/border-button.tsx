@@ -1,16 +1,8 @@
-import { Box } from "../../../components/box";
-import { Button } from "../../../components/button";
-import { ICON_ADD } from "../../../constaints/icons";
+import { Box } from '../../../components/box';
+import { Button } from '../../../components/button';
+import { ICON_ADD } from '../../../constaints/icons';
 
-export 
-
-const BorderButton = ({
-  handler,
-  title,
-}: {
-  handler: () => void;
-  title: string;
-}) => {
+export const BorderButton = ({ handler, title }: { handler: () => void; title: string }) => {
   return (
     <Box marginTop={40}>
       <Button
@@ -23,7 +15,7 @@ const BorderButton = ({
         icon={
           <ICON_ADD
             style={{
-              position: "relative",
+              position: 'relative',
               top: -3,
             }}
             color="666680"

@@ -1,16 +1,16 @@
-import { useEffect } from "react";
-import { FC } from "react";
-import * as Google from "expo-auth-session/providers/google";
-import { AuthProviderButton } from "../../components/auth-provider-button";
-import { providerButtons } from "../../mock-data";
-import { theme } from "../../../../constaints/theme";
-import { Box } from "../../../../components/box";
-import { Text } from "../../../../components/text";
-import { googleAuthApiHandler } from "./service";
-import { Toaster } from "../../../../utils/toaster";
-import { Logger } from "../../../../utils/logger";
-import { enviroments } from "../../../../../enviroments/enviroments";
-import { Button } from "../../../../components/button";
+import { useEffect } from 'react';
+import { FC } from 'react';
+import * as Google from 'expo-auth-session/providers/google';
+import { AuthProviderButton } from '../../components/auth-provider-button';
+import { providerButtons } from '../../mock-data';
+import { theme } from '../../../../constaints/theme';
+import { Box } from '../../../../components/box';
+import { Text } from '../../../../components/text';
+import { googleAuthApiHandler } from './service';
+import { Toaster } from '../../../../utils/toaster';
+import { Logger } from '../../../../utils/logger';
+import { enviroments } from '../../../../../enviroments/enviroments';
+import { Button } from '../../../../components/button';
 
 type Props = {
   height: number;
@@ -40,7 +40,7 @@ export const SignUpWithProvider: FC<Props> = ({
       await sendResponse(res);
       // await AsyncStorage.setItem("auth", JSON.stringify(response.authentication));
     };
-    if (response?.type === "success") {
+    if (response?.type === 'success') {
       const res = response?.authentication;
       if (res) {
         persistAuth(res);
@@ -49,15 +49,13 @@ export const SignUpWithProvider: FC<Props> = ({
   }, [response]);
 
   const sendResponse = async (ress: any) => {
-    const { isError, errorRes, res } = await googleAuthApiHandler(
-      ress.accessToken
-    );
+    const { isError, errorRes, res } = await googleAuthApiHandler(ress.accessToken);
 
-    _logger.log("errorRes");
+    _logger.log('errorRes');
     _logger.log({ errorRes });
 
     if (isError) {
-      _toaster.show("A problem occured while submiting data");
+      _toaster.show('A problem occured while submiting data');
       return;
     }
 
@@ -70,8 +68,8 @@ export const SignUpWithProvider: FC<Props> = ({
   };
 
   return (
-    <Box width={"100%"} height={Math.floor(height) - 170} position="relative">
-      <Box position="absolute" width={"100%"} bottom={52}>
+    <Box width={'100%'} height={Math.floor(height) - 170} position="relative">
+      <Box position="absolute" width={'100%'} bottom={52}>
         {providerButtons.map((f) => (
           <AuthProviderButton
             key={f.id}
@@ -82,18 +80,8 @@ export const SignUpWithProvider: FC<Props> = ({
             onpress={() => promptAsync()}
           />
         ))}
-        <Box
-          width="100%"
-          height={124}
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Text
-            color={theme.color.light.WHITE}
-            lineHeight={20}
-            fontSize={12}
-            fontWeight={600}
-          >
+        <Box width="100%" height={124} alignItems="center" justifyContent="center">
+          <Text color={theme.color.light.WHITE} lineHeight={20} fontSize={12} fontWeight={600}>
             Or
           </Text>
         </Box>

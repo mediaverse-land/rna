@@ -1,8 +1,8 @@
-import { TouchableOpacity } from "react-native";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
-import { ICON_ARROW_DOWN_SVG } from "../../../constaints/icons";
+import { TouchableOpacity } from 'react-native';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
+import { ICON_ARROW_DOWN_SVG } from '../../../constaints/icons';
 
 /**
  * @description A select box component to retrive the selected language
@@ -13,11 +13,11 @@ import { ICON_ARROW_DOWN_SVG } from "../../../constaints/icons";
 export const CreateAssetSelect = ({
   onPress,
   selectedItem,
-  title
+  title,
 }: {
   onPress: () => void;
   selectedItem: string;
-  title: string
+  title: string;
 }) => {
   return (
     <TouchableOpacity activeOpacity={1} onPress={onPress}>
@@ -33,12 +33,8 @@ export const CreateAssetSelect = ({
         paddingRight={16}
         justifyContent="space-between"
       >
-        <Text
-          color={theme.color.light.DARK_INPUT_PLACEHOLDER}
-          fontSize={16}
-          fontWeight={400}
-        >
-          {selectedItem ||  title}
+        <Text color={theme.color.light.DARK_INPUT_PLACEHOLDER} fontSize={16} fontWeight={400}>
+          {selectedItem || title}
         </Text>
         <ICON_ARROW_DOWN_SVG />
       </Box>

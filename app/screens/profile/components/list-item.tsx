@@ -1,15 +1,15 @@
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { UserNameCard } from "../../../components/username-card";
-import { theme } from "../../../constaints/theme";
-import { HORIZONTAL_SLIDER_GRADIENT } from "../../../constaints/images";
-import { ICON_CHECK_WHITE } from "../../../constaints/icons";
-import { windowSize } from "../../../utils/window-size";
+import { Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { UserNameCard } from '../../../components/username-card';
+import { theme } from '../../../constaints/theme';
+import { HORIZONTAL_SLIDER_GRADIENT } from '../../../constaints/images';
+import { ICON_CHECK_WHITE } from '../../../constaints/icons';
+import { windowSize } from '../../../utils/window-size';
 
-const {width} = windowSize();
+const { width } = windowSize();
 
-const ITEM_WIDTH = (width / 2) -32
+const ITEM_WIDTH = width / 2 - 32;
 
 type Props = {
   width: number;
@@ -33,20 +33,22 @@ export function ListItem({
 }: Props) {
   return (
     <Box width={ITEM_WIDTH} marginBottom={30}>
-      <TouchableOpacity
-        onLongPress={onlongpress}
-        onPress={onpress}
-        activeOpacity={1}
-      >
+      <TouchableOpacity onLongPress={onlongpress} onPress={onpress} activeOpacity={1}>
         <Box
-          width={"100%"}
+          width={'100%'}
           borderColor={isSelected ? theme.color.light.PRIMARY : null}
           borderRadius={16}
         >
-          <Image source={{ uri: imagePath }} style={[styles.thumbnail, {
-            width: ITEM_WIDTH,
-            height: ITEM_WIDTH
-          }]} />
+          <Image
+            source={{ uri: imagePath }}
+            style={[
+              styles.thumbnail,
+              {
+                width: ITEM_WIDTH,
+                height: ITEM_WIDTH,
+              },
+            ]}
+          />
           {!isSelected ? (
             <Image
               source={{
@@ -95,7 +97,7 @@ export function ListItem({
               fontSize={theme.numericFontSize.md}
               lineHeight={16}
               textStyles={{
-                paddingTop: 3
+                paddingTop: 3,
               }}
             >
               {title}
@@ -118,14 +120,14 @@ export function ListItem({
 const styles = StyleSheet.create({
   thumbnail: {
     borderRadius: 16,
-    width: "100%",
+    width: '100%',
     height: 163,
   },
   nonSelectedItemPlaceholder: {
     borderRadius: 16,
-    width: "100%",
+    width: '100%',
     height: 163,
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
     zIndex: 10,
@@ -134,8 +136,8 @@ const styles = StyleSheet.create({
     opacity: 0.1,
   },
   selectedItemPlaceholder: {
-    left: "40%",
-    top: "40%",
+    left: '40%',
+    top: '40%',
   },
   username: {
     color: theme.color.light.TEXT,

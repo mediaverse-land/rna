@@ -1,19 +1,24 @@
-import { useDispatch, useSelector } from "react-redux";
-import { UseNavigationType } from "../../../types/use-navigation";
-import { screenSize } from "../../../utils/screen-size";
-import { AppDispatch, RootState } from "../../../store";
-import { useMemo, useState } from "react";
-import { debounce } from "../../../utils/debounce";
-import { setSearchParams } from "../../../slices/live.slice";
-import { Box } from "../../../components/box";
-import { TextInput, TouchableOpacity } from "react-native";
-import { ICON_ARROW_LEFT_SVG, ICON_ARROW_UP, ICON_FILTER, ICON_SEARCH_WHITE } from "../../../constaints/icons";
-import { AllLiveStyles } from "../styles";
-import { theme } from "../../../constaints/theme";
-import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
-import { AllLiveComponents } from ".";
+import { useDispatch, useSelector } from 'react-redux';
+import { UseNavigationType } from '../../../types/use-navigation';
+import { screenSize } from '../../../utils/screen-size';
+import { AppDispatch, RootState } from '../../../store';
+import { useMemo, useState } from 'react';
+import { debounce } from '../../../utils/debounce';
+import { setSearchParams } from '../../../slices/live.slice';
+import { Box } from '../../../components/box';
+import { TextInput, TouchableOpacity } from 'react-native';
+import {
+  ICON_ARROW_LEFT_SVG,
+  ICON_ARROW_UP,
+  ICON_FILTER,
+  ICON_SEARCH_WHITE,
+} from '../../../constaints/icons';
+import { AllLiveStyles } from '../styles';
+import { theme } from '../../../constaints/theme';
+import { RenderIfWithoutLoading } from '../../../components/render-if-without-loading';
+import { AllLiveComponents } from '.';
 
-const {width:WINDOW_WIDTH} =screenSize();
+const { width: WINDOW_WIDTH } = screenSize();
 const { searchInput, magnetIcon } = AllLiveStyles;
 
 const seatch_input_width = Math.floor(WINDOW_WIDTH) - 48 - 22 - 48 - 32;
@@ -48,15 +53,11 @@ export const AllLivesSearchBar = ({
       debounce((title: string) => {
         dispatch(setSearchParams({ title: title }));
       }, 1000),
-    []
+    [],
   );
 
   return (
-    <Box
-      width="100%"
-      height={!showModifyWiew ? 96 : 210}
-      backgroundColor="#4E4E6180"
-    >
+    <Box width="100%" height={!showModifyWiew ? 96 : 210} backgroundColor="#4E4E6180">
       <Box
         direction="row"
         height={96}
@@ -101,11 +102,11 @@ export const AllLivesSearchBar = ({
       <RenderIfWithoutLoading condition={showModifyWiew}>
         <Box id="modify-view" position="relative" top={-16} width="100%">
           <AllLiveComponents.MetaSearchItem
-            title={search_params?.selectedCountry || "Country"}
+            title={search_params?.selectedCountry || 'Country'}
             pressHandler={openSelectCountryModalHandler}
           />
           <AllLiveComponents.MetaSearchItem
-            title={search_params?.selectedLanguage || "Language"}
+            title={search_params?.selectedLanguage || 'Language'}
             pressHandler={openSelectLanguageModalHandler}
           />
         </Box>

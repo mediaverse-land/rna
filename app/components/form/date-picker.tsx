@@ -8,56 +8,55 @@ import { theme } from '../../constaints/theme';
 
 // const ICON_CALENDAR = imageUriResolver(ICON_CALENDAR_PNG);
 
-const { InputBox, FormGroup, PickerPlaceholder } =
-    InputComponent;
+const { InputBox, FormGroup, PickerPlaceholder } = InputComponent;
 
 export function DatePicker() {
-    const [datePicker, setDatePicker] = useState(false);
-    const [date, setDate] = useState(new Date());
+  const [datePicker, setDatePicker] = useState(false);
+  const [date, setDate] = useState(new Date());
 
-    function showDatePicker() {
-        setDatePicker(true);
-    }
+  function showDatePicker() {
+    setDatePicker(true);
+  }
 
-    function onDateSelected(event: any, value: any) {
-        setDate(value);
-        setDatePicker(false);
-    }
+  function onDateSelected(event: any, value: any) {
+    setDate(value);
+    setDatePicker(false);
+  }
 
-    return (
-        <FormGroup>
-            <TouchableOpacity activeOpacity={1} onPress={showDatePicker}>
-                {/* <Image
+  return (
+    <FormGroup>
+      <TouchableOpacity activeOpacity={1} onPress={showDatePicker}>
+        {/* <Image
                     source={{ uri: ICON_CALENDAR }}
                     style={datePiclerIconStyles}
                 /> */}
-                <InputBox
-                    editable={false}
-                    selectTextOnFocus={false}
-                    placeholder="choose date..."
-                    placeholderTextColor={theme.color.light.GRAY}
-                    style={{
-                        paddingLeft: 89
-                    }}
-                />
-                <PickerPlaceholder
-                    style={{
-                        borderRightColor: theme.color.light.GRAY,
-                        borderRightWidth: 1
-                    }}
-                >
-                    Date
-                </PickerPlaceholder>
-            </TouchableOpacity>
-            {datePicker && (
-                <DateTimePicker
-                    value={date}
-                    mode={'date'}
-                    display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-                    is24Hour={true}
-                    onChange={onDateSelected}
-                />
-            )}
-        </FormGroup>
-    );
+        <InputBox
+          editable={false}
+          selectTextOnFocus={false}
+          placeholder="choose date..."
+          placeholderTextColor={theme.color.light.GRAY}
+          style={{
+            paddingLeft: 89,
+          }}
+        />
+        <PickerPlaceholder
+          style={{
+            borderRightColor: theme.color.light.GRAY,
+            borderRightWidth: 1,
+          }}
+        >
+          Date
+        </PickerPlaceholder>
+      </TouchableOpacity>
+      {datePicker && (
+        <DateTimePicker
+          value={date}
+          mode={'date'}
+          display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+          is24Hour={true}
+          onChange={onDateSelected}
+        />
+      )}
+    </FormGroup>
+  );
 }

@@ -1,10 +1,10 @@
-import { theme } from "../../constaints/theme";
-import { StyleSheet } from "react-native";
+import { theme } from '../../constaints/theme';
+import { StyleSheet } from 'react-native';
 
 export const AllLiveStyles = StyleSheet.create({
   searchInput: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
     borderRadius: 16,
     borderWidth: 1,
     borderColor: theme.color.light.INPUT_PLACEHOLDER,
@@ -13,7 +13,7 @@ export const AllLiveStyles = StyleSheet.create({
     color: theme.color.light.LIGHT_TEXT,
   },
   magnetIcon: {
-    position: "absolute",
+    position: 'absolute',
     right: 16,
     top: 16,
   },

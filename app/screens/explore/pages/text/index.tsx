@@ -1,16 +1,16 @@
-import { useState, useContext, useEffect } from "react";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { SoundsPageBestInMonth } from "./best-in-month";
-import { VirtualizedList } from "../../../../components/virtualized-list";
-import { Spacer } from "../../../../components/spacer";
-import { tokenContext } from "../../../../context/token";
-import { tokenStringResolver } from "../../../../utils/token-string-resolver";
-import { RenderIf } from "../../../../components/render-if";
-import { IfNoItem } from "../../../../components/if-no-item";
-import { getTextDataApiHandler } from "./service";
-import { UseNavigationType } from "../../../../types/use-navigation";
-import { SoundsPageRecently } from "./recently";
-import { ExploreGradientWrapper } from "../../components/gradient-wrapper";
+import { useState, useContext, useEffect } from 'react';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { SoundsPageBestInMonth } from './best-in-month';
+import { VirtualizedList } from '../../../../components/virtualized-list';
+import { Spacer } from '../../../../components/spacer';
+import { tokenContext } from '../../../../context/token';
+import { tokenStringResolver } from '../../../../utils/token-string-resolver';
+import { RenderIf } from '../../../../components/render-if';
+import { IfNoItem } from '../../../../components/if-no-item';
+import { getTextDataApiHandler } from './service';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { SoundsPageRecently } from './recently';
+import { ExploreGradientWrapper } from '../../components/gradient-wrapper';
 
 export function TextsPage() {
   const isFocused = useIsFocused();
@@ -36,20 +36,15 @@ export function TextsPage() {
 
   const getData = async () => {
     Promise.all([
-      await getApiDataData(
-        "/texts/newest",
-        setBestInMothData,
-        setIsBestInMonthLoading
-      ),
-      await getApiDataData("/texts", setRecentlyData, setIsRecentlyLoading),
+      await getApiDataData('/texts/newest', setBestInMothData, setIsBestInMonthLoading),
+      await getApiDataData('/texts', setRecentlyData, setIsRecentlyLoading),
     ]);
-
   };
 
   async function getApiDataData(
     url: string,
     setter: (...args: any) => void,
-    loadSetter: (isLoading: boolean) => void
+    loadSetter: (isLoading: boolean) => void,
   ): Promise<void> {
     loadSetter(true);
     const token = await tokenCtx.getToken();
@@ -95,10 +90,7 @@ export function TextsPage() {
           </RenderIf>
           <RenderIf condition={isRecentlyLoading}>
             <IfNoItem dataLength={recentlyData?.data?.length}>
-              <SoundsPageRecently
-                data={recentlyData?.data}
-                navigation={navigation}
-              />
+              <SoundsPageRecently data={recentlyData?.data} navigation={navigation} />
             </IfNoItem>
           </RenderIf>
           <Spacer />

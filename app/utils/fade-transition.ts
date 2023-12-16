@@ -1,5 +1,5 @@
 export const fadeTransition = ({ current }: any) => ({
-    cardStyle: {
-        opacity: current.progress
-    }
+  cardStyle: {
+    opacity: current.progress,
+  },
 });

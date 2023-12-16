@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
-import { SoundsPageBestInMonth } from "./best-in-moth";
-import { SoundsPageRecently } from "./recently";
-import { VirtualizedList } from "../../../../components/virtualized-list";
-import { RenderIf } from "../../../../components/render-if";
-import { IfNoItem } from "../../../../components/if-no-item";
-import { getSoundPageDatApiHandler } from "./service";
-import { Sound } from "../../../../types/sound";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { UseNavigationType } from "../../../../types/use-navigation";
-import { ExploreGradientWrapper } from "../../components/gradient-wrapper";
+import { useState, useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { SoundsPageBestInMonth } from './best-in-moth';
+import { SoundsPageRecently } from './recently';
+import { VirtualizedList } from '../../../../components/virtualized-list';
+import { RenderIf } from '../../../../components/render-if';
+import { IfNoItem } from '../../../../components/if-no-item';
+import { getSoundPageDatApiHandler } from './service';
+import { Sound } from '../../../../types/sound';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { ExploreGradientWrapper } from '../../components/gradient-wrapper';
 
 export function SoundsPage() {
   const isFocused = useIsFocused();
@@ -75,11 +75,11 @@ export function SoundsPage() {
 
 const styles = StyleSheet.create({
   seperator: {
-    width: "100%",
+    width: '100%',
     height: 350,
   },
   scrollView: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     paddingTop: 196,
   },
 });

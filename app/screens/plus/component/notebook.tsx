@@ -1,18 +1,14 @@
-import { FC, useCallback,  useState } from "react";
-import {
-  NativeSyntheticEvent,
-  TextInput,
-  TextInputContentSizeChangeEventData,
-} from "react-native";
-import { Box } from "../../../components/box";
-import { styles } from "./styles";
-import { theme } from "../../../constaints/theme";
+import { FC, useCallback, useState } from 'react';
+import { NativeSyntheticEvent, TextInput, TextInputContentSizeChangeEventData } from 'react-native';
+import { Box } from '../../../components/box';
+import { styles } from './styles';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
   setCaptionText: (text: string) => void;
 };
 
-const WRITE_CAPTION_CONST = "Write a caption";
+const WRITE_CAPTION_CONST = 'Write a caption';
 
 export const NoteBook: FC<Props> = ({ setCaptionText }) => {
   const [height, setHeight] = useState<number>(null);
@@ -25,7 +21,7 @@ export const NoteBook: FC<Props> = ({ setCaptionText }) => {
       }
       setHeight(e.nativeEvent.contentSize.height);
     },
-    [height]
+    [height],
   );
 
   const wrapperHeight = height + 400;
@@ -43,5 +39,3 @@ export const NoteBook: FC<Props> = ({ setCaptionText }) => {
     </Box>
   );
 };
-
-

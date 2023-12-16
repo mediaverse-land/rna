@@ -7,56 +7,47 @@ import { theme } from '../../../constaints/theme';
 import { Button } from '../../../components/button';
 
 type Props = {
-    isLoading: boolean
-    closeAddInventoryAlertHandler: () => void;
-    addCardPressHandler: () => void;
+  isLoading: boolean;
+  closeAddInventoryAlertHandler: () => void;
+  addCardPressHandler: () => void;
 };
 
-export function AddInventory({ closeAddInventoryAlertHandler,addCardPressHandler,  isLoading }: Props) {
-    return (
-        <PaddingContainer>
-            <Box paddingTop={16}>
-                <Box
-                    width="100%"
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                >
-                    <Text
-                        color={theme.color.light.WHITE}
-                        fontWeight={600}
-                        fontSize={16}
-                        lineHeight={16}
-                    >
-                        Add inventory
-                    </Text>
-                    <TouchableOpacity
-                        onPress={closeAddInventoryAlertHandler}
-                        activeOpacity={1}
-                    >
-                        <Text
-                            color={theme.color.light.LIGHT_TEXT}
-                            fontWeight={400}
-                            fontSize={14}
-                            lineHeight={16}
-                        >
-                            Cancel
-                        </Text>
-                    </TouchableOpacity>
-                </Box>
-                <Box marginTop={25}>
-                    <Input placeholder="Insert amount..." labelText="Amount" />
-                    <Button
-                        varient="dark"
-                        text="Pay"
-                        marginTop={24}
-                        borderRadius={16}
-                        size="lg"
-                        isLoading={isLoading}
-                        onpressHandler={addCardPressHandler}
-                    />
-                </Box>
-            </Box>
-        </PaddingContainer>
-    );
+export function AddInventory({
+  closeAddInventoryAlertHandler,
+  addCardPressHandler,
+  isLoading,
+}: Props) {
+  return (
+    <PaddingContainer>
+      <Box paddingTop={16}>
+        <Box width="100%" direction="row" alignItems="center" justifyContent="space-between">
+          <Text color={theme.color.light.WHITE} fontWeight={600} fontSize={16} lineHeight={16}>
+            Add inventory
+          </Text>
+          <TouchableOpacity onPress={closeAddInventoryAlertHandler} activeOpacity={1}>
+            <Text
+              color={theme.color.light.LIGHT_TEXT}
+              fontWeight={400}
+              fontSize={14}
+              lineHeight={16}
+            >
+              Cancel
+            </Text>
+          </TouchableOpacity>
+        </Box>
+        <Box marginTop={25}>
+          <Input placeholder="Insert amount..." labelText="Amount" />
+          <Button
+            varient="dark"
+            text="Pay"
+            marginTop={24}
+            borderRadius={16}
+            size="lg"
+            isLoading={isLoading}
+            onpressHandler={addCardPressHandler}
+          />
+        </Box>
+      </Box>
+    </PaddingContainer>
+  );
 }

@@ -1,26 +1,25 @@
-import React from "react";
-import { Text } from "../../../components/text";
-import { FlashList } from "@shopify/flash-list";
-import { Box } from "../../../components/box";
-import { Flex, PaddingContainer } from "../../../styles/grid";
-import { TouchableOpacity, View } from "react-native";
-import { theme } from "../../../constaints/theme";
-import { UserNameCard } from "../../../components/username-card";
-import type { Video } from "./../../../types/video";
-import { formatTime } from "../../../utils/format-time";
-import { VideoPageComponents } from "../../explore/pages/videos/style";
-import { navigateTo } from "../utils/navigate-to-single-screen";
+import React from 'react';
+import { Text } from '../../../components/text';
+import { FlashList } from '@shopify/flash-list';
+import { Box } from '../../../components/box';
+import { Flex, PaddingContainer } from '../../../styles/grid';
+import { TouchableOpacity, View } from 'react-native';
+import { theme } from '../../../constaints/theme';
+import { UserNameCard } from '../../../components/username-card';
+import type { Video } from './../../../types/video';
+import { formatTime } from '../../../utils/format-time';
+import { VideoPageComponents } from '../../explore/pages/videos/style';
+import { navigateTo } from '../utils/navigate-to-single-screen';
 import {
   PROFILE_IMAGE,
   VIDEO_LIST_ITEM_GRADIENT,
   VIDEO_THUMBNAIL_PLACEHOLDER,
-} from "../../../constaints/images";
+} from '../../../constaints/images';
 
 type Props = {
   data: Video[];
   navigate: (...args: any) => void;
 };
-
 
 const {
   VideoListItem,
@@ -56,8 +55,7 @@ const ViewAllVideoList = ({ data, navigate }: Props) => {
 
     const name = item?.name;
 
-    const thumbUri =
-      item?.asset?.thumbnails?.["340x220"] || VIDEO_THUMBNAIL_PLACEHOLDER;
+    const thumbUri = item?.asset?.thumbnails?.['340x220'] || VIDEO_THUMBNAIL_PLACEHOLDER;
 
     return (
       <TouchableOpacity
@@ -72,7 +70,7 @@ const ViewAllVideoList = ({ data, navigate }: Props) => {
           // )
         }
         style={{
-          width: "100%",
+          width: '100%',
         }}
       >
         <Box width="100%" flex={1}>
@@ -83,9 +81,7 @@ const ViewAllVideoList = ({ data, navigate }: Props) => {
                   uri: thumbUri,
                 }}
               />
-              <VideoListItemGradietImage
-                source={{ uri: VIDEO_LIST_ITEM_GRADIENT }}
-              />
+              <VideoListItemGradietImage source={{ uri: VIDEO_LIST_ITEM_GRADIENT }} />
               <Box
                 position="absolute"
                 zIndex={10}
@@ -99,9 +95,7 @@ const ViewAllVideoList = ({ data, navigate }: Props) => {
             </View>
             <View>
               {item.description ? (
-                <VideoListItemDescription>
-                  {item?.description}
-                </VideoListItemDescription>
+                <VideoListItemDescription>{item?.description}</VideoListItemDescription>
               ) : null}
               <Flex
                 direction="row"
@@ -114,8 +108,8 @@ const ViewAllVideoList = ({ data, navigate }: Props) => {
                 }}
               >
                 <UserNameCard
-                  username={asset_username || ""}
-                  profileUri={asset_user_image_url || ""}
+                  username={asset_username || ''}
+                  profileUri={asset_user_image_url || ''}
                   usernameStyles={{
                     color: theme.color.light.TEXT,
                     marginLeft: 8,

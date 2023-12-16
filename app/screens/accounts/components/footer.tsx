@@ -1,17 +1,15 @@
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { ICON_ADD } from "../../../constaints/icons";
-import { ADD_SHARE_ACCOUNT_BG } from "../../../constaints/images";
-import { windowSize } from "../../../utils/window-size";
-import { AddAccountButton } from "../style";
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { ICON_ADD } from '../../../constaints/icons';
+import { ADD_SHARE_ACCOUNT_BG } from '../../../constaints/images';
+import { windowSize } from '../../../utils/window-size';
+import { AddAccountButton } from '../style';
 
 const { width } = windowSize();
 const SHARE_ACCOUNT_BG_WIDTH = width;
 const SHARE_ACCOUNT_BG_HEIGHT = width / 3;
 
-export const AccountsScreenFooterComponent = ({
-  createAccountHandler,
-}: any) => {
+export const AccountsScreenFooterComponent = ({ createAccountHandler }: any) => {
   return (
     <Box
       width="100%"
@@ -27,7 +25,7 @@ export const AccountsScreenFooterComponent = ({
         width={SHARE_ACCOUNT_BG_WIDTH}
         height={SHARE_ACCOUNT_BG_HEIGHT}
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: -16,
           left: 1,
         }}
@@ -39,7 +37,7 @@ export const AccountsScreenFooterComponent = ({
         <ICON_ADD
           width={20}
           style={{
-            position: "relative",
+            position: 'relative',
             top: 1.5,
           }}
         />

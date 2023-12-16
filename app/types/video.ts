@@ -1,4 +1,4 @@
-import { File } from "./file";
+import { File } from './file';
 
 export interface Video {
   id: number;
@@ -45,16 +45,16 @@ export interface Video {
     sales_number: number;
     views_count: number;
     thumbnails: {
-      "1234x1234": string;
-      "226x226": string;
-      "336x366": string;
-      "340x220": string;
-      "390x264": string;
-      "348x351": string;
-      "523x304": string;
-      "525x525": string;
+      '1234x1234': string;
+      '226x226': string;
+      '336x366': string;
+      '340x220': string;
+      '390x264': string;
+      '348x351': string;
+      '523x304': string;
+      '525x525': string;
     };
-    forkability_status: 1 |2,
+    forkability_status: 1 | 2;
     thumbnail: {
       id: number;
       asset_id: number;
@@ -78,7 +78,7 @@ export interface Video {
         filesize: number;
         avdataend: number;
         mime_type: string;
-        fileformat: "jpg";
+        fileformat: 'jpg';
         thumbnails: string[];
         avdataoffset: number;
       };

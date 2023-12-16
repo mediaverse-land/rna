@@ -1,5 +1,5 @@
-import styled from "styled-components/native";
-import { theme } from "../../constaints/theme";
+import styled from 'styled-components/native';
+import { theme } from '../../constaints/theme';
 // background-color: #0e0e12a0;
 
 const TabBar = styled.View`

@@ -1,14 +1,14 @@
-import { LegacyRef, ReactNode, RefObject } from "react";
-import { ModalBottomSheet } from "../../../components/bottom-sheet-modal";
-import { View } from "react-native";
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
-import { Input } from "../../../components/form";
-import { Button } from "../../../components/button";
-import { LoadingSpinner } from "../../../components/loader-spinner";
-import { Toaster } from "../../../utils/toaster";
+import { LegacyRef, ReactNode, RefObject } from 'react';
+import { ModalBottomSheet } from '../../../components/bottom-sheet-modal';
+import { View } from 'react-native';
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
+import { Input } from '../../../components/form';
+import { Button } from '../../../components/button';
+import { LoadingSpinner } from '../../../components/loader-spinner';
+import { Toaster } from '../../../utils/toaster';
 
 type BottomSheetModalCustomType = {
   open: () => void;
@@ -40,15 +40,15 @@ type Config = {
 
 const _toaster = new Toaster();
 
-let inputValue = "";
+let inputValue = '';
 
 export class TextToTextConvert implements ITextToTextConvert {
-  private _snapPoints = ["30%", "70%"];
+  private _snapPoints = ['30%', '70%'];
   ref: RefObject<BottomSheetModalCustomType>;
   innerRef: LegacyRef<View>;
   apiFunction: any;
   isLoading = false;
-  token = "";
+  token = '';
   assetId: number;
 
   config({ ref, innerRef, _apiFunction, isLoading, token, assetId }: Config) {
@@ -77,15 +77,15 @@ export class TextToTextConvert implements ITextToTextConvert {
     try {
       const result = await func({ token: this.token, body });
       if (result?.error) {
-        _toaster.show("Convert text to text failed");
+        _toaster.show('Convert text to text failed');
       }
 
       if (result?.data) {
         this.closeModal();
-        _toaster.show("Text converted successfully");
+        _toaster.show('Text converted successfully');
       }
     } catch (err) {
-      _toaster.show("Convert text to text failed");
+      _toaster.show('Convert text to text failed');
     }
   }
 
@@ -104,7 +104,7 @@ export class TextToTextConvert implements ITextToTextConvert {
           }}
         >
           {!this.isLoading ? (
-            <Box width={"100%"} flex={1} paddingLeft={24} paddingRight={24}>
+            <Box width={'100%'} flex={1} paddingLeft={24} paddingRight={24}>
               <Text color={theme.color.light.WHITE} marginBottom={32}>
                 Convert text to text
               </Text>

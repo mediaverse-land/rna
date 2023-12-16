@@ -1,28 +1,28 @@
-import { memo, useEffect, useState } from "react";
-import { Platform, StyleSheet, TouchableOpacity } from "react-native";
-import { BottomSheetScrollView } from "@gorhom/bottom-sheet";
-import { BlurView } from "expo-blur";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
-import { Input } from "../../../components/form";
-import { Button } from "../../../components/button";
-import { Select } from "../../../components/form/select";
-import { useAddExternalAccountMutation } from "../../../services/asset.service";
-import { getUserEmailByAccessToken } from "../../accounts/service";
+import { memo, useEffect, useState } from 'react';
+import { Platform, StyleSheet, TouchableOpacity } from 'react-native';
+import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import { BlurView } from 'expo-blur';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
+import { Input } from '../../../components/form';
+import { Button } from '../../../components/button';
+import { Select } from '../../../components/form/select';
+import { useAddExternalAccountMutation } from '../../../services/asset.service';
+import { getUserEmailByAccessToken } from '../../accounts/service';
 import {
   EXTERNAL_ACCOUNT_CREATION_SUCCESS_MSG,
   ERROR_EXTERNAL_ACCOUNT_CREATION_MSG,
   ERROR_FETCH_GOOGLE_DATA,
-} from "../../../constaints/errors-and-messages";
-import { Logger } from "../../../utils/logger";
+} from '../../../constaints/errors-and-messages';
+import { Logger } from '../../../utils/logger';
 import {
   EXTERNAL_ACCOUNT_GOOGLE_TYPE,
   EXTERNAL_ACCOUNT_STREAM_TYPE,
-} from "../../../constaints/consts";
-import { Toaster } from "../../../utils/toaster";
-import { useGetExternalAccountsListQuery } from "../../../services/auth.service";
-import { useGoogleSignin } from "../../../hooks/use-google-singin";
+} from '../../../constaints/consts';
+import { Toaster } from '../../../utils/toaster';
+import { useGetExternalAccountsListQuery } from '../../../services/auth.service';
+import { useGoogleSignin } from '../../../hooks/use-google-singin';
 
 type CreateAccount = {
   accessToken: string;
@@ -30,9 +30,9 @@ type CreateAccount = {
   email: string;
 };
 
-type ChannelAccountType = "Google" | "Twitter" | "Facebook" | "Stream";
+type ChannelAccountType = 'Google' | 'Twitter' | 'Facebook' | 'Stream';
 
-const BOTTOM_SHEET_BLUR_PERCENT = Platform.OS === "android" ? 50 : 80;
+const BOTTOM_SHEET_BLUR_PERCENT = Platform.OS === 'android' ? 50 : 80;
 
 const MemoSelect = memo(Select);
 const MemoInput = memo(Input);
@@ -48,15 +48,14 @@ export const AddChannelBottomSheet = ({
   token: string;
 }) => {
   const [response, promptAsync] = useGoogleSignin();
-  const [channelType, setChannelType] = useState<ChannelAccountType>("Google");
+  const [channelType, setChannelType] = useState<ChannelAccountType>('Google');
   const [streamData, setStreamData] = useState<{
     email: string;
     stream_key: string;
     stream_url: string;
   }>(null);
 
-  const [_createAccountApiHandler, { isLoading, isFetching }] =
-    useAddExternalAccountMutation();
+  const [_createAccountApiHandler, { isLoading, isFetching }] = useAddExternalAccountMutation();
 
   const { refetch } = useGetExternalAccountsListQuery({
     token,
@@ -89,11 +88,7 @@ export const AddChannelBottomSheet = ({
     }
   };
 
-  const _createAccountMiddleware = async ({
-    email,
-    accessToken,
-    refreshToken,
-  }: CreateAccount) => {
+  const _createAccountMiddleware = async ({ email, accessToken, refreshToken }: CreateAccount) => {
     const requestBody = {
       body: {
         type: EXTERNAL_ACCOUNT_GOOGLE_TYPE,
@@ -110,7 +105,7 @@ export const AddChannelBottomSheet = ({
       _toaster.show(
         response?.error?.data?.errors?.title?.[0] ||
           response?.error?.data?.error ||
-          ERROR_EXTERNAL_ACCOUNT_CREATION_MSG
+          ERROR_EXTERNAL_ACCOUNT_CREATION_MSG,
       );
     }
     if (response?.data) {
@@ -125,15 +120,11 @@ export const AddChannelBottomSheet = ({
   };
 
   const createStreamAccount = async () => {
-    if (channelType !== "Stream") {
+    if (channelType !== 'Stream') {
       return;
     }
-    if (
-      !streamData?.email ||
-      !streamData?.stream_key ||
-      !streamData?.stream_url
-    ) {
-      _toaster.show("Please fill all inputs");
+    if (!streamData?.email || !streamData?.stream_key || !streamData?.stream_url) {
+      _toaster.show('Please fill all inputs');
     }
 
     const { stream_key, stream_url, email } = streamData;
@@ -154,7 +145,7 @@ export const AddChannelBottomSheet = ({
       _toaster.show(
         response?.error?.data?.message ||
           response?.error?.data?.error ||
-          ERROR_EXTERNAL_ACCOUNT_CREATION_MSG
+          ERROR_EXTERNAL_ACCOUNT_CREATION_MSG,
       );
     }
     if (response?.data) {
@@ -166,10 +157,10 @@ export const AddChannelBottomSheet = ({
 
   const createAccountSubmitHandler = async () => {
     switch (channelType) {
-      case "Google":
+      case 'Google':
         createGoogleAccount();
         break;
-      case "Stream":
+      case 'Stream':
         await createStreamAccount();
         break;
     }
@@ -191,30 +182,20 @@ export const AddChannelBottomSheet = ({
         tint="dark"
         intensity={BOTTOM_SHEET_BLUR_PERCENT}
       >
-        <Box
-          width="100%"
-          paddingTop={24}
-          paddingBottom={32}
-          paddingRight={32}
-          paddingLeft={32}
-        >
+        <Box width="100%" paddingTop={24} paddingBottom={32} paddingRight={32} paddingLeft={32}>
           <MemoTitle modalCloser={modalCloser} />
           <Box id="form" marginTop={24}>
-            <MemoInput
-              showBorder={false}
-              labelText="Username"
-              placeholder="Insert username..."
-            />
+            <MemoInput showBorder={false} labelText="Username" placeholder="Insert username..." />
             <Box marginTop={16}></Box>
             <MemoSelect
-              options={["Google", "Twitter", "Facebook", "Stream"]}
-              value={"Google"}
+              options={['Google', 'Twitter', 'Facebook', 'Stream']}
+              value={'Google'}
               setSelected={setChannelType}
               labelText="Type"
               placeholder="Choose type"
             />
 
-            {channelType === "Stream" ? (
+            {channelType === 'Stream' ? (
               <>
                 <Box marginTop={16}></Box>
                 <MemoInput
@@ -222,7 +203,7 @@ export const AddChannelBottomSheet = ({
                   labelText="Email"
                   placeholder="Insert Email..."
                   onChangeText={(text: string) => {
-                    updateStreamInputs("email", text);
+                    updateStreamInputs('email', text);
                   }}
                 />
                 <Box marginTop={16}></Box>
@@ -231,7 +212,7 @@ export const AddChannelBottomSheet = ({
                   labelText="Stream key"
                   placeholder="Insert stream key..."
                   onChangeText={(text: string) => {
-                    updateStreamInputs("stream_key", text);
+                    updateStreamInputs('stream_key', text);
                   }}
                 />
                 <Box marginTop={16}></Box>
@@ -240,7 +221,7 @@ export const AddChannelBottomSheet = ({
                   labelText="Stream url"
                   placeholder="rtmp://..."
                   onChangeText={(text: string) => {
-                    updateStreamInputs("stream_url", text);
+                    updateStreamInputs('stream_url', text);
                   }}
                 />
                 <Box marginTop={16}></Box>
@@ -265,22 +246,13 @@ export const AddChannelBottomSheet = ({
 
 const Title = ({ modalCloser }: { modalCloser: () => void }) => {
   return (
-    <Box
-      id="title"
-      direction="row"
-      alignItems="center"
-      justifyContent="space-between"
-    >
+    <Box id="title" direction="row" alignItems="center" justifyContent="space-between">
       <Text color={theme.color.light.WHITE} fontSize={16} fontWeight={600}>
         Add channel
       </Text>
       <Box>
         <TouchableOpacity onPress={modalCloser}>
-          <Text
-            fontSize={14}
-            fontWeight={300}
-            color={theme.color.light.LIGHT_TEXT}
-          >
+          <Text fontSize={14} fontWeight={300} color={theme.color.light.LIGHT_TEXT}>
             Cancel
           </Text>
         </TouchableOpacity>
@@ -293,13 +265,13 @@ const MemoTitle = memo(Title);
 
 const styles = StyleSheet.create({
   bottomSheetScrollView: {
-    width: "100%",
+    width: '100%',
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,
     flex: 1,
   },
   bottomSheetBlurView: {
-    width: "100%",
+    width: '100%',
     flex: 1,
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,

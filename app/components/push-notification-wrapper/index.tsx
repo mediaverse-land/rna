@@ -106,7 +106,7 @@
 //       <Box marginTop={24}>
 //         <Text color={theme.color.light.WHITE} fontSize={16} fontWeight={600}>
 //           {title}
-//         </Text> 
+//         </Text>
 //         <Text color={theme.color.light.WHITE} fontSize={14} fontWeight={600}>
 //           {body}
 //         </Text>

@@ -1,8 +1,8 @@
-import { TouchableOpacity } from "react-native";
-import { screenSize } from "../../../utils/screen-size";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { ICON_ARROW_UP } from "../../../constaints/icons";
+import { TouchableOpacity } from 'react-native';
+import { screenSize } from '../../../utils/screen-size';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { ICON_ARROW_UP } from '../../../constaints/icons';
 
 const { width: WINDOW_WIDTH } = screenSize();
 
@@ -10,16 +10,13 @@ const seatch_input_width = Math.floor(WINDOW_WIDTH) - 48 - 22 - 48 - 32;
 
 type MetaSearchItemProps = { title: string; pressHandler: () => void };
 
-export const AllLivesMetaSearchItem = ({
-  title,
-  pressHandler,
-}: MetaSearchItemProps) => {
+export const AllLivesMetaSearchItem = ({ title, pressHandler }: MetaSearchItemProps) => {
   return (
     <TouchableOpacity
       style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "flex-end",
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
       }}
       activeOpacity={1}
       onPress={pressHandler}
@@ -41,7 +38,7 @@ export const AllLivesMetaSearchItem = ({
         <Text color="#fff" lineHeight={16.94} fontSize={14}>
           {title}
         </Text>
-        <ICON_ARROW_UP style={{ transform: [{ rotate: "180deg" }] }} />
+        <ICON_ARROW_UP style={{ transform: [{ rotate: '180deg' }] }} />
       </Box>
     </TouchableOpacity>
   );

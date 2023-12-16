@@ -1,4 +1,4 @@
-import { ReactNode, memo } from "react";
+import { ReactNode, memo } from 'react';
 
 type Props = {
   condition: boolean;

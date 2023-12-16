@@ -1,32 +1,32 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
-import { StyleSheet, View } from "react-native";
-import { BottomTabBar } from "../../component/bottom-tab-bar";
-import { useNavigation, useIsFocused } from "@react-navigation/native";
-import { UseNavigationType } from "../../../../types/use-navigation";
-import { CreateContentHeader } from "../../component/header";
-import { Box } from "../../../../components/box";
-import { RenderIfWithoutLoading } from "../../../../components/render-if-without-loading";
-import { Camera } from "./camera";
-import { useCreateSingleImageMutation } from "../../../../services/single-image.service";
-import { tokenContext } from "../../../../context/token";
-import { tokenStringResolver } from "../../../../utils/token-string-resolver";
-import { SubmitForm } from "./submit-form";
-import { userContext } from "../../../../context/user";
-import { CREATE_IMAGE } from "../../constaints";
-import { ScreenGradient } from "../../../../components/screen-gradient";
-import { Toaster } from "../../../../utils/toaster";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../store";
-import { removeImage } from "../../../../slices/single-image.slice";
-import { FileSystemController } from "../../../../controllers/file-system.controller";
-import { uploadHandler } from "../../service";
-import { useCreateSingleVideoMutation } from "../../../../services/single.video.service";
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { BottomTabBar } from '../../component/bottom-tab-bar';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { CreateContentHeader } from '../../component/header';
+import { Box } from '../../../../components/box';
+import { RenderIfWithoutLoading } from '../../../../components/render-if-without-loading';
+import { Camera } from './camera';
+import { useCreateSingleImageMutation } from '../../../../services/single-image.service';
+import { tokenContext } from '../../../../context/token';
+import { tokenStringResolver } from '../../../../utils/token-string-resolver';
+import { SubmitForm } from './submit-form';
+import { userContext } from '../../../../context/user';
+import { CREATE_IMAGE } from '../../constaints';
+import { ScreenGradient } from '../../../../components/screen-gradient';
+import { Toaster } from '../../../../utils/toaster';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../../store';
+import { removeImage } from '../../../../slices/single-image.slice';
+import { FileSystemController } from '../../../../controllers/file-system.controller';
+import { uploadHandler } from '../../service';
+import { useCreateSingleVideoMutation } from '../../../../services/single.video.service';
 import {
   REDIRECTED_FROM_CREATE_ASSET,
   SINGLE_IMAGE_SCREEN,
   SINGLE_VIDEO_SCREEN,
-} from "../../../../constaints/consts";
-import { Logger } from "../../../../utils/logger";
+} from '../../../../constaints/consts';
+import { Logger } from '../../../../utils/logger';
 
 type CapturedImage = {
   height: number;
@@ -51,8 +51,7 @@ const _fileSystemController = new FileSystemController();
 export const CreateImageScreen = () => {
   const [capturedImage, setCapturedImage] = useState<CapturedImage>(null);
   const [capturedVideo, setSapturedVideo] = useState<CapturedImage>(null);
-  const [capturedVideo_base64_address, _set_capturedVideo_base64_address] =
-    useState<string>(null);
+  const [capturedVideo_base64_address, _set_capturedVideo_base64_address] = useState<string>(null);
   const [isLoading, setIsLoading] = useState(false);
   // Create image
   const [createNewImage] = useCreateSingleImageMutation();
@@ -60,9 +59,7 @@ export const CreateImageScreen = () => {
 
   const { params } = useSelector((state: RootState) => state.plusSlice);
 
-  const { latest_image_uri } = useSelector(
-    (states: RootState) => states.imageSlice
-  );
+  const { latest_image_uri } = useSelector((states: RootState) => states.imageSlice);
 
   const cameraRef = useRef<any>(null);
   const dispatch = useDispatch<AppDispatch>();
@@ -104,7 +101,7 @@ export const CreateImageScreen = () => {
 
   const showToastOfCapturingVideo = () => {
     setTimeout(() => {
-      _toast.show("Hold button to capture video");
+      _toast.show('Hold button to capture video');
     }, 1000);
   };
 
@@ -125,18 +122,16 @@ export const CreateImageScreen = () => {
   };
 
   const _stopVideoSubmitButtonHandler = async () => {
-    try{
-
+    try {
       await cameraRef?.current?.stopVideo();
       const uri = capturedVideo?.uri;
-      
+
       const result = await _fileSystemController.convertFileToBase64(uri);
       if (result) {
         _set_capturedVideo_base64_address(result);
       }
-    }
-    catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -164,7 +159,7 @@ export const CreateImageScreen = () => {
       },
     };
 
-    if(plan === 1){
+    if (plan === 1) {
       delete options.body.price;
     }
 
@@ -199,16 +194,16 @@ export const CreateImageScreen = () => {
       body: {
         ...options.body,
         type: 4,
-        country: "fr",
-        language: "fr",
-        genre: "horror",
+        country: 'fr',
+        language: 'fr',
+        genre: 'horror',
         imdb_score: 9.8,
         production_year: 1994,
         length: 2000,
-        producers: ["Quentin Tarantino"],
-        directors: ["Steven Spielberg"],
-        actors: ["Marlon Brando"],
-        contributors: ["mohammad alimardani"],
+        producers: ['Quentin Tarantino'],
+        directors: ['Steven Spielberg'],
+        actors: ['Marlon Brando'],
+        contributors: ['mohammad alimardani'],
       },
     };
     createNewVideo(CREATE_VIDEO_OPTIONS)
@@ -216,8 +211,7 @@ export const CreateImageScreen = () => {
         const asset_id = res?.data?.asset_id;
 
         if (!asset_id || res?.error) {
-          const errorMessage =
-            res?.error?.data?.message || "Something went wrong, try again";
+          const errorMessage = res?.error?.data?.message || 'Something went wrong, try again';
           stopLoad();
           _logger.log(errorMessage);
           _toast.show(errorMessage);
@@ -232,7 +226,7 @@ export const CreateImageScreen = () => {
           setIsLoading,
         });
 
-        if (upload_res === "Ok" && id) {
+        if (upload_res === 'Ok' && id) {
           navigation?.navigate(SINGLE_VIDEO_SCREEN, {
             id,
             asset_id: id,
@@ -252,8 +246,7 @@ export const CreateImageScreen = () => {
         const asset_id = res?.data?.asset_id;
 
         if (!asset_id) {
-          const errorMessage =
-            res?.error?.data?.message || "Something went wrong, try again";
+          const errorMessage = res?.error?.data?.message || 'Something went wrong, try again';
           stopLoad();
           _logger.logErro(errorMessage);
           _toast.show(errorMessage);
@@ -268,7 +261,7 @@ export const CreateImageScreen = () => {
           setIsLoading,
         });
 
-        if (upload_res === "Ok") {
+        if (upload_res === 'Ok') {
           if (params?.IS_REDIRECTED_FROM_CREATE_SCREENSHOT) {
             navigation.goBack();
             return;
@@ -323,18 +316,8 @@ export const CreateImageScreen = () => {
 
   return (
     <>
-      <Box
-        position="absolute"
-        top={0}
-        left={24}
-        width="100%"
-        paddingTop={24}
-        zIndex={10000000}
-      >
-        <CreateContentHeader
-          justBackButtonVisible={true}
-          goBackHandler={goBackHandler}
-        />
+      <Box position="absolute" top={0} left={24} width="100%" paddingTop={24} zIndex={10000000}>
+        <CreateContentHeader justBackButtonVisible={true} goBackHandler={goBackHandler} />
       </Box>
       <RenderIfWithoutLoading condition={isFocused}>
         <View style={styles.container}>
@@ -346,18 +329,13 @@ export const CreateImageScreen = () => {
               isLoading={false}
               submitButtonHandler={_submitButtonHandler}
               longPressSubmitButtonHandler={_createVideoSubmitButtonHandler}
-              longressOutSubmitButtonHandler={
-                () =>_stopVideoSubmitButtonHandler()
-              }
+              longressOutSubmitButtonHandler={() => _stopVideoSubmitButtonHandler()}
             />
           </ScreenGradient>
         </View>
       </RenderIfWithoutLoading>
       {capturedImage?.base64 || capturedVideo_base64_address ? (
-        <SubmitForm
-          isLoading={isLoading}
-          createAssetRequest={_createImageRequest}
-        />
+        <SubmitForm isLoading={isLoading} createAssetRequest={_createImageRequest} />
       ) : null}
     </>
   );
@@ -366,6 +344,6 @@ export const CreateImageScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignContent: "center",
+    alignContent: 'center',
   },
 });

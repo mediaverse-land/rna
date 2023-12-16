@@ -1,29 +1,26 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { memo, useCallback, useEffect, useState } from "react";
-import { useGetExternalAccountsListQuery } from "../../../services/auth.service";
-import { useClickOutside } from "react-native-click-outside";
-import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
-import { ChannelItem } from "../types";
-import { Box } from "../../../components/box";
-import { LinearGradient } from "expo-linear-gradient";
-import {
-  ICON_MENU_VERTICAL,
-  ICON_SPEAKER_BLACK,
-} from "../../../constaints/icons";
-import { Text } from "../../../components/text";
-import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
-import { ActivityIndicator } from "react-native";
-import { BlurView } from "expo-blur";
-import { useRemoveExternalAccountMutation } from "../../../services/asset.service";
+import { memo, useCallback, useEffect, useState } from 'react';
+import { useGetExternalAccountsListQuery } from '../../../services/auth.service';
+import { useClickOutside } from 'react-native-click-outside';
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { ChannelItem } from '../types';
+import { Box } from '../../../components/box';
+import { LinearGradient } from 'expo-linear-gradient';
+import { ICON_MENU_VERTICAL, ICON_SPEAKER_BLACK } from '../../../constaints/icons';
+import { Text } from '../../../components/text';
+import { RenderIfWithoutLoading } from '../../../components/render-if-without-loading';
+import { ActivityIndicator } from 'react-native';
+import { BlurView } from 'expo-blur';
+import { useRemoveExternalAccountMutation } from '../../../services/asset.service';
 
 const gradientProps = {
   style: {
-    width: "100%",
+    width: '100%',
     height: 72,
     borderRadius: 16,
     padding: 1,
   },
-  colors: ["rgba(207, 207, 252, 0)", "rgba(207, 207, 252, 0.3)"],
+  colors: ['rgba(207, 207, 252, 0)', 'rgba(207, 207, 252, 0.3)'],
   start: {
     x: 0.7,
     y: 0,
@@ -37,7 +34,7 @@ const speakerIconGradientProps = {
     borderRadius: 8,
     padding: 1,
   },
-  colors: ["#8bb3ff", "#4484ff"],
+  colors: ['#8bb3ff', '#4484ff'],
   start: {
     x: 0.1,
     y: 0.7,
@@ -52,7 +49,7 @@ const menuWindowGradientProps = {
     padding: 1,
     opacity: 0.5,
   },
-  colors: ["#4b4b55", "#38383c"],
+  colors: ['#4b4b55', '#38383c'],
   start: {
     x: 0.1,
     y: 0.7,
@@ -60,10 +57,10 @@ const menuWindowGradientProps = {
 };
 
 const accountTypes = {
-  1: "Google",
-  2: "Twitter",
-  3: "Meta",
-  4: "RTMP",
+  1: 'Google',
+  2: 'Twitter',
+  3: 'Meta',
+  4: 'RTMP',
 };
 
 const MemoChannelsList = ({ token }: { token: string }) => {
@@ -78,11 +75,10 @@ const MemoChannelsList = ({ token }: { token: string }) => {
   const openEditWindowHandler = (id: number) => setActiveEditWindowId(id);
   const closeEditWindowHandler = () => setActiveEditWindowId(null);
 
-  const { data, isLoading, isFetching, refetch } =
-    useGetExternalAccountsListQuery({
-      token,
-      page,
-    });
+  const { data, isLoading, isFetching, refetch } = useGetExternalAccountsListQuery({
+    token,
+    page,
+  });
 
   const current_page = data?.current_page;
   const total = data?.total;
@@ -102,10 +98,8 @@ const MemoChannelsList = ({ token }: { token: string }) => {
     closeEditWindowHandler();
   });
 
-  const [
-    _removeAccountHandler,
-    { isLoading: isRremoveLoading, isFetching: isRremoveFetching },
-  ] = useRemoveExternalAccountMutation();
+  const [_removeAccountHandler, { isLoading: isRremoveLoading, isFetching: isRremoveFetching }] =
+    useRemoveExternalAccountMutation();
 
   const removeExternalAccountHandler = async (accountId: number) => {
     setSelectedItem(accountId);
@@ -133,14 +127,8 @@ const MemoChannelsList = ({ token }: { token: string }) => {
 
   const renderItem = ({ item }: { item: ChannelItem }) => {
     return (
-      <TouchableOpacity
-        activeOpacity={1}
-      >
-        <Box
-          width="100%"
-          marginBottom={16}
-          height={activeEditWindowId === item.id ? 95 : 72}
-        >
+      <TouchableOpacity activeOpacity={1}>
+        <Box width="100%" marginBottom={16} height={activeEditWindowId === item.id ? 95 : 72}>
           <Box position="relative" zIndex={10} width="100%">
             <LinearGradient {...gradientProps}>
               <Box
@@ -154,12 +142,7 @@ const MemoChannelsList = ({ token }: { token: string }) => {
                 position="relative"
                 justifyContent="space-between"
               >
-                <Box
-                  width="90%"
-                  height="100%"
-                  direction="row"
-                  alignItems="center"
-                >
+                <Box width="90%" height="100%" direction="row" alignItems="center">
                   <LinearGradient {...speakerIconGradientProps}>
                     <Box
                       id="speaker-icon"
@@ -172,28 +155,20 @@ const MemoChannelsList = ({ token }: { token: string }) => {
                     </Box>
                   </LinearGradient>
                   <Box flex={1} height="100%" paddingLeft={16}>
-                    <Text
-                      color="rgba(255, 255, 255, 1)"
-                      fontWeight={600}
-                      fontSize={16}
-                    >
+                    <Text color="rgba(255, 255, 255, 1)" fontWeight={600} fontSize={16}>
                       {/* @ts-ignore */}
                       {accountTypes[item.type]}
                     </Text>
-                    <Text
-                      color="rgba(102, 102, 128, 1)"
-                      fontWeight={400}
-                      fontSize={12}
-                    >
+                    <Text color="rgba(102, 102, 128, 1)" fontWeight={400} fontSize={12}>
                       {isRremoveFetching || isRremoveLoading
                         ? selectedItem === item.id
-                          ? "..."
-                          : item.status === "pending"
-                          ? "..."
-                          : "Finished"
-                        : item.status === "pending"
-                        ? "..."
-                        : "Finished"}
+                          ? '...'
+                          : item.status === 'pending'
+                          ? '...'
+                          : 'Finished'
+                        : item.status === 'pending'
+                        ? '...'
+                        : 'Finished'}
                     </Text>
                   </Box>
                 </Box>
@@ -202,12 +177,7 @@ const MemoChannelsList = ({ token }: { token: string }) => {
                     onPress={() => openEditWindowHandler(item.id)}
                     activeOpacity={1}
                   >
-                    <Box
-                      alignItems="center"
-                      justifyContent="center"
-                      width={40}
-                      height={40}
-                    >
+                    <Box alignItems="center" justifyContent="center" width={40} height={40}>
                       <ICON_MENU_VERTICAL />
                     </Box>
                   </TouchableOpacity>
@@ -219,7 +189,13 @@ const MemoChannelsList = ({ token }: { token: string }) => {
             <View ref={modalWrapperRef} style={styles.editViewWrapper}>
               <LinearGradient {...menuWindowGradientProps}>
                 <BlurView style={styles.blur} tint="dark" intensity={80}>
-                  <Box width="100%" paddingLeft={16} paddingRight={16} paddingTop={14} height="100%">
+                  <Box
+                    width="100%"
+                    paddingLeft={16}
+                    paddingRight={16}
+                    paddingTop={14}
+                    height="100%"
+                  >
                     {/* <TouchableOpacity activeOpacity={1}>
                       <Text
                         color="#D9D9FF"
@@ -234,12 +210,7 @@ const MemoChannelsList = ({ token }: { token: string }) => {
                       activeOpacity={1}
                       onPress={() => removeExternalAccountHandler(item?.id)}
                     >
-                      <Text
-                        color="#D9D9FF"
-                        marginBottom={16}
-                        fontSize={14}
-                        fontWeight={600}
-                      >
+                      <Text color="#D9D9FF" marginBottom={16} fontSize={14} fontWeight={600}>
                         Delete
                       </Text>
                     </TouchableOpacity>
@@ -268,7 +239,7 @@ const MemoChannelsList = ({ token }: { token: string }) => {
           renderItem={renderItem}
           keyExtractor={key}
           style={{
-            overflow: "visible",
+            overflow: 'visible',
             paddingBottom: 100,
           }}
           onEndReached={nextPageHandler}
@@ -286,7 +257,7 @@ export const ChannelsList = memo(MemoChannelsList);
 
 const styles = StyleSheet.create({
   editViewWrapper: {
-    position: "absolute",
+    position: 'absolute',
     width: 124,
     height: 50,
     zIndex: 100000000,
@@ -294,8 +265,8 @@ const styles = StyleSheet.create({
     top: 58,
   },
   blur: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
     borderRadius: 16,
   },
 });

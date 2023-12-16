@@ -1,5 +1,5 @@
-import styled from "styled-components/native";
-import { theme } from "../../constaints/theme";
+import styled from 'styled-components/native';
+import { theme } from '../../constaints/theme';
 
 export const SearchBarComponents = {
   SearchInput: styled.TextInput<{ textAlign: string }>`

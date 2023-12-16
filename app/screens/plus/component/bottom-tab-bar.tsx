@@ -1,23 +1,23 @@
-import { useState, useEffect, useRef } from "react";
-import { ActivityIndicator, TouchableOpacity } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
-import { Box } from "../../../components/box";
-import { theme } from "../../../constaints/theme";
-import { UseNavigationType } from "../../../types/use-navigation";
-import { CREATE_IMAGE, CREATE_SOUND, CREATE_TEXT } from "../constaints";
-import { windowSize } from "../../../utils/window-size";
-import { StorageService } from "../../../services/storage.service";
-import { HAS_USER_SEEN_PLUS_TOUR } from "../../../constaints/consts";
-import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
-import { isAndroid } from "../../../controllers/platform.controller";
-import { TabbarBackground } from "./tabbar-background";
+import { useState, useEffect, useRef } from 'react';
+import { ActivityIndicator, TouchableOpacity } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
+import { Box } from '../../../components/box';
+import { theme } from '../../../constaints/theme';
+import { UseNavigationType } from '../../../types/use-navigation';
+import { CREATE_IMAGE, CREATE_SOUND, CREATE_TEXT } from '../constaints';
+import { windowSize } from '../../../utils/window-size';
+import { StorageService } from '../../../services/storage.service';
+import { HAS_USER_SEEN_PLUS_TOUR } from '../../../constaints/consts';
+import { Coachmark, CoachmarkComposer } from 'react-native-coachmark';
+import { isAndroid } from '../../../controllers/platform.controller';
+import { TabbarBackground } from './tabbar-background';
 import {
   menuOrdersIfImageScreen,
   menuOrdersIfSoundScreen,
   menuOrdersIfTextScreen,
-} from "../models";
-import { CurrentPage } from "../types";
-import { msg } from "../msg";
+} from '../models';
+import { CurrentPage } from '../types';
+import { msg } from '../msg';
 
 type Props = {
   navigation: UseNavigationType;
@@ -100,17 +100,9 @@ export function BottomTabBar({
       return;
     }
 
-    if (
-      imageButtonRef?.current &&
-      textButtonRef?.current &&
-      soundButtonRef?.current
-    ) {
+    if (imageButtonRef?.current && textButtonRef?.current && soundButtonRef?.current) {
       setTimeout(() => {
-        const composer = new CoachmarkComposer([
-          imageButtonRef,
-          soundButtonRef,
-          textButtonRef,
-        ]);
+        const composer = new CoachmarkComposer([imageButtonRef, soundButtonRef, textButtonRef]);
         composer.show().then(async () => {
           await setUserSeenTour();
           // setPreventIntractions(false);
@@ -155,9 +147,7 @@ export function BottomTabBar({
           >
             <TouchableOpacity
               activeOpacity={1}
-              onPress={() =>
-                tabBarItemClickNavigateHandler(menuOrder?.next.screen)
-              }
+              onPress={() => tabBarItemClickNavigateHandler(menuOrder?.next.screen)}
             >
               <CoachmarkWrapper
                 allowBackgroundInteractions={false}
@@ -207,11 +197,7 @@ export function BottomTabBar({
                       alignItems="center"
                       justifyContent="center"
                     >
-                      {isLoading ? (
-                        <ActivityIndicator />
-                      ) : (
-                        menuOrder?.center.icon
-                      )}
+                      {isLoading ? <ActivityIndicator /> : menuOrder?.center.icon}
                     </Box>
                   </Box>
                 </CoachmarkWrapper>
@@ -219,9 +205,7 @@ export function BottomTabBar({
             </Box>
             <TouchableOpacity
               activeOpacity={1}
-              onPress={() =>
-                tabBarItemClickNavigateHandler(menuOrder?.prev.screen)
-              }
+              onPress={() => tabBarItemClickNavigateHandler(menuOrder?.prev.screen)}
             >
               <CoachmarkWrapper
                 allowBackgroundInteractions={false}

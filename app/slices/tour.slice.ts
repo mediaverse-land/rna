@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export type InitialState = {
-  DISABLE_INTRACTION:boolean,
+  DISABLE_INTRACTION: boolean;
   BOTTOM_NAVIGATION_TOUR_HAS_SEEN: boolean;
   EXPLORE_TOP_BAR_TOUR_HAS_SEEN: boolean;
   PROFILE_HEADER_TOUR_HAS_SEEN: boolean;
@@ -19,7 +19,7 @@ const initialState: InitialState = {
 };
 
 const tourSlice = createSlice({
-  name: "tour_slice",
+  name: 'tour_slice',
   initialState,
   reducers: {
     // Active DISABLE_INTRACTION
@@ -71,7 +71,7 @@ export const {
   removeProfileAssetItemTour,
   // DisableOnIntractions
   activeDisableOnIntractions,
-  deActivrDisableOnIntractions
+  deActivrDisableOnIntractions,
 } = tourSlice.actions;
 
 // export const getParamsFromPlusSlice = (state: InitialState) =>

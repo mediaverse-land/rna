@@ -1,16 +1,13 @@
-import { TouchableOpacity } from "react-native";
-import { Box } from "../../../components/box";
-import { PaddingContainer } from "../../../styles/grid";
-import {
-  ICON_FOLDER_WHITE,
-  ICON_SEARCH_WHITE,
-} from "../../../constaints/icons";
+import { TouchableOpacity } from 'react-native';
+import { Box } from '../../../components/box';
+import { PaddingContainer } from '../../../styles/grid';
+import { ICON_FOLDER_WHITE, ICON_SEARCH_WHITE } from '../../../constaints/icons';
 
 type Props = {
   justBackButtonVisible: boolean;
   openWebViewHandler?: () => void;
   searchGalleryViewHandler?: () => void;
-  goBackHandler?: () =>void
+  goBackHandler?: () => void;
 };
 
 export const CreateContentHeader = ({
@@ -30,10 +27,7 @@ export const CreateContentHeader = ({
       >
         {!justBackButtonVisible ? (
           <Box direction="row" alignItems="center">
-            <TouchableOpacity
-              activeOpacity={1}
-              onPress={searchGalleryViewHandler}
-            >
+            <TouchableOpacity activeOpacity={1} onPress={searchGalleryViewHandler}>
               <Box
                 id="search-in-local-folders"
                 width={40}

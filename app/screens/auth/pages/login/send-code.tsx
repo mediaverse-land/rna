@@ -1,11 +1,11 @@
-import { TouchableOpacity, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { UseNavigationType } from "../../../../types/use-navigation";
-import { Box } from "../../../../components/box";
-import { Text } from "../../../../components/text";
-import { Input } from "../../../../components/form";
-import { theme } from "../../../../constaints/theme";
-import { AuthWindows } from "../types";
+import { TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { Box } from '../../../../components/box';
+import { Text } from '../../../../components/text';
+import { Input } from '../../../../components/form';
+import { theme } from '../../../../constaints/theme';
+import { AuthWindows } from '../types';
 
 type Props = {
   setWindowHandler: (window: AuthWindows) => void;
@@ -15,23 +15,18 @@ export const SendCode = ({ setWindowHandler }: Props) => {
   const navigation = useNavigation<UseNavigationType>();
 
   const navigateToExploreHandler = () => {
-    navigation.navigate("AppStack");
+    navigation.navigate('AppStack');
   };
 
   const navigateToSignupPage = () => {
-    setWindowHandler("singin");
+    setWindowHandler('singin');
   };
 
   return (
     <>
       <Box flex={1} alignItems="center">
-        <Box position="relative" top={"27%"} alignItems="center">
-          <Text
-            color={theme.color.light.WHITE}
-            lineHeight={20}
-            fontSize={12}
-            fontWeight={600}
-          >
+        <Box position="relative" top={'27%'} alignItems="center">
+          <Text color={theme.color.light.WHITE} lineHeight={20} fontSize={12} fontWeight={600}>
             We send the code to +339012910407
           </Text>
 
@@ -65,12 +60,7 @@ export const SendCode = ({ setWindowHandler }: Props) => {
               borderRadius={32}
               backgroundColor="rgba(78, 78, 97, 0.5)"
             >
-              <Text
-                color={theme.color.light.WHITE}
-                lineHeight={20}
-                fontSize={12}
-                fontWeight={600}
-              >
+              <Text color={theme.color.light.WHITE} lineHeight={20} fontSize={12} fontWeight={600}>
                 Send code
               </Text>
             </Box>
@@ -83,6 +73,6 @@ export const SendCode = ({ setWindowHandler }: Props) => {
 
 const styles = StyleSheet.create({
   fullWidth: {
-    width: "100%",
+    width: '100%',
   },
 });

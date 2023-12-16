@@ -1,80 +1,79 @@
-import { useContext, useState } from "react";
-import { ScrollView } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Text } from "../../../components/text";
-import { reportAssetApiHandler } from "../service";
-import { tokenStringResolver } from "../../../utils/token-string-resolver";
-import { tokenContext } from "../../../context/token";
-import { LoadingSpinner } from "../../../components/loader-spinner";
-import { Box } from "../../../components/box";
-import { Toaster } from "../../../utils/toaster";
-
+import { useContext, useState } from 'react';
+import { ScrollView } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Text } from '../../../components/text';
+import { reportAssetApiHandler } from '../service';
+import { tokenStringResolver } from '../../../utils/token-string-resolver';
+import { tokenContext } from '../../../context/token';
+import { LoadingSpinner } from '../../../components/loader-spinner';
+import { Box } from '../../../components/box';
+import { Toaster } from '../../../utils/toaster';
 
 const reportItems = [
   {
     id: 1,
-    fa_title: "محتوای آزاردهنده",
-    en_title: "Disturbing content",
+    fa_title: 'محتوای آزاردهنده',
+    en_title: 'Disturbing content',
   },
   {
     id: 2,
-    fa_title: "محتوای جنسی",
-    en_title: "Sexual content",
+    fa_title: 'محتوای جنسی',
+    en_title: 'Sexual content',
   },
   {
     id: 3,
-    fa_title: "محتوای نژادپرستانه",
-    en_title: "Racist content",
+    fa_title: 'محتوای نژادپرستانه',
+    en_title: 'Racist content',
   },
   {
     id: 4,
-    fa_title: "توهین به مذهبی ها",
-    en_title: "Insulting religious people",
+    fa_title: 'توهین به مذهبی ها',
+    en_title: 'Insulting religious people',
   },
   {
     id: 5,
-    fa_title: "توهین به سیاست",
-    en_title: "Insulting politics",
+    fa_title: 'توهین به سیاست',
+    en_title: 'Insulting politics',
   },
   {
     id: 6,
-    fa_title: "گسترش خشونت",
-    en_title: "The spread of violence",
+    fa_title: 'گسترش خشونت',
+    en_title: 'The spread of violence',
   },
   {
     id: 7,
-    fa_title: "گسترش کودک آزاری",
-    en_title: "The spread of child abuse",
+    fa_title: 'گسترش کودک آزاری',
+    en_title: 'The spread of child abuse',
   },
   {
     id: 8,
-    fa_title: "قلدری",
-    en_title: "bullying",
+    fa_title: 'قلدری',
+    en_title: 'bullying',
   },
   {
     id: 9,
-    fa_title: "محتوای نامناسب کودکان",
-    en_title: "Inappropriate child content",
+    fa_title: 'محتوای نامناسب کودکان',
+    en_title: 'Inappropriate child content',
   },
   {
     id: 10,
-    fa_title: "نقض حق نسخه برداری",
-    en_title: "Copyright infringement",
+    fa_title: 'نقض حق نسخه برداری',
+    en_title: 'Copyright infringement',
   },
   {
     id: 11,
-    fa_title: "تبلیغات غیرمجاز",
-    en_title: "Unauthorized advertising",
+    fa_title: 'تبلیغات غیرمجاز',
+    en_title: 'Unauthorized advertising',
   },
   {
     id: 12,
-    fa_title: "حیوان آزاری",
-    en_title: "animal cruelty",
+    fa_title: 'حیوان آزاری',
+    en_title: 'animal cruelty',
   },
   {
     id: 20,
-    fa_title: "دیگر",
-    en_title: "Other",
+    fa_title: 'دیگر',
+    en_title: 'Other',
   },
 ];
 
@@ -100,14 +99,10 @@ export const ReportModal = ({
     }
 
     const formattedToken = tokenStringResolver(token);
-    const { isError } = await reportAssetApiHandler(
-      formattedToken,
-      assetId,
-      categoryId
-    );
+    const { isError } = await reportAssetApiHandler(formattedToken, assetId, categoryId);
 
     if (!isError) {
-      toaster.show("Reported successfully");
+      toaster.show('Reported successfully');
     }
     setIsLoading(false);
     reportModalCloseHandler();
@@ -116,7 +111,7 @@ export const ReportModal = ({
   return (
     <ScrollView
       style={{
-        width: "100%",
+        width: '100%',
         height: 250,
         padding: 16,
         borderRadius: 16,

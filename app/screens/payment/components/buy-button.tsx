@@ -1,7 +1,7 @@
-import { TouchableOpacity } from "react-native";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
+import { TouchableOpacity } from 'react-native';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
   setPayHandler: () => void;
@@ -13,13 +13,7 @@ export function BuyButton({ setPayHandler }: Props) {
   };
 
   return (
-    <Box
-      width="100%"
-      height={80}
-      backgroundColor="transparent"
-      paddingLeft={24}
-      paddingRight={24}
-    >
+    <Box width="100%" height={80} backgroundColor="transparent" paddingLeft={24} paddingRight={24}>
       <TouchableOpacity activeOpacity={1} onPress={buyButtonPressHandler}>
         <Box
           width="100%"
@@ -30,12 +24,7 @@ export function BuyButton({ setPayHandler }: Props) {
           alignItems="center"
           justifyContent="center"
         >
-          <Text
-            color={theme.color.light.WHITE}
-            fontSize={14}
-            lineHeight={20}
-            fontWeight={600}
-          >
+          <Text color={theme.color.light.WHITE} fontSize={14} lineHeight={20} fontWeight={600}>
             Buy
           </Text>
         </Box>

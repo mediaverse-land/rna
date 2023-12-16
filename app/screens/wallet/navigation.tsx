@@ -1,24 +1,24 @@
-import { StatusBar } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { WalletSlider } from "./slider";
-import { HistoryPage } from "./history";
-import { useFocusEffect } from "@react-navigation/native";
-import React, { useCallback, useState } from "react";
+import { StatusBar } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { WalletSlider } from './slider';
+import { HistoryPage } from './history';
+import { useFocusEffect } from '@react-navigation/native';
+import React, { useCallback, useState } from 'react';
 
 const Stack = createStackNavigator();
 
 const routes = [
   {
     id: 1,
-    title: "WalletSlider",
+    title: 'WalletSlider',
     component: WalletSlider,
-    name: "walletSlider",
+    name: 'walletSlider',
   },
   {
     id: 9,
-    title: "HistoryPage",
+    title: 'HistoryPage',
     component: HistoryPage,
-    name: "HistoryPage",
+    name: 'HistoryPage',
   },
 ];
 
@@ -27,7 +27,6 @@ const fadeTransition = ({ current }: any) => ({
     opacity: current.progress,
   },
 });
-
 
 export function WalletStack() {
   const [shouldHide, setShouldHide] = useState(false);
@@ -39,14 +38,12 @@ export function WalletStack() {
       return () => {
         setShouldHide(true);
       };
-    }, [])
+    }, []),
   );
 
   return (
     <>
-      {shouldHide ? null : (
-        <StatusBar backgroundColor={"#030340"} barStyle="light-content" />
-      )}
+      {shouldHide ? null : <StatusBar backgroundColor={'#030340'} barStyle="light-content" />}
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
@@ -54,11 +51,7 @@ export function WalletStack() {
         }}
       >
         {routes.map((route) => (
-          <Stack.Screen
-            key={route.id}
-            name={route.name}
-            component={route.component}
-          />
+          <Stack.Screen key={route.id} name={route.name} component={route.component} />
         ))}
       </Stack.Navigator>
     </>

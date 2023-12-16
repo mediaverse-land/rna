@@ -1,7 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const singleSoundService: any = createApi({
-  reducerPath: "singleSoundService",
+  reducerPath: 'singleSoundService',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.EXPO_APPBASE_URL,
   }),
@@ -10,7 +10,7 @@ export const singleSoundService: any = createApi({
       query: (args) => {
         return {
           url: `/audios/${args.id}`,
-          method: "GET",
+          method: 'GET',
           headers: { Authorization: `Bearer ${args.token}` },
         };
       },
@@ -18,8 +18,8 @@ export const singleSoundService: any = createApi({
     createSingleSound: builder.mutation({
       query: (args) => {
         return {
-          url: "/audios",
-          method: "POST",
+          url: '/audios',
+          method: 'POST',
           body: args.body,
           headers: { Authorization: `Bearer ${args.token}` },
         };
@@ -28,7 +28,4 @@ export const singleSoundService: any = createApi({
   }),
 });
 
-export const { 
-    useGetSingleVideoDataQuery,
-    useCreateSingleSoundMutation
- } = singleSoundService;
+export const { useGetSingleVideoDataQuery, useCreateSingleSoundMutation } = singleSoundService;

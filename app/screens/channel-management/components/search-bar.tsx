@@ -1,13 +1,13 @@
-import { useMemo } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
-import { ChanelManagementView } from "../types";
-import { ChannelManagementTitle } from "./title";
-import { ChannelManagementSearchBox } from "./search-box";
+import { useMemo } from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
+import { ChanelManagementView } from '../types';
+import { ChannelManagementTitle } from './title';
+import { ChannelManagementSearchBox } from './search-box';
 
-const BG_COLOR = "rgba(14, 14, 18, 0.50)";
+const BG_COLOR = 'rgba(14, 14, 18, 0.50)';
 
 type NavTab = {
   id: number;
@@ -18,21 +18,21 @@ type NavTab = {
 const NAV_TABS: NavTab[] = [
   {
     id: 1,
-    title: "Channels",
-    path: "CHANNEL",
+    title: 'Channels',
+    path: 'CHANNEL',
   },
   {
     id: 2,
-    title: "Conductor",
-    path: "CONDUCTOR",
+    title: 'Conductor',
+    path: 'CONDUCTOR',
   },
 ];
 
 const getStyles = (isSelected: boolean) => {
   return {
-    height: "100%",
+    height: '100%',
     borderBottomWidth: 2,
-    borderColor: isSelected ? theme.color.light.PRIMARY : "transparent",
+    borderColor: isSelected ? theme.color.light.PRIMARY : 'transparent',
     paddingTop: 17,
     color: isSelected ? theme.color.light.ACTIVE_TEXT : theme.color.light.TEXT,
   };
@@ -61,13 +61,7 @@ export function ChannelManagementSearchBar({
         paddingRight={24}
         paddingLeft={24}
       >
-        <Box
-          id="inner"
-          width="100%"
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-        >
+        <Box id="inner" width="100%" direction="row" alignItems="center" justifyContent="center">
           {NAV_TABS.map((item) => {
             const isSelected = item.path === selectedView;
 
@@ -79,17 +73,8 @@ export function ChannelManagementSearchBar({
                 style={styles.half}
                 onPress={() => setSelectedView(item.path)}
               >
-                <Box
-                  width="100%"
-                  height={56}
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  <Text
-                    fontSize={16}
-                    fontWeight={400}
-                    textStyles={activeStyles}
-                  >
+                <Box width="100%" height={56} justifyContent="center" alignItems="center">
+                  <Text fontSize={16} fontWeight={400} textStyles={activeStyles}>
                     {item.title}
                   </Text>
                 </Box>
@@ -103,18 +88,12 @@ export function ChannelManagementSearchBar({
 
   const titleComponent = useMemo(
     () => <ChannelManagementTitle goBackHandler={goBackHandler} />,
-    []
+    [],
   );
   const searchBoxCompoonent = useMemo(() => <ChannelManagementSearchBox />, []);
 
   return (
-    <Box
-      width="100%"
-      height={139}
-      backgroundColor={BG_COLOR}
-      paddingTop={32}
-      position="relative"
-    >
+    <Box width="100%" height={139} backgroundColor={BG_COLOR} paddingTop={32} position="relative">
       {titleComponent}
       {searchBoxCompoonent}
       {navigator}
@@ -124,6 +103,6 @@ export function ChannelManagementSearchBar({
 
 const styles = StyleSheet.create({
   half: {
-    width: "50%",
+    width: '50%',
   },
 });

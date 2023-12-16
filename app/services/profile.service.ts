@@ -1,8 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { enviroments } from "../../enviroments/enviroments";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { enviroments } from '../../enviroments/enviroments';
 
 export const profileService = createApi({
-  reducerPath: "profileService",
+  reducerPath: 'profileService',
   baseQuery: fetchBaseQuery({
     baseUrl: enviroments.BASE_URL,
   }),
@@ -11,11 +11,11 @@ export const profileService = createApi({
     getUserProfile: builder.query({
       query: (args) => {
         return {
-          url: "profile/statics",
-          method: "GET",
+          url: 'profile/statics',
+          method: 'GET',
           headers: {
             Authorization: `Bearer ${args.token}`,
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },

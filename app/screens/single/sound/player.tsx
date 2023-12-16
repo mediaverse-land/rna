@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Audio } from "expo-av";
-import {  StyleSheet } from "react-native";
-import Slider from "@react-native-community/slider";
-import { Flex, PaddingContainer } from "../../../styles/grid";
-import { Box } from "../../../components/box";
-import { SoundsPageComponents } from "../../explore/pages/sounds/style";
+import React, { useState, useEffect } from 'react';
+import { Audio } from 'expo-av';
+import { StyleSheet } from 'react-native';
+import Slider from '@react-native-community/slider';
+import { Flex, PaddingContainer } from '../../../styles/grid';
+import { Box } from '../../../components/box';
+import { SoundsPageComponents } from '../../explore/pages/sounds/style';
 import {
   COMMENT_BOX_GRADIENT,
   MUSIC_PLAYER_STOP_BUTTON_GRADIENT,
-} from "../../../constaints/images";
-import { ICON_PLAY_SVG, ICON_VIDEO_PAUSE } from "../../../constaints/icons";
-import { formatTime } from "../../../utils/format-time";
-import {useIsFocused} from '@react-navigation/native'
+} from '../../../constaints/images';
+import { ICON_PLAY_SVG, ICON_VIDEO_PAUSE } from '../../../constaints/icons';
+import { formatTime } from '../../../utils/format-time';
+import { useIsFocused } from '@react-navigation/native';
 
 const {
   MusicPlayerContainer,
@@ -53,12 +53,12 @@ const MusicPlayer = ({ url }: any) => {
   }, []);
 
   useEffect(() => {
-    if(!isFocused){
-        sound?.unloadAsync();
-        setSound(null);
-        setIsPlaying(false);
+    if (!isFocused) {
+      sound?.unloadAsync();
+      setSound(null);
+      setIsPlaying(false);
     }
-  }, [isFocused])
+  }, [isFocused]);
 
   const handlePlayPause = async () => {
     if (sound) {
@@ -101,25 +101,19 @@ const MusicPlayer = ({ url }: any) => {
       <PaddingContainer>
         <MusicPlayerContainer
           style={{
-            width: "100%",
+            width: '100%',
             height: 130,
           }}
         >
           <MusicPlayerContainerGradient
             source={{ uri: COMMENT_BOX_GRADIENT }}
             style={{
-              width: "100%",
+              width: '100%',
               height: 130,
             }}
           />
           <MusicPlayerBox>
-            <Flex
-              direction="row"
-              width="100%"
-              height="12px"
-              align="center"
-              justify="space-between"
-            >
+            <Flex direction="row" width="100%" height="12px" align="center" justify="space-between">
               <Slider
                 minimumValue={0}
                 maximumValue={duration}
@@ -130,10 +124,9 @@ const MusicPlayer = ({ url }: any) => {
                 minimumTrackTintColor="#ccc"
                 style={styles.progressSlider}
               />
-              <Box >
+              <Box>
                 <CurrentSliderTime>
-                  {formattedPosition?.minute } :
-                  {formattedPosition?.second }
+                  {formattedPosition?.minute} :{formattedPosition?.second}
                 </CurrentSliderTime>
               </Box>
             </Flex>
@@ -156,7 +149,7 @@ const MusicPlayer = ({ url }: any) => {
                     width={18}
                     height={18}
                     style={{
-                      position: "absolute",
+                      position: 'absolute',
                       zIndex: 10,
                       left: 17,
                       top: 14,
@@ -167,7 +160,7 @@ const MusicPlayer = ({ url }: any) => {
                     width={18}
                     height={18}
                     style={{
-                      position: "absolute",
+                      position: 'absolute',
                       zIndex: 10,
                       left: 17,
                       top: 14,

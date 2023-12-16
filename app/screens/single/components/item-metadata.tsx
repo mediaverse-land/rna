@@ -1,8 +1,8 @@
-import { theme } from "../../../constaints/theme";
-import { useRtl } from "../../../hooks/use-rtl";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { SingleVideoPageComponents } from "../style";
+import { theme } from '../../../constaints/theme';
+import { useRtl } from '../../../hooks/use-rtl';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { SingleVideoPageComponents } from '../style';
 
 export type MetaDataType = {
   id: number;
@@ -42,12 +42,7 @@ export function SingleItemMetaData({ data }: { data: MetaDataType[] }) {
           >
             {video.key}
           </VideoDataBoxLabel>
-          <Box
-            direction="row"
-            flex={1}
-            alignItems="center"
-            justifyContent="center"
-          >
+          <Box direction="row" flex={1} alignItems="center" justifyContent="center">
             <Text color={theme.color.light.WHITE} fontSize={14} lineHeight={14}>
               {video.value}
             </Text>

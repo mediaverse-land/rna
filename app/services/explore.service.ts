@@ -1,8 +1,8 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { enviroments } from "../../enviroments/enviroments";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { enviroments } from '../../enviroments/enviroments';
 
 export const exploreService: any = createApi({
-  reducerPath: "exploreService",
+  reducerPath: 'exploreService',
   baseQuery: fetchBaseQuery({
     baseUrl: enviroments.BASE_URL,
   }),
@@ -11,11 +11,11 @@ export const exploreService: any = createApi({
     getLives: builder.query({
       query: () => {
         return {
-          url: "lives",
-          method: "GET",
+          url: 'lives',
+          method: 'GET',
           headers: {
             // Authorization: `Bearer ${args.token}`
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },
@@ -23,11 +23,11 @@ export const exploreService: any = createApi({
     getMostViewdImages: builder.query({
       query: () => {
         return {
-          url: "images/daily-recommended",
-          method: "GET",
+          url: 'images/daily-recommended',
+          method: 'GET',
           headers: {
             // Authorization: `Bearer ${args.token}`
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },
@@ -35,11 +35,11 @@ export const exploreService: any = createApi({
     getTopTenTexts: builder.query({
       query: () => {
         return {
-          url: "texts/",
-          method: "GET",
+          url: 'texts/',
+          method: 'GET',
           headers: {
             // Authorization: `Bearer ${args.token}`
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },
@@ -47,11 +47,11 @@ export const exploreService: any = createApi({
     getBestVideos: builder.query({
       query: () => {
         return {
-          url: "videos/most-viewed",
-          method: "GET",
+          url: 'videos/most-viewed',
+          method: 'GET',
           headers: {
             // Authorization: `Bearer ${args.token}`
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },
@@ -59,11 +59,11 @@ export const exploreService: any = createApi({
     getChillSongs: builder.query({
       query: () => {
         return {
-          url: "audios/daily-recommended",
-          method: "GET",
+          url: 'audios/daily-recommended',
+          method: 'GET',
           headers: {
             // Authorization: `Bearer ${args.token}`
-            "X-App": "_Android",
+            'X-App': '_Android',
           },
         };
       },
@@ -76,5 +76,5 @@ export const {
   useGetBestVideosQuery,
   useGetMostViewdImagesQuery,
   useGetTopTenTextsQuery,
-  useGetChillSongsQuery
+  useGetChillSongsQuery,
 } = exploreService;

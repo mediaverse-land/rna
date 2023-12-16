@@ -1,27 +1,27 @@
-import { View, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
-import { AllPageMostViewed } from "./most-viewed";
-import { AllPageTopTenText } from "./top-ten-texts";
-import { AllPageChillSongs } from "./chill-songs";
-import { VirtualizedList } from "../../../../components/virtualized-list";
-import { AllPageLives } from "./lives";
-import { RootState } from "../../../../store";
+import { View, StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
+import { AllPageMostViewed } from './most-viewed';
+import { AllPageTopTenText } from './top-ten-texts';
+import { AllPageChillSongs } from './chill-songs';
+import { VirtualizedList } from '../../../../components/virtualized-list';
+import { AllPageLives } from './lives';
+import { RootState } from '../../../../store';
 import {
   useGetBestVideosQuery,
   useGetChillSongsQuery,
   useGetLivesQuery,
   useGetMostViewdImagesQuery,
   useGetTopTenTextsQuery,
-} from "../../../../services/explore.service";
-import { UseNavigationType } from "../../../../types/use-navigation";
-import { ExplorePageBestVideos } from "./best-videos";
-import { ExploreGradientWrapper } from "../../components/gradient-wrapper";
-import { useCallback } from "react";
-import { useNavigation } from "@react-navigation/native";
+} from '../../../../services/explore.service';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { ExplorePageBestVideos } from './best-videos';
+import { ExploreGradientWrapper } from '../../components/gradient-wrapper';
+import { useCallback } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 export function AllPage() {
   const { DISABLE_INTRACTION }: { DISABLE_INTRACTION: boolean } = useSelector(
-    (state: RootState) => state.tourSlice
+    (state: RootState) => state.tourSlice,
   );
 
   const navigation = useNavigation<UseNavigationType>();
@@ -68,7 +68,6 @@ export function AllPage() {
     // error: _chillSongsError,
     refetch: regreshChillSongs,
   } = useGetChillSongsQuery();
-
 
   const onRefreshHandler = useCallback(async () => {
     refreshLives();
@@ -121,10 +120,10 @@ export function AllPage() {
 const styles = StyleSheet.create({
   scrollView: {
     paddingTop: 196,
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
   },
   space: {
-    width: "100%",
+    width: '100%',
     height: 280,
   },
 });

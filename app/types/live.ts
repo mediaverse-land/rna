@@ -1,6 +1,6 @@
 export interface Live {
   id: number;
-  title: string ;
+  title: string;
   type: number;
   link: string;
   thumbnail_id: number;
@@ -14,9 +14,8 @@ export interface Live {
   };
   created_at: string;
   updated_at: string;
-  thumbnail:
-  string,
-    file: {
+  thumbnail: string;
+  file: {
     id: number;
     user_id: number;
     type: number;

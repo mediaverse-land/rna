@@ -1,14 +1,14 @@
-import { FC, useState } from "react";
-import { TouchableOpacity, LayoutChangeEvent, Image } from "react-native";
-import { Box } from "../../../components/box";
+import { FC, useState } from 'react';
+import { TouchableOpacity, LayoutChangeEvent, Image } from 'react-native';
+import { Box } from '../../../components/box';
 import {
   VIDEO_FILES_ITEM_GRADEINT,
   VIDEO_FILES_WRAPPER_GRADEINT,
-} from "../../../constaints/images";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
-import { ICON_ARROW_UP } from "../../../constaints/icons";
-import { PaddingContainer } from "../../../styles/grid";
+} from '../../../constaints/images';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
+import { ICON_ARROW_UP } from '../../../constaints/icons';
+import { PaddingContainer } from '../../../styles/grid';
 
 export type FileType = {
   id: number;
@@ -42,7 +42,7 @@ export const SingleItemFiles: FC<Props> = ({ data }) => {
         onlayout={setLayoutHeightHandler}
         // borderRadius={16}
         additionalStyles={{
-          overflow: "hidden",
+          overflow: 'hidden',
         }}
         position="relative"
         zIndex={10}
@@ -50,9 +50,9 @@ export const SingleItemFiles: FC<Props> = ({ data }) => {
         <Image
           source={{ uri: VIDEO_FILES_WRAPPER_GRADEINT }}
           style={{
-            width: "100%",
+            width: '100%',
             height: layoutHeight,
-            position: "absolute",
+            position: 'absolute',
             top: 0,
             left: 0,
           }}
@@ -83,7 +83,7 @@ export const SingleItemFiles: FC<Props> = ({ data }) => {
                   height: 14,
                   transform: [
                     {
-                      rotateX: isAccordianOpen ? "180deg" : "0deg",
+                      rotateX: isAccordianOpen ? '180deg' : '0deg',
                     },
                   ],
                 }}
@@ -92,12 +92,7 @@ export const SingleItemFiles: FC<Props> = ({ data }) => {
           </Box>
         </TouchableOpacity>
         {isAccordianOpen ? (
-          <Box
-            paddingTop={28}
-            paddingBottom={20}
-            paddingLeft={16}
-            paddingRight={16}
-          >
+          <Box paddingTop={28} paddingBottom={20} paddingLeft={16} paddingRight={16}>
             {data.map((file) => (
               <Box key={file.id} marginBottom={8} borderRadius={8}>
                 <Image
@@ -105,9 +100,9 @@ export const SingleItemFiles: FC<Props> = ({ data }) => {
                     uri: VIDEO_FILES_ITEM_GRADEINT,
                   }}
                   style={{
-                    width: "100%",
+                    width: '100%',
                     height: 48,
-                    position: "absolute",
+                    position: 'absolute',
                     top: 0,
                   }}
                   resizeMode="stretch"

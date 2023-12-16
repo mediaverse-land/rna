@@ -1,30 +1,27 @@
-import { ApiHandler } from "../../../../utils/api-handler";
+import { ApiHandler } from '../../../../utils/api-handler';
 
 const api = new ApiHandler();
 
 export async function requestCodeApiHandler(phoneNumber: string) {
   const data = {
     cellphone: `+98${phoneNumber}`,
-    captcha: "abc123xyz456",
+    captcha: 'abc123xyz456',
   };
 
-  return await api.post("/auth/otp/request", data);
+  return await api.post('/auth/otp/request', data);
 }
 
-export async function submitCodeApiHandler(
-  phoneNumber: string,
-  otp: number | string
-) {
+export async function submitCodeApiHandler(phoneNumber: string, otp: number | string) {
   const data = {
     cellphone: `+98${phoneNumber}`,
     otp: otp,
   };
 
   const config = {
-    headers: { "X-App": "_Android" },
+    headers: { 'X-App': '_Android' },
   };
 
-  return await api.post("/auth/otp/submit", data, config);
+  return await api.post('/auth/otp/submit', data, config);
 }
 
 export type SignupCompleteionBody = {
@@ -36,17 +33,17 @@ export type SignupCompleteionBody = {
 
 export async function signupCompeletionApiHandler(body: object, token: string) {
   const config = {
-    headers: { Authorization: `Bearer ${token}`, "X-App": "_Android" },
+    headers: { Authorization: `Bearer ${token}`, 'X-App': '_Android' },
   };
 
-  return await api.post("/auth/sign-up-completion", body, config);
+  return await api.post('/auth/sign-up-completion', body, config);
 }
 
 export async function googleAuthApiHandler(token: string) {
-  const url = "/auth/google";
+  const url = '/auth/google';
 
   const config = {
-    headers: { "X-App": "_Android" },
+    headers: { 'X-App': '_Android' },
   };
 
   const body = {

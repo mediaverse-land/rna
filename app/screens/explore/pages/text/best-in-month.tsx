@@ -1,13 +1,13 @@
-import { useNavigation } from "@react-navigation/native";
-import { Title } from "../../../../components/title";
-import { Box } from "../../../../components/box";
-import { Text } from "../../../../types/text";
-import { TextSlider } from "../../../../components/text-slider";
-import { UseNavigationType } from "../../../../types/use-navigation";
-import { BEST_IN_MONTH } from "../../../../constaints/consts";
-import { ICON_TOP_TABBAR_TEXT_ACTIVE_SVG } from "../../../../constaints/icons";
-import { ViewAllPageEnum } from "../../../view-all";
-import { VIEW_ALL } from "../../types";
+import { useNavigation } from '@react-navigation/native';
+import { Title } from '../../../../components/title';
+import { Box } from '../../../../components/box';
+import { Text } from '../../../../types/text';
+import { TextSlider } from '../../../../components/text-slider';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { BEST_IN_MONTH } from '../../../../constaints/consts';
+import { ICON_TOP_TABBAR_TEXT_ACTIVE_SVG } from '../../../../constaints/icons';
+import { ViewAllPageEnum } from '../../../view-all';
+import { VIEW_ALL } from '../../types';
 
 type Props = {
   data: Text[];
@@ -21,7 +21,7 @@ export function SoundsPageBestInMonth({ data }: Props) {
       pageDirection: ViewAllPageEnum.BEST_IN_MONTH_TEXTS,
     });
   };
-  
+
   return (
     <Box flex={1}>
       <Box paddingLeft={24} paddingRight={32}>

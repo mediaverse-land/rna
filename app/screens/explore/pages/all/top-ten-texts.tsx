@@ -1,15 +1,15 @@
-import { FC } from "react";
-import { Title } from "../../../../components/title";
-import { Box } from "../../../../components/box";
-import { ICON_TOP_TABBAR_TEXT_ACTIVE_SVG } from "../../../../constaints/icons";
-import { UseNavigationType } from "../../../../types/use-navigation";
-import { TextSlider } from "../../../../components/text-slider";
-import { TOP_TEN_TEXTS } from "../../../../constaints/consts";
-import type { Text as TextType } from "../../../../types/text";
-import { RenderIf } from "../../../../components/render-if";
-import { Text } from "../../../../components/text";
-import { ViewAllPageEnum } from "../../../view-all";
-import { VIEW_ALL } from "../../types";
+import { FC } from 'react';
+import { Title } from '../../../../components/title';
+import { Box } from '../../../../components/box';
+import { ICON_TOP_TABBAR_TEXT_ACTIVE_SVG } from '../../../../constaints/icons';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { TextSlider } from '../../../../components/text-slider';
+import { TOP_TEN_TEXTS } from '../../../../constaints/consts';
+import type { Text as TextType } from '../../../../types/text';
+import { RenderIf } from '../../../../components/render-if';
+import { Text } from '../../../../components/text';
+import { ViewAllPageEnum } from '../../../view-all';
+import { VIEW_ALL } from '../../types';
 
 type Props = {
   isLoading: boolean;
@@ -22,21 +22,16 @@ export const AllPageTopTenText: FC<Props> = ({
   isLoading,
   data,
   disableOnIntractions = false,
-  navigation
+  navigation,
 }) => {
-
   const viewAllNavigationHandler = () => {
     navigation.navigate(VIEW_ALL, {
-      pageDirection: ViewAllPageEnum.TOP_TEXTS
+      pageDirection: ViewAllPageEnum.TOP_TEXTS,
     });
   };
 
   return (
-    <Box
-      id="top-ten-text-slider-wrapper"
-      marginTop={35}
-      flex={1}
-    >
+    <Box id="top-ten-text-slider-wrapper" marginTop={35} flex={1}>
       <Box paddingRight={32} paddingLeft={24}>
         <Title
           str={TOP_TEN_TEXTS}

@@ -1,26 +1,26 @@
-import { useEffect, useState, useRef } from "react";
-import { Image, TouchableOpacity, BackHandler, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import * as ScreenOrientation from "expo-screen-orientation";
-import ViewShot from "react-native-view-shot";
-import { useDispatch, useSelector } from "react-redux";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { SINGLE_VIDEO_COVER_IMAGE_GRADIENT } from "../../../constaints/images";
-import { PaddingContainer } from "../../../styles/grid";
-import { GoBackButton } from "../components/goback-button";
-import { theme } from "../../../constaints/theme";
-import { AVPlaybackStatus, ResizeMode, Video } from "expo-av";
-import { addImage } from "../../../slices/single-image.slice";
-import { Toaster } from "../../../utils/toaster";
-import { AppDispatch, RootState } from "../../../store";
-import { UseNavigationType } from "../../../types/use-navigation";
-import { setParam } from "../../../slices/plus.slice";
-import { convertVideoToSoundHandler } from "../service";
-import { tokenStringResolver } from "../../../utils/token-string-resolver";
-import { Toolbar } from "../components/toolbar";
-import { StorageService } from "../../../services/storage.service";
-import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
+import { useEffect, useState, useRef } from 'react';
+import { Image, TouchableOpacity, BackHandler, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import * as ScreenOrientation from 'expo-screen-orientation';
+import ViewShot from 'react-native-view-shot';
+import { useDispatch, useSelector } from 'react-redux';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { SINGLE_VIDEO_COVER_IMAGE_GRADIENT } from '../../../constaints/images';
+import { PaddingContainer } from '../../../styles/grid';
+import { GoBackButton } from '../components/goback-button';
+import { theme } from '../../../constaints/theme';
+import { AVPlaybackStatus, ResizeMode, Video } from 'expo-av';
+import { addImage } from '../../../slices/single-image.slice';
+import { Toaster } from '../../../utils/toaster';
+import { AppDispatch, RootState } from '../../../store';
+import { UseNavigationType } from '../../../types/use-navigation';
+import { setParam } from '../../../slices/plus.slice';
+import { convertVideoToSoundHandler } from '../service';
+import { tokenStringResolver } from '../../../utils/token-string-resolver';
+import { Toolbar } from '../components/toolbar';
+import { StorageService } from '../../../services/storage.service';
+import { Coachmark, CoachmarkComposer } from 'react-native-coachmark';
 import {
   ICON_SCREENSHOT,
   ICON_SHARE_YOUTUBE,
@@ -28,11 +28,8 @@ import {
   ICON_SINGLE_EDIT,
   ICON_VIDEO_PLAY,
   ICON_VIDEO_WHITE,
-} from "../../../constaints/icons";
-import {
-  EDIT_SCREEN,
-  HAS_USER_SEEN_OWNER_VIDEO_TOUR,
-} from "../../../constaints/consts";
+} from '../../../constaints/icons';
+import { EDIT_SCREEN, HAS_USER_SEEN_OWNER_VIDEO_TOUR } from '../../../constaints/consts';
 
 type Props = {
   goBackHandler: () => void;
@@ -57,12 +54,11 @@ const thumbnailHeight = 264;
 
 const toaster = new Toaster();
 
-const VIDEO_TOUR_GUIDE =
-  "Now that the fee has been paid, it's time to enjoy viewing the content!";
+const VIDEO_TOUR_GUIDE = "Now that the fee has been paid, it's time to enjoy viewing the content!";
 const TOOLBAR_GUIDE =
-  "This is the starting point of the excitement, with a few buttons you can convert audio to text and create images from text and translate audio! And build your digital asset";
+  'This is the starting point of the excitement, with a few buttons you can convert audio to text and create images from text and translate audio! And build your digital asset';
 const REPORTE_GUIDE =
-  "We will be happy if you see unethical, inappropriate, offensive .or... content in Mediaverse, help us by reporting it";
+  'We will be happy if you see unethical, inappropriate, offensive .or... content in Mediaverse, help us by reporting it';
 
 const CoachmarkWrapper: any = Coachmark;
 const _storageService = new StorageService();
@@ -114,7 +110,7 @@ export function SingleVideoHeader({
     dispatch(
       setParam({
         video_position: 0,
-      })
+      }),
     );
     navigation?.goBack();
     return true;
@@ -125,8 +121,7 @@ export function SingleVideoHeader({
   };
 
   const _getCurrenMilSec = async () => {
-    const position: AVPlaybackStatus | any =
-      await videoRef?.current?.getStatusAsync();
+    const position: AVPlaybackStatus | any = await videoRef?.current?.getStatusAsync();
     return (position?.positionMillis as number) || null;
   };
 
@@ -146,16 +141,10 @@ export function SingleVideoHeader({
 
   // Device goback button press event
   useEffect(() => {
-    BackHandler.addEventListener(
-      "hardwareBackPress",
-      _deviceBackButtonClickHandler
-    );
+    BackHandler.addEventListener('hardwareBackPress', _deviceBackButtonClickHandler);
     const clearHandler = () => {
       return () => {
-        BackHandler.removeEventListener(
-          "hardwareBackPress",
-          _deviceBackButtonClickHandler
-        );
+        BackHandler.removeEventListener('hardwareBackPress', _deviceBackButtonClickHandler);
       };
     };
     if (!isFocused) {
@@ -175,7 +164,7 @@ export function SingleVideoHeader({
     dispatch(
       setParam({
         video_position: 0,
-      })
+      }),
     );
     goBackHandler();
   };
@@ -185,7 +174,7 @@ export function SingleVideoHeader({
       return;
     }
     if (!videoRef?.current) {
-      toaster.show("Please run video first");
+      toaster.show('Please run video first');
       return;
     }
     await _pauseVideo();
@@ -199,12 +188,12 @@ export function SingleVideoHeader({
         dispatch(
           setParam({
             video_position: position,
-            IS_REDIRECTED_FROM_CREATE_SCREENSHOT: "true",
-          })
+            IS_REDIRECTED_FROM_CREATE_SCREENSHOT: 'true',
+          }),
         );
 
-        toaster.show("Screenshot captured");
-        navigation.navigate("Plus");
+        toaster.show('Screenshot captured');
+        navigation.navigate('Plus');
       }
     });
   };
@@ -215,11 +204,7 @@ export function SingleVideoHeader({
     errorMessage?: string;
   };
 
-  const requestAPiHandler = async ({
-    method,
-    errorMessage,
-    successMessage,
-  }: RequestAPiHandler) => {
+  const requestAPiHandler = async ({ method, errorMessage, successMessage }: RequestAPiHandler) => {
     const token = await retriveToken();
     if (!token) {
       return;
@@ -237,8 +222,8 @@ export function SingleVideoHeader({
   const _convertVideoToSoundHandler = async () => {
     await requestAPiHandler({
       method: convertVideoToSoundHandler,
-      successMessage: "Video converted to audio successfully",
-      errorMessage: "Video convert to audio failed",
+      successMessage: 'Video converted to audio successfully',
+      errorMessage: 'Video convert to audio failed',
     });
   };
 
@@ -260,14 +245,10 @@ export function SingleVideoHeader({
 
   const onFullscreenUpdate = async (_rotationStatus: 1 | 3) => {
     if (_rotationStatus === 1) {
-      await ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.LANDSCAPE
-      );
+      await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
     }
     if (_rotationStatus === 3) {
-      await ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.PORTRAIT
-      );
+      await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
     }
   };
 
@@ -281,7 +262,7 @@ export function SingleVideoHeader({
   const navigateToEditScreen = () => {
     navigation.navigate(EDIT_SCREEN, {
       id: id,
-      assetType: "video",
+      assetType: 'video',
     });
   };
 
@@ -293,7 +274,7 @@ export function SingleVideoHeader({
       func: shareToYoutubeHandler,
       icon: <ICON_SHARE_YOUTUBE width={24} height={24} />,
       // isDisable: isOwner ? false : true,
-      isDisable: false
+      isDisable: false,
     },
     {
       id: 1,
@@ -324,17 +305,12 @@ export function SingleVideoHeader({
    * @returns {boolean}
    */
   const hasUserSeenTour = async () => {
-    const hasUserSeen = await _storageService.get(
-      HAS_USER_SEEN_OWNER_VIDEO_TOUR
-    );
+    const hasUserSeen = await _storageService.get(HAS_USER_SEEN_OWNER_VIDEO_TOUR);
     return hasUserSeen ? true : false;
   };
 
   const setUserSeenTour = async () => {
-    await _storageService.set(
-      HAS_USER_SEEN_OWNER_VIDEO_TOUR,
-      HAS_USER_SEEN_OWNER_VIDEO_TOUR
-    );
+    await _storageService.set(HAS_USER_SEEN_OWNER_VIDEO_TOUR, HAS_USER_SEEN_OWNER_VIDEO_TOUR);
   };
 
   const setupTour = async () => {
@@ -343,18 +319,10 @@ export function SingleVideoHeader({
       return;
     }
 
-    if (
-      videoTourRef?.current &&
-      toolbarTourRef?.current &&
-      reportTourRef?.current
-    ) {
+    if (videoTourRef?.current && toolbarTourRef?.current && reportTourRef?.current) {
       setTimeout(() => {
         setIsTourActive(true);
-        const composer = new CoachmarkComposer([
-          videoTourRef,
-          toolbarTourRef,
-          reportTourRef,
-        ]);
+        const composer = new CoachmarkComposer([videoTourRef, toolbarTourRef, reportTourRef]);
         composer.show().then(async () => {
           await setUserSeenTour();
           setIsTourActive(false);
@@ -402,11 +370,7 @@ export function SingleVideoHeader({
   return (
     <Box position="relative" zIndex={20}>
       <Box>
-        <GoBackButton
-          goBackHandler={_goBackHandler}
-          hasBackground={true}
-          isOwner={isOwner}
-        />
+        <GoBackButton goBackHandler={_goBackHandler} hasBackground={true} isOwner={isOwner} />
         <CoachmarkWrapper
           allowBackgroundInteractions={false}
           ref={videoTourRef}
@@ -422,7 +386,7 @@ export function SingleVideoHeader({
                       <Image
                         source={{ uri: thumnailImageUri }}
                         style={{
-                          width: "100%",
+                          width: '100%',
                           height: thumbnailHeight,
                           borderBottomLeftRadius: 16,
                           borderBottomRightRadius: 16,
@@ -436,15 +400,11 @@ export function SingleVideoHeader({
                     style={{ flex: 1 }}
                     ref={videoAreaRef}
                     options={{
-                      format: "jpg",
-                      result: "base64",
+                      format: 'jpg',
+                      result: 'base64',
                     }}
                   >
-                    <Box
-                      id="video-player"
-                      width={"100%"}
-                      height={thumbnailHeight}
-                    >
+                    <Box id="video-player" width={'100%'} height={thumbnailHeight}>
                       {videoUri ? (
                         <Video
                           shouldPlay={true}
@@ -453,9 +413,9 @@ export function SingleVideoHeader({
                           }}
                           ref={videoRef}
                           style={{
-                            width: "100%",
+                            width: '100%',
                             height: thumbnailHeight,
-                            backgroundColor: "black",
+                            backgroundColor: 'black',
                           }}
                           positionMillis={video_position}
                           source={{
@@ -482,10 +442,10 @@ export function SingleVideoHeader({
                     <Image
                       source={{
                         uri: thumnailImageUri,
-                        cache: "only-if-cached",
+                        cache: 'only-if-cached',
                       }}
                       style={{
-                        width: "100%",
+                        width: '100%',
                         height: thumbnailHeight,
                         borderBottomLeftRadius: 16,
                         borderBottomRightRadius: 16,
@@ -537,12 +497,7 @@ export function SingleVideoHeader({
         ) : null}
         <Box direction="row" alignItems="center">
           <Box flex={1} marginTop={!videoUri ? 24 : 0}>
-            <Text
-              color={theme.color.light.WHITE}
-              fontSize={20}
-              lineHeight={20}
-              fontWeight={600}
-            >
+            <Text color={theme.color.light.WHITE} fontSize={20} lineHeight={20} fontWeight={600}>
               {contentName}
             </Text>
           </Box>
@@ -564,7 +519,7 @@ export function SingleVideoHeader({
                 position="relative"
                 zIndex={1040}
               >
-                <Text color={"#666680"} fontSize={14} fontWeight={400}>
+                <Text color={'#666680'} fontSize={14} fontWeight={400}>
                   Report
                 </Text>
               </Box>
@@ -615,10 +570,10 @@ export function SingleVideoHeader({
 
 const styles = StyleSheet.create({
   thumbnailCoverStyles: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
-    width: "100%",
+    width: '100%',
     zIndex: 10,
     height: thumbnailHeight,
     borderBottomLeftRadius: 16,
@@ -633,18 +588,18 @@ const styles = StyleSheet.create({
     height: 20,
   },
   thumbnailStyles: {
-    width: "100%",
+    width: '100%',
     height: thumbnailHeight,
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
   },
   videoStyles: {
-    width: "100%",
+    width: '100%',
     height: thumbnailHeight,
-    backgroundColor: "black",
+    backgroundColor: 'black',
   },
   mainThumbnailStyles: {
-    width: "100%",
+    width: '100%',
     height: thumbnailHeight,
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
@@ -656,7 +611,7 @@ const thumbnailCoverGradient = (
   <Image
     source={{
       uri: SINGLE_VIDEO_COVER_IMAGE_GRADIENT,
-      cache: "only-if-cached",
+      cache: 'only-if-cached',
     }}
     style={styles.thumbnailCoverStyles}
   />

@@ -1,5 +1,3 @@
-export class UserSituation{
-    config(){
-        
-    }
+export class UserSituation {
+  config() {}
 }

@@ -1,36 +1,28 @@
-import {
-  FC,
-  memo,
-  useEffect,
-  useMemo,
-  useReducer,
-  useRef,
-  useState,
-} from "react";
-import { View } from "react-native";
-import { useClickOutside } from "react-native-click-outside";
-import * as Google from "expo-auth-session/providers/google";
-import { ModalBottomSheet } from "../../../components/bottom-sheet-modal";
-import { Box } from "../../../components/box";
-import { AccountsSCreenComponents } from "./index";
-import { enviroments } from "../../../../enviroments/enviroments";
-import { getUserEmailByAccessToken } from "../service";
-import { Logger } from "../../../utils/logger";
-import { useAddExternalAccountMutation } from "../../../services/asset.service";
-import { Toaster } from "../../../utils/toaster";
-import { Button } from "../../../components/button";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
-import { Input } from "../../../components/form";
+import { FC, memo, useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { View } from 'react-native';
+import { useClickOutside } from 'react-native-click-outside';
+import * as Google from 'expo-auth-session/providers/google';
+import { ModalBottomSheet } from '../../../components/bottom-sheet-modal';
+import { Box } from '../../../components/box';
+import { AccountsSCreenComponents } from './index';
+import { enviroments } from '../../../../enviroments/enviroments';
+import { getUserEmailByAccessToken } from '../service';
+import { Logger } from '../../../utils/logger';
+import { useAddExternalAccountMutation } from '../../../services/asset.service';
+import { Toaster } from '../../../utils/toaster';
+import { Button } from '../../../components/button';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
+import { Input } from '../../../components/form';
 import {
   EXTERNAL_ACCOUNT_GOOGLE_TYPE,
   EXTERNAL_ACCOUNT_STREAM_TYPE,
-} from "../../../constaints/consts";
+} from '../../../constaints/consts';
 import {
   ERROR_EXTERNAL_ACCOUNT_CREATION_MSG,
   ERROR_FETCH_GOOGLE_DATA,
   EXTERNAL_ACCOUNT_CREATION_SUCCESS_MSG,
-} from "../../../constaints/errors-and-messages";
+} from '../../../constaints/errors-and-messages';
 
 type Props = {
   token: string;
@@ -47,7 +39,7 @@ const _logger = new Logger();
 const _toaster = new Toaster();
 
 const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
-  const [snapPoints, setSnapPoints] = useState(["30%"]);
+  const [snapPoints, setSnapPoints] = useState(['30%']);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [request, response, promptAsync]: any = Google.useAuthRequest({
@@ -69,8 +61,7 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
   //   // responseType: "code",
   // });
 
-  const [createAccountApiHandler, { isLoading, isFetching }] =
-    useAddExternalAccountMutation();
+  const [createAccountApiHandler, { isLoading, isFetching }] = useAddExternalAccountMutation();
 
   const selectAccountModalRef = useRef(null);
   const modalSnapPoints = useMemo(() => snapPoints, [snapPoints]);
@@ -87,11 +78,7 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
     manageGoogleApi();
   }, [response]);
 
-  const _createAccountMiddleware = async ({
-    email,
-    accessToken,
-    refreshToken,
-  }: CreateAccount) => {
+  const _createAccountMiddleware = async ({ email, accessToken, refreshToken }: CreateAccount) => {
     const requestBody = {
       body: {
         type: EXTERNAL_ACCOUNT_GOOGLE_TYPE,
@@ -105,9 +92,7 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
     const response = await createAccountApiHandler(requestBody);
 
     if (response?.error) {
-      _toaster.show(
-        response?.error?.data?.error || ERROR_EXTERNAL_ACCOUNT_CREATION_MSG
-      );
+      _toaster.show(response?.error?.data?.error || ERROR_EXTERNAL_ACCOUNT_CREATION_MSG);
     }
     if (response?.data) {
       refetchData();
@@ -117,7 +102,6 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
 
   const manageGoogleApi = async () => {
     if (response?.authentication) {
-
       const accessToken = response?.authentication?.accessToken;
       const refreshToken = response?.authentication?.refreshToken || null;
 
@@ -170,9 +154,7 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
 
     const response = await createAccountApiHandler(requestBody);
     if (response?.error) {
-      _toaster.show(
-        response?.error?.data?.error || ERROR_EXTERNAL_ACCOUNT_CREATION_MSG
-      );
+      _toaster.show(response?.error?.data?.error || ERROR_EXTERNAL_ACCOUNT_CREATION_MSG);
     }
     if (response?.data) {
       refetchData();
@@ -197,10 +179,7 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
       {/*</Box>*/}
       <AccountsSCreenComponents.Footer createAccountHandler={openModal} />
       {/* <BottomSheet /> */}
-      <ModalBottomSheet
-        ref={selectAccountModalRef}
-        snapPoints={modalSnapPoints}
-      >
+      <ModalBottomSheet ref={selectAccountModalRef} snapPoints={modalSnapPoints}>
         <View
           ref={selectAccountModalRefWrapperRef}
           style={{
@@ -230,10 +209,10 @@ type BottomSheetProps = {
 };
 
 const formStateUpdateTypes = {
-  UPDATE_TITLE: "UPDATE_TITLE",
-  UPDATE_STREAM_URL: "UPDATE_STREAM_URL",
-  UPDATE_STREAM_KEY: "UPDATE_STREAM_KEY",
-  CLEAN_STATE: "CLEAN_STATE",
+  UPDATE_TITLE: 'UPDATE_TITLE',
+  UPDATE_STREAM_URL: 'UPDATE_STREAM_URL',
+  UPDATE_STREAM_KEY: 'UPDATE_STREAM_KEY',
+  CLEAN_STATE: 'CLEAN_STATE',
 };
 
 type InitialFormState = {
@@ -243,9 +222,9 @@ type InitialFormState = {
 };
 
 const initialFormState: InitialFormState = {
-  title: "",
-  stream_key: "",
-  stream_url: "",
+  title: '',
+  stream_key: '',
+  stream_url: '',
 };
 
 const streamFormReducer = (state: InitialFormState, { type, payload }: any) => {
@@ -279,9 +258,9 @@ const BottomSheet: FC<BottomSheetProps> = ({
   createGoogleAccountHandler,
   isLoading,
 }) => {
-  const [currentView, setCurrentView] = useState<
-    "account-types" | "stream-account"
-  >("account-types");
+  const [currentView, setCurrentView] = useState<'account-types' | 'stream-account'>(
+    'account-types',
+  );
 
   const [formState, dispatch] = useReducer(streamFormReducer, initialFormState);
 
@@ -291,11 +270,11 @@ const BottomSheet: FC<BottomSheetProps> = ({
 
   const viewHeightManager = () => {
     switch (currentView) {
-      case "account-types":
-        setSnapPoints(["30%"]);
+      case 'account-types':
+        setSnapPoints(['30%']);
         return;
-      case "stream-account":
-        setSnapPoints(["45%"]);
+      case 'stream-account':
+        setSnapPoints(['45%']);
         return;
     }
   };
@@ -305,7 +284,7 @@ const BottomSheet: FC<BottomSheetProps> = ({
   };
 
   const setStreamAccountView = () => {
-    setCurrentView(() => "stream-account");
+    setCurrentView(() => 'stream-account');
   };
 
   const updateInputs = (type: string, value: string) => {
@@ -318,14 +297,10 @@ const BottomSheet: FC<BottomSheetProps> = ({
 
   return (
     <Box width="100%" height={170} paddingLeft={24} paddingRight={24}>
-      {currentView === "account-types" ? (
+      {currentView === 'account-types' ? (
         <>
           <Box>
-            <Text
-              color={theme.color.light.WHITE}
-              fontSize={16}
-              fontWeight={600}
-            >
+            <Text color={theme.color.light.WHITE} fontSize={16} fontWeight={600}>
               Select account type
             </Text>
           </Box>
@@ -355,9 +330,7 @@ const BottomSheet: FC<BottomSheetProps> = ({
           <Box marginTop={24}>
             <Input
               labelText="Email"
-              onChangeText={(text: string) =>
-                updateInputs(formStateUpdateTypes.UPDATE_TITLE, text)
-              }
+              onChangeText={(text: string) => updateInputs(formStateUpdateTypes.UPDATE_TITLE, text)}
             />
           </Box>
           <Box marginTop={16}>

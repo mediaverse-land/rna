@@ -1,22 +1,19 @@
-import React from "react";
-import { Text } from "../../../components/text";
-import { Box } from "../../../components/box";
-import type { Image as ImageType } from "../../../types/image";
-import { PaddingContainer } from "../../../styles/grid";
-import { windowSize } from "../../../utils/window-size";
-import { FlatList, Image, TouchableOpacity } from "react-native";
-import { theme } from "../../../constaints/theme";
-import { UserNameCard } from "../../../components/username-card";
-import {
-  HORIZONTAL_SLIDER_GRADIENT,
-  PROFILE_ONE,
-} from "../../../constaints/images";
-import { navigateTo } from "../utils/navigate-to-single-screen";
+import React from 'react';
+import { Text } from '../../../components/text';
+import { Box } from '../../../components/box';
+import type { Image as ImageType } from '../../../types/image';
+import { PaddingContainer } from '../../../styles/grid';
+import { windowSize } from '../../../utils/window-size';
+import { FlatList, Image, TouchableOpacity } from 'react-native';
+import { theme } from '../../../constaints/theme';
+import { UserNameCard } from '../../../components/username-card';
+import { HORIZONTAL_SLIDER_GRADIENT, PROFILE_ONE } from '../../../constaints/images';
+import { navigateTo } from '../utils/navigate-to-single-screen';
 
 type Props = {
   data: ImageType[];
   navigate: (...args: any) => void;
-  onEndReached: () => void
+  onEndReached: () => void;
 };
 
 const { width: WINDOW_WIDTH } = windowSize();
@@ -34,30 +31,21 @@ const ViewAllImageList = ({ data, navigate, onEndReached }: Props) => {
         onPress={() => navigateTo.singleImage({ navigate, id: item.id })}
         activeOpacity={1}
       >
-        <Box
-          width={itemWidth}
-          height={217}
-          marginBottom={34}
-          position="relative"
-        >
+        <Box width={itemWidth} height={217} marginBottom={34} position="relative">
           <Box id="thumbnail">
             <Image
               source={{
-                uri: item.asset.thumbnails["336x366"],
+                uri: item.asset.thumbnails['336x366'],
               }}
               style={{
-                width: "100%",
+                width: '100%',
                 height: 163,
                 borderRadius: 16,
               }}
             />
           </Box>
           <Box id="tite" marginTop={16} paddingLeft={8} paddingRight={8}>
-            <Text
-              color={theme_text_color}
-              lineHeight={title_text_size}
-              fontSize={title_text_size}
-            >
+            <Text color={theme_text_color} lineHeight={title_text_size} fontSize={title_text_size}>
               {item.name}
             </Text>
           </Box>
@@ -82,9 +70,9 @@ const ViewAllImageList = ({ data, navigate, onEndReached }: Props) => {
               uri: HORIZONTAL_SLIDER_GRADIENT,
             }}
             style={{
-              width: "101%",
+              width: '101%',
               height: 163,
-              position: "absolute",
+              position: 'absolute',
               top: 0,
               left: 0,
             }}
@@ -101,8 +89,8 @@ const ViewAllImageList = ({ data, navigate, onEndReached }: Props) => {
     <Box marginTop={56}>
       <PaddingContainer>
         <FlatList
-          contentContainerStyle={{ justifyContent: "space-between" }}
-          columnWrapperStyle={{ justifyContent: "space-between" }}
+          contentContainerStyle={{ justifyContent: 'space-between' }}
+          columnWrapperStyle={{ justifyContent: 'space-between' }}
           // contentContainerStyle={{ justifyContent: "space-between" }}
           data={data}
           numColumns={2}

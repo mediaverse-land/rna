@@ -1,7 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const singleTextService: any = createApi({
-  reducerPath: "singleTextService",
+  reducerPath: 'singleTextService',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.EXPO_APPBASE_URL,
   }),
@@ -10,7 +10,7 @@ export const singleTextService: any = createApi({
       query: (args) => {
         return {
           url: `/texts/${args.id}`,
-          method: "GET",
+          method: 'GET',
           headers: { Authorization: `Bearer ${args.token}` },
         };
       },
@@ -18,8 +18,8 @@ export const singleTextService: any = createApi({
     createSingleText: builder.mutation({
       query: (args) => {
         return {
-          url: "/texts",
-          method: "POST",
+          url: '/texts',
+          method: 'POST',
           body: args.body,
           headers: { Authorization: `Bearer ${args.token}` },
         };
@@ -28,8 +28,8 @@ export const singleTextService: any = createApi({
     convertTextToText: builder.mutation({
       query: (args) => {
         return {
-          url: "/convert/text-text",
-          method: "POST",
+          url: '/convert/text-text',
+          method: 'POST',
           body: args.body,
           headers: { Authorization: `Bearer ${args.token}` },
         };

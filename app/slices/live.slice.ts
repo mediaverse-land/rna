@@ -1,4 +1,4 @@
-import { PayloadAction,  createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 type Item = {
   startTime: number;
@@ -25,12 +25,12 @@ const initialState: InitialState = {
 };
 
 const liveSlice = createSlice({
-  name: "live_slice",
+  name: 'live_slice',
   initialState,
   reducers: {
     setSearchParams: (
       state,
-      action: PayloadAction<{ lang?: string; country?: string; title?: string }>
+      action: PayloadAction<{ lang?: string; country?: string; title?: string }>,
     ) => {
       if (action.payload.lang) {
         const _newState = {
@@ -46,7 +46,7 @@ const liveSlice = createSlice({
         };
         state.search_params = _newState;
       }
-      if (action.payload.title || action.payload.title === "") {
+      if (action.payload.title || action.payload.title === '') {
         const _newState = {
           ...state.search_params,
           title: action.payload.title,
@@ -59,9 +59,7 @@ const liveSlice = createSlice({
     },
     addRecordLive: (state, action: PayloadAction<Item>) => {
       const item = action.payload;
-      const filteredRecords = state.recordingItems.filter(
-        (f) => f.liveId !== item.liveId
-      );
+      const filteredRecords = state.recordingItems.filter((f) => f.liveId !== item.liveId);
       if (filteredRecords) {
         state.recordingItems = [...filteredRecords, item];
       } else {
@@ -69,9 +67,7 @@ const liveSlice = createSlice({
       }
     },
     getRecordById: (state, action: PayloadAction<{ liveId: number }>) => {
-      const live = state.recordingItems.find(
-        (f) => f.liveId === action.payload.liveId
-      );
+      const live = state.recordingItems.find((f) => f.liveId === action.payload.liveId);
 
       if (live) {
         state.has_current_live_record = true;
@@ -81,7 +77,7 @@ const liveSlice = createSlice({
     },
     removeRecordById: (state, action: PayloadAction<{ liveId: number }>) => {
       const filteredRecords = state.recordingItems.filter(
-        (f) => f.liveId === action.payload.liveId
+        (f) => f.liveId === action.payload.liveId,
       );
       state.recordingItems = filteredRecords;
     },

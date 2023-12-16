@@ -1,22 +1,21 @@
-import { useMemo, useState } from "react";
-import {  SafeAreaView, StyleSheet } from "react-native";
-import { FocusedStatusBar } from "../../components/focused-statusbar";
-import { ScreenGradient } from "../../components/screen-gradient";
-import { PaddingContainer } from "../../styles/grid";
-import { ChannelManagementSearchBar } from "./components/search-bar";
-import { ChanelManagementView } from "./types";
-import { ChannelsPage } from "./pages/channels";
-import { ConductorPage } from "./pages/conductor";
-import { UseNavigationType } from "../../types/use-navigation";
+import { useMemo, useState } from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { FocusedStatusBar } from '../../components/focused-statusbar';
+import { ScreenGradient } from '../../components/screen-gradient';
+import { PaddingContainer } from '../../styles/grid';
+import { ChannelManagementSearchBar } from './components/search-bar';
+import { ChanelManagementView } from './types';
+import { ChannelsPage } from './pages/channels';
+import { ConductorPage } from './pages/conductor';
+import { UseNavigationType } from '../../types/use-navigation';
 
 const views: Record<ChanelManagementView, any> = {
   CHANNEL: ChannelsPage,
   CONDUCTOR: ConductorPage,
 };
 
-export function ChannelManagementScreen({navigation}:{navigation: UseNavigationType}) {
-  const [selectedView, setSelectedView] =
-    useState<ChanelManagementView>("CHANNEL");
+export function ChannelManagementScreen({ navigation }: { navigation: UseNavigationType }) {
+  const [selectedView, setSelectedView] = useState<ChanelManagementView>('CHANNEL');
 
   const CurrentView = useMemo(() => views[selectedView], [selectedView]);
 
@@ -38,7 +37,7 @@ export function ChannelManagementScreen({navigation}:{navigation: UseNavigationT
               />
             }
           />
-          
+
           <PaddingContainer></PaddingContainer>
         </ScreenGradient>
       </SafeAreaView>

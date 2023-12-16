@@ -1,9 +1,9 @@
-import { TouchableOpacity } from "react-native";
-import { Box } from "../../../components/box";
-import { PaddingContainer } from "../../../styles/grid";
-import { SingleItemDescription } from "../components/description";
-import { MetaDataType, SingleItemMetaData } from "../components/item-metadata";
-import { Text } from "../../../components/text";
+import { TouchableOpacity } from 'react-native';
+import { Box } from '../../../components/box';
+import { PaddingContainer } from '../../../styles/grid';
+import { SingleItemDescription } from '../components/description';
+import { MetaDataType, SingleItemMetaData } from '../components/item-metadata';
+import { Text } from '../../../components/text';
 
 type Props = {
   description: string;

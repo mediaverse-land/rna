@@ -1,6 +1,6 @@
-import { FC, ReactNode } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { isAndroid } from "../../controllers/platform.controller";
+import { FC, ReactNode } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { isAndroid } from '../../controllers/platform.controller';
 
 type Props = {
   children: ReactNode;

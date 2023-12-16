@@ -1,23 +1,23 @@
-import {  useState } from "react";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
-import { ScreenGradient } from "../../../../components/screen-gradient";
-import { FileSystemController } from "../../../../controllers/file-system.controller";
-import { CustomSafeArea } from "../../../../components/custom-safe-area";
-import { windowSize } from "../../../../utils/window-size";
-import { TopToolbar } from "../../component/top-toolbar";
-import { Box } from "../../../../components/box";
-import { PaddingContainer } from "../../../../styles/grid";
-import { Input } from "../../../../components/form";
-import { NoteBook } from "../../component/notebook";
-import { VirtualizedList } from "../../../../components/virtualized-list";
-import { BottomTabBar } from "../../component/bottom-tab-bar";
-import { CREATE_TEXT } from "../../constaints";
-import { UseNavigationType } from "../../../../types/use-navigation";
-import { theme } from "../../../../constaints/theme";
-import { AppDispatch, RootState } from "../../../../store";
-import { setFileBase64, setTitle } from "../../../../slices/plus.slice";
+import { useState } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { ScreenGradient } from '../../../../components/screen-gradient';
+import { FileSystemController } from '../../../../controllers/file-system.controller';
+import { CustomSafeArea } from '../../../../components/custom-safe-area';
+import { windowSize } from '../../../../utils/window-size';
+import { TopToolbar } from '../../component/top-toolbar';
+import { Box } from '../../../../components/box';
+import { PaddingContainer } from '../../../../styles/grid';
+import { Input } from '../../../../components/form';
+import { NoteBook } from '../../component/notebook';
+import { VirtualizedList } from '../../../../components/virtualized-list';
+import { BottomTabBar } from '../../component/bottom-tab-bar';
+import { CREATE_TEXT } from '../../constaints';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { theme } from '../../../../constaints/theme';
+import { AppDispatch, RootState } from '../../../../store';
+import { setFileBase64, setTitle } from '../../../../slices/plus.slice';
 
 const _fileSystemController = new FileSystemController();
 
@@ -52,7 +52,7 @@ export const CreateTextScreen = () => {
 
     setTimeout(() => {
       setIsLoading(false);
-      navigation.navigate("addAssetMetadata");
+      navigation.navigate('addAssetMetadata');
     }, 1000);
   };
 

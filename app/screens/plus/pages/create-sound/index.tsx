@@ -1,32 +1,29 @@
-import { useState, useEffect, useContext } from "react";
-import { ToastAndroid } from "react-native";
-import { Box } from "../../../../components/box";
-import { UseNavigationType } from "../../../../types/use-navigation";
-import { BottomTabBar } from "../../component/bottom-tab-bar";
-import { CreateContentHeader } from "../../component/header";
-import { useNavigation, useIsFocused } from "@react-navigation/native";
-import { ScreenGradient } from "../../../../components/screen-gradient";
-import { PaddingContainer } from "../../../../styles/grid";
-import { windowSize } from "../../../../utils/window-size";
-import { ICON_WARNING } from "../../../../constaints/icons";
-import { Text } from "../../../../components/text";
-import { theme } from "../../../../constaints/theme";
-import { Audio } from "expo-av";
-import { CREATE_SOUND } from "../../constaints";
-import { RecordingController } from "../../../../controllers/recording.controller";
-import { FileSystemController } from "../../../../controllers/file-system.controller";
-import axios from "axios";
-import { SubmitForm } from "./submit-form";
-import { tokenContext } from "../../../../context/token";
-import { userContext } from "../../../../context/user";
-import { tokenStringResolver } from "../../../../utils/token-string-resolver";
-import { useCreateSingleSoundMutation } from "../../../../services/single-sound.service";
-import { Toaster } from "../../../../utils/toaster";
-import {
-  REDIRECTED_FROM_CREATE_ASSET,
-  SINGLE_SOUND_SCREEN,
-} from "../../../../constaints/consts";
-import { Logger } from "../../../../utils/logger";
+import { useState, useEffect, useContext } from 'react';
+import { ToastAndroid } from 'react-native';
+import { Box } from '../../../../components/box';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { BottomTabBar } from '../../component/bottom-tab-bar';
+import { CreateContentHeader } from '../../component/header';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
+import { ScreenGradient } from '../../../../components/screen-gradient';
+import { PaddingContainer } from '../../../../styles/grid';
+import { windowSize } from '../../../../utils/window-size';
+import { ICON_WARNING } from '../../../../constaints/icons';
+import { Text } from '../../../../components/text';
+import { theme } from '../../../../constaints/theme';
+import { Audio } from 'expo-av';
+import { CREATE_SOUND } from '../../constaints';
+import { RecordingController } from '../../../../controllers/recording.controller';
+import { FileSystemController } from '../../../../controllers/file-system.controller';
+import axios from 'axios';
+import { SubmitForm } from './submit-form';
+import { tokenContext } from '../../../../context/token';
+import { userContext } from '../../../../context/user';
+import { tokenStringResolver } from '../../../../utils/token-string-resolver';
+import { useCreateSingleSoundMutation } from '../../../../services/single-sound.service';
+import { Toaster } from '../../../../utils/toaster';
+import { REDIRECTED_FROM_CREATE_ASSET, SINGLE_SOUND_SCREEN } from '../../../../constaints/consts';
+import { Logger } from '../../../../utils/logger';
 
 const WINDOW_HEIGHT = windowSize().height;
 const PLACE_HODLDER_HEIGHT = Math.floor(WINDOW_HEIGHT) - 100;
@@ -59,7 +56,6 @@ export const CreateSoundScreen = () => {
     }
   }, [recording]);
 
-
   useEffect(() => {
     if (!isFocused) {
       setRecording(null);
@@ -72,34 +68,33 @@ export const CreateSoundScreen = () => {
     asset_id: number,
     f: any,
     setIsLoading: (args: boolean) => void,
-    id: number
+    id: number,
   ) => {
     const data = new FormData();
 
-    data.append("asset", asset_id.toString());
-    data.append("file", f);
+    data.append('asset', asset_id.toString());
+    data.append('file', f);
 
     const config = {
-      method: "post",
+      method: 'post',
       maxBodyLength: Infinity,
       url: `${process.env.EXPO_APPBASE_URL}/files`,
       headers: {
-        accept: "*/*",
-        "accept-language": "en-US,en;q=0.9",
+        accept: '*/*',
+        'accept-language': 'en-US,en;q=0.9',
         authorization: `Bearer ${token}`,
         origin: process.env.EXPO_APPBASE_URL,
         referer: process.env.EXPO_APPBASE_URL,
-        "X-App": "_Android",
-        "sec-ch-ua":
-          '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
-        "sec-ch-ua-mobile": "?0",
-        "sec-ch-ua-platform": '"macOS"',
-        "sec-fetch-dest": "empty",
-        "sec-fetch-mode": "cors",
-        "sec-fetch-site": "same-site",
-        "user-agent":
-          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
-        "Content-Type": "multipart/form-data",
+        'X-App': '_Android',
+        'sec-ch-ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"macOS"',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-site',
+        'user-agent':
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+        'Content-Type': 'multipart/form-data',
       },
       data: data,
     };
@@ -107,7 +102,7 @@ export const CreateSoundScreen = () => {
     axios
       .request(config)
       .then(() => {
-        ToastAndroid.show("Item created successfully", 3000);
+        ToastAndroid.show('Item created successfully', 3000);
         setIsLoading(false);
         navigation?.navigate(SINGLE_SOUND_SCREEN, {
           id,
@@ -116,7 +111,7 @@ export const CreateSoundScreen = () => {
         });
       })
       .catch((error) => {
-        ToastAndroid.show("Item creation failed", 3000);
+        ToastAndroid.show('Item creation failed', 3000);
         _logger.log(JSON.stringify(error));
         setIsLoading(false);
       });
@@ -161,16 +156,14 @@ export const CreateSoundScreen = () => {
     }
     setIsLoading(true);
 
-    const audio_base64 = await _fileSystemController.convertFileToBase64(
-      storedSoundUri
-    );
+    const audio_base64 = await _fileSystemController.convertFileToBase64(storedSoundUri);
 
     await createService(
       token,
       asset_id,
       `data:audio/mpeg;base64,${audio_base64}`,
       setIsLoading,
-      id
+      id,
     );
     setIsLoading(false);
   };
@@ -212,14 +205,13 @@ export const CreateSoundScreen = () => {
       body: newBody,
     };
 
-    
     createNewAsset(newOption)
       .then(async (res: any) => {
         const asset_id = res?.data?.asset_id;
         if (!asset_id) {
           setIsLoading(false);
-          _logger.logErro("no asset_id");
-          _toast.show(res?.error?.data?.message || "Something went wrong, try again");
+          _logger.logErro('no asset_id');
+          _toast.show(res?.error?.data?.message || 'Something went wrong, try again');
 
           return;
         }
@@ -269,26 +261,20 @@ export const CreateSoundScreen = () => {
     <ScreenGradient>
       <Box paddingTop={24} width="100%" flex={1}>
         <PaddingContainer>
-          <CreateContentHeader
-            justBackButtonVisible={true}
-            goBackHandler={goBackHandler}
-          />
+          <CreateContentHeader justBackButtonVisible={true} goBackHandler={goBackHandler} />
           <Placeholder isRecording={recording ? true : false} />
         </PaddingContainer>
       </Box>
       {isFocused ? (
         <BottomTabBar
-        isLoading={isLoading}
+          isLoading={isLoading}
           currentPage={CREATE_SOUND}
           navigation={navigation}
           submitButtonHandler={_submitButtonHandler}
         />
       ) : null}
       {lastRecording && !recording ? (
-        <SubmitForm
-          isLoading={isLoading}
-          createAssetRequest={_createImageRequest}
-        />
+        <SubmitForm isLoading={isLoading} createAssetRequest={_createImageRequest} />
       ) : null}
     </ScreenGradient>
   );

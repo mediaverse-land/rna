@@ -1,7 +1,7 @@
 export interface ExternalAccount {
   id: number;
   user_id: number;
-  type: 1 |number;
+  type: 1 | number;
   // Email = title
   title: string;
   information: {

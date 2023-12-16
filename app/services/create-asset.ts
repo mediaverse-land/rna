@@ -1,7 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const uploadService: any = createApi({
-  reducerPath: "uploadService",
+  reducerPath: 'uploadService',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.EXPO_APPBASE_URL,
   }),
@@ -10,7 +10,7 @@ export const uploadService: any = createApi({
       query: (args) => {
         return {
           url: `/assets/${args.body.asset_id}/files`,
-          method: "POST",
+          method: 'POST',
           body: args.body,
           headers: { Authorization: `Bearer ${args.token}` },
         };
@@ -19,6 +19,4 @@ export const uploadService: any = createApi({
   }),
 });
 
-export const { 
-  useUploadAssetMutation
- } = uploadService;
+export const { useUploadAssetMutation } = uploadService;

@@ -1,14 +1,14 @@
-import React, { useCallback, useState } from "react";
-import { StatusBar } from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { ImagesPage } from "./pages/images";
-import { VideosPage } from "./pages/videos";
-import { SoundsPage } from "./pages/sounds";
-import { TextsPage } from "./pages/text";
-import { AllPage } from "./pages/all";
-import TopTabBar from "../../components/top-tab-bar";
-import { Box } from "../../components/box";
+import React, { useCallback, useState } from 'react';
+import { StatusBar } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { ImagesPage } from './pages/images';
+import { VideosPage } from './pages/videos';
+import { SoundsPage } from './pages/sounds';
+import { TextsPage } from './pages/text';
+import { AllPage } from './pages/all';
+import TopTabBar from '../../components/top-tab-bar';
+import { Box } from '../../components/box';
 
 type RoutesType = {
   AllPage: undefined;
@@ -28,32 +28,32 @@ type RouteObject = {
 const routes: RouteObject[] = [
   {
     id: 1,
-    name: "AllPage",
-    title: "All",
+    name: 'AllPage',
+    title: 'All',
     component: AllPage,
   },
   {
     id: 2,
-    name: "ImagesPage",
-    title: "image",
+    name: 'ImagesPage',
+    title: 'image',
     component: ImagesPage,
   },
   {
     id: 3,
-    name: "VideosPage",
-    title: "video",
+    name: 'VideosPage',
+    title: 'video',
     component: VideosPage,
   },
   {
     id: 4,
-    name: "SoundsPage",
-    title: "sound",
+    name: 'SoundsPage',
+    title: 'sound',
     component: SoundsPage,
   },
   {
     id: 5,
-    name: "TextsPage",
-    title: "text",
+    name: 'TextsPage',
+    title: 'text',
     component: TextsPage,
   },
 ];
@@ -69,16 +69,14 @@ export function Navigator() {
       return () => {
         setShouldHide(true);
       };
-    }, [])
+    }, []),
   );
 
   return (
     <>
-      {shouldHide ? null : (
-        <StatusBar backgroundColor={"#0c0c21"} barStyle="light-content" />
-      )}
+      {shouldHide ? null : <StatusBar backgroundColor={'#0c0c21'} barStyle="light-content" />}
 
-      <Box width={"100%"} flex={1}>
+      <Box width={'100%'} flex={1}>
         <Tab.Navigator
           screenOptions={{
             animationEnabled: false,

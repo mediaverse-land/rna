@@ -1,41 +1,40 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { Image, TouchableOpacity, Text as NativeText } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
-import { Box } from "../../../components/box";
-import { Flex, PaddingContainer } from "../../../styles/grid";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
-import { windowSize } from "./../../../utils/window-size";
-import { ICON_PROFILE_SETTINGS_SVG } from "../../../constaints/icons";
-import { UseNavigationType } from "../../../types/use-navigation";
-import { LoadingSpinner } from "../../../components/loader-spinner";
-import { User } from "../../../types/user";
-import { userContext } from "../../../context/user";
-import { PROFILE_IMAGE } from "../../../constaints/images";
-import { tokenContext } from "../../../context/token";
-import { tokenStringResolver } from "../../../utils/token-string-resolver";
-import { StorageService } from "../../../services/storage.service";
-import { HAS_USER_SEEN_PROFILE_HEADER_TOUR } from "../../../constaints/consts";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store";
+import { useContext, useEffect, useRef, useState } from 'react';
+import { Image, TouchableOpacity, Text as NativeText } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { Coachmark, CoachmarkComposer } from 'react-native-coachmark';
+import { Box } from '../../../components/box';
+import { Flex, PaddingContainer } from '../../../styles/grid';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
+import { windowSize } from './../../../utils/window-size';
+import { ICON_PROFILE_SETTINGS_SVG } from '../../../constaints/icons';
+import { UseNavigationType } from '../../../types/use-navigation';
+import { LoadingSpinner } from '../../../components/loader-spinner';
+import { User } from '../../../types/user';
+import { userContext } from '../../../context/user';
+import { PROFILE_IMAGE } from '../../../constaints/images';
+import { tokenContext } from '../../../context/token';
+import { tokenStringResolver } from '../../../utils/token-string-resolver';
+import { StorageService } from '../../../services/storage.service';
+import { HAS_USER_SEEN_PROFILE_HEADER_TOUR } from '../../../constaints/consts';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../store';
 import {
   activeDisableOnIntractions,
   deActivrDisableOnIntractions,
   seeProfileHeaderTour,
-} from "../../../slices/tour.slice";
-import { setPage } from "../../../slices/profile.slicer";
-import { useGetUserProfileQuery } from "../../../services/profile.service";
-
+} from '../../../slices/tour.slice';
+import { setPage } from '../../../slices/profile.slicer';
+import { useGetUserProfileQuery } from '../../../services/profile.service';
 
 const { width: windowWidth, height: windowHeight } = windowSize();
 const usernameBoxWidth = Math.floor(windowWidth) - 184;
 
 const STATICS_TOUR_GUIDE =
-  "How many products do you have? How much did you sell and...? You can see all this in the statistics";
+  'How many products do you have? How much did you sell and...? You can see all this in the statistics';
 const SETTINGS_TOUR_GUIDE =
-  "In the account, you can edit your name, username, password and everything you entered during registration or log out of your !account";
+  'In the account, you can edit your name, username, password and everything you entered during registration or log out of your !account';
 
 const CoachmarkWrapper: any = Coachmark;
 
@@ -48,14 +47,13 @@ export function ProfileScreenHead() {
   const dispatch = useDispatch<AppDispatch>();
 
   const [allowIntraction, setAllowIntraction] = useState(false);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState('');
 
-  const { DISABLE_INTRACTION } = useSelector(
-    (store: RootState) => store.tourSlice
+  const { DISABLE_INTRACTION } = useSelector((store: RootState) => store.tourSlice);
+
+  const { ACTIVE_PAGE }: { ACTIVE_PAGE: 'subscribe' | 'ownership' } = useSelector(
+    (store: RootState) => store.profileSlice,
   );
-
-  const { ACTIVE_PAGE }: { ACTIVE_PAGE: "subscribe" | "ownership" } =
-    useSelector((store: RootState) => store.profileSlice);
 
   const staticsRef = useRef();
   const settingsRef = useRef();
@@ -66,22 +64,13 @@ export function ProfileScreenHead() {
 
   if (!user) {
     return (
-      <Box
-        width="100%"
-        height={windowHeight}
-        alignItems="center"
-        justifyContent="center"
-      >
+      <Box width="100%" height={windowHeight} alignItems="center" justifyContent="center">
         <LoadingSpinner color="red" />
       </Box>
     );
   }
 
-  const { data } =
-    useGetUserProfileQuery(
-      { token }
-    );
-
+  const { data } = useGetUserProfileQuery({ token });
 
   useEffect(() => {
     getData();
@@ -120,24 +109,24 @@ export function ProfileScreenHead() {
     if (DISABLE_INTRACTION) {
       return;
     }
-    navigation.navigate("Settings");
+    navigation.navigate('Settings');
   };
 
   const userProfileData = [
     {
       id: 1,
       value: data?.assets || 0,
-      title: "Assets",
+      title: 'Assets',
     },
     {
       id: 2,
       value: data?.sales_number || 0,
-      title: "Sales",
+      title: 'Sales',
     },
     {
       id: 3,
       value: data?.sales_volume || 0,
-      title: "Volume",
+      title: 'Volume',
     },
   ];
 
@@ -159,10 +148,7 @@ export function ProfileScreenHead() {
   };
 
   const _userSeenTourHandler = async () => {
-    await _storageService.set(
-      HAS_USER_SEEN_PROFILE_HEADER_TOUR,
-      HAS_USER_SEEN_PROFILE_HEADER_TOUR
-    );
+    await _storageService.set(HAS_USER_SEEN_PROFILE_HEADER_TOUR, HAS_USER_SEEN_PROFILE_HEADER_TOUR);
     setTourStateTrueHandler();
   };
 
@@ -195,38 +181,38 @@ export function ProfileScreenHead() {
   // id 2 === owner
   const handleProfilePage = (id: number) => {
     if (id === 1) {
-      dispatch(setPage("subscribe"));
+      dispatch(setPage('subscribe'));
     }
     if (id === 2) {
-      dispatch(setPage("ownership"));
+      dispatch(setPage('ownership'));
     }
   };
 
   return (
     <Box
-      width={"100%"}
+      width={'100%'}
       backgroundColor="rgba(14, 14, 18, 0.5)"
       borderBottomLeftRadius={32}
       borderBottomRightRadius={32}
     >
-      <Box width={"100%"} height={88}>
+      <Box width={'100%'} height={88}>
         <LinearGradient
-          colors={["#204cb4", "#b3c4ea"]}
+          colors={['#204cb4', '#b3c4ea']}
           start={{ x: 0.6, y: 0.2 }}
           end={{ x: 0.1, y: 0.2 }}
           style={{
-            width: "100%",
+            width: '100%',
             height: 82,
           }}
         />
       </Box>
-      <Box width={"100%"}>
+      <Box width={'100%'}>
         <LinearGradient
-          colors={["#0a0a2f", "#0b0b30"]}
+          colors={['#0a0a2f', '#0b0b30']}
           start={{ x: 0.7, y: 0.2 }}
           end={{ x: 0.1, y: 0.2 }}
           style={{
-            width: "100%",
+            width: '100%',
             height: 247,
             borderBottomLeftRadius: 32,
             borderBottomRightRadius: 32,
@@ -258,8 +244,8 @@ export function ProfileScreenHead() {
                     uri: PROFILE_IMAGE,
                   }}
                   style={{
-                    width: "100%",
-                    height: "100%",
+                    width: '100%',
+                    height: '100%',
                     borderRadius: 100,
                   }}
                 />
@@ -298,25 +284,17 @@ export function ProfileScreenHead() {
                   borderColor={theme.color.light.INPUT_PLACEHOLDER}
                   backgroundColor="rgba(14, 14, 18, 0.5)"
                   additionalStyles={{
-                    overflow: "hidden",
+                    overflow: 'hidden',
                   }}
                 >
-                  <Flex
-                    align="center"
-                    justify="center"
-                    width="48px"
-                    height="48px"
-                  >
+                  <Flex align="center" justify="center" width="48px" height="48px">
                     {/*  */}
-                    <TouchableOpacity
-                      activeOpacity={1}
-                      onPress={settingsScreenRedirect}
-                    >
+                    <TouchableOpacity activeOpacity={1} onPress={settingsScreenRedirect}>
                       <ICON_PROFILE_SETTINGS_SVG
                         style={{
                           width: 19.2,
                           height: 20,
-                          position: "relative",
+                          position: 'relative',
                         }}
                       />
                     </TouchableOpacity>
@@ -331,13 +309,7 @@ export function ProfileScreenHead() {
           <CoachmarkWrapper ref={staticsRef} message={STATICS_TOUR_GUIDE}>
             <Box width="100%" position="relative">
               {/*  */}
-              <Box
-                position="relative"
-                width="100%"
-                height={100}
-                paddingLeft={24}
-                paddingRight={24}
-              >
+              <Box position="relative" width="100%" height={100} paddingLeft={24} paddingRight={24}>
                 <Flex
                   width="100%"
                   height="100px"
@@ -360,20 +332,13 @@ export function ProfileScreenHead() {
                         backgroundColor={theme.color.light.PRIMARY}
                         left="29%"
                       ></Box>
-                      <Flex
-                        width="100%"
-                        height="68"
-                        align="center"
-                        justify="center"
-                      >
+                      <Flex width="100%" height="68" align="center" justify="center">
                         <Text
                           color={theme.color.light.CARD_TITLE_TEXT}
                           fontSize={theme.numericFontSize.md}
                           lineHeight={20}
                         >
-                          {data.title === "Volume"
-                            ? `${data.value} $`
-                            : data.value}
+                          {data.title === 'Volume' ? `${data.value} $` : data.value}
                         </Text>
                         <Text
                           color={theme.color.light.LIGHT_DESCRIPTION}
@@ -412,63 +377,49 @@ export function ProfileScreenHead() {
                 //   (item.id === 2 && ACTIVE_PAGE === "ownership") || false;
 
                 return ( */}
-              <TouchableOpacity
-                activeOpacity={1}
-                onPress={() => handleProfilePage(1)}
-              >
+              <TouchableOpacity activeOpacity={1} onPress={() => handleProfilePage(1)}>
                 <Box
                   paddingBottom={16}
                   additionalStyles={{
-                    borderBottomWidth: ACTIVE_PAGE === "subscribe" ? 2 : 0,
+                    borderBottomWidth: ACTIVE_PAGE === 'subscribe' ? 2 : 0,
                     borderBottomColor:
-                      ACTIVE_PAGE === "subscribe"
-                        ? theme.color.light.PRIMARY
-                        : "transparet",
+                      ACTIVE_PAGE === 'subscribe' ? theme.color.light.PRIMARY : 'transparet',
                   }}
                 >
                   <NativeText
                     style={[
-                      ACTIVE_PAGE === "subscribe"
-                        ? { color: "#D9D9FF" }
-                        : { color: "#666680" },
+                      ACTIVE_PAGE === 'subscribe' ? { color: '#D9D9FF' } : { color: '#666680' },
                       {
                         fontSize: 14,
                         lineHeight: 16,
-                        fontWeight: "400",
+                        fontWeight: '400',
                       },
                     ]}
                   >
-                    {"Subscribe"}
+                    {'Subscribe'}
                   </NativeText>
                 </Box>
               </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={1}
-                onPress={() => handleProfilePage(2)}
-              >
+              <TouchableOpacity activeOpacity={1} onPress={() => handleProfilePage(2)}>
                 <Box
                   paddingBottom={16}
                   additionalStyles={{
-                    borderBottomWidth: ACTIVE_PAGE === "ownership" ? 2 : 0,
+                    borderBottomWidth: ACTIVE_PAGE === 'ownership' ? 2 : 0,
                     borderBottomColor:
-                      ACTIVE_PAGE === "ownership"
-                        ? theme.color.light.PRIMARY
-                        : "transparet",
+                      ACTIVE_PAGE === 'ownership' ? theme.color.light.PRIMARY : 'transparet',
                   }}
                 >
                   <NativeText
                     style={[
-                      ACTIVE_PAGE === "ownership"
-                        ? { color: "#D9D9FF" }
-                        : { color: "#666680" },
+                      ACTIVE_PAGE === 'ownership' ? { color: '#D9D9FF' } : { color: '#666680' },
                       {
                         fontSize: 14,
                         lineHeight: 16,
-                        fontWeight: "400",
+                        fontWeight: '400',
                       },
                     ]}
                   >
-                    {"Ownership"}
+                    {'Ownership'}
                   </NativeText>
                 </Box>
               </TouchableOpacity>

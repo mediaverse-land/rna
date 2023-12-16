@@ -99,141 +99,125 @@ import { StatusBar } from 'react-native';
 // ];
 
 const renderSigninItems = ({ item }: { item: Session }) => {
-    return (
-        <PaddingContainer>
-            <Box
-                width="100%"
-                height={77}
-                paddingTop={16}
-                paddingBottom={16}
-                marginBottom={8}
-                borderRadius={16}
-            >
-                <Image
-                    source={{ uri: SIGNINS_LIST_ITEM_GRADIET }}
-                    style={{
-                        width: '100%',
-                        height: 77,
-                        position: 'absolute',
-                        left: 0,
-                        top: 0,
-                        borderRadius: 16
-                    }}
-                    resizeMode='stretch'
-                />
-                <Box width="100%" paddingLeft={16}>
-                    <Text
-                        color={theme.color.light.WHITE}
-                        fontSize={14}
-                        fontWeight={400}
-                        lineHeight={17}
-                    >
-                        {/* {item.details.agent} */}
-                        {item.app}
-                    </Text>
-                </Box>
-                <Box
-                    direction="row"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    width="100%"
-                    height={16}
-                    marginTop={8}
-                >
-                    <Text
-                        marginLeft={16}
-                        color={theme.color.light.TEXT}
-                        fontSize={theme.numericFontSize.sm}
-                        lineHeight={theme.numericLineHeight.md}
-                    >
-                        {item.created_at}
-                    </Text>
-                    <Text
-                        color={theme.color.light.TEXT}
-                        marginRight={16}
-                        fontSize={theme.numericFontSize.sm}
-                        lineHeight={theme.numericLineHeight.md}
-                    >
-                        {item.id}
-                    </Text>
-                </Box>
-            </Box>
-        </PaddingContainer>
-    );
+  return (
+    <PaddingContainer>
+      <Box
+        width="100%"
+        height={77}
+        paddingTop={16}
+        paddingBottom={16}
+        marginBottom={8}
+        borderRadius={16}
+      >
+        <Image
+          source={{ uri: SIGNINS_LIST_ITEM_GRADIET }}
+          style={{
+            width: '100%',
+            height: 77,
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            borderRadius: 16,
+          }}
+          resizeMode="stretch"
+        />
+        <Box width="100%" paddingLeft={16}>
+          <Text color={theme.color.light.WHITE} fontSize={14} fontWeight={400} lineHeight={17}>
+            {/* {item.details.agent} */}
+            {item.app}
+          </Text>
+        </Box>
+        <Box
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          width="100%"
+          height={16}
+          marginTop={8}
+        >
+          <Text
+            marginLeft={16}
+            color={theme.color.light.TEXT}
+            fontSize={theme.numericFontSize.sm}
+            lineHeight={theme.numericLineHeight.md}
+          >
+            {item.created_at}
+          </Text>
+          <Text
+            color={theme.color.light.TEXT}
+            marginRight={16}
+            fontSize={theme.numericFontSize.sm}
+            lineHeight={theme.numericLineHeight.md}
+          >
+            {item.id}
+          </Text>
+        </Box>
+      </Box>
+    </PaddingContainer>
+  );
 };
 
 const pageHeaderComponent = (
-    <PaddingContainer>
-        <Box marginTop={29}>
-            <SettingsScreenTitle title="Sessions" />
-        </Box>
-    </PaddingContainer>
+  <PaddingContainer>
+    <Box marginTop={29}>
+      <SettingsScreenTitle title="Sessions" />
+    </Box>
+  </PaddingContainer>
 );
 
 const keyExtractor = (item: Session): string => item.id.toString();
 
 export function SessionsPage() {
-    const [data, setData] = useState<Session[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<Session[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const tokenCtx = useContext(tokenContext);
+  const tokenCtx = useContext(tokenContext);
 
-    const getSessions = async () => {
-        setIsLoading(true);
-        //
-        const token = await tokenCtx.getToken();
+  const getSessions = async () => {
+    setIsLoading(true);
+    //
+    const token = await tokenCtx.getToken();
 
-        if (token !== null) {
-            const formattedToken = await tokenStringResolver(token);
+    if (token !== null) {
+      const formattedToken = await tokenStringResolver(token);
 
-            const { isSuccess, isError, res } = await getSessionsApiHandler(
-                formattedToken
-            );
+      const { isSuccess, isError, res } = await getSessionsApiHandler(formattedToken);
 
-            if (isError || !isSuccess) {
-                setIsLoading(false);
-                return;
-            }
-
-            setData(res.data);
-
-            setIsLoading(false);
-        }
+      if (isError || !isSuccess) {
         setIsLoading(false);
-    };
+        return;
+      }
 
-    useEffect(() => {
-        getSessions();
-    }, []);
+      setData(res.data);
 
-    const isFocused = useIsFocused();
+      setIsLoading(false);
+    }
+    setIsLoading(false);
+  };
 
-    return (
-        <SafeAreaView style={{ flex: 1, width: '100%', marginTop: -30 }}>
-            {isFocused ? (
-                <StatusBar
-                    backgroundColor={'#030340'}
-                    barStyle="light-content"
-                />
-            ) : null}
-            <ScreenGradient>
-                <Box width="100%">
-                    <VirtualizedList>
-                        {pageHeaderComponent}
-                        {isLoading ? (
-                            <FullScreenSpinnerLoader />
-                        ) : (
-                            <Box marginTop={48}>
-                                <FlatList
-                                    data={data}
-                                    renderItem={renderSigninItems}
-                                    keyExtractor={keyExtractor}
-                                />
-                            </Box>
-                        )}
-                    </VirtualizedList>
-                </Box>
-            </ScreenGradient>
-        </SafeAreaView>
-    );
+  useEffect(() => {
+    getSessions();
+  }, []);
+
+  const isFocused = useIsFocused();
+
+  return (
+    <SafeAreaView style={{ flex: 1, width: '100%', marginTop: -30 }}>
+      {isFocused ? <StatusBar backgroundColor={'#030340'} barStyle="light-content" /> : null}
+      <ScreenGradient>
+        <Box width="100%">
+          <VirtualizedList>
+            {pageHeaderComponent}
+            {isLoading ? (
+              <FullScreenSpinnerLoader />
+            ) : (
+              <Box marginTop={48}>
+                <FlatList data={data} renderItem={renderSigninItems} keyExtractor={keyExtractor} />
+              </Box>
+            )}
+          </VirtualizedList>
+        </Box>
+      </ScreenGradient>
+    </SafeAreaView>
+  );
 }

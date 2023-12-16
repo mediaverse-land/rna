@@ -1,46 +1,39 @@
-import { Controller, useForm } from "react-hook-form";
-import { EditScreenStyles } from "./style";
-import { useContext, useEffect, useState } from "react";
-import type { Image as ImageType } from "./../../types/image";
-import { tokenContext } from "../../context/token";
-import { useIsFocused } from "@react-navigation/native";
-import { tokenStringResolver } from "../../utils/token-string-resolver";
-import { SafeAreaView, ToastAndroid } from "react-native";
-import { FocusedStatusBar } from "../../components/focused-statusbar";
-import { ScreenGradient } from "../../components/screen-gradient";
-import { VirtualizedList } from "../../components/virtualized-list";
-import { RenderIf } from "../../components/render-if";
-import { EditSubmitButton } from "./components/submit-button";
-import { AssetThumbnail } from "../../components/asset-thumbnail";
-import { Box } from "../../components/box";
-import { updateImageFormStructure } from "./form-structure";
-import { PaddingContainer } from "../../styles/grid";
-import { Text } from "../../components/text";
-import { RadioButton } from "../../components/form";
-import { getAssetApiHandler, updateAssetApiHandler } from "./service";
-import { userContext } from "../../context/user";
-import { Logger } from "../../utils/logger";
+import { Controller, useForm } from 'react-hook-form';
+import { EditScreenStyles } from './style';
+import { useContext, useEffect, useState } from 'react';
+import type { Image as ImageType } from './../../types/image';
+import { tokenContext } from '../../context/token';
+import { useIsFocused } from '@react-navigation/native';
+import { tokenStringResolver } from '../../utils/token-string-resolver';
+import { SafeAreaView, ToastAndroid } from 'react-native';
+import { FocusedStatusBar } from '../../components/focused-statusbar';
+import { ScreenGradient } from '../../components/screen-gradient';
+import { VirtualizedList } from '../../components/virtualized-list';
+import { RenderIf } from '../../components/render-if';
+import { EditSubmitButton } from './components/submit-button';
+import { AssetThumbnail } from '../../components/asset-thumbnail';
+import { Box } from '../../components/box';
+import { updateImageFormStructure } from './form-structure';
+import { PaddingContainer } from '../../styles/grid';
+import { Text } from '../../components/text';
+import { RadioButton } from '../../components/form';
+import { getAssetApiHandler, updateAssetApiHandler } from './service';
+import { userContext } from '../../context/user';
+import { Logger } from '../../utils/logger';
 
 type Params = {
   id: number;
-  assetType: "image" | "video" | "sound" | "text";
+  assetType: 'image' | 'video' | 'sound' | 'text';
 };
 
 const _logger = new Logger();
 
-const { ThumbnailWrapper, EditableInput } =
-  EditScreenStyles;
+const { ThumbnailWrapper, EditableInput } = EditScreenStyles;
 
 export const EditScreen = ({ navigation, route }: any) => {
   const { id, assetType }: Params = route.params;
 
-
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    control,
-  } = useForm();
+  const { register, handleSubmit, setValue, control } = useForm();
 
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<ImageType>(null);
@@ -48,7 +41,7 @@ export const EditScreen = ({ navigation, route }: any) => {
   const [_selectedItems, _setSelecteItems] = useState<
     { plan: string; forkability_status: boolean } | any
   >({
-    plan: "free",
+    plan: 'free',
     forkability_status: true,
   });
 
@@ -69,17 +62,16 @@ export const EditScreen = ({ navigation, route }: any) => {
       const price = data?.asset?.price;
       const description = data?.description;
 
-      setValue("name", name);
-      setValue("description", description);
-      setValue("price", price.toString() );
-
+      setValue('name', name);
+      setValue('description', description);
+      setValue('price', price.toString());
 
       const st: any = data?.asset?.forkability_status;
 
       const availablePlans: Record<number, string> = {
-        1: "free",
-        2: "ownership",
-        3: "subscription",
+        1: 'free',
+        2: 'ownership',
+        3: 'subscription',
       };
       const plan = data?.asset?.plan;
       _setSelecteItems({
@@ -106,7 +98,7 @@ export const EditScreen = ({ navigation, route }: any) => {
   const getSingleData = async (token: string) => {
     setIsLoading(true);
 
-    const { isError, res } = await getAssetApiHandler(token,  id, assetType);
+    const { isError, res } = await getAssetApiHandler(token, id, assetType);
 
     if (isError) {
       setIsLoading(false);
@@ -146,7 +138,6 @@ export const EditScreen = ({ navigation, route }: any) => {
 
     const initFork = _selectedItems.forkability_status === true ? 2 : 1;
 
-
     const updatedData = {
       ..._formData,
       plan: _selectedItems.plan,
@@ -160,20 +151,19 @@ export const EditScreen = ({ navigation, route }: any) => {
       formattedToken,
       id,
       assetType,
-      updatedData
+      updatedData,
     );
-    _logger.log({res, isSuccess, isError, errorRes })
+    _logger.log({ res, isSuccess, isError, errorRes });
     if (isSuccess) {
-      ToastAndroid.show("Asset edited successfully", ToastAndroid.BOTTOM);
+      ToastAndroid.show('Asset edited successfully', ToastAndroid.BOTTOM);
       navigation?.goBack();
     }
     if (isError) {
-      ToastAndroid.show("Asset update failed", ToastAndroid.BOTTOM);
+      ToastAndroid.show('Asset update failed', ToastAndroid.BOTTOM);
     }
   };
 
-
-  const getThumbnail = data?.asset?.thumbnails?.["390x218"];
+  const getThumbnail = data?.asset?.thumbnails?.['390x218'];
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -182,13 +172,10 @@ export const EditScreen = ({ navigation, route }: any) => {
         <VirtualizedList>
           <RenderIf condition={data?.id ? false : true}>
             <ThumbnailWrapper>
-              <AssetThumbnail
-                assetType="image"
-                thumnailImageUri={getThumbnail}
-              />
+              <AssetThumbnail assetType="image" thumnailImageUri={getThumbnail} />
               <Box marginTop={16}></Box>
               {updateImageFormStructure.map((_form: any) => {
-                if (_form.type !== "radio-button") {
+                if (_form.type !== 'radio-button') {
                   return (
                     <PaddingContainer key={_form.id}>
                       <Box marginBottom={8} marginTop={8} key={_form.id}>
@@ -211,9 +198,9 @@ export const EditScreen = ({ navigation, route }: any) => {
                     </PaddingContainer>
                   );
                 }
-                if (_form.type === "radio-button") {
-                  if(typeof _selectedItems[_form.name] ==='boolean'){
-                      return null
+                if (_form.type === 'radio-button') {
+                  if (typeof _selectedItems[_form.name] === 'boolean') {
+                    return null;
                   }
                   return (
                     <Box marginTop={8} key={_form.id}>
@@ -221,9 +208,7 @@ export const EditScreen = ({ navigation, route }: any) => {
                         <RadioButton
                           labelText={_form.labelText}
                           dataList={_form.options}
-                          getSelectedOption={(option: any) =>
-                            getSelectedItem(option, _form.name)
-                          }
+                          getSelectedOption={(option: any) => getSelectedItem(option, _form.name)}
                           defaultOption={_selectedItems[_form.name]}
                         />
                       </PaddingContainer>
@@ -235,10 +220,7 @@ export const EditScreen = ({ navigation, route }: any) => {
             </ThumbnailWrapper>
           </RenderIf>
         </VirtualizedList>
-        <EditSubmitButton
-          isLoading={isLoading}
-          onSave={handleSubmit(_onSubmit)}
-        />
+        <EditSubmitButton isLoading={isLoading} onSave={handleSubmit(_onSubmit)} />
       </ScreenGradient>
     </SafeAreaView>
   );

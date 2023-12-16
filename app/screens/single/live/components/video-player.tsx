@@ -1,6 +1,6 @@
-import ViewShot from "react-native-view-shot";
-import { Box } from "../../../../components/box";
-import { ResizeMode, Video } from "expo-av";
+import ViewShot from 'react-native-view-shot';
+import { Box } from '../../../../components/box';
+import { ResizeMode, Video } from 'expo-av';
 
 type VideoPlayerProps = {
   videoAreaRef: any;
@@ -20,13 +20,13 @@ export const SingleLiveVideoPlayer = ({
   thumbnailHeight,
 }: VideoPlayerProps) => {
   return (
-    <Box id="video-player" width={"100%"} height={thumbnailHeight}>
+    <Box id="video-player" width={'100%'} height={thumbnailHeight}>
       <ViewShot
         style={{ flex: 1 }}
         ref={videoAreaRef}
         options={{
-          format: "jpg",
-          result: "base64",
+          format: 'jpg',
+          result: 'base64',
         }}
       >
         {videoUri ? (
@@ -37,9 +37,9 @@ export const SingleLiveVideoPlayer = ({
             }}
             ref={videoRef}
             style={{
-              width: "100%",
+              width: '100%',
               height: thumbnailHeight,
-              backgroundColor: "black",
+              backgroundColor: 'black',
             }}
             source={{
               uri: videoUri,

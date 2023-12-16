@@ -1,4 +1,4 @@
-import { File } from "./file";
+import { File } from './file';
 
 export interface Text {
   id: number;
@@ -35,14 +35,14 @@ export interface Text {
     sales_number: number;
     views_count: number;
     thumbnails: {
-      "100": string;
-      "100x150": string;
-      "150x100": string;
-      "270x370": string;
-      "525x525": string;
-      "336x366": string;
-      "226x226": string;
-      "852x480": string;
+      '100': string;
+      '100x150': string;
+      '150x100': string;
+      '270x370': string;
+      '525x525': string;
+      '336x366': string;
+      '226x226': string;
+      '852x480': string;
     };
     thumbnail: {
       id: number;

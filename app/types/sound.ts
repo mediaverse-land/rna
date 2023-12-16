@@ -1,4 +1,4 @@
-import { File } from "./file";
+import { File } from './file';
 
 export interface Sound {
   id: number;
@@ -35,16 +35,16 @@ export interface Sound {
     sales_number: number;
     views_count: number;
     thumbnails: {
-      "1080x1080": string;
-      "648x651": string;
-      "525x525": string;
-      "523x304": string;
-      "340x220": string;
-      "348x351": string;
-      "336x366": string;
-      "226x226": string;
+      '1080x1080': string;
+      '648x651': string;
+      '525x525': string;
+      '523x304': string;
+      '340x220': string;
+      '348x351': string;
+      '336x366': string;
+      '226x226': string;
     };
-    forkability_status: 1|2,
+    forkability_status: 1 | 2;
     thumbnail: {
       id: number;
       asset_id: number;

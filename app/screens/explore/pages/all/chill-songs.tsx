@@ -1,16 +1,16 @@
-import { FC } from "react";
-import { ImagesPageComponents } from "./style";
-import { Title } from "../../../../components/title";
-import { HorizontalSlider } from "../../../../components/horizontal-slider";
-import { Asset } from "../../../../types/asset";
-import { RenderIf } from "../../../../components/render-if";
-import { IfNoItem } from "../../../../components/if-no-item";
-import { CHILL_SONGS } from "../../../../constaints/consts";
-import { Box } from "../../../../components/box";
-import { ICON_TOP_TABBAR_SOUND_ACTIVE_SVG } from "../../../../constaints/icons";
-import { UseNavigationType } from "../../../../types/use-navigation";
-import { ViewAllPageEnum } from "../../../view-all";
-import { VIEW_ALL } from "../../types";
+import { FC } from 'react';
+import { ImagesPageComponents } from './style';
+import { Title } from '../../../../components/title';
+import { HorizontalSlider } from '../../../../components/horizontal-slider';
+import { Asset } from '../../../../types/asset';
+import { RenderIf } from '../../../../components/render-if';
+import { IfNoItem } from '../../../../components/if-no-item';
+import { CHILL_SONGS } from '../../../../constaints/consts';
+import { Box } from '../../../../components/box';
+import { ICON_TOP_TABBAR_SOUND_ACTIVE_SVG } from '../../../../constaints/icons';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { ViewAllPageEnum } from '../../../view-all';
+import { VIEW_ALL } from '../../types';
 
 type Props = {
   isLoading: boolean;
@@ -20,11 +20,7 @@ type Props = {
 
 const { DailyRecomended } = ImagesPageComponents;
 
-export const AllPageChillSongs: FC<Props> = ({
-  isLoading,
-  data,
-  navigation,
-}) => {
+export const AllPageChillSongs: FC<Props> = ({ isLoading, data, navigation }) => {
   const viewAllNavigationHandler = () => {
     navigation.navigate(VIEW_ALL, {
       pageDirection: ViewAllPageEnum.BEST_SONGS,

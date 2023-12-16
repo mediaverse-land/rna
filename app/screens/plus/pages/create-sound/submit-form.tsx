@@ -1,6 +1,6 @@
-import {  useState } from "react";
-import { createImageFormStructure } from "../create-image/form-structure";
-import { CreateAssetForm } from "../../component/create-asset-form";
+import { useState } from 'react';
+import { createImageFormStructure } from '../create-image/form-structure';
+import { CreateAssetForm } from '../../component/create-asset-form';
 
 type Props = {
   isLoading: boolean;
@@ -9,14 +9,12 @@ type Props = {
 };
 
 export const SubmitForm = ({ isLoading, createAssetRequest }: Props) => {
-  const [selectedOption, setSelectedOption] = useState<Record<string, string|boolean>>(
-    {
-      plan: "ownership",
-      forkability_status: true
-    }
-  );
+  const [selectedOption, setSelectedOption] = useState<Record<string, string | boolean>>({
+    plan: 'ownership',
+    forkability_status: true,
+  });
 
-  const _getSelectedOption = (option: Record<string, string|boolean>) => {
+  const _getSelectedOption = (option: Record<string, string | boolean>) => {
     setSelectedOption(option);
   };
 
@@ -32,17 +30,17 @@ export const SubmitForm = ({ isLoading, createAssetRequest }: Props) => {
       subscription: 3,
     };
 
-    const __plan: any = selectedOption.plan
+    const __plan: any = selectedOption.plan;
 
     const options: any = {
       name,
-      price: selectedOption.plan !== "free" ? parseInt(data.price) : 0,
+      price: selectedOption.plan !== 'free' ? parseInt(data.price) : 0,
       plan: plans[__plan],
       description,
       forkability_status: selectedOption.forkability_status,
     };
 
-    if (selectedOption.plan === "subscription") {
+    if (selectedOption.plan === 'subscription') {
       options.subscription_period = parseInt(data.subscription_period);
     }
 

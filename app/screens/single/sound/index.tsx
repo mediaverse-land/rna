@@ -1,50 +1,50 @@
-import { useState, useEffect, useContext, useRef, useMemo } from "react";
-import { ToastAndroid, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ScreenGradient } from "../../../components/screen-gradient";
-import { SingleSoundHeader } from "./header";
-import { Box } from "../../../components/box";
-import { SingleSoundContent } from "./content";
-import { CommentCard } from "../../../components/comment-card";
-import { BuyBottom } from "../components/buy-button";
-import { FocusedStatusBar } from "../../../components/focused-statusbar";
-import { tokenContext } from "../../../context/token";
-import { tokenStringResolver } from "../../../utils/token-string-resolver";
+import { useState, useEffect, useContext, useRef, useMemo } from 'react';
+import { ToastAndroid, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScreenGradient } from '../../../components/screen-gradient';
+import { SingleSoundHeader } from './header';
+import { Box } from '../../../components/box';
+import { SingleSoundContent } from './content';
+import { CommentCard } from '../../../components/comment-card';
+import { BuyBottom } from '../components/buy-button';
+import { FocusedStatusBar } from '../../../components/focused-statusbar';
+import { tokenContext } from '../../../context/token';
+import { tokenStringResolver } from '../../../utils/token-string-resolver';
 import {
   convertAudioToImageHandler,
   getSoundDetailApiHandler,
   translateAudioHandler,
-} from "../service";
-import { MetaDataType } from "../components/item-metadata";
-import { VirtualizedList } from "../../../components/virtualized-list";
-import { RenderIf } from "../../../components/render-if";
-import { userContext } from "../../../context/user";
-import { ifUserIsOwner } from "../../../utils/if-user-is-owner";
-import { Sound } from "../../../types/sound";
-import { Audio } from "expo-av";
-import { useIsFocused } from "@react-navigation/native";
-import { SingleItemFiles } from "../components/files";
-import MusicPlayer from "./player";
-import { ReportModal } from "../components/report-modal";
-import { useClickOutside } from "react-native-click-outside";
-import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
-import { retriveToken } from "../../../utils/retrive-token";
-import { Toolbar } from "../components/toolbar";
+} from '../service';
+import { MetaDataType } from '../components/item-metadata';
+import { VirtualizedList } from '../../../components/virtualized-list';
+import { RenderIf } from '../../../components/render-if';
+import { userContext } from '../../../context/user';
+import { ifUserIsOwner } from '../../../utils/if-user-is-owner';
+import { Sound } from '../../../types/sound';
+import { Audio } from 'expo-av';
+import { useIsFocused } from '@react-navigation/native';
+import { SingleItemFiles } from '../components/files';
+import MusicPlayer from './player';
+import { ReportModal } from '../components/report-modal';
+import { useClickOutside } from 'react-native-click-outside';
+import { RenderIfWithoutLoading } from '../../../components/render-if-without-loading';
+import { retriveToken } from '../../../utils/retrive-token';
+import { Toolbar } from '../components/toolbar';
 import {
   ICON_SHARE_YOUTUBE,
   ICON_SINGLE_CONVERT_TO_IMAGE,
   ICON_SINGLE_CONVERT_TO_TEXT,
   ICON_SINGLE_EDIT,
-} from "../../../constaints/icons";
-import { PaddingContainer } from "../../../styles/grid";
-import { AUDIO_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
-import { EDIT_SCREEN } from "../../../constaints/consts";
-import { ModalBottomSheet } from "../../../components/bottom-sheet-modal";
-import SelectLanguageBottomSheet from "./../../../components/select-language";
-import { SingleAssetFooter } from "../components/footer";
-import { useYoutubeShareMutation } from "../../../services/asset.service";
-import { YoutubeShare } from "../components/youtube-share";
-import { BackButtonRedirector } from "../utils/back-button-redirector";
+} from '../../../constaints/icons';
+import { PaddingContainer } from '../../../styles/grid';
+import { AUDIO_THUMBNAIL_PLACEHOLDER } from '../../../constaints/images';
+import { EDIT_SCREEN } from '../../../constaints/consts';
+import { ModalBottomSheet } from '../../../components/bottom-sheet-modal';
+import SelectLanguageBottomSheet from './../../../components/select-language';
+import { SingleAssetFooter } from '../components/footer';
+import { useYoutubeShareMutation } from '../../../services/asset.service';
+import { YoutubeShare } from '../components/youtube-share';
+import { BackButtonRedirector } from '../utils/back-button-redirector';
 
 const _backButtonRedirector = new BackButtonRedirector();
 const _youtubeShare = new YoutubeShare();
@@ -64,7 +64,7 @@ export function SingleSoundScreen({ navigation, route }: any) {
   const [token, setToken] = useState<string>(null);
 
   const [currentUserId, setCurrentUserId] = useState<number>(null);
-  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState('');
 
   const selectLanguageRef = useRef(null);
 
@@ -110,7 +110,6 @@ export function SingleSoundScreen({ navigation, route }: any) {
       return _backButtonRedirector.cleanup(navigation);
     }
   }, []);
-
 
   async function playSoundHandler() {
     if (isOwner === true || isSubscriber === true) {
@@ -173,7 +172,7 @@ export function SingleSoundScreen({ navigation, route }: any) {
     const { isError, res } = await getSoundDetailApiHandler(
       token,
       shouldSearchByAssetId,
-      route.params?.saech__asset_id ? route.params?.saech__asset_id : id
+      route.params?.saech__asset_id ? route.params?.saech__asset_id : id,
     );
 
     if (isError) {
@@ -187,10 +186,7 @@ export function SingleSoundScreen({ navigation, route }: any) {
     // is user owner
     const currentUserId = userCtx.getUser();
     setCurrentUserId(currentUserId?.id);
-    const isUserOwner = ifUserIsOwner(
-      assetData?.asset?.user?.id,
-      currentUserId.id
-    );
+    const isUserOwner = ifUserIsOwner(assetData?.asset?.user?.id, currentUserId.id);
 
     const fileUrl = data?.file?.url || assetData?.asset?.file?.url;
 
@@ -227,20 +223,13 @@ export function SingleSoundScreen({ navigation, route }: any) {
       audio: itemId,
     };
 
-    const { isError, isSuccess } =
-      await convertAudioToImageHandler(token, data?.id, body);
+    const { isError, isSuccess } = await convertAudioToImageHandler(token, data?.id, body);
 
     if (isSuccess) {
-      ToastAndroid.show(
-        "Convert asset to text requested successfully",
-        ToastAndroid.LONG
-      );
+      ToastAndroid.show('Convert asset to text requested successfully', ToastAndroid.LONG);
     }
     if (isError) {
-      ToastAndroid.show(
-        "Convert asset to text requested faliled",
-        ToastAndroid.LONG
-      );
+      ToastAndroid.show('Convert asset to text requested faliled', ToastAndroid.LONG);
     }
   };
 
@@ -262,20 +251,13 @@ export function SingleSoundScreen({ navigation, route }: any) {
       language: selectLanguageRef,
     };
 
-    const { isError, isSuccess } = await translateAudioHandler(
-      token,
-      data?.id,
-      body
-    );
+    const { isError, isSuccess } = await translateAudioHandler(token, data?.id, body);
 
     if (isSuccess) {
-      ToastAndroid.show(
-        "Translate asset requested successfully",
-        ToastAndroid.LONG
-      );
+      ToastAndroid.show('Translate asset requested successfully', ToastAndroid.LONG);
     }
     if (isError) {
-      ToastAndroid.show("Translate asset requested faliled", ToastAndroid.LONG);
+      ToastAndroid.show('Translate asset requested faliled', ToastAndroid.LONG);
     }
     selectLanguageRef?.current?.close();
   };
@@ -288,26 +270,25 @@ export function SingleSoundScreen({ navigation, route }: any) {
     selectLanguageRef?.current?.open();
   };
 
-  const thumnailImageUri =
-    data?.asset?.thumbnails["336x366"] || AUDIO_THUMBNAIL_PLACEHOLDER;
+  const thumnailImageUri = data?.asset?.thumbnails['336x366'] || AUDIO_THUMBNAIL_PLACEHOLDER;
   const price = data?.asset?.price || null;
 
   const metaDataList: MetaDataType[] =
     [
       {
         id: 1,
-        key: "Suffix",
+        key: 'Suffix',
         value: data?.asset?.thumbnail?.extension,
       },
       {
         id: 2,
-        key: "Type",
-        value: "Music",
+        key: 'Type',
+        value: 'Music',
       },
       {
         id: 3,
-        key: "Lanuage",
-        value: "en",
+        key: 'Lanuage',
+        value: 'en',
       },
     ] || [];
 
@@ -316,7 +297,7 @@ export function SingleSoundScreen({ navigation, route }: any) {
         {
           id: 1,
           chapterName: file?.details?.name,
-          duration: "",
+          duration: '',
         },
       ]
     : null;
@@ -324,21 +305,17 @@ export function SingleSoundScreen({ navigation, route }: any) {
   const navigateToEditScreen = () => {
     navigation.navigate(EDIT_SCREEN, {
       id: data?.id,
-      assetType: "sound",
+      assetType: 'sound',
     });
   };
 
-  const isDisableEditIcon =
-    data?.asset?.user?.id === currentUserId ? false : true;
+  const isDisableEditIcon = data?.asset?.user?.id === currentUserId ? false : true;
 
-  const hasEditPermission =
-    data?.asset?.forkability_status === 2 ? true : false;
+  const hasEditPermission = data?.asset?.forkability_status === 2 ? true : false;
 
-    
   const shareToYoutubeHandler = () => {
     _youtubeShare.openModal();
   };
-
 
   const toolbarOptions = [
     {
@@ -381,11 +358,10 @@ export function SingleSoundScreen({ navigation, route }: any) {
   const isFileExists = data?.asset?.file?.url ? true : false;
 
   const hasPermission = isOwner || isSubscriber;
-  const snapPoints = useMemo(() => ["25%", "50%"], []);
+  const snapPoints = useMemo(() => ['25%', '50%'], []);
   const accountId: number = userCtx.getUser().id;
 
   const youtubeShareTemplate = _youtubeShare.template();
-
 
   return (
     <>
@@ -404,8 +380,8 @@ export function SingleSoundScreen({ navigation, route }: any) {
                     isOwnerOrSubscriber={hasPermission}
                     playSoundHandler={playSoundHandler}
                     stopSoundHandler={stopSoundHandler}
-                    username={data?.asset?.user?.username || ""}
-                    userProfileUri={data?.asset?.user?.image_url || ""}
+                    username={data?.asset?.user?.username || ''}
+                    userProfileUri={data?.asset?.user?.image_url || ''}
                     openReportModalHandler={_openReportModalHandler}
                   />
                   <RenderIfWithoutLoading condition={hasPermission}>
@@ -416,10 +392,7 @@ export function SingleSoundScreen({ navigation, route }: any) {
                   <RenderIfWithoutLoading condition={isFileExists}>
                     <MusicPlayer url={file?.url} />
                   </RenderIfWithoutLoading>
-                  <SingleSoundContent
-                    description={data?.description}
-                    metaDataList={metaDataList}
-                  />
+                  <SingleSoundContent description={data?.description} metaDataList={metaDataList} />
                   <RenderIfWithoutLoading condition={isFileExists}>
                     <SingleItemFiles data={textFiles} />
                   </RenderIfWithoutLoading>
@@ -453,11 +426,11 @@ export function SingleSoundScreen({ navigation, route }: any) {
             <View
               ref={ref}
               style={{
-                position: "absolute",
+                position: 'absolute',
                 zIndex: 40000,
                 top: 300,
                 right: 20,
-                backgroundColor: "#0f172cab",
+                backgroundColor: '#0f172cab',
                 width: 250,
                 height: 250,
               }}

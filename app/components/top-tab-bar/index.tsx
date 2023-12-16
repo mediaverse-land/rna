@@ -1,18 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ReactElement, useEffect, useMemo, useRef } from "react";
-import { ImageStyle, Platform } from "react-native";
-import { Box } from "../box";
-import { TabBarComponents } from "./style";
-import { theme } from "../../constaints/theme";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
-import { StorageService } from "../../services/storage.service";
-import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
-import {
-  deActivrDisableOnIntractions,
-  seeExploreTopBarTour,
-} from "../../slices/tour.slice";
-import { USER_HAS_SEEN_EXPLORE_TOP_BAR_TOUR_GUIDE } from "../../constaints/consts";
+import { ReactElement, useEffect, useMemo, useRef } from 'react';
+import { ImageStyle, Platform } from 'react-native';
+import { Box } from '../box';
+import { TabBarComponents } from './style';
+import { theme } from '../../constaints/theme';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store';
+import { StorageService } from '../../services/storage.service';
+import { Coachmark, CoachmarkComposer } from 'react-native-coachmark';
+import { deActivrDisableOnIntractions, seeExploreTopBarTour } from '../../slices/tour.slice';
+import { USER_HAS_SEEN_EXPLORE_TOP_BAR_TOUR_GUIDE } from '../../constaints/consts';
 import {
   ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG,
   ICON_TOP_TABBAR_IMAGE_SVG,
@@ -22,37 +19,37 @@ import {
   ICON_TOP_TABBAR_TEXT_SVG,
   ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG,
   ICON_TOP_TABBAR_VIDEO_SVG,
-} from "../../constaints/icons";
-import { View, StyleSheet } from "react-native";
-import { BlurView } from "expo-blur";
+} from '../../constaints/icons';
+import { View, StyleSheet } from 'react-native';
+import { BlurView } from 'expo-blur';
 
 function getTobBarItemsIcon(tobBarItemName: string, isFocused: boolean) {
   let iconPath: ReactElement<SVGElement>;
   let iconStyle: ImageStyle;
 
   switch (tobBarItemName) {
-    case "video":
+    case 'video':
       iconPath = isFocused ? (
         <ICON_TOP_TABBAR_VIDEO_ACTIVE_SVG width={19.76} height={16} />
       ) : (
         <ICON_TOP_TABBAR_VIDEO_SVG width={19.76} height={16} />
       );
       break;
-    case "image":
+    case 'image':
       iconPath = isFocused ? (
         <ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG width={19.76} height={16} />
       ) : (
         <ICON_TOP_TABBAR_IMAGE_SVG width={19.76} height={16} />
       );
       break;
-    case "sound":
+    case 'sound':
       iconPath = isFocused ? (
         <ICON_TOP_TABBAR_SOUND_ACTIVE_SVG width={19.76} height={16} />
       ) : (
         <ICON_TOP_TABBAR_SOUND_SVG width={19.76} height={16} />
       );
       break;
-    case "text":
+    case 'text':
       iconPath = isFocused ? (
         <ICON_TOP_TABBAR_TEXT_ACTIVE_SVG width={19.76} height={16} />
       ) : (
@@ -69,8 +66,8 @@ function getTobBarItemsIcon(tobBarItemName: string, isFocused: boolean) {
 const _storageService = new StorageService();
 
 const tourGuides: Record<number, string> = {
-  0: "This bar will help you put the application in explorer mode of different content formats, go ahead ",
-  1: "In the image explorer mode, you can see a list of images shared by users and buy according to your needs ",
+  0: 'This bar will help you put the application in explorer mode of different content formats, go ahead ',
+  1: 'In the image explorer mode, you can see a list of images shared by users and buy according to your needs ',
   2: `By selecting video mode, you'll have access to a selection of 
     live TV and recorded content`,
   3: `In the audio mode, you will encounter a large number of music, 
@@ -91,17 +88,11 @@ function TopTabBar({
   isProfilePage = false,
   hasBorderRadius = true,
 }: any) {
-  const topStyle = isProfilePage
-    ? 8
-    : hasFullWidth
-    ? 120
-    : Platform.OS === "android"
-    ? 104
-    : 84;
+  const topStyle = isProfilePage ? 8 : hasFullWidth ? 120 : Platform.OS === 'android' ? 104 : 84;
   const dispatch = useDispatch<AppDispatch>();
 
   const { BOTTOM_NAVIGATION_TOUR_HAS_SEEN, DISABLE_INTRACTION } = useSelector(
-    (state: RootState) => state.tourSlice
+    (state: RootState) => state.tourSlice,
   );
 
   const allRef = useRef(),
@@ -132,9 +123,7 @@ function TopTabBar({
   };
 
   const hasUserSeenTour = async () => {
-    const hasUserSeen = await _storageService.get(
-      USER_HAS_SEEN_EXPLORE_TOP_BAR_TOUR_GUIDE
-    );
+    const hasUserSeen = await _storageService.get(USER_HAS_SEEN_EXPLORE_TOP_BAR_TOUR_GUIDE);
     const result = hasUserSeen ? true : false;
 
     if (result) {
@@ -146,7 +135,7 @@ function TopTabBar({
   const setUserSeenTour = async () => {
     await _storageService.set(
       USER_HAS_SEEN_EXPLORE_TOP_BAR_TOUR_GUIDE,
-      USER_HAS_SEEN_EXPLORE_TOP_BAR_TOUR_GUIDE
+      USER_HAS_SEEN_EXPLORE_TOP_BAR_TOUR_GUIDE,
     );
   };
 
@@ -165,13 +154,7 @@ function TopTabBar({
     ) {
       setTimeout(() => {
         // dispatch(activeDisableOnIntractions());
-        const composer = new CoachmarkComposer([
-          allRef,
-          imagesRef,
-          videosRef,
-          soundsRef,
-          textsRef,
-        ]);
+        const composer = new CoachmarkComposer([allRef, imagesRef, videosRef, soundsRef, textsRef]);
         composer.show().then(async () => {
           setStateOfUserSeenTour();
           await setUserSeenTour();
@@ -214,10 +197,7 @@ function TopTabBar({
       width="100%"
     >
       <View
-        style={[
-          styles.container,
-          hasBorderRadius ? { borderRadius: 16 } : { borderRadius: 0 },
-        ]}
+        style={[styles.container, hasBorderRadius ? { borderRadius: 16 } : { borderRadius: 0 }]}
       >
         <View style={[styles.background]} />
 
@@ -230,96 +210,89 @@ function TopTabBar({
           <TabBarComponents.TabBar
             style={[
               {
-                flexDirection: "row",
+                flexDirection: 'row',
               },
               hasBorderRadius ? { borderRadius: 16 } : { borderRadius: 0 },
             ]}
           >
-            {state.routes.map(
-              (route: ReturnType<(typeof state.routes)[0]>, index: number) => {
-                const { options } = descriptors[route.key];
+            {state.routes.map((route: ReturnType<(typeof state.routes)[0]>, index: number) => {
+              const { options } = descriptors[route.key];
 
-                const label =
-                  options.tabBarLabel !== undefined
-                    ? options.tabBarLabel
-                    : options.title !== undefined
-                    ? options.title
-                    : route.name;
+              const label =
+                options.tabBarLabel !== undefined
+                  ? options.tabBarLabel
+                  : options.title !== undefined
+                  ? options.title
+                  : route.name;
 
-                const isFocused = state.index === index;
+              const isFocused = state.index === index;
 
-                const { iconPath } = getTobBarItemsIcon(
-                  options.title,
-                  isFocused
-                );
+              const { iconPath } = getTobBarItemsIcon(options.title, isFocused);
 
-                const onPress = () => {
+              const onPress = () => {
+                if (DISABLE_INTRACTION) {
+                  return;
+                }
+                const event = navigation.emit({
+                  type: 'tabPress',
+                  target: route.key,
+                  canPreventDefault: true,
+                });
+
+                if (!isFocused && !event.defaultPrevented) {
                   if (DISABLE_INTRACTION) {
                     return;
                   }
-                  const event = navigation.emit({
-                    type: "tabPress",
-                    target: route.key,
-                    canPreventDefault: true,
+                  navigation.navigate({
+                    name: route.name,
+                    merge: true,
                   });
+                }
+              };
 
-                  if (!isFocused && !event.defaultPrevented) {
-                    if (DISABLE_INTRACTION) {
-                      return;
-                    }
-                    navigation.navigate({
-                      name: route.name,
-                      merge: true,
-                    });
-                  }
-                };
+              const onLongPress = () => {
+                navigation.emit({
+                  type: 'tabLongPress',
+                  target: route.key,
+                });
+              };
 
-                const onLongPress = () => {
-                  navigation.emit({
-                    type: "tabLongPress",
-                    target: route.key,
-                  });
-                };
+              const menuItemRef = returnRef(index);
+              const menuTourText = tourGuides[index];
 
-                const menuItemRef = returnRef(index);
-                const menuTourText = tourGuides[index];
-
-                return (
-                  <TabBarComponents.Container
-                    accessibilityRole="button"
-                    accessibilityState={isFocused ? { selected: true } : {}}
-                    accessibilityLabel={options.tabBarAccessibilityLabel}
-                    testID={options.tabBarTestID}
-                    onPress={onPress}
-                    onLongPress={onLongPress}
-                    key={index}
-                    style={{ flex: 1, top: 40 }}
+              return (
+                <TabBarComponents.Container
+                  accessibilityRole="button"
+                  accessibilityState={isFocused ? { selected: true } : {}}
+                  accessibilityLabel={options.tabBarAccessibilityLabel}
+                  testID={options.tabBarTestID}
+                  onPress={onPress}
+                  onLongPress={onLongPress}
+                  key={index}
+                  style={{ flex: 1, top: 40 }}
+                >
+                  <CoachmarkWrapper
+                    allowBackgroundInteractions={false}
+                    ref={menuItemRef}
+                    message={menuTourText}
                   >
-                    <CoachmarkWrapper
-                      allowBackgroundInteractions={false}
-                      ref={menuItemRef}
-                      message={menuTourText}
-                    >
-                      <TabBarComponents.Wrapper>
-                        {iconPath ? iconPath : null}
-                        {label === "All" ? (
-                          <TabBarComponents.Label
-                            style={{
-                              color: isFocused
-                                ? theme.color.light.WHITE
-                                : theme.color.light.TEXT,
-                            }}
-                          >
-                            {label}
-                          </TabBarComponents.Label>
-                        ) : null}
-                      </TabBarComponents.Wrapper>
-                    </CoachmarkWrapper>
-                    {isFocused ? <TabBarComponents.SpacerBorder /> : null}
-                  </TabBarComponents.Container>
-                );
-              }
-            )}
+                    <TabBarComponents.Wrapper>
+                      {iconPath ? iconPath : null}
+                      {label === 'All' ? (
+                        <TabBarComponents.Label
+                          style={{
+                            color: isFocused ? theme.color.light.WHITE : theme.color.light.TEXT,
+                          }}
+                        >
+                          {label}
+                        </TabBarComponents.Label>
+                      ) : null}
+                    </TabBarComponents.Wrapper>
+                  </CoachmarkWrapper>
+                  {isFocused ? <TabBarComponents.SpacerBorder /> : null}
+                </TabBarComponents.Container>
+              );
+            })}
           </TabBarComponents.TabBar>
         </BlurView>
       </View>
@@ -332,25 +305,25 @@ export default TopTabBar;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 16,
     height: 50,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
   background: {
     ...StyleSheet.absoluteFillObject,
   },
   blurView: {
-    position: "absolute",
-    width: "100%",
+    position: 'absolute',
+    width: '100%',
     height: 50,
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
     zIndex: 999999999999,
-    backgroundColor: "rgba(14, 14, 18, 0.50)",
+    backgroundColor: 'rgba(14, 14, 18, 0.50)',
 
     borderRadius: 10,
   },

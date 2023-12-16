@@ -1,28 +1,25 @@
-import { FC, useContext, useState, useEffect, useMemo } from "react";
-import { StyleSheet, ToastAndroid, TouchableOpacity } from "react-native";
-import { ICON_FRANCE_FLAG } from "../../../../constaints/icons";
-import { Box } from "../../../../components/box";
-import { Input } from "../../../../components/form";
-import { Text } from "../../../../components/text";
-import { AuthWindows, LoginNavigationEvent } from "../types";
-import { theme } from "../../../../constaints/theme";
-import { useForm, Controller } from "react-hook-form";
-import { Button } from "../../../../components/button";
-import { tokenContext } from "../../../../context/token";
-import { userContext } from "../../../../context/user";
-import { signinApiHandler } from "./service";
-import { removeZeroFromPhoneNumber } from "../../../../utils/remove-zere-from-pone-number";
-import { phoneLoginformStructure } from "./form-strucutre";
+import { FC, useContext, useState, useEffect, useMemo } from 'react';
+import { StyleSheet, ToastAndroid, TouchableOpacity } from 'react-native';
+import { ICON_FRANCE_FLAG } from '../../../../constaints/icons';
+import { Box } from '../../../../components/box';
+import { Input } from '../../../../components/form';
+import { Text } from '../../../../components/text';
+import { AuthWindows, LoginNavigationEvent } from '../types';
+import { theme } from '../../../../constaints/theme';
+import { useForm, Controller } from 'react-hook-form';
+import { Button } from '../../../../components/button';
+import { tokenContext } from '../../../../context/token';
+import { userContext } from '../../../../context/user';
+import { signinApiHandler } from './service';
+import { removeZeroFromPhoneNumber } from '../../../../utils/remove-zere-from-pone-number';
+import { phoneLoginformStructure } from './form-strucutre';
 
 type Props = {
   setWindowHandler: (window: AuthWindows) => void;
   loginNavigationEventsHandler: LoginNavigationEvent;
 };
 
-export const InsertPhone: FC<Props> = ({
-  setWindowHandler,
-  loginNavigationEventsHandler,
-}) => {
+export const InsertPhone: FC<Props> = ({ setWindowHandler, loginNavigationEventsHandler }) => {
   const {
     handleSubmit,
     control,
@@ -42,7 +39,7 @@ export const InsertPhone: FC<Props> = ({
   }, []);
 
   const navigateToSignupPage = () => {
-    setWindowHandler("singin");
+    setWindowHandler('singin');
   };
 
   const onSubmit = async (data: any) => {
@@ -57,11 +54,9 @@ export const InsertPhone: FC<Props> = ({
     };
 
     // await tokenCtx.setToken('1544f8f3a8759a54a39fcb20d2488797aba5a645eae871263a1620aabfa16815a8d472525514c15a7473223878a4e1883587615d8eed125af68204c230325440');
-    const { isError, isSuccess, res, errorRes } = await signinApiHandler(
-      newData
-    );
+    const { isError, isSuccess, res, errorRes } = await signinApiHandler(newData);
 
-    if (errorRes || typeof errorRes === "string") {
+    if (errorRes || typeof errorRes === 'string') {
       ToastAndroid.show(errorRes?.message, ToastAndroid.SHORT);
       showErrors(errorRes?.message);
       setIsLoading(false);
@@ -87,17 +82,17 @@ export const InsertPhone: FC<Props> = ({
     const errorMessage: string = errors?.error || errors;
     if (errorMessage) {
       if (
-        errorMessage.includes("phone") ||
-        errorMessage.includes("cellphone") ||
-        errorMessage.includes("number")
+        errorMessage.includes('phone') ||
+        errorMessage.includes('cellphone') ||
+        errorMessage.includes('number')
       ) {
-        setError("cellphone", {});
+        setError('cellphone', {});
       }
-      if (errorMessage.includes("password")) {
-        setError("password", {});
+      if (errorMessage.includes('password')) {
+        setError('password', {});
       } else {
-        setError("password", {});
-        setError("cellphone", {});
+        setError('password', {});
+        setError('cellphone', {});
       }
     }
   };
@@ -114,18 +109,14 @@ export const InsertPhone: FC<Props> = ({
                 labelText={f.labelText}
                 onBlur={onBlur}
                 onChangeText={(value: any) => {
-                  onChange(value || "");
+                  onChange(value || '');
                 }}
                 value={value}
                 hasError={errors?.[f.name] ? true : false}
-                labelIcon={
-                  f.name === "cellphone" && (
-                    <ICON_FRANCE_FLAG style={styles.flagIcon} />
-                  )
-                }
+                labelIcon={f.name === 'cellphone' && <ICON_FRANCE_FLAG style={styles.flagIcon} />}
                 additionalProps={{
                   inputMode: f.type,
-                  secureTextEntry: f.type === "password" ? true : false,
+                  secureTextEntry: f.type === 'password' ? true : false,
                 }}
               />
             )}
@@ -139,13 +130,7 @@ export const InsertPhone: FC<Props> = ({
 
   return (
     <Box paddingBottom={32} flex={1} width="100%" alignItems="center">
-      <Box
-        position="relative"
-        flex={1}
-        width="100%"
-        marginTop={175}
-        alignItems="center"
-      >
+      <Box position="relative" flex={1} width="100%" marginTop={175} alignItems="center">
         <Text
           color={theme.color.light.WHITE}
           lineHeight={20}
@@ -157,9 +142,7 @@ export const InsertPhone: FC<Props> = ({
         </Text>
         <Box width="100%">{renderForm}</Box>
         <Box marginBottom={8}>
-          <TouchableOpacity
-            onPress={loginNavigationEventsHandler.navigateToEmailLogin}
-          >
+          <TouchableOpacity onPress={loginNavigationEventsHandler.navigateToEmailLogin}>
             <Text
               lineHeight={16}
               fontWeight={400}
@@ -171,9 +154,7 @@ export const InsertPhone: FC<Props> = ({
           </TouchableOpacity>
         </Box>
         <Box>
-          <TouchableOpacity
-            onPress={loginNavigationEventsHandler.navigateToUsernameLogin}
-          >
+          <TouchableOpacity onPress={loginNavigationEventsHandler.navigateToUsernameLogin}>
             <Text
               lineHeight={16}
               fontWeight={400}
@@ -214,10 +195,10 @@ const styles = StyleSheet.create({
   flagIcon: {
     width: 20,
     height: 10,
-    position: "relative",
+    position: 'relative',
     top: 4,
   },
   fullWidth: {
-    width: "100%",
+    width: '100%',
   },
 });

@@ -4,25 +4,25 @@ import { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 
 export function useApi<DATA_TYPE>(getterFunction: Function) {
-    const [data, setData] = useState<DATA_TYPE>();
-    const [error, setError] = useState({});
-    const [isPending, setIsPending] = useState(true);
+  const [data, setData] = useState<DATA_TYPE>();
+  const [error, setError] = useState({});
+  const [isPending, setIsPending] = useState(true);
 
-    useEffect(() => {
-        const getData = async () => {
-            const result = await getterFunction();
-            if (result) {
-                setData(result);
-                setIsPending(false);
-            }
-        };
-
-        getData();
-    }, []);
-
-    const alertIfHasError = () => {
-        Alert.alert('sdmflksdf');
+  useEffect(() => {
+    const getData = async () => {
+      const result = await getterFunction();
+      if (result) {
+        setData(result);
+        setIsPending(false);
+      }
     };
 
-    return { isPending, data, error, alertIfHasError };
+    getData();
+  }, []);
+
+  const alertIfHasError = () => {
+    Alert.alert('sdmflksdf');
+  };
+
+  return { isPending, data, error, alertIfHasError };
 }

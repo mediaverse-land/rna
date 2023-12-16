@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export type InitialState = {
   params: any;
@@ -9,14 +9,14 @@ export type InitialState = {
   selectedLanguage: string;
   selectedPlan: string;
   price: number;
-  createAssetActiveView: "add-metadata" | "save-and-publish" |"upload-loder";
+  createAssetActiveView: 'add-metadata' | 'save-and-publish' | 'upload-loder';
   subscriptionPriod: number;
   ThumbnailCover: string;
 
-  fileBase64: string,
+  fileBase64: string;
 
-  title: string,
-  description: string
+  title: string;
+  description: string;
 };
 
 const initialState: InitialState = {
@@ -26,20 +26,20 @@ const initialState: InitialState = {
   isForkabilityBottomSheetOpen: false,
   selectedLanguage: null,
   selectedPlan: null,
-  createAssetActiveView: "add-metadata",
+  createAssetActiveView: 'add-metadata',
   forkabilityStatus: null,
   price: null,
   subscriptionPriod: null,
   ThumbnailCover: null,
- 
+
   fileBase64: null,
 
   title: null,
-  description: null
+  description: null,
 };
 
 const plusSlice = createSlice({
-  name: "plus_slice",
+  name: 'plus_slice',
   initialState,
   reducers: {
     setParam: (state, action: PayloadAction<any>) => {
@@ -79,10 +79,10 @@ const plusSlice = createSlice({
       state.selectedLanguage = action.payload;
     },
     navigateToAddMetaDataView: (state) => {
-      state.createAssetActiveView = "add-metadata";
+      state.createAssetActiveView = 'add-metadata';
     },
     navigateToSaveAndPublishView: (state) => {
-      state.createAssetActiveView = "save-and-publish";
+      state.createAssetActiveView = 'save-and-publish';
     },
 
     setThumbnailCover: (state, action: PayloadAction<string>) => {
@@ -100,7 +100,7 @@ const plusSlice = createSlice({
     setSubscriptionPriod: (state, action: PayloadAction<number>) => {
       state.subscriptionPriod = action.payload;
     },
-   
+
     setFileBase64: (state, action: PayloadAction<string>) => {
       state.fileBase64 = action.payload;
     },
@@ -118,7 +118,7 @@ export const {
   setPrice,
   setSubscriptionPriod,
 
-  setTitle, 
+  setTitle,
   setDescription,
 
   setParam,

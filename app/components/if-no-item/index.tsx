@@ -1,7 +1,7 @@
-import { ReactNode } from "react";
-import { ViewStyle } from "react-native";
-import { Box } from "../box";
-import { Text } from "../text";
+import { ReactNode } from 'react';
+import { ViewStyle } from 'react-native';
+import { Box } from '../box';
+import { Text } from '../text';
 
 export const IfNoItem = ({
   dataLength,

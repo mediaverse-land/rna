@@ -1,9 +1,9 @@
-import React from "react";
-import { Text } from "../../../components/text";
-import { Box } from "../../../components/box";
-import { theme } from "../../../constaints/theme";
-import { ICON_ARROW_LEFT_SVG } from "../../../constaints/icons";
-import { TouchableOpacity } from "react-native";
+import React from 'react';
+import { Text } from '../../../components/text';
+import { Box } from '../../../components/box';
+import { theme } from '../../../constaints/theme';
+import { ICON_ARROW_LEFT_SVG } from '../../../constaints/icons';
+import { TouchableOpacity } from 'react-native';
 
 type Props = {
   title: string;
@@ -17,20 +17,9 @@ export const ViewAllTitle = ({ title, icon, goBack }: Props) => {
   };
 
   return (
-    <Box
-      position="relative"
-      width="100%"
-      marginTop={40}
-      direction="row"
-      justifyContent="center"
-    >
+    <Box position="relative" width="100%" marginTop={40} direction="row" justifyContent="center">
       {icon ? <Box id="icon-wrapper">{icon}</Box> : null}
-      <Text
-        color={theme.color.light.WHITE}
-        lineHeight={16}
-        fontWeight={600}
-        fontSize={16}
-      >
+      <Text color={theme.color.light.WHITE} lineHeight={16} fontWeight={600} fontSize={16}>
         {title}
       </Text>
       <Box id="go-back-button" width={40} position="absolute" left={24}>

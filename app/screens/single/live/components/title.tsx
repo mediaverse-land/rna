@@ -1,8 +1,8 @@
-import React from "react";
-import { Box } from "../../../../components/box";
-import { Image } from "react-native";
-import { Text } from "../../../../components/text";
-import { theme } from "../../../../constaints/theme";
+import React from 'react';
+import { Box } from '../../../../components/box';
+import { Image } from 'react-native';
+import { Text } from '../../../../components/text';
+import { theme } from '../../../../constaints/theme';
 
 type Props = {
   videoUri: string;

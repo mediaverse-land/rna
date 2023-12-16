@@ -1,14 +1,10 @@
-import { TouchableOpacity } from "react-native";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
-import { ICON_ARROW_LEFT_SVG } from "../../../constaints/icons";
+import { TouchableOpacity } from 'react-native';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
+import { ICON_ARROW_LEFT_SVG } from '../../../constaints/icons';
 
-export const AccountsScreenTitleComponent = ({
-  goBackHandler,
-}: {
-  goBackHandler: () => void;
-}) => {
+export const AccountsScreenTitleComponent = ({ goBackHandler }: { goBackHandler: () => void }) => {
   return (
     <Box
       id="title"
@@ -24,7 +20,7 @@ export const AccountsScreenTitleComponent = ({
       <TouchableOpacity
         onPress={goBackHandler}
         style={{
-          position: "absolute",
+          position: 'absolute',
           left: 24,
           top: 5,
         }}

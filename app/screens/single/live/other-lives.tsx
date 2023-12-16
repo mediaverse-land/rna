@@ -1,12 +1,12 @@
-import { FC, useCallback } from "react";
-import { Live } from "../../../types/live";
-import { useRtl } from "../../../hooks/use-rtl";
-import { OTHER_CAHNNELS } from "../../../constaints/consts";
-import { HorizontalSlide } from "../../../components/horizontal-slider/slide";
-import { Box } from "../../../components/box";
-import { Title } from "../../../components/title";
-import { RenderIf } from "../../../components/render-if";
-import { FlatList } from "react-native-gesture-handler";
+import { FC, useCallback } from 'react';
+import { Live } from '../../../types/live';
+import { useRtl } from '../../../hooks/use-rtl';
+import { OTHER_CAHNNELS } from '../../../constaints/consts';
+import { HorizontalSlide } from '../../../components/horizontal-slider/slide';
+import { Box } from '../../../components/box';
+import { Title } from '../../../components/title';
+import { RenderIf } from '../../../components/render-if';
+import { FlatList } from 'react-native-gesture-handler';
 
 type Props = {
   data: Live[];
@@ -15,18 +15,14 @@ type Props = {
   handleRedirect: any;
 };
 ``;
-export const SingleLiveOtherLives: FC<Props> = ({
-  data,
-  isLoading,
-  handleRedirect,
-}) => {
+export const SingleLiveOtherLives: FC<Props> = ({ data, isLoading, handleRedirect }) => {
   const { isRtl } = useRtl();
 
   const renderItems = ({ item, index }: { item: Live; index: number }) => {
     return (
       <Box marginLeft={index === 0 ? 24 : 0}>
         <HorizontalSlide
-        index={index}
+          index={index}
           id={item.id}
           title={null}
           thumbnailPath={item.thumbnail}

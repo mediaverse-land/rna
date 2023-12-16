@@ -1,13 +1,13 @@
-import { ReactNode, useCallback, useState } from "react";
-import { StyleSheet, TextInputProps } from "react-native";
-import { Box } from "../box";
-import { InputComponent } from "./style";
-import { Text } from "../text";
-import { theme } from "../../constaints/theme";
-import { LayoutChangeEvent } from "react-native";
-import { useRtl } from "../../hooks/use-rtl";
-import { ICON_FORM_ERROR } from "../../constaints/icons";
-import { isIos } from "../../controllers/platform.controller";
+import { ReactNode, useCallback, useState } from 'react';
+import { StyleSheet, TextInputProps } from 'react-native';
+import { Box } from '../box';
+import { InputComponent } from './style';
+import { Text } from '../text';
+import { theme } from '../../constaints/theme';
+import { LayoutChangeEvent } from 'react-native';
+import { useRtl } from '../../hooks/use-rtl';
+import { ICON_FORM_ERROR } from '../../constaints/icons';
+import { isIos } from '../../controllers/platform.controller';
 
 const { InputBox, Label } = InputComponent;
 
@@ -17,15 +17,7 @@ type Props = {
   labelText?: string;
   placeholder?: string;
   labelIcon?: ReactNode;
-  inputMode?:
-    | "decimal"
-    | "email"
-    | "none"
-    | "numeric"
-    | "search"
-    | "tel"
-    | "text"
-    | "url";
+  inputMode?: 'decimal' | 'email' | 'none' | 'numeric' | 'search' | 'tel' | 'text' | 'url';
   additionalProps?: TextInputProps;
   hasError?: boolean;
   onBlur?: any;
@@ -33,9 +25,9 @@ type Props = {
   value?: any;
   isTextArea?: boolean;
   showBorder?: boolean;
-  varient?: "bordered-light" | "flat-dark";
+  varient?: 'bordered-light' | 'flat-dark';
   height?: number;
-  defaultValue?: string| number;
+  defaultValue?: string | number;
 };
 
 export function Input({
@@ -49,7 +41,7 @@ export function Input({
   value,
   isTextArea = false,
   showBorder = true,
-  varient = "bordered-light",
+  varient = 'bordered-light',
   defaultValue,
   height,
 }: Props) {
@@ -68,9 +60,8 @@ export function Input({
     });
   }, []);
 
-
-  const possibleVarients: Record<"bordered-light" | "flat-dark", any> = {
-    "bordered-light": {
+  const possibleVarients: Record<'bordered-light' | 'flat-dark', any> = {
+    'bordered-light': {
       labelWrapperStyles: [
         isIOS
           ? {
@@ -83,25 +74,21 @@ export function Input({
               borderRightColor: theme.color.light.WHITE,
             },
       ],
-      labelColor: "#fff",
+      labelColor: '#fff',
       inputPlaceholderColor: isTextArea
         ? theme.color.light.INPUT_PLACEHOLDER
         : labelWidth
         ? theme.color.light.INPUT_PLACEHOLDER
-        : "transparent",
+        : 'transparent',
       inputStyles: {
         paddingLeft: isTextArea ? 12 : labelWidth,
-        height: isTextArea
-          ? textAreaState.height < 100
-            ? 100
-            : textAreaState.height
-          : 48,
+        height: isTextArea ? (textAreaState.height < 100 ? 100 : textAreaState.height) : 48,
         padding: isTextArea ? 12 : 0,
-        textAlignVertical: isTextArea ? "top" : "center",
+        textAlignVertical: isTextArea ? 'top' : 'center',
         paddingTop: 5,
       },
     },
-    "flat-dark": {
+    'flat-dark': {
       labelWrapperStyles: [
         isIOS
           ? {
@@ -115,24 +102,20 @@ export function Input({
               paddingTop: 25,
             },
       ],
-      labelColor: "#353542",
+      labelColor: '#353542',
       inputPlaceholderColor: isTextArea
         ? theme.color.light.INPUT_PLACEHOLDER
         : labelWidth
         ? theme.color.light.INPUT_PLACEHOLDER
-        : "transparent",
+        : 'transparent',
       inputStyles: [
         {
           paddingLeft: isTextArea ? 12 : labelWidth,
-          height: isTextArea
-            ? textAreaState.height < 100
-              ? 100
-              : textAreaState.height
-            : 48,
+          height: isTextArea ? (textAreaState.height < 100 ? 100 : textAreaState.height) : 48,
           padding: isTextArea ? 12 : 0,
-          borderColor: "#353542",
-          backgroundColor: "rgba(14, 14, 18, 0.50)",
-          textAlignVertical: isTextArea ? "top" : "center",
+          borderColor: '#353542',
+          backgroundColor: 'rgba(14, 14, 18, 0.50)',
+          textAlignVertical: isTextArea ? 'top' : 'center',
         },
         isIOS ? { paddingTop: 2 } : { paddingTop: 12 },
       ],
@@ -152,10 +135,7 @@ export function Input({
               setLabelWidth(Math.floor(width));
             }}
           >
-            <Box
-              height="100%"
-              additionalStyles={currentVarient.labelWrapperStyles}
-            >
+            <Box height="100%" additionalStyles={currentVarient.labelWrapperStyles}>
               <Text
                 fontSize={14}
                 lineHeight={theme.numericLineHeight.md}
@@ -169,7 +149,7 @@ export function Input({
                   </Box>
                 ) : null}
                 <Text>
-                  {labelIcon ? "   " : null}
+                  {labelIcon ? '   ' : null}
                   {labelText}
                 </Text>
               </Text>
@@ -186,14 +166,14 @@ export function Input({
             !labelText && { paddingLeft: 16 },
             height && { height },
             {
-              textAlignVertical: "top",
+              textAlignVertical: 'top',
             },
             isTextArea && {
               paddingTop: 16,
             },
           ]}
           hasError={hasError}
-          textAlign={isRtl ? "right" : "left"}
+          textAlign={isRtl ? 'right' : 'left'}
           onBlur={onBlur}
           onContentSizeChange={inputChangeContentSizeDetectHandler}
           onChangeText={onChangeText}
@@ -202,16 +182,14 @@ export function Input({
           {...additionalProps}
         />
       </Box>
-      {hasError ? (
-        <ICON_FORM_ERROR width={18.21} height={16} style={styles.iconStyles} />
-      ) : null}
+      {hasError ? <ICON_FORM_ERROR width={18.21} height={16} style={styles.iconStyles} /> : null}
     </>
   );
 }
 
 const styles = StyleSheet.create({
   iconStyles: {
-    position: "absolute",
+    position: 'absolute',
     right: 16,
     top: 16,
   },

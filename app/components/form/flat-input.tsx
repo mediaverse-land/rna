@@ -7,59 +7,53 @@ import { windowSize } from '../../utils/window-size';
 const { FlatFormGroup, InputBox, FlatLabel } = InputComponent;
 
 type Props = {
-    labelText: string;
-    placeholder?: string;
-    labelInSeperateLine: boolean;
+  labelText: string;
+  placeholder?: string;
+  labelInSeperateLine: boolean;
 };
 
 const windowWidth = windowSize().width;
 
-export function FlatInput({
-    labelText,
-    labelInSeperateLine = false,
-    placeholder
-}: Props) {
-    const [labelWidth, setLabelWidth] = useState<number>(0);
+export function FlatInput({ labelText, labelInSeperateLine = false, placeholder }: Props) {
+  const [labelWidth, setLabelWidth] = useState<number>(0);
 
-    // 63 = (24 +24 => padding of <PaddingContainer></PaddingContainer> + 15 =>(marginRight of label))
-    const inputWidth = labelInSeperateLine
-        ? '100%'
-        : Math.floor(windowWidth) - (79 + labelWidth);
+  // 63 = (24 +24 => padding of <PaddingContainer></PaddingContainer> + 15 =>(marginRight of label))
+  const inputWidth = labelInSeperateLine ? '100%' : Math.floor(windowWidth) - (79 + labelWidth);
 
-    function ditectLabelWidthHandler(width: number) {
-        setLabelWidth(width);
-    }
+  function ditectLabelWidthHandler(width: number) {
+    setLabelWidth(width);
+  }
 
-    return (
-        <FlatFormGroup
-            style={{
-                flexDirection: labelInSeperateLine ? 'column' : 'row',
-                alignItems: 'center'
-            }}
-        >
-            <FlatLabel
-                style={{
-                    marginRight: 15,
-                    borderRightColor: theme.color.light.GRAY,
-                    borderRightWidth: 0.5
-                }}
-                onLayout={(event: LayoutChangeEvent) => {
-                    const { width } = event.nativeEvent.layout;
-                    ditectLabelWidthHandler(width);
-                }}
-            >
-                {labelText}
-            </FlatLabel>
+  return (
+    <FlatFormGroup
+      style={{
+        flexDirection: labelInSeperateLine ? 'column' : 'row',
+        alignItems: 'center',
+      }}
+    >
+      <FlatLabel
+        style={{
+          marginRight: 15,
+          borderRightColor: theme.color.light.GRAY,
+          borderRightWidth: 0.5,
+        }}
+        onLayout={(event: LayoutChangeEvent) => {
+          const { width } = event.nativeEvent.layout;
+          ditectLabelWidthHandler(width);
+        }}
+      >
+        {labelText}
+      </FlatLabel>
 
-            <InputBox
-                placeholder={placeholder}
-                placeholderTextColor={theme.color.light.GRAY}
-                style={{
-                    width: inputWidth,
-                    paddingLeft: 70
-                }}
-                flat
-            />
-        </FlatFormGroup>
-    );
+      <InputBox
+        placeholder={placeholder}
+        placeholderTextColor={theme.color.light.GRAY}
+        style={{
+          width: inputWidth,
+          paddingLeft: 70,
+        }}
+        flat
+      />
+    </FlatFormGroup>
+  );
 }

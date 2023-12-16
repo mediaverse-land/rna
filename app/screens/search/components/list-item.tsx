@@ -1,16 +1,16 @@
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { UserNameCard } from "../../../components/username-card";
-import { theme } from "../../../constaints/theme";
-import { HORIZONTAL_SLIDER_GRADIENT } from "../../../constaints/images";
+import { Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { UserNameCard } from '../../../components/username-card';
+import { theme } from '../../../constaints/theme';
+import { HORIZONTAL_SLIDER_GRADIENT } from '../../../constaints/images';
 import {
   ICON_IMAGE_WHITE,
   ICON_SOUND_WHITE,
   ICON_TEXT_WHITE,
   ICON_VIDEO_WHITE,
-} from "../../../constaints/icons";
-import { windowSize } from "../../../utils/window-size";
+} from '../../../constaints/icons';
+import { windowSize } from '../../../utils/window-size';
 
 type Props = {
   width: number;
@@ -52,18 +52,10 @@ export function ListItem({
   const contentIcon = (showItemTypeIcon && contentTypeIcon[type]) || null;
 
   return (
-    <Box
-      width={ITEM_WIDTH}
-      paddingTop={index === 0 || index === 1 ? 40 : 0}
-      marginBottom={30}
-    >
-      <TouchableOpacity
-        onLongPress={onlongpress}
-        onPress={onpress}
-        activeOpacity={1}
-      >
+    <Box width={ITEM_WIDTH} paddingTop={index === 0 || index === 1 ? 40 : 0} marginBottom={30}>
+      <TouchableOpacity onLongPress={onlongpress} onPress={onpress} activeOpacity={1}>
         <Box
-          width={"100%"}
+          width={'100%'}
           borderColor={isSelected ? theme.color.light.PRIMARY : null}
           borderRadius={16}
         >
@@ -136,7 +128,7 @@ const styles = StyleSheet.create({
   },
   nonSelectedItemPlaceholder: {
     borderRadius: 16,
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
     zIndex: 10,
@@ -145,8 +137,8 @@ const styles = StyleSheet.create({
     opacity: 0.1,
   },
   selectedItemPlaceholder: {
-    left: "40%",
-    top: "40%",
+    left: '40%',
+    top: '40%',
   },
   username: {
     color: theme.color.light.TEXT,

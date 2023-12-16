@@ -1,30 +1,26 @@
-import { useCallback } from "react";
-import { useSelector } from "react-redux";
-import { UseNavigationType } from "../../../types/use-navigation";
-import { RootState } from "../../../store";
-import { useGetSearchLiveQuery } from "../../../services/live.service";
-import { SINGLE_LIVE_SCREEN } from "../../../constaints/consts";
-import { Live } from "../../../types/live";
-import { Image, TouchableOpacity, View } from "react-native";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
-import { ICON_LIVE_CHANNELS } from "../../../constaints/icons";
-import { PaddingContainer } from "../../../styles/grid";
-import { RenderIf } from "../../../components/render-if";
-import { FlashList } from "@shopify/flash-list";
+import { useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import { UseNavigationType } from '../../../types/use-navigation';
+import { RootState } from '../../../store';
+import { useGetSearchLiveQuery } from '../../../services/live.service';
+import { SINGLE_LIVE_SCREEN } from '../../../constaints/consts';
+import { Live } from '../../../types/live';
+import { Image, TouchableOpacity, View } from 'react-native';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
+import { ICON_LIVE_CHANNELS } from '../../../constaints/icons';
+import { PaddingContainer } from '../../../styles/grid';
+import { RenderIf } from '../../../components/render-if';
+import { FlashList } from '@shopify/flash-list';
 
-export const AllLiveList = ({
-  navigation,
-}: {
-  navigation: UseNavigationType;
-}) => {
+export const AllLiveList = ({ navigation }: { navigation: UseNavigationType }) => {
   const { search_params } = useSelector((state: RootState) => state.liveSlice);
 
   const { data, isLoading, isFetching } = useGetSearchLiveQuery({
     lang: search_params?.selectedLanguage?.toLowerCase() || null,
     country: search_params?.selectedCountry?.toLowerCase() || null,
-    title: search_params?.title || "",
+    title: search_params?.title || '',
   });
 
   const navigateToLivePage = (id: number) => {
@@ -35,10 +31,7 @@ export const AllLiveList = ({
 
   const renderItem = useCallback(({ item }: { item: Live }) => {
     return (
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={() => navigateToLivePage(item.id)}
-      >
+      <TouchableOpacity activeOpacity={1} onPress={() => navigateToLivePage(item.id)}>
         <Box
           borderRadius={16}
           width="100%"
@@ -61,8 +54,8 @@ export const AllLiveList = ({
               fontSize={16}
               lineHeight={16}
               textStyles={{
-                height:20,
-                paddingTop:5
+                height: 20,
+                paddingTop: 5,
               }}
             >
               {item.title}
@@ -87,13 +80,7 @@ export const AllLiveList = ({
 
   return (
     <Box width="100%" flex={1}>
-      <Box
-        id="title"
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        marginTop={28}
-      >
+      <Box id="title" direction="row" justifyContent="center" alignItems="center" marginTop={28}>
         <ICON_LIVE_CHANNELS
           style={{
             marginRight: 8,
@@ -106,7 +93,7 @@ export const AllLiveList = ({
           lineHeight={16}
           textStyles={{
             height: 20,
-            paddingTop:7
+            paddingTop: 7,
           }}
         >
           live channel

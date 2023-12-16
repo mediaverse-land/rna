@@ -4,16 +4,16 @@ import { Navigator } from './navigator';
 import { SearchBar } from '../../layout/search-bar';
 
 export function ExploreStack() {
-    return (
-        <SafeAreaView style={styles.flex}>
-            <SearchBar />
-            <Navigator />
-        </SafeAreaView>
-    );
+  return (
+    <SafeAreaView style={styles.flex}>
+      <SearchBar />
+      <Navigator />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-    flex: {
-        flex: 1
-    }
+  flex: {
+    flex: 1,
+  },
 });

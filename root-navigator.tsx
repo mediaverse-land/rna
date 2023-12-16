@@ -1,24 +1,24 @@
-import { FC, useContext, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from 'react';
 // import { SafeAreaView } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
-import { SearchPage } from "./app/screens/search";
-import { SettingsStack } from "./app/screens/settings/stack-navigator";
-import { SingleVideoScreen } from "./app/screens/single/video";
-import { SingleImageScreen } from "./app/screens/single/image";
-import { SingleSoundScreen } from "./app/screens/single/sound";
-import { SingleTextScreen } from "./app/screens/single/text";
-import { PaymentScreen } from "./app/screens/payment";
-import { AuthScreen } from "./app/screens/auth";
-import { WalletScreen } from "./app/screens/wallet";
-import { tokenContext } from "./app/context/token";
-import { fadeTransition } from "./app/utils/fade-transition";
-import { FullScreenSpinnerLoader } from "./app/components/loader-spinner";
-import { LinearGradient } from "expo-linear-gradient";
-import { SingleLiveScreen } from "./app/screens/single/live";
-import { PlusScreen } from "./app/screens/plus";
-import { AppStack } from "./app/screens/stack";
-import { EditScreen } from "./app/screens/edit";
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { SearchPage } from './app/screens/search';
+import { SettingsStack } from './app/screens/settings/stack-navigator';
+import { SingleVideoScreen } from './app/screens/single/video';
+import { SingleImageScreen } from './app/screens/single/image';
+import { SingleSoundScreen } from './app/screens/single/sound';
+import { SingleTextScreen } from './app/screens/single/text';
+import { PaymentScreen } from './app/screens/payment';
+import { AuthScreen } from './app/screens/auth';
+import { WalletScreen } from './app/screens/wallet';
+import { tokenContext } from './app/context/token';
+import { fadeTransition } from './app/utils/fade-transition';
+import { FullScreenSpinnerLoader } from './app/components/loader-spinner';
+import { LinearGradient } from 'expo-linear-gradient';
+import { SingleLiveScreen } from './app/screens/single/live';
+import { PlusScreen } from './app/screens/plus';
+import { AppStack } from './app/screens/stack';
+import { EditScreen } from './app/screens/edit';
 import {
   ACCOUNTS_SCREEN,
   APP_STACK,
@@ -33,17 +33,17 @@ import {
   SINGLE_TEXT_SCREEN,
   SINGLE_VIDEO_SCREEN,
   WALLET_STACK,
-} from "./app/constaints/consts";
-import AccountsScreen from "./app/screens/accounts";
+} from './app/constaints/consts';
+import AccountsScreen from './app/screens/accounts';
 // import { userContext } from "./app/context/user";
 // import axios from "axios";
 // import { Toaster } from "./app/utils/toaster";
 // import { PushNotificationPermissionAlert } from "./app/components/push-notification-permission-alert";
-import { useSetFirebasePushNotificationAccountMutation } from "./app/services/auth.service";
+import { useSetFirebasePushNotificationAccountMutation } from './app/services/auth.service';
 // import PushNotificationWrapper from "./app/components/push-notification-wrapper";
-import { tokenStringResolver } from "./app/utils/token-string-resolver";
+import { tokenStringResolver } from './app/utils/token-string-resolver';
 // import { PushNotificationPermissionAlert } from "./app/components/push-notification-permission-alert";
-import { CustomSafeArea } from "./app/components/custom-safe-area";
+import { CustomSafeArea } from './app/components/custom-safe-area';
 
 type Route = { id: number; name: string; component: FC | any };
 
@@ -63,7 +63,7 @@ const appRoutes: Route[] = [
   },
   {
     id: 31,
-    name: "Plus",
+    name: 'Plus',
     component: PlusScreen,
   },
   {
@@ -153,11 +153,9 @@ type Props = {
 // const _toaster = new Toaster();
 
 export function RootNavigator({ firebaseToken }: Props) {
-  const [isUserAuthenticated, setIsUserAuthenticated] = useState<
-    boolean | string
-  >("__false__");
+  const [isUserAuthenticated, setIsUserAuthenticated] = useState<boolean | string>('__false__');
 
-  const [userToken, setUserToken] = useState<string>("");
+  const [userToken, setUserToken] = useState<string>('');
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -183,8 +181,8 @@ export function RootNavigator({ firebaseToken }: Props) {
     const _token = tokenStringResolver(userToken);
 
     const requestBody = { token: firebaseToken };
-    
-     await _setAccountHandler({
+
+    await _setAccountHandler({
       body: requestBody,
       token: _token,
     });
@@ -199,7 +197,7 @@ export function RootNavigator({ firebaseToken }: Props) {
   const getTokenHandler = async () => {
     const tk = await tokenCtx.getToken();
 
-    if (typeof tk === "string") {
+    if (typeof tk === 'string') {
       setUserToken(tk);
       setIsUserAuthenticated(true);
     } else setIsUserAuthenticated(false);
@@ -231,25 +229,21 @@ export function RootNavigator({ firebaseToken }: Props) {
         {isLoading ? (
           <CustomSafeArea style={{ flex: 1 }}>
             <LinearGradient
-              colors={["#030340", "#030340"]}
+              colors={['#030340', '#030340']}
               start={{ x: 0.7, y: 0 }}
               style={{ flex: 1 }}
             >
               <FullScreenSpinnerLoader />
             </LinearGradient>
           </CustomSafeArea>
-        ) : isUserAuthenticated === "boolean" ||
-          isUserAuthenticated === false ? (
+        ) : isUserAuthenticated === 'boolean' || isUserAuthenticated === false ? (
           <Stack.Navigator
             screenOptions={{
               headerShown: false,
               cardStyleInterpolator: fadeTransition,
             }}
           >
-            <Stack.Screen
-              name={authRoute.name}
-              component={authRoute.component}
-            />
+            <Stack.Screen name={authRoute.name} component={authRoute.component} />
           </Stack.Navigator>
         ) : (
           <Stack.Navigator
@@ -259,11 +253,7 @@ export function RootNavigator({ firebaseToken }: Props) {
             }}
           >
             {appRoutes.map((route) => (
-              <Stack.Screen
-                key={route.id}
-                name={route.name}
-                component={route.component}
-              />
+              <Stack.Screen key={route.id} name={route.name} component={route.component} />
             ))}
           </Stack.Navigator>
         )}

@@ -1,18 +1,15 @@
-import { FC } from "react";
-import { Box } from "../../../components/box";
-import {
-  ICON_TRASHBEEN,
-  ICON_X_WHITE,
-} from "../../../constaints/icons";
-import { TouchableOpacity } from "react-native";
+import { FC } from 'react';
+import { Box } from '../../../components/box';
+import { ICON_TRASHBEEN, ICON_X_WHITE } from '../../../constaints/icons';
+import { TouchableOpacity } from 'react-native';
 
 type Props = {
   isVisible: boolean;
   closerHandler: () => void;
-  deleteAssetsHandler: () => void
+  deleteAssetsHandler: () => void;
 };
 
-export const SelectBar: FC<Props> = ({ isVisible,deleteAssetsHandler, closerHandler }) => {
+export const SelectBar: FC<Props> = ({ isVisible, deleteAssetsHandler, closerHandler }) => {
   const selectBarCloserHandler = () => {
     closerHandler();
   };

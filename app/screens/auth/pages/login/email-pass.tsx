@@ -1,20 +1,18 @@
-import { TouchableOpacity } from "react-native";
-import { Box } from "../../../../components/box";
-import { Text } from "../../../../components/text";
-import { Input } from "../../../../components/form";
-import { theme } from "../../../../constaints/theme";
-import { Button } from "../../../../components/button";
-import { FC, useContext, useMemo } from "react";
-import { LoginNavigationEvent } from "../types";
-import { Controller, useForm } from "react-hook-form";
-import {
-  emailLoginformStructure,
-} from "./form-strucutre";
-import { useSignInMutation } from "../../../../services/auth.service";
-import { Toaster } from "../../../../utils/toaster";
-import { tokenContext } from "../../../../context/token";
-import { userContext } from "../../../../context/user";
-import { User } from "../../../../types/user";
+import { TouchableOpacity } from 'react-native';
+import { Box } from '../../../../components/box';
+import { Text } from '../../../../components/text';
+import { Input } from '../../../../components/form';
+import { theme } from '../../../../constaints/theme';
+import { Button } from '../../../../components/button';
+import { FC, useContext, useMemo } from 'react';
+import { LoginNavigationEvent } from '../types';
+import { Controller, useForm } from 'react-hook-form';
+import { emailLoginformStructure } from './form-strucutre';
+import { useSignInMutation } from '../../../../services/auth.service';
+import { Toaster } from '../../../../utils/toaster';
+import { tokenContext } from '../../../../context/token';
+import { userContext } from '../../../../context/user';
+import { User } from '../../../../types/user';
 
 type Props = {
   loginNavigationEventsHandler: LoginNavigationEvent;
@@ -71,14 +69,14 @@ export const EmailPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
                 labelText={f.labelText}
                 onBlur={onBlur}
                 onChangeText={(value: any) => {
-                  onChange(value || "");
+                  onChange(value || '');
                 }}
                 value={value}
                 hasError={errors?.[f.name] ? true : false}
                 additionalProps={{
                   inputMode: f.type,
-                  secureTextEntry: f.type === "password" ? true : false,
-                  autoComplete: f.type === "password" ? "off" : "email",
+                  secureTextEntry: f.type === 'password' ? true : false,
+                  autoComplete: f.type === 'password' ? 'off' : 'email',
                 }}
               />
             )}
@@ -101,12 +99,7 @@ export const EmailPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
           marginTop={175}
           alignItems="center"
         >
-          <Text
-            color={theme.color.light.WHITE}
-            lineHeight={20}
-            fontSize={12}
-            fontWeight={600}
-          >
+          <Text color={theme.color.light.WHITE} lineHeight={20} fontSize={12} fontWeight={600}>
             Insert your email to login
           </Text>
           <Box width="100%" marginTop={32}>
@@ -114,9 +107,7 @@ export const EmailPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
           </Box>
 
           <Box marginTop={32}>
-            <TouchableOpacity
-              onPress={loginNavigationEventsHandler.navigateToPhoneLogin}
-            >
+            <TouchableOpacity onPress={loginNavigationEventsHandler.navigateToPhoneLogin}>
               <Text
                 lineHeight={16}
                 fontWeight={400}
@@ -128,9 +119,7 @@ export const EmailPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
             </TouchableOpacity>
           </Box>
           <Box marginTop={8}>
-            <TouchableOpacity
-              onPress={loginNavigationEventsHandler.navigateToUsernameLogin}
-            >
+            <TouchableOpacity onPress={loginNavigationEventsHandler.navigateToUsernameLogin}>
               <Text
                 lineHeight={16}
                 fontWeight={400}
@@ -149,8 +138,7 @@ export const EmailPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
               fontWeight={600}
               marginBottom={24}
             >
-              Dont have an account?{" "}
-              <Text color={theme.color.light.PRIMARY}>Signup</Text>
+              Dont have an account? <Text color={theme.color.light.PRIMARY}>Signup</Text>
             </Text>
             <Button
               text="Log in"

@@ -1,30 +1,26 @@
-import { memo, useState } from "react";
-import { ActivityIndicator, TouchableOpacity } from "react-native";
-import { Box } from "../box";
-import { theme } from "../../constaints/theme";
-import { ICON_ADD_IMAGE } from "../../constaints/icons";
-import { Text } from "../text";
-import { DocumentController } from "../../controllers/document.controller";
-import { FileSystemController } from "../../controllers/file-system.controller";
-import * as Progress from "react-native-progress";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store";
-import { setThumbnailCover } from "../../slices/plus.slice";
+import { memo, useState } from 'react';
+import { ActivityIndicator, TouchableOpacity } from 'react-native';
+import { Box } from '../box';
+import { theme } from '../../constaints/theme';
+import { ICON_ADD_IMAGE } from '../../constaints/icons';
+import { Text } from '../text';
+import { DocumentController } from '../../controllers/document.controller';
+import { FileSystemController } from '../../controllers/file-system.controller';
+import * as Progress from 'react-native-progress';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store';
+import { setThumbnailCover } from '../../slices/plus.slice';
 
 const _documentController = new DocumentController();
 const _fileSystemController = new FileSystemController();
 
-const ACCEPTABLE_TYPES = ["image/png", "image/jpeg", "image/png"];
+const ACCEPTABLE_TYPES = ['image/png', 'image/jpeg', 'image/png'];
 
 const convertImageToBase64 = async (uri: string) => {
   return await _fileSystemController.convertTextToBase64(uri);
 };
 
-const FileUploadFieldMemo = ({
-  progressBarWidth,
-}: {
-  progressBarWidth: number;
-}) => {
+const FileUploadFieldMemo = ({ progressBarWidth }: { progressBarWidth: number }) => {
   const [progress] = useState<number>(0);
 
   const dispatch = useDispatch<AppDispatch>();
@@ -63,7 +59,7 @@ const FileUploadFieldMemo = ({
     try {
       const result: any = await _documentController.pick(ACCEPTABLE_TYPES);
 
-      if (result.type === "success") {
+      if (result.type === 'success') {
         if (!result.uri) {
           return;
         }
@@ -84,9 +80,9 @@ const FileUploadFieldMemo = ({
   return (
     <TouchableOpacity activeOpacity={1} onPress={pickDocument}>
       <Box
-        width={"100%"}
+        width={'100%'}
         backgroundColor="rgba(14, 14, 18, 0.50)"
-        height={"100%"}
+        height={'100%'}
         hasBlackBorder
         borderColor={theme.color.light.DARK_INPUT_BORDER}
         borderRadius={8}
@@ -116,7 +112,7 @@ const FileUploadFieldMemo = ({
             style={{
               borderRadius: 4,
             }}
-            borderColor={progress ? theme.color.light.PRIMARY : "transparent"}
+            borderColor={progress ? theme.color.light.PRIMARY : 'transparent'}
           />
           {progress !== 0 ? (
             <Box marginLeft={8}>

@@ -1,4 +1,4 @@
-import { File } from "./file";
+import { File } from './file';
 
 export interface Image {
   id: number;
@@ -36,16 +36,16 @@ export interface Image {
     sales_number: number;
     views_count: number;
     thumbnails?: {
-      "3090x1396": string;
-      "1920x1080": string;
-      "1080x1080": string;
-      "226x226": string;
-      "336x366": string;
-      "340x220": string;
-      "390x218": string;
-      "523x304": string;
-      "525x525": string;
-      "648x651": string;
+      '3090x1396': string;
+      '1920x1080': string;
+      '1080x1080': string;
+      '226x226': string;
+      '336x366': string;
+      '340x220': string;
+      '390x218': string;
+      '523x304': string;
+      '525x525': string;
+      '648x651': string;
     };
     thumbnail?: {
       id: number;

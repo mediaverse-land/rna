@@ -11,9 +11,7 @@
       "resizeMode": "cover",
       "backgroundColor": "#090951"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.emahdi1297.mediaverse",

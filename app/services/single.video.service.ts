@@ -1,7 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const singleVideoService: any = createApi({
-  reducerPath: "singleVideoService",
+  reducerPath: 'singleVideoService',
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.EXPO_APPBASE_URL,
   }),
@@ -10,7 +10,7 @@ export const singleVideoService: any = createApi({
       query: (args) => {
         return {
           url: `videos/${args.id}`,
-          method: "GET",
+          method: 'GET',
           headers: { Authorization: `Bearer ${args.token}` },
         };
       },
@@ -18,8 +18,8 @@ export const singleVideoService: any = createApi({
     createSingleVideo: builder.mutation({
       query: (args) => {
         return {
-          url: "/videos",
-          method: "POST",
+          url: '/videos',
+          method: 'POST',
           body: args.body,
           headers: { Authorization: `Bearer ${args.token}` },
         };

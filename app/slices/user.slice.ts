@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { User } from "../types/user";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { User } from '../types/user';
 
 export type UserInitialState = {
   isLoading: boolean;
@@ -12,7 +12,7 @@ const initialState: UserInitialState = {
 };
 
 const userSlice = createSlice({
-  name: "user_slice",
+  name: 'user_slice',
   initialState,
   reducers: {
     startLoad: (state) => {
@@ -22,7 +22,7 @@ const userSlice = createSlice({
       state.isLoading = false;
     },
     setUser: (state, action: PayloadAction<any>) => {
-        state.data = action.payload
+      state.data = action.payload;
     },
   },
 });

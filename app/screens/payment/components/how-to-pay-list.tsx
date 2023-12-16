@@ -1,24 +1,20 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  ICON_WALLET_BLUE,
-  ICON_WALLET_SVG,
-} from "../../../constaints/icons";
-import { theme } from "../../../constaints/theme";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { PaddingContainer } from "../../../styles/grid";
-import { TouchableOpacity } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
-import { StorageService } from "../../../services/storage.service";
-import { HAS_USER_SEEN_PAYMENT_TOUR } from "../../../constaints/consts";
-import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
+import { useEffect, useRef, useState } from 'react';
+import { ICON_WALLET_BLUE, ICON_WALLET_SVG } from '../../../constaints/icons';
+import { theme } from '../../../constaints/theme';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { PaddingContainer } from '../../../styles/grid';
+import { TouchableOpacity } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
+import { StorageService } from '../../../services/storage.service';
+import { HAS_USER_SEEN_PAYMENT_TOUR } from '../../../constaints/consts';
+import { Coachmark, CoachmarkComposer } from 'react-native-coachmark';
 
 type Props = {
   userBalance: number;
 };
 
-const TOUR_TEXT =
-  "You can buy your digital asset by paying from your wallet or credit card";
+const TOUR_TEXT = 'You can buy your digital asset by paying from your wallet or credit card';
 
 const _storageService = new StorageService();
 const CoachmarkWrapper: any = Coachmark;
@@ -39,14 +35,14 @@ export function HowToPayList({ userBalance }: Props) {
             style={{
               width: 20,
               height: 20,
-              position: "absolute",
+              position: 'absolute',
               top: 12,
               left: 10,
             }}
           />
         </>
       ),
-      title: "Wallet",
+      title: 'Wallet',
       description: `Inventory: ${userBalance} $`,
     },
     // {
@@ -78,7 +74,7 @@ export function HowToPayList({ userBalance }: Props) {
   ];
 
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>(
-    paymentMethods[0].title
+    paymentMethods[0].title,
   );
 
   const setSelectedPaymentMethodHandler = (title: string) => {
@@ -102,10 +98,7 @@ export function HowToPayList({ userBalance }: Props) {
   };
 
   const setUserSeenTour = async () => {
-    await _storageService.set(
-      HAS_USER_SEEN_PAYMENT_TOUR,
-      HAS_USER_SEEN_PAYMENT_TOUR
-    );
+    await _storageService.set(HAS_USER_SEEN_PAYMENT_TOUR, HAS_USER_SEEN_PAYMENT_TOUR);
   };
 
   const setupTour = async () => {
@@ -137,7 +130,7 @@ export function HowToPayList({ userBalance }: Props) {
         ref={tourViewRef}
         message={TOUR_TEXT}
         style={{
-          with: "100%",
+          with: '100%',
           height: 400,
         }}
       >
@@ -173,18 +166,13 @@ export function HowToPayList({ userBalance }: Props) {
                           borderColor:
                             selectedPaymentMethod === m.title
                               ? theme.color.light.PRIMARY
-                              : "transparent",
+                              : 'transparent',
                         }}
                       >
                         <Box width={40} height={40}>
                           {m.icon}
                         </Box>
-                        <Box
-                          flex={1}
-                          direction="row"
-                          alignItems="center"
-                          marginLeft={16}
-                        >
+                        <Box flex={1} direction="row" alignItems="center" marginLeft={16}>
                           <Box>
                             <Text
                               color={theme.color.light.WHITE}
@@ -204,11 +192,7 @@ export function HowToPayList({ userBalance }: Props) {
                               {m.description}
                             </Text>
                           </Box>
-                          <Box
-                            flex={1}
-                            direction="row"
-                            justifyContent="flex-end"
-                          >
+                          <Box flex={1} direction="row" justifyContent="flex-end">
                             <Box
                               width={18}
                               height={18}
@@ -218,12 +202,12 @@ export function HowToPayList({ userBalance }: Props) {
                                 borderColor:
                                   selectedPaymentMethod !== m.title
                                     ? theme.color.light.SONG_CARD_TITLE_TEXT
-                                    : "transparent",
+                                    : 'transparent',
                               }}
                               backgroundColor={
                                 selectedPaymentMethod === m.title
                                   ? theme.color.light.PRIMARY
-                                  : "transparent"
+                                  : 'transparent'
                               }
                             ></Box>
                           </Box>

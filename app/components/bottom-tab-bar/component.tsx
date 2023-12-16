@@ -1,10 +1,5 @@
-import React, { memo, useContext, useEffect, useRef } from "react";
-import {
-  StyleSheet,
-  View,
-  Dimensions,
-  TouchableOpacity,
-} from "react-native";
+import React, { memo, useContext, useEffect, useRef } from 'react';
+import { StyleSheet, View, Dimensions, TouchableOpacity } from 'react-native';
 
 import {
   ICON_APPS_ACTIVE_SVG,
@@ -16,33 +11,24 @@ import {
   ICON_PROFILE_SVG,
   ICON_WALLET_ACTIVE_SVG,
   ICON_WALLET_SVG,
-} from "./../../constaints/icons";
-import { alertContext } from "../../context/alert";
-import { Box } from "../box";
+} from './../../constaints/icons';
+import { alertContext } from '../../context/alert';
+import { Box } from '../box';
 
-import { StorageService } from "../../services/storage.service";
+import { StorageService } from '../../services/storage.service';
 
-import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
-import { BackgroundSvg } from "./background-svg";
-import { USER_HAS_SEEN_BOTTOM_TAB_GUIDE } from "../../constaints/consts";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
-import {
-  activeDisableOnIntractions,
-  seeButtomNavigationTour,
-} from "../../slices/tour.slice";
-import { PLUS_BUTTON_BG } from "../../constaints/images";
+import { Coachmark, CoachmarkComposer } from 'react-native-coachmark';
+import { BackgroundSvg } from './background-svg';
+import { USER_HAS_SEEN_BOTTOM_TAB_GUIDE } from '../../constaints/consts';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store';
+import { activeDisableOnIntractions, seeButtomNavigationTour } from '../../slices/tour.slice';
+import { PLUS_BUTTON_BG } from '../../constaints/images';
 
 const icons: any = {
   explore: {
     path: <ICON_EXPLORE_SVG width={20} height={20} style={{ marginTop: 10 }} />,
-    activePath: (
-      <ICON_EXPLORE_ACTIVE_SVG
-        width={20}
-        height={20}
-        style={{ marginTop: 10 }}
-      />
-    ),
+    activePath: <ICON_EXPLORE_ACTIVE_SVG width={20} height={20} style={{ marginTop: 10 }} />,
     styles: {
       width: 20,
       height: 20,
@@ -51,9 +37,7 @@ const icons: any = {
   },
   apps: {
     path: <ICON_APPS_SVG width={20} height={20} style={{ marginTop: 10 }} />,
-    activePath: (
-      <ICON_APPS_ACTIVE_SVG width={20} height={20} style={{ marginTop: 10 }} />
-    ),
+    activePath: <ICON_APPS_ACTIVE_SVG width={20} height={20} style={{ marginTop: 10 }} />,
     styles: {
       width: 20,
       height: 20,
@@ -62,13 +46,7 @@ const icons: any = {
   },
   wallet: {
     path: <ICON_WALLET_SVG width={20} height={16} style={{ marginTop: 10 }} />,
-    activePath: (
-      <ICON_WALLET_ACTIVE_SVG
-        width={20}
-        height={16}
-        style={{ marginTop: 10 }}
-      />
-    ),
+    activePath: <ICON_WALLET_ACTIVE_SVG width={20} height={16} style={{ marginTop: 10 }} />,
     styles: {
       width: 20,
       height: 16,
@@ -77,13 +55,7 @@ const icons: any = {
   },
   profile: {
     path: <ICON_PROFILE_SVG width={16} height={20} style={{ marginTop: 10 }} />,
-    activePath: (
-      <ICON_PROFILE_ACTIVE_SVG
-        width={16}
-        height={20}
-        style={{ marginTop: 10 }}
-      />
-    ),
+    activePath: <ICON_PROFILE_ACTIVE_SVG width={16} height={20} style={{ marginTop: 10 }} />,
     styles: {
       width: 16,
       height: 20,
@@ -93,20 +65,18 @@ const icons: any = {
 };
 
 const tourGuides: Record<number, string> = {
-  0: "In the explorer, you will see a different collection of digital content that can be purchased and used",
-  1: "In the Apps, you will find a set of social TV management tools to help you do the most complicated tasks easily",
+  0: 'In the explorer, you will see a different collection of digital content that can be purchased and used',
+  1: 'In the Apps, you will find a set of social TV management tools to help you do the most complicated tasks easily',
   2: "Just press +, select the type of digital content, generate the asset and it's ready to publish and sell with one button",
-  3: "In Mediaverse, the world of digital content, your every action is a financial transaction, some transactions are income and some are expenses, you can see your transactions in this section",
-  4: "In your profile, you can see all your user information, messages, digital assets, etc",
+  3: 'In Mediaverse, the world of digital content, your every action is a financial transaction, some transactions are income and some are expenses, you can see your transactions in this section',
+  4: 'In your profile, you can see all your user information, messages, digital assets, etc',
 };
 
 const CoachmarkWrapper: any = Coachmark;
 const _storageService = new StorageService();
 
 function BottomTabBarComponent({ state, navigation }: any) {
-  const { DISABLE_INTRACTION } = useSelector(
-    (state: RootState) => state.tourSlice
-  );
+  const { DISABLE_INTRACTION } = useSelector((state: RootState) => state.tourSlice);
 
   const tabBarItemClickNavigateHandler = (screenName: string) => {
     if (DISABLE_INTRACTION) {
@@ -116,7 +86,7 @@ function BottomTabBarComponent({ state, navigation }: any) {
   };
 
   const plusNavigationHandler = () => {
-    navigation?.navigate("Plus");
+    navigation?.navigate('Plus');
   };
 
   const alertCtx: any = useContext(alertContext);
@@ -147,9 +117,7 @@ function BottomTabBarComponent({ state, navigation }: any) {
   };
 
   const hasUserSeenTour = async () => {
-    const hasUserSeen = await _storageService.get(
-      USER_HAS_SEEN_BOTTOM_TAB_GUIDE
-    );
+    const hasUserSeen = await _storageService.get(USER_HAS_SEEN_BOTTOM_TAB_GUIDE);
     const result = hasUserSeen ? true : false;
 
     if (result) {
@@ -159,10 +127,7 @@ function BottomTabBarComponent({ state, navigation }: any) {
   };
 
   const setUserSeenTour = async () => {
-    await _storageService.set(
-      USER_HAS_SEEN_BOTTOM_TAB_GUIDE,
-      USER_HAS_SEEN_BOTTOM_TAB_GUIDE
-    );
+    await _storageService.set(USER_HAS_SEEN_BOTTOM_TAB_GUIDE, USER_HAS_SEEN_BOTTOM_TAB_GUIDE);
   };
 
   const setupTourShow = async () => {
@@ -220,9 +185,7 @@ function BottomTabBarComponent({ state, navigation }: any) {
             style={styles.plusButton}
             onPress={plusNavigationHandler}
           >
-            <PLUS_BUTTON_BG style={styles.plusButtonBg} 
-            width={110} height={110}
-            />
+            <PLUS_BUTTON_BG style={styles.plusButtonBg} width={110} height={110} />
             <ICON_PLUS_SVG width={20} height={20} />
           </TouchableOpacity>
 
@@ -231,9 +194,7 @@ function BottomTabBarComponent({ state, navigation }: any) {
               const isFocused = state.index === i;
               const icon = icons[route.name.toLowerCase()];
 
-              const currentIcon: any = isFocused
-                ? icon?.activePath
-                : icon?.path;
+              const currentIcon: any = isFocused ? icon?.activePath : icon?.path;
 
               const buttonRef = returnRef(i);
 
@@ -248,24 +209,24 @@ function BottomTabBarComponent({ state, navigation }: any) {
                     {
                       height: 64,
                       borderWidth: 1,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderColor: "transparent",
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderColor: 'transparent',
                     },
                     i === 0 && {
-                      width: "17.5%",
+                      width: '17.5%',
                     },
                     i === 1 && {
-                      width: "17.5%",
+                      width: '17.5%',
                     },
                     i === 2 && {
-                      width: "30%",
+                      width: '30%',
                     },
                     i === 3 && {
-                      width: "17.5%",
+                      width: '17.5%',
                     },
                     i === 4 && {
-                      width: "17.5%",
+                      width: '17.5%',
                     },
                   ]}
                 >
@@ -291,48 +252,47 @@ function BottomTabBarComponent({ state, navigation }: any) {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   content: {
-    flexDirection: "column",
+    flexDirection: 'column',
     zIndex: 1,
     height: 100,
-    width: Dimensions.get("window").width - 30,
+    width: Dimensions.get('window').width - 30,
     maxWidth: 326,
-    marginBottom: "4%",
-    position: "absolute",
-    bottom: "1%",
+    marginBottom: '4%',
+    position: 'absolute',
+    bottom: '1%',
   },
   subContent: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginBottom: 10,
-    position: "absolute",
+    position: 'absolute',
     bottom: 5,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     zIndex: 2,
   },
   plusButton: {
     width: 56,
     height: 56,
     borderRadius: 100,
-    position: "absolute",
+    position: 'absolute',
     top: 13,
     zIndex: 10,
-    left: "41.4%",
-    justifyContent: "center",
-    alignItems: "center",
-    borderColor:'transparent',
-    backgroundColor:'transparent',
+    left: '41.4%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: 'transparent',
+    backgroundColor: 'transparent',
   },
   plusButtonBg: {
     width: 56,
     height: 56,
-    position:'absolute',
-    top: -19
+    position: 'absolute',
+    top: -19,
   },
 });
 
-
-export default memo(BottomTabBarComponent)
+export default memo(BottomTabBarComponent);

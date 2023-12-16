@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Animated, StyleSheet, View } from "react-native";
-import React, { useEffect, useState, useRef } from "react";
-import Constants from "expo-constants";
-import { Box } from "../box";
-import { theme } from "../../constaints/theme";
+import { Animated, StyleSheet, View } from 'react-native';
+import React, { useEffect, useState, useRef } from 'react';
+import Constants from 'expo-constants';
+import { Box } from '../box';
+import { theme } from '../../constaints/theme';
 
 export function ProgressBar() {
   const counter = useRef(new Animated.Value(0)).current;
@@ -12,10 +12,7 @@ export function ProgressBar() {
   // EFFECT HOOK TO SETUP AND CLEAN INTERvAL COUNTER
   useEffect(() => {
     // SETUP INTERVAL COUNTER TO REFERENCED HOOK
-    countInterval.current = setInterval(
-      () => setCount((prev) => prev + 10),
-      150
-    );
+    countInterval.current = setInterval(() => setCount((prev) => prev + 10), 150);
     return () => {
       // CLEAR ON EXIT
 
@@ -45,15 +42,13 @@ export function ProgressBar() {
   };
   const width = counter.interpolate({
     inputRange: [0, 100],
-    outputRange: ["0%", "100%"],
-    extrapolate: "clamp",
+    outputRange: ['0%', '100%'],
+    extrapolate: 'clamp',
   });
   return (
     <Box width="100%" position="absolute" top={0}>
       <View style={styles.progressBar}>
-        <Animated.View
-          style={{ backgroundColor: theme.color.light.PRIMARY, width: width }}
-        />
+        <Animated.View style={{ backgroundColor: theme.color.light.PRIMARY, width: width }} />
       </View>
     </Box>
   );
@@ -61,8 +56,8 @@ export function ProgressBar() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
     padding: 8,
   },
@@ -77,9 +72,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   progressBar: {
-    width: "100%",
+    width: '100%',
     height: 3,
     borderWidth: 0,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
 });

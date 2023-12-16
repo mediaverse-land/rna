@@ -1,14 +1,14 @@
-export type ChanelManagementView = "CHANNEL" | "CONDUCTOR";
+export type ChanelManagementView = 'CHANNEL' | 'CONDUCTOR';
 
 export type ChannelItem = {
   id: number;
-  status: "pending" | "finished";
+  status: 'pending' | 'finished';
   title: string;
 };
 
-export type AssetType = "Subscribe" | "Ownership";
+export type AssetType = 'Subscribe' | 'Ownership';
 
-export type ActiveNav = "All" | "Images" | "Videos" | "Sounds" | "Texts";
+export type ActiveNav = 'All' | 'Images' | 'Videos' | 'Sounds' | 'Texts';
 
 export type TabbarItem = {
   id: number;

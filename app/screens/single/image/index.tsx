@@ -1,38 +1,36 @@
-import { useEffect, useContext, useState, useRef } from "react";
-import { View } from "react-native";
-import { useIsFocused } from "@react-navigation/native";
-import { useClickOutside } from "react-native-click-outside";
-import { ScreenGradient } from "../../../components/screen-gradient";
-import { Box } from "../../../components/box";
-import { CommentCard } from "../../../components/comment-card";
-import { BuyBottom } from "../components/buy-button";
-import { VirtualizedList } from "../../../components/virtualized-list";
-import { RenderIf } from "../../../components/render-if";
-import { MetaDataType } from "../components/item-metadata";
-import { SingleItemFiles } from "../components/files";
-import { FocusedStatusBar } from "../../../components/focused-statusbar";
-import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
-import { ReportModal } from "../components/report-modal";
-import { SingleAssetFooter } from "../components/footer";
-import { YoutubeShare } from "../components/youtube-share";
-import { CustomSafeArea } from "../../../components/custom-safe-area";
-import { SingleImageHeader } from "./header";
-import { SingleImageContent } from "./content";
-import { AssetLargeImage } from "./large-image";
-import { getImageDetailApiHandler } from "../service";
-import { Image } from "../../../types/image";
-import { ICON_SHARE_YOUTUBE } from "../../../constaints/icons";
-import { useYoutubeShareMutation } from "../../../services/asset.service";
-import { tokenStringResolver } from "../../../utils/token-string-resolver";
-import { ifUserIsOwner } from "../../../utils/if-user-is-owner";
-import { BackButtonRedirector } from "../utils/back-button-redirector";
-import { userContext } from "../../../context/user";
-import { tokenContext } from "../../../context/token";
-import { singleImageStyles } from "./styles";
-import { IMAGE_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
-import {
-  EDIT_SCREEN,
-} from "../../../constaints/consts";
+import { useEffect, useContext, useState, useRef } from 'react';
+import { View } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
+import { useClickOutside } from 'react-native-click-outside';
+import { ScreenGradient } from '../../../components/screen-gradient';
+import { Box } from '../../../components/box';
+import { CommentCard } from '../../../components/comment-card';
+import { BuyBottom } from '../components/buy-button';
+import { VirtualizedList } from '../../../components/virtualized-list';
+import { RenderIf } from '../../../components/render-if';
+import { MetaDataType } from '../components/item-metadata';
+import { SingleItemFiles } from '../components/files';
+import { FocusedStatusBar } from '../../../components/focused-statusbar';
+import { RenderIfWithoutLoading } from '../../../components/render-if-without-loading';
+import { ReportModal } from '../components/report-modal';
+import { SingleAssetFooter } from '../components/footer';
+import { YoutubeShare } from '../components/youtube-share';
+import { CustomSafeArea } from '../../../components/custom-safe-area';
+import { SingleImageHeader } from './header';
+import { SingleImageContent } from './content';
+import { AssetLargeImage } from './large-image';
+import { getImageDetailApiHandler } from '../service';
+import { Image } from '../../../types/image';
+import { ICON_SHARE_YOUTUBE } from '../../../constaints/icons';
+import { useYoutubeShareMutation } from '../../../services/asset.service';
+import { tokenStringResolver } from '../../../utils/token-string-resolver';
+import { ifUserIsOwner } from '../../../utils/if-user-is-owner';
+import { BackButtonRedirector } from '../utils/back-button-redirector';
+import { userContext } from '../../../context/user';
+import { tokenContext } from '../../../context/token';
+import { singleImageStyles } from './styles';
+import { IMAGE_THUMBNAIL_PLACEHOLDER } from '../../../constaints/images';
+import { EDIT_SCREEN } from '../../../constaints/consts';
 
 const _youtubeShare = new YoutubeShare();
 const _backButtonRedirector = new BackButtonRedirector();
@@ -122,7 +120,7 @@ export function SingleImageScreen({ navigation, route }: any) {
     const { isError, res } = await getImageDetailApiHandler(
       token,
       shouldSearchByAssetId,
-      route.params?.saech__asset_id ? route.params?.saech__asset_id : id
+      route.params?.saech__asset_id ? route.params?.saech__asset_id : id,
     );
 
     if (isError) {
@@ -135,10 +133,7 @@ export function SingleImageScreen({ navigation, route }: any) {
     // is user owner
     const currentUserId = userCtx.getUser();
     setCurrentUserId(currentUserId.id);
-    const isUserOwner = ifUserIsOwner(
-      assetData?.asset?.user?.id,
-      currentUserId.id
-    );
+    const isUserOwner = ifUserIsOwner(assetData?.asset?.user?.id, currentUserId.id);
 
     const fileUrl = assetData?.file?.url || assetData?.asset?.file?.url;
 
@@ -184,8 +179,7 @@ export function SingleImageScreen({ navigation, route }: any) {
     setOpenReportModal(false);
   };
 
-  const thumnailImageUri =
-    data?.asset?.thumbnails?.["390x218"] || IMAGE_THUMBNAIL_PLACEHOLDER;
+  const thumnailImageUri = data?.asset?.thumbnails?.['390x218'] || IMAGE_THUMBNAIL_PLACEHOLDER;
 
   const price = data?.asset?.price || null;
   const file = data?.asset?.file;
@@ -194,18 +188,18 @@ export function SingleImageScreen({ navigation, route }: any) {
     [
       {
         id: 1,
-        key: "Suffix",
+        key: 'Suffix',
         value: data?.asset?.thumbnail?.extension,
       },
       {
         id: 2,
-        key: "Type",
-        value: "Clip",
+        key: 'Type',
+        value: 'Clip',
       },
       {
         id: 3,
-        key: "Lanuage",
-        value: "En",
+        key: 'Lanuage',
+        value: 'En',
       },
     ] || [];
 
@@ -214,7 +208,7 @@ export function SingleImageScreen({ navigation, route }: any) {
         {
           id: 1,
           chapterName: file?.details?.name,
-          duration: "",
+          duration: '',
         },
       ]
     : null;
@@ -224,15 +218,14 @@ export function SingleImageScreen({ navigation, route }: any) {
   const isLoadedAndDataExists = !isLoading && data?.id ? true : false;
 
   const navigateToEditScreen = () => {
-    const isDisableEditIcon =
-      data?.asset?.user?.id === currentUserId ? false : true;
+    const isDisableEditIcon = data?.asset?.user?.id === currentUserId ? false : true;
 
     if (isDisableEditIcon) {
       return;
     }
     navigation.navigate(EDIT_SCREEN, {
       id: data?.id,
-      assetType: "image",
+      assetType: 'image',
     });
   };
 
@@ -264,7 +257,7 @@ export function SingleImageScreen({ navigation, route }: any) {
                 <SingleImageHeader
                   goBackHandler={goBackHandler}
                   thumnailImageUri={thumnailImageUri}
-                  contentName={data?.name || ""}
+                  contentName={data?.name || ''}
                   isOwner={isOwner}
                   isSubscriber={isSubscriber}
                   showLargeImagePressHandler={_showLargeImagePressHandler}

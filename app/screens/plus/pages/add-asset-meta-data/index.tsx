@@ -1,41 +1,38 @@
-import { ReactNode, lazy, useContext, useMemo, useState } from "react";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
-import { CustomSafeArea } from "../../../../components/custom-safe-area";
-import { ScreenGradient } from "../../../../components/screen-gradient";
-import { VirtualizedList } from "../../../../components/virtualized-list";
-import { CreateAssetToolbar } from "../../component/create-asset-toolbar";
-import { Box } from "../../../../components/box";
-import { TopToolbar } from "../../component/top-toolbar";
-import { Button } from "../../../../components/button";
-import { AssetDataView } from "./add-asset-data";
-import { theme } from "../../../../constaints/theme";
-import { SaveAndPublish } from "./save-and-publish";
-import { AppDispatch, RootState } from "../../../../store";
+import { ReactNode, lazy, useContext, useMemo, useState } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import { CustomSafeArea } from '../../../../components/custom-safe-area';
+import { ScreenGradient } from '../../../../components/screen-gradient';
+import { VirtualizedList } from '../../../../components/virtualized-list';
+import { CreateAssetToolbar } from '../../component/create-asset-toolbar';
+import { Box } from '../../../../components/box';
+import { TopToolbar } from '../../component/top-toolbar';
+import { Button } from '../../../../components/button';
+import { AssetDataView } from './add-asset-data';
+import { theme } from '../../../../constaints/theme';
+import { SaveAndPublish } from './save-and-publish';
+import { AppDispatch, RootState } from '../../../../store';
 import {
   navigateToAddMetaDataView,
   navigateToSaveAndPublishView,
-} from "../../../../slices/plus.slice";
-import { PaddingContainer } from "../../../../styles/grid";
-import { UseNavigationType } from "../../../../types/use-navigation";
-import { tokenContext } from "../../../../context/token";
-import { retriveToken } from "../../../../utils/retrive-token";
-import { userContext } from "../../../../context/user";
-import { useCreateAssetMutation } from "../../../../services/asset.service";
-import { UploadLoader } from "./upload-loader";
+} from '../../../../slices/plus.slice';
+import { PaddingContainer } from '../../../../styles/grid';
+import { UseNavigationType } from '../../../../types/use-navigation';
+import { tokenContext } from '../../../../context/token';
+import { retriveToken } from '../../../../utils/retrive-token';
+import { userContext } from '../../../../context/user';
+import { useCreateAssetMutation } from '../../../../services/asset.service';
+import { UploadLoader } from './upload-loader';
 
-const SelectPlan = lazy(() => import("../../component/select-plan"));
-const SelectLanguage = lazy(() => import("../../component/select-language"));
-const SelectForkability = lazy(
-  () => import("../../component/select-forkability")
-);
+const SelectPlan = lazy(() => import('../../component/select-plan'));
+const SelectLanguage = lazy(() => import('../../component/select-language'));
+const SelectForkability = lazy(() => import('../../component/select-forkability'));
 
 const BG_GRADIENT = theme.gradients.PLUS_PAGE_GRADIENT;
 
 export const AddAssetMetaData = () => {
   const { top } = useSafeAreaInsets();
-
 
   const [createdAssetId, setCreatedAssetId] = useState<number>(null);
 
@@ -59,8 +56,7 @@ export const AddAssetMetaData = () => {
 
   let mutateCreateAssetActiveView = createAssetActiveView;
 
-  const [createAssetApiHandler, { isLoading, isFetching }] =
-    useCreateAssetMutation();
+  const [createAssetApiHandler, { isLoading, isFetching }] = useCreateAssetMutation();
 
   const publishPressHandler = () => {
     if (!selectedLanguage || !title || !description) {
@@ -74,7 +70,7 @@ export const AddAssetMetaData = () => {
   };
 
   const goBackHandler = () => {
-    if (mutateCreateAssetActiveView === "save-and-publish") {
+    if (mutateCreateAssetActiveView === 'save-and-publish') {
       navigateToAddMetaDataViewHandler();
       return;
     }
@@ -145,7 +141,7 @@ export const AddAssetMetaData = () => {
       forkability_status: forkabilityStatus,
       description: description,
       type: 1,
-      lang:selectedLanguage
+      lang: selectedLanguage,
     };
 
     if (currentPlan === 2) {
@@ -167,7 +163,7 @@ export const AddAssetMetaData = () => {
 
   const createAssetHandler = async () => {
     const [options, token] = await getRequestBody();
-    const url = "/texts";
+    const url = '/texts';
 
     const response = await createAssetApiHandler({
       url,
@@ -181,54 +177,48 @@ export const AddAssetMetaData = () => {
   };
 
   const views = useMemo<
-    Record<"add-metadata" | "save-and-publish" | "upload-loder", ReactNode>
+    Record<'add-metadata' | 'save-and-publish' | 'upload-loder', ReactNode>
   >(() => {
     return {
-      "add-metadata": <AssetDataView />,
-      "save-and-publish": <SaveAndPublish />,
-      "upload-loder": (
-        <UploadLoader
-          assetId={createdAssetId}
-          cleanupCreatedAssetId={cleanupCreatedAssetId}
-        />
+      'add-metadata': <AssetDataView />,
+      'save-and-publish': <SaveAndPublish />,
+      'upload-loder': (
+        <UploadLoader assetId={createdAssetId} cleanupCreatedAssetId={cleanupCreatedAssetId} />
       ),
     };
   }, [mutateCreateAssetActiveView, createdAssetId]);
 
-
   // Indicate toolbar if current view is "add-metadata"
   const Toolbar = () => {
-    if (mutateCreateAssetActiveView === "add-metadata") {
+    if (mutateCreateAssetActiveView === 'add-metadata') {
       return <CreateAssetToolbar publishPressHandler={publishPressHandler} />;
     }
 
-    if (mutateCreateAssetActiveView === "save-and-publish"){
-
-      return <Box marginTop={100} marginBottom={32}>
-        <PaddingContainer>
-          <Button
-            varient="primary"
-            text="Publish"
-            onpressHandler={createAssetHandler}
-            isLoading={isLoading || isFetching}
+    if (mutateCreateAssetActiveView === 'save-and-publish') {
+      return (
+        <Box marginTop={100} marginBottom={32}>
+          <PaddingContainer>
+            <Button
+              varient="primary"
+              text="Publish"
+              onpressHandler={createAssetHandler}
+              isLoading={isLoading || isFetching}
             />
-        </PaddingContainer>
-      </Box>
-          }
+          </PaddingContainer>
+        </Box>
+      );
+    }
   };
 
   if (createdAssetId) {
-    mutateCreateAssetActiveView = "upload-loder";
+    mutateCreateAssetActiveView = 'upload-loder';
   }
 
   const currentView = views[mutateCreateAssetActiveView];
 
-  let pageTitle =
-    mutateCreateAssetActiveView === "add-metadata"
-      ? "Information"
-      : "Save $ publish";
+  let pageTitle = mutateCreateAssetActiveView === 'add-metadata' ? 'Information' : 'Save $ publish';
 
-  pageTitle = mutateCreateAssetActiveView === "upload-loder" && "";
+  pageTitle = mutateCreateAssetActiveView === 'upload-loder' && '';
 
   return (
     <>

@@ -1,13 +1,13 @@
-import { Image, TouchableOpacity, StyleSheet } from "react-native";
-import { HeaderStyles } from "./style";
-import { useNavigation } from "@react-navigation/native";
-import { UseNavigationType } from "../../types/use-navigation";
+import { Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { HeaderStyles } from './style';
+import { useNavigation } from '@react-navigation/native';
+import { UseNavigationType } from '../../types/use-navigation';
 
-export function Header() { 
+export function Header() {
   const navigation = useNavigation<UseNavigationType>();
 
   function navigateToSearchPage() {
-    navigation.navigate("Search");
+    navigation.navigate('Search');
   }
 
   return (
@@ -15,7 +15,7 @@ export function Header() {
       <HeaderStyles.HeaderWrapper>
         <HeaderStyles.Profile>
           <Image
-            source={require("./../../../assets/img/10-profile-picture.png")}
+            source={require('./../../../assets/img/10-profile-picture.png')}
             style={styles.headerProfileImage}
           />
           <HeaderStyles.UserName>User.Name</HeaderStyles.UserName>
@@ -23,7 +23,7 @@ export function Header() {
         <HeaderStyles.SearchIconWrapper>
           <TouchableOpacity onPress={navigateToSearchPage} activeOpacity={1}>
             <Image
-              source={require("./../../../assets/icons/icon__search.png")}
+              source={require('./../../../assets/icons/icon__search.png')}
               style={styles.searchIcon}
             />
           </TouchableOpacity>

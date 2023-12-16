@@ -10,10 +10,7 @@ import { Text } from '../../../components/text';
 import { RenderIfWithoutLoading } from '../../../components/render-if-without-loading';
 import { ActivityIndicator } from 'react-native';
 import { BlurView } from 'expo-blur';
-import {
-  useGetShareListQuery,
-  useRemoveShareItemMutation,
-} from '../../../services/asset.service';
+import { useGetShareListQuery, useRemoveShareItemMutation } from '../../../services/asset.service';
 import { Toaster } from '../../../utils/toaster';
 
 const gradientProps = {
@@ -64,7 +61,7 @@ const _toaster = new Toaster();
 const MemoShareList = ({ token }: { token: string }) => {
   const [activeEditWindowId, setActiveEditWindowId] = useState<number>(null);
 
-  const [setSelectedItem] = useState<number| any>(null);
+  const [setSelectedItem] = useState<number | any>(null);
 
   const [dataList, setDataList] = useState<ShareItem[]>([]);
 

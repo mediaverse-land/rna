@@ -1,28 +1,23 @@
-import { useState } from "react";
-import { createImageFormStructure } from "./form-structure";
-import { CreateImageRequestBody } from ".";
-import { CreateAssetForm } from "../../component/create-asset-form";
+import { useState } from 'react';
+import { createImageFormStructure } from './form-structure';
+import { CreateImageRequestBody } from '.';
+import { CreateAssetForm } from '../../component/create-asset-form';
 
 type Props = {
   isLoading: boolean;
-  createAssetRequest: ({
-    name,
-    price,
-    plan,
-    description,
-  }: CreateImageRequestBody) => Promise<any>;
+  createAssetRequest: ({ name, price, plan, description }: CreateImageRequestBody) => Promise<any>;
   uploadImageRequest?: () => Promise<any>;
 };
 
 export const SubmitForm = ({ isLoading, createAssetRequest }: Props) => {
-  const [selectedOption, setSelectedOption] = useState<Record<string, string| boolean>>({
-    plan: "ownership",
-    forkability_status:true
+  const [selectedOption, setSelectedOption] = useState<Record<string, string | boolean>>({
+    plan: 'ownership',
+    forkability_status: true,
   });
 
-  const _getSelectedOption = (option: Record<string, string| boolean>) => {
-    setSelectedOption(option)
-  }
+  const _getSelectedOption = (option: Record<string, string | boolean>) => {
+    setSelectedOption(option);
+  };
 
   const onSubmit = async (data: any) => {
     const { name, description } = data;
@@ -33,17 +28,17 @@ export const SubmitForm = ({ isLoading, createAssetRequest }: Props) => {
       subscription: 3,
     };
 
-    const __plan: any= selectedOption.plan
+    const __plan: any = selectedOption.plan;
 
     const options: any = {
       name,
-      price: selectedOption.plan !== "free" ? parseInt(data.price) : 0,
+      price: selectedOption.plan !== 'free' ? parseInt(data.price) : 0,
       plan: plans[__plan],
       forkability_status: selectedOption.forkability_status,
       description,
     };
 
-    if (selectedOption.plan === "subscription") {
+    if (selectedOption.plan === 'subscription') {
       options.subscription_period = parseInt(data.subscription_period);
     }
 

@@ -1,5 +1,5 @@
-import { ReactNode, useMemo } from "react";
-import { Text as ReactNativeText, TextInput, TextStyle } from "react-native";
+import { ReactNode, useMemo } from 'react';
+import { Text as ReactNativeText, TextInput, TextStyle } from 'react-native';
 
 type Props = {
   children: ReactNode;
@@ -61,12 +61,7 @@ export function Text({
   return (
     <>
       {isTextArea ? (
-        <TextInput
-          
-          style={[styles, textStyles]}
-        >
-          {children}
-        </TextInput>
+        <TextInput style={[styles, textStyles]}>{children}</TextInput>
       ) : (
         <ReactNativeText selectable={selectable} style={[styles, textStyles]}>
           {children}

@@ -1,15 +1,15 @@
-import { memo, useCallback, useEffect, useState } from "react";
-import { Image, TouchableOpacity, FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { Box } from "../box";
-import { UseNavigationType } from "../../types/use-navigation";
+import { memo, useCallback, useEffect, useState } from 'react';
+import { Image, TouchableOpacity, FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Box } from '../box';
+import { UseNavigationType } from '../../types/use-navigation';
 import {
   // BANNER_ITEM_GRADIENT_IMAGE,
   IMAGE_THUMBNAIL_PLACEHOLDER,
-} from "../../constaints/images";
-import { windowSize } from "../../utils/window-size";
+} from '../../constaints/images';
+import { windowSize } from '../../utils/window-size';
 // import { Text } from "../text";
-import { Text } from "../../types/text";
+import { Text } from '../../types/text';
 
 type Props = {
   data: any;
@@ -20,11 +20,10 @@ const { width: WINDOW_WIDTH } = windowSize();
 
 const ROW_WIDTH = WINDOW_WIDTH - 48;
 
-
 function Masonry({ data, disableOnIntractions = false }: Props) {
   const [chunkedList, setChunkedList] = useState<Image[]>([]);
 
-  let direction: "row" | "row-reverse" = "row";
+  let direction: 'row' | 'row-reverse' = 'row';
 
   const navigation = useNavigation<UseNavigationType>();
 
@@ -44,19 +43,19 @@ function Masonry({ data, disableOnIntractions = false }: Props) {
         all[chunk] = [].concat(all[chunk] || [], one);
         return all;
       }, []),
-    [data]
+    [data],
   );
 
   const navigateRedirectHandler = (
     name: string,
     id: number,
     asset_username: string,
-    asset_user_image_url: string
+    asset_user_image_url: string,
   ) => {
     if (disableOnIntractions) {
       return;
     }
-    navigation.navigate("SingleImageScreen", {
+    navigation.navigate('SingleImageScreen', {
       id,
       name,
       isOwner: false,
@@ -68,7 +67,7 @@ function Masonry({ data, disableOnIntractions = false }: Props) {
   const _key = () => Math.random().toString();
 
   const RenderItem = ({ row }: { row: any }) => {
-    direction = direction === "row" ? "row-reverse" : "row";
+    direction = direction === 'row' ? 'row-reverse' : 'row';
 
     const firstRow: Record<string, Text> = {
       bigImage: row?.[0],
@@ -85,9 +84,9 @@ function Masonry({ data, disableOnIntractions = false }: Props) {
           width="100%"
           direction={direction}
           justifyContent="space-between"
-          height={"66%"}
+          height={'66%'}
           position="relative"
-          right={direction === "row-reverse" ? -8 : 0}
+          right={direction === 'row-reverse' ? -8 : 0}
           additionalStyles={{
             gap: 8,
           }}
@@ -100,21 +99,21 @@ function Masonry({ data, disableOnIntractions = false }: Props) {
                   firstRow?.bigImage.name,
                   firstRow?.bigImage.id,
                   firstRow?.bigImage?.asset?.user?.username,
-                  firstRow?.bigImage?.asset?.user?.image_url
+                  firstRow?.bigImage?.asset?.user?.image_url,
                 )
               }
             >
               <Image
                 source={{
                   uri:
-                    firstRow?.bigImage?.asset?.thumbnails?.["525x525"] ||
-                    firstRow?.bigImage?.asset?.thumbnails["336x366"] ||
-                    firstRow?.bigImage?.asset?.thumbnails["226x226"] ||
+                    firstRow?.bigImage?.asset?.thumbnails?.['525x525'] ||
+                    firstRow?.bigImage?.asset?.thumbnails['336x366'] ||
+                    firstRow?.bigImage?.asset?.thumbnails['226x226'] ||
                     IMAGE_THUMBNAIL_PLACEHOLDER,
                 }}
                 style={{
-                  width: "100%",
-                  height: "100%",
+                  width: '100%',
+                  height: '100%',
                   borderRadius: 8,
                 }}
               />
@@ -129,21 +128,21 @@ function Masonry({ data, disableOnIntractions = false }: Props) {
                     firstRow?.topImage.name,
                     firstRow?.topImage.id,
                     firstRow?.topImage?.asset?.user?.username,
-                    firstRow?.topImage?.asset?.user?.image_url
+                    firstRow?.topImage?.asset?.user?.image_url,
                   )
                 }
               >
                 <Image
                   source={{
                     uri:
-                      firstRow?.topImage?.asset?.thumbnails?.["525x525"] ||
-                      firstRow?.topImage?.asset?.thumbnails["336x366"] ||
-                      firstRow?.topImage?.asset?.thumbnails["226x226"] ||
+                      firstRow?.topImage?.asset?.thumbnails?.['525x525'] ||
+                      firstRow?.topImage?.asset?.thumbnails['336x366'] ||
+                      firstRow?.topImage?.asset?.thumbnails['226x226'] ||
                       IMAGE_THUMBNAIL_PLACEHOLDER,
                   }}
                   style={{
-                    width: "100%",
-                    height: "100%",
+                    width: '100%',
+                    height: '100%',
                     borderRadius: 8,
                   }}
                 />
@@ -157,21 +156,21 @@ function Masonry({ data, disableOnIntractions = false }: Props) {
                     firstRow?.bottomImage.name,
                     firstRow?.bottomImage.id,
                     firstRow?.bottomImage?.asset?.user?.username,
-                    firstRow?.bottomImage?.asset?.user?.image_url
+                    firstRow?.bottomImage?.asset?.user?.image_url,
                   )
                 }
               >
                 <Image
                   source={{
                     uri:
-                      firstRow?.bottomImage?.asset?.thumbnails?.["525x525"] ||
-                      firstRow?.bottomImage?.asset?.thumbnails["336x366"] ||
-                      firstRow?.bottomImage?.asset?.thumbnails["226x226"] ||
+                      firstRow?.bottomImage?.asset?.thumbnails?.['525x525'] ||
+                      firstRow?.bottomImage?.asset?.thumbnails['336x366'] ||
+                      firstRow?.bottomImage?.asset?.thumbnails['226x226'] ||
                       IMAGE_THUMBNAIL_PLACEHOLDER,
                   }}
                   style={{
-                    width: "100%",
-                    height: "100%",
+                    width: '100%',
+                    height: '100%',
                     borderRadius: 8,
                   }}
                 />
@@ -183,10 +182,10 @@ function Masonry({ data, disableOnIntractions = false }: Props) {
           id="bottom"
           width="100%"
           marginTop={8}
-          height={"33%"}
+          height={'33%'}
           additionalStyles={{
             gap: 8,
-            flexWrap: "nowrap",
+            flexWrap: 'nowrap',
           }}
           direction="row"
           // justifyContent="space-between"
@@ -199,7 +198,7 @@ function Masonry({ data, disableOnIntractions = false }: Props) {
                   _item.name,
                   _item.id,
                   _item?.asset?.user?.username,
-                  _item?.asset?.user?.image_url
+                  _item?.asset?.user?.image_url,
                 )
               }
               key={index}
@@ -207,9 +206,9 @@ function Masonry({ data, disableOnIntractions = false }: Props) {
               <Image
                 source={{
                   uri:
-                    _item?.asset?.thumbnails?.["525x525"] ||
-                    _item?.asset?.thumbnails["336x366"] ||
-                    _item?.asset?.thumbnails["226x226"] ||
+                    _item?.asset?.thumbnails?.['525x525'] ||
+                    _item?.asset?.thumbnails['336x366'] ||
+                    _item?.asset?.thumbnails['226x226'] ||
                     IMAGE_THUMBNAIL_PLACEHOLDER,
                 }}
                 style={{
@@ -423,4 +422,3 @@ function Masonry({ data, disableOnIntractions = false }: Props) {
 // }
 
 export default memo(Masonry);
-

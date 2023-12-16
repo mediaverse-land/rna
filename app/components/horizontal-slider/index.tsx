@@ -1,12 +1,12 @@
-import { FlatList } from "react-native";
-import { HorizontalSliderComponents } from "./style";
-import { HorizontalSlide } from "./slide";
-import { useNavigation } from "@react-navigation/native";
-import { Asset } from "../../types/asset";
-import { PROFILE_ONE } from "../../constaints/images";
-import { UseNavigationType } from "../../types/use-navigation";
-import { Sound } from "../../types/sound";
-import { Text } from "../../types/text";
+import { FlatList } from 'react-native';
+import { HorizontalSliderComponents } from './style';
+import { HorizontalSlide } from './slide';
+import { useNavigation } from '@react-navigation/native';
+import { Asset } from '../../types/asset';
+import { PROFILE_ONE } from '../../constaints/images';
+import { UseNavigationType } from '../../types/use-navigation';
+import { Sound } from '../../types/sound';
+import { Text } from '../../types/text';
 
 type ContentType = 1 | 2 | 3 | 4;
 
@@ -31,20 +31,16 @@ const { Wrapper } = HorizontalSliderComponents;
 
 const contentTypeMapperToScreenMapper = (type: ContentType) => {
   const screens = {
-    1: "SingleTextScreen",
-    2: "SingleImageScreen",
-    3: "SingleSoundScreen",
-    4: "SingleVideoScreen",
+    1: 'SingleTextScreen',
+    2: 'SingleImageScreen',
+    3: 'SingleSoundScreen',
+    4: 'SingleVideoScreen',
   };
 
   return screens[type] || null;
 };
 
-export function HorizontalSlider({
-  data,
-  isRtl,
-  disableOnIntractions = false,
-}: Props) {
+export function HorizontalSlider({ data, isRtl, disableOnIntractions = false }: Props) {
   const navigation = useNavigation<UseNavigationType>();
 
   function slidePressRedirectHandler(
@@ -52,7 +48,7 @@ export function HorizontalSlider({
     name: string,
     contentType: ContentType,
     asset_username: string,
-    asset_user_image_url: string
+    asset_user_image_url: string,
   ) {
     if (disableOnIntractions) {
       return;
@@ -70,18 +66,18 @@ export function HorizontalSlider({
     }
   }
 
-  const renderItem = ({ item, index }: { item: Asset | Sound | Text | any, index: number }) => {
+  const renderItem = ({ item, index }: { item: Asset | Sound | Text | any; index: number }) => {
     const thumbUri =
-    item?.asset?.thumbnails["525x525"]||
-      item?.asset?.thumbnails["336x366"] ||
-      item.asset?.thumbnails["226x226"] 
+      item?.asset?.thumbnails['525x525'] ||
+      item?.asset?.thumbnails['336x366'] ||
+      item.asset?.thumbnails['226x226'];
 
-      // type Size = '1080x1080' |'226x226' | '336x366' | '340x220' | '523x304' | '525x525' |
-      // '648x651'
+    // type Size = '1080x1080' |'226x226' | '336x366' | '340x220' | '523x304' | '525x525' |
+    // '648x651'
 
     const title = item.name || item?.asset?.name;
     const type = item?.asset?.type || item.type;
-    const username = item?.asset?.user?.username || "Mahdi Alipoor";
+    const username = item?.asset?.user?.username || 'Mahdi Alipoor';
     const asset_user_image_url = item?.asset?.user?.image_url || PROFILE_ONE;
 
     return (
@@ -95,13 +91,7 @@ export function HorizontalSlider({
         type={type}
         isRtl={isRtl}
         slidePressRedirectHandler={() =>
-          slidePressRedirectHandler(
-            item.id,
-            title,
-            type,
-            username,
-            asset_user_image_url
-          )
+          slidePressRedirectHandler(item.id, title, type, username, asset_user_image_url)
         }
       />
     );

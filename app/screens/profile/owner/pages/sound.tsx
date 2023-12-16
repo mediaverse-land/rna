@@ -1,27 +1,27 @@
 /* eslint-disable no-unsafe-optional-chaining */
-import { useState, useContext, useEffect } from "react";
-import { LinearGradient } from "expo-linear-gradient";
-import { useIsFocused } from "@react-navigation/native";
-import { Asset } from "../../../../types/asset";
-import { tokenContext } from "../../../../context/token";
-import { UseSelectContent } from "../../hooks/use-select-content";
-import { retriveToken } from "../../../../utils/retrive-token";
-import { getProfileSoundDataApiHandler, removeAssetApiHandler } from "../../service";
-import { ASSET_TYPES } from "../../../../heloers/asset-types";
-import { stickyStyles } from "../../../../styles/sticky";
-import { SelectBar } from "../../components/select-bar";
-import { VirtualizedList } from "../../../../components/virtualized-list";
-import RenderList from "../../components/render-list";
-import { Box } from "../../../../components/box";
-import { LoadingSpinner } from "../../../../components/loader-spinner";
-import { Spacer } from "../../../../components/spacer";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../store";
-import { useGetUserProfileQuery } from "../../../../services/profile.service";
+import { useState, useContext, useEffect } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useIsFocused } from '@react-navigation/native';
+import { Asset } from '../../../../types/asset';
+import { tokenContext } from '../../../../context/token';
+import { UseSelectContent } from '../../hooks/use-select-content';
+import { retriveToken } from '../../../../utils/retrive-token';
+import { getProfileSoundDataApiHandler, removeAssetApiHandler } from '../../service';
+import { ASSET_TYPES } from '../../../../heloers/asset-types';
+import { stickyStyles } from '../../../../styles/sticky';
+import { SelectBar } from '../../components/select-bar';
+import { VirtualizedList } from '../../../../components/virtualized-list';
+import RenderList from '../../components/render-list';
+import { Box } from '../../../../components/box';
+import { LoadingSpinner } from '../../../../components/loader-spinner';
+import { Spacer } from '../../../../components/spacer';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
+import { useGetUserProfileQuery } from '../../../../services/profile.service';
 
-const OWNERSHIP_BASE_URL = "/profile/audios?page=";
-const SUBSCRIBE_BASE_URL = "/subscriptions/audios?page=";
-const GRADIENTS_COLORS = ["#030340", "#030340"];
+const OWNERSHIP_BASE_URL = '/profile/audios?page=';
+const SUBSCRIBE_BASE_URL = '/subscriptions/audios?page=';
+const GRADIENTS_COLORS = ['#030340', '#030340'];
 const GRADIENT_AXIS = { x: 0.7, y: 0 };
 
 export const ProfileScreenSoundPage = () => {
@@ -30,12 +30,13 @@ export const ProfileScreenSoundPage = () => {
   const [totalAssetsCount, setTotalAssetsCount] = useState<number>(null);
   const [data, setData] = useState<Asset[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState('');
 
   const { refetch } = useGetUserProfileQuery({ token });
 
-  const { ACTIVE_PAGE }: { ACTIVE_PAGE: "subscribe" | "ownership" } =
-    useSelector((store: RootState) => store.profileSlice);
+  const { ACTIVE_PAGE }: { ACTIVE_PAGE: 'subscribe' | 'ownership' } = useSelector(
+    (store: RootState) => store.profileSlice,
+  );
 
   const isFocused = useIsFocused();
   const tokenCtx = useContext(tokenContext);
@@ -64,9 +65,9 @@ export const ProfileScreenSoundPage = () => {
   }, [isFocused]);
 
   useEffect(() => {
-    setData([])
-    setCurrentPage(1)
-  }, [ACTIVE_PAGE])
+    setData([]);
+    setCurrentPage(1);
+  }, [ACTIVE_PAGE]);
 
   useEffect(() => {
     getData();
@@ -91,19 +92,15 @@ export const ProfileScreenSoundPage = () => {
       return;
     }
 
-    
     let __uri: string;
-    if (ACTIVE_PAGE === "ownership") {
+    if (ACTIVE_PAGE === 'ownership') {
       __uri = OWNERSHIP_BASE_URL + (__currPage ? __currPage : currentPage);
     }
-    if (ACTIVE_PAGE === "subscribe") {
+    if (ACTIVE_PAGE === 'subscribe') {
       __uri = SUBSCRIBE_BASE_URL + (__currPage ? __currPage : currentPage);
     }
 
-    const { isError, res, isSuccess } = await getProfileSoundDataApiHandler(
-      token,
-      __uri
-    );
+    const { isError, res, isSuccess } = await getProfileSoundDataApiHandler(token, __uri);
 
     if (isError || !isSuccess) {
       stopLoad();
@@ -176,17 +173,13 @@ export const ProfileScreenSoundPage = () => {
 
       const assetType = ASSET_TYPES[type];
 
-       await removeAssetApiHandler(
-        token,
-        assetType,
-        id
-      );
+      await removeAssetApiHandler(token, assetType, id);
     }
 
     refetch();
     onRefresh();
   };
-  const IS_OWNERSHIP_ACTIVE = ACTIVE_PAGE === "ownership"? true: false
+  const IS_OWNERSHIP_ACTIVE = ACTIVE_PAGE === 'ownership' ? true : false;
 
   return (
     <LinearGradient

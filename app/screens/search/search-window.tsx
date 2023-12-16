@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { ImagesPageComponents } from "../explore/pages/all/style";
-import { Flex } from "../../styles/grid";
-import { SearchBoxComponents } from "./style";
+import { useState } from 'react';
+import { TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { ImagesPageComponents } from '../explore/pages/all/style';
+import { Flex } from '../../styles/grid';
+import { SearchBoxComponents } from './style';
 import {
   ICON_ARROW_DOWN_SVG,
   ICON_ARROW_LEFT_SVG,
   ICON_SEARCH_SVG_PATH,
-} from "../../constaints/icons";
-import { useNavigation } from "@react-navigation/native";
-import { windowSize } from "../../utils/window-size";
-import { useRtl } from "../../hooks/use-rtl";
-import { theme } from "../../constaints/theme";
-import { SearchParam } from ".";
+} from '../../constaints/icons';
+import { useNavigation } from '@react-navigation/native';
+import { windowSize } from '../../utils/window-size';
+import { useRtl } from '../../hooks/use-rtl';
+import { theme } from '../../constaints/theme';
+import { SearchParam } from '.';
 
 type Props = {
   setSearch: (param: SearchParam) => void;
@@ -33,15 +33,15 @@ const {
 
 const dropDownList: {
   id: number;
-  title: "Plan" | "Tag";
+  title: 'Plan' | 'Tag';
 }[] = [
   {
     id: 1,
-    title: "Plan",
+    title: 'Plan',
   },
   {
     id: 2,
-    title: "Tag",
+    title: 'Tag',
   },
 ];
 
@@ -49,7 +49,7 @@ export function SearchWindow({ setSearch }: Props) {
   const { isRtl } = useRtl();
 
   const [showTagDropDown, setShowTagDropDown] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<"Plan" | "Tag">("Plan");
+  const [selectedItem, setSelectedItem] = useState<'Plan' | 'Tag'>('Plan');
 
   const [searchParams, setSearchParams] = useState<SearchParam>({
     type: null,
@@ -64,7 +64,7 @@ export function SearchWindow({ setSearch }: Props) {
     setShowTagDropDown(true);
   };
 
-  const hideTagDropDownHandler = (item?: "Plan" | "Tag") => {
+  const hideTagDropDownHandler = (item?: 'Plan' | 'Tag') => {
     if (item) {
       setSelectedItem(item);
     }
@@ -95,7 +95,7 @@ export function SearchWindow({ setSearch }: Props) {
     <TouchableWithoutFeedback onPress={() => hideTagDropDownHandler(null)}>
       <View
         style={{
-          position: "absolute",
+          position: 'absolute',
           width,
           height,
           top: 0,
@@ -105,7 +105,7 @@ export function SearchWindow({ setSearch }: Props) {
       >
         <LinearGradient
           style={[ContainerStyles]}
-          colors={["#0D0D21", "#0D0D21"]}
+          colors={['#0D0D21', '#0D0D21']}
           start={{
             x: 0.7,
             y: 0,
@@ -114,7 +114,7 @@ export function SearchWindow({ setSearch }: Props) {
           <Flex
             width="100%"
             direction="row"
-            style={[SearchBoxWrapper, { backgroundColor: "transparent" }]}
+            style={[SearchBoxWrapper, { backgroundColor: 'transparent' }]}
             align="center"
           >
             <TouchableOpacity
@@ -130,7 +130,7 @@ export function SearchWindow({ setSearch }: Props) {
                 width={22}
                 height={16.88}
                 style={{
-                  transform: [{ rotate: isRtl ? "180deg" : "0deg" }],
+                  transform: [{ rotate: isRtl ? '180deg' : '0deg' }],
                 }}
               />
             </TouchableOpacity>
@@ -143,7 +143,7 @@ export function SearchWindow({ setSearch }: Props) {
                 width={16}
                 height={16}
                 style={{
-                  position: "absolute",
+                  position: 'absolute',
                   right: 16,
                   top: 40,
                   zIndex: 10,
@@ -154,7 +154,7 @@ export function SearchWindow({ setSearch }: Props) {
                 placeholderTextColor={theme.color.light.INPUT_PLACEHOLDER}
                 onSubmitEditing={submitHandler}
                 onChangeText={setNameToSearchHandler}
-                textAlign={isRtl ? "right" : "left"}
+                textAlign={isRtl ? 'right' : 'left'}
               />
             </View>
           </Flex>
@@ -168,13 +168,8 @@ export function SearchWindow({ setSearch }: Props) {
                     marginTop: 2,
                   }}
                 />
-                <TouchableOpacity
-                  activeOpacity={1}
-                  onPress={showTagDropDownHandler}
-                >
-                  <SearchTagDropDownTitle>
-                    {selectedItem}:
-                  </SearchTagDropDownTitle>
+                <TouchableOpacity activeOpacity={1} onPress={showTagDropDownHandler}>
+                  <SearchTagDropDownTitle>{selectedItem}:</SearchTagDropDownTitle>
                 </TouchableOpacity>
                 {showTagDropDown === true ? (
                   <DropDown>
@@ -185,9 +180,7 @@ export function SearchWindow({ setSearch }: Props) {
                         style={{ marginBottom: 16 }}
                         onPress={() => hideTagDropDownHandler(l.title)}
                       >
-                        <SearchTagDropDownTitle>
-                          {l.title}
-                        </SearchTagDropDownTitle>
+                        <SearchTagDropDownTitle>{l.title}</SearchTagDropDownTitle>
                       </TouchableOpacity>
                     ))}
                   </DropDown>
@@ -202,17 +195,11 @@ export function SearchWindow({ setSearch }: Props) {
                   placeholder={`Search in ${selectedItem.toLocaleLowerCase()}s`}
                   placeholderTextColor={theme.color.light.INPUT_PLACEHOLDER}
                   style={{ marginTop: 0 }}
-                  textAlign={isRtl ? "right" : "left"}
+                  textAlign={isRtl ? 'right' : 'left'}
                   onChangeText={(text) => {
-                    selectedItem === "Plan"
-                      ? setPlanHandler(text)
-                      : setTagHandler(text);
+                    selectedItem === 'Plan' ? setPlanHandler(text) : setTagHandler(text);
                   }}
-                  defaultValue={
-                    selectedItem === "Plan"
-                      ? searchParams.plan
-                      : searchParams.tag
-                  }
+                  defaultValue={selectedItem === 'Plan' ? searchParams.plan : searchParams.tag}
                   onSubmitEditing={submitHandler}
                 />
               </View>

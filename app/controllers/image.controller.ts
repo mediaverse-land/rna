@@ -1,4 +1,4 @@
-import * as ExpoCamera from "expo-camera";
+import * as ExpoCamera from 'expo-camera';
 
 const CAMERA_OPTIONS = { base64: true };
 
@@ -7,9 +7,8 @@ export class ImageController {
 
   async askForPermission() {
     await ExpoCamera.Camera.requestMicrophonePermissionsAsync();
-    const cameraStatus =
-      await ExpoCamera.Camera.requestCameraPermissionsAsync();
-    this._cameraPermission = cameraStatus.status === "granted" ? true : false;
+    const cameraStatus = await ExpoCamera.Camera.requestCameraPermissionsAsync();
+    this._cameraPermission = cameraStatus.status === 'granted' ? true : false;
 
     return cameraStatus;
   }

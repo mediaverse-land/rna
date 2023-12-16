@@ -1,7 +1,7 @@
-import { tokenStringResolver } from "../../../utils/token-string-resolver";
+import { tokenStringResolver } from '../../../utils/token-string-resolver';
 
 type Props = {
-  nextPageUrl:  string;
+  nextPageUrl: string;
   setIsInfinitLoading: (args: boolean) => void;
   tokenCtx: any;
   apiFunc: (one: any, sec: any) => void;
@@ -18,7 +18,7 @@ export const getNextPageDataHandler = async ({
   data,
   setData,
   _setNextPageUrl,
-}:Props) => {
+}: Props) => {
   const url = nextPageUrl;
   if (!url) {
     return;
@@ -41,15 +41,13 @@ export const getNextPageDataHandler = async ({
   if (response) {
     setData([...data, ...res.data.data]);
 
-    const next_page_url = response.data?.next_page_url?.split("/")[4];
+    const next_page_url = response.data?.next_page_url?.split('/')[4];
     if (!next_page_url) {
       setIsInfinitLoading(false);
       _setNextPageUrl(null);
       return;
     }
-    next_page_url &&
-      next_page_url !== nextPageUrl &&
-      _setNextPageUrl(`/${next_page_url}`);
+    next_page_url && next_page_url !== nextPageUrl && _setNextPageUrl(`/${next_page_url}`);
   }
   setIsInfinitLoading(false);
 };

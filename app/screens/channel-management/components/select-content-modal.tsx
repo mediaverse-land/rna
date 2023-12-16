@@ -1,34 +1,34 @@
-import { memo, useCallback, useContext, useEffect, useState } from "react";
-import { Box } from "../../../components/box";
-import { ActivityIndicator } from "react-native";
-import { windowSize } from "../../../utils/window-size";
-import { BottomSheetFlatList } from "@gorhom/bottom-sheet";
-import { useGetAssetListQuery } from "../../../services/view-all.service";
-import { tokenContext } from "../../../context/token";
-import { retriveToken } from "../../../utils/retrive-token";
-import { Button } from "../../../components/button";
-import { ContentListItem } from "./content-list-item";
-import { ActiveNav, AssetType } from "../types";
-import { Asset } from "../../../types/asset";
-import { Nav } from "../../../components/nav";
-import { SelectContentAssetTypeNav } from "./content-asset-type-nav";
+import { memo, useCallback, useContext, useEffect, useState } from 'react';
+import { Box } from '../../../components/box';
+import { ActivityIndicator } from 'react-native';
+import { windowSize } from '../../../utils/window-size';
+import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import { useGetAssetListQuery } from '../../../services/view-all.service';
+import { tokenContext } from '../../../context/token';
+import { retriveToken } from '../../../utils/retrive-token';
+import { Button } from '../../../components/button';
+import { ContentListItem } from './content-list-item';
+import { ActiveNav, AssetType } from '../types';
+import { Asset } from '../../../types/asset';
+import { Nav } from '../../../components/nav';
+import { SelectContentAssetTypeNav } from './content-asset-type-nav';
 
 const { width, height } = windowSize();
 
 const URLS: Record<AssetType, Record<ActiveNav, string>> = {
   Ownership: {
-    All: "/profile/assets",
-    Images: "/profile/images?page=",
-    Videos: "/profile/videos?page=",
-    Sounds: "/profile/audios?page=",
-    Texts: "/profile/texts?page=",
+    All: '/profile/assets',
+    Images: '/profile/images?page=',
+    Videos: '/profile/videos?page=',
+    Sounds: '/profile/audios?page=',
+    Texts: '/profile/texts?page=',
   },
   Subscribe: {
-    All: "/profile/subscriptions?page=",
-    Images: "/profile/subscriptions/images?page=",
-    Videos: "/profile/subscriptions/videos?page=",
-    Sounds: "/profile/subscriptions/audios?page=",
-    Texts: "/profile/subscriptions/texts?page=",
+    All: '/profile/subscriptions?page=',
+    Images: '/profile/subscriptions/images?page=',
+    Videos: '/profile/subscriptions/videos?page=',
+    Sounds: '/profile/subscriptions/audios?page=',
+    Texts: '/profile/subscriptions/texts?page=',
   },
 };
 
@@ -39,8 +39,8 @@ const SelectContentModalMemo = ({
   closeModalHandler: () => void;
   addAssetHandler: (id: number) => void;
 }) => {
-  const [assetType, setAssetType] = useState<AssetType>("Subscribe");
-  const [activeNav, setActiveNav] = useState<ActiveNav>("All");
+  const [assetType, setAssetType] = useState<AssetType>('Subscribe');
+  const [activeNav, setActiveNav] = useState<ActiveNav>('All');
 
   const [selectedItemId, setSelectedItemId] = useState<number>(null);
 
@@ -54,7 +54,6 @@ const SelectContentModalMemo = ({
   useEffect(() => {
     getToken();
   }, []);
-
 
   const getToken = async () => {
     const formattedToken = await retriveToken(tokenCtx);
@@ -73,7 +72,7 @@ const SelectContentModalMemo = ({
         />
       );
     },
-    [selectedItemId]
+    [selectedItemId],
   );
 
   const key = useCallback(() => Math.random().toString(), []);
@@ -87,7 +86,7 @@ const SelectContentModalMemo = ({
     },
     {
       skip: token ? false : true,
-    }
+    },
   );
 
   const current_page = data?.current_page;
@@ -95,9 +94,8 @@ const SelectContentModalMemo = ({
 
   useEffect(() => {
     setAssetsList([]);
-    setPage(1)
-  } ,[currentUrl])
-
+    setPage(1);
+  }, [currentUrl]);
 
   useEffect(() => {
     if (data?.data?.length) {
@@ -138,7 +136,7 @@ const SelectContentModalMemo = ({
         }}
         columnWrapperStyle={{
           width: width - 48,
-          position: "relative",
+          position: 'relative',
           left: 24,
           gap: 16,
         }}
@@ -152,21 +150,14 @@ const SelectContentModalMemo = ({
               assetType={assetType}
               closeSelectContentModalHandler={closeSelectContentModalHandler}
             />
-            <Nav
-              setActiveNav={setActiveNav}
-              activeNav={activeNav}
-            />
+            <Nav setActiveNav={setActiveNav} activeNav={activeNav} />
           </>
         }
         ListFooterComponent={
           <>
             {hasMoreItems && (!isLoading || !isFetching) ? (
               <Box width={width - 48} position="relative" left={24}>
-                <Button
-                  text="Load more"
-                  onpressHandler={nextPageHandler}
-                  varient="dark"
-                />
+                <Button text="Load more" onpressHandler={nextPageHandler} varient="dark" />
               </Box>
             ) : null}
             <Loader isLoading={isLoading || isFetching} />
@@ -174,14 +165,7 @@ const SelectContentModalMemo = ({
           </>
         }
       />
-      <Box
-        height={50}
-        position="absolute"
-        left={24}
-        width={width - 42}
-        bottom={32}
-        zIndex={100000}
-      >
+      <Box height={50} position="absolute" left={24} width={width - 42} bottom={32} zIndex={100000}>
         <Button
           varient="primary"
           text="Add"

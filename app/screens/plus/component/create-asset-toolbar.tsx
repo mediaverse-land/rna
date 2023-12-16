@@ -1,10 +1,10 @@
-import { FC } from "react";
-import { TouchableOpacity } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { Box } from "../../../components/box";
-import { ICON_PUBLISH } from "../../../constaints/icons";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
+import { FC } from 'react';
+import { TouchableOpacity } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Box } from '../../../components/box';
+import { ICON_PUBLISH } from '../../../constaints/icons';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
 
 type Props = {
   publishPressHandler: () => void;
@@ -44,18 +44,10 @@ export const CreateAssetToolbar: FC<Props> = ({ publishPressHandler }) => {
           </Box>
         </LinearGradient>
         <Box marginTop={4}>
-          <Text
-            color={theme.color.light.ACTIVE_TEXT}
-            fontSize={14}
-            fontWeight={400}
-          >
+          <Text color={theme.color.light.ACTIVE_TEXT} fontSize={14} fontWeight={400}>
             Save &
           </Text>
-          <Text
-            color={theme.color.light.ACTIVE_TEXT}
-            fontSize={14}
-            fontWeight={400}
-          >
+          <Text color={theme.color.light.ACTIVE_TEXT} fontSize={14} fontWeight={400}>
             Publish
           </Text>
         </Box>

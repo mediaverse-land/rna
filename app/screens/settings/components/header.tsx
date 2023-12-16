@@ -1,17 +1,17 @@
-import { Image, TouchableOpacity } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { Flex } from "../../../styles/grid";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
-import { ICON_ARROW_LEFT_SVG } from "../../../constaints/icons";
-import { useNavigation } from "@react-navigation/native";
-import { useRtl } from "../../../hooks/use-rtl";
-import { useContext } from "react";
-import { userContext } from "../../../context/user";
-import { User } from "../../../types/user";
-import { LoadingSpinner } from "../../../components/loader-spinner";
-import { PROFILE_IMAGE } from "../../../constaints/images";
+import { Image, TouchableOpacity } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Flex } from '../../../styles/grid';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
+import { ICON_ARROW_LEFT_SVG } from '../../../constaints/icons';
+import { useNavigation } from '@react-navigation/native';
+import { useRtl } from '../../../hooks/use-rtl';
+import { useContext } from 'react';
+import { userContext } from '../../../context/user';
+import { User } from '../../../types/user';
+import { LoadingSpinner } from '../../../components/loader-spinner';
+import { PROFILE_IMAGE } from '../../../constaints/images';
 
 export function SettingsScreenHeader() {
   const { isRtl } = useRtl();
@@ -38,11 +38,11 @@ export function SettingsScreenHeader() {
   return (
     <>
       <LinearGradient
-        colors={["#204cb4", "#b3c4ea"]}
+        colors={['#204cb4', '#b3c4ea']}
         start={{ x: 0.6, y: 0.2 }}
         end={{ x: 0.1, y: 0.2 }}
         style={{
-          width: "100%",
+          width: '100%',
           height: 52,
         }}
       />
@@ -97,7 +97,7 @@ export function SettingsScreenHeader() {
             style={{
               width: 122,
               height: 16.88,
-              transform: [{ rotate: isRtl ? "180deg" : "0deg" }],
+              transform: [{ rotate: isRtl ? '180deg' : '0deg' }],
             }}
           />
         </TouchableOpacity>

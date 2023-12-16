@@ -1,45 +1,45 @@
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { AppsPageAllScreen } from "./all";
-import { Box } from "../../components/box";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { AppsPageAllScreen } from './all';
+import { Box } from '../../components/box';
 
 const Tab = createMaterialTopTabNavigator();
 
 const routes = [
   {
     id: 1,
-    title: "All",
+    title: 'All',
     component: AppsPageAllScreen,
-    name: "all",
+    name: 'all',
   },
   {
     id: 3,
-    title: "image",
+    title: 'image',
     component: AppsPageAllScreen,
-    name: "image",
+    name: 'image',
   },
   {
     id: 4,
-    title: "video",
+    title: 'video',
     component: AppsPageAllScreen,
-    name: "video",
+    name: 'video',
   },
   {
     id: 5,
-    title: "sound",
+    title: 'sound',
     component: AppsPageAllScreen,
-    name: "sound",
+    name: 'sound',
   },
   {
     id: 6,
-    title: "text",
+    title: 'text',
     component: AppsPageAllScreen,
-    name: "text",
+    name: 'text',
   },
 ];
 
 export function Navigator() {
   return (
-    <Box width={"100%"} flex={1}>
+    <Box width={'100%'} flex={1}>
       {/* <Tab.Navigator tabBar={(props) => <TopTabBar {...props} />}> */}
       <Tab.Navigator
         tabBar={() => <></>}

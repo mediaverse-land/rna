@@ -1,6 +1,6 @@
-import axios from "axios";
-import { Toaster } from "../../utils/toaster";
-import { Logger } from "../../utils/logger";
+import axios from 'axios';
+import { Toaster } from '../../utils/toaster';
+import { Logger } from '../../utils/logger';
 
 const _toast = new Toaster();
 const _logger = new Logger();
@@ -12,40 +12,31 @@ type Args = {
   setIsLoading: (args: boolean) => void;
 };
 
-export const uploadHandler = async ({
-  token,
-  asset_id,
-  input,
-  setIsLoading,
-}: Args) => {
+export const uploadHandler = async ({ token, asset_id, input, setIsLoading }: Args) => {
   try {
     const formData = new FormData();
 
-    formData.append("file", input.base64);
-    formData.append("asset", asset_id.toString());
+    formData.append('file', input.base64);
+    formData.append('asset', asset_id.toString());
 
     const config = {
       headers: {
-        "Content-type": "multipart/form-data",
+        'Content-type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
-        "X-App": "_Android",
+        'X-App': '_Android',
       },
     };
 
-    const result__ = await axios.post(
-      `${process.env.EXPO_APPBASE_URL}/files`,
-      formData,
-      config
-    );
+    const result__ = await axios.post(`${process.env.EXPO_APPBASE_URL}/files`, formData, config);
 
     _logger.log(result__);
-    _toast.show("Item created successfully");
+    _toast.show('Item created successfully');
     setIsLoading(false);
-    return "Ok";
+    return 'Ok';
   } catch (err) {
     _logger.logErro(JSON.stringify(err));
-    _toast.show("Item creation failed");
+    _toast.show('Item creation failed');
     setIsLoading(false);
-    return "Err";
+    return 'Err';
   }
 };
