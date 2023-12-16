@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { Title } from "../../../../components/title";
 import { Box } from "../../../../components/box";
 import { ICON_TOP_TABBAR_TEXT_ACTIVE_SVG } from "../../../../constaints/icons";

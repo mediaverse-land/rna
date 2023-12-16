@@ -1,16 +1,14 @@
+/* eslint-disable react/display-name */
 import { useState, useEffect, forwardRef, useImperativeHandle } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import * as ExpoCamera from "expo-camera";
 import { ImageController } from "../../../../controllers/image.controller";
 
 const _imageController = new ImageController();
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 const BACK_CAMERA = ExpoCamera.Camera.Constants.Type.back
-const VIDEO_TYPE = 'VIDEO_TYPE'
-const PICTURE_TYPE = 'PICTURE_TYPE';
-
-type AssetType = 'VIDEO_TYPE' | 'PICTURE_TYPE'
 
 
 export const Camera = forwardRef((props, ref: any) => {

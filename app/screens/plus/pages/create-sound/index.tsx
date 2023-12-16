@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Button, ToastAndroid } from "react-native";
+import { ToastAndroid } from "react-native";
 import { Box } from "../../../../components/box";
 import { UseNavigationType } from "../../../../types/use-navigation";
 import { BottomTabBar } from "../../component/bottom-tab-bar";
@@ -16,7 +16,6 @@ import { CREATE_SOUND } from "../../constaints";
 import { RecordingController } from "../../../../controllers/recording.controller";
 import { FileSystemController } from "../../../../controllers/file-system.controller";
 import axios from "axios";
-import { ApiHandler } from "../../../../utils/api-handler";
 import { SubmitForm } from "./submit-form";
 import { tokenContext } from "../../../../context/token";
 import { userContext } from "../../../../context/user";
@@ -39,7 +38,6 @@ const PLACEHOLDER_TEXT_LIE_HEIGHT = 16;
 const _recordingController = new RecordingController();
 const _fileSystemController = new FileSystemController();
 
-const _api = new ApiHandler();
 const _toast = new Toaster();
 const _logger = new Logger();
 
@@ -47,7 +45,7 @@ export const CreateSoundScreen = () => {
   const [recording, setRecording] = useState<Audio.Recording>(null);
   const [lastRecording, setLastRecording] = useState<Audio.Recording>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [createNewAsset, response] = useCreateSingleSoundMutation();
+  const [createNewAsset] = useCreateSingleSoundMutation();
 
   const navigation = useNavigation<UseNavigationType>();
   const isFocused = useIsFocused();
@@ -61,11 +59,6 @@ export const CreateSoundScreen = () => {
     }
   }, [recording]);
 
-  useEffect(() => {
-    const setup = async () => {};
-    setup();
-  }, [recording?.getStatusAsync()]);
-  _logger.log(recording?.getStatusAsync());
 
   useEffect(() => {
     if (!isFocused) {
@@ -81,12 +74,12 @@ export const CreateSoundScreen = () => {
     setIsLoading: (args: boolean) => void,
     id: number
   ) => {
-    let data = new FormData();
+    const data = new FormData();
 
     data.append("asset", asset_id.toString());
     data.append("file", f);
 
-    let config = {
+    const config = {
       method: "post",
       maxBodyLength: Infinity,
       url: `${process.env.EXPO_APPBASE_URL}/files`,
@@ -113,7 +106,7 @@ export const CreateSoundScreen = () => {
 
     axios
       .request(config)
-      .then((response) => {
+      .then(() => {
         ToastAndroid.show("Item created successfully", 3000);
         setIsLoading(false);
         navigation?.navigate(SINGLE_SOUND_SCREEN, {
@@ -206,7 +199,7 @@ export const CreateSoundScreen = () => {
       },
     };
 
-    let newBody: any = {
+    const newBody: any = {
       ...options.body,
     };
 
@@ -285,6 +278,7 @@ export const CreateSoundScreen = () => {
       </Box>
       {isFocused ? (
         <BottomTabBar
+        isLoading={isLoading}
           currentPage={CREATE_SOUND}
           navigation={navigation}
           submitButtonHandler={_submitButtonHandler}

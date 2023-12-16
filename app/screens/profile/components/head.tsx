@@ -16,7 +16,6 @@ import { userContext } from "../../../context/user";
 import { PROFILE_IMAGE } from "../../../constaints/images";
 import { tokenContext } from "../../../context/token";
 import { tokenStringResolver } from "../../../utils/token-string-resolver";
-import { ProfileStatic } from "../../../types/profile-static";
 import { StorageService } from "../../../services/storage.service";
 import { HAS_USER_SEEN_PROFILE_HEADER_TOUR } from "../../../constaints/consts";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,20 +25,9 @@ import {
   deActivrDisableOnIntractions,
   seeProfileHeaderTour,
 } from "../../../slices/tour.slice";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { setPage } from "../../../slices/profile.slicer";
 import { useGetUserProfileQuery } from "../../../services/profile.service";
-import { Logger } from "../../../utils/logger";
 
-const initialState: ProfileStatic = {
-  assets: null,
-  audios: null,
-  images: null,
-  sales_number: null,
-  sales_volume: null,
-  texts: null,
-  videos: null,
-};
 
 const { width: windowWidth, height: windowHeight } = windowSize();
 const usernameBoxWidth = Math.floor(windowWidth) - 184;
@@ -52,28 +40,6 @@ const SETTINGS_TOUR_GUIDE =
 const CoachmarkWrapper: any = Coachmark;
 
 const _storageService = new StorageService();
-const _logger = new Logger();
-
-const SUBSCRIPTION_OWNER_TAB_STYLES = {
-  fontSize: 14,
-  fontWeight: 14,
-  lineHeight: 16,
-  activeColor: "#D9D9FF",
-  deActiveColor: "#666680",
-};
-
-const subscriptionOwnerTabItems = [
-  {
-    id: 1,
-    title: "Subscribe",
-    path: "ProfileSubscribeScreen",
-  },
-  {
-    id: 2,
-    title: "Ownership",
-    path: "ProfileOwnershipScreen",
-  },
-];
 
 export function ProfileScreenHead() {
   const navigation = useNavigation<UseNavigationType>();
@@ -83,9 +49,6 @@ export function ProfileScreenHead() {
 
   const [allowIntraction, setAllowIntraction] = useState(false);
   const [token, setToken] = useState("");
-
-  const [profileStaticsData, setProfileStaticsData] =
-    useState<ProfileStatic>(initialState);
 
   const { DISABLE_INTRACTION } = useSelector(
     (store: RootState) => store.tourSlice
@@ -114,7 +77,7 @@ export function ProfileScreenHead() {
     );
   }
 
-  const { data, isLoading, isError, isFetching, error } =
+  const { data } =
     useGetUserProfileQuery(
       { token }
     );

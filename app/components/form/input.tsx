@@ -48,7 +48,6 @@ export function Input({
   onChangeText,
   value,
   isTextArea = false,
-  inputMode,
   showBorder = true,
   varient = "bordered-light",
   defaultValue,

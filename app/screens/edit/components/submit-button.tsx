@@ -1,8 +1,5 @@
-import { useState } from "react";
 import { UseNavigationType } from "../../../types/use-navigation";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../store";
+import {  useNavigation } from "@react-navigation/native";
 import { Box } from "../../../components/box";
 import { Image, TouchableOpacity } from "react-native";
 import {
@@ -11,7 +8,6 @@ import {
 } from "../../../constaints/images";
 import { Text } from "../../../components/text";
 import { theme } from "../../../constaints/theme";
-import { ICON_EYE_GRAY, ICON_SHRE_GRAY } from "../../../constaints/icons";
 import { LoadingSpinner } from "../../../components/loader-spinner";
 
 type Props = {
@@ -19,8 +15,6 @@ type Props = {
   onSave: () => void;
 };
 
-const TOUR_GUIDE =
-  "After choosing the content you want, you have to pay for it depending on its price";
 
 export function EditSubmitButton({
   //   price,
@@ -37,7 +31,6 @@ Props) {
   }
 
   const navigation = useNavigation<UseNavigationType>();
-  const isFocused = useIsFocused();
 
   //   const paymentScreenNavigationHandler = async() => {
   //     onSave()

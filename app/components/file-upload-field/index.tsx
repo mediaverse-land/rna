@@ -6,7 +6,6 @@ import { ICON_ADD_IMAGE } from "../../constaints/icons";
 import { Text } from "../text";
 import { DocumentController } from "../../controllers/document.controller";
 import { FileSystemController } from "../../controllers/file-system.controller";
-import axios from "axios";
 import * as Progress from "react-native-progress";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store";
@@ -26,7 +25,7 @@ const FileUploadFieldMemo = ({
 }: {
   progressBarWidth: number;
 }) => {
-  const [progress, setProgress] = useState<number>(0);
+  const [progress] = useState<number>(0);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -75,6 +74,7 @@ const FileUploadFieldMemo = ({
           dispatch(setThumbnailCover(content));
         }
       } else {
+        //
       }
     } catch (err) {
       console.log(err);

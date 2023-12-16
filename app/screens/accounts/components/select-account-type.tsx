@@ -49,6 +49,7 @@ const _toaster = new Toaster();
 const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
   const [snapPoints, setSnapPoints] = useState(["30%"]);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [request, response, promptAsync]: any = Google.useAuthRequest({
     androidClientId: enviroments.REACT_APP_ANDROID_CLIENT_ID,
     iosClientId: enviroments.REACT_APP_IOS_CLIENT_ID,
@@ -136,20 +137,20 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
     }
   };
 
-  const getGoogleTokens = ({ authentication }: any) => {
-    const accessToken = authentication?.accessToken;
-    const refreshToken = authentication?.refreshToken;
+  // const getGoogleTokens = ({ authentication }: any) => {
+  //   const accessToken = authentication?.accessToken;
+  //   const refreshToken = authentication?.refreshToken;
 
-    // if (!accessToken) {
-    //   _logger.log(NO_ACCESS_TOKEN_MSG);
-    //   return NO_ACCESS_TOKEN_MSG;
-    // }
+  //   // if (!accessToken) {
+  //   //   _logger.log(NO_ACCESS_TOKEN_MSG);
+  //   //   return NO_ACCESS_TOKEN_MSG;
+  //   // }
 
-    return {
-      accessToken: accessToken || "",
-      refreshToken,
-    };
-  };
+  //   return {
+  //     accessToken: accessToken || "",
+  //     refreshToken,
+  //   };
+  // };
 
   const createStreamExternalAccountEndpoint = async ({
     title,
@@ -311,9 +312,9 @@ const BottomSheet: FC<BottomSheetProps> = ({
     dispatch({ type, payload: value });
   };
 
-  const cleanUp = () => {
-    dispatch({ type: formStateUpdateTypes.CLEAN_STATE });
-  };
+  // const cleanUp = () => {
+  //   dispatch({ type: formStateUpdateTypes.CLEAN_STATE });
+  // };
 
   return (
     <Box width="100%" height={170} paddingLeft={24} paddingRight={24}>

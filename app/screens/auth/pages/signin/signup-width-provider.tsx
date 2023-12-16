@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { FC } from "react";
-import { TouchableOpacity } from "react-native";
 import * as Google from "expo-auth-session/providers/google";
 import { AuthProviderButton } from "../../components/auth-provider-button";
 import { providerButtons } from "../../mock-data";
@@ -28,6 +27,7 @@ export const SignUpWithProvider: FC<Props> = ({
   setSIgnupWithUsernameHandler,
   navigateToFillData,
 }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId: enviroments.REACT_APP_ANDROID_CLIENT_ID,
     iosClientId: enviroments.REACT_APP_IOS_CLIENT_ID,
@@ -49,7 +49,7 @@ export const SignUpWithProvider: FC<Props> = ({
   }, [response]);
 
   const sendResponse = async (ress: any) => {
-    const { isError, isSuccess, errorRes, res } = await googleAuthApiHandler(
+    const { isError, errorRes, res } = await googleAuthApiHandler(
       ress.accessToken
     );
 

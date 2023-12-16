@@ -3,6 +3,7 @@ import { enviroments } from "../../enviroments/enviroments";
 
 
 export const useGoogleSignin = () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [request, response, promptAsync]: any = Google.useAuthRequest({
       androidClientId: enviroments.REACT_APP_ANDROID_CLIENT_ID,
       iosClientId: enviroments.REACT_APP_IOS_CLIENT_ID,

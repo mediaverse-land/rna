@@ -4,7 +4,6 @@ import { ButtonComponents } from "./style";
 import { Box } from "../box";
 import { Text } from "../text";
 import { theme } from "../../constaints/theme";
-import { LoadingSpinner } from "../loader-spinner";
 import { LinearGradient } from "expo-linear-gradient";
 
 type Varient = "muted" | "primary" | "flat" | "dark";

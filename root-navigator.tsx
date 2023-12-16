@@ -1,5 +1,5 @@
 import { FC, useContext, useEffect, useState } from "react";
-import { SafeAreaView } from "react-native";
+// import { SafeAreaView } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { SearchPage } from "./app/screens/search";
@@ -35,14 +35,14 @@ import {
   WALLET_STACK,
 } from "./app/constaints/consts";
 import AccountsScreen from "./app/screens/accounts";
-import { userContext } from "./app/context/user";
-import axios from "axios";
-import { Toaster } from "./app/utils/toaster";
+// import { userContext } from "./app/context/user";
+// import axios from "axios";
+// import { Toaster } from "./app/utils/toaster";
 // import { PushNotificationPermissionAlert } from "./app/components/push-notification-permission-alert";
 import { useSetFirebasePushNotificationAccountMutation } from "./app/services/auth.service";
 // import PushNotificationWrapper from "./app/components/push-notification-wrapper";
 import { tokenStringResolver } from "./app/utils/token-string-resolver";
-import { PushNotificationPermissionAlert } from "./app/components/push-notification-permission-alert";
+// import { PushNotificationPermissionAlert } from "./app/components/push-notification-permission-alert";
 import { CustomSafeArea } from "./app/components/custom-safe-area";
 
 type Route = { id: number; name: string; component: FC | any };
@@ -125,32 +125,32 @@ const appRoutes: Route[] = [
   },
 ];
 
-const deliverNotificationTokenToApi = async (
-  token: string,
-  userToken: string
-) => {
-  try {
-    const result = await axios.post(
-      `${process.env.EXPO_APPBASE_URL}/push-notifications/firebase-tokens`,
-      { token },
-      {
-        headers: {
-          Authorization: `Bearer ${userToken}`,
-          "X-App": "_Android",
-        },
-      }
-    );
-    // console.log(result);
-  } catch (err: any) {
-    // console.log(err?.response);
-  }
-};
+// const deliverNotificationTokenToApi = async (
+//   token: string,
+//   userToken: string
+// ) => {
+//   try {
+//     await axios.post(
+//       `${process.env.EXPO_APPBASE_URL}/push-notifications/firebase-tokens`,
+//       { token },
+//       {
+//         headers: {
+//           Authorization: `Bearer ${userToken}`,
+//           "X-App": "_Android",
+//         },
+//       }
+//     );
+//     // console.log(result);
+//   } catch (err: any) {
+//     // console.log(err?.response);
+//   }
+// };
 
 type Props = {
   firebaseToken: string;
 };
 
-const _toaster = new Toaster();
+// const _toaster = new Toaster();
 
 export function RootNavigator({ firebaseToken }: Props) {
   const [isUserAuthenticated, setIsUserAuthenticated] = useState<
@@ -164,7 +164,7 @@ export function RootNavigator({ firebaseToken }: Props) {
   const [_setAccountHandler] = useSetFirebasePushNotificationAccountMutation();
 
   const tokenCtx = useContext(tokenContext);
-  const userCtx: any = useContext(userContext);
+  // const userCtx: any = useContext(userContext);
   const getToken: any = tokenCtx.getToken();
 
   useEffect(() => {
@@ -184,7 +184,7 @@ export function RootNavigator({ firebaseToken }: Props) {
 
     const requestBody = { token: firebaseToken };
     
-    const response = await _setAccountHandler({
+     await _setAccountHandler({
       body: requestBody,
       token: _token,
     });
@@ -205,24 +205,24 @@ export function RootNavigator({ firebaseToken }: Props) {
     } else setIsUserAuthenticated(false);
   };
 
-  const saveDeviceFirebasePushNotificationToken = async () => {
-    if (!firebaseToken) {
-      _toaster.show("NO FIREBASE TOKEN FOR THIS DEVICE");
-    }
+  // const saveDeviceFirebasePushNotificationToken = async () => {
+  //   if (!firebaseToken) {
+  //     _toaster.show("NO FIREBASE TOKEN FOR THIS DEVICE");
+  //   }
 
-    const userData = await userCtx.getUser();
-    const tk: any = await tokenCtx.getToken();
-    if (!userData || !tk) {
-      return;
-    }
+  //   const userData = await userCtx.getUser();
+  //   const tk: any = await tokenCtx.getToken();
+  //   if (!userData || !tk) {
+  //     return;
+  //   }
 
-    const { id } = userData;
-    const token: string = tk;
+  //   const { id } = userData;
+  //   const token: string = tk;
 
-    await deliverNotificationTokenToApi(firebaseToken, token);
-  };
+  //   await deliverNotificationTokenToApi(firebaseToken, token);
+  // };
 
-  const isAuth = isUserAuthenticated === true;
+  // const isAuth = isUserAuthenticated === true;
 
   return (
     <>

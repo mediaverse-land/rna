@@ -64,6 +64,7 @@ const ExternalAccount: FC<Props> = ({
     }
 
     if (data?.data) {
+      // eslint-disable-next-line no-unsafe-optional-chaining
       setDataList((prev) => [...prev, ...data?.data]);
     }
   }, [data?.data]);

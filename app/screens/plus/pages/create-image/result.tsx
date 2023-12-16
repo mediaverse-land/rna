@@ -2,8 +2,6 @@ import { Image, TouchableOpacity } from "react-native";
 import { Box } from "../../../../components/box";
 import { ScreenGradient } from "../../../../components/screen-gradient";
 import { VirtualizedList } from "../../../../components/virtualized-list";
-import { PaddingContainer } from "../../../../styles/grid";
-import { windowSize } from "../../../../utils/window-size";
 import {
   ICON_CREATE_IMAGE_RESULT_BG,
   ICON_PUBLISH,
@@ -13,7 +11,6 @@ import {
 import { Spacer } from "../../../../components/spacer";
 import { Text } from "../../../../components/text";
 
-const WINDW_HEIGHT = windowSize().height;
 
 const RESULT_OPTIONS = [
   {

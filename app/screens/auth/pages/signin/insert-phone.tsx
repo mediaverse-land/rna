@@ -47,7 +47,7 @@ export const InsertPhone = ({
         }
     }, []);
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data: any) => {
         setIsLoading(true);
 
         const { phone_number } = data;
@@ -102,7 +102,7 @@ export const InsertPhone = ({
                                     <ICON_FRANCE_FLAG style={styles.flagIcon} />
                                 }
                                 onBlur={onBlur}
-                                onChangeText={(value) => {
+                                onChangeText={(value: string) => {
                                     onChange(value || '');
                                 }}
                                 value={value}

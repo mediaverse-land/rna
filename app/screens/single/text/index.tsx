@@ -41,12 +41,9 @@ import {
 } from "../../../constaints/icons";
 import {
   TEXT_THUMBNAIL_PLACEHOLDER,
-  __TEXT_THUMBNAIL_PLACEHOLDER_PNG,
 } from "../../../constaints/images";
 import {
-  APP_STACK,
   EDIT_SCREEN,
-  REDIRECTED_FROM_CREATE_ASSET,
 } from "../../../constaints/consts";
 import { PaddingContainer } from "../../../styles/grid";
 import { Toolbar } from "../components/toolbar";
@@ -174,7 +171,7 @@ export function SingleTextScreen({
   const getSingleData = async (token: string) => {
     const shouldSearchByAssetId = route.params?.saech__asset_id ? true : false;
 
-    const { isError, res, errorRes } = await getTextDetailApiHandler(
+    const { isError, res } = await getTextDetailApiHandler(
       token,
       shouldSearchByAssetId,
       route.params?.saech__asset_id ? route.params?.saech__asset_id : id
@@ -233,7 +230,7 @@ export function SingleTextScreen({
       language: selectedLanguage,
     };
 
-    const { isError, isSuccess, errorRes, res } = await translateTextApiHandler(
+    const { isError, isSuccess} = await translateTextApiHandler(
       token,
       data?.id,
       body
@@ -297,7 +294,7 @@ export function SingleTextScreen({
       size: "512x512",
     };
 
-    const { isError, isSuccess, errorRes, res } =
+    const { isError, isSuccess } =
       await convertTextToImageHandler(token, data?.id, body);
 
     if (isSuccess) {
@@ -321,7 +318,7 @@ export function SingleTextScreen({
       language: "en",
     };
 
-    const { isError, isSuccess, errorRes, res } =
+    const { isError, isSuccess } =
       await convertTextToAudioHandler(token, data?.id, body);
 
 

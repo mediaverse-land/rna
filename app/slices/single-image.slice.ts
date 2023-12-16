@@ -1,4 +1,4 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction,  createSlice } from "@reduxjs/toolkit";
 
 export type SingleImageInitialState = {
   latest_image_uri: string;

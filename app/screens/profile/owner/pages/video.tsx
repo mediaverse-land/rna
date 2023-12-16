@@ -19,7 +19,6 @@ import { Spacer } from "../../../../components/spacer";
 import { Asset } from "../../../../types/asset";
 import { RootState } from "../../../../store";
 import { useSelector } from "react-redux";
-import { useGetUserProfileQuery } from "../../../../services/profile.service";
 
 const SUBSCRIBE_BASE_URL = "/subscriptions/videos?page=";
 const OWNERSHIP_BASE_URL = "/profile/videos?page=";
@@ -33,7 +32,7 @@ export const ProfileScreenVideoPage = () => {
   const [totalAssetsCount, setTotalAssetsCount] = useState<number>(null);
   const [data, setData] = useState<Asset[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [token, setToken] = useState("");
+  // const [token, setToken] = useState("");
 
   const { ACTIVE_PAGE }: { ACTIVE_PAGE: "subscribe" | "ownership" } =
     useSelector((store: RootState) => store.profileSlice);
@@ -55,7 +54,7 @@ export const ProfileScreenVideoPage = () => {
     const setTokenHandler = async () => {
       const _token = await retriveToken(tokenCtx);
       if (_token) {
-        setToken(_token);
+        // setToken(_token);
       }
     };
 
@@ -126,6 +125,7 @@ export const ProfileScreenVideoPage = () => {
       stopLoad();
       return;
     } else {
+      // eslint-disable-next-line no-unsafe-optional-chaining
       setData([...data, ...res.data?.data]);
       stopLoad();
     }
@@ -178,7 +178,7 @@ export const ProfileScreenVideoPage = () => {
 
       const assetType = ASSET_TYPES[type];
 
-      const { isError, isSuccess, res, errorRes } = await removeAssetApiHandler(
+       await removeAssetApiHandler(
         token,
         assetType,
         id

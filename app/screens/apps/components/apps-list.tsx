@@ -1,6 +1,5 @@
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
+import { Image,  TouchableOpacity } from "react-native";
 import { Box } from "../../../components/box";
-import { Flex } from "../../../styles/grid";
 import { Text } from "../../../components/text";
 import { theme } from "../../../constaints/theme";
 import { SIGNINS_LIST_ITEM_GRADIET } from "../../../constaints/images";
@@ -72,10 +71,3 @@ export function AppItem({
   );
 }
 
-const styles = StyleSheet.create({
-  itemIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 8,
-  },
-});

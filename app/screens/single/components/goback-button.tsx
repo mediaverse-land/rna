@@ -2,7 +2,6 @@ import { FC, useState } from "react";
 import { SingleVideoPageComponents } from "../style";
 import {
   ICON_ARROW_LEFT_WHITE,
-  ICON_MENU_ACTIVE,
 } from "../../../constaints/icons";
 import { TouchableOpacity } from "react-native";
 import { useRtl } from "../../../hooks/use-rtl";
@@ -18,7 +17,7 @@ type Props = {
 };
 const { BackButton } = SingleVideoPageComponents;
 
-const { width: windowWidth, height: windowHeight } = windowSize();
+const {  height: windowHeight } = windowSize();
 
 const menuList: { id: number; title: string }[] = [
   {
@@ -46,7 +45,6 @@ const menuList: { id: number; title: string }[] = [
 export const GoBackButton: FC<Props> = ({
   goBackHandler,
   hasBackground,
-  isOwner,
 }) => {
   const { isRtl } = useRtl();
 
@@ -56,9 +54,6 @@ export const GoBackButton: FC<Props> = ({
     setIsMenuOpen(false);
   };
 
-  const openMenuHandler = () => {
-    setIsMenuOpen(true);
-  };
 
   const renderGoBackButton = !hasBackground ? (
     <TouchableOpacity

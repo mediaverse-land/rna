@@ -10,9 +10,7 @@ import { Box } from "../../../components/box";
 import { AppDispatch, RootState } from "../../../store";
 import {
   closeForkabilityBottomSheet,
-  closeSelectPlanBottomSheet,
   setForkability,
-  setSelectedPlan,
 } from "../../../slices/plus.slice";
 import { Text } from "../../../components/text";
 

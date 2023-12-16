@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { StyleSheet, View, Button, Image } from "react-native";
+import { StyleSheet, View,  Image } from "react-native";
 import BottomSheet, { BottomSheetFlatList } from "@gorhom/bottom-sheet";
 import { Box } from "../../../../components/box";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -15,7 +15,6 @@ import { windowSize } from "../../../../utils/window-size";
 import { Text } from "../../../../components/text";
 import { ICON_ARROW_DOWN_SVG } from "../../../../constaints/icons";
 import { GALLERY_MODAL_BG } from "../../../../constaints/images";
-import { Logger } from "../../../../utils/logger";
 
 type Props = {
   openModal: boolean;
@@ -23,7 +22,6 @@ type Props = {
 };
 
 
-const _logger = new Logger();
 
 const dropDownList: any = [
   {
@@ -86,11 +84,6 @@ export const ImagesModal = ({ openModal, setOpenModal }: Props) => {
   };
 
   const snapPoints = useMemo(() => ["80%"], []);
-
-  // callbacks
-  const handleSheetChange = useCallback((index: any) => {
-    _logger.log("handleSheetChange", index);
-  }, []);
 
   const handleClosePress = useCallback(() => {
     setOpenModal(false);
@@ -214,12 +207,14 @@ export const ImagesModal = ({ openModal, setOpenModal }: Props) => {
         <BottomSheet
           ref={sheetRef}
           snapPoints={snapPoints}
-          onChange={handleSheetChange}
+          onChange={() => {
+            //
+          }}
           backgroundStyle={{
             backgroundColor: "transparent",
           }}
           handleComponent={null}
-          backdropComponent={(props) => (
+          backdropComponent={() => (
             <>
               <TouchableOpacity
                 activeOpacity={1}

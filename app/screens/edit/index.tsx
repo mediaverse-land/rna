@@ -28,7 +28,7 @@ type Params = {
 
 const _logger = new Logger();
 
-const { ThumbnailWrapper, EditableTitleInput, EditableInput } =
+const { ThumbnailWrapper, EditableInput } =
   EditScreenStyles;
 
 export const EditScreen = ({ navigation, route }: any) => {
@@ -40,7 +40,6 @@ export const EditScreen = ({ navigation, route }: any) => {
     handleSubmit,
     setValue,
     control,
-    formState: { errors },
   } = useForm();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -191,7 +190,7 @@ export const EditScreen = ({ navigation, route }: any) => {
               {updateImageFormStructure.map((_form: any) => {
                 if (_form.type !== "radio-button") {
                   return (
-                    <PaddingContainer>
+                    <PaddingContainer key={_form.id}>
                       <Box marginBottom={8} marginTop={8} key={_form.id}>
                         <Box marginBottom={8}>
                           <Text color="#fff">{_form.labelText}</Text>
@@ -214,10 +213,10 @@ export const EditScreen = ({ navigation, route }: any) => {
                 }
                 if (_form.type === "radio-button") {
                   if(typeof _selectedItems[_form.name] ==='boolean'){
-                    
+                      return null
                   }
                   return (
-                    <Box marginTop={8}>
+                    <Box marginTop={8} key={_form.id}>
                       <PaddingContainer>
                         <RadioButton
                           labelText={_form.labelText}

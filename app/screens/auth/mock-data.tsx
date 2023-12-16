@@ -1,4 +1,4 @@
-import { ICON_APPLE, ICON_FACEBOOK, ICON_GOOGLE } from '../../constaints/icons';
+import { ICON_GOOGLE } from '../../constaints/icons';
 import { theme } from '../../constaints/theme';
 
 export const providerButtons = [

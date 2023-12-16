@@ -1,9 +1,8 @@
-import React, { memo } from "react";
+import React from "react";
 import { Text } from "../../../components/text";
 import { FlashList } from "@shopify/flash-list";
 import { Box } from "../../../components/box";
 import { Flex, PaddingContainer } from "../../../styles/grid";
-import { windowSize } from "../../../utils/window-size";
 import { TouchableOpacity, View } from "react-native";
 import { theme } from "../../../constaints/theme";
 import { UserNameCard } from "../../../components/username-card";
@@ -22,7 +21,6 @@ type Props = {
   navigate: (...args: any) => void;
 };
 
-const { width: WINDOW_WIDTH } = windowSize();
 
 const {
   VideoListItem,

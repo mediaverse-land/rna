@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { ScrollView, Text, View } from "react-native";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 import HTMLView from "react-native-htmlview";
 import { Box } from "../../../components/box";
@@ -18,7 +19,6 @@ const { width, height } = windowSize();
 
 const TermsOfUseModal: FC<Props> = ({
   isOpen,
-  openTermsModalHandler,
   closeTermsModalHandler,
 }) => {
   const { data, isLoading, isFetching, error } = useGetTermsOfUseQuery();

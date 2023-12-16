@@ -88,11 +88,12 @@ export const Nav = ({
       tabbarItems.map((tab) => {
         const isSelected = tab.path === activeNav;
 
-        let placeholderIcon = isSelected ? tab.activeIcon : tab.icon;
+        const placeholderIcon = isSelected ? tab.activeIcon : tab.icon;
 
         return (
           <Box
             width="20%"
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             additionalStyles={[isSelected ? activeNavBorderStyle : null]}
             alignItems="center"

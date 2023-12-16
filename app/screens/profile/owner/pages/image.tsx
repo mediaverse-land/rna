@@ -7,7 +7,6 @@ import { UseSelectContent } from "../../hooks/use-select-content";
 import { retriveToken } from "../../../../utils/retrive-token";
 import {
   getProfileImageDataApiHandler,
-  getProfileSoundDataApiHandler,
   removeAssetApiHandler,
 } from "../../service";
 import { ASSET_TYPES } from "../../../../heloers/asset-types";
@@ -130,6 +129,7 @@ export const ProfileScreenImagePage = () => {
       stopLoad();
       return;
     } else {
+      // eslint-disable-next-line no-unsafe-optional-chaining
       setData([...data, ...res.data?.data]);
       stopLoad();
     }

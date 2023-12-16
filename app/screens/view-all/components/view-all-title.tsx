@@ -4,7 +4,6 @@ import { Box } from "../../../components/box";
 import { theme } from "../../../constaints/theme";
 import { ICON_ARROW_LEFT_SVG } from "../../../constaints/icons";
 import { TouchableOpacity } from "react-native";
-import { UseNavigationType } from "../../../types/use-navigation";
 
 type Props = {
   title: string;

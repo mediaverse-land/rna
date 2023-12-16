@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  ICON_MASTER_CARD,
-  ICON_PAYPAL,
   ICON_WALLET_BLUE,
   ICON_WALLET_SVG,
 } from "../../../constaints/icons";
@@ -10,8 +8,6 @@ import { Box } from "../../../components/box";
 import { Text } from "../../../components/text";
 import { PaddingContainer } from "../../../styles/grid";
 import { TouchableOpacity } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store";
 import { useIsFocused } from "@react-navigation/native";
 import { StorageService } from "../../../services/storage.service";
 import { HAS_USER_SEEN_PAYMENT_TOUR } from "../../../constaints/consts";
@@ -89,7 +85,6 @@ export function HowToPayList({ userBalance }: Props) {
     setSelectedPaymentMethod(title);
   };
 
-  const dispatch = useDispatch<AppDispatch>();
   const isFocused = useIsFocused();
 
   // const res = await _storageService.get(HAS_USER_SEEN_PAYMENT_TOUR);

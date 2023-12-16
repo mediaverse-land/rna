@@ -6,7 +6,6 @@ import { RenderIf } from "../../../../components/render-if";
 import { FlatList } from "react-native";
 import { Live } from "../../../../types/live";
 import { HorizontalSlide } from "../../../../components/horizontal-slider/slide";
-import { PROFILE_ONE } from "../../../../constaints/images";
 import { ALL_LIVES_SCREEN, LIVES, SINGLE_LIVE_SCREEN } from "../../../../constaints/consts";
 import { useNavigation } from "@react-navigation/native";
 import { UseNavigationType } from "../../../../types/use-navigation";

@@ -23,7 +23,6 @@ type Props = {
 
 const {
   TextSlide,
-  TextSlideBackgroundGradient,
   TextSlideBody,
   TextSlideTitle,
   TextSlideContentText,

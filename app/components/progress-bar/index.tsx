@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Animated, StyleSheet, View } from "react-native";
 import React, { useEffect, useState, useRef } from "react";
 import Constants from "expo-constants";

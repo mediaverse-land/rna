@@ -4,10 +4,7 @@ import { Text } from "../../../components/text";
 import { GoBackButton } from "../components/goback-button";
 import { SingleItemUsernameAndDuration } from "../components/username-and-duration";
 import {
-  ICON_PLAY_SVG,
   ICON_SOUND_WHITE,
-  ICON_VIDEO_PAUSE,
-  ICON_VIDEO_PLAY,
 } from "../../../constaints/icons";
 import {
   AUDIO_THUMBNAIL_PLACEHOLDER,
@@ -16,7 +13,6 @@ import {
   SINGLE_VIDEO_COVER_IMAGE_GRADIENT,
 } from "../../../constaints/images";
 import { theme } from "../../../constaints/theme";
-import { useState } from "react";
 
 type Props = {
   goBackHandler: () => void;
@@ -35,12 +31,9 @@ const thumbnailHeight = 332;
 
 export function SingleSoundHeader({
   goBackHandler,
-  isOwnerOrSubscriber,
   thumnailImageUri,
   contentName,
   isOwner = false,
-  playSoundHandler,
-  stopSoundHandler,
   username = "",
   userProfileUri = PROFILE_ONE,
   openReportModalHandler,

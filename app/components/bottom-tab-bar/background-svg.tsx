@@ -1,6 +1,5 @@
 import React from "react";
 import { Circle, Path, Svg } from "react-native-svg";
-import { theme } from "../../constaints/theme";
 
 const states = {
   pathX: "357",

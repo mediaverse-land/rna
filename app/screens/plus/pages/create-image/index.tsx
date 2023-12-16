@@ -55,8 +55,8 @@ export const CreateImageScreen = () => {
     useState<string>(null);
   const [isLoading, setIsLoading] = useState(false);
   // Create image
-  const [createNewImage, imageResponse] = useCreateSingleImageMutation();
-  const [createNewVideo, videoresponse] = useCreateSingleVideoMutation();
+  const [createNewImage] = useCreateSingleImageMutation();
+  const [createNewVideo] = useCreateSingleVideoMutation();
 
   const { params } = useSelector((state: RootState) => state.plusSlice);
 
@@ -168,7 +168,7 @@ export const CreateImageScreen = () => {
       delete options.body.price;
     }
 
-    let newBody: any = {
+    const newBody: any = {
       ...options.body,
     };
 
@@ -240,7 +240,7 @@ export const CreateImageScreen = () => {
           });
         }
       })
-      .catch((err: any) => {
+      .catch(() => {
         // console.log(`createNewVideo:${JSON.stringify(err)}`);
         stopLoad();
       });
@@ -282,7 +282,7 @@ export const CreateImageScreen = () => {
           }
         }
       })
-      .catch((err: any) => {
+      .catch(() => {
         startLoad();
         // console.log(`createNewImage:${JSON.stringify(err)}`);
       });
@@ -343,6 +343,7 @@ export const CreateImageScreen = () => {
             <BottomTabBar
               currentPage={CREATE_IMAGE}
               navigation={navigation}
+              isLoading={false}
               submitButtonHandler={_submitButtonHandler}
               longPressSubmitButtonHandler={_createVideoSubmitButtonHandler}
               longressOutSubmitButtonHandler={

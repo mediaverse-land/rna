@@ -1,13 +1,11 @@
-import React, { memo } from "react";
+import React from "react";
 import { Text } from "../../../components/text";
-import { FlashList } from "@shopify/flash-list";
 import { Box } from "../../../components/box";
-import type { Image as ImageType } from "../../../types/image";
 import { PaddingContainer } from "../../../styles/grid";
 import { windowSize } from "../../../utils/window-size";
 import { FlatList, TouchableOpacity } from "react-native";
 import { UserNameCard } from "../../../components/username-card";
-import { PROFILE_ONE, TEXT_SLIDER_COVER_BG } from "../../../constaints/images";
+import { PROFILE_ONE } from "../../../constaints/images";
 import { navigateTo } from "../utils/navigate-to-single-screen";
 import { Text as TextType } from "../../../types/text";
 import { LinearGradient } from "expo-linear-gradient";

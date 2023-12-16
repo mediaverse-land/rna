@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import {
   useState,
   forwardRef,
@@ -6,23 +7,23 @@ import {
   useContext,
   useEffect,
   ReactNode,
-} from "react";
-import { Image } from "react-native";
-import BottomSheet, { BottomSheetView } from "@gorhom/bottom-sheet";
-import { alertContext } from "../../context/alert";
-import { Box } from "../../components/box";
-import { CONFIRM_MODAL_BACKGROUND } from "../../constaints/images";
-import { theme } from "../../constaints/theme";
+} from 'react';
+import { Image } from 'react-native';
+import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import { alertContext } from '../../context/alert';
+import { Box } from '../../components/box';
+import { CONFIRM_MODAL_BACKGROUND } from '../../constaints/images';
+import { theme } from '../../constaints/theme';
 
 type Props = {
   children: ReactNode;
   height?: number;
   snapPoints: string[];
-  onChange?: any
+  onChange?: any;
 };
 
 export const ModalBottomSheet = forwardRef(
-  ({ children,onChange,  height, snapPoints }: Props, ref) => {
+  ({ children, onChange, height, snapPoints }: Props, ref) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
@@ -63,7 +64,7 @@ export const ModalBottomSheet = forwardRef(
         {isModalOpen ? (
           <>
             <BottomSheet
-            //   animateOnMount={true}
+              //   animateOnMount={true}
               snapPoints={snapPoints}
               ref={confirmAlertSheetRef}
               onClose={() => {
@@ -79,12 +80,11 @@ export const ModalBottomSheet = forwardRef(
             >
               <BottomSheetView
                 style={{
-                  position: "absolute",
-                  backgroundColor:
-                    theme.color.light.ADD_ACCOUNT_MODAL_BAKGROUND,
+                  position: 'absolute',
+                  backgroundColor: theme.color.light.ADD_ACCOUNT_MODAL_BAKGROUND,
                   top: 0,
                   left: 0,
-                  width: "100%",
+                  width: '100%',
                   zIndex: 1000,
                   borderRadius: 16,
                 }}
@@ -94,9 +94,9 @@ export const ModalBottomSheet = forwardRef(
                     uri: CONFIRM_MODAL_BACKGROUND,
                   }}
                   style={{
-                    width: "100%",
+                    width: '100%',
                     height: height,
-                    position: "absolute",
+                    position: 'absolute',
                     borderTopLeftRadius: 16,
                     borderTopRightRadius: 16,
                     top: 0,
@@ -118,5 +118,5 @@ export const ModalBottomSheet = forwardRef(
         ) : null}
       </>
     );
-  }
+  },
 );

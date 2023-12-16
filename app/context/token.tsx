@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { createContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useState, useEffect, ReactNode, FC } from 'react';
 import { StorageService } from '../services/storage.service';
 import { User } from '../types/user';
 
@@ -19,7 +19,7 @@ export const tokenContext = createContext({
 
 const _storageService = new StorageService();
 
-export const TokenContextProvider: React.FC<Props> = ({ children }) => {
+export const TokenContextProvider: FC<Props> = ({ children }) => {
     const [token, setToken] = useState<string>(null);
     const [userData, setUserData] = useState<User>(null);
 

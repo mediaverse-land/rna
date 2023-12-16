@@ -1,10 +1,9 @@
-import React, { memo, useContext, useEffect, useRef, useState } from "react";
+import React, { memo, useContext, useEffect, useRef } from "react";
 import {
   StyleSheet,
   View,
   Dimensions,
   TouchableOpacity,
-  Text,
 } from "react-native";
 
 import {
@@ -30,7 +29,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import {
   activeDisableOnIntractions,
-  deActivrDisableOnIntractions,
   seeButtomNavigationTour,
 } from "../../slices/tour.slice";
 import { PLUS_BUTTON_BG } from "../../constaints/images";
@@ -105,7 +103,7 @@ const tourGuides: Record<number, string> = {
 const CoachmarkWrapper: any = Coachmark;
 const _storageService = new StorageService();
 
-function BottomTabBarComponent({ state, descriptors, navigation }: any) {
+function BottomTabBarComponent({ state, navigation }: any) {
   const { DISABLE_INTRACTION } = useSelector(
     (state: RootState) => state.tourSlice
   );

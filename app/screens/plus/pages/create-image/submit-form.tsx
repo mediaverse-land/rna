@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createImageFormStructure } from "./form-structure";
 import { CreateImageRequestBody } from ".";
 import { CreateAssetForm } from "../../component/create-asset-form";
@@ -25,8 +25,7 @@ export const SubmitForm = ({ isLoading, createAssetRequest }: Props) => {
   }
 
   const onSubmit = async (data: any) => {
-    const { name, description, price } = data;
-    const plan = 1;
+    const { name, description } = data;
 
     const plans: any = {
       free: 1,

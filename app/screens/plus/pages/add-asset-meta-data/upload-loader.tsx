@@ -1,16 +1,16 @@
-import { FC, useContext, useEffect, useState } from "react";
-import { Box } from "../../../../components/box";
-import { windowSize } from "../../../../utils/window-size";
-import { Text } from "../../../../components/text";
-import { ActivityIndicator } from "react-native";
-import { theme } from "../../../../constaints/theme";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../store";
-import axios from "axios";
-import { PaddingContainer } from "../../../../styles/grid";
-import * as Progress from "react-native-progress";
-import { retriveToken } from "../../../../utils/retrive-token";
-import { tokenContext } from "../../../../context/token";
+import { FC, useContext, useEffect, useState } from 'react';
+import { Box } from '../../../../components/box';
+import { windowSize } from '../../../../utils/window-size';
+import { Text } from '../../../../components/text';
+import { ActivityIndicator } from 'react-native';
+import { theme } from '../../../../constaints/theme';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../store';
+import axios from 'axios';
+import { PaddingContainer } from '../../../../styles/grid';
+import * as Progress from 'react-native-progress';
+import { retriveToken } from '../../../../utils/retrive-token';
+import { tokenContext } from '../../../../context/token';
 
 type Props = {
   assetId: number;
@@ -19,13 +19,11 @@ type Props = {
 
 const { width, height } = windowSize();
 
-export const UploadLoader: FC<Props> = ({ assetId, cleanupCreatedAssetId }) => {
+export const UploadLoader: FC<Props> = ({ assetId }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState<number>(0);
 
-  const { ThumbnailCover, fileBase64 } = useSelector(
-    (state: RootState) => state.plusSlice
-  );
+  const { ThumbnailCover, fileBase64 } = useSelector((state: RootState) => state.plusSlice);
 
   const tokenCtx = useContext(tokenContext);
 
@@ -46,42 +44,38 @@ export const UploadLoader: FC<Props> = ({ assetId, cleanupCreatedAssetId }) => {
       file: fileBase64,
     };
 
-    console.log(requestBody)
+    console.log(requestBody);
 
     const token = await getToken();
 
     await submitHandler(requestBody, token);
 
     if (ThumbnailCover) {
-        // await uplodThumbnailFile(token);
-    } 
+      // await uplodThumbnailFile(token);
+    }
   };
 
-  const uplodThumbnailFile = async (token: string) => {
-    const requestBody = {
-      asset: assetId,
-      is_thumbnail: true,
-      file: ThumbnailCover,
-    };
+  // const uplodThumbnailFile = async (token: string) => {
+  //   const requestBody = {
+  //     asset: assetId,
+  //     is_thumbnail: true,
+  //     file: ThumbnailCover,
+  //   };
 
-    await submitHandler(requestBody, token);
-};
+  //   await submitHandler(requestBody, token);
+  // };
 
   const submitHandler = async (requestBody: any, token: string) => {
-    console.log(requestBody)
+    console.log(requestBody);
     try {
-      const result = await axios.post(
-        `${process.env.EXPO_APPBASE_URL}/files`,
-        requestBody,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            "X-App": "_Android",
-            Authorization: `Bearer ${token}`,
-          },
-          onUploadProgress: uploadProgress,
-        }
-      );
+      const result = await axios.post(`${process.env.EXPO_APPBASE_URL}/files`, requestBody, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'X-App': '_Android',
+          Authorization: `Bearer ${token}`,
+        },
+        onUploadProgress: uploadProgress,
+      });
       if (result) {
         setIsLoading(false);
       }
@@ -92,19 +86,12 @@ export const UploadLoader: FC<Props> = ({ assetId, cleanupCreatedAssetId }) => {
   };
 
   const uploadProgress = (progressEvent: any) => {
-    var Percentage = Math.round(
-      (progressEvent.loaded / progressEvent.total) * 100
-    );
+    const Percentage = Math.round((progressEvent.loaded / progressEvent.total) * 100);
     setProgress(Percentage);
   };
 
   return (
-    <Box
-      width={width}
-      height={height - 100}
-      alignItems="center"
-      justifyContent="center"
-    >
+    <Box width={width} height={height - 100} alignItems="center" justifyContent="center">
       <Text color={theme.color.light.ACTIVE_TEXT}>Asset is uploading</Text>
       <Text color={theme.color.light.ACTIVE_TEXT} marginTop={16}>
         Please wait
@@ -120,7 +107,7 @@ export const UploadLoader: FC<Props> = ({ assetId, cleanupCreatedAssetId }) => {
             style={{
               borderRadius: 4,
             }}
-            borderColor={progress ? theme.color.light.PRIMARY : "transparent"}
+            borderColor={progress ? theme.color.light.PRIMARY : 'transparent'}
           />
         </PaddingContainer>
       </Box>

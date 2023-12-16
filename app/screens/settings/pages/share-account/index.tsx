@@ -1,63 +1,15 @@
-import { useRef, useState } from 'react';
-import {
-    FlatList,
-    StatusBar,
-    Image,
-    View,
-    TouchableOpacity
-} from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import BottomSheet from '@gorhom/bottom-sheet';
-import { SettingsScreenComponents } from '../../style';
-import { windowSize } from '../../../../utils/window-size';
-import { Box } from '../../../../components/box';
-import { PaddingContainer } from '../../../../styles/grid';
-import { SettingsScreenTitle } from '../../components/title';
-import { Text } from '../../../../components/text';
-import { theme } from '../../../../constaints/theme';
 import { ScreenGradient } from '../../../../components/screen-gradient';
 // import { AddAccountModal } from './add-account-modal';
-import {
-    ICON_ADD,
-    ICON_INSTAGRAM_PRIMARY,
-    ICON_TRASHBEEN
-} from '../../../../constaints/icons';
-import {
-    ADD_ACCOUNT_BUTTON_GRADIENT,
-    SIGNINS_LIST_ITEM_GRADIET
-} from '../../../../constaints/images';
-import { ConfirmAlert } from '../../../../components/confirm-alert';
 
-type AccountType = {
-    id: number;
-    appIcon: any;
-    username: string;
-};
 
-const { AddAccountButton } = SettingsScreenComponents;
-const { height } = windowSize();
-
-const accounts: AccountType[] = [
-    {
-        id: 1,
-        appIcon: ICON_INSTAGRAM_PRIMARY,
-        username: 'Ma.Nakhli'
-    },
-    {
-        id: 2,
-        appIcon: ICON_INSTAGRAM_PRIMARY,
-        username: 'Mahdi_alipoor'
-    }
-];
-
-const pageHeaderComponent = (
-    <Box marginBottom={48}>
-        <PaddingContainer>
-            <SettingsScreenTitle title="Share account" />
-        </PaddingContainer>
-    </Box>
-);
+// const pageHeaderComponent = (
+//     <Box marginBottom={48}>
+//         <PaddingContainer>
+//             <SettingsScreenTitle title="Share account" />
+//         </PaddingContainer>
+//     </Box>
+// );
 
 // const keyExtractor = (item: AccountType): string => item.id.toString();
 
@@ -156,6 +108,7 @@ export function ShareAccountPage() {
                     />
                 ) : null} */}
                 <ScreenGradient>
+                    <></>
                     {/* <Box width="100%">
                         <FlatList
                             ListHeaderComponent={pageHeaderComponent}

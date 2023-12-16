@@ -36,7 +36,6 @@ const BG_GRADIENT = theme.gradients.PLUS_PAGE_GRADIENT;
 export const AddAssetMetaData = () => {
   const { top } = useSafeAreaInsets();
 
-  const [progress, setProgress] = useState<number>(0);
 
   const [createdAssetId, setCreatedAssetId] = useState<number>(null);
 
@@ -120,12 +119,12 @@ export const AddAssetMetaData = () => {
   //   }
   // };
 
-  const uploadProgress = (progressEvent: any) => {
-    var Percentage = Math.round(
-      (progressEvent.loaded / progressEvent.total) * 100
-    );
-    setProgress(Percentage);
-  };
+  // const uploadProgress = (progressEvent: any) => {
+  //   const Percentage = Math.round(
+  //     (progressEvent.loaded / progressEvent.total) * 100
+  //   );
+  //   setProgress(Percentage);
+  // };
 
   const cleanupCreatedAssetId = () => {
     setCreatedAssetId(null);

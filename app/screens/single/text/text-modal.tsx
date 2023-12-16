@@ -38,7 +38,7 @@ export const AssetModal = ({ hideTextModalHandler, fileUrl, title }: Props) => {
 
   const getFileData = async () => {
     setIsLoading(true);
-    const { isSuccess, isError, res, errorRes } = await getTextFileApiHandler(
+    const {  isError, res } = await getTextFileApiHandler(
       fileUrl
     );
 

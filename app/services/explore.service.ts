@@ -9,7 +9,7 @@ export const exploreService: any = createApi({
   //   tagTypes: ['ExploreLives'],
   endpoints: (builder) => ({
     getLives: builder.query({
-      query: (args) => {
+      query: () => {
         return {
           url: "lives",
           method: "GET",
@@ -21,7 +21,7 @@ export const exploreService: any = createApi({
       },
     }),
     getMostViewdImages: builder.query({
-      query: (args) => {
+      query: () => {
         return {
           url: "images/daily-recommended",
           method: "GET",
@@ -33,7 +33,7 @@ export const exploreService: any = createApi({
       },
     }),
     getTopTenTexts: builder.query({
-      query: (args) => {
+      query: () => {
         return {
           url: "texts/",
           method: "GET",
@@ -45,7 +45,7 @@ export const exploreService: any = createApi({
       },
     }),
     getBestVideos: builder.query({
-      query: (args) => {
+      query: () => {
         return {
           url: "videos/most-viewed",
           method: "GET",
@@ -57,7 +57,7 @@ export const exploreService: any = createApi({
       },
     }),
     getChillSongs: builder.query({
-      query: (args) => {
+      query: () => {
         return {
           url: "audios/daily-recommended",
           method: "GET",

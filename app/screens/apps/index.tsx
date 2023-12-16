@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Navigator } from "./topbar-navigator";
 import { FocusedStatusBar } from "../../components/focused-statusbar";
-import { Box } from "../../components/box";
 
 export function AppsStack() {
   return (

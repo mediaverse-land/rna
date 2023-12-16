@@ -1,11 +1,6 @@
 import { CHANNEL_MANAGEMENT_SCREEN } from "../../../constaints/consts";
 import {
-  AI_AND_PRODUCTION,
-  CG_PLAYOUT,
   CHANNLE_MANAGEMENT,
-  CONTROL_ROM,
-  MEDIA_SUIT,
-  STUDIO,
 } from "../../../constaints/icons";
 
 export type AppItemType = {

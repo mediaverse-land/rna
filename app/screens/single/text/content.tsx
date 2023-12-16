@@ -3,7 +3,6 @@ import { Box } from "../../../components/box";
 import { PaddingContainer } from "../../../styles/grid";
 import { SingleItemDescription } from "../components/description";
 import { MetaDataType, SingleItemMetaData } from "../components/item-metadata";
-import { FileType, SingleItemFiles } from "../components/files";
 import { Text } from "../../../components/text";
 
 type Props = {

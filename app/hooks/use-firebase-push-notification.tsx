@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // Notifications.setNotificationChannelAsync("location-reached", {
 //   name: "location-reached",
 //   importance: Notifications.AndroidImportance.MAX,

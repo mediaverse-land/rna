@@ -2,7 +2,7 @@ import { Audio } from "expo-av";
 
 export class Permissions {
     async _askForRecorder(){
-        const res= await Audio.requestPermissionsAsync();
+        await Audio.requestPermissionsAsync();
     }
 
     async _getRecordingPermission(){

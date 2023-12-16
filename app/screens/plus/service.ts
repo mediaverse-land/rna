@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Toaster } from "../../utils/toaster";
-import { UseNavigationType } from "../../types/use-navigation";
 import { Logger } from "../../utils/logger";
 
 const _toast = new Toaster();

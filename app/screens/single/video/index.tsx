@@ -65,7 +65,6 @@ export function SingleVideoScreen({ navigation, route }: any) {
     {
       isLoading: isYoutubeShareLoading,
       isFetching: isYoutubeShareFetching,
-      error,
     },
   ] = useYoutubeShareMutation();
 

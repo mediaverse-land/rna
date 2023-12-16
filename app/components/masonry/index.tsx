@@ -1,16 +1,12 @@
 import { memo, useCallback, useEffect, useState } from "react";
-import { Image, StyleSheet, TouchableOpacity, FlatList } from "react-native";
+import { Image, TouchableOpacity, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { MasonryComponents } from "./style";
-import { Flex } from "../../styles/grid";
 import { Box } from "../box";
-import { Asset } from "../../types/asset";
 import { UseNavigationType } from "../../types/use-navigation";
 import {
   // BANNER_ITEM_GRADIENT_IMAGE,
   IMAGE_THUMBNAIL_PLACEHOLDER,
 } from "../../constaints/images";
-import type { Image as ImageType } from "./../../types/image";
 import { windowSize } from "../../utils/window-size";
 // import { Text } from "../text";
 import { Text } from "../../types/text";
@@ -24,7 +20,6 @@ const { width: WINDOW_WIDTH } = windowSize();
 
 const ROW_WIDTH = WINDOW_WIDTH - 48;
 
-const { MasonryWrapper, MasonryRow } = MasonryComponents;
 
 function Masonry({ data, disableOnIntractions = false }: Props) {
   const [chunkedList, setChunkedList] = useState<Image[]>([]);
@@ -38,7 +33,7 @@ function Masonry({ data, disableOnIntractions = false }: Props) {
   }, [data]);
 
   const sortMasonryData = () => {
-    let newChunk = chunkData(data);
+    const newChunk = chunkData(data);
     setChunkedList(newChunk);
   };
 
@@ -429,10 +424,3 @@ function Masonry({ data, disableOnIntractions = false }: Props) {
 
 export default memo(Masonry);
 
-const styles = StyleSheet.create({
-  oneInOneImageStyle: {
-    width: "100%",
-    height: 109,
-    borderRadius: 8,
-  },
-});

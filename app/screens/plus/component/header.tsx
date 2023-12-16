@@ -2,7 +2,6 @@ import { TouchableOpacity } from "react-native";
 import { Box } from "../../../components/box";
 import { PaddingContainer } from "../../../styles/grid";
 import {
-  ICON_ARROW_LEFT_WHITE,
   ICON_FOLDER_WHITE,
   ICON_SEARCH_WHITE,
 } from "../../../constaints/icons";
@@ -18,7 +17,6 @@ export const CreateContentHeader = ({
   justBackButtonVisible,
   openWebViewHandler,
   searchGalleryViewHandler,
-  goBackHandler
 }: Props) => {
   return (
     <PaddingContainer>

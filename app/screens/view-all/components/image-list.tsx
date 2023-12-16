@@ -1,6 +1,5 @@
-import React, { memo } from "react";
+import React from "react";
 import { Text } from "../../../components/text";
-import { FlashList } from "@shopify/flash-list";
 import { Box } from "../../../components/box";
 import type { Image as ImageType } from "../../../types/image";
 import { PaddingContainer } from "../../../styles/grid";

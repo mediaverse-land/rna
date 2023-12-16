@@ -9,8 +9,8 @@ import { Live } from "../../../../types/live";
 import { getLivesApiHandler } from "../all/service";
 import { VideosPageLives } from "./lives";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../store";
+import {  useSelector } from "react-redux";
+import {  RootState } from "../../../../store";
 import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
 import { StorageService } from "../../../../services/storage.service";
 import { HAS_USER_SEEN_EXPLORE_ALL_TOUR } from "../../../../constaints/consts";
@@ -57,7 +57,6 @@ export function VideosPage() {
     setIsLoading(false);
   };
 
-  const dispatch = useDispatch<AppDispatch>();
 
   const setValue = async (
     promiseData: PromiseSettledResult<{

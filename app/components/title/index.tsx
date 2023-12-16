@@ -13,7 +13,6 @@ type Props = {
 
 export function Title({
   str,
-  iconPath,
   svgIcon,
   navigateHandler,
   showViewMoreButton = false,

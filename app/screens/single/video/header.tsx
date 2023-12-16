@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef, useContext } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Image, TouchableOpacity, BackHandler, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as ScreenOrientation from "expo-screen-orientation";
-import ViewShot, { CaptureOptions } from "react-native-view-shot";
+import ViewShot from "react-native-view-shot";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "../../../components/box";
 import { Text } from "../../../components/text";
@@ -16,7 +16,7 @@ import { Toaster } from "../../../utils/toaster";
 import { AppDispatch, RootState } from "../../../store";
 import { UseNavigationType } from "../../../types/use-navigation";
 import { setParam } from "../../../slices/plus.slice";
-import { convertVideoToSoundHandler, recordVideoHandler } from "../service";
+import { convertVideoToSoundHandler } from "../service";
 import { tokenStringResolver } from "../../../utils/token-string-resolver";
 import { Toolbar } from "../components/toolbar";
 import { StorageService } from "../../../services/storage.service";
@@ -26,7 +26,6 @@ import {
   ICON_SHARE_YOUTUBE,
   ICON_SINGLE_CONVERT_TO_AUDIO,
   ICON_SINGLE_EDIT,
-  ICON_STREAM,
   ICON_VIDEO_PLAY,
   ICON_VIDEO_WHITE,
 } from "../../../constaints/icons";
@@ -67,10 +66,6 @@ const REPORTE_GUIDE =
 
 const CoachmarkWrapper: any = Coachmark;
 const _storageService = new StorageService();
-const VIDEO_OPTIONS: CaptureOptions = {
-  format: "jpg",
-  result: "base64",
-};
 
 export function SingleVideoHeader({
   goBackHandler,
@@ -83,7 +78,6 @@ export function SingleVideoHeader({
   isFocused,
   id,
   forkability_status,
-  userId,
   isDisableEditIcon,
   tokenCtx,
   shareToYoutubeHandler,
@@ -91,6 +85,7 @@ export function SingleVideoHeader({
   // rotationStatus 1 = landscape and 3 = portrait
   const [rotationStatus, setRotationStatus] = useState<1 | 3>(3);
   // Start position of video
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [initSeek, setInitSeek] = useState(null);
   const [isStarted, setIsStarted] = useState(false);
   const [isTourActive, setIsTourActive] = useState(false);
@@ -229,7 +224,7 @@ export function SingleVideoHeader({
     if (!token) {
       return;
     }
-    const { isSuccess, isError, errorRes } = await method(token, id);
+    const { isSuccess, isError } = await method(token, id);
 
     if (isSuccess && successMessage) {
       toaster.show(successMessage);
@@ -247,13 +242,13 @@ export function SingleVideoHeader({
     });
   };
 
-  const _recordVideoHandler = async () => {
-    await requestAPiHandler({
-      method: recordVideoHandler,
-      successMessage: "Video recorded successfully",
-      errorMessage: "Video record failed",
-    });
-  };
+  // const _recordVideoHandler = async () => {
+  //   await requestAPiHandler({
+  //     method: recordVideoHandler,
+  //     successMessage: "Video recorded successfully",
+  //     errorMessage: "Video record failed",
+  //   });
+  // };
 
   const retriveToken = async () => {
     const tk = await tokenCtx.getToken();
@@ -378,31 +373,31 @@ export function SingleVideoHeader({
   }, [videoTourRef, toolbarTourRef, isFocused, reportTourRef, hasPermission]);
 
   // Render video thumbnail element if exists
-  const thumbnailImageElement = thumnailImageUri ? (
-    <Image
-      source={{ uri: thumnailImageUri }}
-      style={styles.mainThumbnailStyles}
-      resizeMode="cover"
-    />
-  ) : null;
+  // const thumbnailImageElement = thumnailImageUri ? (
+  //   <Image
+  //     source={{ uri: thumnailImageUri }}
+  //     style={styles.mainThumbnailStyles}
+  //     resizeMode="cover"
+  //   />
+  // ) : null;
 
   // Render thumbnail if user is not owner or subscriber
-  const RENDER_THUMBNAIL_IF_USER_NOT_OWNER =
-    !isSubscriber || !isOwner ? (
-      <>
-        {thumbnailCoverGradient}
-        {thumnailImageUri ? (
-          <Image
-            source={{
-              uri: thumnailImageUri,
-              cache: "only-if-cached",
-            }}
-            style={styles.thumbnailStyles}
-            resizeMode="cover"
-          />
-        ) : null}
-      </>
-    ) : null;
+  // const RENDER_THUMBNAIL_IF_USER_NOT_OWNER =
+  //   !isSubscriber || !isOwner ? (
+  //     <>
+  //       {thumbnailCoverGradient}
+  //       {thumnailImageUri ? (
+  //         <Image
+  //           source={{
+  //             uri: thumnailImageUri,
+  //             cache: "only-if-cached",
+  //           }}
+  //           style={styles.thumbnailStyles}
+  //           resizeMode="cover"
+  //         />
+  //       ) : null}
+  //     </>
+  //   ) : null;
 
   return (
     <Box position="relative" zIndex={20}>
@@ -581,42 +576,42 @@ export function SingleVideoHeader({
   );
 }
 
-type ReportSectionType = {
-  openReportModalHandler: () => void;
-  reportTourRef: any;
-};
+// type ReportSectionType = {
+//   openReportModalHandler: () => void;
+//   reportTourRef: any;
+// };
 
-const ReportSection = ({
-  openReportModalHandler,
-  reportTourRef,
-}: ReportSectionType) => {
-  return (
-    <TouchableOpacity
-      activeOpacity={1}
-      onPress={() => {
-        openReportModalHandler();
-      }}
-    >
-      <CoachmarkWrapper
-        allowBackgroundInteractions={false}
-        ref={reportTourRef}
-        message={REPORTE_GUIDE}
-      >
-        <Box
-          alignItems="center"
-          justifyContent="center"
-          width={50}
-          position="relative"
-          zIndex={1040}
-        >
-          <Text color={"#666680"} fontSize={14} fontWeight={400}>
-            Report
-          </Text>
-        </Box>
-      </CoachmarkWrapper>
-    </TouchableOpacity>
-  );
-};
+// const ReportSection = ({
+//   openReportModalHandler,
+//   reportTourRef,
+// }: ReportSectionType) => {
+//   return (
+//     <TouchableOpacity
+//       activeOpacity={1}
+//       onPress={() => {
+//         openReportModalHandler();
+//       }}
+//     >
+//       <CoachmarkWrapper
+//         allowBackgroundInteractions={false}
+//         ref={reportTourRef}
+//         message={REPORTE_GUIDE}
+//       >
+//         <Box
+//           alignItems="center"
+//           justifyContent="center"
+//           width={50}
+//           position="relative"
+//           zIndex={1040}
+//         >
+//           <Text color={"#666680"} fontSize={14} fontWeight={400}>
+//             Report
+//           </Text>
+//         </Box>
+//       </CoachmarkWrapper>
+//     </TouchableOpacity>
+//   );
+// };
 
 const styles = StyleSheet.create({
   thumbnailCoverStyles: {

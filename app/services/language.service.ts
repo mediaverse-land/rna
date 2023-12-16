@@ -9,7 +9,7 @@ export const languageService: any = createApi({
   tagTypes: ["Language", "country"],
   endpoints: (builder) => ({
     getLanguages: builder.query({
-      query: (args) => {
+      query: () => {
         return {
           url: "languages",
           method: "GET",
@@ -21,7 +21,7 @@ export const languageService: any = createApi({
       },
     }),
     getCountries: builder.query({
-      query: (args) => {
+      query: () => {
         return {
           url: "countries",
           method: "GET",

@@ -2,10 +2,8 @@ import { StatusBar } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { WalletSlider } from "./slider";
 import { HistoryPage } from "./history";
-import { useFocusEffect, useIsFocused } from "@react-navigation/native";
-import React, { useCallback, useEffect, useState } from "react";
-import { StorageService } from "../../services/storage.service";
-import { HAS_USER_SEEN_PAYMENT_TOUR, HAS_USER_SEEN_WALLET_TOUR } from "../../constaints/consts";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
 
 const Stack = createStackNavigator();
 
@@ -30,7 +28,6 @@ const fadeTransition = ({ current }: any) => ({
   },
 });
 
-const _storageService = new StorageService();
 
 export function WalletStack() {
   const [shouldHide, setShouldHide] = useState(false);

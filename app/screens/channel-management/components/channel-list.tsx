@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { memo, useCallback, useEffect, useState } from "react";
 import { useGetExternalAccountsListQuery } from "../../../services/auth.service";
 import { useClickOutside } from "react-native-click-outside";
@@ -91,6 +92,7 @@ const MemoChannelsList = ({ token }: { token: string }) => {
       if (page === 1 || current_page === 1) {
         setDataList(data?.data);
       } else {
+        // eslint-disable-next-line no-unsafe-optional-chaining
         setDataList((prev) => [...prev, ...data?.data]);
       }
     }

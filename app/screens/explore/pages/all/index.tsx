@@ -17,52 +17,55 @@ import { UseNavigationType } from "../../../../types/use-navigation";
 import { ExplorePageBestVideos } from "./best-videos";
 import { ExploreGradientWrapper } from "../../components/gradient-wrapper";
 import { useCallback } from "react";
+import { useNavigation } from "@react-navigation/native";
 
-export function AllPage({ navigation }: { navigation: UseNavigationType }) {
+export function AllPage() {
   const { DISABLE_INTRACTION }: { DISABLE_INTRACTION: boolean } = useSelector(
     (state: RootState) => state.tourSlice
   );
 
+  const navigation = useNavigation<UseNavigationType>();
+
   const {
     data: _livesData,
-    isError: _isLivesError,
-    isSuccess: _isLivesSuccess,
+    // isError: _isLivesError,
+    // isSuccess: _isLivesSuccess,
     isLoading: _isLivesLoading,
     refetch: refreshLives,
   } = useGetLivesQuery();
 
   const {
     data: _bestVideosData,
-    isError: _isBestVideosError,
-    isSuccess: _isBestVideosSuccess,
+    // isError: _isBestVideosError,
+    // isSuccess: _isBestVideosSuccess,
     isLoading: _isBestVideosLoading,
     refetch: refreshBestVideos,
   } = useGetBestVideosQuery();
 
   const {
     data: _imagesData,
-    isError: _isImagesError,
-    isSuccess: _isImagesSuccess,
+    // isError: _isImagesError,
+    // isSuccess: _isImagesSuccess,
     isLoading: _isImagesLoading,
-    error: _imagesError,
+    // error: _imagesError,
     refetch: refetchImages,
   } = useGetMostViewdImagesQuery();
 
   const {
     data: _topTenTextData,
-    isError: _isTopTenTextError,
-    isSuccess: _isTopTenTextSuccess,
+    // isError: _isTopTenTextError,
+    // isSuccess: _isTopTenTextSuccess,
     isLoading: _isTopTenTextLoading,
-    error: _topTenTextError,
+    // error: _topTenTextError,
     refetch: refetchTopTenText,
   } = useGetTopTenTextsQuery();
 
   const {
     data: _chillSongsData,
-    isError: _isChillSongsError,
-    isSuccess: _isChillSongsSuccess,
+    // isError: _isChillSongsError,
+    // isSuccess: _isChillSongsSuccess,
     isLoading: _isChillSongsLoading,
-    error: _chillSongsError,
+    // error: _chillSongsError,
     refetch: regreshChillSongs,
   } = useGetChillSongsQuery();
 

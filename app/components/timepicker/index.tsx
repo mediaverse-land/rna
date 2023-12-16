@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Input } from "../form";

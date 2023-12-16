@@ -58,7 +58,6 @@ export const CreateAssetForm = ({
     handleSubmit,
     control,
     setValue,
-    watch,
     resetField,
     formState: { errors },
   } = useForm();

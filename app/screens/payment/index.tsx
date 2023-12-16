@@ -1,86 +1,80 @@
-import { useState, useContext, useEffect } from "react";
-import { Linking, ScrollView, ToastAndroid, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ScreenGradient } from "../../components/screen-gradient";
-import { Box } from "../../components/box";
-import { PaymentSuccess } from "./payment-success";
-import { PaymentContentHeader } from "./components/header";
-import { HowToPayList } from "./components/how-to-pay-list";
-import { FocusedStatusBar } from "../../components/focused-statusbar";
-import { userContext } from "../../context/user";
-import { tokenContext } from "../../context/token";
-import { buyAssetApiHandler } from "./service";
-import { Button } from "../../components/button";
-import { PaddingContainer } from "../../styles/grid";
+import { useState, useContext, useEffect } from 'react';
+import { Linking, ScrollView, ToastAndroid } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScreenGradient } from '../../components/screen-gradient';
+import { Box } from '../../components/box';
+import { PaymentSuccess } from './payment-success';
+import { PaymentContentHeader } from './components/header';
+import { HowToPayList } from './components/how-to-pay-list';
+import { FocusedStatusBar } from '../../components/focused-statusbar';
+import { tokenContext } from '../../context/token';
+import { buyAssetApiHandler } from './service';
+import { Button } from '../../components/button';
+import { PaddingContainer } from '../../styles/grid';
 import {
   useCheckStripeAccountBalanceQuery,
-  useCheckStripeAccountQuery,
   useConnectToStripeMutation,
-} from "../../services/payment.service";
-import { retriveToken } from "../../utils/retrive-token";
-import { tokenStringResolver } from "../../utils/token-string-resolver";
-import { Text } from "../../components/text";
+} from '../../services/payment.service';
+import { retriveToken } from '../../utils/retrive-token';
+import { tokenStringResolver } from '../../utils/token-string-resolver';
 
 export function PaymentScreen({ navigation, route }: any) {
   const [isPayed, setIsPayed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const [token, setToken] = useState('')
+  const [token, setToken] = useState('');
 
   const { price, assetId, title, thumbnail } = route.params;
 
-  const userCtx = useContext(userContext);
+  // const userCtx = useContext(userContext);
   const tokenCtx = useContext(tokenContext);
 
-  const {data, error, isError} = useCheckStripeAccountBalanceQuery({token}, {
-    skip: !token? true: false
-  });
+  const { data,  isError } = useCheckStripeAccountBalanceQuery(
+    { token },
+    {
+      skip: !token ? true : false,
+    },
+  );
 
+  const [_connectHandler] = useConnectToStripeMutation();
 
-  const [_connectHandler,
-    { isLoading: isAddingLoading, isFetching: isAddingFetching },
-
-  ] = useConnectToStripeMutation();
-
-
-  const createStripeAccount  = async() => {
+  const createStripeAccount = async () => {
     const response = await _connectHandler({ token });
     if (response?.data?.url) {
       Linking.openURL(response?.data?.url);
     }
-  }
+  };
 
   useEffect(() => {
-    if(isError){
-      createStripeAccount()
+    if (isError) {
+      createStripeAccount();
     }
-  } ,[isError])
+  }, [isError]);
 
-  
-  const balance = data?.available?.[0]?.amount?.toString()
+  const balance = data?.available?.[0]?.amount?.toString();
 
   useEffect(() => {
-    const getToken = async() =>{
+    const getToken = async () => {
       const _token = await retriveToken(tokenCtx);
-      setToken(_token)
-    }
+      setToken(_token);
+    };
 
     getToken();
   }, []);
 
-  const connectStripeAccount = async () => {
-    
-    const response = await _connectHandler({ token });
-    if (response?.data) {
-      Linking.openURL(response?.data?.url);
-    }
-  };
+  // const connectStripeAccount = async () => {
 
-  const checkStripeAccount = async () => {
-    // /stripe/balance
-  };
+  //   const response = await _connectHandler({ token });
+  //   if (response?.data) {
+  //     Linking.openURL(response?.data?.url);
+  //   }
+  // };
 
-  const userData = userCtx.getUser();
+  // const checkStripeAccount = async () => {
+  //   // /stripe/balance
+  // };
+
+  // const userData = userCtx.getUser();
 
   const goBackHandler = () => {
     navigation.goBack();
@@ -110,7 +104,7 @@ export function PaymentScreen({ navigation, route }: any) {
     const { isSuccess, errorRes } = await buyAssetApiHandler(token, assetId);
 
     if (errorRes) {
-      const message = errorRes?.message || "Failed";
+      const message = errorRes?.message || 'Failed';
       ToastAndroid.show(message, ToastAndroid.LONG);
       setIsLoading(() => false);
     }
@@ -121,13 +115,13 @@ export function PaymentScreen({ navigation, route }: any) {
     setIsLoading(() => false);
   };
 
-  const wallet = (userData && userData?.wallets && userData?.wallets[0]) || 0;
+  // const wallet = (userData && userData?.wallets && userData?.wallets[0]) || 0;
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <FocusedStatusBar />
       <ScreenGradient>
-        <ScrollView style={{ width: "100%" }}>
+        <ScrollView style={{ width: '100%' }}>
           <Box width="100%">
             {!isPayed ? (
               <>

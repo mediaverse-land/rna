@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { BottomSheetFlatList } from "@gorhom/bottom-sheet";
 import { Box } from "../../../components/box";
 import { useGetExternalAccountsListQuery } from "../../../services/auth.service";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { retriveToken } from "../../../utils/retrive-token";
 import { tokenContext } from "../../../context/token";
-import { CondutorTitle } from "./conductor-title";
 import { TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import {

@@ -1,7 +1,6 @@
 import { memo, useCallback, useContext, useEffect, useState } from "react";
 import { Box } from "../../../components/box";
 import { ActivityIndicator } from "react-native";
-import { Text } from "../../../components/text";
 import { windowSize } from "../../../utils/window-size";
 import { BottomSheetFlatList } from "@gorhom/bottom-sheet";
 import { useGetAssetListQuery } from "../../../services/view-all.service";
@@ -81,7 +80,7 @@ const SelectContentModalMemo = ({
 
   const currentUrl = URLS[assetType][activeNav];
 
-  const { data, isLoading, isFetching, isError, error } = useGetAssetListQuery(
+  const { data, isLoading, isFetching } = useGetAssetListQuery(
     {
       url: `${currentUrl}${page}`,
       token,
@@ -105,6 +104,7 @@ const SelectContentModalMemo = ({
       if (page === 1 || current_page === 1) {
         setAssetsList(data?.data);
       } else {
+        // eslint-disable-next-line no-unsafe-optional-chaining
         setAssetsList((prev) => [...prev, ...data?.data]);
       }
     }

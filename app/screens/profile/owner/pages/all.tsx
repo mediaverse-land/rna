@@ -17,7 +17,7 @@ import RenderList from "../../components/render-list";
 import { Box } from "../../../../components/box";
 import { LoadingSpinner } from "../../../../components/loader-spinner";
 import { Spacer } from "../../../../components/spacer";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 import { createArrayOfAssetObject } from "../../../../utils/create-array-of-asset-object";
 import {
@@ -46,7 +46,6 @@ export const ProfileScreenAllPage = () => {
 
   const isFocused = useIsFocused();
   const tokenCtx = useContext(tokenContext);
-  const dispatch = useDispatch();
 
   const {
     selectedContents,
@@ -68,7 +67,7 @@ export const ProfileScreenAllPage = () => {
   }, [ACTIVE_PAGE]);
 
   useEffect(() => {
-    getData(currentPage);
+    getData();
   }, [currentPage, ACTIVE_PAGE]);
 
   useEffect(() => {
@@ -93,7 +92,7 @@ export const ProfileScreenAllPage = () => {
     }
   };
 
-  const getData = async (__currPage?: number) => {
+  const getData = async () => {
     startLoad();
     const token = await retriveToken(tokenCtx);
 
@@ -142,7 +141,7 @@ export const ProfileScreenAllPage = () => {
   const onRefresh = async () => {
     setCurrentPage(1);
     setData([]);
-    getData(1);
+    getData();
   };
 
   const _createArrayOfAssetObject = (inputData: any) => {

@@ -94,7 +94,7 @@ export function CommentCard({ assetId }: Props) {
             "body": inputValue
         }
 
-        const { isError, res, errorRes } = await submitCommentApiHandler(formattedToken, body);
+        const {  res } = await submitCommentApiHandler(formattedToken, body);
 
         if (res) {
             await getData()
@@ -198,6 +198,8 @@ const CommentInputBox = (
             submitHandler: () => void;
             isLoading: boolean
         }) => {
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [indicateSubmitButton, setIndicateSubmitButton] = useState(false);
 
     const indicateButton = () => {

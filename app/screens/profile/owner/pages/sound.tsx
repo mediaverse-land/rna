@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 import { useState, useContext, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { useIsFocused } from "@react-navigation/native";
@@ -175,7 +176,7 @@ export const ProfileScreenSoundPage = () => {
 
       const assetType = ASSET_TYPES[type];
 
-      const { isError, isSuccess, res, errorRes } = await removeAssetApiHandler(
+       await removeAssetApiHandler(
         token,
         assetType,
         id

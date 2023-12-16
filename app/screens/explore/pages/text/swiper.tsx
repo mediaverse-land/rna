@@ -37,7 +37,7 @@ export function TextPageSwiper({ data }: Props) {
         return null
     }
 
-    const [currentSlide, setCurrentSlide] = useState<Text>();
+    const [currentSlide, setCurrentSlide] = useState<Text| any>();
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
 
     useEffect(() => {

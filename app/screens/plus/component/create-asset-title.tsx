@@ -4,7 +4,7 @@ import { Text } from "../../../components/text";
 import { theme } from "../../../constaints/theme";
 import { windowSize } from "../../../utils/window-size";
 
-const { width, height } = windowSize();
+const { width } = windowSize();
 
 const HALF_ROW_WIDTH = width / 2 - 34;
 

@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { User } from "../types/user";
 
 export type UserInitialState = {
   ACTIVE_PAGE: "subscribe" | "ownership";

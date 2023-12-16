@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { FC, createContext, useState } from 'react';
 
 type Props = {
     children: React.ReactNode;
@@ -16,7 +16,7 @@ export const alertContext = createContext({
     }
 });
 
-export const AlertContextProvider: React.FC<Props> = ({ children }) => {
+export const AlertContextProvider: FC<Props> = ({ children }) => {
     const [isAlertOpen, setIsAlertOpen] = useState(false);
 
     const openAlert = () => {

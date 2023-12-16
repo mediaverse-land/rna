@@ -1,26 +1,25 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { ScreenGradient } from "../../../components/screen-gradient";
-import { tokenContext } from "../../../context/token";
-import { tokenStringResolver } from "../../../utils/token-string-resolver";
-import { VirtualizedList } from "../../../components/virtualized-list";
-import { RenderIf } from "../../../components/render-if";
-import { getLiveDataApiHandler } from "../service";
-import { Live } from "../../../types/live";
-import { SingleLiveHeader } from "./header";
-import { FocusedStatusBar } from "../../../components/focused-statusbar";
-import { SingleLiveOtherLives } from "./other-lives";
-import { useGetLivesQuery } from "../../../services/explore.service";
-import { SingleLiveComponents } from "./components";
-import BottomSheet from "@gorhom/bottom-sheet";
-import { useRecordLiveMutation } from "../../../services/live.service";
-import { ToastAndroid } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../store";
-import { addRecordLive, removeRecordById } from "../../../slices/live.slice";
-import { SINGLE_LIVE_SCREEN } from "../../../constaints/consts";
-import { Button } from "../../../components/button";
-import { useIsFocused } from "@react-navigation/native";
+import { useContext, useEffect, useRef, useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ScreenGradient } from '../../../components/screen-gradient';
+import { tokenContext } from '../../../context/token';
+import { tokenStringResolver } from '../../../utils/token-string-resolver';
+import { VirtualizedList } from '../../../components/virtualized-list';
+import { RenderIf } from '../../../components/render-if';
+import { getLiveDataApiHandler } from '../service';
+import { Live } from '../../../types/live';
+import { SingleLiveHeader } from './header';
+import { FocusedStatusBar } from '../../../components/focused-statusbar';
+import { SingleLiveOtherLives } from './other-lives';
+import { useGetLivesQuery } from '../../../services/explore.service';
+import { SingleLiveComponents } from './components';
+import BottomSheet from '@gorhom/bottom-sheet';
+import { useRecordLiveMutation } from '../../../services/live.service';
+import { ToastAndroid } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../store';
+import { addRecordLive, removeRecordById } from '../../../slices/live.slice';
+import { SINGLE_LIVE_SCREEN } from '../../../constaints/consts';
+import { useIsFocused } from '@react-navigation/native';
 
 export function SingleLiveScreen({ navigation, route }: any) {
   const { id } = route.params;
@@ -39,18 +38,10 @@ export function SingleLiveScreen({ navigation, route }: any) {
 
   const tokenCtx = useContext(tokenContext);
 
-  const {
-    data: _livesData,
-    isError: _isLivesError,
-    isSuccess: _isLivesSuccess,
-    isLoading: _isLivesLoading,
-    refetch: refreshLives,
-  } = useGetLivesQuery();
+  const { data: _livesData, isLoading: _isLivesLoading } = useGetLivesQuery();
 
-  const [
-    recordHandler,
-    { isLoading: _isRecordLiveLoading, isFetching: _isRedcordLiveFetching },
-  ] = useRecordLiveMutation();
+  const [recordHandler, { isLoading: _isRecordLiveLoading, isFetching: _isRedcordLiveFetching }] =
+    useRecordLiveMutation();
 
   useEffect(() => {
     if (isFocused && id) {
@@ -129,10 +120,7 @@ export function SingleLiveScreen({ navigation, route }: any) {
 
     const result = await recordHandler({ body: requestBody, token: token });
     if (result?.data) {
-      ToastAndroid.show(
-        `Recording live started for next ${length} minutes`,
-        ToastAndroid.SHORT
-      );
+      ToastAndroid.show(`Recording live started for next ${length} minutes`, ToastAndroid.SHORT);
       closeRecordBottomSheetHandler();
       addRecordToStore(data?.id, length * 60);
     }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ApiHandler } from '../../utils/api-handler';
 
 const _api = new ApiHandler();

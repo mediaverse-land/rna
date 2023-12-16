@@ -2,7 +2,6 @@ import { FC, useState } from "react";
 import { TouchableOpacity, LayoutChangeEvent, Image } from "react-native";
 import { Box } from "../../../components/box";
 import {
-  COMMENT_BOX_GRADIENT,
   VIDEO_FILES_ITEM_GRADEINT,
   VIDEO_FILES_WRAPPER_GRADEINT,
 } from "../../../constaints/images";

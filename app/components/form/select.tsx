@@ -1,21 +1,17 @@
 import { ReactNode, useEffect, useState } from "react";
 import {
   TextInputProps,
-  TextInput,
   TouchableOpacity,
-  View,
   Platform,
 } from "react-native";
 import { Box } from "../box";
 import { InputComponent } from "./style";
 import { Text } from "../text";
 import { theme } from "../../constaints/theme";
-import { LayoutChangeEvent } from "react-native";
 import { useRtl } from "../../hooks/use-rtl";
 import { ICON_ARROW_DOWN_SVG, ICON_FORM_ERROR } from "../../constaints/icons";
-import { useClickOutside } from "react-native-click-outside";
 
-const { InputBox, Label } = InputComponent;
+const {  Label } = InputComponent;
 
 const IS_IOS = Platform.OS === 'ios'
 

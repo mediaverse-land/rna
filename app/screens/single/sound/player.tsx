@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Audio } from "expo-av";
-import { View, TouchableOpacity, Image, StyleSheet } from "react-native";
+import {  StyleSheet } from "react-native";
 import Slider from "@react-native-community/slider";
 import { Flex, PaddingContainer } from "../../../styles/grid";
 import { Box } from "../../../components/box";
@@ -8,7 +8,6 @@ import { SoundsPageComponents } from "../../explore/pages/sounds/style";
 import {
   COMMENT_BOX_GRADIENT,
   MUSIC_PLAYER_STOP_BUTTON_GRADIENT,
-  TEXT_SWIPER_GRADIENT,
 } from "../../../constaints/images";
 import { ICON_PLAY_SVG, ICON_VIDEO_PAUSE } from "../../../constaints/icons";
 import { formatTime } from "../../../utils/format-time";
@@ -17,14 +16,7 @@ import {useIsFocused} from '@react-navigation/native'
 const {
   MusicPlayerContainer,
   MusicPlayerBox,
-  MusicPlayerBoxTitle,
   MusicPlayerContainerGradient,
-  MusicCoverSliderWrapper,
-  CurrentMusicCoverSlide,
-  PrevMusicCoverSlide,
-  NextMusicCoverSlide,
-  CurrentTrackTitle,
-  CurrentTrackSinger,
   CurrentSliderTime,
   StartStopButton,
   StartStopButtonGradient,

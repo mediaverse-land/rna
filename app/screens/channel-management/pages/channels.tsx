@@ -13,9 +13,8 @@ import {
   View,
 } from "react-native";
 import { Box } from "../../../components/box";
-import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
+import BottomSheet from "@gorhom/bottom-sheet";
 import { alertContext } from "../../../context/alert";
-import { FlashList } from "@shopify/flash-list";
 import { tokenContext } from "../../../context/token";
 import { retriveToken } from "../../../utils/retrive-token";
 import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";

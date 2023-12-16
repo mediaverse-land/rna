@@ -89,7 +89,7 @@ function RenderList({
       });
   };
 
-  const renderListItem = ({ item, index }: { item: any; index: number }) => {
+  const renderListItem = ({ item }: { item: any }) => {
     const isSelected = isSelectedContent(item.id);
 
     const contentData = {

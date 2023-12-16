@@ -1,4 +1,5 @@
-import { FlatList, Platform, StyleSheet, View } from "react-native";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { FlatList, Platform,  View } from "react-native";
 import { Box } from "../../../components/box";
 import {
   lazy,
@@ -13,7 +14,6 @@ import {
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import { Calendar } from "../../../components/calendar";
-import { FlashList } from "@shopify/flash-list";
 import { alertContext } from "../../../context/alert";
 import BottomSheet, { BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { CreateConductorFormMemo } from "../components/create-conductor-form";

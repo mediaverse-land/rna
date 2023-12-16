@@ -1,18 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useRef, useState } from "react";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { theme } from "../../../constaints/theme";
-import { Box } from "../../../components/box";
-import { Text } from "../../../components/text";
-import { Flex } from "../../../styles/grid";
-import { TouchableOpacity } from "react-native";
-import { useRtl } from "../../../hooks/use-rtl";
-import { UseNavigationType } from "../../../types/use-navigation";
-import { StorageService } from "../../../services/storage.service";
-import {
-  HAS_USER_SEEN_SETTINGS_TOUR,
-} from "../../../constaints/consts";
-import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
+import { useEffect, useRef, useState } from 'react';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { theme } from '../../../constaints/theme';
+import { Box } from '../../../components/box';
+import { Text } from '../../../components/text';
+import { Flex } from '../../../styles/grid';
+import { TouchableOpacity } from 'react-native';
+import { useRtl } from '../../../hooks/use-rtl';
+import { UseNavigationType } from '../../../types/use-navigation';
+import { StorageService } from '../../../services/storage.service';
+import { HAS_USER_SEEN_SETTINGS_TOUR } from '../../../constaints/consts';
+import { Coachmark, CoachmarkComposer } from 'react-native-coachmark';
 
 export type ListColumnItem = {
   id: number;
@@ -21,7 +19,7 @@ export type ListColumnItem = {
   bage?: number | string | null;
   icon: any;
   routePath?: string;
-  direction?: "row-reverse";
+  direction?: 'row-reverse';
   iconStyle?: any;
   isDisabled?: boolean;
 };
@@ -33,9 +31,8 @@ type Props = {
 };
 
 const ACCOUNT_TOUR =
-  "In the account, you can edit your name, username, password and everything you entered during registration or log out of your !account";
-const INBOX_TOUR =
-  "The latest news and announcements of the platform can be seen in your inbox";
+  'In the account, you can edit your name, username, password and everything you entered during registration or log out of your !account';
+const INBOX_TOUR = 'The latest news and announcements of the platform can be seen in your inbox';
 
 const _storageService = new StorageService();
 const CoachmarkWrapper: any = Coachmark;
@@ -44,11 +41,11 @@ export function ListColumn({ data, onpress, hasTour = false }: Props) {
   const { isRtl } = useRtl();
   const navigation = useNavigation<UseNavigationType>();
 
-  const [allowIntraction, setAllowIntraction] = useState(hasTour ? false : true)
+  const [allowIntraction, setAllowIntraction] = useState(hasTour ? false : true);
 
   const navigationHandler = (routePath: string) => {
-    if(!allowIntraction){
-      return  
+    if (!allowIntraction) {
+      return;
     }
     navigation.navigate(routePath);
   };
@@ -57,17 +54,14 @@ export function ListColumn({ data, onpress, hasTour = false }: Props) {
 
   const hasUserSeenTour = async () => {
     const res = await _storageService.get(HAS_USER_SEEN_SETTINGS_TOUR);
-    if(res){
-      setAllowIntraction(true)
+    if (res) {
+      setAllowIntraction(true);
     }
     return res ? true : false;
   };
 
   const _userSeenTourHandler = async () => {
-    await _storageService.set(
-      HAS_USER_SEEN_SETTINGS_TOUR,
-      HAS_USER_SEEN_SETTINGS_TOUR
-    );
+    await _storageService.set(HAS_USER_SEEN_SETTINGS_TOUR, HAS_USER_SEEN_SETTINGS_TOUR);
   };
 
   const accountRef = useRef();
@@ -84,7 +78,7 @@ export function ListColumn({ data, onpress, hasTour = false }: Props) {
         const composer = new CoachmarkComposer([accountRef, inboxRef]);
         composer.show().then(async () => {
           await _userSeenTourHandler();
-          setAllowIntraction(true)
+          setAllowIntraction(true);
         });
       }, 3000);
     }
@@ -116,11 +110,10 @@ export function ListColumn({ data, onpress, hasTour = false }: Props) {
             const ref = retriveRefs[index] || null;
             return (
               <CoachmarkWrapper
+                key={list.id}
                 ref={ref}
                 allowBackgroundInteractions={false}
-                message={
-                  index === 0 ? ACCOUNT_TOUR : index === 1 ? INBOX_TOUR : null
-                }
+                message={index === 0 ? ACCOUNT_TOUR : index === 1 ? INBOX_TOUR : null}
               >
                 <Item
                   list={list}
@@ -156,14 +149,9 @@ const Item = ({ list, navigationHandler, data, onpress, isRtl }: any) => {
           onpress && onpress();
         }}
       >
-        <Flex
-          width="100%"
-          direction="row"
-          align="center"
-          justify="space-between"
-        >
+        <Flex width="100%" direction="row" align="center" justify="space-between">
           <Flex width="60%" direction="row" align="center">
-            {!list.direction || list.direction !== "row-reverse" ? (
+            {!list.direction || list.direction !== 'row-reverse' ? (
               <list.icon
                 style={[
                   list.iconStyle,
@@ -175,7 +163,7 @@ const Item = ({ list, navigationHandler, data, onpress, isRtl }: any) => {
               />
             ) : null}
             <Text
-              color={list?.isDisabled ? "#5A5A5A" : theme.color.light.WHITE}
+              color={list?.isDisabled ? '#5A5A5A' : theme.color.light.WHITE}
               fontSize={14}
               lineHeight={20}
             >
@@ -183,14 +171,14 @@ const Item = ({ list, navigationHandler, data, onpress, isRtl }: any) => {
             </Text>
           </Flex>
 
-          {list?.direction === "row-reverse" ? (
+          {list?.direction === 'row-reverse' ? (
             <list.icon
               style={[
                 list.iconStyle,
                 {
                   transform: [
                     {
-                      rotate: isRtl ? "180deg" : "0deg",
+                      rotate: isRtl ? '180deg' : '0deg',
                     },
                   ],
                 },

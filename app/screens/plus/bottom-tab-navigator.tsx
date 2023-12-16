@@ -2,7 +2,6 @@ import { useCallback, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StatusBar } from "react-native";
-import { Box } from "../../components/box";
 import { CreateImageScreen } from "./pages/create-image";
 import { CreateSoundScreen } from "./pages/create-sound";
 import { CreateTextScreen } from "./pages/create-text";
@@ -73,7 +72,7 @@ export const Navigator = () => {
       {/* if route === createImage => hide bottom tab and show inner bottom tab in 
               createImageScreen */}
       <Tab.Navigator
-        tabBar={(props) => (
+        tabBar={() => (
           // <BottomTabBar {...props} />
           <></>
         )}

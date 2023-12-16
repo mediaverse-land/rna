@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Box } from "../box";
 import { Text } from "../text";
 import { theme } from "../../constaints/theme";
 import { windowSize } from "../../utils/window-size";
-import { FirebasePushNotificationController } from "../../controllers/push-notification-controller";
+// import { FirebasePushNotificationController } from "../../controllers/push-notification-controller";
 import { StorageService } from "../../services/storage.service";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
@@ -21,8 +22,8 @@ const { width: WINDOW_WIDTH, height: WINDOW_HEIGHT } = windowSize();
 const NOTIFICATION_BOX_ALERT_WIDTH = WINDOW_WIDTH - 48;
 const NOTIFICATION_BOX_ALERT_TOP_DISTANCE = WINDOW_HEIGHT / 2 - 100;
 
-const _firebasePushNotificationController =
-  new FirebasePushNotificationController();
+// const _firebasePushNotificationController =
+//   new FirebasePushNotificationController();
 const _storageService = new StorageService();
 
 export function PushNotificationPermissionAlert({ isAuth }: Props) {
@@ -90,7 +91,7 @@ export function PushNotificationPermissionAlert({ isAuth }: Props) {
 
   const _openSettingsHandler = async () => {
     setOpenBox(false)
-    await _firebasePushNotificationController.openSettings();
+    // await _firebasePushNotificationController.openSettings();
   };
 
   const modalCloserHandler = () => setOpenBox(false);

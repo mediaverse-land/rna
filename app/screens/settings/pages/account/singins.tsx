@@ -13,8 +13,6 @@ import { tokenStringResolver } from '../../../../utils/token-string-resolver';
 import { tokenContext } from '../../../../context/token';
 import { Signin } from '../../../../types/signin';
 import { VirtualizedList } from '../../../../components/virtualized-list';
-import { useIsFocused } from '@react-navigation/native';
-import { StatusBar } from 'react-native';
 import { RenderIf } from '../../../../components/render-if';
 import { IfNoItem } from '../../../../components/if-no-item';
 import { FocusedStatusBar } from '../../../../components/focused-statusbar';
@@ -123,7 +121,6 @@ export function SignInsPage() {
     useEffect(() => {
         getSessions();
     }, []);
-    const isFocused = useIsFocused();
 
     return (
         <SafeAreaView style={{ flex: 1 }}>

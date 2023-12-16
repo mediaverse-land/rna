@@ -31,13 +31,10 @@ import { RenderIfWithoutLoading } from "../../../components/render-if-without-lo
 import { retriveToken } from "../../../utils/retrive-token";
 import { Toolbar } from "../components/toolbar";
 import {
-  ICON_EDIT_DARK,
   ICON_SHARE_YOUTUBE,
   ICON_SINGLE_CONVERT_TO_IMAGE,
   ICON_SINGLE_CONVERT_TO_TEXT,
   ICON_SINGLE_EDIT,
-  ICON_SOUND_WHITE,
-  ICON_TEXT_WHITE,
 } from "../../../constaints/icons";
 import { PaddingContainer } from "../../../styles/grid";
 import { AUDIO_THUMBNAIL_PLACEHOLDER } from "../../../constaints/images";
@@ -48,8 +45,6 @@ import { SingleAssetFooter } from "../components/footer";
 import { useYoutubeShareMutation } from "../../../services/asset.service";
 import { YoutubeShare } from "../components/youtube-share";
 import { BackButtonRedirector } from "../utils/back-button-redirector";
-
-let counter = 0;
 
 const _backButtonRedirector = new BackButtonRedirector();
 const _youtubeShare = new YoutubeShare();
@@ -232,7 +227,7 @@ export function SingleSoundScreen({ navigation, route }: any) {
       audio: itemId,
     };
 
-    const { isError, isSuccess, errorRes, res } =
+    const { isError, isSuccess } =
       await convertAudioToImageHandler(token, data?.id, body);
 
     if (isSuccess) {
@@ -267,7 +262,7 @@ export function SingleSoundScreen({ navigation, route }: any) {
       language: selectLanguageRef,
     };
 
-    const { isError, isSuccess, errorRes, res } = await translateAudioHandler(
+    const { isError, isSuccess } = await translateAudioHandler(
       token,
       data?.id,
       body

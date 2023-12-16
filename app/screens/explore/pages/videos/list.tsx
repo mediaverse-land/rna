@@ -7,7 +7,6 @@ import {
 } from "../../../../constaints/images";
 import { Flex, PaddingContainer } from "../../../../styles/grid";
 import { UserNameCard } from "../../../../components/username-card";
-import { useNavigation } from "@react-navigation/native";
 import { UseNavigationType } from "../../../../types/use-navigation";
 import { theme } from "../../../../constaints/theme";
 import { Asset } from "../../../../types/asset";

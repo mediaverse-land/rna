@@ -1,24 +1,22 @@
-import React, { useMemo, useRef, useState } from "react";
-import { Box } from "../../../components/box";
-import { Image, TouchableOpacity, View } from "react-native";
-import { Text } from "../../../components/text";
-import { theme } from "../../../constaints/theme";
-import { ICON_DOWNLOAD_WHITE } from "../../../constaints/icons";
-import { tokenStringResolver } from "../../../utils/token-string-resolver";
-import { StorageService } from "../../../services/storage.service";
-import { Logger } from "../../../utils/logger";
-import { useGoogleDriveShareMutation } from "../../../services/asset.service";
+import React, { useMemo, useRef, useState } from 'react';
+import { Box } from '../../../components/box';
+import { Image, TouchableOpacity, View } from 'react-native';
+import { Text } from '../../../components/text';
+import { theme } from '../../../constaints/theme';
+import { ICON_DOWNLOAD_WHITE } from '../../../constaints/icons';
+import { tokenStringResolver } from '../../../utils/token-string-resolver';
+import { useGoogleDriveShareMutation } from '../../../services/asset.service';
 import {
   DOWNLOAD_BTN_BG_GTADIENT,
   EDIT_BTN_BG_GTADIENT,
   SINGLE_ASSET_FOOTER_BG_PNG_GRADIENT,
-} from "../../../constaints/images";
-import ExternalAccountBottomSheet from "../../../components/external-account-bottom-sheet";
-import { ModalBottomSheet } from "../../../components/bottom-sheet-modal";
-import { useClickOutside } from "react-native-click-outside";
-import { ExternalAccount } from "../../../types/external-account";
-import { Toaster } from "../../../utils/toaster";
-import { LoadingSpinner } from "../../../components/loader-spinner";
+} from '../../../constaints/images';
+import ExternalAccountBottomSheet from '../../../components/external-account-bottom-sheet';
+import { ModalBottomSheet } from '../../../components/bottom-sheet-modal';
+import { useClickOutside } from 'react-native-click-outside';
+import { ExternalAccount } from '../../../types/external-account';
+import { Toaster } from '../../../utils/toaster';
+import { LoadingSpinner } from '../../../components/loader-spinner';
 
 type Props = {
   fileName: string;
@@ -29,21 +27,16 @@ type Props = {
   token: string;
 };
 
-const _logger = new Logger();
 const _toaster = new Toaster();
 
 export const SingleAssetFooter = ({
   fileName,
   editorHandler,
   asset_Id,
-  parent_Id,
   tokenCtx,
   token,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const [_selectedAccount, setSelectedAccount] =
-    useState<ExternalAccount>(null);
 
   const selectAccountRef = useRef(null);
 
@@ -51,8 +44,7 @@ export const SingleAssetFooter = ({
     selectAccountRef?.current.close();
   });
 
-  const [downalodHandler, { isLoading, isFetching, error }] =
-    useGoogleDriveShareMutation();
+  const [downalodHandler, { isLoading, isFetching }] = useGoogleDriveShareMutation();
 
   const getToken = async () => {
     const token = await tokenCtx.getToken();
@@ -67,41 +59,35 @@ export const SingleAssetFooter = ({
     selectAccountRef?.current?.close();
   };
 
-  const downalodToGoogleDriveHandler = async (
-    accounId: number,
-    time: string
-  ) => {
+  const downalodToGoogleDriveHandler = async (accounId: number, time: string) => {
     const requestBody: Record<string, any> = {
       asset: asset_Id,
       account: accounId,
     };
 
     if (time) {
-      requestBody["times"] = [time];
+      requestBody['times'] = [time];
     }
 
     const token = await getToken();
 
     const result = await downalodHandler({ body: requestBody, token });
     if (result?.error) {
-      _toaster.show("Error while saving asset to your google drive");
+      _toaster.show('Error while saving asset to your google drive');
     }
     if (result?.data) {
-      _toaster.show("Asset saved to your google drive successfully");
+      _toaster.show('Asset saved to your google drive successfully');
     }
   };
 
-  const getExternalAccountHandler = async (
-    _account: ExternalAccount,
-    time: string
-  ) => {
+  const getExternalAccountHandler = async (_account: ExternalAccount, time: string) => {
     const accounId: number = _account?.id;
 
     await downalodToGoogleDriveHandler(accounId, time);
     closeDownoadModal();
   };
 
-  const snapPoints = useMemo(() => ["25%", "50%"], []);
+  const snapPoints = useMemo(() => ['25%', '50%'], []);
 
   if (!token) {
     return;
@@ -127,7 +113,8 @@ export const SingleAssetFooter = ({
         </Box>
       ) : null}
       <ModalBottomSheet
-      // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         onChange={(e) => {
           if (e !== 1) {
             setIsOpen(true);
@@ -178,9 +165,9 @@ const DownloadButton = ({ handler, fileName }: any) => {
             uri: DOWNLOAD_BTN_BG_GTADIENT,
           }}
           style={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
             top: 0,
             left: 0,
           }}
@@ -206,21 +193,15 @@ const DownloadButton = ({ handler, fileName }: any) => {
 const EditButton = ({ handler }: any) => {
   return (
     <TouchableOpacity onPress={handler} activeOpacity={1}>
-      <Box
-        width="100%"
-        height={48}
-        borderRadius={8}
-        justifyContent="center"
-        alignItems="center"
-      >
+      <Box width="100%" height={48} borderRadius={8} justifyContent="center" alignItems="center">
         <Image
           source={{
             uri: EDIT_BTN_BG_GTADIENT,
           }}
           style={{
-            width: "100%",
-            height: "100%",
-            position: "absolute",
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
             top: 0,
             left: 0,
           }}
@@ -254,9 +235,9 @@ const GradientBg = () => {
         uri: SINGLE_ASSET_FOOTER_BG_PNG_GRADIENT,
       }}
       style={{
-        width: "101%",
-        height: "100%",
-        position: "absolute",
+        width: '101%',
+        height: '100%',
+        position: 'absolute',
         left: 0,
         top: 0,
         zIndex: 1,

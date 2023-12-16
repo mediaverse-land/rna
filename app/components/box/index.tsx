@@ -55,7 +55,6 @@ type Props = {
 };
 
 export function Box({
-    id,
     flexWrap,
     children,
     marginTop,

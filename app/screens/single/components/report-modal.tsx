@@ -9,10 +9,6 @@ import { LoadingSpinner } from "../../../components/loader-spinner";
 import { Box } from "../../../components/box";
 import { Toaster } from "../../../utils/toaster";
 
-type Props = {
-  openReportModal: boolean;
-  ref: any;
-};
 
 const reportItems = [
   {
@@ -104,7 +100,7 @@ export const ReportModal = ({
     }
 
     const formattedToken = tokenStringResolver(token);
-    const { isError, res, errorRes } = await reportAssetApiHandler(
+    const { isError } = await reportAssetApiHandler(
       formattedToken,
       assetId,
       categoryId

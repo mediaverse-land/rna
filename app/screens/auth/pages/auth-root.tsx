@@ -9,6 +9,7 @@ import { windowSize } from "../../../utils/window-size";
 import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
 import { lazy, useState } from "react";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 const TermsOfUseModal = lazy(() => import("../components/terms-of-use-modal"));
 

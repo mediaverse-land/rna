@@ -2,7 +2,6 @@ import { HorizontalSlider } from "../../../../components/horizontal-slider";
 import { IfNoItem } from "../../../../components/if-no-item";
 import { RenderIf } from "../../../../components/render-if";
 import { Title } from "../../../../components/title";
-import { PaddingContainer } from "../../../../styles/grid";
 import { Sound } from "../../../../types/sound";
 import { Box } from "../../../../components/box";
 import { BEST_IN_MONTH } from "../../../../constaints/consts";

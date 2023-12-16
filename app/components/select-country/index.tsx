@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { TouchableOpacity } from "react-native";
 import { BottomSheetFlatList } from "@gorhom/bottom-sheet";
 import {

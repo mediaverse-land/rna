@@ -1,5 +1,4 @@
 import { FC, useCallback } from "react";
-import { ImagesPageComponents } from "./style";
 import { Title } from "../../../../components/title";
 import { Box } from "../../../../components/box";
 import { useRtl } from "../../../../hooks/use-rtl";
@@ -15,7 +14,6 @@ import {
 import { UseNavigationType } from "../../../../types/use-navigation";
 import { ICON_LIVE_CHANNELS } from "../../../../constaints/icons";
 
-const { DailyRecomended } = ImagesPageComponents;
 
 type Props = {
   data: Live[];

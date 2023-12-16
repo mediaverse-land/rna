@@ -1,33 +1,29 @@
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
-import { useGetExternalAccountsListQuery } from "../../../services/auth.service";
-import { useClickOutside } from "react-native-click-outside";
-import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
-import { ChannelItem, ShareItem } from "../types";
-import { Box } from "../../../components/box";
-import { LinearGradient } from "expo-linear-gradient";
-import {
-  ICON_MENU_VERTICAL,
-  ICON_SPEAKER_BLACK,
-} from "../../../constaints/icons";
-import { Text } from "../../../components/text";
-import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
-import { ActivityIndicator } from "react-native";
-import { BlurView } from "expo-blur";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { memo, useCallback, useEffect, useState } from 'react';
+import { useClickOutside } from 'react-native-click-outside';
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { ShareItem } from '../types';
+import { Box } from '../../../components/box';
+import { LinearGradient } from 'expo-linear-gradient';
+import { ICON_MENU_VERTICAL, ICON_SPEAKER_BLACK } from '../../../constaints/icons';
+import { Text } from '../../../components/text';
+import { RenderIfWithoutLoading } from '../../../components/render-if-without-loading';
+import { ActivityIndicator } from 'react-native';
+import { BlurView } from 'expo-blur';
 import {
   useGetShareListQuery,
-  useRemoveExternalAccountMutation,
   useRemoveShareItemMutation,
-} from "../../../services/asset.service";
-import { Toaster } from "../../../utils/toaster";
+} from '../../../services/asset.service';
+import { Toaster } from '../../../utils/toaster';
 
 const gradientProps = {
   style: {
-    width: "100%",
+    width: '100%',
     height: 72,
     borderRadius: 16,
     padding: 1,
   },
-  colors: ["rgba(207, 207, 252, 0)", "rgba(207, 207, 252, 0.3)"],
+  colors: ['rgba(207, 207, 252, 0)', 'rgba(207, 207, 252, 0.3)'],
   start: {
     x: 0.7,
     y: 0,
@@ -41,7 +37,7 @@ const speakerIconGradientProps = {
     borderRadius: 8,
     padding: 1,
   },
-  colors: ["#8bb3ff", "#4484ff"],
+  colors: ['#8bb3ff', '#4484ff'],
   start: {
     x: 0.1,
     y: 0.7,
@@ -56,18 +52,11 @@ const menuWindowGradientProps = {
     padding: 1,
     opacity: 0.5,
   },
-  colors: ["#4b4b55", "#38383c"],
+  colors: ['#4b4b55', '#38383c'],
   start: {
     x: 0.1,
     y: 0.7,
   },
-};
-
-const accountTypes = {
-  1: "Google",
-  2: "Twitter",
-  3: "Meta",
-  4: "RTMP",
 };
 
 const _toaster = new Toaster();
@@ -75,7 +64,7 @@ const _toaster = new Toaster();
 const MemoShareList = ({ token }: { token: string }) => {
   const [activeEditWindowId, setActiveEditWindowId] = useState<number>(null);
 
-  const [selectedItem, setSelectedItem] = useState<number>(null);
+  const [setSelectedItem] = useState<number| any>(null);
 
   const [dataList, setDataList] = useState<ShareItem[]>([]);
 
@@ -84,7 +73,7 @@ const MemoShareList = ({ token }: { token: string }) => {
   const openEditWindowHandler = (id: number) => setActiveEditWindowId(id);
   const closeEditWindowHandler = () => setActiveEditWindowId(null);
 
-  const { data, isLoading, isFetching, refetch, error } = useGetShareListQuery({
+  const { data, isLoading, isFetching } = useGetShareListQuery({
     token,
     page,
   });
@@ -97,6 +86,7 @@ const MemoShareList = ({ token }: { token: string }) => {
       if (page === 1 || current_page === 1) {
         setDataList(data?.data);
       } else {
+        // eslint-disable-next-line no-unsafe-optional-chaining
         setDataList((prev) => [...prev, ...data?.data]);
       }
     }
@@ -106,10 +96,8 @@ const MemoShareList = ({ token }: { token: string }) => {
     closeEditWindowHandler();
   });
 
-  const [
-    _removeItemHandler,
-    { isLoading: isRremoveLoading, isFetching: isRremoveFetching },
-  ] = useRemoveShareItemMutation();
+  const [_removeItemHandler, { isLoading: isRremoveLoading, isFetching: isRremoveFetching }] =
+    useRemoveShareItemMutation();
 
   const removeExternalAccountHandler = async (accountId: number) => {
     setSelectedItem(accountId);
@@ -120,14 +108,14 @@ const MemoShareList = ({ token }: { token: string }) => {
     });
 
     if (resposne && !resposne?.error) {
-      _toaster.show("Item deleted successfully");
+      _toaster.show('Item deleted successfully');
       setSelectedItem(null);
       const filteredList = dataList?.filter((f) => f.id !== accountId);
       setDataList(filteredList);
       closeEditWindowHandler();
     }
     if (resposne?.error) {
-      _toaster.show("Failed");
+      _toaster.show('Failed');
     }
   };
 
@@ -146,11 +134,7 @@ const MemoShareList = ({ token }: { token: string }) => {
   const renderItem = ({ item }: { item: ShareItem }) => {
     return (
       <TouchableOpacity activeOpacity={1}>
-        <Box
-          width="100%"
-          marginBottom={16}
-          height={activeEditWindowId === item.id ? 95 : 72}
-        >
+        <Box width="100%" marginBottom={16} height={activeEditWindowId === item.id ? 95 : 72}>
           <Box position="relative" zIndex={10} width="100%">
             <LinearGradient {...gradientProps}>
               <Box
@@ -164,12 +148,7 @@ const MemoShareList = ({ token }: { token: string }) => {
                 position="relative"
                 justifyContent="space-between"
               >
-                <Box
-                  width="90%"
-                  height="100%"
-                  direction="row"
-                  alignItems="center"
-                >
+                <Box width="90%" height="100%" direction="row" alignItems="center">
                   <LinearGradient {...speakerIconGradientProps}>
                     <Box
                       id="speaker-icon"
@@ -182,19 +161,11 @@ const MemoShareList = ({ token }: { token: string }) => {
                     </Box>
                   </LinearGradient>
                   <Box flex={1} height="100%" paddingLeft={16}>
-                    <Text
-                      color="rgba(255, 255, 255, 1)"
-                      fontWeight={600}
-                      fontSize={16}
-                    >
+                    <Text color="rgba(255, 255, 255, 1)" fontWeight={600} fontSize={16}>
                       {/* @ts-ignore */}
                       share to {item?.type}
                     </Text>
-                    <Text
-                      color="rgba(102, 102, 128, 1)"
-                      fontWeight={400}
-                      fontSize={12}
-                    >
+                    <Text color="rgba(102, 102, 128, 1)" fontWeight={400} fontSize={12}>
                       {item?.time}
                     </Text>
                   </Box>
@@ -204,12 +175,7 @@ const MemoShareList = ({ token }: { token: string }) => {
                     onPress={() => openEditWindowHandler(item.id)}
                     activeOpacity={1}
                   >
-                    <Box
-                      alignItems="center"
-                      justifyContent="center"
-                      width={40}
-                      height={40}
-                    >
+                    <Box alignItems="center" justifyContent="center" width={40} height={40}>
                       <ICON_MENU_VERTICAL />
                     </Box>
                   </TouchableOpacity>
@@ -232,12 +198,7 @@ const MemoShareList = ({ token }: { token: string }) => {
                       activeOpacity={1}
                       onPress={() => removeExternalAccountHandler(item?.id)}
                     >
-                      <Text
-                        color="#D9D9FF"
-                        marginBottom={16}
-                        fontSize={14}
-                        fontWeight={600}
-                      >
+                      <Text color="#D9D9FF" marginBottom={16} fontSize={14} fontWeight={600}>
                         Delete
                       </Text>
                     </TouchableOpacity>
@@ -251,10 +212,7 @@ const MemoShareList = ({ token }: { token: string }) => {
     );
   };
 
-  const key = useCallback(
-    (item: ShareItem, index: number) => item?.id?.toString(),
-    []
-  );
+  const key = useCallback((item: ShareItem) => item?.id?.toString(), []);
 
   return (
     <Box id="channels-list" width="100%" marginTop={32}>
@@ -264,16 +222,14 @@ const MemoShareList = ({ token }: { token: string }) => {
         renderItem={renderItem}
         keyExtractor={key}
         style={{
-          overflow: "visible",
+          overflow: 'visible',
           paddingBottom: 100,
         }}
         onEndReached={nextPageHandler}
       />
       {/* ) : null} */}
       <RenderIfWithoutLoading
-        condition={
-          isLoading || isFetching || isRremoveFetching || isRremoveLoading
-        }
+        condition={isLoading || isFetching || isRremoveFetching || isRremoveLoading}
       >
         <Box marginTop={-100}>
           <ActivityIndicator color="#8A8AE5" />
@@ -286,7 +242,7 @@ export const ShareList = memo(MemoShareList);
 
 const styles = StyleSheet.create({
   editViewWrapper: {
-    position: "absolute",
+    position: 'absolute',
     width: 124,
     height: 124,
     zIndex: 100000000,
@@ -294,8 +250,8 @@ const styles = StyleSheet.create({
     top: 58,
   },
   blur: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%',
     borderRadius: 16,
   },
 });

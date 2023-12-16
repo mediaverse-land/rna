@@ -75,7 +75,7 @@ export const SendCode = ({
         if (isLoading || !otp_code || !phoneNumber) return;
 
         const phoneInputValue = removeZeroFromPhoneNumber(phoneNumber);
-        const { isError, isSuccess, res, errorRes } = await submitCodeApiHandler(
+        const { isError, isSuccess, res } = await submitCodeApiHandler(
             phoneInputValue,
             otp_code
         );

@@ -1,5 +1,4 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import TopTabBar from "../../components/top-tab-bar";
 import { AppsPageAllScreen } from "./all";
 import { Box } from "../../components/box";
 
@@ -43,7 +42,7 @@ export function Navigator() {
     <Box width={"100%"} flex={1}>
       {/* <Tab.Navigator tabBar={(props) => <TopTabBar {...props} />}> */}
       <Tab.Navigator
-        tabBar={(props) => <></>}
+        tabBar={() => <></>}
         screenOptions={{
           animationEnabled: false,
           swipeEnabled: false,

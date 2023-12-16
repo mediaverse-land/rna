@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { createContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useState, useEffect, ReactNode, FC } from 'react';
 import { StorageService } from '../services/storage.service';
 import { RootService } from '../services/root.service';
 import { User } from '../types/user';
@@ -24,7 +24,7 @@ export const userContext = createContext({
 const _storageService = new StorageService();
 const _rootService = new RootService();
 
-export const UserContextProvider: React.FC<Props> = ({ children }) => {
+export const UserContextProvider: FC<Props> = ({ children }) => {
     const [userData, setUserData] = useState<User>(null);
 
     const forceUpdate = useForceUpdate();

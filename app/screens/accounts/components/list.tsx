@@ -1,19 +1,16 @@
-import { FC, useCallback } from "react";
+import { FC } from "react";
 import { FlatList, Image, TouchableOpacity } from "react-native";
 import { ExternalAccount } from "../../../types/external-account";
 import { Box } from "../../../components/box";
 import { SHARE_ACCOUNT_ITEM_BG } from "../../../constaints/images";
 import {
   ICONS_GOOGLE_BLUE,
-  ICON_RESET,
   ICON_STREAM,
   ICON_TRASHBEEN,
 } from "../../../constaints/icons";
 import { Text } from "../../../components/text";
 import { theme } from "../../../constaints/theme";
 import { LoadingSpinner } from "../../../components/loader-spinner";
-import { enviroments } from "../../../../enviroments/enviroments";
-import * as Google from "expo-auth-session/providers/google";
 
 type ListProps = {
   data: ExternalAccount[];
@@ -25,7 +22,6 @@ type ListProps = {
 export const AccountsScreenListComponent: FC<ListProps> = ({
   data,
   isLoading,
-  updateAccountHandler,
   removaAccountHandler,
 }) => {
   const renderItem = ({ item }: { item: ExternalAccount }) => {

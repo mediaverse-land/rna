@@ -9,8 +9,6 @@ import { theme } from "../../../constaints/theme";
 import { ICON_EYE_GRAY, ICON_SHRE_GRAY } from "../../../constaints/icons";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { UseNavigationType } from "../../../types/use-navigation";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../store";
 import { StorageService } from "../../../services/storage.service";
 import { Coachmark, CoachmarkComposer } from "react-native-coachmark";
 import { useEffect, useRef, useState } from "react";
@@ -52,7 +50,6 @@ export function BuyBottom({
   const [isTourActive, setIsTourActive] = useState(false)
 
   const navigation = useNavigation<UseNavigationType>();
-  const dispatch = useDispatch<AppDispatch>();
   const isFocused = useIsFocused();
 
   const buttomRef = useRef();

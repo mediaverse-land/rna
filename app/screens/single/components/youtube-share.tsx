@@ -84,7 +84,7 @@ export class YoutubeShare implements IYoutubeShare {
     _assetId: number,
     time: string
   ) {
-    let requestBody: Record<string, any> = {
+    const requestBody: Record<string, any> = {
       account: _accountId,
       asset: _assetId,
       title,

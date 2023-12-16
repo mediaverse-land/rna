@@ -26,6 +26,7 @@ export const SingleLiveOtherLives: FC<Props> = ({
     return (
       <Box marginLeft={index === 0 ? 24 : 0}>
         <HorizontalSlide
+        index={index}
           id={item.id}
           title={null}
           thumbnailPath={item.thumbnail}

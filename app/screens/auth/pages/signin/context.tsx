@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { createContext, useState, ReactNode } from 'react';
+import { createContext, useState, ReactNode, FC } from 'react';
 
 type Props = {
     children: ReactNode;
@@ -32,7 +32,7 @@ export const signupContext = createContext<Context>({
     }
 });
 
-export const TokenContextProvider: React.FC<Props> = ({ children }) => {
+export const TokenContextProvider: FC<Props> = ({ children }) => {
     const [expiredTime, setExpiredTime] = useState<string>(null);
     const [phoneNumber, setPhoneNumber] = useState<string>(null);
     const [token, setToken] = useState<string>(null);

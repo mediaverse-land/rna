@@ -126,6 +126,7 @@ export const ProfileScreenTextPage = () => {
       stopLoad();
       return;
     } else {
+      // eslint-disable-next-line no-unsafe-optional-chaining
       setData([...data, ...res.data?.data]);
       stopLoad();
     }

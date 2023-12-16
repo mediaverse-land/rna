@@ -4,7 +4,7 @@ import { Title } from "../../../../components/title";
 import { ICON_TOP_TABBAR_IMAGE_ACTIVE_SVG } from "../../../../constaints/icons";
 import Masonry from "../../../../components/masonry";
 import { Box } from "../../../../components/box";
-import { Flex, PaddingContainer } from "../../../../styles/grid";
+import {  PaddingContainer } from "../../../../styles/grid";
 import { Asset } from "../../../../types/asset";
 import { RenderIf } from "../../../../components/render-if";
 import { IfNoItem } from "../../../../components/if-no-item";

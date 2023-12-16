@@ -39,8 +39,6 @@ const _storageService = new StorageService();
 const CoachmarkWrapper: any = Coachmark;
 
 export function BottomTabBar({
-  state,
-  descriptors,
   navigation,
   submitButtonHandler,
   longPressSubmitButtonHandler,
@@ -64,7 +62,7 @@ export function BottomTabBar({
 
   const isFocused = useIsFocused();
 
-  const [menuOrder, setMenuOrder] = useState(currentIcons);
+  const [menuOrder] = useState(currentIcons);
 
   const tabBarItemClickNavigateHandler = (screenName: string) => {
     if (isLoading) {

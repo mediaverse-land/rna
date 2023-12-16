@@ -10,9 +10,6 @@ import {
 } from "../../../constaints/images";
 import { SingleItemUsernameAndDuration } from "../components/username-and-duration";
 import { theme } from "../../../constaints/theme";
-import { Toolbar } from "../components/toolbar";
-import { RenderIfWithoutLoading } from "../../../components/render-if-without-loading";
-import { PaddingContainer } from "../../../styles/grid";
 
 type Props = {
   goBackHandler: () => void;
@@ -37,8 +34,6 @@ export function SingleTextHeader({
   isOwner = false,
   asset_username,
   user_image_url,
-  toolbar_options,
-  hasPermission,
 }: Props) {
   const thumbnailHeaderGradient = (
     <Image

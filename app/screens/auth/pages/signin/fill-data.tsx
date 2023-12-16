@@ -70,7 +70,6 @@ const _storageService = new StorageService();
 export const FillData: FC<Props> = ({ initial__token }: Props) => {
     const { getToken, getPhoneNumber } = useContext(signupContext);
 
-    const tk = getToken();
 
     const phoneNumber = getPhoneNumber();
 
@@ -88,11 +87,11 @@ export const FillData: FC<Props> = ({ initial__token }: Props) => {
 
     const userCtx = useContext(userContext);
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data: any) => {
         setIsLoading(true);
         clearErrors();
 
-        const formattedData: Partial<SignupCompleteionBody> = {};
+        const formattedData: Partial<SignupCompleteionBody>| any = {};
 
         for (const item in data) {
             if (typeof item !== 'undefined') {
@@ -143,7 +142,7 @@ export const FillData: FC<Props> = ({ initial__token }: Props) => {
         }
     };
 
-    const showErrors = (errors) => {
+    const showErrors = (errors: any) => {
         const errorMessage: string = errors?.error;
         if (errorMessage) {
             if (
@@ -168,7 +167,7 @@ export const FillData: FC<Props> = ({ initial__token }: Props) => {
                             placeholder={f.placeholder}
                             labelText={f.labelText}
                             onBlur={onBlur}
-                            onChangeText={(value) => {
+                            onChangeText={(value: string) => {
                                 onChange(value || '');
                             }}
                             value={value}

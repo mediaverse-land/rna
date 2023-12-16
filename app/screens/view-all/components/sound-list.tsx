@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from "react";
+import React, {  useCallback } from "react";
 import { Text } from "../../../components/text";
 import { FlashList } from "@shopify/flash-list";
 import { Box } from "../../../components/box";

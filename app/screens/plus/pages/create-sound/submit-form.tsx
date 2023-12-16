@@ -24,8 +24,7 @@ export const SubmitForm = ({ isLoading, createAssetRequest }: Props) => {
     if (isLoading) {
       return;
     }
-    const { name, description, price } = data;
-    const plan = 1;
+    const { name, description } = data;
 
     const plans: any = {
       free: 1,

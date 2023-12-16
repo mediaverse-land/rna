@@ -1,8 +1,5 @@
 import React, {
-  forwardRef,
-  useCallback,
   useMemo,
-  useRef,
   useState,
 } from "react";
 import { StyleSheet } from "react-native";

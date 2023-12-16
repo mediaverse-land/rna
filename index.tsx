@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import { AppRegistry, I18nManager, Platform } from "react-native";
+import { AppRegistry, Platform } from "react-native";
 import App from "./App";
 
 AppRegistry.registerComponent("main", () => App);

@@ -1,4 +1,4 @@
-import { Image, View } from 'react-native';
+import { Image } from 'react-native';
 import { TextCardItemComponents } from './style';
 import { Box } from '../box';
 import { Flex } from '../../styles/grid';

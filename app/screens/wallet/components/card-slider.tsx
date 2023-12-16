@@ -2,7 +2,7 @@ import { ViewStyle, Image } from 'react-native';
 import { Box } from '../../../components/box';
 import { STRIPE_IMG, WALLET_SLIDER_BACKGROUND } from '../../../constaints/images';
 import { Text } from '../../../components/text';
-import { ICON_PAYPAL_LARGE, ICON_SIMCARD } from '../../../constaints/icons';
+import { ICON_SIMCARD } from '../../../constaints/icons';
 import { theme } from '../../../constaints/theme';
 import { useContext } from 'react';
 import { userContext } from '../../../context/user';

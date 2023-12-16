@@ -10,29 +10,6 @@ import { ICON_ARROW_RIGHT } from "../../../../constaints/icons";
 import { SettingsScreenTitle } from "../../components/title";
 import { tokenContext } from "../../../../context/token";
 import { StorageService } from "../../../../services/storage.service";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../../store";
-// import { hideExploreNavigationTour } from "../../../../slices/tour.slice";
-import {
-  HAS_USER_SEEN_APPS_TOUR,
-  HAS_USER_SEEN_BUY_BUTTON_TOUR,
-  HAS_USER_SEEN_EXPLORE_ALL_TOUR,
-  HAS_USER_SEEN_OWNER_VIDEO_TOUR,
-  HAS_USER_SEEN_PAYMENT_TOUR,
-  HAS_USER_SEEN_PLUS_CREATE_FORM_TOUR,
-  HAS_USER_SEEN_PLUS_TOUR,
-  HAS_USER_SEEN_PROFILE_HEADER_TOUR,
-  HAS_USER_SEEN_PROFILE_ITEMS_TOUR,
-  HAS_USER_SEEN_SETTINGS_TOUR,
-  HAS_USER_SEEN_WALLET_TOUR,
-  USER_HAS_SEEN_BOTTOM_TAB_GUIDE,
-  USER_HAS_SEEN_EXPLORE_TOP_BAR_TOUR_GUIDE,
-} from "../../../../constaints/consts";
-import {
-  activeDisableOnIntractions,
-  removeButtomNavitationTour,
-  removeExploreTopBarTour,
-} from "../../../../slices/tour.slice";
 import { Logger } from "../../../../utils/logger";
 
 const data: ListColumnItem[] = [
@@ -93,7 +70,6 @@ const _logger = new Logger();
 
 export function AccountPage() {
   const _tokenCtx = useContext(tokenContext);
-  const dispatch = useDispatch<AppDispatch>();
 
   const signOutHandler = async () => {
     try {

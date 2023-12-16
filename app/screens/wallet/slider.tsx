@@ -1,11 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useContext, useRef, useState, useEffect } from "react";
 import {
-  ActivityIndicator,
   Image,
   Linking,
   ScrollView,
   TouchableOpacity,
-  View,
 } from "react-native";
 import { ScreenGradient } from "../../components/screen-gradient";
 import { CardSlider } from "./components/card-slider";
@@ -50,8 +49,6 @@ const HISTORY_GUIDE =
   "You can spend money in Mediaverse and of course , you will earn money, the history of your transactions will always be available in history !";
 const INVENTORY_GUIDE = "See your inventory in the list!";
 const ADD_CARD_GUIDE = "Specify a bank account for payment";
-const ADD_INVENTORY_GUIDE =
-  "Enter the amount and increase your account balance by withdrawing from the account";
 
 const _storageService = new StorageService();
 

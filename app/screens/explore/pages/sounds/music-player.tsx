@@ -4,7 +4,6 @@ import { SoundsPageComponents } from "./style";
 import { Flex, PaddingContainer } from "../../../../styles/grid";
 import {
   AUDIO_THUMBNAIL_PLACEHOLDER,
-  HORIZONTAL_SLIDER_GRADIENT,
   MUSIC_PLAYER_STOP_BUTTON_GRADIENT,
   TEXT_SWIPER_GRADIENT,
 } from "../../../../constaints/images";
@@ -33,7 +32,7 @@ const {
 } = SoundsPageComponents;
 
 type Props = {
-  data: Sound[];
+  data: Sound[] | any;
 };
 
 export function SoundsPageMusicPlayer({ data }: Props) {
@@ -41,7 +40,7 @@ export function SoundsPageMusicPlayer({ data }: Props) {
     return null;
   }
 
-  const [currentSlide, setCurrentSlide] = useState<Sound>(null);
+  const [currentSlide, setCurrentSlide] = useState<Sound| any>(null);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(1);
 
   useEffect(() => {

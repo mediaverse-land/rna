@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useEffect, useState } from "react";
 import { Box } from "../box";
 import { screenSize } from "../../utils/screen-size";
@@ -62,7 +63,7 @@ const MemoCalendar = ({
       return;
     }
 
-    let _daysFakeArray;
+    let _daysFakeArray: any;
 
     const formattedStringDate = `${activeYear}-${monthIndex[activeMonth]}-03`;
 
@@ -70,10 +71,11 @@ const MemoCalendar = ({
 
     newDate.setDate(1);
 
-    let _firstDayOfMonth = getDayName(newDate);
+    const _firstDayOfMonth = getDayName(newDate);
 
     setFirstDayOfMonth(_firstDayOfMonth);
 
+    // eslint-disable-next-line prefer-const
     _daysFakeArray = Array(daysOfMonth).fill("");
 
     if (_firstDayOfMonth?.includes("Tu")) {
@@ -257,11 +259,12 @@ const MemoCalendar = ({
               }
 
               if (item === null) {
-                return <Box width={"14.2%"}></Box>;
+                return <Box key={item.id} width={"14.2%"}></Box>;
               }
 
               return (
                 <TouchableOpacity
+                key={item.id}
                   onPress={() =>
                     setSelectedDay({ day: dayIndex, month: activeMonth })
                   }
@@ -306,7 +309,6 @@ export const Calendar = MemoCalendar;
 
 const YearDropdown = ({
   closerHandler,
-  currentYear,
   setSelectedYearHandler,
 }: {
   closerHandler: () => void;

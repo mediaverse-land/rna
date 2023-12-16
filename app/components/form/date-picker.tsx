@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Platform, TouchableOpacity, Image } from 'react-native';
+import { Platform, TouchableOpacity } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { InputComponent } from './style';
 import { theme } from '../../constaints/theme';
@@ -8,7 +8,7 @@ import { theme } from '../../constaints/theme';
 
 // const ICON_CALENDAR = imageUriResolver(ICON_CALENDAR_PNG);
 
-const { InputBox, FormGroup, datePiclerIconStyles, PickerPlaceholder } =
+const { InputBox, FormGroup, PickerPlaceholder } =
     InputComponent;
 
 export function DatePicker() {

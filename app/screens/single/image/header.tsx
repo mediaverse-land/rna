@@ -26,7 +26,6 @@ export function SingleImageHeader({
   thumnailImageUri,
   contentName,
   isOwner,
-  isSubscriber,
   showLargeImagePressHandler,
   openReportModalHandler,
   toolbarOptions,

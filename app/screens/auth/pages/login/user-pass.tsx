@@ -1,4 +1,4 @@
-import { TouchableOpacity, StyleSheet } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Box } from "../../../../components/box";
 import { Text } from "../../../../components/text";
 import { Input } from "../../../../components/form";
@@ -24,8 +24,6 @@ export const UserPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
   const {
     handleSubmit,
     control,
-    setError,
-    clearErrors,
     formState: { errors },
   } = useForm();
 
@@ -43,6 +41,7 @@ export const UserPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
     const response = await _loginHandler({ body: requestBody });
 
     if (response?.data) {
+      // eslint-disable-next-line no-unsafe-optional-chaining
       const { token, user } = response?.data;
       saveDataToContext(token, user);
     }
@@ -163,8 +162,3 @@ export const UserPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  fullWidth: {
-    width: "100%",
-  },
-});

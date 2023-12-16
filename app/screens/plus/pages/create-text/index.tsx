@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import {  useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
