@@ -119,8 +119,10 @@ export const AddAssetMetaData = ({ route }: ComponentNavigationProps) => {
   };
 
   const getUser = async () => {
-    console.log(await userCtx.getUser())
+    console.log(await userCtx.getUser());
     return await userCtx.getUser();
+
+    
   };
 
   const plans: any = {
@@ -138,7 +140,6 @@ export const AddAssetMetaData = ({ route }: ComponentNavigationProps) => {
   const getRequestBody = async () => {
     const token = await getToken();
     const user = await getUser();
-
 
     const currentPlan = plans[selectedPlan];
 
@@ -173,14 +174,13 @@ export const AddAssetMetaData = ({ route }: ComponentNavigationProps) => {
     const [options, token] = await getRequestBody();
     const url = '/texts';
 
-
     const response = await createAssetApiHandler({
       url,
       token,
       body: options,
     });
 
-    console.log(response?.error)
+    console.log(response?.error);
 
     if (response?.data) {
       dispatch(navigateToUploadAssetView());
