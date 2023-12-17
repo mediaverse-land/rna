@@ -43,7 +43,9 @@ const NoteBook = forwardRef((props: Props, ref: any) => {
         placeholder={WRITE_CAPTION_CONST}
         onContentSizeChange={changeContentSizeHandler}
         multiline
-        ref={input => { textInputRef.current = input }}
+        ref={(input) => {
+          textInputRef.current = input;
+        }}
       />
     </Box>
   );

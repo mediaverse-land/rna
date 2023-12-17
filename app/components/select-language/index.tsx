@@ -44,7 +44,7 @@ const SelectLanguageBottomMemo = ({
 
   const _key = (item: string) => item;
 
-  const __data: any = data ? Object.keys(data).map((key) => [key, data[key]]): [];
+  const __data: any = data ? Object.keys(data).map((key) => [key, data[key]]) : [];
 
   return (
     <>
@@ -74,5 +74,5 @@ const SelectLanguageBottomMemo = ({
   );
 };
 
-const  SelectLanguageBottom = memo(SelectLanguageBottomMemo)
+const SelectLanguageBottom = memo(SelectLanguageBottomMemo);
 export default SelectLanguageBottom;

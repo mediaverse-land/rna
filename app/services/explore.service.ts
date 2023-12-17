@@ -16,7 +16,7 @@ export const exploreService: any = createApi({
           headers: {
             // Authorization: `Bearer ${args.token}`
             'X-App': '_Android',
-            'Accept-Language':'en-US'
+            'Accept-Language': 'en-US',
           },
         };
       },
@@ -29,7 +29,7 @@ export const exploreService: any = createApi({
           headers: {
             // Authorization: `Bearer ${args.token}`
             'X-App': '_Android',
-            'Accept-Language':'en-US'
+            'Accept-Language': 'en-US',
           },
         };
       },
@@ -42,7 +42,7 @@ export const exploreService: any = createApi({
           headers: {
             // Authorization: `Bearer ${args.token}`
             'X-App': '_Android',
-            'Accept-Language':'en-US'
+            'Accept-Language': 'en-US',
           },
         };
       },
@@ -55,7 +55,7 @@ export const exploreService: any = createApi({
           headers: {
             // Authorization: `Bearer ${args.token}`
             'X-App': '_Android',
-            'Accept-Language':'en-US'
+            'Accept-Language': 'en-US',
           },
         };
       },
@@ -68,7 +68,7 @@ export const exploreService: any = createApi({
           headers: {
             // Authorization: `Bearer ${args.token}`
             'X-App': '_Android',
-            'Accept-Language':'en-US'
+            'Accept-Language': 'en-US',
           },
         };
       },

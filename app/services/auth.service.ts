@@ -16,7 +16,7 @@ export const authService: any = createApi({
           headers: {
             Authorization: `Bearer ${args.token}`,
             'X-App': '_Android',
-            'Accept-Language':'en-US'
+            'Accept-Language': 'en-US',
           },
         };
       },
@@ -29,7 +29,7 @@ export const authService: any = createApi({
           headers: {
             Authorization: `Bearer ${args.token}`,
             'X-App': '_Android',
-            'Accept-Language':'en-US'
+            'Accept-Language': 'en-US',
           },
         };
       },
@@ -45,7 +45,7 @@ export const authService: any = createApi({
           headers: {
             Authorization: `Bearer ${args.token}`,
             'X-App': '_Android',
-            'Accept-Language':'en-US'
+            'Accept-Language': 'en-US',
           },
         };
       },
@@ -59,7 +59,7 @@ export const authService: any = createApi({
           headers: {
             'X-App': '_Android',
             // "Accept-Language": "en-US"
-            'Accept-Language':'en-US'
+            'Accept-Language': 'en-US',
           },
         };
       },
@@ -71,7 +71,7 @@ export const authService: any = createApi({
           method: 'GET',
           headers: {
             'X-App': '_Android',
-            'Accept-Language':'en-US'
+            'Accept-Language': 'en-US',
             // "Accept-Language": "en-US"
           },
         };

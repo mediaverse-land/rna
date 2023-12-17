@@ -47,7 +47,6 @@ const UploadLoaderInner: FC<Props> = ({ createdAssetData }) => {
 
   const routeHistory = navigation?.getState()?.history?.[1];
 
-
   useEffect(() => {
     if (!routeHistory?.key?.includes('addAssetMetadata')) {
       navigation?.navigate('createText');
@@ -69,7 +68,6 @@ const UploadLoaderInner: FC<Props> = ({ createdAssetData }) => {
     dispatch(navigateToAddMetaDataView());
   };
 
-
   const uplodMainFile = async () => {
     const formData = new FormData();
 
@@ -80,19 +78,16 @@ const UploadLoaderInner: FC<Props> = ({ createdAssetData }) => {
 
     const [status] = await submitHandler(formData, token);
 
-
-
     if (!ThumbnailCover && status === 'success') {
       dispatch(cleanupCreatedAssetInputs());
 
-      // navigation?.navigate(SINGLE_TEXT_SCREEN, {
-      //   id: createdAssetData?.id,
-      //   asset_id: createdAssetData?.assetId,
-      //   ORIGIN: REDIRECTED_FROM_CREATE_ASSET,
-      // });
+      navigation?.navigate(SINGLE_TEXT_SCREEN, {
+        id: createdAssetData?.id,
+        asset_id: createdAssetData?.assetId,
+        ORIGIN: REDIRECTED_FROM_CREATE_ASSET,
+      });
       setIsLoading(false);
     }
-
 
     if (status === 'success') {
       if (ThumbnailCover) {
@@ -138,7 +133,7 @@ const UploadLoaderInner: FC<Props> = ({ createdAssetData }) => {
       }
     } catch (err: any) {
       setIsLoading(false);
-      console.log(err?.response?.data)
+      console.log(err?.response?.data);
       setProgress(0);
       return ['error'];
     }

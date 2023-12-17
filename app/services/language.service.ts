@@ -16,7 +16,7 @@ export const languageService: any = createApi({
           headers: {
             // Authorization: `Bearer ${args.token}`
             'X-App': '_Android',
-            'Accept-Language':'en-US'
+            'Accept-Language': 'en-US',
           },
         };
       },
@@ -29,7 +29,7 @@ export const languageService: any = createApi({
           headers: {
             // Authorization: `Bearer ${args.token}`
             'X-App': '_Android',
-            'Accept-Language':'en-US'
+            'Accept-Language': 'en-US',
           },
         };
       },

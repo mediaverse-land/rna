@@ -114,10 +114,10 @@ const plusSlice = createSlice({
       state.selectedPlan = null;
       state.fileBase64 = null;
       state.subscriptionPriod = null;
-      state.title = null
-      state.description = null
-      state.price = null
-      state.ThumbnailCover = null
+      state.title = null;
+      state.description = null;
+      state.price = null;
+      state.ThumbnailCover = null;
     },
   },
 });
@@ -147,7 +147,7 @@ export const {
   navigateToAddMetaDataView,
   navigateToSaveAndPublishView,
   navigateToUploadAssetView,
-  
+
   setFileBase64,
 
   cleanupCreatedAssetInputs,

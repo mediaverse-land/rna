@@ -255,9 +255,9 @@ export function SingleTextScreen({ navigation, route }: ComponentNavigationProps
   };
 
   const goBackHandler = () => {
-    if(ORIGIN && ORIGIN === REDIRECTED_FROM_CREATE_ASSET){
+    if (ORIGIN && ORIGIN === REDIRECTED_FROM_CREATE_ASSET) {
       navigation.navigate(PROFILE);
-      return;  
+      return;
     }
     navigation.goBack();
   };
@@ -412,7 +412,6 @@ export function SingleTextScreen({ navigation, route }: ComponentNavigationProps
   const youtubeShareTemplate = _youtubeShare.template();
   const textToTextTranslateTemplate = _textToTextConver.template();
   const accountId: number = userCtx.getUser().id;
-
 
   return (
     <>
