@@ -16,6 +16,7 @@ export const paymentService: any = createApi({
           headers: {
             Authorization: `Bearer ${args.token}`,
             'X-App': '_Android',
+            'Accept-Language':'en-US'
           },
         };
       },
@@ -28,6 +29,7 @@ export const paymentService: any = createApi({
           headers: {
             Authorization: `Bearer ${args.token}`,
             'X-App': '_Android',
+            'Accept-Language':'en-US'
           },
         };
       },
@@ -40,6 +42,7 @@ export const paymentService: any = createApi({
           headers: {
             Authorization: `Bearer ${args.token}`,
             'X-App': '_Android',
+            'Accept-Language':'en-US'
           },
         };
       },
@@ -52,6 +55,7 @@ export const paymentService: any = createApi({
           headers: {
             Authorization: `Bearer ${args.token}`,
             'X-App': '_Android',
+            'Accept-Language':'en-US'
           },
         };
       },

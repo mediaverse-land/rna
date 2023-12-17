@@ -12,7 +12,7 @@ export const uploadService: any = createApi({
           url: `/assets/${args.body.asset_id}/files`,
           method: 'POST',
           body: args.body,
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: { Authorization: `Bearer ${args.token}`, 'Accept-Language': 'en-US' },
         };
       },
     }),

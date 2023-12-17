@@ -11,7 +11,7 @@ export const singleSoundService: any = createApi({
         return {
           url: `/audios/${args.id}`,
           method: 'GET',
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: { Authorization: `Bearer ${args.token}`, 'Accept-Language': 'en-US' },
         };
       },
     }),
@@ -21,7 +21,7 @@ export const singleSoundService: any = createApi({
           url: '/audios',
           method: 'POST',
           body: args.body,
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: { Authorization: `Bearer ${args.token}`, 'Accept-Language': 'en-US' },
         };
       },
     }),

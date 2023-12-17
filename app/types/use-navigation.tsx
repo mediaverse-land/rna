@@ -9,4 +9,5 @@ export type UseNavigationType = {
   ) => void;
   setParams: (...args: any) => void;
   goBack?: () => void;
+  getState?: () => {history: any}
 };

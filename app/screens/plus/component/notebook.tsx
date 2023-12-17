@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from 'react';
+import { forwardRef, useCallback, useImperativeHandle, useRef, useState } from 'react';
 import { NativeSyntheticEvent, TextInput, TextInputContentSizeChangeEventData } from 'react-native';
 import { Box } from '../../../components/box';
 import { styles } from './styles';
@@ -10,8 +10,16 @@ type Props = {
 
 const WRITE_CAPTION_CONST = 'Write a caption';
 
-export const NoteBook: FC<Props> = ({ setCaptionText }) => {
+const NoteBook = forwardRef((props: Props, ref: any) => {
   const [height, setHeight] = useState<number>(null);
+
+  const textInputRef = useRef<TextInput>();
+
+  useImperativeHandle(ref, () => ({
+    clear() {
+      textInputRef?.current?.clear();
+    },
+  }));
 
   // Gets the current text size of input
   const changeContentSizeHandler = useCallback(
@@ -31,11 +39,16 @@ export const NoteBook: FC<Props> = ({ setCaptionText }) => {
       <TextInput
         placeholderTextColor={theme.color.light.DARK_INPUT_PLACEHOLDER}
         style={[styles.textArea, { height: wrapperHeight }]}
-        onChangeText={(text) => setCaptionText(text)}
+        onChangeText={(text) => props.setCaptionText(text)}
         placeholder={WRITE_CAPTION_CONST}
         onContentSizeChange={changeContentSizeHandler}
         multiline
+        ref={input => { textInputRef.current = input }}
       />
     </Box>
   );
-};
+});
+
+NoteBook.displayName = 'NoteBook';
+
+export { NoteBook };

@@ -11,7 +11,7 @@ export const singleTextService: any = createApi({
         return {
           url: `/texts/${args.id}`,
           method: 'GET',
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: { Authorization: `Bearer ${args.token}`, 'Accept-Language': 'en-US' },
         };
       },
     }),
@@ -21,7 +21,7 @@ export const singleTextService: any = createApi({
           url: '/texts',
           method: 'POST',
           body: args.body,
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: { Authorization: `Bearer ${args.token}`, 'Accept-Language': 'en-US' },
         };
       },
     }),
@@ -31,7 +31,7 @@ export const singleTextService: any = createApi({
           url: '/convert/text-text',
           method: 'POST',
           body: args.body,
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: { Authorization: `Bearer ${args.token}`, 'Accept-Language': 'en-US' },
         };
       },
     }),

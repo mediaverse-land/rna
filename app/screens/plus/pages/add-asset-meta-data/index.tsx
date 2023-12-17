@@ -1,4 +1,4 @@
-import { ReactNode, lazy, useContext, useMemo, useState } from 'react';
+import { ReactNode, lazy, useContext, useEffect, useMemo, useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +16,7 @@ import { AppDispatch, RootState } from '../../../../store';
 import {
   navigateToAddMetaDataView,
   navigateToSaveAndPublishView,
+  navigateToUploadAssetView,
 } from '../../../../slices/plus.slice';
 import { PaddingContainer } from '../../../../styles/grid';
 import { UseNavigationType } from '../../../../types/use-navigation';
@@ -24,6 +25,9 @@ import { retriveToken } from '../../../../utils/retrive-token';
 import { userContext } from '../../../../context/user';
 import { useCreateAssetMutation } from '../../../../services/asset.service';
 import { UploadLoader } from './upload-loader';
+import { ComponentNavigationProps } from '../../../../types/component-navigation-props';
+import { CREATE_IMAGE, CREATE_SOUND, CREATE_TEXT } from '../../constaints';
+import { CREATE_IMAGE_SCREEN, CREATE_SOUND_SCREEN, CREATE_TEXT_SCREEN } from '../../types';
 
 const SelectPlan = lazy(() => import('../../component/select-plan'));
 const SelectLanguage = lazy(() => import('../../component/select-language'));
@@ -31,10 +35,12 @@ const SelectForkability = lazy(() => import('../../component/select-forkability'
 
 const BG_GRADIENT = theme.gradients.PLUS_PAGE_GRADIENT;
 
-export const AddAssetMetaData = () => {
+export const AddAssetMetaData = ({ route }: ComponentNavigationProps) => {
   const { top } = useSafeAreaInsets();
 
-  const [createdAssetId, setCreatedAssetId] = useState<number>(null);
+  const redirectedFromPage = route?.params?.redirectedFromPage;
+
+  const [createdAssetId, setCreatedAssetId] = useState<{ id: number; assetId: number }>(null);
 
   const navigation = useNavigation<UseNavigationType>();
   const dispatch: any = useDispatch<AppDispatch>();
@@ -54,7 +60,11 @@ export const AddAssetMetaData = () => {
     selectedPlan,
   } = useSelector((state: RootState) => state.plusSlice);
 
-  let mutateCreateAssetActiveView = createAssetActiveView;
+  useEffect(() => {
+    navigateToAddMetaDataViewHandler();
+  }, []);
+
+  const mutateCreateAssetActiveView = createAssetActiveView;
 
   const [createAssetApiHandler, { isLoading, isFetching }] = useCreateAssetMutation();
 
@@ -69,13 +79,39 @@ export const AddAssetMetaData = () => {
     dispatch(navigateToAddMetaDataView());
   };
 
+  const navigateToSaveAndPublishViewHandler = () => {
+    dispatch(navigateToSaveAndPublishView());
+  };
+
   const goBackHandler = () => {
     if (mutateCreateAssetActiveView === 'save-and-publish') {
       navigateToAddMetaDataViewHandler();
       return;
     }
+    if (mutateCreateAssetActiveView === 'upload-loder') {
+      navigateToSaveAndPublishViewHandler();
+      return;
+    }
 
-    navigation.goBack();
+    routeRedirectorHandler();
+  };
+
+  const routeRedirectorHandler = () => {
+    if (!redirectedFromPage) {
+      return;
+    }
+
+    switch (redirectedFromPage) {
+      case CREATE_TEXT:
+        navigation.navigate(CREATE_TEXT_SCREEN);
+        break;
+      case CREATE_IMAGE:
+        navigation.navigate(CREATE_IMAGE_SCREEN);
+        break;
+      case CREATE_SOUND:
+        navigation.navigate(CREATE_SOUND_SCREEN);
+        break;
+    }
   };
 
   const getToken = async () => {
@@ -91,36 +127,6 @@ export const AddAssetMetaData = () => {
     Ownership: 2,
     Subscription: 3,
   };
-
-  // const submitHandler = async (file: string) => {
-  //   try {
-  //     const requestBody = {
-  //       asset: 91,
-  //       is_thumbnail: true,
-  //       file: file,
-  //     };
-
-  //     const result = await axios.post(
-  //       "${process.env.EXPO_APPBASE_URL}/files",
-  //       requestBody,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //         onUploadProgress: uploadProgress,
-  //       }
-  //     );
-  //   } catch (err: any) {
-  //     console.log(err?.response?.data);
-  //   }
-  // };
-
-  // const uploadProgress = (progressEvent: any) => {
-  //   const Percentage = Math.round(
-  //     (progressEvent.loaded / progressEvent.total) * 100
-  //   );
-  //   setProgress(Percentage);
-  // };
 
   const cleanupCreatedAssetId = () => {
     setCreatedAssetId(null);
@@ -172,7 +178,8 @@ export const AddAssetMetaData = () => {
     });
 
     if (response?.data) {
-      setCreatedAssetId(response?.data?.asset?.id);
+      dispatch(navigateToUploadAssetView());
+      setCreatedAssetId({ assetId: response?.data?.asset?.id, id: response?.data?.id });
     }
   };
 
@@ -183,7 +190,10 @@ export const AddAssetMetaData = () => {
       'add-metadata': <AssetDataView />,
       'save-and-publish': <SaveAndPublish />,
       'upload-loder': (
-        <UploadLoader assetId={createdAssetId} cleanupCreatedAssetId={cleanupCreatedAssetId} />
+        <UploadLoader
+          createdAssetData={createdAssetId}
+          cleanupCreatedAssetId={cleanupCreatedAssetId}
+        />
       ),
     };
   }, [mutateCreateAssetActiveView, createdAssetId]);
@@ -209,10 +219,6 @@ export const AddAssetMetaData = () => {
       );
     }
   };
-
-  if (createdAssetId) {
-    mutateCreateAssetActiveView = 'upload-loder';
-  }
 
   const currentView = views[mutateCreateAssetActiveView];
 

@@ -84,6 +84,9 @@ const plusSlice = createSlice({
     navigateToSaveAndPublishView: (state) => {
       state.createAssetActiveView = 'save-and-publish';
     },
+    navigateToUploadAssetView: (state) => {
+      state.createAssetActiveView = 'upload-loder';
+    },
 
     setThumbnailCover: (state, action: PayloadAction<string>) => {
       state.ThumbnailCover = action.payload;
@@ -105,10 +108,16 @@ const plusSlice = createSlice({
       state.fileBase64 = action.payload;
     },
 
-    cleanup: (state) => {
+    cleanupCreatedAssetInputs: (state) => {
       state.selectedLanguage = null;
       state.forkabilityStatus = null;
       state.selectedPlan = null;
+      state.fileBase64 = null;
+      state.subscriptionPriod = null;
+      state.title = null
+      state.description = null
+      state.price = null
+      state.ThumbnailCover = null
     },
   },
 });
@@ -137,9 +146,11 @@ export const {
 
   navigateToAddMetaDataView,
   navigateToSaveAndPublishView,
+  navigateToUploadAssetView,
+  
   setFileBase64,
 
-  cleanup,
+  cleanupCreatedAssetInputs,
 } = plusSlice.actions;
 
 export const getParamsFromPlusSlice = (state: InitialState) => state.params;

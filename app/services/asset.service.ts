@@ -14,6 +14,7 @@ export const assetService: any = createApi({
           headers: {
             'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
+            'Accept-Language':'en-US'
           },
         };
       },
@@ -28,6 +29,7 @@ export const assetService: any = createApi({
           headers: {
             'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
+            'Accept-Language':'en-US'
           },
         };
       },
@@ -42,6 +44,7 @@ export const assetService: any = createApi({
           headers: {
             'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
+            'Accept-Language':'en-US'
           },
         };
       },
@@ -55,6 +58,7 @@ export const assetService: any = createApi({
           headers: {
             'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
+            'Accept-Language':'en-US'
           },
         };
       },
@@ -68,6 +72,7 @@ export const assetService: any = createApi({
           headers: {
             'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
+            'Accept-Language':'en-US'
           },
         };
       },
@@ -82,6 +87,7 @@ export const assetService: any = createApi({
           headers: {
             'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
+            'Accept-Language':'en-US'
           },
         };
       },
@@ -95,6 +101,7 @@ export const assetService: any = createApi({
           headers: {
             'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
+            'Accept-Language':'en-US'
           },
         };
       },
@@ -107,6 +114,7 @@ export const assetService: any = createApi({
           headers: {
             'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
+            'Accept-Language':'en-US'
           },
         };
       },
@@ -119,6 +127,7 @@ export const assetService: any = createApi({
           headers: {
             'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
+            'Accept-Language':'en-US'
           },
         };
       },
@@ -131,6 +140,7 @@ export const assetService: any = createApi({
           headers: {
             'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
+            'Accept-Language':'en-US'
           },
         };
       },
@@ -144,6 +154,7 @@ export const assetService: any = createApi({
           headers: {
             'X-App': '_Android',
             Authorization: `Bearer ${args.token}`,
+            'Accept-Language':'en-US'
           },
         };
       },

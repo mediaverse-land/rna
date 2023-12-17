@@ -1,12 +1,12 @@
 import { memo, useState } from 'react';
 import { ActivityIndicator, TouchableOpacity } from 'react-native';
+import * as Progress from 'react-native-progress';
 import { Box } from '../box';
 import { theme } from '../../constaints/theme';
 import { ICON_ADD_IMAGE } from '../../constaints/icons';
 import { Text } from '../text';
 import { DocumentController } from '../../controllers/document.controller';
 import { FileSystemController } from '../../controllers/file-system.controller';
-import * as Progress from 'react-native-progress';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../store';
 import { setThumbnailCover } from '../../slices/plus.slice';
@@ -17,43 +17,13 @@ const _fileSystemController = new FileSystemController();
 const ACCEPTABLE_TYPES = ['image/png', 'image/jpeg', 'image/png'];
 
 const convertImageToBase64 = async (uri: string) => {
-  return await _fileSystemController.convertTextToBase64(uri);
+  return await _fileSystemController.convertFileToBase64(uri);
 };
 
 const FileUploadFieldMemo = ({ progressBarWidth }: { progressBarWidth: number }) => {
   const [progress] = useState<number>(0);
 
   const dispatch = useDispatch<AppDispatch>();
-
-  // const submitHandler = async (file: string) => {
-  //   try {
-  //     const requestBody = {
-  //       asset: 91,
-  //       is_thumbnail: true,
-  //       file: file,
-  //     };
-
-  //     const result = await axios.post(
-  //       "${process.env.EXPO_APPBASE_URL}/files",
-  //       requestBody,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //         onUploadProgress: uploadProgress,
-  //       }
-  //     );
-  //   } catch (err: any) {
-  //     console.log(err?.response?.data);
-  //   }
-  // };
-
-  // const uploadProgress = (progressEvent: any) => {
-  //   var Percentage = Math.round(
-  //     (progressEvent.loaded / progressEvent.total) * 100
-  //   );
-  //   setProgress(Percentage);
-  // };
 
   const pickDocument = async () => {
     try {
@@ -67,10 +37,9 @@ const FileUploadFieldMemo = ({ progressBarWidth }: { progressBarWidth: number })
         const content = await convertImageToBase64(result.uri);
 
         if (content) {
-          dispatch(setThumbnailCover(content));
+          const dataUri = `data:${result?.mimeType};base64,${content}`;
+          dispatch(setThumbnailCover(dataUri));
         }
-      } else {
-        //
       }
     } catch (err) {
       console.log(err);
@@ -98,7 +67,6 @@ const FileUploadFieldMemo = ({ progressBarWidth }: { progressBarWidth: number })
         >
           your cover...
         </Text>
-        {/* {progress !== 0 ? ( */}
         <Box
           direction="row"
           alignItems="center"

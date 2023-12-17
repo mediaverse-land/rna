@@ -40,7 +40,7 @@ import {
   ICON_TEXT_TO_TEXT,
 } from '../../../constaints/icons';
 import { TEXT_THUMBNAIL_PLACEHOLDER } from '../../../constaints/images';
-import { EDIT_SCREEN } from '../../../constaints/consts';
+import { EDIT_SCREEN, REDIRECTED_FROM_CREATE_ASSET } from '../../../constaints/consts';
 import { PaddingContainer } from '../../../styles/grid';
 import { Toolbar } from '../components/toolbar';
 import { YoutubeShare } from '../components/youtube-share';
@@ -50,6 +50,7 @@ import { TextToTextConvert } from '../components/text-to-text-convert';
 import { useConvertTextToTextMutation } from '../../../services/single-text.service';
 import { SingleAssetFooter } from '../components/footer';
 import { BackButtonRedirector } from '../utils/back-button-redirector';
+import { PROFILE } from '../../stack';
 
 const _toaster = new Toaster();
 const _textToTextConver = new TextToTextConvert();
@@ -254,6 +255,10 @@ export function SingleTextScreen({ navigation, route }: ComponentNavigationProps
   };
 
   const goBackHandler = () => {
+    if(ORIGIN && ORIGIN === REDIRECTED_FROM_CREATE_ASSET){
+      navigation.navigate(PROFILE);
+      return;  
+    }
     navigation.goBack();
   };
 
@@ -407,6 +412,7 @@ export function SingleTextScreen({ navigation, route }: ComponentNavigationProps
   const youtubeShareTemplate = _youtubeShare.template();
   const textToTextTranslateTemplate = _textToTextConver.template();
   const accountId: number = userCtx.getUser().id;
+
 
   return (
     <>

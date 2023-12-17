@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useCallback, useState } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -45,6 +46,7 @@ const routes: RouteObject[] = [
     id: 4,
     name: 'addAssetMetadata',
     title: null,
+    //@ts-ignore
     component: AddAssetMetaData,
   },
 ];

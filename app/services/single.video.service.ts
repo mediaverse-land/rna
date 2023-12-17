@@ -11,7 +11,8 @@ export const singleVideoService: any = createApi({
         return {
           url: `videos/${args.id}`,
           method: 'GET',
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: { Authorization: `Bearer ${args.token}`, 
+          'Accept-Language':'en-US' },
         };
       },
     }),
@@ -21,7 +22,8 @@ export const singleVideoService: any = createApi({
           url: '/videos',
           method: 'POST',
           body: args.body,
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: { Authorization: `Bearer ${args.token}`, 
+          'Accept-Language':'en-US' },
         };
       },
     }),

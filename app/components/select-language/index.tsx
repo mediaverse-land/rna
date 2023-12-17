@@ -7,7 +7,7 @@ import { theme } from '../../constaints/theme';
 import { Text } from '../text';
 import { LoadingSpinner } from '../loader-spinner';
 
-const SelectLanguageBottomSheet = ({
+const SelectLanguageBottomMemo = ({
   setSelectedLanguage,
   isFocused,
 }: {
@@ -24,7 +24,7 @@ const SelectLanguageBottomSheet = ({
 
   const renderItem = ({ item }: { item: string }) => {
     return (
-      <TouchableOpacity activeOpacity={1} onPress={() => setSelectedLanguage(item)}>
+      <TouchableOpacity activeOpacity={1} onPress={() => setSelectedLanguage(item[0])}>
         <Box
           paddingLeft={8}
           paddingBottom={8}
@@ -36,7 +36,7 @@ const SelectLanguageBottomSheet = ({
           width="100%"
           direction="row"
         >
-          <Text color="#ccc">{data[item]}</Text>
+          <Text color="#ccc">{item[1]}</Text>
         </Box>
       </TouchableOpacity>
     );
@@ -44,13 +44,15 @@ const SelectLanguageBottomSheet = ({
 
   const _key = (item: string) => item;
 
+  const __data: any = data ? Object.keys(data).map((key) => [key, data[key]]): [];
+
   return (
     <>
       {isFetching ? (
         <LoadingSpinner />
       ) : (
         <BottomSheetFlatList
-          data={Object.keys(data)}
+          data={__data}
           keyExtractor={_key}
           renderItem={renderItem}
           ListHeaderComponent={
@@ -72,4 +74,5 @@ const SelectLanguageBottomSheet = ({
   );
 };
 
-export default memo(SelectLanguageBottomSheet);
+const  SelectLanguageBottom = memo(SelectLanguageBottomMemo)
+export default SelectLanguageBottom;

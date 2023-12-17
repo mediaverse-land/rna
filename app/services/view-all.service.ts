@@ -12,7 +12,7 @@ export const viewAllService: any = createApi({
         return {
           url: args.url,
           method: 'GET',
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: { Authorization: `Bearer ${args.token}`, 'Accept-Language': 'en-US' },
         };
       },
     }),

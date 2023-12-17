@@ -19,7 +19,7 @@ export const singleImageService: any = createApi({
         return {
           url: `images/${args.id}`,
           method: 'GET',
-          headers: { Authorization: `Bearer ${_getToken}` },
+          headers: { Authorization: `Bearer ${_getToken}`, 'Accept-Language': 'en-US' },
         };
       },
     }),
@@ -29,7 +29,7 @@ export const singleImageService: any = createApi({
           url: '/images',
           method: 'POST',
           body: args.body,
-          headers: { Authorization: `Bearer ${args.token}` },
+          headers: { Authorization: `Bearer ${args.token}`, 'Accept-Language': 'en-US' },
         };
       },
     }),

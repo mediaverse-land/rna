@@ -6,7 +6,8 @@ export class RootService {
   async getUserData(token: string) {
     const url = '/profile';
     const config = {
-      headers: { Authorization: `Bearer ${token}`, 'X-App': '_Android' },
+      headers: { Authorization: `Bearer ${token}`, 'X-App': '_Android',
+      'Accept-Language':'en-US' },
     };
     return await _api.get(url, config);
   }

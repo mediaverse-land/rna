@@ -16,6 +16,7 @@ export const profileService = createApi({
           headers: {
             Authorization: `Bearer ${args.token}`,
             'X-App': '_Android',
+            'Accept-Language':'en-US'
           },
         };
       },

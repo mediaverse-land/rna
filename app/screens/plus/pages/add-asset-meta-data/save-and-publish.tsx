@@ -86,11 +86,11 @@ export const SaveAndPublish = () => {
               <Input
                 varient="flat-dark"
                 placeholder="Insert price..."
+                onChangeText={updatePriceHandler}
+                defaultValue={price}
                 additionalProps={{
                   keyboardType: 'numeric',
                 }}
-                onChangeText={updatePriceHandler}
-                defaultValue={price}
               />
             </Box>
           </Box>

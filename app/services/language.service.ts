@@ -6,7 +6,7 @@ export const languageService: any = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: enviroments.BASE_URL,
   }),
-  tagTypes: ['Language', 'country'],
+  // tagTypes: ['Language', 'country'],
   endpoints: (builder) => ({
     getLanguages: builder.query({
       query: () => {
@@ -16,6 +16,7 @@ export const languageService: any = createApi({
           headers: {
             // Authorization: `Bearer ${args.token}`
             'X-App': '_Android',
+            'Accept-Language':'en-US'
           },
         };
       },
@@ -28,6 +29,7 @@ export const languageService: any = createApi({
           headers: {
             // Authorization: `Bearer ${args.token}`
             'X-App': '_Android',
+            'Accept-Language':'en-US'
           },
         };
       },
