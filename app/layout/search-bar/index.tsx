@@ -37,11 +37,11 @@ export function SearchBar() {
     >
       <BlurView style={styles.wrapper} intensity={70} tint="dark">
         <TouchableOpacity
+          activeOpacity={1}
+          onPress={navigateToSearchPageHandler}
           style={{
             width: '100%',
           }}
-          activeOpacity={1}
-          onPress={navigateToSearchPageHandler}
         >
           <SearchInput
             placeholder="Search"

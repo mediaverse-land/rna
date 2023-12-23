@@ -105,13 +105,16 @@ export function SingleVideoHeader({
     if (isTourActive) {
       return;
     }
+
     setInitSeek(0);
     setIsStarted(false);
+
     dispatch(
       setParam({
         video_position: 0,
       }),
     );
+
     navigation?.goBack();
     return true;
   }

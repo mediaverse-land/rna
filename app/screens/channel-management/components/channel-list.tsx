@@ -12,6 +12,7 @@ import { RenderIfWithoutLoading } from '../../../components/render-if-without-lo
 import { ActivityIndicator } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { useRemoveExternalAccountMutation } from '../../../services/asset.service';
+import { theme } from '../../../constaints/theme';
 
 const gradientProps = {
   style: {
@@ -56,14 +57,26 @@ const menuWindowGradientProps = {
   },
 };
 
-const accountTypes = {
+const accountTypes: Record<number, any> = {
   1: 'Google',
   2: 'Twitter',
   3: 'Meta',
   4: 'RTMP',
 };
 
-const MemoChannelsList = ({ token }: { token: string }) => {
+const MemoChannelsList = ({
+  token,
+  cardsBackgroundColor = '#121247',
+  getSelectedChannel,
+  hideEditOpetations = false,
+  activateSelectedChannel = false,
+}: {
+  token: string;
+  cardsBackgroundColor?: string;
+  getSelectedChannel?: (channelId: number) => void;
+  hideEditOpetations?: boolean;
+  activateSelectedChannel?: boolean;
+}) => {
   const [activeEditWindowId, setActiveEditWindowId] = useState<number>(null);
 
   const [selectedItem, setSelectedItem] = useState<number>(null);
@@ -127,7 +140,15 @@ const MemoChannelsList = ({ token }: { token: string }) => {
 
   const renderItem = ({ item }: { item: ChannelItem }) => {
     return (
-      <TouchableOpacity activeOpacity={1}>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => {
+          if (getSelectedChannel) {
+            setSelectedItem(item.id);
+            getSelectedChannel(item.id);
+          }
+        }}
+      >
         <Box width="100%" marginBottom={16} height={activeEditWindowId === item.id ? 95 : 72}>
           <Box position="relative" zIndex={10} width="100%">
             <LinearGradient {...gradientProps}>
@@ -135,7 +156,13 @@ const MemoChannelsList = ({ token }: { token: string }) => {
                 width="100%"
                 height="100%"
                 borderRadius={16}
-                backgroundColor="#121247"
+                backgroundColor={
+                  activateSelectedChannel
+                    ? selectedItem === item.id
+                      ? theme.color.light.ACTIVE_CHAANEL_ITEM
+                      : cardsBackgroundColor
+                    : cardsBackgroundColor
+                }
                 padding={16}
                 direction="row"
                 alignItems="center"
@@ -155,11 +182,11 @@ const MemoChannelsList = ({ token }: { token: string }) => {
                     </Box>
                   </LinearGradient>
                   <Box flex={1} height="100%" paddingLeft={16}>
-                    <Text color="rgba(255, 255, 255, 1)" fontWeight={600} fontSize={16}>
+                    <Text color={theme.color.light.CHANNEL_ITEM_CHANNEL_TYPE_TEXT} fontWeight={600} fontSize={16}>
                       {/* @ts-ignore */}
                       {accountTypes[item.type]}
                     </Text>
-                    <Text color="rgba(102, 102, 128, 1)" fontWeight={400} fontSize={12}>
+                    <Text color={theme.color.light.CHANNEL_ITEM_STATUS_TEXT} fontWeight={400} fontSize={12}>
                       {isRremoveFetching || isRremoveLoading
                         ? selectedItem === item.id
                           ? '...'
@@ -173,14 +200,16 @@ const MemoChannelsList = ({ token }: { token: string }) => {
                   </Box>
                 </Box>
                 <Box width="10%" height="100%">
-                  <TouchableOpacity
-                    onPress={() => openEditWindowHandler(item.id)}
-                    activeOpacity={1}
-                  >
-                    <Box alignItems="center" justifyContent="center" width={40} height={40}>
-                      <ICON_MENU_VERTICAL />
-                    </Box>
-                  </TouchableOpacity>
+                  {hideEditOpetations === false ? (
+                    <TouchableOpacity
+                      onPress={() => openEditWindowHandler(item.id)}
+                      activeOpacity={1}
+                    >
+                      <Box alignItems="center" justifyContent="center" width={40} height={40}>
+                        <ICON_MENU_VERTICAL />
+                      </Box>
+                    </TouchableOpacity>
+                  ) : null}
                 </Box>
               </Box>
             </LinearGradient>
@@ -196,29 +225,14 @@ const MemoChannelsList = ({ token }: { token: string }) => {
                     paddingTop={14}
                     height="100%"
                   >
-                    {/* <TouchableOpacity activeOpacity={1}>
-                      <Text
-                        color="#D9D9FF"
-                        marginBottom={16}
-                        fontSize={14}
-                        fontWeight={600}
-                      >
-                        Edit
-                      </Text>
-                    </TouchableOpacity> */}
                     <TouchableOpacity
                       activeOpacity={1}
                       onPress={() => removeExternalAccountHandler(item?.id)}
                     >
-                      <Text color="#D9D9FF" marginBottom={16} fontSize={14} fontWeight={600}>
+                      <Text color={theme.color.light.ACTIVE_TEXT} marginBottom={16} fontSize={14} fontWeight={600}>
                         Delete
                       </Text>
                     </TouchableOpacity>
-                    {/* <TouchableOpacity activeOpacity={1}>
-                      <Text color="#D9D9FF" fontSize={14} fontWeight={600}>
-                        Refresh
-                      </Text>
-                    </TouchableOpacity> */}
                   </Box>
                 </BlurView>
               </LinearGradient>
@@ -240,13 +254,12 @@ const MemoChannelsList = ({ token }: { token: string }) => {
           keyExtractor={key}
           style={{
             overflow: 'visible',
-            paddingBottom: 100,
           }}
           onEndReached={nextPageHandler}
         />
       ) : null}
       <RenderIfWithoutLoading condition={isLoading || isFetching}>
-        <Box marginTop={-100}>
+        <Box>
           <ActivityIndicator color="#8A8AE5" />
         </Box>
       </RenderIfWithoutLoading>

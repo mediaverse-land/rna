@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { useGetLanguagesQuery } from '../../services/language.service';
@@ -7,12 +7,14 @@ import { theme } from '../../constaints/theme';
 import { Text } from '../text';
 import { LoadingSpinner } from '../loader-spinner';
 
-const SelectLanguageBottomMemo = ({
+const SelectLanguageBottom = ({
   setSelectedLanguage,
   isFocused,
+  showTitle = true,
 }: {
   setSelectedLanguage: (lang: string) => void;
   isFocused: boolean;
+  showTitle?: boolean;
 }) => {
   const { data, isFetching, refetch } = useGetLanguagesQuery();
 
@@ -56,17 +58,21 @@ const SelectLanguageBottomMemo = ({
           keyExtractor={_key}
           renderItem={renderItem}
           ListHeaderComponent={
-            <Box marginBottom={24}>
-              <Text color="#fff" fontWeight={400} fontSize={16} lineHeight={16}>
-                Select a language
-              </Text>
-            </Box>
+            <>
+              {showTitle ? (
+                <Box marginBottom={24}>
+                  <Text color="#fff" fontWeight={400} fontSize={16} lineHeight={16}>
+                    Select a language
+                  </Text>
+                </Box>
+              ) : null}
+            </>
           }
           contentContainerStyle={{
-            paddingLeft: 24,
-            paddingRight: 24,
-            paddingTop: 16,
-            paddingBottom: 800,
+            // paddingLeft: 24,
+            // paddingRight: 24,
+            // paddingTop: 16,
+            paddingBottom: 200,
           }}
         />
       )}
@@ -74,5 +80,4 @@ const SelectLanguageBottomMemo = ({
   );
 };
 
-const SelectLanguageBottom = memo(SelectLanguageBottomMemo);
 export default SelectLanguageBottom;

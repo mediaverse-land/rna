@@ -6,12 +6,16 @@ export const singleTextService: any = createApi({
     baseUrl: process.env.EXPO_APPBASE_URL,
   }),
   endpoints: (builder) => ({
-    getSingleImage: builder.query({
+    getSingleText: builder.query({
       query: (args) => {
         return {
           url: `/texts/${args.id}`,
           method: 'GET',
-          headers: { Authorization: `Bearer ${args.token}`, 'Accept-Language': 'en-US' },
+          headers: {
+            Authorization: `Bearer ${args.token}`,
+            'Accept-Language': 'en-US',
+            'X-App': '_Android',
+          },
         };
       },
     }),
@@ -21,7 +25,11 @@ export const singleTextService: any = createApi({
           url: '/texts',
           method: 'POST',
           body: args.body,
-          headers: { Authorization: `Bearer ${args.token}`, 'Accept-Language': 'en-US' },
+          headers: {
+            Authorization: `Bearer ${args.token}`,
+            'Accept-Language': 'en-US',
+            'X-App': '_Android',
+          },
         };
       },
     }),
@@ -31,6 +39,21 @@ export const singleTextService: any = createApi({
           url: '/convert/text-text',
           method: 'POST',
           body: args.body,
+          headers: {
+            Authorization: `Bearer ${args.token}`,
+            'Accept-Language': 'en-US',
+            'X-App': '_Android',
+          },
+        };
+      },
+    }),
+    convertTextToAudio: builder.mutation({
+      query: (args) => {
+        console.log(args.body);
+        return {
+          url: '/convert/text-audio',
+          method: 'POST',
+          body: args.body,
           headers: { Authorization: `Bearer ${args.token}`, 'Accept-Language': 'en-US' },
         };
       },
@@ -38,4 +61,9 @@ export const singleTextService: any = createApi({
   }),
 });
 
-export const { useCreateSingleTextMutation, useConvertTextToTextMutation } = singleTextService;
+export const {
+  useGetSingleTextQuery,
+  useCreateSingleTextMutation,
+  useConvertTextToTextMutation,
+  useConvertTextToAudioMutation,
+} = singleTextService;

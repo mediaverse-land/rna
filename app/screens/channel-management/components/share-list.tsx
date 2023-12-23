@@ -139,6 +139,7 @@ const MemoShareList = ({ token }: { token: string }) => {
                 height="100%"
                 borderRadius={16}
                 backgroundColor="#121247"
+                // backgroundColor="#121247a3"
                 padding={16}
                 direction="row"
                 alignItems="center"

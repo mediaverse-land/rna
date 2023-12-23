@@ -50,6 +50,7 @@ const _backButtonRedirector = new BackButtonRedirector();
 const _youtubeShare = new YoutubeShare();
 
 export function SingleSoundScreen({ navigation, route }: any) {
+  console.log('7', 'SINGLE_SOUND')
   const { id, ORIGIN } = route.params;
 
   const [openReportModal, setOpenReportModal] = useState(false);

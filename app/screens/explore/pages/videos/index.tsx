@@ -26,6 +26,17 @@ const _storageService = new StorageService();
 
 export function VideosPage() {
   const isFocused = useIsFocused();
+
+  if (!isFocused) {
+    return <ExploreGradientWrapper>
+      <></>
+    </ExploreGradientWrapper>
+  }
+
+  return <VideosPageWrapper isFocused={isFocused} />;
+}
+
+const VideosPageWrapper = ({ isFocused }: { isFocused: boolean }) => {
   const navigation = useNavigation<UseNavigationType>();
 
   const [isLoading, setIsLoading] = useState(true);
@@ -36,9 +47,7 @@ export function VideosPage() {
   const { EXPLORE_TOP_BAR_TOUR_HAS_SEEN } = useSelector((state: RootState) => state.tourSlice);
 
   useEffect(() => {
-    if (isFocused) {
       getData();
-    }
   }, [isFocused]);
 
   const getData = async (): Promise<void> => {
@@ -176,4 +185,4 @@ export function VideosPage() {
       </ExploreGradientWrapper>
     </>
   );
-}
+};

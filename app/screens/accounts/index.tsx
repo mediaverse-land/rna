@@ -20,6 +20,8 @@ import { Toaster } from '../../utils/toaster';
 const _toaster = new Toaster();
 
 const AccountsScreen = () => {
+
+  console.log('8', 'ACCOUNTS_SCREEN')
   const [page, setPage] = useState(1);
   const [token, setToken] = useState<string>(null);
   const [__dataList, setDataList] = useState<ExternalAccount[]>([]);

@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { Box } from '../../../components/box';
-import { ICON_X_WHITE } from '../../../constaints/icons';
-import { windowSize } from '../../../utils/window-size';
-import { getTextFileApiHandler } from '../service';
-import { PaddingContainer } from '../../../styles/grid';
-import { Text } from '../../../components/text';
-import { FullScreenSpinnerLoader } from '../../../components/loader-spinner';
-import { VirtualizedList } from '../../../components/virtualized-list';
-import { theme } from '../../../constaints/theme';
+import { Box } from '../../../../components/box';
+import { ICON_X_WHITE } from '../../../../constaints/icons';
+import { windowSize } from '../../../../utils/window-size';
+import { getTextFileApiHandler } from '../../service';
+import { PaddingContainer } from '../../../../styles/grid';
+import { Text } from '../../../../components/text';
+import { FullScreenSpinnerLoader } from '../../../../components/loader-spinner';
+import { VirtualizedList } from '../../../../components/virtualized-list';
+import { theme } from '../../../../constaints/theme';
 
 type Props = {
   hideTextModalHandler: () => void;

@@ -23,6 +23,8 @@ type Props = {
   size?: Size;
   isLoading?: boolean;
   additionalStyles?: any;
+  height?: number;
+  children?: ReactNode;
 };
 
 type VarientObject = Record<Varient, any>;
@@ -44,6 +46,8 @@ export const Button: FC<Props> = ({
   size,
   isLoading = false,
   additionalStyles,
+  height,
+  children,
 }) => {
   const varients: VarientObject = useMemo(() => {
     return {
@@ -53,7 +57,7 @@ export const Button: FC<Props> = ({
         gradient: {
           style: {
             width: '100%',
-            height: 48,
+            height: height || 48,
             borderRadius: 32,
             marginTop: 16,
             padding: 1,
@@ -71,7 +75,7 @@ export const Button: FC<Props> = ({
         gradient: {
           style: {
             width: '100%',
-            height: 48,
+            height: height || 48,
             padding: 1,
           },
           colors: ['#8aa1ff', theme.color.light.PRIMARY],
@@ -144,7 +148,7 @@ export const Button: FC<Props> = ({
               {...gradient}
               style={{
                 borderRadius: borderRadius || 32,
-                height: 48,
+                height: height || 48,
                 padding: 1,
               }}
             >
@@ -158,15 +162,19 @@ export const Button: FC<Props> = ({
                 direction="row"
                 additionalStyles={additionalStyles}
               >
-                <ButtonText
-                  textColor={textColor}
-                  lineHeight={lineHeight}
-                  fontSize={fontSize}
-                  fontWeight={fontWeight}
-                  isLoading={isLoading}
-                  text={text}
-                  icon={icon}
-                />
+                {children ? (
+                  children
+                ) : (
+                  <ButtonText
+                    textColor={textColor}
+                    lineHeight={lineHeight}
+                    fontSize={fontSize}
+                    fontWeight={fontWeight}
+                    isLoading={isLoading}
+                    text={text}
+                    icon={icon}
+                  />
+                )}
               </Box>
             </LinearGradient>
           ) : (
@@ -180,15 +188,19 @@ export const Button: FC<Props> = ({
               direction="row"
               additionalStyles={additionalStyles}
             >
-              <ButtonText
-                textColor={textColor}
-                lineHeight={lineHeight}
-                fontSize={fontSize}
-                fontWeight={fontWeight}
-                isLoading={isLoading}
-                text={text}
-                icon={icon}
-              />
+              {children ? (
+                children
+              ) : (
+                <ButtonText
+                  textColor={textColor}
+                  lineHeight={lineHeight}
+                  fontSize={fontSize}
+                  fontWeight={fontWeight}
+                  isLoading={isLoading}
+                  text={text}
+                  icon={icon}
+                />
+              )}
             </Box>
           )}
         </Btn>

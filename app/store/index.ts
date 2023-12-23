@@ -14,9 +14,11 @@ import { viewAllService } from '../services/view-all.service';
 import { languageService } from '../services/language.service';
 import { liveService } from '../services/live.service';
 import liveSlice from '../slices/live.slice';
+import singelTextSlice from '../slices/single-text.slice';
 import { assetService } from '../services/asset.service';
 import { authService } from '../services/auth.service';
 import { paymentService } from '../services/payment.service';
+import singleAssetSlice from '../slices/single-asset.slice';
 // import { setupListeners } from '@reduxjs/toolkit/query'
 
 const store = configureStore({
@@ -40,6 +42,8 @@ const store = configureStore({
     plusSlice: plusSlice,
     profileSlice: profileSlicer,
     liveSlice: liveSlice,
+    singelTextSlice: singelTextSlice,
+    singleAssetSlice: singleAssetSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

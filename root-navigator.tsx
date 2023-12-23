@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { FC, useContext, useEffect, useState } from 'react';
 // import { SafeAreaView } from "react-native";
-import { createStackNavigator } from '@react-navigation/stack';
+// import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { SearchPage } from './app/screens/search';
 import { SettingsStack } from './app/screens/settings/stack-navigator';
@@ -19,6 +20,18 @@ import { SingleLiveScreen } from './app/screens/single/live';
 import { PlusScreen } from './app/screens/plus';
 import { AppStack } from './app/screens/stack';
 import { EditScreen } from './app/screens/edit';
+
+import AccountsScreen from './app/screens/accounts';
+// import { userContext } from "./app/context/user";
+// import axios from "axios";
+// import { Toaster } from "./app/utils/toaster";
+// import { PushNotificationPermissionAlert } from "./app/components/push-notification-permission-alert";
+import { useSetFirebasePushNotificationAccountMutation } from './app/services/auth.service';
+// import PushNotificationWrapper from "./app/components/push-notification-wrapper";
+import { tokenStringResolver } from './app/utils/token-string-resolver';
+// import { PushNotificationPermissionAlert } from "./app/components/push-notification-permission-alert";
+import { CustomSafeArea } from './app/components/custom-safe-area';
+import { rightToLeftScreenAnimation } from './app/UI/animations';
 import {
   ACCOUNTS_SCREEN,
   APP_STACK,
@@ -34,20 +47,11 @@ import {
   SINGLE_VIDEO_SCREEN,
   WALLET_STACK,
 } from './app/constaints/consts';
-import AccountsScreen from './app/screens/accounts';
-// import { userContext } from "./app/context/user";
-// import axios from "axios";
-// import { Toaster } from "./app/utils/toaster";
-// import { PushNotificationPermissionAlert } from "./app/components/push-notification-permission-alert";
-import { useSetFirebasePushNotificationAccountMutation } from './app/services/auth.service';
-// import PushNotificationWrapper from "./app/components/push-notification-wrapper";
-import { tokenStringResolver } from './app/utils/token-string-resolver';
-// import { PushNotificationPermissionAlert } from "./app/components/push-notification-permission-alert";
-import { CustomSafeArea } from './app/components/custom-safe-area';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-type Route = { id: number; name: string; component: FC | any };
+type Route = { id: number; name: string; component: FC | any; options?: any };
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const authRoute: Route = {
   id: 1,
@@ -80,22 +84,26 @@ const appRoutes: Route[] = [
     id: 4,
     name: SINGLE_VIDEO_SCREEN,
     component: SingleVideoScreen,
+    options: rightToLeftScreenAnimation,
   },
   {
     id: 5,
     name: SINGLE_IMAGE_SCREEN,
     component: SingleImageScreen,
+    options: rightToLeftScreenAnimation,
     // component: EditScreen
   },
   {
     id: 6,
     name: SINGLE_SOUND_SCREEN,
     component: SingleSoundScreen,
+    options: rightToLeftScreenAnimation,
   },
   {
     id: 7,
     name: SINGLE_TEXT_SCREEN,
     component: SingleTextScreen,
+    options: rightToLeftScreenAnimation,
   },
   {
     id: 8,
@@ -111,6 +119,7 @@ const appRoutes: Route[] = [
     id: 11,
     name: SINGLE_LIVE_SCREEN,
     component: SingleLiveScreen,
+    options: rightToLeftScreenAnimation,
   },
   // Edits
   {
@@ -240,6 +249,7 @@ export function RootNavigator({ firebaseToken }: Props) {
           <Stack.Navigator
             screenOptions={{
               headerShown: false,
+              //@ts-ignore
               cardStyleInterpolator: fadeTransition,
             }}
           >
@@ -249,11 +259,17 @@ export function RootNavigator({ firebaseToken }: Props) {
           <Stack.Navigator
             screenOptions={{
               headerShown: false,
+              //@ts-ignore
               cardStyleInterpolator: fadeTransition,
             }}
           >
             {appRoutes.map((route) => (
-              <Stack.Screen key={route.id} name={route.name} component={route.component} />
+              <Stack.Screen
+                key={route.id}
+                name={route.name}
+                component={route.component}
+                options={route.options}
+              />
             ))}
           </Stack.Navigator>
         )}

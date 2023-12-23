@@ -74,7 +74,7 @@ export function Input({
               borderRightColor: theme.color.light.WHITE,
             },
       ],
-      labelColor: '#fff',
+      labelColor: theme.color.light.TEXT,
       inputPlaceholderColor: isTextArea
         ? theme.color.light.INPUT_PLACEHOLDER
         : labelWidth
@@ -102,7 +102,8 @@ export function Input({
               paddingTop: 25,
             },
       ],
-      labelColor: '#353542',
+      // labelColor: isIOS ? theme.color.light.DARK_INPUT_PLACEHOLDER: theme.color.light.TEXT,
+      labelColor: theme.color.light.TEXT,
       inputPlaceholderColor: isTextArea
         ? theme.color.light.INPUT_PLACEHOLDER
         : labelWidth
@@ -113,7 +114,7 @@ export function Input({
           paddingLeft: isTextArea ? 12 : labelWidth,
           height: isTextArea ? (textAreaState.height < 100 ? 100 : textAreaState.height) : 48,
           padding: isTextArea ? 12 : 0,
-          borderColor: '#353542',
+          borderColor: theme.color.light.DARK_INPUT_PLACEHOLDER,
           backgroundColor: 'rgba(14, 14, 18, 0.50)',
           textAlignVertical: isTextArea ? 'top' : 'center',
         },

@@ -23,7 +23,7 @@ export interface Image {
     lat: null;
     lng: null;
     source: number;
-    forkability_status: boolean;
+    forkability_status: 1|2;
     eligible_for_labeling: boolean;
     eligible_for_audio_extraction: boolean;
     eligible_for_image_extraction: boolean;

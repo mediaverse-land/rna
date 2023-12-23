@@ -36,6 +36,7 @@ export const assetService: any = createApi({
     }),
     youtubeShare: builder.mutation({
       query: (args) => {
+        console.log(args)
         return {
           url: `/share/youtube`,
           // url: `/share/stream`,
@@ -159,6 +160,19 @@ export const assetService: any = createApi({
         };
       },
     }),
+    getComments: builder.query({
+      query: (args) => {
+        return {
+          url: `/assets/${args.assetId}/comments`,
+          method: 'GET',
+          headers: {
+            'X-App': '_Android',
+            Authorization: `Bearer ${args.token}`,
+            'Accept-Language': 'en-US',
+          },
+        };
+      },
+    }),
   }),
 });
 
@@ -176,4 +190,6 @@ export const {
   useCreateAssetMutation,
 
   useSearchMutation,
+
+  useGetCommentsQuery
 } = assetService;

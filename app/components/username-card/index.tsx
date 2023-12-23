@@ -23,20 +23,26 @@ export function UserNameCard({
 }: Props) {
   return (
     <RowAlignCenter>
-      <Image
-        source={{
-          uri: profileUri || PROFILE_ONE,
-        }}
-        style={[
-          {
-            width: width || 20,
-            height: height || 20,
-            borderRadius: borderRadius || 100,
-          },
-          profileImageStyles,
-        ]}
-      />
-      <Text style={[{ color: 'rgba(0, 0, 51, 0.2)' }, usernameStyles]}>{username}</Text>
+      {profileUri ? (
+        <Image
+          source={{
+            uri: profileUri || PROFILE_ONE,
+          }}
+          style={[
+            {
+              width: width || 20,
+              height: height || 20,
+              borderRadius: borderRadius || 100,
+            },
+            profileImageStyles,
+          ]}
+        />
+      ) : null}
+      <Text
+        style={[{ color: 'rgba(0, 0, 51, 0.2)' }, profileUri && { marginLeft: 8 }, usernameStyles]}
+      >
+        {username}
+      </Text>
     </RowAlignCenter>
   );
 }

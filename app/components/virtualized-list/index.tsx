@@ -5,6 +5,7 @@ type Props = {
   children: ReactNode;
   props?: FlatListProps<any>;
   paddingTop?: number;
+  paddingBottom?: number;
   onEndReached?: () => void;
   onRefresh?: () => void;
   onEndReachedThreshold?: number;
@@ -19,6 +20,7 @@ export const VirtualizedList: FC<Props> = ({
   onEndReached,
   onRefresh,
   onEndReachedThreshold,
+  paddingBottom
 }) => {
   return (
     <FlatList
@@ -31,6 +33,7 @@ export const VirtualizedList: FC<Props> = ({
       ListFooterComponent={ListFooterComponent}
       style={{
         paddingTop: paddingTop,
+        paddingBottom: paddingBottom,
         backgroundColor: 'transparent',
         width: '100%',
       }}

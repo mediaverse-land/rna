@@ -62,7 +62,9 @@ export function RadioButton({ labelText, dataList, defaultOption, getSelectedOpt
   return (
     <Box width="100%">
       <Box height={45} width="100%">
-        <Text color={theme.color.light.WHITE}>{labelText}</Text>
+        <Text color={theme.color.light.WHITE} fontSize={14} fontWeight={600}>
+          {labelText}
+        </Text>
       </Box>
       <HorizontalRadioWrapper>{renderDataList}</HorizontalRadioWrapper>
     </Box>

@@ -36,6 +36,8 @@ const _youtubeShare = new YoutubeShare();
 const _backButtonRedirector = new BackButtonRedirector();
 
 export function SingleImageScreen({ navigation, route }: any) {
+  console.log('6', 'SINGLE_IMAGE')
+
   const { id, ORIGIN } = route.params;
 
   const [isOwner, setIsOwner] = useState<boolean>(null);

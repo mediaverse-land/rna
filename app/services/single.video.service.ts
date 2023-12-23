@@ -28,4 +28,4 @@ export const singleVideoService: any = createApi({
   }),
 });
 
-export const { useCreateSingleVideoMutation } = singleVideoService;
+export const { useCreateSingleVideoMutation, useGetSingleVideoQuery } = singleVideoService;

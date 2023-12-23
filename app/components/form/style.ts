@@ -80,7 +80,7 @@ export const InputComponent: any = {
   HorizontalRadioItem: styled.TouchableOpacity`
     width: 100%;
     height: 48px;
-    border: 1px solid ${theme.color.light.TEXT};
+    border: 1px solid ${theme.color.light.ASSET_FOOTER_CARD_BORDER};
     border-radius: 8px;
     justify-content: center;
     align-items: center;

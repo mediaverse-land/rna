@@ -22,13 +22,16 @@ const SelectForkabilityMemo = () => {
   };
 
   const _selectPlanHandler = (item: string) => {
-    let status: boolean;
+    let status: number;
+
 
     if (item === 'yes') {
-      status = true;
+      status = 2;
     } else {
-      status = false;
+      status = 1;
     }
+
+
     dispatch(setForkability(status));
     dispatch(closeForkabilityBottomSheet());
   };

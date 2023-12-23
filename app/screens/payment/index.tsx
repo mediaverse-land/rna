@@ -22,6 +22,7 @@ export function PaymentScreen({ navigation, route }: any) {
   const [isPayed, setIsPayed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+
   const [token, setToken] = useState('');
 
   const { price, assetId, title, thumbnail } = route.params;

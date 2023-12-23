@@ -26,6 +26,7 @@ export const EXPORE = 'Explore',
 
 const Tab = createBottomTabNavigator<RoutesType>();
 
+
 const routes = [
   {
     id: 1,

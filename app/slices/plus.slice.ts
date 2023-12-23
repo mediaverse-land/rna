@@ -5,7 +5,7 @@ export type InitialState = {
   isSelectLanguageBottomSheetOpen: boolean;
   isSelectPlanBottomSheetOpen: boolean;
   isForkabilityBottomSheetOpen: boolean;
-  forkabilityStatus: boolean;
+  forkabilityStatus: number;
   selectedLanguage: string;
   selectedPlan: string;
   price: number;
@@ -71,7 +71,7 @@ const plusSlice = createSlice({
     closeForkabilityBottomSheet: (state) => {
       state.isForkabilityBottomSheetOpen = false;
     },
-    setForkability: (state, action: PayloadAction<boolean>) => {
+    setForkability: (state, action: PayloadAction<number>) => {
       state.forkabilityStatus = action.payload;
     },
 

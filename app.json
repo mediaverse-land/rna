@@ -15,7 +15,10 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.emahdi1297.mediaverse",
-      "buildNumber": "1.10.1"
+      "buildNumber": "1.10.1",
+      "infoPlist": {
+        "UIBackgroundModes": ["audio"]
+      }
     },
     "android": {
       "versionCode": 3,

@@ -34,7 +34,7 @@ export const SaveAndPublish = () => {
   const forkAbilityPlaceholder =
     forkabilityStatus === null
       ? 'Choose forkability status'
-      : forkabilityStatus === true
+      : forkabilityStatus === 2
       ? 'yes'
       : 'no';
 

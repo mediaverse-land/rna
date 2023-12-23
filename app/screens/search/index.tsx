@@ -18,6 +18,9 @@ export type SearchParam = {
 };
 
 export function SearchPage() {
+  console.log('3', 'SEARCH_CONSOLE')
+
+
   const [showSearchWindow, setShowSearchWindow] = useState(true);
   const [searchParams, setSearchParams] = useState<SearchParam>({
     type: null,

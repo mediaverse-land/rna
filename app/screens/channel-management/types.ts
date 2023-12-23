@@ -4,6 +4,7 @@ export type ChannelItem = {
   id: number;
   status: 'pending' | 'finished';
   title: string;
+  type?:string
 };
 
 export type AssetType = 'Subscribe' | 'Ownership';

@@ -16,10 +16,17 @@ export class RecordingController {
         playsInSilentModeIOS: true,
       });
 
+
+
       _logger.log('Starting recording..');
       const { recording } = await Audio.Recording.createAsync(
         Audio.RecordingOptionsPresets.HIGH_QUALITY,
       );
+      recording.setOnRecordingStatusUpdate((e) => {
+        console.log(e)
+      });
+
+
       setRecording(recording);
       _logger.log('Recording started');
     } catch (err) {

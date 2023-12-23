@@ -73,6 +73,8 @@ const fadeTransition = ({ current }: any) => ({
 });
 
 export function SettingsStack() {
+  console.log('4', 'SETTINGS_CONSOLE')
+
   return (
     <>
       <Stack.Navigator

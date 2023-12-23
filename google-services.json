@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "519271936627",
+    "project_id": "mediaverse-test-notification",
+    "storage_bucket": "mediaverse-test-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519271936627:android:675e6957976c1d2da5f006",
+        "android_client_info": {
+          "package_name": "com.emahdi1297.mediaverse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv1tEb84lQUX1WVai_f82kYosy93okFRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

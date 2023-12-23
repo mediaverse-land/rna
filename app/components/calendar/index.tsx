@@ -246,12 +246,12 @@ const MemoCalendar = ({
               }
 
               if (item === null) {
-                return <Box key={item.id} width={'14.2%'}></Box>;
+                return <Box key={index} width={'14.2%'}></Box>;
               }
 
               return (
                 <TouchableOpacity
-                  key={item.id}
+                  key={index}
                   onPress={() => setSelectedDay({ day: dayIndex, month: activeMonth })}
                   style={[
                     {
