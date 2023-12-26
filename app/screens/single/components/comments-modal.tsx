@@ -1,4 +1,4 @@
-import React, { FC, lazy, memo, useCallback, useMemo, useRef, useState } from 'react';
+import React, { FC, lazy, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
 import { useKeyboard } from '../../../hooks/use-keyboard';
@@ -12,7 +12,9 @@ import { ModalTitle } from '../../../components/modal-title';
 import { Box } from '../../../components/box';
 import { CommentsBox } from './comments-box';
 import { windowSize } from '../../../utils/window-size';
-import { useCreateCommentMutation } from '../../../services/asset.service';
+import { useCreateCommentMutation, useGetCommentsQuery } from '../../../services/asset.service';
+import { Comment } from '../../../types/comment';
+import { RenderIf } from '../../../components/render-if';
 
 const CommentsList = lazy(() => import('../../../components/comment-list'));
 
@@ -80,7 +82,7 @@ const CommentsModalComponentMemo = () => {
       {isCommentsBottomSheetOpen ? (
         <BottomSheet {...BOTTOM_SHEET_OPTIONS}>
           <BottomSheetScrollView>
-            <BottomSheetBodyWrapper minHeight={500} paddingLeft={32} paddingRight={32}>
+            <BottomSheetBodyWrapper bgColor="rgba(78, 78, 97, 0.75)" minHeight={500} paddingLeft={32} paddingRight={32}>
               <ModalTitle title="Comments" closerHandler={() => {}} />
               <Body token={token} assetId={assetId} />
             </BottomSheetBodyWrapper>
@@ -101,6 +103,18 @@ const { width } = windowSize();
 const Body: FC<BodyProps> = ({ assetId, token }) => {
   const [_assetCreateApi] = useCreateCommentMutation();
 
+  const [comments, setComments] = useState<Comment[]>([]);
+
+  const { data, isLoading, isFetching, refetch } = useGetCommentsQuery({ token, assetId });
+
+  const inputBoxRef = useRef(null)
+
+  useEffect(() => {
+    if (data?.data?.length) {
+      setComments(data?.data);
+    }
+  }, [data]);
+
   const createCommentHandler = async (commentText: string) => {
     if (!commentText) {
       return;
@@ -112,8 +126,13 @@ const Body: FC<BodyProps> = ({ assetId, token }) => {
     };
 
     const response = await _assetCreateApi({ token, body: requestBody });
-    console.log(response)
+    if (response) {
+      refetch();
+    }
+
+    inputBoxRef?.current?.clear()
   };
+
 
   return (
     <Box width={width - 32} position="relative" right={16}>
@@ -122,8 +141,18 @@ const Body: FC<BodyProps> = ({ assetId, token }) => {
         hasBackground={false}
         showTitle={false}
         setCommetnTextValue={createCommentHandler}
+        ref={inputBoxRef}
       />
-      <CommentsList assetId={assetId} />
+      <Box
+        marginTop={-32}
+        additionalStyles={{
+          minHeight: 400,
+        }}
+      >
+        <RenderIf condition={isLoading || isFetching}>
+          <CommentsList data={comments} />
+        </RenderIf>
+      </Box>
     </Box>
   );
 };

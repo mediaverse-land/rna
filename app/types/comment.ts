@@ -24,6 +24,7 @@ export interface Comment {
     referrer_id: null;
     created_at: string;
     updated_at: string;
+    image_url?:string
   };
   replies: [];
 }

@@ -4,7 +4,7 @@ import { Box } from '../../../components/box';
 import { Text } from '../../../components/text';
 import { theme } from '../../../constaints/theme';
 import { PROFILE_IMAGE } from '../../../constaints/images';
-import { FC, useMemo, useState } from 'react';
+import {  forwardRef, useMemo, useState } from 'react';
 
 type Props = {
   hasBackground?: boolean;
@@ -14,14 +14,14 @@ type Props = {
   setCommetnTextValue?: (comment: string) => void;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const CommentsBox: FC<Props> = ({
-  hasBackground = true,
-  showTitle = true,
-  editable = true,
-  setCommetnTextValue,
-  // assetId,
-}) => {
+export const CommentsBox = forwardRef((props:Props, ref: any) => {
+  const {
+    hasBackground = true,
+    showTitle = true,
+    editable = true,
+    setCommetnTextValue,
+  } = props;
+
   const [commentText, setCommentText] = useState<string>(null);
 
   const gradientProps = useMemo<any>(() => {
@@ -108,6 +108,7 @@ export const CommentsBox: FC<Props> = ({
                   paddingLeft: 16,
                   color: '#fff',
                 }}
+                ref={ref}
                 placeholder="Add a comment..."
                 editable={editable}
                 placeholderTextColor={theme.color.light.TEXT}
@@ -122,4 +123,8 @@ export const CommentsBox: FC<Props> = ({
       </LinearGradient>
     </Box>
   );
-};
+})
+
+
+
+CommentsBox.displayName = 'CommentsBox'

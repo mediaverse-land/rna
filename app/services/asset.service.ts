@@ -213,6 +213,19 @@ export const assetService: any = createApi({
         };
       },
     }),
+    useGetCommentsQuery: builder.query({
+      query: (args) => {
+        return {
+          url: `/assets/${args.assedId}/comments`,
+          method: 'GET',
+          headers: {
+            'X-App': '_Android',
+            Authorization: `Bearer ${args.token}`,
+            'Accept-Language': 'en-US',
+          },
+        };
+      },
+    }),
   }),
 });
 
