@@ -18,6 +18,9 @@ web-build/
 ./google-services.json
 ./GoogleService-Info.plist
 ./eas.json
+google-services.json
+GoogleService-Info.plist
+eas.json
 # macOS
 .DS_Store
 
