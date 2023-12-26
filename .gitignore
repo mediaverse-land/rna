@@ -31,3 +31,7 @@ web-build/
 
 .metro-health-check*
 
+eas.json
+google-services.json
+GoogleService-Info.plist
+.husky/pre-commit
