@@ -21,9 +21,10 @@ import { tokenContext } from '../../../../context/token';
 import { userContext } from '../../../../context/user';
 import { tokenStringResolver } from '../../../../utils/token-string-resolver';
 import { useCreateSingleSoundMutation } from '../../../../services/single-sound.service';
-import { Toaster } from '../../../../utils/toaster';
+// import { Toaster } from '../../../../utils/toaster';
 import { REDIRECTED_FROM_CREATE_ASSET, SINGLE_SOUND_SCREEN } from '../../../../constaints/consts';
 import { Logger } from '../../../../utils/logger';
+import { alertContext } from '../../../../context/alert';
 
 const WINDOW_HEIGHT = windowSize().height;
 const PLACE_HODLDER_HEIGHT = Math.floor(WINDOW_HEIGHT) - 100;
@@ -35,7 +36,7 @@ const PLACEHOLDER_TEXT_LIE_HEIGHT = 16;
 const _recordingController = new RecordingController();
 const _fileSystemController = new FileSystemController();
 
-const _toast = new Toaster();
+// const _toast = new Toaster();
 const _logger = new Logger();
 
 export const CreateSoundScreen = () => {
@@ -43,6 +44,8 @@ export const CreateSoundScreen = () => {
   const [lastRecording, setLastRecording] = useState<Audio.Recording>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [createNewAsset] = useCreateSingleSoundMutation();
+
+  const alertCtx = useContext(alertContext)
 
   const navigation = useNavigation<UseNavigationType>();
   const isFocused = useIsFocused();
@@ -211,7 +214,7 @@ export const CreateSoundScreen = () => {
         if (!asset_id) {
           setIsLoading(false);
           _logger.logErro('no asset_id');
-          _toast.show(res?.error?.data?.message || 'Something went wrong, try again');
+          alertCtx.fire(res?.error?.data?.message || 'Something went wrong, try again','warning');
 
           return;
         }

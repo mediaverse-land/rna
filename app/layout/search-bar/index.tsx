@@ -8,12 +8,18 @@ import { theme } from '../../constaints/theme';
 import { BlurView } from 'expo-blur';
 import { windowSize } from '../../utils/window-size';
 import { Box } from '../../components/box';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { isIos } from '../../controllers/platform.controller';
 
 const { SearchInput } = SearchBarComponents;
+
+const IS_IOS = isIos();
 
 const { width } = windowSize();
 
 export function SearchBar() {
+  const { top } = useSafeAreaInsets();
+
   const { isRtl } = useRtl();
   const navigation = useNavigation<UseNavigationType>();
 
@@ -25,9 +31,8 @@ export function SearchBar() {
     <Box
       additionalStyles={{
         width: width,
-        height: 96,
+        height: IS_IOS ? 76 + top : 96,
         position: 'absolute',
-        top: 0,
         left: 0,
         zIndex: 1000000,
         borderBottomLeftRadius: 32,
@@ -35,7 +40,22 @@ export function SearchBar() {
         overflow: 'hidden',
       }}
     >
-      <BlurView style={styles.wrapper} intensity={70} tint="dark">
+      <BlurView
+        style={{
+          width: width,
+          height: IS_IOS ? 76 + top : 96,
+          zIndex: 10,
+          borderBottomLeftRadius: 32,
+          borderBottomRightRadius: 32,
+          alignItems: 'center',
+          justifyContent: 'center',
+          paddingLeft: 24,
+          backgroundColor: 'rgba(14, 14, 18, 0.50)',
+          paddingRight: 24,
+        }}
+        intensity={IS_IOS ? 30 : 20}
+        tint="dark"
+      >
         <TouchableOpacity
           activeOpacity={1}
           onPress={navigateToSearchPageHandler}
@@ -57,18 +77,6 @@ export function SearchBar() {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    width: width,
-    height: 96,
-    zIndex: 10,
-    borderBottomLeftRadius: 32,
-    borderBottomRightRadius: 32,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingLeft: 24,
-    backgroundColor: 'rgba(14, 14, 18, 0.50)',
-    paddingRight: 24,
-  },
   iconSearch: {
     position: 'relative',
     left: width - 85,

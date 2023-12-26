@@ -80,13 +80,13 @@ const singelTextSlice = createSlice({
       state.token = action.payload;
     },
 
-    openCommentsBottomSheet: (state) => {
-      state.isCommentsBottomSheetOpen = true;
-    },
+    // openCommentsBottomSheet: (state) => {
+    //   state.isCommentsBottomSheetOpen = true;
+    // },
 
-    closeCommentsBottomSheet: (state) => {
-      state.isCommentsBottomSheetOpen = false;
-    },
+    // closeCommentsBottomSheet: (state) => {
+    //   state.isCommentsBottomSheetOpen = false;
+    // },
 
     openToolbarHandler: (state) => {
       state.isToolbarOpen = true;
@@ -170,8 +170,8 @@ const singelTextSlice = createSlice({
 
 export const {
   setDataToState,
-  openCommentsBottomSheet,
-  closeCommentsBottomSheet,
+  // openCommentsBottomSheet,
+  // closeCommentsBottomSheet,
   setTokenToState,
 
   openToolbarHandler,

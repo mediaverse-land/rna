@@ -54,7 +54,7 @@ export const GoBackButton: FC<Props> = ({
             </Box>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={goBackHandler}>
             <Box
               id="go-back-button-wrapper"
               justifyContent="center"

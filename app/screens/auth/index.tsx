@@ -1,13 +1,13 @@
 import { ReactNode, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, StatusBar } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthLogo } from './components/logo';
 import { AuthRoot } from './pages/auth-root';
 import { Signin } from './pages/signin';
 import { AuthWindows } from './pages/types';
 import { Login } from './pages/login';
 import { LinearGradient } from 'expo-linear-gradient';
+import { CustomSafeArea } from '../../components/custom-safe-area';
 
 export function AuthScreen() {
   const [currentWindow, setCurrentWindow] = useState<AuthWindows>('root');
@@ -34,7 +34,7 @@ export function AuthScreen() {
   return (
     <>
       {isFocused ? <StatusBar backgroundColor={'#030340'} barStyle="light-content" /> : null}
-      <SafeAreaView style={styles.safeAreaView}>
+      <CustomSafeArea style={styles.safeAreaView}>
         <ScrollView style={styles.scrollView}>
           <LinearGradient
             colors={['#090952', '#030340']}
@@ -45,7 +45,7 @@ export function AuthScreen() {
             {authWindows[currentWindow]}
           </LinearGradient>
         </ScrollView>
-      </SafeAreaView>
+      </CustomSafeArea>
     </>
   );
 }

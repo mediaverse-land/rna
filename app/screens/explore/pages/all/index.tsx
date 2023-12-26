@@ -32,7 +32,9 @@ export function AllPage() {
     // isSuccess: _isLivesSuccess,
     isLoading: _isLivesLoading,
     refetch: refreshLives,
+    // error
   } = useGetLivesQuery();
+
 
   const {
     data: _bestVideosData,
@@ -75,7 +77,7 @@ export function AllPage() {
     refetchTopTenText();
     regreshChillSongs();
     refreshBestVideos();
-  }, []);
+  }, []);  
 
   return (
     <>

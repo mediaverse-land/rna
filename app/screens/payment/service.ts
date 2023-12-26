@@ -6,7 +6,7 @@ export const buyAssetApiHandler = async (token: string, assedId: number) => {
   const url = `/assets/${assedId}/buy`;
 
   const config = {
-    headers: { Authorization: `Bearer ${token}`, 'X-App': '_Android' },
+    headers: { Authorization: `Bearer ${token}`, 'X-App': '_Android', 'Accept-Language': 'en-US' },
   };
 
   return await _api.patch(url, {}, config);

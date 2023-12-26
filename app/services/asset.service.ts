@@ -36,7 +36,6 @@ export const assetService: any = createApi({
     }),
     youtubeShare: builder.mutation({
       query: (args) => {
-        console.log(args)
         return {
           url: `/share/youtube`,
           // url: `/share/stream`,
@@ -173,6 +172,47 @@ export const assetService: any = createApi({
         };
       },
     }),
+    buyAsset: builder.mutation({
+      query: (args) => {
+        return {
+          url: `/assets/${args.assedId}/buy`,
+          method: 'PATCH',
+          headers: {
+            'X-App': '_Android',
+            Authorization: `Bearer ${args.token}`,
+            'Accept-Language': 'en-US',
+          },
+        }
+      }
+    }),
+    translateAsset: builder.mutation({
+      query: (args) => {
+        return {
+          url: args.url,
+          method: 'POST',
+          body: args.body,
+          headers: {
+            'X-App': '_Android',
+            Authorization: `Bearer ${args.token}`,
+            'Accept-Language': 'en-US',
+          },
+        };
+      },
+    }),
+    createComment: builder.mutation({
+      query: (args) => {
+        return {
+          url: '/assets/comments',
+          method: 'POST',
+          body: args.body,
+          headers: {
+            'X-App': '_Android',
+            Authorization: `Bearer ${args.token}`,
+            'Accept-Language': 'en-US',
+          },
+        };
+      },
+    }),
   }),
 });
 
@@ -189,7 +229,13 @@ export const {
 
   useCreateAssetMutation,
 
+  useTranslateAssetMutation,
+
   useSearchMutation,
 
-  useGetCommentsQuery
+  useBuyAssetMutation,
+
+  useGetCommentsQuery,
+
+  useCreateCommentMutation
 } = assetService;

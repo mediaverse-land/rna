@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { FC } from 'react';
 import * as Google from 'expo-auth-session/providers/google';
 import { AuthProviderButton } from '../../components/auth-provider-button';
@@ -7,10 +7,10 @@ import { theme } from '../../../../constaints/theme';
 import { Box } from '../../../../components/box';
 import { Text } from '../../../../components/text';
 import { googleAuthApiHandler } from './service';
-import { Toaster } from '../../../../utils/toaster';
 import { Logger } from '../../../../utils/logger';
 import { enviroments } from '../../../../../enviroments/enviroments';
 import { Button } from '../../../../components/button';
+import { alertContext } from '../../../../context/alert';
 
 type Props = {
   height: number;
@@ -18,7 +18,7 @@ type Props = {
   navigateToFillData: (token: string) => void;
 };
 
-const _toaster = new Toaster();
+// const _toaster = new Toaster();
 
 const _logger = new Logger();
 
@@ -27,6 +27,9 @@ export const SignUpWithProvider: FC<Props> = ({
   setSIgnupWithUsernameHandler,
   navigateToFillData,
 }) => {
+
+  const alertCtx = useContext(alertContext)
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId: enviroments.REACT_APP_ANDROID_CLIENT_ID,
@@ -55,7 +58,9 @@ export const SignUpWithProvider: FC<Props> = ({
     _logger.log({ errorRes });
 
     if (isError) {
-      _toaster.show('A problem occured while submiting data');
+      alertCtx.fire('A problem occured while submiting data', 'warning')
+
+      // _toaster.show('A problem occured while submiting data');
       return;
     }
 

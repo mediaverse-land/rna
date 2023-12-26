@@ -47,11 +47,12 @@ import {
   SINGLE_VIDEO_SCREEN,
   WALLET_STACK,
 } from './app/constaints/consts';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 type Route = { id: number; name: string; component: FC | any; options?: any };
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 const authRoute: Route = {
   id: 1,
@@ -268,7 +269,7 @@ export function RootNavigator({ firebaseToken }: Props) {
                 key={route.id}
                 name={route.name}
                 component={route.component}
-                options={route.options}
+                // options={route.options}
               />
             ))}
           </Stack.Navigator>

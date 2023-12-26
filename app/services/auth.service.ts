@@ -37,7 +37,6 @@ export const authService: any = createApi({
 
     setFirebasePushNotificationAccount: builder.mutation({
       query: (args) => {
-        console.log(args);
         return {
           url: `push-notifications/firebase-tokens`,
           method: 'POST',

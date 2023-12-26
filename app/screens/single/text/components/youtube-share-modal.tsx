@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useContext, useMemo, useRef, useState } from 'react';
 import { Box } from '../../../../components/box';
 import { useKeyboard } from '../../../../hooks/use-keyboard';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,13 +10,15 @@ import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { BottomSheetBodyWrapper } from '../../../../components/bottom-sheet-body-wrapper';
 import { ModalTitle } from '../../../../components/modal-title';
 import { isIos } from '../../../../controllers/platform.controller';
-import { closeYoutubeShareBottomSheet } from '../../../../slices/single-text.slice';
+import { closeYoutubeShareBottomSheet } from '../../../../slices/single-asset.slice';
 import { Input, RadioButton } from '../../../../components/form';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Button } from '../../../../components/button';
 import { ChannelsList } from '../../../channel-management/components/channel-list';
 import { Text } from '../../../../components/text';
 import { useYoutubeShareMutation } from '../../../../services/asset.service';
+import { useToken } from '../../../../hooks/use-token';
+import { alertContext } from '../../../../context/alert';
 
 const IS_IOS = isIos();
 
@@ -25,9 +27,12 @@ export const YoutubeShareBottomSheet = () => {
 
   const [modalIndex, setModalIndex] = useState<number>(null);
 
+  const [token]: string[] = useToken();
+
+
   // const { assetId, id, token, isYoutubeShareBottomSheetOpen } = useSelector(
-  const { isYoutubeShareBottomSheetOpen, token, assetId } = useSelector(
-    (state: RootState) => state.singelTextSlice,
+  const { isYoutubeShareBottomSheetOpen, assetId } = useSelector(
+    (state: RootState) => state.singleAssetSlice,
   );
 
   const dispatch = useDispatch<AppDispatch>();
@@ -55,7 +60,7 @@ export const YoutubeShareBottomSheet = () => {
   }, [modalIndex]);
 
   const MODAL_BG = useMemo(() => {
-    return IS_IOS ? 'transparent' : theme.color.light.ADD_ACCOUNT_MODAL_BAKGROUND;
+    return IS_IOS ? 'transparent' : '#474755f5';
   }, []);
 
   const BOTTOM_SHEET_OPTIONS = useMemo<any>(() => {
@@ -104,6 +109,9 @@ const Body = ({ token, assetId }: { token: string; assetId: number }) => {
     description: null,
   });
 
+  const alertCtx = useContext(alertContext);
+
+
   const [_shareYoutubeApiHandler, { isLoading, isFetching }] = useYoutubeShareMutation();
 
   const [__selectedDate, __selectedTime, _year, _hours] = printTime(date);
@@ -143,19 +151,19 @@ const Body = ({ token, assetId }: { token: string; assetId: number }) => {
 
   const onShareSubmitHandler = async () => {
     if (!shareMetaData?.title) {
-      console.log('Please fill title');
+      alertCtx.fire('Please fill title','warning');
       return;
     }
     if (!shareMetaData?.description) {
-      console.log('Please fill description');
+      alertCtx.fire('Please fill description','warning');
       return;
     }
     if (!selectedChannelId) {
-      console.log('Please choose a channel to continue');
+      alertCtx.fire('Please choose a channel to continue','warning');
       return;
     }
     if (shareTime === 'later' && !selectedDate) {
-      console.log('Please choose a date to continue');
+      alertCtx.fire('Please choose a date to continue','warning');
       return;
     }
 
@@ -167,12 +175,16 @@ const Body = ({ token, assetId }: { token: string; assetId: number }) => {
       privacy: 'private',
     };
 
+
     if (shareTime === 'later') {
       requestBody['times'] = [selectedDate];
     }
 
     const response = await _shareYoutubeApiHandler({ token, body: requestBody });
-    console.log(response?.error)
+    if(response?.error){
+      // console.log(response?.error)
+      alertCtx.fire('Share on youtube failed','warning')
+    }
   };
 
   return (

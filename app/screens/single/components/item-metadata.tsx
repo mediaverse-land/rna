@@ -71,7 +71,7 @@ export function SingleItemMetaData({ data }: { data: MetaDataType[] }) {
           </Box>
           <Box height={17} flex={1} justifyContent="center" alignItems="center">
             <Text color={theme.color.light.WHITE} fontSize={12} fontWeight={400}>
-              {item.key}
+              {item.value}
             </Text>
           </Box>
         </Box>

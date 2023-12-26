@@ -1,14 +1,14 @@
 import { TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box } from '../../../components/box';
 import { PaddingContainer } from '../../../styles/grid';
 import { CommentsBox } from './comments-box';
-import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
-import { openCommentsBottomSheet } from '../../../slices/single-text.slice';
+import { openCommentsBottomSheet } from '../../../slices/single-asset.slice';
+import { memo } from 'react';
 
-export const CommentsCard = () => {
-
-  const {id} = useSelector((state: RootState) => state.singelTextSlice);
+const CommentsCardMemo = () => {
+  const {id} = useSelector((state: RootState) => state.singleAssetSlice);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -26,3 +26,5 @@ export const CommentsCard = () => {
     </Box>
   );
 };
+
+export const CommentsCard = memo(CommentsCardMemo)

@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
-import { Linking, ScrollView, ToastAndroid } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Linking, ScrollView } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenGradient } from '../../components/screen-gradient';
 import { Box } from '../../components/box';
 import { PaymentSuccess } from './payment-success';
@@ -17,11 +17,18 @@ import {
 } from '../../services/payment.service';
 import { retriveToken } from '../../utils/retrive-token';
 import { tokenStringResolver } from '../../utils/token-string-resolver';
+import { CustomSafeArea } from '../../components/custom-safe-area';
+import { Spacer } from '../../components/spacer';
+import { GoBackButton } from '../single/components/goback-button';
+import { alertContext } from '../../context/alert';
 
 export function PaymentScreen({ navigation, route }: any) {
   const [isPayed, setIsPayed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const { top } = useSafeAreaInsets();
+
+  // console.log(navigation?.goBack())
 
   const [token, setToken] = useState('');
 
@@ -29,6 +36,7 @@ export function PaymentScreen({ navigation, route }: any) {
 
   // const userCtx = useContext(userContext);
   const tokenCtx = useContext(tokenContext);
+  const alertCtx = useContext(alertContext);
 
   const { data, isError } = useCheckStripeAccountBalanceQuery(
     { token },
@@ -63,22 +71,8 @@ export function PaymentScreen({ navigation, route }: any) {
     getToken();
   }, []);
 
-  // const connectStripeAccount = async () => {
-
-  //   const response = await _connectHandler({ token });
-  //   if (response?.data) {
-  //     Linking.openURL(response?.data?.url);
-  //   }
-  // };
-
-  // const checkStripeAccount = async () => {
-  //   // /stripe/balance
-  // };
-
-  // const userData = userCtx.getUser();
-
   const goBackHandler = () => {
-    navigation.goBack();
+    navigation?.goBack();
   };
 
   const setPayHandler = async () => {
@@ -106,7 +100,7 @@ export function PaymentScreen({ navigation, route }: any) {
 
     if (errorRes) {
       const message = errorRes?.message || 'Failed';
-      ToastAndroid.show(message, ToastAndroid.LONG);
+      alertCtx?.fire(message, 'warning')
       setIsLoading(() => false);
     }
 
@@ -116,16 +110,15 @@ export function PaymentScreen({ navigation, route }: any) {
     setIsLoading(() => false);
   };
 
-  // const wallet = (userData && userData?.wallets && userData?.wallets[0]) || 0;
-
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <CustomSafeArea>
       <FocusedStatusBar />
       <ScreenGradient>
         <ScrollView style={{ width: '100%' }}>
-          <Box width="100%">
+          <Box paddingTop={top} width="100%">
             {!isPayed ? (
               <>
+                <GoBackButton goBackHandler={goBackHandler} hasBackground={false} />
                 <PaymentContentHeader
                   goBackHandler={goBackHandler}
                   thumbnail={thumbnail}
@@ -133,16 +126,6 @@ export function PaymentScreen({ navigation, route }: any) {
                   price={price}
                 />
                 <HowToPayList userBalance={balance} />
-                {/* {!isError ? 
-                <Box direction="row" alignItems="center" marginTop={24} paddingLeft={24}>
-                  <Text color="red">Please create an stripe account.</Text>
-                  <TouchableOpacity style={{
-                    marginLeft: 8
-                  }}>
-                    <Text color="#fff">Click here</Text>
-                  </TouchableOpacity>
-                </Box>
-                : null} */}
               </>
             ) : (
               <PaymentSuccess />
@@ -159,10 +142,11 @@ export function PaymentScreen({ navigation, route }: any) {
                 onpressHandler={setPayHandler}
                 size="lg"
               />
+              <Spacer margin={32} />
             </PaddingContainer>
           </Box>
         ) : null}
       </ScreenGradient>
-    </SafeAreaView>
+    </CustomSafeArea>
   );
 }

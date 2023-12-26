@@ -38,7 +38,6 @@ export class ApiHandler {
 
     const url = !notUseBaseUrl ? `${BASE_URL}${endpoint}` : endpoint;
 
-    console.log(url);
 
     try {
       const request = await axios.get(url, config);

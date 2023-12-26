@@ -9,4 +9,3 @@ if (Platform.OS === 'web') {
   AppRegistry.runApplication('main', { rootTag });
 }
 
-// 989109679109

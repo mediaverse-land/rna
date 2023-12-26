@@ -30,7 +30,7 @@ const speakerIconGradientProps = {
   },
 };
 
-const gradientProps = {
+const gradientProps: any = {
   style: {
     width: '100%',
     height: 72,

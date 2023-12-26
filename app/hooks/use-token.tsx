@@ -27,5 +27,7 @@ export const useToken = () => {
     setToken(_token);
   }, [token]);
 
-  return [token, currentUserId];
+  const returnValues: any = [token, currentUserId]
+
+  return returnValues;
 };

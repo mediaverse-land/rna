@@ -14,7 +14,7 @@ import { SubmitForm } from './submit-form';
 import { userContext } from '../../../../context/user';
 import { CREATE_IMAGE } from '../../constaints';
 import { ScreenGradient } from '../../../../components/screen-gradient';
-import { Toaster } from '../../../../utils/toaster';
+// import { Toaster } from '../../../../utils/toaster';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../../store';
 import { removeImage } from '../../../../slices/single-image.slice';
@@ -27,6 +27,7 @@ import {
   SINGLE_VIDEO_SCREEN,
 } from '../../../../constaints/consts';
 import { Logger } from '../../../../utils/logger';
+import { alertContext } from '../../../../context/alert';
 
 type CapturedImage = {
   height: number;
@@ -45,7 +46,7 @@ export type CreateImageRequestBody = {
 };
 
 const _logger = new Logger();
-const _toast = new Toaster();
+// const _toast = new Toaster();
 const _fileSystemController = new FileSystemController();
 
 export const CreateImageScreen = () => {
@@ -65,6 +66,7 @@ export const CreateImageScreen = () => {
   const dispatch = useDispatch<AppDispatch>();
   const tokenCtx = useContext(tokenContext);
   const userCtx = useContext(userContext);
+  const alertCtx = useContext(alertContext);
   const navigation = useNavigation<UseNavigationType>();
 
   const isFocused = useIsFocused();
@@ -101,7 +103,7 @@ export const CreateImageScreen = () => {
 
   const showToastOfCapturingVideo = () => {
     setTimeout(() => {
-      _toast.show('Hold button to capture video');
+      alertCtx.fire('Hold button to capture video','warning');
     }, 1000);
   };
 
@@ -214,7 +216,7 @@ export const CreateImageScreen = () => {
           const errorMessage = res?.error?.data?.message || 'Something went wrong, try again';
           stopLoad();
           _logger.log(errorMessage);
-          _toast.show(errorMessage);
+          alertCtx.fire(errorMessage,'warning');
           return;
         }
         const id = res?.data?.id;
@@ -249,7 +251,7 @@ export const CreateImageScreen = () => {
           const errorMessage = res?.error?.data?.message || 'Something went wrong, try again';
           stopLoad();
           _logger.logErro(errorMessage);
-          _toast.show(errorMessage);
+          alertCtx.fire(errorMessage,'warning');
           return;
         }
 

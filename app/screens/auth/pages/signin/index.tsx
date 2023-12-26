@@ -30,7 +30,7 @@ export function Signin({ goBackToSigninWindow, setWindowHandler }: Props) {
     setSigUpCurrentWindow(SIGNUP_WITH_USERNAME);
   };
 
-  const currentWindow: Record<SignupWindows, ReactNode> = {
+  const currentWindow: Record<SignupWindows, ReactNode>| any = {
     SINGUP_WITH_PROVIDER: (
       <SignUpWithProvider
         height={height}

@@ -11,11 +11,9 @@ import {
 import { useConvertTextToAudioMutation } from '../../../../services/single-text.service';
 
 export const ConvertTextToAudioModal = () => {
-  const { isConvertTextToAudioViewOpen, token, id, isSelectLanguageBottomSheetOpen } = useSelector(
-    (state: RootState) => state.singelTextSlice,
+  const { isConvertTextToAudioViewOpen, token, id } = useSelector(
+    (state: RootState) => state.singleAssetSlice,
   );
-
-  console.log({ isConvertTextToAudioViewOpen, isSelectLanguageBottomSheetOpen });
 
   if (!isConvertTextToAudioViewOpen) {
     return <></>;

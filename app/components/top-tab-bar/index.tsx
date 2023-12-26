@@ -355,6 +355,10 @@ import {
 } from '../../constaints/icons';
 import { View, StyleSheet } from 'react-native';
 import { BlurView } from 'expo-blur';
+import { isAndroid } from '../../controllers/platform.controller';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+const IS_ANDROID = isAndroid();
 
 function getTobBarItemsIcon(tobBarItemName: string, isFocused: boolean) {
   let iconPath: ReactElement<SVGElement>;
@@ -421,6 +425,8 @@ function TopTabBar({
   isProfilePage = false,
   hasBorderRadius = true,
 }: any) {
+  const { top } = useSafeAreaInsets();
+
   const topStyle = isProfilePage ? 8 : hasFullWidth ? 120 : Platform.OS === 'android' ? 104 : 84;
   const dispatch = useDispatch<AppDispatch>();
 
@@ -568,7 +574,7 @@ function TopTabBar({
       paddingLeft={hasFullWidth ? 0 : 24}
       paddingRight={hasFullWidth ? 0 : 24}
       position="absolute"
-      top={topStyle}
+      top={topStyle + top}
       zIndex={100}
       width="100%"
     >
@@ -580,7 +586,7 @@ function TopTabBar({
         <BlurView
           renderToHardwareTextureAndroid
           style={[styles.blurView]}
-          intensity={70}
+          intensity={IS_ANDROID ? 0:20}
           tint="dark"
         >
           <TabBarComponents.TabBar
@@ -603,7 +609,7 @@ function TopTabBar({
 
               const isFocused = state.index === index;
 
-              const { iconPath } = getTobBarItemsIcon(options.title, isFocused);
+              const { iconPath }: any = getTobBarItemsIcon(options.title, isFocused);
 
               const _setItemsToState = ({ name, target, _isFocused }: any) => {
                 setItemsToState({

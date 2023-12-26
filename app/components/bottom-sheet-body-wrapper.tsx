@@ -9,9 +9,11 @@ const IS_IOS = isIos();
 type Props = {
   children: ReactNode;
   minHeight?: number;
+  paddingRight?: number,
+  paddingLeft?:number
 };
 
-export const BottomSheetBodyWrapper: FC<Props> = ({ children, minHeight = 300 }) => {
+export const BottomSheetBodyWrapper: FC<Props> = ({ children, minHeight = 300, paddingLeft = 32, paddingRight =32 }) => {
   return (
     <View
       style={{
@@ -26,9 +28,9 @@ export const BottomSheetBodyWrapper: FC<Props> = ({ children, minHeight = 300 })
           backgroundColor: IS_IOS ? '#3d3d5aa3': 'transparent',
           minHeight
         }}
-        intensity={50}
+        intensity={IS_IOS ? 50 : 0}
       >
-        <Box flex={1} paddingTop={32} paddingBottom={32} paddingLeft={32} paddingRight={32}>
+        <Box flex={1} paddingTop={32} paddingBottom={32} paddingLeft={paddingLeft} paddingRight={paddingRight}>
           {children}
         </Box>
       </BlurView>

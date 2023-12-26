@@ -7,22 +7,20 @@ import { useFirebasePushNotification } from './app/hooks/use-firebase-push-notif
 import { AppProviders } from './app-providets';
 import { SystemLoggerController } from './app/controllers/system-logger.controller';
 
-splashScreenController.preventAutoHiding();
+// splashScreenController.preventAutoHiding();
 
-const _systemLoggerController = new SystemLoggerController();
-_systemLoggerController.hideLogsOnDevelopment();
+// const _systemLoggerController = new SystemLoggerController();
+// _systemLoggerController.hideLogsOnDevelopment();
 
 export default function App() {
-  usePreventScreenCapture();
+  // usePreventScreenCapture();
 
-
-
-  const [areFontsLoaded] = useLoadFonts();
+  // const [areFontsLoaded] = useLoadFonts();
   const [token] = useFirebasePushNotification();
 
-  if (!areFontsLoaded) {
-    return null;
-  }
+  // if (!areFontsLoaded) {
+  //   return null;
+  // }
 
   return (
     <>

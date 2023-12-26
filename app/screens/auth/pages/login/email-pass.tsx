@@ -9,16 +9,16 @@ import { LoginNavigationEvent } from '../types';
 import { Controller, useForm } from 'react-hook-form';
 import { emailLoginformStructure } from './form-strucutre';
 import { useSignInMutation } from '../../../../services/auth.service';
-import { Toaster } from '../../../../utils/toaster';
 import { tokenContext } from '../../../../context/token';
 import { userContext } from '../../../../context/user';
 import { User } from '../../../../types/user';
+import { alertContext } from '../../../../context/alert';
 
 type Props = {
   loginNavigationEventsHandler: LoginNavigationEvent;
 };
 
-const _toaster = new Toaster();
+// const _toaster = new Toaster();
 
 export const EmailPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
   const {
@@ -31,6 +31,7 @@ export const EmailPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
 
   const tokenCtx = useContext(tokenContext);
   const userCtx = useContext(userContext);
+  const alertCtx = useContext(alertContext);
 
   const onSubmit = async (data: any) => {
     const requestBody = {
@@ -48,7 +49,7 @@ export const EmailPass: FC<Props> = ({ loginNavigationEventsHandler }) => {
     }
 
     if (response?.error) {
-      _toaster.show(response?.error?.data?.message);
+      alertCtx.fire(response?.error?.data?.message, 'warning')
     }
   };
 

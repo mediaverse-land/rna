@@ -14,7 +14,7 @@ import { BlurView } from 'expo-blur';
 import { useRemoveExternalAccountMutation } from '../../../services/asset.service';
 import { theme } from '../../../constaints/theme';
 
-const gradientProps = {
+const gradientProps: any = {
   style: {
     width: '100%',
     height: 72,

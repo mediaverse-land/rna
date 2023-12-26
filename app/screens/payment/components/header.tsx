@@ -1,5 +1,4 @@
 import { Image, TouchableOpacity } from 'react-native';
-import { GoBackButton } from '../../single/components/goback-button';
 import { PaddingContainer } from '../../../styles/grid';
 import { Box } from '../../../components/box';
 import {
@@ -21,13 +20,12 @@ type Props = {
 const paymentCardItemImagePath =
   'https://s3-alpha-sig.figma.com/img/43f5/fd0b/108d3af19c1494f0e588166ba567c70c?Expires=1685923200&Signature=i9oLIJQZlXtXY1z~aRULqWji8zHBjQDuL9mxah4gNYiJZAiitaxRfnzOia0kHfKg-CNPPh1boVuw2bPH9GL~RT-bsbhhSAmk6vgEFM-knbhi2~nKwP7ySw93ArhjHgazfIzrsHvR61sdhILZP~aM5SBhGHHFbLpKJm98KoSrwrEcu-SYKMIwuMNd-g1DcKs-2Nrw27i1k4om9B41~WgVC9ZTXZaQVGli~BCu1YFJ3M2hJjQtqIRVJsL3kpT4E21v0L0e~1UBeriDLWya-JByBokcN3Elb54jYedLzwuEpQnct81sNrDh7SCM8YxUbx4RjpHXmPgwJh4vDAfkSesSmA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4';
 
-export function PaymentContentHeader({ goBackHandler, thumbnail, title, price }: Props) {
+export function PaymentContentHeader({  thumbnail, title, price }: Props) {
   return (
     <>
-      <GoBackButton goBackHandler={goBackHandler} hasBackground={false} />
       <PaddingContainer>
         {/* card item */}
-        <Box width="100%" height={160} marginTop={80}>
+        <Box width="100%" height={160} marginTop={24}>
           <Image
             source={{ uri: PAYMENT_CARD_ITEM_GRAIDENT }}
             style={{

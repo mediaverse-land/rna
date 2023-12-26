@@ -1,8 +1,8 @@
-import { ReactNode } from 'react';
+import { ReactNode, memo } from 'react';
 import { Box } from '../box';
 import { ActivityIndicator } from 'react-native';
 
-export const RenderIf = ({
+const RenderIfMemo = ({
   condition,
   children,
   paddingLeft,
@@ -32,3 +32,6 @@ export const RenderIf = ({
     </>
   );
 };
+
+
+export const RenderIf = memo(RenderIfMemo)

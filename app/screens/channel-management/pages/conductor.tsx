@@ -11,7 +11,6 @@ import { CreateConductorFormMemo } from '../components/create-conductor-form';
 import { BorderButton } from '../components/border-button';
 import { SelectAccountModal } from '../components/select-account-modal';
 import { useGetShareListQuery, useShareMutation } from '../../../services/asset.service';
-import { Toaster } from '../../../utils/toaster';
 import { ExternalAccount } from '../../../types/external-account';
 import { retriveToken } from '../../../utils/retrive-token';
 import { tokenContext } from '../../../context/token';
@@ -26,7 +25,7 @@ const SelectContentModal = lazy(
 
 const styles = channelManagementStyles;
 
-const _toaster = new Toaster();
+// const _toaster = new Toaster();
 
 const BOTTOM_SHEET_BLUR_BG = Platform.OS === 'android' ? 'rgba(78, 78, 97, 0.75)' : 'transparent';
 
@@ -81,6 +80,8 @@ export const ConductorPage = ({ headerComponent }: any) => {
   const sheetRef = useRef<BottomSheet>(null);
   const contentModalSheetRef = useRef<BottomSheet>(null);
   const selectAccountModalSheetRef = useRef<BottomSheet>(null);
+
+  const alertCtx = useContext(alertContext);
 
   const [_shareApiHandler, { isLoading, isFetching }] = useShareMutation();
 
@@ -199,26 +200,26 @@ export const ConductorPage = ({ headerComponent }: any) => {
 
   const createConductorHandler = async () => {
     if (!selectedChannel) {
-      _toaster.show('Please select a channel to continue');
+      alertCtx.fire('Please select a channel to continue','warning');
       return;
     }
     if (!selectedAssetToShareId) {
-      _toaster.show('Please select a content to continue');
+      alertCtx.fire('Please select a content to continue','warning');
       return;
     }
 
     if (!action) {
-      _toaster.show('Please select an action to continue');
+      alrtCtx.fire('Please select an action to continue','warning');
       return;
     }
 
     if (action === 'Stream' && !titleInput) {
-      _toaster.show('Please insert title');
+      alertCtx.fire('Please insert title','warning');
       return;
     }
 
     if (!activeDay?.year || !activeDay?.month || !activeDay?.day) {
-      _toaster.show('Please select a date to continue');
+      alertCtx.fire('Please select a date to continue','warning');
       return;
     }
 
@@ -269,10 +270,10 @@ export const ConductorPage = ({ headerComponent }: any) => {
     const response = await _shareApiHandler({ token, url, body: requestBody });
     console.log(response);
     if (response?.error) {
-      _toaster.show('Failed');
+      alertCtx.fire('Failed','warning');
     }
     if (response?.data) {
-      _toaster.show('Shared successfully');
+      alrtCtx.fire('Shared successfully','warning');
       handleClosePres();
       await refetch();
     }

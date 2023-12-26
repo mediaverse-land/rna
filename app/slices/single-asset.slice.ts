@@ -8,13 +8,23 @@ import { File } from '../types/file';
 export type InitialState = {
   currentUserId: number;
 
+  id: number,
   asset: Video | Text | Image | Sound;
+  assetId: number;
   thumnails: Record<string, string>;
+
+  type: 1| 2| 3|4
 
   name: string;
   description: string;
+  price: number;
 
   file: File;
+
+  plan: number,
+
+  assetUsername: string;
+  assetUserProfile: string;
 
   isToolbarOpen: boolean;
   selectedLanguage: string;
@@ -23,6 +33,11 @@ export type InitialState = {
   isSubscriber: boolean;
   // BottomSheets
   isCommentsBottomSheetOpen: boolean;
+
+  // 2 = forkable
+  // 1 = forkability disabled
+  forkability_status: 1 | 2,
+
   isSelectLanguageBottomSheetOpen: boolean;
   isConvertTextToTextBottomSheetOpen: boolean;
   isYoutubeShareBottomSheetOpen: boolean;
@@ -31,12 +46,17 @@ export type InitialState = {
 
   isGoogleDriveShareBottomSheetOpen: boolean;
 
+  isTranalateViewOpen: boolean,
+
   // methods
   takeScreenShotMethod: () => void;
+
+  audio: { durationMilis: number };
 };
 
 const initialState: InitialState = {
   asset: null,
+  id: null,
   token: null,
   name: null,
   description: null,
@@ -44,12 +64,26 @@ const initialState: InitialState = {
   isOwner: null,
   file: null,
   isSubscriber: null,
+  assetId: null,
+  plan: null, 
+
+  type: null,
+
+  price: null,
+
+  forkability_status: null,
 
   currentUserId: null,
 
   isToolbarOpen: false,
 
   selectedLanguage: null,
+
+  // Audio specifics
+  audio: { durationMilis: null },
+
+  assetUsername: null,
+  assetUserProfile: null,
 
   // View
   isConvertTextToAudioViewOpen: false,
@@ -60,6 +94,8 @@ const initialState: InitialState = {
   isSelectLanguageBottomSheetOpen: false,
   isYoutubeShareBottomSheetOpen: false,
   isGoogleDriveShareBottomSheetOpen: false,
+
+  isTranalateViewOpen: false,
 
   // Methods
   takeScreenShotMethod: null,
@@ -76,8 +112,13 @@ const singleAssetSlice = createSlice({
 
       state.asset = action.payload;
 
-      if (action.payload.asset.file) {
-        if (action.payload.asset.file?.user_id === action.payload.currentUserId) {
+      state.price = action.payload?.asset?.price;
+      state.assetId = action.payload?.asset?.id
+
+      state.type = action.payload?.asset?.type
+
+      if (action.payload?.asset.file) {
+        if (action.payload?.asset.file?.user_id === action.payload.currentUserId) {
           state.isOwner = true;
         } else {
           state.isSubscriber = true;
@@ -89,13 +130,21 @@ const singleAssetSlice = createSlice({
         state.isSubscriber = false;
       }
 
-      state.file = action.payload.asset?.file;
+      state.file = action.payload?.asset?.file;
+      state.plan = action.payload?.asset?.plan
+      state.forkability_status = action.payload?.asset?.forkability_status
 
-      state.currentUserId = action.payload.currentUserId;
+      state.currentUserId = action.payload?.currentUserId;
 
-      state.thumnails = action.payload.asset.thumbnails;
-      state.name = action.payload.name;
-      state.description = action.payload.description;
+      state.thumnails = action.payload?.asset?.thumbnails;
+      state.name = action.payload?.name;
+      state.description = action.payload?.description;
+      state.id = action.payload?.id;
+
+      if (action.payload?.asset?.user) {
+        state.assetUsername = action.payload?.asset?.user?.username;
+        state.assetUserProfile = action.payload?.asset?.user?.image_url;
+      }
     },
 
     setTokenToState: (state, action: PayloadAction<string>) => {
@@ -124,7 +173,15 @@ const singleAssetSlice = createSlice({
     closeConvertTextToTextBottomSheet: (state) => {
       state.isConvertTextToTextBottomSheetOpen = false;
     },
+    
+    openTranlateView: (state) => {
+      state.isTranalateViewOpen = true;
+    },
+    closeTranslateView: (state) => {
+      state.isTranalateViewOpen = false;
+    },
 
+    
     // openTranslateAssetBottomSheet: (state) => {
     //   state.isSelectLanguageBottomSheetOpen = true;
     // },
@@ -188,6 +245,11 @@ const singleAssetSlice = createSlice({
     setTakeScreenShotMethodHandler: (state, action: PayloadAction<() => void>) => {
       state.takeScreenShotMethod = action.payload;
     },
+
+    // Audio methods
+    setAudioDurationMillis: (state, action: PayloadAction<number>) => {
+      state.audio.durationMilis = action.payload;
+    },
   },
 });
 
@@ -217,11 +279,17 @@ export const {
   openGoogleDriveShareBottomSheet,
   closeGoogleDriveShareBottomSheet,
 
+  openTranlateView,
+  closeTranslateView,
+
   setSelectedLanguage,
 
   clearState,
 
-  setTakeScreenShotMethodHandler
+  setTakeScreenShotMethodHandler,
+
+  // Audio
+  setAudioDurationMillis,
 } = singleAssetSlice.actions;
 
 // export const getImagesDataFromSlice = (state: UserInitialState) => state.data;

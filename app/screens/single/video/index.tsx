@@ -1,32 +1,30 @@
+import { FC, useCallback, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useIsFocused } from '@react-navigation/native';
 import { CustomSafeArea } from '../../../components/custom-safe-area';
 import { FocusedStatusBar } from '../../../components/focused-statusbar';
 import { ScreenGradient } from '../../../components/screen-gradient';
 import { Spacer } from '../../../components/spacer';
 import { VirtualizedList } from '../../../components/virtualized-list';
-import { CommentsModalComponent } from '../components/comments-modal';
 import { VideoScreenComponents } from './components';
-import { FC, useCallback, useEffect, useMemo } from 'react';
 import { useToken } from '../../../hooks/use-token';
 import { UseNavigationType } from '../../../types/use-navigation';
 import { useGetSingleVideoQuery } from '../../../services/single.video.service';
 import { RenderIf } from '../../../components/render-if';
-import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store';
 import { setDataToState } from '../../../slices/single-asset.slice';
 import { ToolbarOptions } from '../components/toolbar-woindow';
 
 export function SingleVideoScreen({ route }: any) {
   const isFocused = useIsFocused();
-
-  if (!isFocused) {
-    return null;
-  }
-
   const [token, currentUserId]: any = useToken();
 
-  if (!token) {
-    return null;
+  if (!isFocused || !token) {
+    return (
+      <ScreenGradient>
+        <></>
+      </ScreenGradient>
+    );
   }
 
   return <Wrapper params={route.params} token={token} currentUserId={currentUserId} />;
@@ -48,7 +46,9 @@ const Wrapper: FC<WrapperProps> = ({ params, token, currentUserId }: any) => {
   const video_position = params?.video_position || 0;
 
   const dispatch = useDispatch<AppDispatch>();
-  const { takeScreenShotMethod } = useSelector((state: RootState) => state.singleAssetSlice);
+  const { takeScreenShotMethod, isOwner, forkability_status } = useSelector(
+    (state: RootState) => state.singleAssetSlice,
+  );
 
   const { data, isLoading, isFetching } = useGetSingleVideoQuery({
     token,
@@ -72,25 +72,39 @@ const Wrapper: FC<WrapperProps> = ({ params, token, currentUserId }: any) => {
 
   const toolbarOptions = useMemo<ToolbarOptions>(
     () => [
-      {
-        id: 1,
-        title: 'Take screenshot',
-        function: takeScreenShotMethodHandler,
-        shouldCloseModalAfterClick: true,
-      },
-      {
-        id: 3,
-        function: null,
-        title:'Convert to audio',
-      },
-      {
-        id: 2,
-        function: null,
-        title:'Share to youtube',
-      },
+      forkability_status
+        ? {
+            id: 1,
+            title: 'Take screenshot',
+            function: takeScreenShotMethodHandler,
+            shouldCloseModalAfterClick: true,
+          }
+        : null,
+      isOwner
+        ? {
+            id: 3,
+            function: null,
+            title: 'Convert to audio',
+          }
+        : null,
+      isOwner
+        ? {
+            id: 2,
+            function: null,
+            title: 'Share to youtube',
+          }
+        : null,
     ],
-    [takeScreenShotMethod],
+    [takeScreenShotMethod, isOwner, forkability_status],
   );
+
+  const videoComponentRenderer = useMemo(() => {
+    return <VideoScreenComponents.Header video_position={video_position} />;
+  }, [data, video_position]);
+
+  const footerComponentRenderer = useMemo(() => {
+    return <VideoScreenComponents.FooterCard />;
+  }, [data]);
 
   return (
     <>
@@ -99,19 +113,19 @@ const Wrapper: FC<WrapperProps> = ({ params, token, currentUserId }: any) => {
         <ScreenGradient>
           <RenderIf condition={isLoading || isFetching}>
             <VirtualizedList>
-              <VideoScreenComponents.Header video_position={video_position} />
+              {videoComponentRenderer}
               <VideoScreenComponents.ToolbarWindow toolbarOptions={toolbarOptions} />
               <VideoScreenComponents.Title />
               <VideoScreenComponents.Description />
+              <VideoScreenComponents.UsernameCard />
 
               <VideoScreenComponents.MetaData />
               <VideoScreenComponents.CommentsCard />
 
               <Spacer margin={200} />
-
-              <CommentsModalComponent />
             </VirtualizedList>
-            <VideoScreenComponents.FooterCard />
+            {footerComponentRenderer}
+            <VideoScreenComponents.CommentsBottomSheet />
           </RenderIf>
         </ScreenGradient>
       </CustomSafeArea>

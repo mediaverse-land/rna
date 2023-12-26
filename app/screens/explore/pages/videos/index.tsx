@@ -27,12 +27,6 @@ const _storageService = new StorageService();
 export function VideosPage() {
   const isFocused = useIsFocused();
 
-  if (!isFocused) {
-    return <ExploreGradientWrapper>
-      <></>
-    </ExploreGradientWrapper>
-  }
-
   return <VideosPageWrapper isFocused={isFocused} />;
 }
 

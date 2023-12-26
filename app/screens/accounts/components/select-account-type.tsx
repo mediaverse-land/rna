@@ -1,4 +1,4 @@
-import { FC, memo, useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { FC, memo, useContext, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { View } from 'react-native';
 import { useClickOutside } from 'react-native-click-outside';
 import * as Google from 'expo-auth-session/providers/google';
@@ -9,7 +9,6 @@ import { enviroments } from '../../../../enviroments/enviroments';
 import { getUserEmailByAccessToken } from '../service';
 import { Logger } from '../../../utils/logger';
 import { useAddExternalAccountMutation } from '../../../services/asset.service';
-import { Toaster } from '../../../utils/toaster';
 import { Button } from '../../../components/button';
 import { Text } from '../../../components/text';
 import { theme } from '../../../constaints/theme';
@@ -23,6 +22,7 @@ import {
   ERROR_FETCH_GOOGLE_DATA,
   EXTERNAL_ACCOUNT_CREATION_SUCCESS_MSG,
 } from '../../../constaints/errors-and-messages';
+import { alertContext } from '../../../context/alert';
 
 type Props = {
   token: string;
@@ -36,7 +36,7 @@ type CreateAccount = {
 };
 
 const _logger = new Logger();
-const _toaster = new Toaster();
+// const _toaster = new Toaster();
 
 const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
   const [snapPoints, setSnapPoints] = useState(['30%']);
@@ -48,6 +48,8 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
     expoClientId: enviroments.REACT_APP_EXPO_CLIENT_ID,
     scopes: enviroments.GOOGLE_AUTH_SCOPE,
   });
+
+  const alertCtx = useContext(alertContext)
 
   // const [request, response, promptAsync]: any = Google.useAuthRequest({
   //   androidClientId: enviroments.REACT_APP_ANDROID_CLIENT_ID,
@@ -92,11 +94,14 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
     const response = await createAccountApiHandler(requestBody);
 
     if (response?.error) {
-      _toaster.show(response?.error?.data?.error || ERROR_EXTERNAL_ACCOUNT_CREATION_MSG);
+      alertCtx.fire(response?.error?.data?.error || ERROR_EXTERNAL_ACCOUNT_CREATION_MSG, 'warning')
+      // _toaster.show(response?.error?.data?.error || ERROR_EXTERNAL_ACCOUNT_CREATION_MSG);
     }
     if (response?.data) {
       refetchData();
-      _toaster.show(EXTERNAL_ACCOUNT_CREATION_SUCCESS_MSG);
+      
+      alertCtx.fire(EXTERNAL_ACCOUNT_CREATION_SUCCESS_MSG, 'warning')
+      // _toaster.show(EXTERNAL_ACCOUNT_CREATION_SUCCESS_MSG);
     }
   };
 
@@ -154,12 +159,15 @@ const SelectAccountType: FC<Props> = ({ token, refetchData }) => {
 
     const response = await createAccountApiHandler(requestBody);
     if (response?.error) {
-      _toaster.show(response?.error?.data?.error || ERROR_EXTERNAL_ACCOUNT_CREATION_MSG);
+      
+      alertCtx.fire(response?.error?.data?.error || ERROR_EXTERNAL_ACCOUNT_CREATION_MSG, 'warning')
+      // _toaster.show(response?.error?.data?.error || ERROR_EXTERNAL_ACCOUNT_CREATION_MSG);
     }
     if (response?.data) {
       refetchData();
       modalCloser();
-      _toaster.show(EXTERNAL_ACCOUNT_CREATION_SUCCESS_MSG);
+      alertCtx.fire(EXTERNAL_ACCOUNT_CREATION_SUCCESS_MSG, 'warning')
+      // _toaster.show(EXTERNAL_ACCOUNT_CREATION_SUCCESS_MSG);
     }
   };
 

@@ -11,15 +11,21 @@ import { BottomSheetBodyWrapper } from '../../../../components/bottom-sheet-body
 import { BackdropComponent } from '../../../../components/modal-backdrop';
 import { isIos } from '../../../../controllers/platform.controller';
 import { ModalTitle } from '../../../../components/modal-title';
+import { ActivityIndicator } from 'react-native';
 
 type Props = {
   setSelectedLanguage: (lang: string) => void;
-  onModalChange?: (index: number) => void
+  onModalChange?: (index: number) => void;
+  showLoading?: boolean;
 };
 
 const IS_IOS = isIos();
 
-const SelectLanguageMemo: FC<Props> = ({ setSelectedLanguage, onModalChange }) => {
+const SelectLanguageMemo: FC<Props> = ({
+  setSelectedLanguage,
+  onModalChange,
+  showLoading = false,
+}) => {
   const isFocused = useIsFocused();
   const [modalIndex, setModalIndex] = useState<number>(null);
 
@@ -28,7 +34,7 @@ const SelectLanguageMemo: FC<Props> = ({ setSelectedLanguage, onModalChange }) =
   const snapPoints = useMemo(() => ['25%', '50%'], []);
 
   const { isSelectLanguageBottomSheetOpen } = useSelector(
-    (state: RootState) => state.singelTextSlice,
+    (state: RootState) => state.singleAssetSlice,
   );
 
   const selectLanguageRef = useRef(null);
@@ -41,7 +47,7 @@ const SelectLanguageMemo: FC<Props> = ({ setSelectedLanguage, onModalChange }) =
     if (setSelectedLanguage) {
       setSelectedLanguage(lang);
     }
-    
+
     dispatch(closeSelectLanguageBottomSheet());
   };
 
@@ -63,10 +69,10 @@ const SelectLanguageMemo: FC<Props> = ({ setSelectedLanguage, onModalChange }) =
       ref: selectLanguageRef,
       onClose: closeBottomSheetHandler,
       enablePanDownToClose: true,
-      onChange: (_index:number) => {
-        setModalIndex(_index)
-        if(onModalChange){
-          onModalChange(_index)
+      onChange: (_index: number) => {
+        setModalIndex(_index);
+        if (onModalChange) {
+          onModalChange(_index);
         }
       },
       backdropComponent: renderBackdrop,
@@ -82,13 +88,19 @@ const SelectLanguageMemo: FC<Props> = ({ setSelectedLanguage, onModalChange }) =
         <BottomSheet {...BOTTOM_SHEET_OPTIONS}>
           <BottomSheetBodyWrapper minHeight={420}>
             <Box width="100%" height={400}>
-              <ModalTitle closerHandler={closeBottomSheetHandler} title="Convert text to text" />
+              <ModalTitle closerHandler={closeBottomSheetHandler} title="Select a language" />
               <Box marginTop={32} />
-              <SelectLanguageBottomSheet
-                showTitle={false}
-                isFocused={isFocused}
-                setSelectedLanguage={_selectLanguageHandler}
-              />
+              {showLoading ? (
+                <Box width="100%" height={200} alignItems="center" justifyContent="center">
+                  <ActivityIndicator />
+                </Box>
+              ) : (
+                <SelectLanguageBottomSheet
+                  showTitle={false}
+                  isFocused={isFocused}
+                  setSelectedLanguage={_selectLanguageHandler}
+                />
+              )}
             </Box>
           </BottomSheetBodyWrapper>
         </BottomSheet>

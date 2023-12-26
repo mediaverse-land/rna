@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useContext, useMemo, useRef, useState } from 'react';
 import { Box } from '../../../components/box';
 import { Image, TouchableOpacity, View } from 'react-native';
 import { Text } from '../../../components/text';
@@ -6,17 +6,17 @@ import { theme } from '../../../constaints/theme';
 import { ICON_DOWNLOAD_WHITE } from '../../../constaints/icons';
 import { tokenStringResolver } from '../../../utils/token-string-resolver';
 import { useGoogleDriveShareMutation } from '../../../services/asset.service';
+import ExternalAccountBottomSheet from '../../../components/external-account-bottom-sheet';
+import { ModalBottomSheet } from '../../../components/bottom-sheet-modal';
+import { useClickOutside } from 'react-native-click-outside';
+import { ExternalAccount } from '../../../types/external-account';
+import { LoadingSpinner } from '../../../components/loader-spinner';
 import {
   DOWNLOAD_BTN_BG_GTADIENT,
   EDIT_BTN_BG_GTADIENT,
   SINGLE_ASSET_FOOTER_BG_PNG_GRADIENT,
 } from '../../../constaints/images';
-import ExternalAccountBottomSheet from '../../../components/external-account-bottom-sheet';
-import { ModalBottomSheet } from '../../../components/bottom-sheet-modal';
-import { useClickOutside } from 'react-native-click-outside';
-import { ExternalAccount } from '../../../types/external-account';
-import { Toaster } from '../../../utils/toaster';
-import { LoadingSpinner } from '../../../components/loader-spinner';
+import { alertContext } from '../../../context/alert';
 
 type Props = {
   fileName: string;
@@ -27,7 +27,7 @@ type Props = {
   token: string;
 };
 
-const _toaster = new Toaster();
+// const _toaster = new Toaster();
 
 export const SingleAssetFooter = ({
   fileName,
@@ -39,6 +39,7 @@ export const SingleAssetFooter = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const selectAccountRef = useRef(null);
+  const alertCtx = useContext(alertContext);
 
   const innerSelectAccountRef = useClickOutside<View>(() => {
     selectAccountRef?.current.close();
@@ -73,10 +74,10 @@ export const SingleAssetFooter = ({
 
     const result = await downalodHandler({ body: requestBody, token });
     if (result?.error) {
-      _toaster.show('Error while saving asset to your google drive');
+      alertCtx.fire('Error while saving asset to your google drive','warning');
     }
     if (result?.data) {
-      _toaster.show('Asset saved to your google drive successfully');
+      alertCtx.fire('Asset saved to your google drive successfully','warning');
     }
   };
 

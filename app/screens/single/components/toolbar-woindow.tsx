@@ -20,9 +20,13 @@ export type ToolbarOptions = {
 
 type Props = {
   toolbarOptions: ToolbarOptions;
+  customTopDistance?: number;
 };
 
-export const ToolbarWindow: FC<Props> = ({ toolbarOptions }) => {
+export const ToolbarWindow: FC<Props> = ({
+  toolbarOptions,
+  customTopDistance = isIOS ? 130 : 70,
+}) => {
   const { isToolbarOpen } = useSelector((state: RootState) => state.singleAssetSlice);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +41,7 @@ export const ToolbarWindow: FC<Props> = ({ toolbarOptions }) => {
     dispatch(closeToolbarHandler());
   };
 
-  const TOOLBAR_WINDOW_HEIGHT = toolbarOptions.length * 32 + toolbarOptions.length * 8 + 16;
+  // const TOOLBAR_WINDOW_HEIGHT = toolbarOptions.length * 32 + toolbarOptions.length * 8 + 16;
 
   // If shouldCloseModalAfterClick, the modal will be closed
   // else, a loading will be shown until the main view dispatch the closer function
@@ -50,8 +54,11 @@ export const ToolbarWindow: FC<Props> = ({ toolbarOptions }) => {
     setIsLoading(true);
   };
 
+  if (!toolbarOptions?.length) {
+    return null;
+  }
   if (!isToolbarOpen) {
-    return;
+    return null;
   }
 
   return (
@@ -69,20 +76,18 @@ export const ToolbarWindow: FC<Props> = ({ toolbarOptions }) => {
       <Box
         width={170}
         right={24}
-        top={130}
+        top={customTopDistance}
         borderRadius={16}
         position="absolute"
-        height={TOOLBAR_WINDOW_HEIGHT}
         additionalStyles={{
           overflow: 'hidden',
         }}
         zIndex={200}
-        backgroundColor={isIOS ? 'transparent' : '#131349d9'}
       >
         <View>
           <BlurView
             tint="light"
-            intensity={25}
+            intensity={isIOS ? 25 : 15}
             style={{
               width: '100%',
               height: '100%',
@@ -90,23 +95,27 @@ export const ToolbarWindow: FC<Props> = ({ toolbarOptions }) => {
             }}
           >
             {isLoading ? (
-              <Box width='100%' height='100%' alignItems='center' justifyContent='center'>
+              <Box width="100%" height="100%" alignItems="center" justifyContent="center">
                 <ActivityIndicator />
               </Box>
             ) : (
-              toolbarOptions.map((item: any) => (
-                <TouchableOpacity
-                  key={item.id}
-                  onPress={() => {
-                    item.function();
-                    toolbarCloser(item.shouldCloseModalAfterClick || false);
-                  }}
-                >
-                  <Box width="100%" height={32} marginBottom={8}>
-                    <Text color={theme.color.light.WHITE}>{item.title}</Text>
-                  </Box>
-                </TouchableOpacity>
-              ))
+              toolbarOptions.map((item: any) => {
+                if (item?.title) {
+                  return (
+                    <TouchableOpacity
+                      key={item.id}
+                      onPress={() => {
+                        item.function();
+                        toolbarCloser(item.shouldCloseModalAfterClick || false);
+                      }}
+                    >
+                      <Box width="100%" height={32} marginBottom={8}>
+                        <Text color={theme.color.light.WHITE}>{item.title}</Text>
+                      </Box>
+                    </TouchableOpacity>
+                  );
+                }
+              })
             )}
           </BlurView>
         </View>

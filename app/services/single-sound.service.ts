@@ -6,7 +6,7 @@ export const singleSoundService: any = createApi({
     baseUrl: process.env.EXPO_APPBASE_URL,
   }),
   endpoints: (builder) => ({
-    getSingleVideoData: builder.query({
+    getSingleSoundData: builder.query({
       query: (args) => {
         return {
           url: `/audios/${args.id}`,
@@ -25,7 +25,22 @@ export const singleSoundService: any = createApi({
         };
       },
     }),
+    convertAudioToText: builder.mutation({
+      query: (args) => {
+        console.log(args.body, args.token);
+        return {
+          url: '/convert/audio-text',
+          method: 'POST',
+          body: args.body,
+          headers: { Authorization: `Bearer ${args.token}`, 'Accept-Language': 'en-US' },
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetSingleVideoDataQuery, useCreateSingleSoundMutation } = singleSoundService;
+export const {
+  useGetSingleSoundDataQuery,
+  useCreateSingleSoundMutation,
+  useConvertAudioToTextMutation,
+} = singleSoundService;

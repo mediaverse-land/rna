@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import { Platform, StyleSheet, TouchableOpacity } from 'react-native';
 import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { BlurView } from 'expo-blur';
@@ -20,9 +20,10 @@ import {
   EXTERNAL_ACCOUNT_GOOGLE_TYPE,
   EXTERNAL_ACCOUNT_STREAM_TYPE,
 } from '../../../constaints/consts';
-import { Toaster } from '../../../utils/toaster';
+// import { Toaster } from '../../../utils/toaster';
 import { useGetExternalAccountsListQuery } from '../../../services/auth.service';
 import { useGoogleSignin } from '../../../hooks/use-google-singin';
+import { alertContext } from '../../../context/alert';
 
 type CreateAccount = {
   accessToken: string;
@@ -38,7 +39,7 @@ const MemoSelect = memo(Select);
 const MemoInput = memo(Input);
 
 const _logger = new Logger();
-const _toaster = new Toaster();
+// const _toaster = new Toaster();
 
 export const AddChannelBottomSheet = ({
   modalCloser,
@@ -54,6 +55,8 @@ export const AddChannelBottomSheet = ({
     stream_key: string;
     stream_url: string;
   }>(null);
+
+  const alertCtx = useContext(alertContext);
 
   const [_createAccountApiHandler, { isLoading, isFetching }] = useAddExternalAccountMutation();
 
@@ -102,15 +105,16 @@ export const AddChannelBottomSheet = ({
     const response = await _createAccountApiHandler(requestBody);
 
     if (response?.error) {
-      _toaster.show(
+      alertCtx?.fire(
         response?.error?.data?.errors?.title?.[0] ||
           response?.error?.data?.error ||
           ERROR_EXTERNAL_ACCOUNT_CREATION_MSG,
+        'warning',
       );
     }
     if (response?.data) {
       refetch();
-      _toaster.show(EXTERNAL_ACCOUNT_CREATION_SUCCESS_MSG);
+      alertCtx.fire(EXTERNAL_ACCOUNT_CREATION_SUCCESS_MSG, 'warning');
       modalCloser();
     }
   };
@@ -124,7 +128,7 @@ export const AddChannelBottomSheet = ({
       return;
     }
     if (!streamData?.email || !streamData?.stream_key || !streamData?.stream_url) {
-      _toaster.show('Please fill all inputs');
+      alertCtx.fire('Please fill all inputs', 'warning');
     }
 
     const { stream_key, stream_url, email } = streamData;
@@ -142,16 +146,16 @@ export const AddChannelBottomSheet = ({
 
     const response = await _createAccountApiHandler(requestBody);
     if (response?.error) {
-      _toaster.show(
+      alertCtx.fire(
         response?.error?.data?.message ||
           response?.error?.data?.error ||
-          ERROR_EXTERNAL_ACCOUNT_CREATION_MSG,
+          ERROR_EXTERNAL_ACCOUNT_CREATION_MSG,'warning'
       );
     }
     if (response?.data) {
       refetch();
       modalCloser();
-      _toaster.show(EXTERNAL_ACCOUNT_CREATION_SUCCESS_MSG);
+      alertCtx.fire(EXTERNAL_ACCOUNT_CREATION_SUCCESS_MSG,'warning');
     }
   };
 

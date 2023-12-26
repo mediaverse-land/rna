@@ -1,15 +1,11 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CustomSafeArea } from '../../../components/custom-safe-area';
 import { ScreenGradient } from '../../../components/screen-gradient';
 import { VirtualizedList } from '../../../components/virtualized-list';
 import { ComponentNavigationProps } from '../../../types/component-navigation-props';
 import { SingleTextComponents } from './components';
-import { tokenContext } from '../../../context/token';
-import { retriveToken } from '../../../utils/retrive-token';
-import {
-  useGetSingleTextQuery,
-} from '../../../services/single-text.service';
+import { useGetSingleTextQuery } from '../../../services/single-text.service';
 import { AppDispatch, RootState } from '../../../store';
 import {
   clearState,
@@ -20,23 +16,61 @@ import {
   openSelectLanguageBottomSheet,
   openConvertTextToAudioView,
 } from '../../../slices/single-text.slice';
-import { CommentsModalComponent } from '../components/comments-modal';
+// import { CommentsModalComponent } from '../components/comments-modal';
 import { RenderIf } from '../../../components/render-if';
 import { useIsFocused } from '@react-navigation/native';
 import { Spacer } from '../../../components/spacer';
 import { FocusedStatusBar } from '../../../components/focused-statusbar';
 import { ToolbarOptions } from '../components/toolbar-woindow';
 import { useFocusEffect } from '@react-navigation/native';
+import { UseNavigationType } from '../../../types/use-navigation';
+import { useToken } from '../../../hooks/use-token';
 
-export function SingleTextScreen({ route }: ComponentNavigationProps) {
-  const { id } = route.params;
+// const isFocused = useIsFocused();
+// const [token, currentUserId]: any = useToken();
+
+// if (!isFocused) {
+//   return null;
+// }
+
+export function SingleTextScreen({ route, navigation }: ComponentNavigationProps) {
+  const isFocused = useIsFocused();
+  const [token, currentUserId]: any = useToken();
+
+  if (!isFocused || !token) {
+    return (
+      <ScreenGradient>
+        <></>
+      </ScreenGradient>
+    );
+  }
+
+  return (
+    <Wrapper
+      params={route.params}
+      token={token}
+      currentUserId={currentUserId}
+      navigation={navigation}
+    />
+  );
+}
+
+type WrapperProps = {
+  params: {
+    id: number;
+    ORIGIN?: string;
+  };
+  navigation?: UseNavigationType;
+  token: string;
+  currentUserId: number;
+};
+
+const Wrapper: FC<WrapperProps> = ({ params, token }: any) => {
+  const { id } = params;
   // const { id, ORIGIN } = route.params;
-
-  const [token, setToken] = useState<string>(null);
 
   const { id: assetMainId } = useSelector((state: RootState) => state.singelTextSlice);
 
-  const tokenCtx = useContext(tokenContext);
   const dispatch = useDispatch<AppDispatch>();
   const isFocused = useIsFocused();
 
@@ -48,10 +82,6 @@ export function SingleTextScreen({ route }: ComponentNavigationProps) {
     },
     { skip: !token ? true : false },
   );
-
-  useEffect(() => {
-    getToken();
-  }, []);
 
   useFocusEffect(
     useCallback(() => {
@@ -92,11 +122,6 @@ export function SingleTextScreen({ route }: ComponentNavigationProps) {
     dispatch(setDataToState(data));
   };
 
-  const getToken = async () => {
-    const _token: any = await retriveToken(tokenCtx);
-    setToken(_token);
-  };
-
   const openTextToTextBottoSheet = useCallback(() => {
     dispatch(openConvertTextToTextBottomSheet());
   }, []);
@@ -113,12 +138,10 @@ export function SingleTextScreen({ route }: ComponentNavigationProps) {
   }, []);
 
   const convertTextToAudioHandler = useCallback(async () => {
-    
     dispatch(openConvertTextToAudioView());
-    dispatch(openSelectLanguageBottomSheet())
-    
-    // dispatch(closeToolbarHandler());
+    dispatch(openSelectLanguageBottomSheet());
 
+    // dispatch(closeToolbarHandler());
   }, [token, assetMainId]);
 
   const toolbarOptions = useMemo<ToolbarOptions>(
@@ -178,7 +201,7 @@ export function SingleTextScreen({ route }: ComponentNavigationProps) {
         </ScreenGradient>
 
         {/* Comments modal */}
-        <CommentsModalComponent />
+        {/* <CommentsModalComponent /> */}
         <SingleTextComponents.ConvertTextToTextModal />
         {/* <SingleTextComponents.SelectLanguageModal setSelectedLanguage={() => {}}/> */}
         <SingleTextComponents.YoutubeShareBottomSheet />
@@ -187,8 +210,7 @@ export function SingleTextScreen({ route }: ComponentNavigationProps) {
       </CustomSafeArea>
     </>
   );
-}
-
+};
 // import { BackHandler } from 'react-native';
 
 // import { AppState, AppStateStatus } from 'react-native';

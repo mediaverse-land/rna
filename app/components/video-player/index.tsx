@@ -48,6 +48,8 @@ export const VideoPlayer = forwardRef((props: Props, ref: Ref<Video>) => {
         source={{
           uri: videoUri,
         }}
+        isMuted={false}
+        
         onFullscreenUpdate={(e) => {
           console.log(e);
           //   const { fullscreenUpdate }: any = e;

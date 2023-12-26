@@ -4,18 +4,27 @@ import { Box } from '../../../components/box';
 import { Text } from '../../../components/text';
 import { theme } from '../../../constaints/theme';
 import { PROFILE_IMAGE } from '../../../constaints/images';
-import { FC, useMemo } from 'react';
+import { FC, useMemo, useState } from 'react';
 
 type Props = {
   hasBackground?: boolean;
   editable?: boolean;
-  assetId: number
+  assetId: number;
+  showTitle?: boolean;
+  setCommetnTextValue?: (comment: string) => void;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const CommentsBox: FC<Props> = ({ hasBackground = true, editable = true , assetId}) => {
+export const CommentsBox: FC<Props> = ({
+  hasBackground = true,
+  showTitle = true,
+  editable = true,
+  setCommetnTextValue,
+  // assetId,
+}) => {
+  const [commentText, setCommentText] = useState<string>(null);
 
-  const gradientProps = useMemo(() => {
+  const gradientProps = useMemo<any>(() => {
     return {
       style: {
         width: '100%',
@@ -33,7 +42,7 @@ export const CommentsBox: FC<Props> = ({ hasBackground = true, editable = true ,
     };
   }, [hasBackground]);
 
-  const innerGradientProps = useMemo(() => {
+  const innerGradientProps = useMemo<any>(() => {
     return {
       style: {
         width: '100%',
@@ -54,20 +63,23 @@ export const CommentsBox: FC<Props> = ({ hasBackground = true, editable = true ,
     <Box width="100%" height={102}>
       <LinearGradient {...gradientProps}>
         <LinearGradient {...innerGradientProps}>
-          <Box
-            id="title"
-            direction="row"
-            alignItems="center"
-            justifyContent="space-between"
-            width="100%"
-          >
-            <Text color={theme.color.light.WHITE} fontSize={14} fontWeight={600}>
-              Comments
-            </Text>
-            <Text color={theme.color.light.TEXT} fontSize={14} fontWeight={400}>
-              56
-            </Text>
-          </Box>
+          {showTitle && (
+            <Box
+              id="title"
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+              width="100%"
+            >
+              <Text color={theme.color.light.WHITE} fontSize={14} fontWeight={600}>
+                Comments
+              </Text>
+              <Text color={theme.color.light.TEXT} fontSize={14} fontWeight={400}>
+                56
+              </Text>
+            </Box>
+          )}
+
           <Box
             id="body"
             marginTop={16}
@@ -99,6 +111,10 @@ export const CommentsBox: FC<Props> = ({ hasBackground = true, editable = true ,
                 placeholder="Add a comment..."
                 editable={editable}
                 placeholderTextColor={theme.color.light.TEXT}
+                onChangeText={(e: string) => setCommentText(e)}
+                onBlur={() => {
+                  setCommetnTextValue && setCommetnTextValue(commentText);
+                }}
               />
             </Box>
           </Box>

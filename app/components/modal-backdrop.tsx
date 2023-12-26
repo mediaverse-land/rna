@@ -10,7 +10,7 @@ export const BackdropComponent = ({
     closeBottomSheetHandler?: () => void;
   }) => {
     return (
-      <Box width={width} height={height} position="absolute" left={0} bottom={0} top={0} right={0}>
+      <Box width={width}  height={height} position="absolute" left={0} bottom={0} top={0} right={0}>
         <TouchableOpacity
           activeOpacity={1}
           onPress={closeBottomSheetHandler ? closeBottomSheetHandler: null}

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import { useClickOutside } from 'react-native-click-outside';
 import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ShareItem } from '../types';
@@ -11,9 +11,9 @@ import { RenderIfWithoutLoading } from '../../../components/render-if-without-lo
 import { ActivityIndicator } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { useGetShareListQuery, useRemoveShareItemMutation } from '../../../services/asset.service';
-import { Toaster } from '../../../utils/toaster';
+import { alertContext } from '../../../context/alert';
 
-const gradientProps = {
+const gradientProps: any = {
   style: {
     width: '100%',
     height: 72,
@@ -27,7 +27,7 @@ const gradientProps = {
   },
 };
 
-const speakerIconGradientProps = {
+const speakerIconGradientProps: any = {
   style: {
     width: 40,
     height: 40,
@@ -41,7 +41,7 @@ const speakerIconGradientProps = {
   },
 };
 
-const menuWindowGradientProps = {
+const menuWindowGradientProps: any = {
   style: {
     width: 127,
     height: 50,
@@ -56,7 +56,7 @@ const menuWindowGradientProps = {
   },
 };
 
-const _toaster = new Toaster();
+// const _toaster = new Toaster();
 
 const MemoShareList = ({ token }: { token: string }) => {
   const [activeEditWindowId, setActiveEditWindowId] = useState<number>(null);
@@ -66,6 +66,9 @@ const MemoShareList = ({ token }: { token: string }) => {
   const [dataList, setDataList] = useState<ShareItem[]>([]);
 
   const [page, setPage] = useState(1);
+
+  const alertCtx = useContext(alertContext);
+
 
   const openEditWindowHandler = (id: number) => setActiveEditWindowId(id);
   const closeEditWindowHandler = () => setActiveEditWindowId(null);
@@ -105,14 +108,14 @@ const MemoShareList = ({ token }: { token: string }) => {
     });
 
     if (resposne && !resposne?.error) {
-      _toaster.show('Item deleted successfully');
+      alertCtx.fire('Item deleted successfully', 'warning');
       setSelectedItem(null);
       const filteredList = dataList?.filter((f) => f.id !== accountId);
       setDataList(filteredList);
       closeEditWindowHandler();
     }
     if (resposne?.error) {
-      _toaster.show('Failed');
+      alertCtx.fire('Failed','warning');
     }
   };
 

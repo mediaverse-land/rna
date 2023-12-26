@@ -65,7 +65,7 @@ export function ChannelManagementSearchBar({
           {NAV_TABS.map((item) => {
             const isSelected = item.path === selectedView;
 
-            const activeStyles = getStyles(isSelected);
+            const activeStyles: any = getStyles(isSelected);
 
             return (
               <TouchableOpacity
